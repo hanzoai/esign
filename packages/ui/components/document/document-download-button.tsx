@@ -15,7 +15,7 @@ export type DownloadButtonProps = HTMLAttributes<HTMLButtonElement> & {
   documentData?: DocumentData;
 };
 
-export const DownloadButton = ({
+export const DocumentDownloadButton = ({
   className,
   fileName,
   documentData,
