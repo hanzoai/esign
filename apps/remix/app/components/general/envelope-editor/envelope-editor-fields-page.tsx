@@ -60,7 +60,7 @@ const FieldSettingsTypeTranslations: Record<FieldType, MessageDescriptor> = {
   [FieldType.DROPDOWN]: msg`Dropdown Settings`,
 };
 
-export const EnvelopeEditorPageFields = () => {
+export const EnvelopeEditorFieldsPage = () => {
   const { envelope, editorFields } = useCurrentEnvelopeEditor();
 
   const { currentEnvelopeItem } = useCurrentEnvelopeRender();
@@ -109,7 +109,7 @@ export const EnvelopeEditorPageFields = () => {
         <EnvelopeRendererFileSelector fields={editorFields.localFields} />
 
         {/* Document View */}
-        <div className="mt-4 flex justify-center">
+        <div className="mt-4 flex justify-center p-4">
           {currentEnvelopeItem !== null ? (
             <PDFViewerKonvaLazy customPageRenderer={EnvelopeEditorFieldsPageRenderer} />
           ) : (
@@ -128,10 +128,10 @@ export const EnvelopeEditorPageFields = () => {
 
       {/* Right Section - Form Fields Panel */}
       {currentEnvelopeItem && (
-        <div className="sticky top-0 h-[calc(100vh-73px)] w-80 flex-shrink-0 overflow-y-auto border-l border-gray-200 bg-white py-4">
+        <div className="bg-background border-border sticky top-0 h-[calc(100vh-73px)] w-80 flex-shrink-0 overflow-y-auto border-l py-4">
           {/* Recipient selector section. */}
           <section className="px-4">
-            <h3 className="mb-2 text-sm font-semibold text-gray-900">
+            <h3 className="text-foreground mb-2 text-sm font-semibold">
               <Trans>Selected Recipient</Trans>
             </h3>
 
@@ -170,7 +170,7 @@ export const EnvelopeEditorPageFields = () => {
 
           {/* Add fields section. */}
           <section className="px-4">
-            <h3 className="mb-2 text-sm font-semibold text-gray-900">
+            <h3 className="text-foreground mb-2 text-sm font-semibold">
               <Trans>Add Fields</Trans>
             </h3>
 

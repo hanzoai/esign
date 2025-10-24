@@ -7,12 +7,16 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { DocumentStatus } from '@prisma/client';
 import { FileWarningIcon, GripVerticalIcon, Loader2 } from 'lucide-react';
 import { X } from 'lucide-react';
+import { ErrorCode as DropzoneErrorCode, type FileRejection } from 'react-dropzone';
 import { Link } from 'react-router';
 
+import { useLimits } from '@documenso/ee/server-only/limits/provider/client';
 import {
   useCurrentEnvelopeEditor,
   useDebounceFunction,
 } from '@documenso/lib/client-only/providers/envelope-editor-provider';
+import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
+import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@documenso/lib/constants/app';
 import { nanoid } from '@documenso/lib/universal/id';
 import { putPdfFile } from '@documenso/lib/universal/upload/put-file';
 import { canEnvelopeItemsBeModified } from '@documenso/lib/utils/envelope';
@@ -26,9 +30,9 @@ import {
   CardTitle,
 } from '@documenso/ui/primitives/card';
 import { DocumentDropzone } from '@documenso/ui/primitives/document-dropzone';
+import { useToast } from '@documenso/ui/primitives/use-toast';
 
 import { EnvelopeItemDeleteDialog } from '~/components/dialogs/envelope-item-delete-dialog';
-import { useCurrentTeam } from '~/providers/team';
 
 import { EnvelopeEditorRecipientForm } from './envelope-editor-recipient-form';
 import { EnvelopeItemTitleInput } from './envelope-editor-title-input';
@@ -41,11 +45,13 @@ type LocalFile = {
   isError: boolean;
 };
 
-export const EnvelopeEditorPageUpload = () => {
-  const team = useCurrentTeam();
-  const { t } = useLingui();
+export const EnvelopeEditorUploadPage = () => {
+  const organisation = useCurrentOrganisation();
 
-  const { envelope, setLocalEnvelope } = useCurrentEnvelopeEditor();
+  const { t } = useLingui();
+  const { envelope, setLocalEnvelope, relativePath } = useCurrentEnvelopeEditor();
+  const { maximumEnvelopeItemCount, remaining } = useLimits();
+  const { toast } = useToast();
 
   const [localFiles, setLocalFiles] = useState<LocalFile[]>(
     envelope.envelopeItems
@@ -220,12 +226,56 @@ export const EnvelopeEditorPageUpload = () => {
     debouncedUpdateEnvelopeItems(newLocalFilesValue);
   };
 
+  const dropzoneDisabledMessage = useMemo(() => {
+    if (!canItemsBeModified) {
+      return msg`Cannot upload items after the document has been sent`;
+    }
+
+    if (organisation.subscription && remaining.documents === 0) {
+      return msg`Document upload disabled due to unpaid invoices`;
+    }
+
+    if (maximumEnvelopeItemCount <= localFiles.length) {
+      return msg`You cannot upload more than ${maximumEnvelopeItemCount} items per envelope.`;
+    }
+
+    return null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [localFiles.length, maximumEnvelopeItemCount, remaining.documents]);
+
+  const onFileDropRejected = (fileRejections: FileRejection[]) => {
+    const maxItemsReached = fileRejections.some((fileRejection) =>
+      fileRejection.errors.some((error) => error.code === DropzoneErrorCode.TooManyFiles),
+    );
+
+    if (maxItemsReached) {
+      toast({
+        title: t`You cannot upload more than ${maximumEnvelopeItemCount} items per envelope.`,
+        duration: 5000,
+        variant: 'destructive',
+      });
+
+      return;
+    }
+
+    toast({
+      title: t`Upload failed`,
+      description: t`File cannot be larger than ${APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB`,
+      duration: 5000,
+      variant: 'destructive',
+    });
+  };
+
   return (
     <div className="mx-auto max-w-4xl space-y-6 p-8">
       <Card backdropBlur={false} className="border">
         <CardHeader className="pb-3">
-          <CardTitle>Documents</CardTitle>
-          <CardDescription>Add and configure multiple documents</CardDescription>
+          <CardTitle>
+            <Trans>Documents</Trans>
+          </CardTitle>
+          <CardDescription>
+            <Trans>Add and configure multiple documents</Trans>
+          </CardDescription>
         </CardHeader>
 
         <CardContent>
@@ -233,9 +283,11 @@ export const EnvelopeEditorPageUpload = () => {
             onDrop={onFileDrop}
             allowMultiple
             className="pb-4 pt-6"
-            disabled={!canItemsBeModified}
-            disabledMessage={msg`Cannot upload items after the document has been sent`}
+            disabled={dropzoneDisabledMessage !== null}
+            disabledMessage={dropzoneDisabledMessage || undefined}
             disabledHeading={msg`Upload disabled`}
+            maxFiles={maximumEnvelopeItemCount - localFiles.length}
+            onDropRejected={onFileDropRejected}
           />
 
           {/* Uploaded Files List */}
@@ -256,7 +308,7 @@ export const EnvelopeEditorPageUpload = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             style={provided.draggableProps.style}
-                            className={`flex items-center justify-between rounded-lg bg-gray-50 p-3 transition-shadow ${
+                            className={`bg-accent/50 flex items-center justify-between rounded-lg p-3 transition-shadow ${
                               snapshot.isDragging ? 'shadow-md' : ''
                             }`}
                           >
@@ -282,7 +334,7 @@ export const EnvelopeEditorPageUpload = () => {
                                   <p className="text-sm font-medium">{localFile.title}</p>
                                 )}
 
-                                <div className="text-xs text-gray-500">
+                                <div className="text-muted-foreground text-xs">
                                   {localFile.isUploading ? (
                                     <Trans>Uploading</Trans>
                                   ) : localFile.isError ? (
@@ -295,7 +347,7 @@ export const EnvelopeEditorPageUpload = () => {
                             <div className="flex items-center space-x-2">
                               {localFile.isUploading && (
                                 <div className="flex h-6 w-10 items-center justify-center">
-                                  <Loader2 className="h-4 w-4 animate-spin text-gray-500" />
+                                  <Loader2 className="text-muted-foreground h-4 w-4 animate-spin" />
                                 </div>
                               )}
 
@@ -338,7 +390,7 @@ export const EnvelopeEditorPageUpload = () => {
 
       <div className="flex justify-end">
         <Button asChild>
-          <Link to={`/t/${team.url}/documents/${envelope.id}/edit?step=addFields`}>
+          <Link to={`${relativePath.editorPath}?step=addFields`}>
             <Trans>Add Fields</Trans>
           </Link>
         </Button>
