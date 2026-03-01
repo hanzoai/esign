@@ -311,7 +311,8 @@ export const createEnvelopeFields = async ({
     const newDocumentData = await putPdfFileServerSide({
       name: 'document.pdf',
       type: 'application/pdf',
-      arrayBuffer: async () => Promise.resolve(Buffer.from(modifiedPdfBytes)),
+      arrayBuffer: async () =>
+        Promise.resolve(Buffer.from(modifiedPdfBytes) as unknown as ArrayBuffer),
     });
 
     await prisma.envelopeItem.update({

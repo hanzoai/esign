@@ -40,16 +40,16 @@ export const createDocumentRoute = authenticatedProcedure
 
     if (formValues) {
       // eslint-disable-next-line require-atomic-updates
-      pdf = await insertFormValuesInPdf({
+      pdf = (await insertFormValuesInPdf({
         pdf,
         formValues,
-      });
+      })) as Buffer<ArrayBuffer>;
     }
 
     const { id: documentDataId } = await putNormalizedPdfFileServerSide({
       name: file.name,
       type: 'application/pdf',
-      arrayBuffer: async () => Promise.resolve(pdf),
+      arrayBuffer: async () => Promise.resolve(pdf as unknown as ArrayBuffer),
     });
 
     ctx.logger.info({

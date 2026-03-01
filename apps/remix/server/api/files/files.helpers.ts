@@ -77,5 +77,5 @@ export const handleEnvelopeItemFileRequest = async ({
     c.header('Expires', '0');
   }
 
-  return c.body(file as unknown as BodyInit);
+  return c.body(file as unknown as ArrayBuffer);
 };

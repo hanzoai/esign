@@ -41,7 +41,7 @@ export const verifyTwoFactorAuthenticationToken = async ({
   for (let i = 0; i < window; i++) {
     const counter = Math.floor(now / period);
 
-    const hotp = await generateHOTP(decodedSecret, counter);
+    const hotp = await generateHOTP(decodedSecret.buffer as ArrayBuffer, counter);
 
     if (totpCode === hotp) {
       return true;

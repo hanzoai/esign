@@ -210,7 +210,7 @@ export const createEnvelope = async ({
         const newDocumentData = await putPdfFileServerSide({
           name: titleToUse,
           type: 'application/pdf',
-          arrayBuffer: async () => Promise.resolve(normalizedPdf),
+          arrayBuffer: async () => Promise.resolve(normalizedPdf as unknown as ArrayBuffer),
         });
 
         return {

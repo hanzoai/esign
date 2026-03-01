@@ -52,7 +52,10 @@ export const UNSAFE_createEnvelopeItems = async ({
       let buffer = Buffer.from(await file.arrayBuffer());
 
       if (envelope.formValues) {
-        buffer = await insertFormValuesInPdf({ pdf: buffer, formValues: envelope.formValues });
+        buffer = (await insertFormValuesInPdf({
+          pdf: buffer,
+          formValues: envelope.formValues,
+        })) as Buffer<ArrayBuffer>;
       }
 
       const normalized = await normalizePdf(buffer, {
@@ -64,7 +67,7 @@ export const UNSAFE_createEnvelopeItems = async ({
       const { id: documentDataId } = await putPdfFileServerSide({
         name: file.name,
         type: 'application/pdf',
-        arrayBuffer: async () => Promise.resolve(cleanedPdf),
+        arrayBuffer: async () => Promise.resolve(cleanedPdf as unknown as ArrayBuffer),
       });
 
       return {

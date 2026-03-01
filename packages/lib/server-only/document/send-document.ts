@@ -352,7 +352,7 @@ const injectFormValuesIntoDocument = async (
   const newDocumentData = await putNormalizedPdfFileServerSide({
     name: fileName,
     type: 'application/pdf',
-    arrayBuffer: async () => Promise.resolve(prefilled),
+    arrayBuffer: async () => Promise.resolve(prefilled as unknown as ArrayBuffer),
   });
 
   await prisma.envelopeItem.update({

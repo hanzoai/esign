@@ -139,7 +139,7 @@ export const handleEnvelopeItemPdfRequest = async ({
   c.header('Content-Type', 'application/pdf');
   c.header('Cache-Control', `${cacheStrategy}, max-age=31536000, immutable`);
 
-  return c.body(file as unknown as BodyInit);
+  return c.body(file as unknown as ArrayBuffer);
 };
 
 export default route;

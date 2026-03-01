@@ -111,10 +111,10 @@ export const createEnvelopeRouteCaller = async ({
 
       if (formValues) {
         // eslint-disable-next-line require-atomic-updates
-        pdf = await insertFormValuesInPdf({
+        pdf = (await insertFormValuesInPdf({
           pdf,
           formValues,
-        });
+        })) as Buffer<ArrayBuffer>;
       }
 
       const normalized = await normalizePdf(pdf, {
@@ -127,7 +127,7 @@ export const createEnvelopeRouteCaller = async ({
       const { id: documentDataId } = await putPdfFileServerSide({
         name: file.name,
         type: 'application/pdf',
-        arrayBuffer: async () => Promise.resolve(cleanedPdf),
+        arrayBuffer: async () => Promise.resolve(cleanedPdf as unknown as ArrayBuffer),
       });
 
       return {

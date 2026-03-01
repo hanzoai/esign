@@ -60,7 +60,7 @@ export const putNormalizedPdfFileServerSide = async (
   const documentData = await putFileServerSide({
     name: fileName,
     type: 'application/pdf',
-    arrayBuffer: async () => Promise.resolve(normalized),
+    arrayBuffer: async () => Promise.resolve(normalized as unknown as ArrayBuffer),
   });
 
   return await createDocumentData({
