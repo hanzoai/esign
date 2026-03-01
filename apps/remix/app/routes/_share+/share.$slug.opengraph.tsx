@@ -183,7 +183,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
   const pngBuffer = await svgToPng(svg.toString());
 
-  return new Response(pngBuffer, {
+  return new Response(pngBuffer as unknown as BodyInit, {
     headers: {
       'Content-Type': 'image/png',
       'Content-Length': pngBuffer.length.toString(),

@@ -24,7 +24,7 @@ export const validateTwoFactorTokenFromEmail = async ({
   for (let i = 0; i < window; i++) {
     const counter = Math.floor(now / period);
 
-    const hotp = await generateHOTP(secret, counter);
+    const hotp = await generateHOTP(secret.buffer as ArrayBuffer, counter);
 
     if (code === hotp) {
       return true;

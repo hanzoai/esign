@@ -31,7 +31,7 @@ export const setupTwoFactorAuthentication = async ({
     .map((code) => `${code.slice(0, 5)}-${code.slice(5)}`.toUpperCase());
 
   const accountName = user.email;
-  const uri = createTOTPKeyURI(ISSUER, accountName, secret);
+  const uri = createTOTPKeyURI(ISSUER, accountName, secret.buffer as ArrayBuffer);
   const encodedSecret = base32.encode(new Uint8Array(secret));
 
   await prisma.user.update({

@@ -31,7 +31,7 @@ export async function loader({ params }: Route.LoaderArgs) {
   // res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   // res.send(result.content);
 
-  return new Response(result.content, {
+  return new Response(result.content as unknown as BodyInit, {
     headers: {
       'Content-Type': result.contentType,
       'Cache-Control': 'public, max-age=31536000, immutable',

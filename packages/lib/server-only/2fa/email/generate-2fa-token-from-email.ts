@@ -17,7 +17,7 @@ export const generateTwoFactorTokenFromEmail = async ({
 
   const counter = Math.floor(Date.now() / period);
 
-  const token = await generateHOTP(secret, counter);
+  const token = await generateHOTP(secret.buffer as ArrayBuffer, counter);
 
   return token;
 };

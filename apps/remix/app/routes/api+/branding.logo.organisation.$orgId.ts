@@ -64,7 +64,7 @@ export async function loader({ params }: Route.LoaderArgs) {
 
   const { content, contentType } = await loadLogo(file);
 
-  return new Response(content, {
+  return new Response(content as unknown as BodyInit, {
     headers: {
       'Content-Type': contentType,
       'Content-Length': content.length.toString(),

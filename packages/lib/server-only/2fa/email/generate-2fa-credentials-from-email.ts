@@ -29,7 +29,7 @@ export const generateTwoFactorCredentialsFromEmail = ({
 
   const secret = hmac(sha256, DOCUMENSO_ENCRYPTION_KEY, identity);
 
-  const uri = createTOTPKeyURI(ISSUER, email, secret);
+  const uri = createTOTPKeyURI(ISSUER, email, secret.buffer as ArrayBuffer);
 
   return {
     uri,
