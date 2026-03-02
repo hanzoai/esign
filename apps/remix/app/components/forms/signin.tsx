@@ -72,6 +72,7 @@ export type SignInFormProps = {
   isGoogleSSOEnabled?: boolean;
   isMicrosoftSSOEnabled?: boolean;
   isOIDCSSOEnabled?: boolean;
+  isHanzoSSOEnabled?: boolean;
   oidcProviderLabel?: string;
   returnTo?: string;
 };
@@ -82,6 +83,7 @@ export const SignInForm = ({
   isGoogleSSOEnabled,
   isMicrosoftSSOEnabled,
   isOIDCSSOEnabled,
+  isHanzoSSOEnabled,
   oidcProviderLabel,
   returnTo,
 }: SignInFormProps) => {
@@ -98,7 +100,7 @@ export const SignInForm = ({
     'totp' | 'backup'
   >('totp');
 
-  const hasSocialAuthEnabled = isGoogleSSOEnabled || isMicrosoftSSOEnabled || isOIDCSSOEnabled;
+  const hasSocialAuthEnabled = isGoogleSSOEnabled || isMicrosoftSSOEnabled || isOIDCSSOEnabled || isHanzoSSOEnabled;
 
   const [isPasskeyLoading, setIsPasskeyLoading] = useState(false);
 
@@ -292,6 +294,22 @@ export const SignInForm = ({
     }
   };
 
+  const onSignInWithHanzoClick = async () => {
+    try {
+      await authClient.hanzo.signIn({
+        redirectPath,
+      });
+    } catch (err) {
+      toast({
+        title: _(msg`An unknown error occurred`),
+        description: _(
+          msg`We encountered an unknown error while attempting to sign you In. Please try again later.`,
+        ),
+        variant: 'destructive',
+      });
+    }
+  };
+
   const onSignInWithOIDCClick = async () => {
     try {
       await authClient.oidc.signIn({
@@ -396,6 +414,22 @@ export const SignInForm = ({
                   </span>
                   <div className="h-px flex-1 bg-border" />
                 </div>
+              )}
+
+              {isHanzoSSOEnabled && (
+                <Button
+                  type="button"
+                  size="lg"
+                  variant="outline"
+                  className="border bg-red-500 text-white hover:bg-red-600"
+                  disabled={isSubmitting}
+                  onClick={onSignInWithHanzoClick}
+                >
+                  <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                  </svg>
+                  <Trans>Sign in with Hanzo</Trans>
+                </Button>
               )}
 
               {isGoogleSSOEnabled && (

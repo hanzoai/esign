@@ -323,6 +323,26 @@ export class AuthClient {
     },
   };
 
+  public hanzo = {
+    signIn: async ({ redirectPath }: { redirectPath?: string } = {}) => {
+      const response = await this.client['oauth'].authorize.hanzo.$post({
+        json: { redirectPath },
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+
+        throw AppError.parseError(error);
+      }
+
+      const data = await response.json();
+
+      if (data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      }
+    },
+  };
+
   public oidc = {
     signIn: async ({ redirectPath }: { redirectPath?: string } = {}) => {
       const response = await this.client['oauth'].authorize.oidc.$post({ json: { redirectPath } });

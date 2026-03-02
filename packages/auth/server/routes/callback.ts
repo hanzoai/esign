@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 
 import { AppError } from '@documenso/lib/errors/app-error';
 
-import { GoogleAuthOptions, MicrosoftAuthOptions, OidcAuthOptions } from '../config';
+import { GoogleAuthOptions, HanzoAuthOptions, MicrosoftAuthOptions, OidcAuthOptions } from '../config';
 import { handleOAuthCallbackUrl } from '../lib/utils/handle-oauth-callback-url';
 import { handleOAuthOrganisationCallbackUrl } from '../lib/utils/handle-oauth-organisation-callback-url';
 import type { HonoAuthContext } from '../types/context';
@@ -12,6 +12,11 @@ import type { HonoAuthContext } from '../types/context';
  * backwards compatibility for self-hosters (since we used to use NextAuth).
  */
 export const callbackRoute = new Hono<HonoAuthContext>()
+  /**
+   * Hanzo IAM callback verification.
+   */
+  .get('/hanzo', async (c) => handleOAuthCallbackUrl({ c, clientOptions: HanzoAuthOptions }))
+
   /**
    * OIDC callback verification.
    */

@@ -6,6 +6,7 @@ import { Link, redirect } from 'react-router';
 import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
 import {
   IS_GOOGLE_SSO_ENABLED,
+  IS_HANZO_SSO_ENABLED,
   IS_MICROSOFT_SSO_ENABLED,
   IS_OIDC_SSO_ENABLED,
   OIDC_PROVIDER_LABEL,
@@ -27,6 +28,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   // SSR env variables.
   const isGoogleSSOEnabled = IS_GOOGLE_SSO_ENABLED;
+  const isHanzoSSOEnabled = IS_HANZO_SSO_ENABLED;
   const isMicrosoftSSOEnabled = IS_MICROSOFT_SSO_ENABLED;
   const isOIDCSSOEnabled = IS_OIDC_SSO_ENABLED;
   const oidcProviderLabel = OIDC_PROVIDER_LABEL;
@@ -41,6 +43,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 
   return {
     isGoogleSSOEnabled,
+    isHanzoSSOEnabled,
     isMicrosoftSSOEnabled,
     isOIDCSSOEnabled,
     oidcProviderLabel,
@@ -51,6 +54,7 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function SignIn({ loaderData }: Route.ComponentProps) {
   const {
     isGoogleSSOEnabled,
+    isHanzoSSOEnabled,
     isMicrosoftSSOEnabled,
     isOIDCSSOEnabled,
     oidcProviderLabel,
@@ -81,6 +85,7 @@ export default function SignIn({ loaderData }: Route.ComponentProps) {
 
         <SignInForm
           isGoogleSSOEnabled={isGoogleSSOEnabled}
+          isHanzoSSOEnabled={isHanzoSSOEnabled}
           isMicrosoftSSOEnabled={isMicrosoftSSOEnabled}
           isOIDCSSOEnabled={isOIDCSSOEnabled}
           oidcProviderLabel={oidcProviderLabel}

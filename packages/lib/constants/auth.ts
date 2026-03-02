@@ -26,6 +26,8 @@ export const IS_OIDC_SSO_ENABLED = Boolean(
 
 export const OIDC_PROVIDER_LABEL = env('NEXT_PRIVATE_OIDC_PROVIDER_LABEL');
 
+export const IS_HANZO_SSO_ENABLED = Boolean(env('HANZO_IAM_CLIENT_ID'));
+
 export const USER_SECURITY_AUDIT_LOG_MAP: Record<string, string> = {
   ACCOUNT_SSO_LINK: 'Linked account to SSO',
   ACCOUNT_SSO_UNLINK: 'Unlinked account from SSO',
