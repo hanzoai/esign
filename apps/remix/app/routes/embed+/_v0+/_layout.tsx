@@ -1,13 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 import { Outlet, isRouteErrorResponse, useRouteError } from 'react-router';
 
-import {
-  IS_GOOGLE_SSO_ENABLED,
-  IS_MICROSOFT_SSO_ENABLED,
-  IS_OIDC_SSO_ENABLED,
-  OIDC_PROVIDER_LABEL,
-} from '@documenso/lib/constants/auth';
-
 import { EmbedAuthenticationRequired } from '~/components/embed/embed-authentication-required';
 import { EmbedDocumentCompleted } from '~/components/embed/embed-document-completed';
 import { EmbedDocumentRejected } from '~/components/embed/embed-document-rejected';
@@ -31,29 +24,11 @@ export function headers({ loaderHeaders }: Route.HeadersArgs) {
   };
 }
 
-export function loader() {
-  // SSR env variables.
-  const isGoogleSSOEnabled = IS_GOOGLE_SSO_ENABLED;
-  const isMicrosoftSSOEnabled = IS_MICROSOFT_SSO_ENABLED;
-  const isOIDCSSOEnabled = IS_OIDC_SSO_ENABLED;
-  const oidcProviderLabel = OIDC_PROVIDER_LABEL;
-
-  return {
-    isGoogleSSOEnabled,
-    isMicrosoftSSOEnabled,
-    isOIDCSSOEnabled,
-    oidcProviderLabel,
-  };
-}
-
 export default function Layout() {
   return <Outlet />;
 }
 
-export function ErrorBoundary({ loaderData }: Route.ErrorBoundaryProps) {
-  const { isGoogleSSOEnabled, isMicrosoftSSOEnabled, isOIDCSSOEnabled, oidcProviderLabel } =
-    loaderData || {};
-
+export function ErrorBoundary() {
   const error = useRouteError();
 
   console.log({ routeError: error });
@@ -61,14 +36,7 @@ export function ErrorBoundary({ loaderData }: Route.ErrorBoundaryProps) {
   if (isRouteErrorResponse(error)) {
     if (error.status === 401 && error.data.type === 'embed-authentication-required') {
       return (
-        <EmbedAuthenticationRequired
-          isGoogleSSOEnabled={isGoogleSSOEnabled}
-          isMicrosoftSSOEnabled={isMicrosoftSSOEnabled}
-          isOIDCSSOEnabled={isOIDCSSOEnabled}
-          oidcProviderLabel={oidcProviderLabel}
-          email={error.data.email}
-          returnTo={error.data.returnTo}
-        />
+        <EmbedAuthenticationRequired email={error.data.email} returnTo={error.data.returnTo} />
       );
     }
 
