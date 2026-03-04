@@ -8,10 +8,10 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { TEAM_MEMBER_ROLE_HIERARCHY } from '@documenso/lib/constants/teams';
-import { TEAM_MEMBER_ROLE_MAP } from '@documenso/lib/constants/teams-translations';
-import { trpc } from '@documenso/trpc/react';
-import { Button } from '@documenso/ui/primitives/button';
+import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/teams';
+import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -20,7 +20,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -29,17 +29,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { MultiSelectCombobox } from '@documenso/ui/primitives/multi-select-combobox';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/select';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

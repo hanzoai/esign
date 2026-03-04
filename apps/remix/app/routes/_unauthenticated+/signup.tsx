@@ -1,7 +1,7 @@
 import { redirect } from 'react-router';
 
-import { env } from '@documenso/lib/utils/env';
-import { isValidReturnTo, normalizeReturnTo } from '@documenso/lib/utils/is-valid-return-to';
+import { env } from '@hanzo/sign-lib/utils/env';
+import { isValidReturnTo, normalizeReturnTo } from '@hanzo/sign-lib/utils/is-valid-return-to';
 
 import { SignUpForm } from '~/components/forms/signup';
 import { appMetaTags } from '~/utils/meta';

@@ -1,6 +1,6 @@
 ---
 title: Docker Compose
-description: Deploy Documenso with Docker Compose, including PostgreSQL. This production-ready setup is suitable for most self-hosted deployments.
+description: Deploy Hanzo Sign with Docker Compose, including PostgreSQL. This production-ready setup is suitable for most self-hosted deployments.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -34,15 +34,15 @@ docker compose version
 Download the production Docker Compose file:
 
 ```bash
-mkdir documenso && cd documenso
-curl -O https://raw.githubusercontent.com/documenso/documenso/release/docker/production/compose.yml
+mkdir hanzo-sign && cd hanzo-sign
+curl -O https://raw.githubusercontent.com/hanzo-sign/hanzo-sign/release/docker/production/compose.yml
 ```
 
 Alternatively, clone the full repository:
 
 ```bash
-git clone https://github.com/documenso/documenso.git
-cd documenso/docker/production
+git clone https://github.com/hanzoai/sign.git
+cd hanzo-sign/docker/production
 ```
 
 </Step>
@@ -71,7 +71,7 @@ Add the required configuration (see [Environment Configuration](#environment-con
 The production `compose.yml` includes two services:
 
 ```yaml
-name: documenso-production
+name: hanzo-sign-production
 
 services:
   database:
@@ -88,8 +88,8 @@ services:
     volumes:
       - database:/var/lib/postgresql/data
 
-  documenso:
-    image: documenso/documenso:latest
+  hanzo-sign:
+    image: hanzo-sign/hanzo-sign:latest
     depends_on:
       database:
         condition: service_healthy
@@ -98,7 +98,7 @@ services:
     ports:
       - ${PORT:-3000}:${PORT:-3000}
     volumes:
-      - /opt/documenso/cert.p12:/opt/documenso/cert.p12:ro
+      - /opt/hanzo-sign/cert.p12:/opt/hanzo-sign/cert.p12:ro
 
 volumes:
   database:
@@ -107,9 +107,9 @@ volumes:
 | Service     | Purpose                                                      |
 | ----------- | ------------------------------------------------------------ |
 | `database`  | PostgreSQL 15 database with persistent storage               |
-| `documenso` | Main application container, waits for database to be healthy |
+| `hanzo-sign` | Main application container, waits for database to be healthy |
 
-The Documenso container waits for the database health check to pass before starting.
+The Hanzo Sign container waits for the database health check to pass before starting.
 
 ## Environment Configuration
 
@@ -118,22 +118,22 @@ Create a `.env` file with the following variables:
 ### Required Variables
 
 ```bash
-# Database (used by both database and documenso services)
-POSTGRES_USER=documenso
+# Database (used by both database and hanzo-sign services)
+POSTGRES_USER=hanzo-sign
 POSTGRES_PASSWORD=your-secure-database-password
-POSTGRES_DB=documenso
+POSTGRES_DB=hanzo-sign
 
 # Application secrets (generate with: openssl rand -base64 32)
 NEXTAUTH_SECRET=your-nextauth-secret
 NEXT_PRIVATE_ENCRYPTION_KEY=your-encryption-key-min-32-characters
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=your-secondary-key-min-32-characters
 
-# Public URL where Documenso is accessible
+# Public URL where Hanzo Sign is accessible
 NEXT_PUBLIC_WEBAPP_URL=https://sign.example.com
 NEXT_PRIVATE_INTERNAL_WEBAPP_URL=http://localhost:3000
 
 # Database connection (uses Docker service name)
-NEXT_PRIVATE_DATABASE_URL=postgresql://documenso:your-secure-database-password@database:5432/documenso
+NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign:your-secure-database-password@database:5432/hanzo-sign
 
 # Email configuration
 NEXT_PRIVATE_SMTP_TRANSPORT=smtp-auth
@@ -141,7 +141,7 @@ NEXT_PRIVATE_SMTP_HOST=smtp.example.com
 NEXT_PRIVATE_SMTP_PORT=587
 NEXT_PRIVATE_SMTP_USERNAME=your-smtp-username
 NEXT_PRIVATE_SMTP_PASSWORD=your-smtp-password
-NEXT_PRIVATE_SMTP_FROM_NAME=Documenso
+NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo Sign
 NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@example.com
 ```
 
@@ -185,10 +185,10 @@ A signing certificate is required for document signing. Generate a `.p12` certif
 Place the certificate on the host and set permissions so the container can read it (UID 1001):
 
 ```bash
-sudo mkdir -p /opt/documenso
-sudo cp /path/to/your/cert.p12 /opt/documenso/cert.p12
-sudo chown 1001:1001 /opt/documenso/cert.p12
-sudo chmod 400 /opt/documenso/cert.p12
+sudo mkdir -p /opt/hanzo-sign
+sudo cp /path/to/your/cert.p12 /opt/hanzo-sign/cert.p12
+sudo chown 1001:1001 /opt/hanzo-sign/cert.p12
+sudo chmod 400 /opt/hanzo-sign/cert.p12
 ```
 
 The `compose.yml` mounts this path into the container. Add the passphrase to your `.env` file:
@@ -225,19 +225,19 @@ Expected output:
 
 ```
 NAME                             STATUS              PORTS
-documenso-production-database-1  running (healthy)   5432/tcp
-documenso-production-documenso-1 running             0.0.0.0:3000->3000/tcp
+hanzo-sign-production-database-1  running (healthy)   5432/tcp
+hanzo-sign-production-hanzo-sign-1 running             0.0.0.0:3000->3000/tcp
 ```
 
 Wait for the database to be healthy and for migrations to complete. Check the logs:
 
 ```bash
-docker compose logs -f documenso
+docker compose logs -f hanzo-sign
 ```
 
 Look for "Ready" or "Listening on port 3000" in the output.
 
-## Accessing Documenso
+## Accessing Hanzo Sign
 
 Once the containers are running:
 
@@ -267,7 +267,7 @@ docker compose logs -f
 View logs for a specific service:
 
 ```bash
-docker compose logs -f documenso
+docker compose logs -f hanzo-sign
 docker compose logs -f database
 ```
 
@@ -282,7 +282,7 @@ docker compose --env-file .env restart
 Restart a specific service:
 
 ```bash
-docker compose --env-file .env restart documenso
+docker compose --env-file .env restart hanzo-sign
 ```
 
 ### Stop Services
@@ -309,7 +309,7 @@ docker compose down -v
   Using `down -v` deletes the database volume. Back up your data first.
 </Callout>
 
-### Update Documenso
+### Update Hanzo Sign
 
 {/* prettier-ignore */}
 <Steps>
@@ -341,7 +341,7 @@ Database migrations run automatically on container startup.
 
 ### Reverse Proxy
 
-For production, place Documenso behind a reverse proxy for SSL termination:
+For production, place Hanzo Sign behind a reverse proxy for SSL termination:
 
 **nginx example:**
 
@@ -381,10 +381,10 @@ Set up automated database backups:
 
 ```bash
 # Manual backup
-docker compose exec database pg_dump -U documenso documenso > backup.sql
+docker compose exec database pg_dump -U hanzo-sign hanzo-sign > backup.sql
 
 # Restore from backup
-docker compose exec -T database psql -U documenso documenso < backup.sql
+docker compose exec -T database psql -U hanzo-sign hanzo-sign < backup.sql
 ```
 
 See [Backups](/docs/self-hosting/maintenance/backups) for automated backup strategies.
@@ -395,7 +395,7 @@ Add resource limits to prevent container resource exhaustion:
 
 ```yaml
 services:
-  documenso:
+  hanzo-sign:
     deploy:
       resources:
         limits:
@@ -419,8 +419,8 @@ For production, consider using a managed PostgreSQL service:
     Update environment variables:
 
 ```bash
-NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@your-db-host:5432/documenso
-NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@your-db-host:5432/documenso
+NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@your-db-host:5432/hanzo-sign
+NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@your-db-host:5432/hanzo-sign
 ```
 
   </Step>
@@ -444,13 +444,13 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage).
 
 <Accordions type="multiple">
   <Accordion title="Container fails to start">
-    Check logs: `docker compose logs documenso`. Common causes: missing environment variables
+    Check logs: `docker compose logs hanzo-sign`. Common causes: missing environment variables
     (ensure all required variables are in `.env`), database not ready (the container waits for
     database health check), port conflict (change `PORT` in `.env` if 3000 is in use).
   </Accordion>
   <Accordion title="Database connection errors">
     Verify the database is healthy: `docker compose ps database`. Test: `docker compose exec
-    database psql -U documenso -d documenso -c "SELECT 1"`.
+    database psql -U hanzo-sign -d hanzo-sign -c "SELECT 1"`.
   </Accordion>
   <Accordion title="Certificate errors">
     Check certificate status: `curl http://localhost:3000/api/certificate-status`. Common issues:
@@ -459,7 +459,7 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage).
   </Accordion>
   <Accordion title="Emails not sending">
     Check `NEXT_PRIVATE_SMTP_TRANSPORT` matches your setup, verify host, port, username, and
-    password, check logs: `docker compose logs documenso | grep -i smtp`.
+    password, check logs: `docker compose logs hanzo-sign | grep -i smtp`.
   </Accordion>
   <Accordion title="Application unreachable">
     Verify containers are running: `docker compose ps`; check the port mapping matches your `.env`;

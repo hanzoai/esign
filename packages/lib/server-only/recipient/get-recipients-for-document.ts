@@ -1,6 +1,6 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { getEnvelopeWhereInput } from '../envelope/get-envelope-by-id';
 

@@ -4,9 +4,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.mjs';
 
-import { getEnvelopeItemPdfUrl } from '@documenso/lib/utils/envelope-download';
-import { prisma } from '@documenso/prisma';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { getEnvelopeItemPdfUrl } from '@hanzo/sign-lib/utils/envelope-download';
+import { prisma } from '@hanzo/sign-prisma';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../lib/constants/app';
 import { createApiToken } from '../../../lib/server-only/public-api/create-api-token';

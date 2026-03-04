@@ -3,13 +3,13 @@ import type { Team } from '@prisma/client';
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
 import { Link, redirect } from 'react-router';
 
-import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
-import { getDocumentAndSenderByToken } from '@documenso/lib/server-only/document/get-document-by-token';
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { getRecipientByToken } from '@documenso/lib/server-only/recipient/get-recipient-by-token';
-import { getTeamById } from '@documenso/lib/server-only/team/get-team';
-import { formatDocumentsPath } from '@documenso/lib/utils/teams';
-import { Button } from '@documenso/ui/primitives/button';
+import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
+import { getDocumentAndSenderByToken } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { getRecipientByToken } from '@hanzo/sign-lib/server-only/recipient/get-recipient-by-token';
+import { getTeamById } from '@hanzo/sign-lib/server-only/team/get-team';
+import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import type { Route } from './+types/waiting';
 

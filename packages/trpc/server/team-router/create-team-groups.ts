@@ -1,17 +1,17 @@
 import {
   ALLOWED_TEAM_GROUP_TYPES,
   TEAM_MEMBER_ROLE_PERMISSIONS_MAP,
-} from '@documenso/lib/constants/teams';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { getMemberRoles } from '@documenso/lib/server-only/team/get-member-roles';
-import { generateDatabaseId } from '@documenso/lib/universal/id';
-import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@documenso/lib/utils/teams';
-import { prisma } from '@documenso/prisma';
+} from '@hanzo/sign-lib/constants/teams';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { getMemberRoles } from '@hanzo/sign-lib/server-only/team/get-member-roles';
+import { generateDatabaseId } from '@hanzo/sign-lib/universal/id';
+import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
+import { prisma } from '@hanzo/sign-prisma';
 import {
   OrganisationGroupType,
   OrganisationMemberRole,
   TeamMemberRole,
-} from '@documenso/prisma/generated/types';
+} from '@hanzo/sign-prisma/generated/types';
 
 import { authenticatedProcedure } from '../trpc';
 import {

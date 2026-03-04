@@ -7,17 +7,17 @@ import { DateTime } from 'luxon';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { isDocumentCompleted } from '@documenso/lib/utils/document';
-import { formatDocumentsPath } from '@documenso/lib/utils/teams';
-import type { TFindDocumentsResponse } from '@documenso/trpc/server/document-router/find-documents.types';
-import { Checkbox } from '@documenso/ui/primitives/checkbox';
-import type { DataTableColumnDef, RowSelectionState } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
+import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
+import type { TFindDocumentsResponse } from '@hanzo/sign-trpc/server/document-router/find-documents.types';
+import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+import type { DataTableColumnDef, RowSelectionState } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
 
 import { DocumentStatus } from '~/components/general/document/document-status';
 import { useCurrentTeam } from '~/providers/team';

@@ -74,7 +74,7 @@ export async function GET(_req: Request, { params }: RouteContext<'/og/docs/[...
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoSrc} alt="Documenso" height="28" />
+          <img src={logoSrc} alt="Hanzo Sign" height="28" />
           <span
             style={{
               color: '#D4D4D8',
@@ -133,7 +133,7 @@ export async function GET(_req: Request, { params }: RouteContext<'/og/docs/[...
         {/* Bottom: URL */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <span style={{ color: '#A1A1AA', fontSize: '16px', fontWeight: 400 }}>
-            docs.documenso.com{page.url}
+            docs.sign.hanzo.ai{page.url}
           </span>
         </div>
       </div>

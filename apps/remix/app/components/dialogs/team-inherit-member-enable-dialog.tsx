@@ -1,9 +1,9 @@
 import { Trans, useLingui } from '@lingui/react/macro';
 import { OrganisationGroupType, OrganisationMemberRole, TeamMemberRole } from '@prisma/client';
 
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { trpc } from '@documenso/trpc/react';
-import { Button } from '@documenso/ui/primitives/button';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -13,8 +13,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dialog';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

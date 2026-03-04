@@ -2,7 +2,7 @@ import { FieldType } from '@prisma/client';
 import type { Recipient } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 
 type RecipientPlaceholderInfo = {
   email: string;
@@ -102,7 +102,7 @@ const extractRecipientPlaceholder = (placeholder: string): RecipientPlaceholderI
   const recipientIndex = Number(indexMatch[1]);
 
   return {
-    email: `recipient.${recipientIndex}@documenso.com`,
+    email: `recipient.${recipientIndex}@sign.hanzo.ai`,
     name: `Recipient ${recipientIndex}`,
     recipientIndex,
   };

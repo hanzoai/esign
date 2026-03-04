@@ -1,6 +1,6 @@
 ---
 title: Railway
-description: Deploy Documenso on Railway with automatic builds from Git, managed PostgreSQL, and built-in networking. Use the one-click template or manual setup.
+description: Deploy Hanzo Sign on Railway with automatic builds from Git, managed PostgreSQL, and built-in networking. Use the one-click template or manual setup.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -9,7 +9,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 <Callout type="warn">
   This guide is a community contribution and may be outdated. If you run into issues, check the
-  [GitHub Discussions](https://github.com/documenso/documenso/discussions) for help.
+  [GitHub Discussions](https://github.com/hanzoai/sign/discussions) for help.
 </Callout>
 
 ## Prerequisites
@@ -22,13 +22,13 @@ Before deploying, you need:
 
 ## One-Click Deploy
 
-The fastest way to deploy Documenso on Railway is using the official template:
+The fastest way to deploy Hanzo Sign on Railway is using the official template:
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/bG6D4p)
 
 This template automatically provisions:
 
-- Documenso application service
+- Hanzo Sign application service
 - PostgreSQL database
 - Required environment variables with secure defaults
 
@@ -72,16 +72,16 @@ This takes approximately 5-10 minutes for the initial build.
 <Step>
 ### Access your deployment
 
-Once deployed, Railway provides a URL like `documenso-production.up.railway.app`.
+Once deployed, Railway provides a URL like `hanzo-sign-production.up.railway.app`.
 
-Click the URL in the Railway dashboard to access your Documenso instance.
+Click the URL in the Railway dashboard to access your Hanzo Sign instance.
 
 </Step>
 </Steps>
 
 ## Manual Deployment
 
-If you prefer more control over the setup, deploy Documenso manually:
+If you prefer more control over the setup, deploy Hanzo Sign manually:
 
 {/* prettier-ignore */}
 <Steps>
@@ -92,7 +92,7 @@ If you prefer more control over the setup, deploy Documenso manually:
 - Click "New Project"
 - Select "Deploy from GitHub repo"
 - Connect your GitHub account if not already connected
-- Fork or select the [Documenso repository](https://github.com/documenso/documenso)
+- Fork or select the [Hanzo Sign repository](https://github.com/hanzoai/sign)
 
 </Step>
 
@@ -124,7 +124,7 @@ No additional build configuration is needed.
 <Step>
 ### Configure environment variables
 
-Click on the Documenso service and go to the "Variables" tab. Add the following variables:
+Click on the Hanzo Sign service and go to the "Variables" tab. Add the following variables:
 
 **Required variables:**
 
@@ -140,7 +140,7 @@ NEXT_PRIVATE_SMTP_HOST=<your-smtp-host>
 NEXT_PRIVATE_SMTP_PORT=587
 NEXT_PRIVATE_SMTP_USERNAME=<your-smtp-username>
 NEXT_PRIVATE_SMTP_PASSWORD=<your-smtp-password>
-NEXT_PRIVATE_SMTP_FROM_NAME=Documenso
+NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo Sign
 NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@yourdomain.com
 ```
 
@@ -155,7 +155,7 @@ NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@yourdomain.com
 | `PORT`                            | Application port                   | `3000`  |
 | `NEXT_PUBLIC_DISABLE_SIGNUP`      | Disable public signups             | `false` |
 | `NEXT_PRIVATE_SIGNING_PASSPHRASE` | Passphrase for signing certificate | -       |
-| `DOCUMENSO_DISABLE_TELEMETRY`     | Disable anonymous telemetry        | `false` |
+| `SIGN_DISABLE_TELEMETRY`     | Disable anonymous telemetry        | `false` |
 
 </Step>
 
@@ -198,7 +198,7 @@ NEXT_PRIVATE_DATABASE_URL=${{Postgres.DATABASE_URL}}
 NEXT_PRIVATE_DIRECT_DATABASE_URL=${{Postgres.DATABASE_URL}}
 ```
 
-Documenso runs database migrations automatically on startup.
+Hanzo Sign runs database migrations automatically on startup.
 
 ### Accessing the Database
 
@@ -235,7 +235,7 @@ Railway provides a generated URL by default. To use your own domain:
 <Step>
 ### Generate a domain
 
-- Click on your Documenso service
+- Click on your Hanzo Sign service
 - Go to "Settings" > "Networking"
 - Click "Generate Domain" to get a Railway subdomain, or proceed to add a custom domain
 
@@ -279,7 +279,7 @@ Railway automatically provisions and renews SSL certificates for custom domains.
 
 ## Scaling Options
 
-Railway provides several options for scaling your Documenso deployment:
+Railway provides several options for scaling your Hanzo Sign deployment:
 
 ### Vertical Scaling
 
@@ -288,9 +288,9 @@ Increase resources for your service:
 {/* prettier-ignore */}
 <Steps>
 <Step>
-### Open your Documenso service
+### Open your Hanzo Sign service
 
-In the Railway dashboard, select the Documenso service.
+In the Railway dashboard, select the Hanzo Sign service.
 
 </Step>
 <Step>
@@ -316,7 +316,7 @@ Railway supports horizontal scaling through replicas:
 <Step>
 ### Open service Settings
 
-In the Railway dashboard, select your Documenso service and open "Settings".
+In the Railway dashboard, select your Hanzo Sign service and open "Settings".
 
 </Step>
 <Step>
@@ -334,7 +334,7 @@ Choose how many replicas to run; Railway will load-balance traffic across them.
 </Steps>
 
 <Callout type="warn">
-  Documenso stores sessions in the database, so horizontal scaling works without additional
+  Hanzo Sign stores sessions in the database, so horizontal scaling works without additional
   configuration. However, ensure your database can handle the increased connection load.
 </Callout>
 
@@ -348,7 +348,7 @@ For high-traffic deployments:
 
 ## Cost Estimate
 
-Railway uses usage-based pricing. Estimated monthly costs for Documenso:
+Railway uses usage-based pricing. Estimated monthly costs for Hanzo Sign:
 
 | Tier  | Resources                          | Estimated Cost |
 | ----- | ---------------------------------- | -------------- |
@@ -381,11 +381,11 @@ This is sufficient for testing but not recommended for production.
 
 ## Signing Certificate
 
-Documenso requires a signing certificate to sign documents. On Railway, you can:
+Hanzo Sign requires a signing certificate to sign documents. On Railway, you can:
 
 ### Option 1: Use Generated Certificate (Default)
 
-Documenso generates a self-signed certificate automatically if none is provided. This works for testing but shows generic certificate information in signed documents.
+Hanzo Sign generates a self-signed certificate automatically if none is provided. This works for testing but shows generic certificate information in signed documents.
 
 ### Option 2: Mount Custom Certificate
 
@@ -406,7 +406,7 @@ base64 -i your-cert.p12 | tr -d '\n'
 <Step>
 ### Add environment variables in Railway
 
-In your Documenso service variables, set:
+In your Hanzo Sign service variables, set:
 
 ```bash
 NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS=<base64-encoded-certificate>
@@ -446,11 +446,11 @@ See [Signing Certificate Configuration](/docs/self-hosting/configuration/signing
 
 ### Render
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/documenso/documenso)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/hanzoai/sign)
 
 ### Koyeb
 
-<a href="https://app.koyeb.com/deploy?type=git&repository=github.com/documenso/documenso&branch=main&name=documenso-app&builder=dockerfile&dockerfile=/docker/Dockerfile">
+<a href="https://app.koyeb.com/deploy?type=git&repository=github.com/hanzoai/sign&branch=main&name=hanzo-sign-app&builder=dockerfile&dockerfile=/docker/Dockerfile">
   <img
     src="https://www.koyeb.com/static/images/deploy/button.svg"
     alt="Deploy to Koyeb"

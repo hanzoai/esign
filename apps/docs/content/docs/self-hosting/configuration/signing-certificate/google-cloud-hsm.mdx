@@ -27,13 +27,13 @@ Create an HSM key ring and an asymmetric signing key in Cloud KMS (see [Creating
 <Step>
 ### Create service account
 
-Create a service account with the `cloudkms.signerVerifier` role so Documenso can use the key.
+Create a service account with the `cloudkms.signerVerifier` role so Hanzo Sign can use the key.
 
 </Step>
 <Step>
 ### Export public certificate
 
-Export the public certificate from the HSM key; Documenso needs it to embed in signatures.
+Export the public certificate from the HSM key; Hanzo Sign needs it to embed in signatures.
 
 </Step>
 </Steps>
@@ -55,8 +55,8 @@ Export the public certificate from the HSM key; Documenso needs it to embed in s
 
 ```bash
 NEXT_PRIVATE_SIGNING_TRANSPORT=gcloud-hsm
-NEXT_PRIVATE_SIGNING_GCLOUD_HSM_KEY_PATH=projects/my-project/locations/global/keyRings/documenso/cryptoKeys/signing-key/cryptoKeyVersions/1
-NEXT_PRIVATE_SIGNING_GCLOUD_HSM_PUBLIC_CRT_FILE_PATH=/opt/documenso/public.crt
+NEXT_PRIVATE_SIGNING_GCLOUD_HSM_KEY_PATH=projects/my-project/locations/global/keyRings/hanzo-sign/cryptoKeys/signing-key/cryptoKeyVersions/1
+NEXT_PRIVATE_SIGNING_GCLOUD_HSM_PUBLIC_CRT_FILE_PATH=/opt/hanzo-sign/public.crt
 NEXT_PRIVATE_SIGNING_GCLOUD_APPLICATION_CREDENTIALS_CONTENTS=eyJ0eXBlIjoic2VydmljZV9hY2NvdW50Ii...
 ```
 

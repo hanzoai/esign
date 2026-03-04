@@ -2,21 +2,21 @@ import { DocumentStatus, EnvelopeType } from '@prisma/client';
 import pMap from 'p-map';
 import { match } from 'ts-pattern';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { verifyEmbeddingPresignToken } from '@documenso/lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { UNSAFE_createEnvelopeItems } from '@documenso/lib/server-only/envelope-item/create-envelope-items';
-import { UNSAFE_deleteEnvelopeItem } from '@documenso/lib/server-only/envelope-item/delete-envelope-item';
-import { UNSAFE_updateEnvelopeItems } from '@documenso/lib/server-only/envelope-item/update-envelope-items';
-import { getEnvelopeWhereInput } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { updateEnvelope } from '@documenso/lib/server-only/envelope/update-envelope';
-import { setFieldsForDocument } from '@documenso/lib/server-only/field/set-fields-for-document';
-import { setFieldsForTemplate } from '@documenso/lib/server-only/field/set-fields-for-template';
-import { setDocumentRecipients } from '@documenso/lib/server-only/recipient/set-document-recipients';
-import { setTemplateRecipients } from '@documenso/lib/server-only/recipient/set-template-recipients';
-import { nanoid } from '@documenso/lib/universal/id';
-import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@documenso/lib/utils/embed-config';
-import { canEnvelopeItemsBeModified } from '@documenso/lib/utils/envelope';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { UNSAFE_createEnvelopeItems } from '@hanzo/sign-lib/server-only/envelope-item/create-envelope-items';
+import { UNSAFE_deleteEnvelopeItem } from '@hanzo/sign-lib/server-only/envelope-item/delete-envelope-item';
+import { UNSAFE_updateEnvelopeItems } from '@hanzo/sign-lib/server-only/envelope-item/update-envelope-items';
+import { getEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { updateEnvelope } from '@hanzo/sign-lib/server-only/envelope/update-envelope';
+import { setFieldsForDocument } from '@hanzo/sign-lib/server-only/field/set-fields-for-document';
+import { setFieldsForTemplate } from '@hanzo/sign-lib/server-only/field/set-fields-for-template';
+import { setDocumentRecipients } from '@hanzo/sign-lib/server-only/recipient/set-document-recipients';
+import { setTemplateRecipients } from '@hanzo/sign-lib/server-only/recipient/set-template-recipients';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@hanzo/sign-lib/utils/embed-config';
+import { canEnvelopeItemsBeModified } from '@hanzo/sign-lib/utils/envelope';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { procedure } from '../trpc';
 import {

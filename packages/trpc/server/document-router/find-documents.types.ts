@@ -1,8 +1,8 @@
 import { DocumentSource, DocumentStatus } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZDocumentManySchema } from '@documenso/lib/types/document';
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@documenso/lib/types/search-params';
+import { ZDocumentManySchema } from '@hanzo/sign-lib/types/document';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 
 import type { TrpcRouteMeta } from '../trpc';
 

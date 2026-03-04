@@ -6,10 +6,10 @@ import { FieldType } from '@prisma/client';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { getPdfPagesCount } from '@documenso/lib/constants/pdf-viewer';
-import type { TEditorEnvelope } from '@documenso/lib/types/envelope-editor';
-import { ZFieldMetaSchema } from '@documenso/lib/types/field-meta';
-import { nanoid } from '@documenso/lib/universal/id';
+import { getPdfPagesCount } from '@hanzo/sign-lib/constants/pdf-viewer';
+import type { TEditorEnvelope } from '@hanzo/sign-lib/types/envelope-editor';
+import { ZFieldMetaSchema } from '@hanzo/sign-lib/types/field-meta';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
 
 export const ZLocalFieldSchema = z.object({
   // This is the actual ID of the field if created.

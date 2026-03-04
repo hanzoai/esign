@@ -10,10 +10,10 @@ import { useRevalidator, useSearchParams } from 'react-router';
 import { isDeepEqual } from 'remeda';
 import { match } from 'ts-pattern';
 
-import { useCurrentEnvelopeEditor } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { useCurrentEnvelopeRender } from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { PDF_VIEWER_ERROR_MESSAGES } from '@documenso/lib/constants/pdf-viewer-i18n';
-import type { NormalizedFieldWithContext } from '@documenso/lib/server-only/ai/envelope/detect-fields/types';
+import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { useCurrentEnvelopeRender } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
+import type { NormalizedFieldWithContext } from '@hanzo/sign-lib/server-only/ai/envelope/detect-fields/types';
 import {
   FIELD_META_DEFAULT_VALUES,
   type TCheckboxFieldMeta,
@@ -27,12 +27,12 @@ import {
   type TRadioFieldMeta,
   type TSignatureFieldMeta,
   type TTextFieldMeta,
-} from '@documenso/lib/types/field-meta';
-import { canRecipientFieldsBeModified } from '@documenso/lib/utils/recipients';
-import { AnimateGenericFadeInOut } from '@documenso/ui/components/animate/animate-generic-fade-in-out';
-import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
-import { Separator } from '@documenso/ui/primitives/separator';
+} from '@hanzo/sign-lib/types/field-meta';
+import { canRecipientFieldsBeModified } from '@hanzo/sign-lib/utils/recipients';
+import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Separator } from '@hanzo/sign-ui/primitives/separator';
 
 import { AiFeaturesEnableDialog } from '~/components/dialogs/ai-features-enable-dialog';
 import { AiFieldDetectionDialog } from '~/components/dialogs/ai-field-detection-dialog';

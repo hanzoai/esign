@@ -1,7 +1,7 @@
 import { OrganisationType } from '@prisma/client';
 
-import { createOrganisation } from '@documenso/lib/server-only/organisation/create-organisation';
-import { internalClaims } from '@documenso/lib/types/subscription';
+import { createOrganisation } from '@hanzo/sign-lib/server-only/organisation/create-organisation';
+import { internalClaims } from '@hanzo/sign-lib/types/subscription';
 
 import { adminProcedure } from '../trpc';
 import {

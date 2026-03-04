@@ -1,12 +1,12 @@
 import { sValidator } from '@hono/standard-validator';
 import { Hono } from 'hono';
 
-import { AppError } from '@documenso/lib/errors/app-error';
-import { disableTwoFactorAuthentication } from '@documenso/lib/server-only/2fa/disable-2fa';
-import { enableTwoFactorAuthentication } from '@documenso/lib/server-only/2fa/enable-2fa';
-import { setupTwoFactorAuthentication } from '@documenso/lib/server-only/2fa/setup-2fa';
-import { viewBackupCodes } from '@documenso/lib/server-only/2fa/view-backup-codes';
-import { prisma } from '@documenso/prisma';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { disableTwoFactorAuthentication } from '@hanzo/sign-lib/server-only/2fa/disable-2fa';
+import { enableTwoFactorAuthentication } from '@hanzo/sign-lib/server-only/2fa/enable-2fa';
+import { setupTwoFactorAuthentication } from '@hanzo/sign-lib/server-only/2fa/setup-2fa';
+import { viewBackupCodes } from '@hanzo/sign-lib/server-only/2fa/view-backup-codes';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { AuthenticationErrorCode } from '../lib/errors/error-codes';
 import { getSession } from '../lib/utils/get-session';

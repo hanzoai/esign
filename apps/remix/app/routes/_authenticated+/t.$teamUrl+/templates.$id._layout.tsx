@@ -4,11 +4,11 @@ import { EnvelopeType } from '@prisma/client';
 import { ChevronLeftIcon } from 'lucide-react';
 import { Link, Outlet, isRouteErrorResponse, redirect } from 'react-router';
 
-import { getSession } from '@documenso/auth/server/lib/utils/get-session';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { getTeamByUrl } from '@documenso/lib/server-only/team/get-team';
-import { Button } from '@documenso/ui/primitives/button';
+import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
 

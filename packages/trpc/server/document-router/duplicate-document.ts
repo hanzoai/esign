@@ -1,4 +1,4 @@
-import { duplicateEnvelope } from '@documenso/lib/server-only/envelope/duplicate-envelope';
+import { duplicateEnvelope } from '@hanzo/sign-lib/server-only/envelope/duplicate-envelope';
 
 import { authenticatedProcedure } from '../trpc';
 import {

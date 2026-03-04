@@ -1,6 +1,6 @@
-# Documenso Code Style Guide
+# Hanzo Sign Code Style Guide
 
-This document captures the code style, patterns, and conventions used in the Documenso codebase. It covers both enforceable rules and subjective "taste" elements that make our code consistent and maintainable.
+This document captures the code style, patterns, and conventions used in the Hanzo Sign codebase. It covers both enforceable rules and subjective "taste" elements that make our code consistent and maintainable.
 
 ## Table of Contents
 
@@ -90,10 +90,10 @@ import type { Document, Recipient } from '@prisma/client';
 import { DocumentStatus, RecipientRole } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-// 3. Internal package imports (from @documenso/*)
-import { AppError } from '@documenso/lib/errors/app-error';
-import { prisma } from '@documenso/prisma';
-import { Button } from '@documenso/ui/primitives/button';
+// 3. Internal package imports (from @hanzo/sign-*)
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { prisma } from '@hanzo/sign-prisma';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 // 4. Relative imports
 import { getTeamById } from '../team/get-team';
@@ -107,8 +107,8 @@ import type { FindResultResponse } from './types';
 // ✅ Use type imports for types
 import type { Document } from '@prisma/client';
 
-import { Button } from '@documenso/ui/primitives/button';
-import { Input } from '@documenso/ui/primitives/input';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 ```
 
 ---
@@ -340,7 +340,7 @@ onClick={() => void onFormSubmit()}
 
 ```typescript
 // ✅ Blank line after imports
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 export const findDocuments = async () => {
   // ...

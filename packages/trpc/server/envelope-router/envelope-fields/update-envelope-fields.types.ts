@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { ZFieldSchema } from '@documenso/lib/types/field';
-import { ZEnvelopeFieldAndMetaSchema } from '@documenso/lib/types/field-meta';
+import { ZFieldSchema } from '@hanzo/sign-lib/types/field';
+import { ZEnvelopeFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
 
 import type { TrpcRouteMeta } from '../../trpc';
 import { ZCoordinatePositionSchema } from './create-envelope-fields.types';

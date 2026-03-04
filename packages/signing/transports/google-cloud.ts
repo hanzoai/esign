@@ -1,7 +1,7 @@
 import { GoogleKmsSigner, parsePem } from '@libpdf/core';
 import fs from 'node:fs';
 
-import { env } from '@documenso/lib/utils/env';
+import { env } from '@hanzo/sign-lib/utils/env';
 
 const loadCertificates = async (): Promise<Uint8Array[]> => {
   // Try chain file first (takes precedence)

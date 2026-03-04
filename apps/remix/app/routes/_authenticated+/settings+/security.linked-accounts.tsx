@@ -5,10 +5,10 @@ import { Trans } from '@lingui/react/macro';
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 
-import { authClient } from '@documenso/auth/client';
-import { Button } from '@documenso/ui/primitives/button';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
+import { authClient } from '@hanzo/sign-auth/client';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
 import {
   Dialog,
   DialogContent,
@@ -17,10 +17,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dialog';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { SettingsHeader } from '~/components/general/settings-header';
 import { appMetaTags } from '~/utils/meta';

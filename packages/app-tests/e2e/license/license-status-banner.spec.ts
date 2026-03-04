@@ -2,13 +2,13 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { TCachedLicense } from '@documenso/lib/types/license';
-import { seedUser } from '@documenso/prisma/seed/users';
+import type { TCachedLicense } from '@hanzo/sign-lib/types/license';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 
-const LICENSE_FILE_NAME = '.documenso-license.json';
-const LICENSE_BACKUP_FILE_NAME = '.documenso-license-backup.json';
+const LICENSE_FILE_NAME = '.sign-license.json';
+const LICENSE_BACKUP_FILE_NAME = '.sign-license-backup.json';
 
 /**
  * Get the path to the license file.
@@ -17,7 +17,7 @@ const LICENSE_BACKUP_FILE_NAME = '.documenso-license-backup.json';
  * Tests run from packages/app-tests, so we need to go up to the root then into apps/remix.
  */
 const getLicenseFilePath = () => {
-  // From packages/app-tests/e2e/license -> ../../../../apps/remix/.documenso-license.json
+  // From packages/app-tests/e2e/license -> ../../../../apps/remix/.sign-license.json
   return path.join(__dirname, '../../../../apps/remix', LICENSE_FILE_NAME);
 };
 
@@ -157,7 +157,7 @@ test.describe.skip('License Status Banner', () => {
 
     // Global banner should not be visible (no license file)
     await expect(
-      page.getByText('This is an expired license instance of Documenso'),
+      page.getByText('This is an expired license instance of Hanzo Sign'),
     ).not.toBeVisible();
 
     // Admin banner messages should not be visible (no license file means no banner)
@@ -187,7 +187,7 @@ test.describe.skip('License Status Banner', () => {
 
     // Global banner should not be visible (license is ACTIVE)
     await expect(
-      page.getByText('This is an expired license instance of Documenso'),
+      page.getByText('This is an expired license instance of Hanzo Sign'),
     ).not.toBeVisible();
 
     // Admin banner messages should not be visible (license is ACTIVE)
@@ -216,7 +216,7 @@ test.describe.skip('License Status Banner', () => {
 
     // Global banner should NOT be visible (only shows for EXPIRED + unauthorized)
     await expect(
-      page.getByText('This is an expired license instance of Documenso'),
+      page.getByText('This is an expired license instance of Hanzo Sign'),
     ).not.toBeVisible();
 
     // Admin banner should show PAST_DUE message
@@ -249,7 +249,7 @@ test.describe.skip('License Status Banner', () => {
 
     // Global banner should NOT be visible (requires BOTH expired AND unauthorized)
     await expect(
-      page.getByText('This is an expired license instance of Documenso'),
+      page.getByText('This is an expired license instance of Hanzo Sign'),
     ).not.toBeVisible();
 
     // Admin banner should show EXPIRED message
@@ -283,13 +283,13 @@ test.describe.skip('License Status Banner', () => {
     await expect(page.getByRole('heading', { name: 'Admin Panel' })).toBeVisible();
 
     // Global banner SHOULD be visible (EXPIRED + unauthorized)
-    await expect(page.getByText('This is an expired license instance of Documenso')).toBeVisible();
+    await expect(page.getByText('This is an expired license instance of Hanzo Sign')).toBeVisible();
 
     // Admin banner should show UNAUTHORIZED message (takes precedence over EXPIRED)
     await expect(page.getByText('Invalid License Type')).toBeVisible();
     await expect(
       page.getByText(
-        'Your Documenso instance is using features that are not part of your license.',
+        'Your Hanzo Sign instance is using features that are not part of your license.',
       ),
     ).toBeVisible();
   });
@@ -316,14 +316,14 @@ test.describe.skip('License Status Banner', () => {
 
     // Global banner should NOT be visible (requires EXPIRED status)
     await expect(
-      page.getByText('This is an expired license instance of Documenso'),
+      page.getByText('This is an expired license instance of Hanzo Sign'),
     ).not.toBeVisible();
 
     // Admin banner should show UNAUTHORIZED message
     await expect(page.getByText('Invalid License Type')).toBeVisible();
     await expect(
       page.getByText(
-        'Your Documenso instance is using features that are not part of your license.',
+        'Your Hanzo Sign instance is using features that are not part of your license.',
       ),
     ).toBeVisible();
 
@@ -356,14 +356,14 @@ test.describe.skip('License Status Banner', () => {
 
     // Global banner should NOT be visible (no EXPIRED status, only unauthorized flag)
     await expect(
-      page.getByText('This is an expired license instance of Documenso'),
+      page.getByText('This is an expired license instance of Hanzo Sign'),
     ).not.toBeVisible();
 
     // Admin banner should show Invalid License Type message (unauthorized flag is set)
     await expect(page.getByText('Invalid License Type')).toBeVisible();
     await expect(
       page.getByText(
-        'Your Documenso instance is using features that are not part of your license.',
+        'Your Hanzo Sign instance is using features that are not part of your license.',
       ),
     ).toBeVisible();
 
@@ -387,6 +387,6 @@ test.describe.skip('License Status Banner', () => {
     });
 
     // Global banner SHOULD be visible on any authenticated page (EXPIRED + unauthorized)
-    await expect(page.getByText('This is an expired license instance of Documenso')).toBeVisible();
+    await expect(page.getByText('This is an expired license instance of Hanzo Sign')).toBeVisible();
   });
 });

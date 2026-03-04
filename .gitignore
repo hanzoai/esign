@@ -65,8 +65,8 @@ CLAUDE.md
 scripts/output*
 
 # license
-.documenso-license.json
-.documenso-license-backup.json
+.hanzo-sign-license.json
+.hanzo-sign-license-backup.json
 
 # tmp
 tmp/

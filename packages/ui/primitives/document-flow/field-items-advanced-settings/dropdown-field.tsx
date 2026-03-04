@@ -5,19 +5,19 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { ChevronDown, ChevronUp, Trash } from 'lucide-react';
 
-import { validateDropdownField } from '@documenso/lib/advanced-fields-validation/validate-dropdown';
-import { type TDropdownFieldMeta as DropdownFieldMeta } from '@documenso/lib/types/field-meta';
-import { Button } from '@documenso/ui/primitives/button';
-import { Input } from '@documenso/ui/primitives/input';
-import { Label } from '@documenso/ui/primitives/label';
+import { validateDropdownField } from '@hanzo/sign-lib/advanced-fields-validation/validate-dropdown';
+import { type TDropdownFieldMeta as DropdownFieldMeta } from '@hanzo/sign-lib/types/field-meta';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { Label } from '@hanzo/sign-ui/primitives/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { Switch } from '@documenso/ui/primitives/switch';
+} from '@hanzo/sign-ui/primitives/select';
+import { Switch } from '@hanzo/sign-ui/primitives/switch';
 
 type DropdownFieldAdvancedSettingsProps = {
   fieldState: DropdownFieldMeta;

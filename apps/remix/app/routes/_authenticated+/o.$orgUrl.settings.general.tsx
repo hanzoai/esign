@@ -2,9 +2,9 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { canExecuteOrganisationAction } from '@documenso/lib/utils/organisations';
-import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { canExecuteOrganisationAction } from '@hanzo/sign-lib/utils/organisations';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 
 import { OrganisationDeleteDialog } from '~/components/dialogs/organisation-delete-dialog';
 import { AvatarImageForm } from '~/components/forms/avatar-image';

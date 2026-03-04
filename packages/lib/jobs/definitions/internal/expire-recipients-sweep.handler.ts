@@ -1,6 +1,6 @@
 import { DocumentStatus, SigningStatus } from '@prisma/client';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { jobs } from '../../client';
 import type { JobRunIO } from '../../client/_internal/job';

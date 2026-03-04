@@ -5,13 +5,13 @@ import type { Team } from '@prisma/client';
 import { Prisma } from '@prisma/client';
 import { z } from 'zod';
 
-import { mailer } from '@documenso/email/mailer';
-import { ConfirmTeamEmailTemplate } from '@documenso/email/templates/confirm-team-email';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/teams';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { createTokenVerification } from '@documenso/lib/utils/token-verification';
-import { prisma } from '@documenso/prisma';
+import { mailer } from '@hanzo/sign-email/mailer';
+import { ConfirmTeamEmailTemplate } from '@hanzo/sign-email/templates/confirm-team-email';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { createTokenVerification } from '@hanzo/sign-lib/utils/token-verification';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { env } from '../../utils/env';
@@ -143,7 +143,7 @@ export const sendTeamEmailVerificationEmail = async (email: string, token: strin
     to: email,
     from: senderEmail,
     subject: i18n._(
-      msg`A request to use your email has been initiated by ${team.name} on Documenso`,
+      msg`A request to use your email has been initiated by ${team.name} on Hanzo Sign`,
     ),
     html,
     text,

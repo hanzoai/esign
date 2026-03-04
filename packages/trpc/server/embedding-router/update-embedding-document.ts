@@ -1,9 +1,9 @@
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { verifyEmbeddingPresignToken } from '@documenso/lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { updateEnvelope } from '@documenso/lib/server-only/envelope/update-envelope';
-import { setFieldsForDocument } from '@documenso/lib/server-only/field/set-fields-for-document';
-import { setDocumentRecipients } from '@documenso/lib/server-only/recipient/set-document-recipients';
-import { nanoid } from '@documenso/lib/universal/id';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { updateEnvelope } from '@hanzo/sign-lib/server-only/envelope/update-envelope';
+import { setFieldsForDocument } from '@hanzo/sign-lib/server-only/field/set-fields-for-document';
+import { setDocumentRecipients } from '@hanzo/sign-lib/server-only/recipient/set-document-recipients';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
 
 import { procedure } from '../trpc';
 import {

@@ -9,8 +9,8 @@ import {
   FIELD_DEFAULT_GENERIC_ALIGN,
   type TNameFieldMeta as NameFieldMeta,
   ZNameFieldMeta,
-} from '@documenso/lib/types/field-meta';
-import { Form } from '@documenso/ui/primitives/form/form';
+} from '@hanzo/sign-lib/types/field-meta';
+import { Form } from '@hanzo/sign-ui/primitives/form/form';
 
 import {
   EditorGenericFontSizeField,

@@ -28,8 +28,8 @@ The most common workflow: upload a PDF, add recipients with signature fields, an
 <Tabs items={['TypeScript', 'curl']}>
 <Tab value="TypeScript">
 ```typescript
-const API_TOKEN = process.env.DOCUMENSO_API_TOKEN;
-const BASE_URL = 'https://app.documenso.com/api/v2';
+const API_TOKEN = process.env.SIGN_API_TOKEN;
+const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
 
 type Recipient = {
   email: string;
@@ -160,7 +160,7 @@ result.recipients.forEach((r) => console.log(`${r.email}: ${r.signingUrl}`));
 set -e
 
 API_TOKEN="YOUR_API_TOKEN"
-BASE_URL="https://app.documenso.com/api/v2"
+BASE_URL="https://app.sign.hanzo.ai/api/v2"
 PDF_FILE="./contract.pdf"
 
 # Step 1: Create envelope with recipients and fields
@@ -262,8 +262,8 @@ Use templates for repeatable document workflows. This example creates an employm
 <Tabs items={['TypeScript', 'curl']}>
 <Tab value="TypeScript">
 ```typescript
-const API_TOKEN = process.env.DOCUMENSO_API_TOKEN;
-const BASE_URL = 'https://app.documenso.com/api/v2';
+const API_TOKEN = process.env.SIGN_API_TOKEN;
+const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
 
 type EmployeeData = {
   email: string;
@@ -403,7 +403,7 @@ console.log('Signing URL:', result.signingUrl);
 set -e
 
 API_TOKEN="YOUR_API_TOKEN"
-BASE_URL="https://app.documenso.com/api/v2"
+BASE_URL="https://app.sign.hanzo.ai/api/v2"
 TEMPLATE_ID=123
 
 # Variables
@@ -479,8 +479,8 @@ Send the same document to multiple recipients in parallel. Useful for policy ack
 <Tabs items={['TypeScript', 'curl']}>
 <Tab value="TypeScript">
 ```typescript
-const API_TOKEN = process.env.DOCUMENSO_API_TOKEN;
-const BASE_URL = 'https://app.documenso.com/api/v2';
+const API_TOKEN = process.env.SIGN_API_TOKEN;
+const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
 
 type BulkRecipient = {
   email: string;
@@ -588,7 +588,7 @@ results.failed.forEach((f) => console.error(`${f.email}: ${f.error}`));
 #!/bin/bash
 
 API_TOKEN="YOUR_API_TOKEN"
-BASE_URL="https://app.documenso.com/api/v2"
+BASE_URL="https://app.sign.hanzo.ai/api/v2"
 TEMPLATE_ID=456
 
 # Get signer slot ID from template
@@ -672,7 +672,7 @@ import express from 'express';
 const app = express();
 app.use(express.json());
 
-const WEBHOOK_SECRET = process.env.DOCUMENSO_WEBHOOK_SECRET;
+const WEBHOOK_SECRET = process.env.SIGN_WEBHOOK_SECRET;
 
 type WebhookPayload = {
   event: string;
@@ -694,9 +694,9 @@ type WebhookPayload = {
   createdAt: string;
 };
 
-app.post('/webhooks/documenso', (req, res) => {
+app.post('/webhooks/hanzo-sign', (req, res) => {
   // Verify webhook signature
-  const secret = req.headers['x-documenso-secret'] as string;
+  const secret = req.headers['x-hanzo-sign-secret'] as string;
 
   if (secret !== WEBHOOK_SECRET) {
     console.error('Invalid webhook secret');
@@ -750,7 +750,7 @@ app.listen(3000, () => console.log('Webhook server running on port 3000'));
 
 ### Register the Webhook
 
-Register your endpoint in the Documenso dashboard:
+Register your endpoint in the Hanzo Sign dashboard:
 
 {/* prettier-ignore */}
 <Steps>
@@ -761,14 +761,14 @@ Register your endpoint in the Documenso dashboard:
     Click **Create Webhook**
   </Step>
   <Step>
-    Enter your webhook URL (e.g. <code>https://your-app.com/webhooks/documenso</code>)
+    Enter your webhook URL (e.g. <code>https://your-app.com/webhooks/hanzo-sign</code>)
   </Step>
   <Step>
     Select which events to subscribe to: <code>DOCUMENT_SENT</code>, <code>DOCUMENT_OPENED</code>,{' '}
     <code>DOCUMENT_SIGNED</code>, <code>DOCUMENT_COMPLETED</code>, <code>DOCUMENT_REJECTED</code>
   </Step>
   <Step>
-    Enter your webhook secret (the same value stored in <code>DOCUMENSO_WEBHOOK_SECRET</code>)
+    Enter your webhook secret (the same value stored in <code>SIGN_WEBHOOK_SECRET</code>)
   </Step>
   <Step>
     Click **Create Webhook**
@@ -832,8 +832,8 @@ After a document is completed, download the signed PDF with all signatures embed
 <Tabs items={['TypeScript', 'curl']}>
 <Tab value="TypeScript">
 ```typescript
-const API_TOKEN = process.env.DOCUMENSO_API_TOKEN;
-const BASE_URL = 'https://app.documenso.com/api/v2';
+const API_TOKEN = process.env.SIGN_API_TOKEN;
+const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
 
 type DownloadVersion = 'signed' | 'original';
 
@@ -919,7 +919,7 @@ await downloadAllCompletedDocuments('./downloads');
 #!/bin/bash
 
 API_TOKEN="YOUR_API_TOKEN"
-BASE_URL="https://app.documenso.com/api/v2"
+BASE_URL="https://app.sign.hanzo.ai/api/v2"
 ENVELOPE_ID="envelope_abc123"
 OUTPUT_DIR="./downloads"
 
@@ -1037,14 +1037,14 @@ type ApiError = {
   details?: Record<string, unknown>;
 };
 
-class DocumensoApiError extends Error {
+class Hanzo SignApiError extends Error {
   code?: string;
   statusCode: number;
   details?: Record<string, unknown>;
 
   constructor(error: ApiError) {
     super(error.message);
-    this.name = 'DocumensoApiError';
+    this.name = 'Hanzo SignApiError';
     this.code = error.code;
     this.statusCode = error.statusCode;
     this.details = error.details;
@@ -1054,7 +1054,7 @@ class DocumensoApiError extends Error {
 async function handleApiResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
     const error = await response.json();
-    throw new DocumensoApiError({
+    throw new Hanzo SignApiError({
       message: error.message || 'Unknown error',
       code: error.code,
       statusCode: response.status,
@@ -1076,7 +1076,7 @@ try {
   const envelope = await handleApiResponse<{ id: string }>(response);
   console.log('Created:', envelope.id);
 } catch (error) {
-  if (error instanceof DocumensoApiError) {
+  if (error instanceof Hanzo SignApiError) {
     switch (error.statusCode) {
       case 400:
         console.error('Invalid request:', error.message);
@@ -1150,7 +1150,7 @@ function validatePdfFile(buffer: Buffer, maxSizeMb = 10) {
 
 ## See Also
 
-- [API Reference](https://openapi.documenso.com/) - Full endpoint documentation
+- [API Reference](https://openapi.sign.hanzo.ai/) - Full endpoint documentation
 - [Documents API](/docs/developers/api/documents) - Document operations
 - [Templates API](/docs/developers/api/templates) - Template management
 - [Webhooks](/docs/developers/webhooks/setup) - Webhook configuration

@@ -6,13 +6,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: de\n"
-"Project-Id-Version: documenso-app\n"
+"Project-Id-Version: hanzo-sign-app\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2026-03-06 03:26\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: documenso-app\n"
+"X-Crowdin-Project: hanzo-sign-app\n"
 "X-Crowdin-Project-ID: 694691\n"
 "X-Crowdin-Language: de\n"
 "X-Crowdin-File: web.po\n"
@@ -613,8 +613,8 @@ msgid "<0>{organisationName}</0> has requested to create an account on your beha
 msgstr "<0>{organisationName}</0> hat angefragt, ein Konto in Ihrem Namen zu erstellen."
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "<0>{organisationName}</0> has requested to link your current Documenso account to their organisation."
-msgstr "<0>{organisationName}</0> hat angefragt, Ihr bestehendes Documenso-Konto mit ihrer Organisation zu verknüpfen."
+msgid "<0>{organisationName}</0> has requested to link your current Hanzo Sign account to their organisation."
+msgstr "<0>{organisationName}</0> hat angefragt, Ihr bestehendes Hanzo Sign-Konto mit ihrer Organisation zu verknüpfen."
 
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
 msgid "<0>{senderName} {senderEmail}</0> has invited you to approve this document"
@@ -653,8 +653,8 @@ msgid "<0>{senderName} {senderEmail}</0> on behalf of \"{0}\" has invited you to
 msgstr "<0>{senderName} {senderEmail}</0> im Namen von \"{0}\" hat Sie eingeladen, dieses Dokument anzusehen"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "<0>{teamName}</0> has requested to use your email address for their team on Documenso."
-msgstr "<0>{teamName}</0> hat angefragt, Ihre E-Mail-Adresse für ihr Team bei Documenso zu verwenden."
+msgid "<0>{teamName}</0> has requested to use your email address for their team on Hanzo Sign."
+msgstr "<0>{teamName}</0> hat angefragt, Ihre E-Mail-Adresse für ihr Team bei Hanzo Sign zu verwenden."
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "<0>Account management:</0> Modify your account settings, permissions, and preferences"
@@ -898,8 +898,8 @@ msgid "A means to print or download documents for your records"
 msgstr "Ein Mittel, um Dokumente für Ihre Unterlagen zu drucken oder herunterzuladen"
 
 #: packages/email/templates/organisation-join.tsx
-msgid "A member has joined your organisation on Documenso"
-msgstr "Ein Mitglied ist Ihrer Organisation bei Documenso beigetreten"
+msgid "A member has joined your organisation on Hanzo Sign"
+msgstr "Ein Mitglied ist Ihrer Organisation bei Hanzo Sign beigetreten"
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-left-email.handler.ts
 msgid "A member has left your organisation"
@@ -910,8 +910,8 @@ msgid "A member has left your organisation {organisationName}"
 msgstr "Ein Mitglied hat Ihre Organisation {organisationName} verlassen"
 
 #: packages/email/templates/organisation-leave.tsx
-msgid "A member has left your organisation on Documenso"
-msgstr "Ein Mitglied hat Ihre Organisation auf Documenso verlassen"
+msgid "A member has left your organisation on Hanzo Sign"
+msgstr "Ein Mitglied hat Ihre Organisation auf Hanzo Sign verlassen"
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-joined-email.handler.ts
 msgid "A new member has joined your organisation"
@@ -950,18 +950,18 @@ msgid "A request has been made to create an account for you"
 msgstr "Es wurde eine Anfrage gestellt, ein Konto für Sie zu erstellen."
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "A request has been made to link your Documenso account"
-msgstr "Es wurde eine Anfrage gestellt, Ihr Documenso-Konto zu verknüpfen."
+msgid "A request has been made to link your Hanzo Sign account"
+msgstr "Es wurde eine Anfrage gestellt, Ihr Hanzo Sign-Konto zu verknüpfen."
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/create-team-email-verification.ts
-msgid "A request to use your email has been initiated by {0} on Documenso"
-msgstr "Eine Anfrage zur Verwendung Ihrer E-Mail wurde von {0} auf Documenso initiiert"
+msgid "A request to use your email has been initiated by {0} on Hanzo Sign"
+msgstr "Eine Anfrage zur Verwendung Ihrer E-Mail wurde von {0} auf Hanzo Sign initiiert"
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
-msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Documenso."
-msgstr "Ein Geheimnis, das an deine URL gesendet wird, damit du überprüfen kannst, dass die Anfrage von Documenso gesendet wurde."
+msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo Sign."
+msgstr "Ein Geheimnis, das an deine URL gesendet wird, damit du überprüfen kannst, dass die Anfrage von Hanzo Sign gesendet wurde."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "A stable internet connection"
@@ -1004,12 +1004,12 @@ msgid "Accept & Link Account"
 msgstr "Akzeptieren & Konto verknüpfen"
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Accept invitation to join an organisation on Documenso"
-msgstr "Einladung annehmen, um einer Organisation auf Documenso beizutreten"
+msgid "Accept invitation to join an organisation on Hanzo Sign"
+msgstr "Einladung annehmen, um einer Organisation auf Hanzo Sign beizutreten"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "Accept team email request for {teamName} on Documenso"
-msgstr "Akzeptiere die Team-E-Mail-Anfrage für {teamName} bei Documenso"
+msgid "Accept team email request for {teamName} on Hanzo Sign"
+msgstr "Akzeptiere die Team-E-Mail-Anfrage für {teamName} bei Hanzo Sign"
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "Acceptance and Consent"
@@ -2252,8 +2252,8 @@ msgid "By enabling 2FA, you will be required to enter a code from your authentic
 msgstr "Wenn 2FA aktiviert wird, müssen Sie bei jedem Anmelden mit E-Mail-Passwort einen Code aus Ihrer Authentifikator-App eingeben."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
-msgid "By proceeding to use the electronic signature service provided by Documenso, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
-msgstr "Indem Sie den elektronischen Unterzeichnungsdienst von Documenso verwenden, bestätigen Sie, dass Sie diese Offenlegung gelesen und verstanden haben. Sie stimmen allen Bedingungen und Konditionen zu, die mit der Verwendung elektronischer Unterschriften und elektronischer Transaktionen verbunden sind, wie hierin dargelegt."
+msgid "By proceeding to use the electronic signature service provided by Hanzo Sign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
+msgstr "Indem Sie den elektronischen Unterzeichnungsdienst von Hanzo Sign verwenden, bestätigen Sie, dass Sie diese Offenlegung gelesen und verstanden haben. Sie stimmen allen Bedingungen und Konditionen zu, die mit der Verwendung elektronischer Unterschriften und elektronischer Transaktionen verbunden sind, wie hierin dargelegt."
 
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
 msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
@@ -3714,12 +3714,12 @@ msgid "Do you want to duplicate this template?"
 msgstr "Möchten Sie diese Vorlage duplizieren?"
 
 #: apps/remix/app/components/general/admin-license-card.tsx
-msgid "Documenso License"
-msgstr "Documenso-Lizenz"
+msgid "Hanzo Sign License"
+msgstr "Hanzo Sign-Lizenz"
 
 #: apps/remix/app/components/dialogs/account-delete-dialog.tsx
-msgid "Documenso will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
-msgstr "Documenso wird <0>alle Ihre Dokumente</0> löschen, zusammen mit allen abgeschlossenen Dokumenten, Unterschriften und allen anderen Ressourcen, die zu Ihrem Konto gehören."
+msgid "Hanzo Sign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
+msgstr "Hanzo Sign wird <0>alle Ihre Dokumente</0> löschen, zusammen mit allen abgeschlossenen Dokumenten, Unterschriften und allen anderen Ressourcen, die zu Ihrem Konto gehören."
 
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
@@ -5564,8 +5564,8 @@ msgid "If there is any issue with your subscription, please contact us at <0>{SU
 msgstr "Bei einem Problem mit Ihrem Abo kontaktieren Sie uns bitte unter <0>{SUPPORT_EMAIL}</0>."
 
 #: apps/remix/app/routes/embed+/v2+/authoring+/_layout.tsx
-msgid "If you are using staging, ensure that you have set the host prop on the embedding component to the staging domain (https://stg-app.documenso.com)"
-msgstr "Wenn Sie die Staging-Umgebung verwenden, stellen Sie sicher, dass Sie die Host-Eigenschaft der Embedding-Komponente auf die Staging-Domain (https://stg-app.documenso.com) gesetzt haben"
+msgid "If you are using staging, ensure that you have set the host prop on the embedding component to the staging domain (https://stg-app.sign.hanzo.ai)"
+msgstr "Wenn Sie die Staging-Umgebung verwenden, stellen Sie sicher, dass Sie die Host-Eigenschaft der Embedding-Komponente auf die Staging-Domain (https://stg-app.sign.hanzo.ai) gesetzt haben"
 
 #: packages/email/template-components/template-access-auth-2fa.tsx
 msgid "If you didn't request this verification code, you can safely ignore this email."
@@ -5705,8 +5705,8 @@ msgid "Invalid License Key"
 msgstr "Ungültiger Lizenzschlüssel"
 
 #: apps/remix/app/components/general/admin-license-status-banner.tsx
-msgid "Invalid License Type - Your Documenso instance is using features that are not part of your license."
-msgstr "Ungültiger Lizenztyp – Ihre Documenso-Instanz verwendet Funktionen, die nicht Teil Ihrer Lizenz sind."
+msgid "Invalid License Type - Your Hanzo Sign instance is using features that are not part of your license."
+msgstr "Ungültiger Lizenztyp – Ihre Hanzo Sign-Instanz verwendet Funktionen, die nicht Teil Ihrer Lizenz sind."
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Invalid link"
@@ -5832,8 +5832,8 @@ msgid "Japanese"
 msgstr "Japanisch"
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Join {organisationName} on Documenso"
-msgstr "Tritt {organisationName} auf Documenso bei"
+msgid "Join {organisationName} on Hanzo Sign"
+msgstr "Tritt {organisationName} auf Hanzo Sign bei"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
 msgid "Join our community on <0>Discord</0> for community support and discussion."
@@ -6026,8 +6026,8 @@ msgid "Link template"
 msgstr "Vorlage verknüpfen"
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "Link your Documenso account"
-msgstr "Verknüpfen Sie Ihr Documenso-Konto"
+msgid "Link your Hanzo Sign account"
+msgstr "Verknüpfen Sie Ihr Hanzo Sign-Konto"
 
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
@@ -6350,8 +6350,8 @@ msgid "Min"
 msgstr "Min"
 
 #: apps/remix/app/components/general/admin-license-status-banner.tsx
-msgid "Missing License - Your Documenso instance is using features that require a license."
-msgstr "Fehlende Lizenz – Ihre Documenso-Instanz verwendet Funktionen, für die eine Lizenz erforderlich ist."
+msgid "Missing License - Your Hanzo Sign instance is using features that require a license."
+msgstr "Fehlende Lizenz – Ihre Hanzo Sign-Instanz verwendet Funktionen, für die eine Lizenz erforderlich ist."
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 msgid "Missing Recipients"
@@ -7666,8 +7666,8 @@ msgid "Read Only"
 msgstr "Nur lesen"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
-msgid "Read our documentation to get started with Documenso."
-msgstr "Lesen Sie unsere Dokumentation, um mit Documenso zu beginnen."
+msgid "Read our documentation to get started with Hanzo Sign."
+msgstr "Lesen Sie unsere Dokumentation, um mit Hanzo Sign zu beginnen."
 
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
 msgid "Read the full <0>signature disclosure</0>."
@@ -8168,8 +8168,8 @@ msgid "Return Home"
 msgstr "Zur Startseite zurückkehren"
 
 #: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
-msgid "Return to Documenso sign in page here"
-msgstr "Hier zur Documenso-Anmeldeseite zurückkehren"
+msgid "Return to Hanzo Sign sign in page here"
+msgstr "Hier zur Hanzo Sign-Anmeldeseite zurückkehren"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
 msgid "Return to documents"
@@ -9367,8 +9367,8 @@ msgstr "Team"
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/delete-team.ts
-msgid "Team \"{0}\" has been deleted on Documenso"
-msgstr "Team \"{0}\" wurde auf Documenso gelöscht"
+msgid "Team \"{0}\" has been deleted on Hanzo Sign"
+msgstr "Team \"{0}\" wurde auf Hanzo Sign gelöscht"
 
 #: packages/lib/constants/teams-translations.ts
 msgid "Team Admin"
@@ -9410,8 +9410,8 @@ msgid "Team email removed"
 msgstr "Team-E-Mail entfernt"
 
 #: packages/email/templates/team-email-removed.tsx
-msgid "Team email removed for {teamName} on Documenso"
-msgstr "Team-E-Mail für {teamName} auf Documenso entfernt"
+msgid "Team email removed for {teamName} on Hanzo Sign"
+msgstr "Team-E-Mail für {teamName} auf Hanzo Sign entfernt"
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Team email verification"
@@ -9666,8 +9666,8 @@ msgid "Thank you for completing the signing process."
 msgstr "Danke, dass Sie den Signaturvorgang abgeschlossen haben."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
-msgid "Thank you for using Documenso to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
-msgstr "Vielen Dank, dass Sie Documenso zur elektronischen Unterzeichnung Ihrer Dokumente verwenden. Der Zweck dieser Offenlegung besteht darin, Sie über den Prozess, die Rechtmäßigkeit und Ihre Rechte in Bezug auf die Verwendung elektronischer Unterschriften auf unserer Plattform zu informieren. Indem Sie sich entscheiden, eine elektronische Unterschrift zu verwenden, stimmen Sie den nachfolgend dargelegten Bedingungen zu."
+msgid "Thank you for using Hanzo Sign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
+msgstr "Vielen Dank, dass Sie Hanzo Sign zur elektronischen Unterzeichnung Ihrer Dokumente verwenden. Der Zweck dieser Offenlegung besteht darin, Sie über den Prozess, die Rechtmäßigkeit und Ihre Rechte in Bezug auf die Verwendung elektronischer Unterschriften auf unserer Plattform zu informieren. Indem Sie sich entscheiden, eine elektronische Unterschrift zu verwenden, stimmen Sie den nachfolgend dargelegten Bedingungen zu."
 
 #: packages/email/template-components/template-forgot-password.tsx
 msgid "That's okay, it happens! Click the button below to reset your password."
@@ -10025,8 +10025,8 @@ msgstr "Die Signaturtypen, die Empfänger beim Unterschreiben des Dokuments verw
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
-msgid "The URL for Documenso to send webhook events to."
-msgstr "Die URL für Documenso, um Webhook-Ereignisse zu senden."
+msgid "The URL for Hanzo Sign to send webhook events to."
+msgstr "Die URL für Hanzo Sign, um Webhook-Ereignisse zu senden."
 
 #: apps/remix/app/routes/_authenticated+/admin+/users.$id.tsx
 msgid "The user you are looking for may have been removed, renamed or may have never existed."
@@ -10164,8 +10164,8 @@ msgid "This document has been signed by all recipients"
 msgstr "Dieses Dokument wurde von allen Empfängern unterschrieben"
 
 #: apps/remix/app/components/general/document/document-certificate-qr-view.tsx
-msgid "This document is available in your Documenso account. You can view more details, recipients, and audit logs there."
-msgstr "Dieses Dokument ist in Ihrem Documenso-Konto verfügbar. Dort können Sie weitere Details, Empfänger und Protokolle einsehen."
+msgid "This document is available in your Hanzo Sign account. You can view more details, recipients, and audit logs there."
+msgstr "Dieses Dokument ist in Ihrem Hanzo Sign-Konto verfügbar. Dort können Sie weitere Details, Empfänger und Protokolle einsehen."
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
 msgid "This document is currently a draft and has not been sent"
@@ -10184,8 +10184,8 @@ msgid "This document was created using a direct link."
 msgstr "Dieses Dokument wurde mit einem direkten Link erstellt."
 
 #: packages/email/template-components/template-footer.tsx
-msgid "This document was sent using <0>Documenso</0>."
-msgstr "Dieses Dokument wurde mit <0>Documenso</0> versendet."
+msgid "This document was sent using <0>Hanzo Sign</0>."
+msgstr "Dieses Dokument wurde mit <0>Hanzo Sign</0> versendet."
 
 #: apps/remix/app/components/dialogs/envelope-duplicate-dialog.tsx
 msgid "This document will be duplicated."
@@ -11424,8 +11424,8 @@ msgstr "Warten auf deine Reihe"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
-msgid "Want to send slick signing links like this one? <0>Check out Documenso</0>."
-msgstr "Möchtest du schicke Signatur-Links wie diesen versenden? <0>Sieh dir Documenso an</0>."
+msgid "Want to send slick signing links like this one? <0>Check out Hanzo Sign</0>."
+msgstr "Möchtest du schicke Signatur-Links wie diesen versenden? <0>Sieh dir Hanzo Sign an</0>."
 
 #: apps/remix/app/routes/_profile+/_layout.tsx
 msgid "Want your own public profile?"
@@ -11847,8 +11847,8 @@ msgid "Welcome to {organisationName}"
 msgstr "Willkommen bei {organisationName}"
 
 #: packages/email/template-components/template-confirmation-email.tsx
-msgid "Welcome to Documenso!"
-msgstr "Willkommen bei Documenso!"
+msgid "Welcome to Hanzo Sign!"
+msgstr "Willkommen bei Hanzo Sign!"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Well-known URL is required"
@@ -11886,8 +11886,8 @@ msgid "Whether to enable the SSO portal for your organisation"
 msgstr "Ob das SSO-Portal für Ihre Organisation aktiviert werden soll"
 
 #: apps/remix/app/routes/_profile+/p.$url.tsx
-msgid "While waiting for them to do so you can create your own Documenso account and get started with document signing right away."
-msgstr "Während Sie darauf warten, können Sie Ihr eigenes Documenso-Konto erstellen und sofort mit der Dokumentenunterzeichnung beginnen."
+msgid "While waiting for them to do so you can create your own Hanzo Sign account and get started with document signing right away."
+msgstr "Während Sie darauf warten, können Sie Ihr eigenes Hanzo Sign-Konto erstellen und sofort mit der Dokumentenunterzeichnung beginnen."
 
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 msgid "Whitelabeling, unlimited members and more"
@@ -12136,8 +12136,8 @@ msgid "You can only detect fields in draft envelopes"
 msgstr "Sie können Felder nur in Entwürfen von Umschlägen erkennen."
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "You can revoke access at any time in your team settings on Documenso <0>here</0>."
-msgstr "Sie können den Zugriff jederzeit in Ihren Teameinstellungen auf Documenso <0>hier</0> widerrufen."
+msgid "You can revoke access at any time in your team settings on Hanzo Sign <0>here</0>."
+msgstr "Sie können den Zugriff jederzeit in Ihren Teameinstellungen auf Hanzo Sign <0>hier</0> widerrufen."
 
 #: apps/remix/app/components/forms/public-profile-form.tsx
 msgid "You can update the profile URL by updating the team URL in the general settings page."
@@ -12267,8 +12267,8 @@ msgstr "Sie wurden von <0>{0}</0> eingeladen, deren Organisation beizutreten."
 
 #. placeholder {0}: organisation.name
 #: packages/lib/server-only/organisation/create-organisation-member-invites.ts
-msgid "You have been invited to join {0} on Documenso"
-msgstr "Du wurdest eingeladen, {0} auf Documenso beizutreten"
+msgid "You have been invited to join {0} on Hanzo Sign"
+msgstr "Du wurdest eingeladen, {0} auf Hanzo Sign beizutreten"
 
 #: packages/email/templates/organisation-invite.tsx
 msgid "You have been invited to join the following organisation"
@@ -12801,12 +12801,12 @@ msgid "Your Email"
 msgstr "Ihre E-Mail"
 
 #: apps/remix/app/routes/_unauthenticated+/verify-email.$token.tsx
-msgid "Your email has already been confirmed. You can now use all features of Documenso."
-msgstr "Ihre E-Mail wurde bereits bestätigt. Sie können jetzt alle Funktionen von Documenso nutzen."
+msgid "Your email has already been confirmed. You can now use all features of Hanzo Sign."
+msgstr "Ihre E-Mail wurde bereits bestätigt. Sie können jetzt alle Funktionen von Hanzo Sign nutzen."
 
 #: apps/remix/app/routes/_unauthenticated+/verify-email.$token.tsx
-msgid "Your email has been successfully confirmed! You can now use all features of Documenso."
-msgstr "Ihre E-Mail wurde erfolgreich bestätigt! Sie können jetzt alle Funktionen von Documenso nutzen."
+msgid "Your email has been successfully confirmed! You can now use all features of Hanzo Sign."
+msgstr "Ihre E-Mail wurde erfolgreich bestätigt! Sie können jetzt alle Funktionen von Hanzo Sign nutzen."
 
 #. placeholder {0}: teamEmail.team.name
 #. placeholder {1}: teamEmail.team.url
@@ -12878,8 +12878,8 @@ msgid "Your plan does not support inviting members. Please upgrade or your plan 
 msgstr "Ihr Plan unterstützt keine Mitglieder-Einladungen. Bitte aktualisieren Sie Ihren Plan oder kontaktieren Sie den Vertrieb unter <0>{SUPPORT_EMAIL}</0>, wenn Sie Ihre Optionen besprechen möchten."
 
 #: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "Your plan is no longer valid. Please subscribe to a new plan to continue using Documenso."
-msgstr "Ihr Plan ist nicht mehr gültig. Bitte abonnieren Sie einen neuen Plan, um Documenso weiter zu nutzen."
+msgid "Your plan is no longer valid. Please subscribe to a new plan to continue using Hanzo Sign."
+msgstr "Ihr Plan ist nicht mehr gültig. Bitte abonnieren Sie einen neuen Plan, um Hanzo Sign weiter zu nutzen."
 
 #: apps/remix/app/components/forms/profile.tsx
 msgid "Your profile has been updated successfully."

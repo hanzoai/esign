@@ -1,6 +1,6 @@
 ---
 title: Database Configuration
-description: Configure PostgreSQL connection strings, pooling, SSL, migrations, and performance tuning for your Documenso deployment.
+description: Configure PostgreSQL connection strings, pooling, SSL, migrations, and performance tuning for your Hanzo Sign deployment.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -9,7 +9,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Supported Databases
 
-Documenso requires **PostgreSQL 14 or later**. No other databases are supported.
+Hanzo Sign requires **PostgreSQL 14 or later**. No other databases are supported.
 
 PostgreSQL provides the reliability, performance, and feature set required for document signing workflows, including:
 
@@ -30,11 +30,11 @@ postgresql://[user]:[password]@[host]:[port]/[database]?[parameters]
 
 | Component    | Description                     | Example           |
 | ------------ | ------------------------------- | ----------------- |
-| `user`       | Database username               | `documenso`       |
+| `user`       | Database username               | `hanzo-sign`       |
 | `password`   | Database password (URL-encoded) | `secretpass`      |
 | `host`       | Database server hostname or IP  | `localhost`       |
 | `port`       | Database port                   | `5432`            |
-| `database`   | Database name                   | `documenso`       |
+| `database`   | Database name                   | `hanzo-sign`       |
 | `parameters` | Additional connection options   | `sslmode=require` |
 
 ### Examples
@@ -42,13 +42,13 @@ postgresql://[user]:[password]@[host]:[port]/[database]?[parameters]
 **Local development:**
 
 ```
-postgresql://documenso:password@localhost:5432/documenso
+postgresql://hanzo-sign:password@localhost:5432/hanzo-sign
 ```
 
 **Remote server with SSL:**
 
 ```
-postgresql://documenso:password@db.example.com:5432/documenso?sslmode=require
+postgresql://hanzo-sign:password@db.example.com:5432/hanzo-sign?sslmode=require
 ```
 
 **With special characters in password:**
@@ -56,12 +56,12 @@ postgresql://documenso:password@db.example.com:5432/documenso?sslmode=require
 URL-encode special characters in passwords. For example, `p@ss#word` becomes `p%40ss%23word`:
 
 ```
-postgresql://documenso:p%40ss%23word@localhost:5432/documenso
+postgresql://hanzo-sign:p%40ss%23word@localhost:5432/hanzo-sign
 ```
 
 ## Environment Variables
 
-Documenso uses two database connection variables:
+Hanzo Sign uses two database connection variables:
 
 | Variable                           | Purpose                                             |
 | ---------------------------------- | --------------------------------------------------- |
@@ -73,13 +73,13 @@ Documenso uses two database connection variables:
 When not using a connection pooler, set both variables to the same value:
 
 ```bash
-NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@host:5432/documenso
-NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@host:5432/documenso
+NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@host:5432/hanzo-sign
+NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@host:5432/hanzo-sign
 ```
 
 ### Automatic Detection
 
-Documenso automatically detects common database environment variable formats used by hosting providers:
+Hanzo Sign automatically detects common database environment variable formats used by hosting providers:
 
 | Provider Variable          | Maps To                            |
 | -------------------------- | ---------------------------------- |
@@ -89,7 +89,7 @@ Documenso automatically detects common database environment variable formats use
 | `DATABASE_URL_UNPOOLED`    | `NEXT_PRIVATE_DIRECT_DATABASE_URL` |
 | `POSTGRES_URL_NON_POOLING` | `NEXT_PRIVATE_DIRECT_DATABASE_URL` |
 
-If your hosting provider sets these variables, Documenso will use them automatically.
+If your hosting provider sets these variables, Hanzo Sign will use them automatically.
 
 ## Connection Pooling
 
@@ -113,10 +113,10 @@ When using PgBouncer or similar poolers, configure two connection strings:
 
 ```bash
 # Pooled connection (through PgBouncer)
-NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@pooler-host:6432/documenso?pgbouncer=true
+NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@pooler-host:6432/hanzo-sign?pgbouncer=true
 
 # Direct connection (bypasses PgBouncer)
-NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@db-host:5432/documenso
+NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@db-host:5432/hanzo-sign
 ```
 
 <Callout type="warn">
@@ -125,10 +125,10 @@ NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@db-host:5432/documen
 
 ### Prisma Connection Pool
 
-Documenso uses Prisma, which maintains its own connection pool. Configure pool size with connection string parameters:
+Hanzo Sign uses Prisma, which maintains its own connection pool. Configure pool size with connection string parameters:
 
 ```
-postgresql://user:password@host:5432/documenso?connection_limit=10&pool_timeout=30
+postgresql://user:password@host:5432/hanzo-sign?connection_limit=10&pool_timeout=30
 ```
 
 | Parameter          | Description                              | Default |
@@ -143,7 +143,7 @@ postgresql://user:password@host:5432/documenso?connection_limit=10&pool_timeout=
 Add SSL parameters to your connection string:
 
 ```
-postgresql://user:password@host:5432/documenso?sslmode=require
+postgresql://user:password@host:5432/hanzo-sign?sslmode=require
 ```
 
 ### SSL Modes
@@ -164,7 +164,7 @@ For production, use `require` at minimum. Use `verify-full` when your CA certifi
 When connecting to databases with self-signed or private CA certificates:
 
 ```
-postgresql://user:password@host:5432/documenso?sslmode=verify-full&sslrootcert=/path/to/ca.crt
+postgresql://user:password@host:5432/hanzo-sign?sslmode=verify-full&sslrootcert=/path/to/ca.crt
 ```
 
 For Docker deployments, mount the certificate file:
@@ -172,17 +172,17 @@ For Docker deployments, mount the certificate file:
 ```bash
 docker run -d \
   -v /path/to/ca.crt:/etc/ssl/certs/db-ca.crt:ro \
-  -e NEXT_PRIVATE_DATABASE_URL="postgresql://user:password@host:5432/documenso?sslmode=verify-full&sslrootcert=/etc/ssl/certs/db-ca.crt" \
-  documenso/documenso:latest
+  -e NEXT_PRIVATE_DATABASE_URL="postgresql://user:password@host:5432/hanzo-sign?sslmode=verify-full&sslrootcert=/etc/ssl/certs/db-ca.crt" \
+  hanzo-sign/hanzo-sign:latest
 ```
 
 ## Running Migrations
 
-Database migrations update your schema when upgrading Documenso.
+Database migrations update your schema when upgrading Hanzo Sign.
 
 ### Automatic Migrations
 
-When running Documenso via Docker, migrations run automatically on container startup. No manual intervention is required.
+When running Hanzo Sign via Docker, migrations run automatically on container startup. No manual intervention is required.
 
 ### Manual Migrations
 
@@ -231,7 +231,7 @@ npx prisma migrate deploy
     Use the direct database URL and increase timeout:
     
     ```bash
-    NEXT_PRIVATE_DIRECT_DATABASE_URL="postgresql://user:password@host:5432/documenso?connect_timeout=60"
+    NEXT_PRIVATE_DIRECT_DATABASE_URL="postgresql://user:password@host:5432/hanzo-sign?connect_timeout=60"
     ```
   </Accordion>
 </Accordions>
@@ -262,10 +262,10 @@ npx prisma migrate deploy
 
     ```bash
     # Pooled connection
-    NEXT_PRIVATE_DATABASE_URL=postgresql://[user]:[password]@[endpoint]-pooler.region.aws.neon.tech/documenso?sslmode=require
+    NEXT_PRIVATE_DATABASE_URL=postgresql://[user]:[password]@[endpoint]-pooler.region.aws.neon.tech/hanzo-sign?sslmode=require
 
     # Direct connection for migrations
-    NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://[user]:[password]@[endpoint].region.aws.neon.tech/documenso?sslmode=require
+    NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://[user]:[password]@[endpoint].region.aws.neon.tech/hanzo-sign?sslmode=require
     ```
 
     The pooler endpoint includes `-pooler` in the hostname.
@@ -275,8 +275,8 @@ npx prisma migrate deploy
     **Configuration:**
 
     ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://documenso:[password]@your-instance.region.rds.amazonaws.com:5432/documenso?sslmode=require
-    NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://documenso:[password]@your-instance.region.rds.amazonaws.com:5432/documenso?sslmode=require
+    NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign:[password]@your-instance.region.rds.amazonaws.com:5432/hanzo-sign?sslmode=require
+    NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://hanzo-sign:[password]@your-instance.region.rds.amazonaws.com:5432/hanzo-sign?sslmode=require
     ```
 
     **Recommended settings:**
@@ -291,7 +291,7 @@ npx prisma migrate deploy
     **Configuration:**
 
     ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://documenso:[password]@/documenso?host=/cloudsql/[project]:[region]:[instance]
+    NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign:[password]@/hanzo-sign?host=/cloudsql/[project]:[region]:[instance]
     ```
 
     When connecting via Cloud SQL Proxy, use Unix socket connections.
@@ -299,7 +299,7 @@ npx prisma migrate deploy
     For public IP connections:
 
     ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://documenso:[password]@[public-ip]:5432/documenso?sslmode=require
+    NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign:[password]@[public-ip]:5432/hanzo-sign?sslmode=require
     ```
 
   </Accordion>
@@ -307,7 +307,7 @@ npx prisma migrate deploy
     **Configuration:**
 
     ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://documenso@[server-name]:[password]@[server-name].postgres.database.azure.com:5432/documenso?sslmode=require
+    NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign@[server-name]:[password]@[server-name].postgres.database.azure.com:5432/hanzo-sign?sslmode=require
     ```
 
     Note: Azure requires the username format `user@servername`.
@@ -317,7 +317,7 @@ npx prisma migrate deploy
     **Configuration:**
 
     ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://doadmin:[password]@[cluster-host]:25060/documenso?sslmode=require
+    NEXT_PRIVATE_DATABASE_URL=postgresql://doadmin:[password]@[cluster-host]:25060/hanzo-sign?sslmode=require
     ```
 
     DigitalOcean uses port 25060 by default and requires SSL.
@@ -340,13 +340,13 @@ npx prisma migrate deploy
 **Create a logical backup:**
 
 ```bash
-pg_dump -h host -U user -d documenso -F c -f documenso_backup.dump
+pg_dump -h host -U user -d hanzo-sign -F c -f hanzo-sign_backup.dump
 ```
 
 **Restore from backup:**
 
 ```bash
-pg_restore -h host -U user -d documenso -c documenso_backup.dump
+pg_restore -h host -U user -d hanzo-sign -c hanzo-sign_backup.dump
 ```
 
 ### Managed Service Backups
@@ -369,7 +369,7 @@ Most managed database services provide automated backups:
 
 ### PostgreSQL Configuration
 
-Key parameters for Documenso workloads:
+Key parameters for Hanzo Sign workloads:
 
 | Parameter              | Recommended Value | Description                           |
 | ---------------------- | ----------------- | ------------------------------------- |
@@ -391,7 +391,7 @@ Example: 3 app instances with pool size 10 = `(3 × 10) + 10 = 40` connections m
 
 ### Indexing
 
-Documenso includes necessary indexes by default. Additional indexes may help for:
+Hanzo Sign includes necessary indexes by default. Additional indexes may help for:
 
 - Custom reporting queries
 - High-volume document searches
@@ -439,7 +439,7 @@ Monitor these metrics:
     - Password contains special characters
     
     Solutions:
-    - Reset password with `ALTER USER documenso WITH PASSWORD 'newpassword';`
+    - Reset password with `ALTER USER hanzo-sign WITH PASSWORD 'newpassword';`
     - Verify credentials in `pg_hba.conf`
     - Verify URL-encoded special characters
   </Accordion>
@@ -447,7 +447,7 @@ Monitor these metrics:
     Add SSL mode to your connection string:
 
     ```bash
-    postgresql://user:password@host:5432/documenso?sslmode=require
+    postgresql://user:password@host:5432/hanzo-sign?sslmode=require
     ```
 
   </Accordion>
@@ -466,16 +466,16 @@ Monitor these metrics:
     Create the database:
     
     ```sql
-    CREATE DATABASE documenso;
-    GRANT ALL PRIVILEGES ON DATABASE documenso TO documenso;
+    CREATE DATABASE hanzo-sign;
+    GRANT ALL PRIVILEGES ON DATABASE hanzo-sign TO hanzo-sign;
     ```
   </Accordion>
   <Accordion title="Permission denied">
     Grant permissions:
     
     ```sql
-    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO documenso;
-    GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO documenso;
+    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO hanzo-sign;
+    GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO hanzo-sign;
     ```
   </Accordion>
 </Accordions>

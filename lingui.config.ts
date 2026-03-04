@@ -2,7 +2,7 @@ import { defineConfig } from '@lingui/cli';
 import type { LinguiConfig } from '@lingui/conf';
 import { formatter } from '@lingui/format-po';
 
-import { APP_I18N_OPTIONS } from '@documenso/lib/constants/locales';
+import { APP_I18N_OPTIONS } from '@hanzo/sign-lib/constants/locales';
 
 const config: LinguiConfig = {
   sourceLocale: APP_I18N_OPTIONS.sourceLang,

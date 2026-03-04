@@ -2,9 +2,9 @@ import { createElement } from 'react';
 
 import { msg } from '@lingui/core/macro';
 
-import { mailer } from '@documenso/email/mailer';
-import OrganisationJoinEmailTemplate from '@documenso/email/templates/organisation-join';
-import { prisma } from '@documenso/prisma';
+import { mailer } from '@hanzo/sign-email/mailer';
+import OrganisationJoinEmailTemplate from '@hanzo/sign-email/templates/organisation-join';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';

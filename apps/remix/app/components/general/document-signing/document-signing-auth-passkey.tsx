@@ -11,12 +11,12 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { AppError } from '@documenso/lib/errors/app-error';
-import { DocumentAuth, type TRecipientActionAuth } from '@documenso/lib/types/document-auth';
-import { trpc } from '@documenso/trpc/react';
-import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
-import { DialogFooter } from '@documenso/ui/primitives/dialog';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { DocumentAuth, type TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { DialogFooter } from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -24,14 +24,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
+} from '@hanzo/sign-ui/primitives/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
+} from '@hanzo/sign-ui/primitives/select';
 
 import { PasskeyCreateDialog } from '~/components/dialogs/passkey-create-dialog';
 

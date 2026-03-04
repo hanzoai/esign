@@ -18,16 +18,16 @@ export type OrganisationLeaveEmailProps = {
 
 export const OrganisationLeaveEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  baseUrl = 'https://documenso.com',
+  baseUrl = 'https://sign.hanzo.ai',
   memberName = 'John Doe',
-  memberEmail = 'johndoe@documenso.com',
+  memberEmail = 'johndoe@sign.hanzo.ai',
   organisationName = 'Organisation Name',
   organisationUrl = 'demo',
 }: OrganisationLeaveEmailProps) => {
   const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`A member has left your organisation on Documenso`;
+  const previewText = msg`A member has left your organisation on Hanzo Sign`;
 
   return (
     <Html>

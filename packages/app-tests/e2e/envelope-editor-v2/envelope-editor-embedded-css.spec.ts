@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import {
   type TEnvelopeEditorSurface,

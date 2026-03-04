@@ -1,6 +1,6 @@
 ---
 title: Setting up OAuth Providers
-description: Learn how to set up OAuth providers for your own instance of Documenso.
+description: Learn how to set up OAuth providers for your own instance of Hanzo Sign.
 ---
 
 import { Step, Steps } from 'fumadocs-ui/components/steps';
@@ -48,14 +48,14 @@ Enter a name for your client ID and click **Create**. Click the download button 
 
 Set:
 
-- **Authorized JavaScript origins**: `https://<documenso-domain>`
-- **Authorized redirect URIs**: `https://<documenso-domain>/api/auth/callback/google`
+- **Authorized JavaScript origins**: `https://<hanzo-sign-domain>`
+- **Authorized redirect URIs**: `https://<hanzo-sign-domain>/api/auth/callback/google`
 
 </Step>
 <Step>
 ### Set environment variables
 
-In your Documenso environment, set:
+In your Hanzo Sign environment, set:
 
 ```
 NEXT_PRIVATE_GOOGLE_CLIENT_ID=<your-client-id>
@@ -90,7 +90,7 @@ In the left sidebar, click **App registrations**, then **New registration**.
 <Step>
 ### Name and choose account types
 
-Enter a name (e.g. "Documenso").
+Enter a name (e.g. "Hanzo Sign").
 
 Under **Supported account types**, select both:
 
@@ -106,7 +106,7 @@ This allows any Microsoft account to sign in.
 Under **Redirect URI**, select **Web** and enter:
 
 ```bash
-https://<documenso-domain>/api/auth/callback/microsoft
+https://<hanzo-sign-domain>/api/auth/callback/microsoft
 ```
 
 Click **Register**.
@@ -136,7 +136,7 @@ After registration you're on the app overview page. Copy the **Application (clie
 <Step>
 ### Set environment variables
 
-In your Documenso environment, set:
+In your Hanzo Sign environment, set:
 
 ```
 NEXT_PRIVATE_MICROSOFT_CLIENT_ID=<your-application-client-id>

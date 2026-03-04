@@ -1,13 +1,13 @@
 import { OrganisationType } from '@prisma/client';
 
-import { createCheckoutSession } from '@documenso/ee/server-only/stripe/create-checkout-session';
-import { createCustomer } from '@documenso/ee/server-only/stripe/create-customer';
-import { IS_BILLING_ENABLED, NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { createOrganisation } from '@documenso/lib/server-only/organisation/create-organisation';
-import { INTERNAL_CLAIM_ID, internalClaims } from '@documenso/lib/types/subscription';
-import { generateStripeOrganisationCreateMetadata } from '@documenso/lib/utils/billing';
-import { prisma } from '@documenso/prisma';
+import { createCheckoutSession } from '@hanzo/sign-ee/server-only/stripe/create-checkout-session';
+import { createCustomer } from '@hanzo/sign-ee/server-only/stripe/create-customer';
+import { IS_BILLING_ENABLED, NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { createOrganisation } from '@hanzo/sign-lib/server-only/organisation/create-organisation';
+import { INTERNAL_CLAIM_ID, internalClaims } from '@hanzo/sign-lib/types/subscription';
+import { generateStripeOrganisationCreateMetadata } from '@hanzo/sign-lib/utils/billing';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

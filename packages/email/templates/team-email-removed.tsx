@@ -2,7 +2,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { formatTeamUrl } from '@documenso/lib/utils/teams';
+import { formatTeamUrl } from '@hanzo/sign-lib/utils/teams';
 
 import { Body, Container, Head, Hr, Html, Img, Preview, Section, Text } from '../components';
 import { useBranding } from '../providers/branding';
@@ -19,15 +19,15 @@ export type TeamEmailRemovedTemplateProps = {
 
 export const TeamEmailRemovedTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  baseUrl = 'https://documenso.com',
-  teamEmail = 'example@documenso.com',
+  baseUrl = 'https://sign.hanzo.ai',
+  teamEmail = 'example@sign.hanzo.ai',
   teamName = 'Team Name',
   teamUrl = 'demo',
 }: TeamEmailRemovedTemplateProps) => {
   const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`Team email removed for ${teamName} on Documenso`;
+  const previewText = msg`Team email removed for ${teamName} on Hanzo Sign`;
 
   return (
     <Html>

@@ -9,11 +9,11 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@documenso/lib/constants/organisations';
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@documenso/lib/constants/organisations-translations';
-import { isOrganisationRoleWithinUserHierarchy } from '@documenso/lib/utils/organisations';
-import { trpc } from '@documenso/trpc/react';
-import { Button } from '@documenso/ui/primitives/button';
+import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
+import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/organisations';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -30,15 +30,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
+} from '@hanzo/sign-ui/primitives/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/select';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type OrganisationMemberUpdateDialogProps = {
   currentUserOrganisationRole: OrganisationMemberRole;

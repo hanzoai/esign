@@ -7,20 +7,20 @@ import { useRevalidator } from 'react-router';
 import {
   DEFAULT_DOCUMENT_DATE_FORMAT,
   convertToLocalSystemFormat,
-} from '@documenso/lib/constants/date-formats';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@documenso/lib/constants/time-zones';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import type { TRecipientActionAuth } from '@documenso/lib/types/document-auth';
-import { ZDateFieldMeta } from '@documenso/lib/types/field-meta';
-import type { FieldWithSignature } from '@documenso/prisma/types/field-with-signature';
-import { trpc } from '@documenso/trpc/react';
+} from '@hanzo/sign-lib/constants/date-formats';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
+import { ZDateFieldMeta } from '@hanzo/sign-lib/types/field-meta';
+import type { FieldWithSignature } from '@hanzo/sign-prisma/types/field-with-signature';
+import { trpc } from '@hanzo/sign-trpc/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@documenso/trpc/server/field-router/schema';
-import { cn } from '@documenso/ui/lib/utils';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-trpc/server/field-router/schema';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { DocumentSigningFieldContainer } from './document-signing-field-container';
 import { useDocumentSigningRecipientContext } from './document-signing-recipient-provider';

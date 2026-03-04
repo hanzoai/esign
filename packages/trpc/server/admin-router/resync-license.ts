@@ -1,4 +1,4 @@
-import { LicenseClient } from '@documenso/lib/server-only/license/license-client';
+import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
 
 import { adminProcedure } from '../trpc';
 import { ZResyncLicenseRequestSchema, ZResyncLicenseResponseSchema } from './resync-license.types';

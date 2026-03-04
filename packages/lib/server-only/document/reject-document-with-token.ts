@@ -1,7 +1,7 @@
 import { DocumentStatus, EnvelopeType, SigningStatus } from '@prisma/client';
 
-import { jobs } from '@documenso/lib/jobs/client';
-import { prisma } from '@documenso/prisma';
+import { jobs } from '@hanzo/sign-lib/jobs/client';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { DOCUMENT_AUDIT_LOG_TYPE } from '../../types/document-audit-logs';

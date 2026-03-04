@@ -11,18 +11,18 @@ import Papa, { type ParseResult } from 'papaparse';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { downloadFile } from '@documenso/lib/client-only/download-file';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { IS_BILLING_ENABLED, SUPPORT_EMAIL } from '@documenso/lib/constants/app';
-import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@documenso/lib/constants/organisations';
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@documenso/lib/constants/organisations-translations';
-import { INTERNAL_CLAIM_ID } from '@documenso/lib/types/subscription';
-import { trpc } from '@documenso/trpc/react';
-import { ZCreateOrganisationMemberInvitesRequestSchema } from '@documenso/trpc/server/organisation-router/create-organisation-member-invites.types';
-import { cn } from '@documenso/ui/lib/utils';
-import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
-import { Card, CardContent } from '@documenso/ui/primitives/card';
+import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { IS_BILLING_ENABLED, SUPPORT_EMAIL } from '@hanzo/sign-lib/constants/app';
+import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
+import { INTERNAL_CLAIM_ID } from '@hanzo/sign-lib/types/subscription';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { ZCreateOrganisationMemberInvitesRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-member-invites.types';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
 import {
   Dialog,
   DialogContent,
@@ -31,7 +31,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -39,18 +39,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { SpinnerBox } from '@documenso/ui/primitives/spinner';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@documenso/ui/primitives/tabs';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/select';
+import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@hanzo/sign-ui/primitives/tabs';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type OrganisationMemberInviteDialogProps = {
   trigger?: React.ReactNode;
@@ -253,9 +253,9 @@ export const OrganisationMemberInviteDialog = ({
 
   const downloadTemplate = () => {
     const data = [
-      { email: 'admin@documenso.com', role: 'Admin' },
-      { email: 'manager@documenso.com', role: 'Manager' },
-      { email: 'member@documenso.com', role: 'Member' },
+      { email: 'admin@sign.hanzo.ai', role: 'Admin' },
+      { email: 'manager@sign.hanzo.ai', role: 'Manager' },
+      { email: 'member@sign.hanzo.ai', role: 'Member' },
     ];
 
     const csvContent =
@@ -266,7 +266,7 @@ export const OrganisationMemberInviteDialog = ({
     });
 
     downloadFile({
-      filename: 'documenso-organisation-member-invites-template.csv',
+      filename: 'sign-organisation-member-invites-template.csv',
       data: blob,
     });
   };

@@ -11,20 +11,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://docs.documenso.com'),
+  metadataBase: new URL('https://docs.sign.hanzo.ai'),
   title: {
-    template: '%s | Documenso Docs',
-    default: 'Documenso Docs',
+    template: '%s | Hanzo Sign Docs',
+    default: 'Hanzo Sign Docs',
   },
   description:
-    'The official documentation for Documenso, the open-source document signing platform.',
+    'The official documentation for Hanzo Sign, the open-source document signing platform.',
   openGraph: {
-    siteName: 'Documenso Docs',
+    siteName: 'Hanzo Sign Docs',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@documenso',
+    site: '@hanzoai',
   },
 };
 
@@ -32,7 +32,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
-        <PlausibleProvider domain="documenso.com">
+        <PlausibleProvider domain="sign.hanzo.ai">
           <RootProvider>{children}</RootProvider>
         </PlausibleProvider>
       </body>

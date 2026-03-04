@@ -1,9 +1,9 @@
 import type { Prisma } from '@prisma/client';
 import type { z } from 'zod';
 
-import type { FindResultResponse } from '@documenso/lib/types/search-params';
-import { prisma } from '@documenso/prisma';
-import type SubscriptionClaimSchema from '@documenso/prisma/generated/zod/modelSchema/SubscriptionClaimSchema';
+import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
+import { prisma } from '@hanzo/sign-prisma';
+import type SubscriptionClaimSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/SubscriptionClaimSchema';
 
 import { adminProcedure } from '../trpc';
 import {

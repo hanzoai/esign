@@ -11,18 +11,18 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { formatDocumentsPath, formatTemplatesPath } from '@documenso/lib/utils/teams';
-import { trpc } from '@documenso/trpc/react';
-import { type TFolderWithSubfolders } from '@documenso/trpc/server/folder-router/schema';
-import { Button } from '@documenso/ui/primitives/button';
-import { Card, CardContent } from '@documenso/ui/primitives/card';
+import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { type TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@documenso/ui/primitives/dropdown-menu';
+} from '@hanzo/sign-ui/primitives/dropdown-menu';
 
 import { useCurrentTeam } from '~/providers/team';
 
@@ -61,13 +61,13 @@ export const FolderCard = ({ folder, onMove, onSettings, onDelete }: FolderCardP
       <Card className="hover:bg-muted/50 border-border h-full border transition-all">
         <CardContent className="p-4">
           <div className="flex min-w-0 items-center gap-3">
-            <FolderIcon className="text-documenso h-6 w-6 flex-shrink-0" />
+            <FolderIcon className="text-sign h-6 w-6 flex-shrink-0" />
 
             <div className="flex w-full min-w-0 items-center justify-between">
               <div className="min-w-0 flex-1">
                 <h3 className="flex min-w-0 items-center gap-2 font-medium">
                   <span className="truncate">{folder.name}</span>
-                  {folder.pinned && <PinIcon className="text-documenso h-3 w-3 flex-shrink-0" />}
+                  {folder.pinned && <PinIcon className="text-sign h-3 w-3 flex-shrink-0" />}
                 </h3>
 
                 <div className="text-muted-foreground mt-1 flex space-x-2 truncate text-xs">

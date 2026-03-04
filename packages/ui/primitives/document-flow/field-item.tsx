@@ -9,11 +9,11 @@ import { createPortal } from 'react-dom';
 import { Rnd } from 'react-rnd';
 import { useSearchParams } from 'react-router';
 
-import { useElementBounds } from '@documenso/lib/client-only/hooks/use-element-bounds';
-import { useIsPageInDom } from '@documenso/lib/client-only/hooks/use-is-page-in-dom';
-import { PDF_VIEWER_PAGE_SELECTOR } from '@documenso/lib/constants/pdf-viewer';
-import type { TFieldMetaSchema } from '@documenso/lib/types/field-meta';
-import { ZCheckboxFieldMeta, ZRadioFieldMeta } from '@documenso/lib/types/field-meta';
+import { useElementBounds } from '@hanzo/sign-lib/client-only/hooks/use-element-bounds';
+import { useIsPageInDom } from '@hanzo/sign-lib/client-only/hooks/use-is-page-in-dom';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
+import type { TFieldMetaSchema } from '@hanzo/sign-lib/types/field-meta';
+import { ZCheckboxFieldMeta, ZRadioFieldMeta } from '@hanzo/sign-lib/types/field-meta';
 
 import { useRecipientColors } from '../../lib/recipient-colors';
 import { cn } from '../../lib/utils';
@@ -282,7 +282,7 @@ const FieldItemInner = ({
               'absolute -top-16 left-0 right-0 rounded-md p-2 text-center text-xs text-gray-700',
               {
                 'border border-primary bg-foreground/5': !fieldHasCheckedValues,
-                'border border-primary bg-documenso-200': fieldHasCheckedValues,
+                'border border-primary bg-sign-200': fieldHasCheckedValues,
               },
             )}
           >

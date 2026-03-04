@@ -1,4 +1,4 @@
-import { getEnvelopesByIds } from '@documenso/lib/server-only/envelope/get-envelopes-by-ids';
+import { getEnvelopesByIds } from '@hanzo/sign-lib/server-only/envelope/get-envelopes-by-ids';
 
 import { authenticatedProcedure } from '../trpc';
 import {

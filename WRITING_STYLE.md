@@ -1,6 +1,6 @@
 # Documentation Writing Style Guide
 
-This document defines the writing conventions for Documenso documentation.
+This document defines the writing conventions for Hanzo Sign documentation.
 
 Documentation lives in `apps/docs/` as MDX files and uses [Fumadocs](https://fumadocs.dev).
 
@@ -31,9 +31,9 @@ Documentation lives in `apps/docs/` as MDX files and uses [Fumadocs](https://fum
 
 The docs serve three distinct audiences:
 
-1. **Users** - People using the Documenso web application to send and sign documents
+1. **Users** - People using the Hanzo Sign web application to send and sign documents
 2. **Developers** - Building integrations with the API or SDKs
-3. **Self-hosters** - Running their own Documenso instance
+3. **Self-hosters** - Running their own Hanzo Sign instance
 
 Tailor content to the audience:
 
@@ -206,13 +206,13 @@ For developer documentation, use progressive complexity:
 
 ```typescript
 // Basic usage
-const document = await documenso.documents.create({
+const document = await hanzo-sign.documents.create({
   title: "Contract",
   file: pdfBuffer,
 });
 
 // With recipients
-const document = await documenso.documents.create({
+const document = await hanzo-sign.documents.create({
   title: "Contract",
   file: pdfBuffer,
   recipients: [{ email: "signer@example.com", name: "John Doe" }],
@@ -220,7 +220,7 @@ const document = await documenso.documents.create({
 
 // Full example with error handling
 try {
-  const document = await documenso.documents.create({
+  const document = await hanzo-sign.documents.create({
     title: "Contract",
     file: pdfBuffer,
     recipients: [{ email: "signer@example.com", name: "John Doe" }],

@@ -1,13 +1,13 @@
 import { clone } from 'remeda';
 import type Stripe from 'stripe';
 
-import { stripe } from '@documenso/lib/server-only/stripe';
+import { stripe } from '@hanzo/sign-lib/server-only/stripe';
 import {
   INTERNAL_CLAIM_ID,
   type InternalClaim,
   internalClaims,
-} from '@documenso/lib/types/subscription';
-import { toHumanPrice } from '@documenso/lib/universal/stripe/to-human-price';
+} from '@hanzo/sign-lib/types/subscription';
+import { toHumanPrice } from '@hanzo/sign-lib/universal/stripe/to-human-price';
 
 export type InternalClaimPlans = {
   [key in INTERNAL_CLAIM_ID]: InternalClaim & {
@@ -25,7 +25,7 @@ export type InternalClaimPlans = {
 };
 
 /**
- * Returns the main Documenso plans from Stripe.
+ * Returns the main Hanzo Sign plans from Stripe.
  */
 export const getInternalClaimPlans = async (): Promise<InternalClaimPlans> => {
   const { data: prices } = await stripe.prices.search({

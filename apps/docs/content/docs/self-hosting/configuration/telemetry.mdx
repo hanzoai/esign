@@ -1,6 +1,6 @@
 ---
 title: Telemetry
-description: Learn about the telemetry data that Documenso collects from self-hosted instances.
+description: Learn about the telemetry data that Hanzo Sign collects from self-hosted instances.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -8,13 +8,13 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Overview
 
-Documenso collects anonymous telemetry data from self-hosted instances to help us understand how the software is being used and make improvements to the product. This telemetry is enabled by default, but you can easily disable it if you prefer.
+Hanzo Sign collects anonymous telemetry data from self-hosted instances to help us understand how the software is being used and make improvements to the product. This telemetry is enabled by default, but you can easily disable it if you prefer.
 
 ## What We Collect
 
 We collect minimal, privacy-preserving information that helps us understand the health and adoption of self-hosted installations:
 
-- **App Version**: The version of Documenso you are running. This helps us understand which versions are in use and prioritize support for older versions.
+- **App Version**: The version of Hanzo Sign you are running. This helps us understand which versions are in use and prioritize support for older versions.
 
 - **Installation ID**: A unique identifier for your installation. This is stored in your database and helps us count distinct installations without knowing who you are.
 
@@ -82,7 +82,7 @@ If you prefer not to send telemetry data, you can disable it by setting an envir
 Add the following to your environment configuration:
 
 ```bash
-DOCUMENSO_DISABLE_TELEMETRY=true
+SIGN_DISABLE_TELEMETRY=true
 ```
 
 ### Docker
@@ -93,18 +93,18 @@ If you're using Docker, you can set this in your `docker-compose.yml`:
 services:
   app:
     environment:
-      - DOCUMENSO_DISABLE_TELEMETRY=true
+      - SIGN_DISABLE_TELEMETRY=true
 ```
 
 Or pass it when running a container:
 
 ```bash
-docker run -e DOCUMENSO_DISABLE_TELEMETRY=true ...
+docker run -e SIGN_DISABLE_TELEMETRY=true ...
 ```
 
 ### After Disabling
 
-Once you set `DOCUMENSO_DISABLE_TELEMETRY=true` and restart your server, no telemetry data will be sent. The telemetry client will not initialize, and no network requests will be made to our telemetry servers.
+Once you set `SIGN_DISABLE_TELEMETRY=true` and restart your server, no telemetry data will be sent. The telemetry client will not initialize, and no network requests will be made to our telemetry servers.
 
 <Callout type="info">
   If you previously had telemetry enabled, the installation ID stored in your database will remain,

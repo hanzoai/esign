@@ -1,8 +1,8 @@
 import type { DocumentSource, DocumentStatus, Envelope, EnvelopeType } from '@prisma/client';
 import type { Expression, ExpressionBuilder, SelectQueryBuilder, SqlBool } from 'kysely';
 
-import { kyselyPrisma, prisma, sql } from '@documenso/prisma';
-import type { DB } from '@documenso/prisma/generated/types';
+import { kyselyPrisma, prisma, sql } from '@hanzo/sign-prisma';
+import type { DB } from '@hanzo/sign-prisma/generated/types';
 
 import { TEAM_DOCUMENT_VISIBILITY_MAP } from '../../constants/teams';
 import type { FindResultResponse } from '../../types/search-params';

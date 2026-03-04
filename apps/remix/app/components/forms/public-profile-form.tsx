@@ -11,17 +11,17 @@ import { CheckSquareIcon, CopyIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { useCopyToClipboard } from '@documenso/lib/client-only/hooks/use-copy-to-clipboard';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { isPersonalLayout } from '@documenso/lib/utils/organisations';
-import { formatUserProfilePath } from '@documenso/lib/utils/public-profiles';
+import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
+import { formatUserProfilePath } from '@hanzo/sign-lib/utils/public-profiles';
 import {
   MAX_PROFILE_BIO_LENGTH,
   ZUpdateTeamRequestSchema,
-} from '@documenso/trpc/server/team-router/update-team.types';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
+} from '@hanzo/sign-trpc/server/team-router/update-team.types';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -29,10 +29,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { Textarea } from '@documenso/ui/primitives/textarea';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

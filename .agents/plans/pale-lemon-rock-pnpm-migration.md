@@ -120,7 +120,7 @@ Packages duplicated across 3+ workspaces are prime candidates:
 | `nanoid`                                        | 4          | Yes                    |
 | `@lingui/core` / `macro` / `react`              | 2-3        | Yes                    |
 | `@simplewebauthn/server`                        | 3          | Yes                    |
-| `@documenso/*` (internal)                       | varies     | No (use `workspace:*`) |
+| `@hanzo/sign-*` (internal)                       | varies     | No (use `workspace:*`) |
 | `@aws-sdk/*`                                    | 2          | Yes                    |
 | `hono`                                          | 2          | Yes                    |
 | `posthog-node` / `posthog-js`                   | 2          | Yes                    |
@@ -210,13 +210,13 @@ This is a mechanical find-and-replace across all workspace `package.json` files.
 
 #### Step 11: Convert internal references to `workspace:*`
 
-All `@documenso/*` internal package references currently use `"*"`. Convert to pnpm's `workspace:*` protocol:
+All `@hanzo/sign-*` internal package references currently use `"*"`. Convert to pnpm's `workspace:*` protocol:
 
 ```json
 {
   "dependencies": {
-    "@documenso/lib": "workspace:*",
-    "@documenso/prisma": "workspace:*"
+    "@hanzo/sign-lib": "workspace:*",
+    "@hanzo/sign-prisma": "workspace:*"
   }
 }
 ```
@@ -297,7 +297,7 @@ With catalogs and strict resolution, dependencies currently hoisted to root `pac
    - **Mitigation:** Update cache keys to use `pnpm-lock.yaml` hash. First CI run will be slower, subsequent runs will cache normally.
 
 5. **Turbo + pnpm compatibility:** Turbo has first-class pnpm support, but `turbo prune` output format may differ slightly.
-   - **Mitigation:** Test `turbo prune --scope=@documenso/remix --docker` and verify output structure before updating Dockerfile.
+   - **Mitigation:** Test `turbo prune --scope=@hanzo/sign-remix --docker` and verify output structure before updating Dockerfile.
 
 ## Verification Checklist
 

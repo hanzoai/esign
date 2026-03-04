@@ -6,19 +6,19 @@ import { Trans } from '@lingui/react/macro';
 import { type TemplateDirectLink, TemplateType } from '@prisma/client';
 import { EditIcon, FileIcon, LinkIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 
-import { useCopyToClipboard } from '@documenso/lib/client-only/hooks/use-copy-to-clipboard';
-import { formatDirectTemplatePath } from '@documenso/lib/utils/templates';
-import { trpc } from '@documenso/trpc/react';
-import type { FindTemplateRow } from '@documenso/trpc/server/template-router/schema';
+import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
+import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
+import { trpc } from '@hanzo/sign-trpc/react';
+import type { FindTemplateRow } from '@hanzo/sign-trpc/server/template-router/schema';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@documenso/ui/primitives/dropdown-menu';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { ManagePublicTemplateDialog } from '~/components/dialogs/public-profile-template-manage-dialog';
 

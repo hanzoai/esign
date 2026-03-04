@@ -1,5 +1,5 @@
 // Todo: [Webhooks] delete file after deployment.
-import { handlerTriggerWebhooks } from '@documenso/lib/server-only/webhooks/trigger/handler';
+import { handlerTriggerWebhooks } from '@hanzo/sign-lib/server-only/webhooks/trigger/handler';
 
 import type { Route } from './+types/webhook.trigger';
 

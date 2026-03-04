@@ -1,15 +1,15 @@
 import { expect, test } from '@playwright/test';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { createApiToken } from '@documenso/lib/server-only/public-api/create-api-token';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
-import { prisma } from '@documenso/prisma';
-import { FieldType, RecipientRole } from '@documenso/prisma/client';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { prisma } from '@hanzo/sign-prisma';
+import { FieldType, RecipientRole } from '@hanzo/sign-prisma/client';
 import {
   seedBlankDocument,
   seedPendingDocumentWithFullFields,
-} from '@documenso/prisma/seed/documents';
-import { seedUser } from '@documenso/prisma/seed/users';
+} from '@hanzo/sign-prisma/seed/documents';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 test.describe('Document API', () => {
   test('sendDocument: should respect sendCompletionEmails setting', async ({ request }) => {

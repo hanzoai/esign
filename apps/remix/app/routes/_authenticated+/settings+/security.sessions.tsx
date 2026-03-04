@@ -6,15 +6,15 @@ import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { UAParser } from 'ua-parser-js';
 
-import { authClient } from '@documenso/auth/client';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { authClient } from '@hanzo/sign-auth/client';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { SessionLogoutAllDialog } from '~/components/dialogs/session-logout-all-dialog';
 import { SettingsHeader } from '~/components/general/settings-header';

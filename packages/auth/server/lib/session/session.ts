@@ -2,9 +2,9 @@ import { sha256 } from '@oslojs/crypto/sha2';
 import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from '@oslojs/encoding';
 import { type Session, type User, UserSecurityAuditLogType } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import type { RequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import type { RequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { AUTH_SESSION_LIFETIME } from '../../config';
 

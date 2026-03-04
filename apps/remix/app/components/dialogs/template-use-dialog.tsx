@@ -11,22 +11,22 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import * as z from 'zod';
 
-import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@documenso/lib/constants/app';
+import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/sign-lib/constants/app';
 import {
   TEMPLATE_RECIPIENT_EMAIL_PLACEHOLDER_REGEX,
   TEMPLATE_RECIPIENT_NAME_PLACEHOLDER_REGEX,
-} from '@documenso/lib/constants/template';
+} from '@hanzo/sign-lib/constants/template';
 import {
   DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
   SKIP_QUERY_BATCH_META,
-} from '@documenso/lib/constants/trpc';
-import { AppError } from '@documenso/lib/errors/app-error';
-import { ZRecipientEmailSchema } from '@documenso/lib/types/recipient';
-import { putPdfFile } from '@documenso/lib/universal/upload/put-file';
-import { trpc } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
-import { Checkbox } from '@documenso/ui/primitives/checkbox';
+} from '@hanzo/sign-lib/constants/trpc';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { ZRecipientEmailSchema } from '@hanzo/sign-lib/types/recipient';
+import { putPdfFile } from '@hanzo/sign-lib/universal/upload/put-file';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
 import {
   Dialog,
   DialogClose,
@@ -36,7 +36,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -44,12 +44,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { SpinnerBox } from '@documenso/ui/primitives/spinner';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitives/tooltip';
-import type { Toast } from '@documenso/ui/primitives/use-toast';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+import type { Toast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 const ZAddRecipientsForNewDocumentSchema = z.object({
   distributeDocument: z.boolean(),

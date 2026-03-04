@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 
-import type { FindResultResponse } from '@documenso/lib/types/search-params';
-import { prisma } from '@documenso/prisma';
+import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { adminProcedure } from '../trpc';
 import {

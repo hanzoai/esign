@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZEnvelopeRecipientSchema } from '@documenso/lib/types/recipient';
+import { ZEnvelopeRecipientSchema } from '@hanzo/sign-lib/types/recipient';
 
 import type { TrpcRouteMeta } from '../../trpc';
 

@@ -1,7 +1,7 @@
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/teams';
-import { AppError } from '@documenso/lib/errors/app-error';
-import { createTokenVerification } from '@documenso/lib/utils/token-verification';
-import { prisma } from '@documenso/prisma';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { createTokenVerification } from '@hanzo/sign-lib/utils/token-verification';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { buildTeamWhereQuery } from '../../utils/teams';
 import { sendTeamEmailVerificationEmail } from './create-team-email-verification';

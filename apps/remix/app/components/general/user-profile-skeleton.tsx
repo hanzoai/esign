@@ -1,10 +1,10 @@
 import { Trans } from '@lingui/react/macro';
 import { File, User2 } from 'lucide-react';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { VerifiedIcon } from '@documenso/ui/icons/verified';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { VerifiedIcon } from '@hanzo/sign-ui/icons/verified';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 export type UserProfileSkeletonProps = {
   className?: string;

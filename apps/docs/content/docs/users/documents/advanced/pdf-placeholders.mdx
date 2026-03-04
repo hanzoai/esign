@@ -1,6 +1,6 @@
 ---
 title: PDF Placeholders
-description: Learn how to use placeholder text in your PDFs for automatic field placement in Documenso.
+description: Learn how to use placeholder text in your PDFs for automatic field placement in Hanzo Sign.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -8,11 +8,11 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 ## Overview
 
-Documenso can automatically detect placeholder text in your PDF documents and create fields at those locations. This allows you to prepare documents in your preferred editing tool (Word, Google Docs, etc.) with placeholders that become signature fields when uploaded.
+Hanzo Sign can automatically detect placeholder text in your PDF documents and create fields at those locations. This allows you to prepare documents in your preferred editing tool (Word, Google Docs, etc.) with placeholders that become signature fields when uploaded.
 
 ## How It Works
 
-When you upload a PDF, Documenso scans for text matching the placeholder pattern `{{...}}`. Each placeholder can specify:
+When you upload a PDF, Hanzo Sign scans for text matching the placeholder pattern `{{...}}`. Each placeholder can specify:
 
 1. **Field type**: What kind of field to create (signature, name, email, etc.)
 2. **Recipient**: Which signer the field belongs to (r1, r2, etc.)
@@ -68,7 +68,7 @@ Recipients are identified using `r1`, `r2`, `r3`, etc. The number corresponds to
 - `r2` - Second recipient
 - `r3` - Third recipient
 
-When you upload a PDF with placeholders, Documenso will:
+When you upload a PDF with placeholders, Hanzo Sign will:
 
 1. Create placeholder recipients for each unique identifier found (e.g., `r1`, `r2`)
 2. You can then update these with real email addresses before sending

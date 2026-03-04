@@ -1,7 +1,7 @@
-import { getInternalClaimPlans } from '@documenso/ee/server-only/stripe/get-internal-claim-plans';
-import { getSubscription } from '@documenso/ee/server-only/stripe/get-subscription';
-import { IS_BILLING_ENABLED } from '@documenso/lib/constants/app';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
+import { getInternalClaimPlans } from '@hanzo/sign-ee/server-only/stripe/get-internal-claim-plans';
+import { getSubscription } from '@hanzo/sign-ee/server-only/stripe/get-subscription';
+import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 
 import { authenticatedProcedure } from '../trpc';
 import { ZGetSubscriptionRequestSchema } from './get-subscription.types';

@@ -10,7 +10,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Overview
 
-Webhooks are HTTP callbacks triggered by specific events in Documenso. When an event occurs (such as a document being signed), Documenso sends an HTTP POST request to your configured URL with details about the event.
+Webhooks are HTTP callbacks triggered by specific events in Hanzo Sign. When an event occurs (such as a document being signed), Hanzo Sign sends an HTTP POST request to your configured URL with details about the event.
 
 Common use cases include:
 
@@ -25,7 +25,7 @@ Common use cases include:
 
 ## Creating a Webhook Endpoint
 
-Before configuring a webhook in Documenso, you need an endpoint that can receive HTTP POST requests. Here's a minimal example:
+Before configuring a webhook in Hanzo Sign, you need an endpoint that can receive HTTP POST requests. Here's a minimal example:
 
 <Tabs items={['Node.js (Express)', 'Python (Flask)', 'Go']}>
 <Tab value="Node.js (Express)">
@@ -35,7 +35,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/webhooks/documenso', (req, res) => {
+app.post('/webhooks/hanzo-sign', (req, res) => {
   const { event, payload, createdAt } = req.body;
 
   console.log(`Received event: ${event}`);
@@ -69,7 +69,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/webhooks/documenso', methods=['POST'])
+@app.route('/webhooks/hanzo-sign', methods=['POST'])
 def handle_webhook():
     data = request.get_json()
 
@@ -138,7 +138,7 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/webhooks/documenso", webhookHandler)
+	http.HandleFunc("/webhooks/hanzo-sign", webhookHandler)
 	fmt.Println("Webhook server running on port 3000")
 	http.ListenAndServe(":3000", nil)
 }
@@ -148,10 +148,10 @@ func main() {
 </Tabs>
 
 <Callout type="warn">
-  Always respond with a `200 OK` status within 30 seconds. Documenso will retry failed deliveries.
+  Always respond with a `200 OK` status within 30 seconds. Hanzo Sign will retry failed deliveries.
 </Callout>
 
-## Configuring Webhooks in Documenso via the Dashboard
+## Configuring Webhooks in Hanzo Sign via the Dashboard
 
 {/* prettier-ignore */}
 <Steps>
@@ -232,7 +232,7 @@ See [Webhook Events](/docs/developers/webhooks/events) for detailed payload info
 
 ## Testing Webhooks
 
-Documenso provides a built-in testing feature to verify your webhook endpoint works correctly.
+Hanzo Sign provides a built-in testing feature to verify your webhook endpoint works correctly.
 
 {/* prettier-ignore */}
 <Steps>
@@ -306,13 +306,13 @@ Navigate to the webhook call details page
 Click the **Resend** button
 </Step>
 <Step>
-Documenso will attempt to deliver the same payload again
+Hanzo Sign will attempt to deliver the same payload again
 </Step>
 </Steps>
 
 ## Retry Policy
 
-When a webhook delivery fails (non-2xx response or timeout), Documenso automatically retries with exponential backoff:
+When a webhook delivery fails (non-2xx response or timeout), Hanzo Sign automatically retries with exponential backoff:
 
 | Attempt | Delay |
 | ------- | ----- |
@@ -335,7 +335,7 @@ After 5 failed attempts, the webhook is marked as failed and no further automati
     Always use HTTPS endpoints in production.
   </Accordion>
   <Accordion title="Verify signatures">
-    Use a webhook secret and verify the `X-Documenso-Secret` header (see [Verification](/docs/developers/webhooks/verification)).
+    Use a webhook secret and verify the `X-Hanzo Sign-Secret` header (see [Verification](/docs/developers/webhooks/verification)).
   </Accordion>
   <Accordion title="Validate payloads">
     Validate incoming data before processing.

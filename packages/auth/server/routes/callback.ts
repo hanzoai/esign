@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 
-import { AppError } from '@documenso/lib/errors/app-error';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
 
 import { GoogleAuthOptions, HanzoAuthOptions, MicrosoftAuthOptions, OidcAuthOptions } from '../config';
 import { handleOAuthCallbackUrl } from '../lib/utils/handle-oauth-callback-url';

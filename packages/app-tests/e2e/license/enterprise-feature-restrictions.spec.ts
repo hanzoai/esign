@@ -2,13 +2,13 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { TCachedLicense, TLicenseClaim } from '@documenso/lib/types/license';
-import { seedUser } from '@documenso/prisma/seed/users';
+import type { TCachedLicense, TLicenseClaim } from '@hanzo/sign-lib/types/license';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 
-const LICENSE_FILE_NAME = '.documenso-license.json';
-const LICENSE_BACKUP_FILE_NAME = '.documenso-license-backup.json';
+const LICENSE_FILE_NAME = '.sign-license.json';
+const LICENSE_BACKUP_FILE_NAME = '.sign-license-backup.json';
 
 /**
  * Get the path to the license file.
@@ -17,7 +17,7 @@ const LICENSE_BACKUP_FILE_NAME = '.documenso-license-backup.json';
  * Tests run from packages/app-tests, so we need to go up to the root then into apps/remix.
  */
 const getLicenseFilePath = () => {
-  // From packages/app-tests/e2e/license -> ../../../../apps/remix/.documenso-license.json
+  // From packages/app-tests/e2e/license -> ../../../../apps/remix/.sign-license.json
   return path.join(__dirname, '../../../../apps/remix', LICENSE_FILE_NAME);
 };
 

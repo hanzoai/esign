@@ -5,10 +5,10 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { InfoIcon } from 'lucide-react';
 
-import { DOCUMENT_AUTH_TYPES } from '@documenso/lib/constants/document-auth';
-import { RecipientActionAuth } from '@documenso/lib/types/document-auth';
-import { MultiSelect, type Option } from '@documenso/ui/primitives/multiselect';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitives/tooltip';
+import { DOCUMENT_AUTH_TYPES } from '@hanzo/sign-lib/constants/document-auth';
+import { RecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
+import { MultiSelect, type Option } from '@hanzo/sign-ui/primitives/multiselect';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
 
 import { cn } from '../../lib/utils';
 

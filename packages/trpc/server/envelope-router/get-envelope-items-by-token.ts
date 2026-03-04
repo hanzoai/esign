@@ -1,8 +1,8 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { getEnvelopeWhereInput } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { getEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { maybeAuthenticatedProcedure } from '../trpc';
 import {

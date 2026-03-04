@@ -9,17 +9,17 @@ import {
   WebhookTriggerEvents,
 } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import type { PlaceholderInfo } from '@documenso/lib/server-only/pdf/auto-place-fields';
-import { convertPlaceholdersToFieldInputs } from '@documenso/lib/server-only/pdf/auto-place-fields';
-import { findRecipientByPlaceholder } from '@documenso/lib/server-only/pdf/helpers';
-import { normalizePdf as makeNormalizedPdf } from '@documenso/lib/server-only/pdf/normalize-pdf';
-import { ZDefaultRecipientsSchema } from '@documenso/lib/types/default-recipients';
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@documenso/lib/types/document-audit-logs';
-import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
-import { nanoid, prefixedId } from '@documenso/lib/universal/id';
-import { createDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import type { PlaceholderInfo } from '@hanzo/sign-lib/server-only/pdf/auto-place-fields';
+import { convertPlaceholdersToFieldInputs } from '@hanzo/sign-lib/server-only/pdf/auto-place-fields';
+import { findRecipientByPlaceholder } from '@hanzo/sign-lib/server-only/pdf/helpers';
+import { normalizePdf as makeNormalizedPdf } from '@hanzo/sign-lib/server-only/pdf/normalize-pdf';
+import { ZDefaultRecipientsSchema } from '@hanzo/sign-lib/types/default-recipients';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
+import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import { nanoid, prefixedId } from '@hanzo/sign-lib/universal/id';
+import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
+import { prisma } from '@hanzo/sign-prisma';
 
 import type {
   TDocumentAccessAuthTypes,
@@ -481,7 +481,7 @@ export const createEnvelope = async ({
           uniqueRecipientRefs.entries(),
           ([recipientIndex, name]) => ({
             envelopeId: envelope.id,
-            email: `recipient.${recipientIndex}@documenso.com`,
+            email: `recipient.${recipientIndex}@sign.hanzo.ai`,
             name,
             role: RecipientRole.SIGNER,
             signingOrder: recipientIndex,

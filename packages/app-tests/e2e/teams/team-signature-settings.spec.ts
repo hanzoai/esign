@@ -3,13 +3,13 @@ import { expect, test } from '@playwright/test';
 import {
   mapSecondaryIdToDocumentId,
   mapSecondaryIdToTemplateId,
-} from '@documenso/lib/utils/envelope';
-import { prisma } from '@documenso/prisma';
+} from '@hanzo/sign-lib/utils/envelope';
+import { prisma } from '@hanzo/sign-prisma';
 import {
   seedTeamDocumentWithMeta,
   seedTeamTemplateWithMeta,
-} from '@documenso/prisma/seed/documents';
-import { seedUser } from '@documenso/prisma/seed/users';
+} from '@hanzo/sign-prisma/seed/documents';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

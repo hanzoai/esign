@@ -8,9 +8,9 @@ import { flushSync } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { authClient } from '@documenso/auth/client';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { Button } from '@documenso/ui/primitives/button';
+import { authClient } from '@hanzo/sign-auth/client';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -27,10 +27,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { PinInput, PinInputGroup, PinInputSlot } from '@documenso/ui/primitives/pin-input';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/sign-ui/primitives/pin-input';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export const ZDisable2FAForm = z.object({
   totpCode: z.string().trim().optional(),

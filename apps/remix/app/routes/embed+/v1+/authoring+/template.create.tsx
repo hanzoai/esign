@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router';
 import {
   type TBaseEmbedAuthoringSchema,
   ZBaseEmbedAuthoringSchema,
-} from '@documenso/lib/types/embed-authoring-base-schema';
-import { putPdfFile } from '@documenso/lib/universal/upload/put-file';
-import { trpc } from '@documenso/trpc/react';
-import { Stepper } from '@documenso/ui/primitives/stepper';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-lib/types/embed-authoring-base-schema';
+import { putPdfFile } from '@hanzo/sign-lib/universal/upload/put-file';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { ConfigureDocumentProvider } from '~/components/embed/authoring/configure-document-context';
 import { ConfigureDocumentView } from '~/components/embed/authoring/configure-document-view';

@@ -9,27 +9,27 @@ import { FileWarningIcon, GripVerticalIcon, Loader2 } from 'lucide-react';
 import { X } from 'lucide-react';
 import { ErrorCode as DropzoneErrorCode, type FileRejection } from 'react-dropzone';
 
-import { useLimits } from '@documenso/ee/server-only/limits/provider/client';
-import { useEnvelopeAutosave } from '@documenso/lib/client-only/hooks/use-envelope-autosave';
-import { useCurrentEnvelopeEditor } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@documenso/lib/constants/app';
-import type { TEditorEnvelope } from '@documenso/lib/types/envelope-editor';
-import { nanoid } from '@documenso/lib/universal/id';
-import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@documenso/lib/utils/embed-config';
-import { canEnvelopeItemsBeModified } from '@documenso/lib/utils/envelope';
-import { trpc } from '@documenso/trpc/react';
-import type { TCreateEnvelopeItemsPayload } from '@documenso/trpc/server/envelope-router/create-envelope-items.types';
-import { Button } from '@documenso/ui/primitives/button';
+import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useEnvelopeAutosave } from '@hanzo/sign-lib/client-only/hooks/use-envelope-autosave';
+import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/sign-lib/constants/app';
+import type { TEditorEnvelope } from '@hanzo/sign-lib/types/envelope-editor';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@hanzo/sign-lib/utils/embed-config';
+import { canEnvelopeItemsBeModified } from '@hanzo/sign-lib/utils/envelope';
+import { trpc } from '@hanzo/sign-trpc/react';
+import type { TCreateEnvelopeItemsPayload } from '@hanzo/sign-trpc/server/envelope-router/create-envelope-items.types';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@documenso/ui/primitives/card';
-import { DocumentDropzone } from '@documenso/ui/primitives/document-dropzone';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/card';
+import { DocumentDropzone } from '@hanzo/sign-ui/primitives/document-dropzone';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { EnvelopeItemDeleteDialog } from '~/components/dialogs/envelope-item-delete-dialog';
 

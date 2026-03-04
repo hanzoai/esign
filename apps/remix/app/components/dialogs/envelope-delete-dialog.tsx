@@ -6,10 +6,10 @@ import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
-import { useLimits } from '@documenso/ee/server-only/limits/provider/client';
-import { trpc as trpcReact } from '@documenso/trpc/react';
-import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
+import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -19,9 +19,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
-import { Input } from '@documenso/ui/primitives/input';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dialog';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 type EnvelopeDeleteDialogProps = {
   id: string;

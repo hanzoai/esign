@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-description: Get Documenso running locally in minutes with Docker Compose.
+description: Get Hanzo Sign running locally in minutes with Docker Compose.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -40,8 +40,8 @@ docker compose version
 ### Clone the repository
 
 ```bash
-git clone https://github.com/documenso/documenso.git
-cd documenso
+git clone https://github.com/hanzoai/sign.git
+cd hanzo-sign
 ```
 
 </Step>
@@ -60,7 +60,7 @@ The default values work for local development. No changes are required.
 </Step>
 
 <Step>
-### Start Documenso
+### Start Hanzo Sign
 
 ```bash
 docker compose -f docker/development/compose.yml up -d
@@ -117,7 +117,7 @@ All accounts created through signup are regular user accounts. To grant admin ac
 
 ```bash
 docker compose -f docker/development/compose.yml exec database \
-  psql -U documenso -d documenso -c "UPDATE \"User\" SET roles = '{ADMIN}' WHERE email = 'your@email.com';"
+  psql -U hanzo-sign -d hanzo-sign -c "UPDATE \"User\" SET roles = '{ADMIN}' WHERE email = 'your@email.com';"
 ```
 
 ## What's Included
@@ -126,7 +126,7 @@ The quick start setup runs the following containers:
 
 | Container   | Purpose                          | Port  |
 | ----------- | -------------------------------- | ----- |
-| `documenso` | Main application                 | 3000  |
+| `hanzo-sign` | Main application                 | 3000  |
 | `database`  | PostgreSQL database              | 54320 |
 | `maildev`   | Local email testing server       | 2500  |
 | `minio`     | S3-compatible storage (optional) | 9000  |
@@ -165,7 +165,7 @@ docker compose -f docker/development/compose.yml up -d --build
     `.env` file: `PORT=3001`. Then restart the containers.
   </Accordion>
   <Accordion title="Container fails to start">
-    Check the logs: `docker compose -f docker/development/compose.yml logs documenso`. Common
+    Check the logs: `docker compose -f docker/development/compose.yml logs hanzo-sign`. Common
     issues: insufficient memory (ensure Docker has at least 2GB RAM allocated), database connection
     (wait for the database container to be healthy before the app starts).
   </Accordion>

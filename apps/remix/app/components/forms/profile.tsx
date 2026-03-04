@@ -5,10 +5,10 @@ import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { trpc } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -16,11 +16,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { Label } from '@documenso/ui/primitives/label';
-import { SignaturePadDialog } from '@documenso/ui/primitives/signature-pad/signature-pad-dialog';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { Label } from '@hanzo/sign-ui/primitives/label';
+import { SignaturePadDialog } from '@hanzo/sign-ui/primitives/signature-pad/signature-pad-dialog';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export const ZProfileFormSchema = z.object({
   name: z

@@ -1,16 +1,16 @@
 import { Trans, useLingui } from '@lingui/react/macro';
 
-import { validateFields as validateDateFields } from '@documenso/lib/advanced-fields-validation/validate-fields';
-import { type TDateFieldMeta as DateFieldMeta } from '@documenso/lib/types/field-meta';
-import { Input } from '@documenso/ui/primitives/input';
-import { Label } from '@documenso/ui/primitives/label';
+import { validateFields as validateDateFields } from '@hanzo/sign-lib/advanced-fields-validation/validate-fields';
+import { type TDateFieldMeta as DateFieldMeta } from '@hanzo/sign-lib/types/field-meta';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { Label } from '@hanzo/sign-ui/primitives/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
+} from '@hanzo/sign-ui/primitives/select';
 
 type DateFieldAdvancedSettingsProps = {
   fieldState: DateFieldMeta;

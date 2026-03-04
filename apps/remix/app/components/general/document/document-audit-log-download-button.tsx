@@ -3,12 +3,12 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { DownloadIcon } from 'lucide-react';
 
-import { downloadFile } from '@documenso/lib/client-only/download-file';
-import { base64 } from '@documenso/lib/universal/base64';
-import { trpc } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
+import { base64 } from '@hanzo/sign-lib/universal/base64';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type DocumentAuditLogDownloadButtonProps = {
   className?: string;

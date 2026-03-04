@@ -1,22 +1,22 @@
 import { env } from '../utils/env';
 
-export const DOCUMENSO_ENCRYPTION_KEY = env('NEXT_PRIVATE_ENCRYPTION_KEY');
+export const SIGN_ENCRYPTION_KEY = env('NEXT_PRIVATE_ENCRYPTION_KEY');
 
-export const DOCUMENSO_ENCRYPTION_SECONDARY_KEY = env('NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY');
+export const SIGN_ENCRYPTION_SECONDARY_KEY = env('NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY');
 
 // if (typeof window === 'undefined') {
-//   if (!DOCUMENSO_ENCRYPTION_KEY || !DOCUMENSO_ENCRYPTION_SECONDARY_KEY) {
-//     throw new Error('Missing DOCUMENSO_ENCRYPTION_KEY or DOCUMENSO_ENCRYPTION_SECONDARY_KEY keys');
+//   if (!SIGN_ENCRYPTION_KEY || !SIGN_ENCRYPTION_SECONDARY_KEY) {
+//     throw new Error('Missing SIGN_ENCRYPTION_KEY or SIGN_ENCRYPTION_SECONDARY_KEY keys');
 //   }
 
-//   if (DOCUMENSO_ENCRYPTION_KEY === DOCUMENSO_ENCRYPTION_SECONDARY_KEY) {
+//   if (SIGN_ENCRYPTION_KEY === SIGN_ENCRYPTION_SECONDARY_KEY) {
 //     throw new Error(
-//       'DOCUMENSO_ENCRYPTION_KEY and DOCUMENSO_ENCRYPTION_SECONDARY_KEY cannot be equal',
+//       'SIGN_ENCRYPTION_KEY and SIGN_ENCRYPTION_SECONDARY_KEY cannot be equal',
 //     );
 //   }
 // }
 
-// if (DOCUMENSO_ENCRYPTION_KEY === 'CAFEBABE') {
+// if (SIGN_ENCRYPTION_KEY === 'CAFEBABE') {
 //   console.warn('*********************************************************************');
 //   console.warn('*');
 //   console.warn('*');

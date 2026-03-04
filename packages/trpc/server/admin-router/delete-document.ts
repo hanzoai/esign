@@ -1,5 +1,5 @@
-import { adminSuperDeleteDocument } from '@documenso/lib/server-only/admin/admin-super-delete-document';
-import { sendDeleteEmail } from '@documenso/lib/server-only/document/send-delete-email';
+import { adminSuperDeleteDocument } from '@hanzo/sign-lib/server-only/admin/admin-super-delete-document';
+import { sendDeleteEmail } from '@hanzo/sign-lib/server-only/document/send-delete-email';
 
 import { adminProcedure } from '../trpc';
 import {

@@ -6,9 +6,9 @@ import type { Expression, ExpressionBuilder, SelectQueryBuilder, SqlBool } from 
 import { DateTime } from 'luxon';
 import { match } from 'ts-pattern';
 
-import { kyselyPrisma, prisma, sql } from '@documenso/prisma';
-import type { DB } from '@documenso/prisma/generated/types';
-import { ExtendedDocumentStatus } from '@documenso/prisma/types/extended-document-status';
+import { kyselyPrisma, prisma, sql } from '@hanzo/sign-prisma';
+import type { DB } from '@hanzo/sign-prisma/generated/types';
+import { ExtendedDocumentStatus } from '@hanzo/sign-prisma/types/extended-document-status';
 
 import { type FindResultResponse } from '../../types/search-params';
 import { maskRecipientTokensForDocument } from '../../utils/mask-recipient-tokens-for-document';

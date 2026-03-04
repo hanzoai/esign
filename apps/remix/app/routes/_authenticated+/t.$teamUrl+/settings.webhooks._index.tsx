@@ -16,22 +16,22 @@ import {
 import { DateTime } from 'luxon';
 import { Link } from 'react-router';
 
-import { toFriendlyWebhookEventName } from '@documenso/lib/universal/webhook/to-friendly-webhook-event-name';
-import { trpc } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
-import { DataTable, type DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
+import { toFriendlyWebhookEventName } from '@hanzo/sign-lib/universal/webhook/to-friendly-webhook-event-name';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { DataTable, type DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@documenso/ui/primitives/dropdown-menu';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
+} from '@hanzo/sign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
 
 import { WebhookCreateDialog } from '~/components/dialogs/webhook-create-dialog';
 import { WebhookDeleteDialog } from '~/components/dialogs/webhook-delete-dialog';

@@ -1,6 +1,6 @@
 ---
 title: Manual Setup
-description: Manually set up Documenso on your machine for local development.
+description: Manually set up Hanzo Sign on your machine for local development.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -8,15 +8,15 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 # Manual Setup
 
-Follow these steps to set up Documenso on your local machine:
+Follow these steps to set up Hanzo Sign on your local machine:
 
 {/* prettier-ignore */}
 <Steps>
 
 <Step>
-### Fork Documenso
+### Fork Hanzo Sign
 
-Fork the [Documenso repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) to your GitHub account.
+Fork the [Hanzo Sign repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) to your GitHub account.
 
 </Step>
 
@@ -26,7 +26,7 @@ Fork the [Documenso repository](https://docs.github.com/en/pull-requests/collabo
 After forking the repository, clone it to your local device by using the following command:
 
 ```bash
-git clone https://github.com/<your-username>/documenso
+git clone https://github.com/<your-username>/hanzo-sign
 ```
 
 </Step>
@@ -78,7 +78,7 @@ npm run prisma:migrate-dev
 Seed the database with test data by running the following command:
 
 ```bash
-npm run prisma:seed -w @documenso/prisma
+npm run prisma:seed -w @hanzo/sign-prisma
 ```
 
 </Step>
@@ -93,7 +93,7 @@ Run `npm run dev` in the root directory to start the application.
 <Step>
 ### Access the application
 
-Access the Documenso application by visiting `http://localhost:3000` in your web browser.
+Access the Hanzo Sign application by visiting `http://localhost:3000` in your web browser.
 
 </Step>
 

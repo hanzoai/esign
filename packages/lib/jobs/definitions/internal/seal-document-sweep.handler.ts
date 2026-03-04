@@ -1,7 +1,7 @@
 import { DocumentStatus, EnvelopeType, RecipientRole, SigningStatus } from '@prisma/client';
 import { DateTime } from 'luxon';
 
-import { kyselyPrisma, sql } from '@documenso/prisma';
+import { kyselyPrisma, sql } from '@hanzo/sign-prisma';
 
 import { mapSecondaryIdToDocumentId } from '../../../utils/envelope';
 import { jobs } from '../../client';

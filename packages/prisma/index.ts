@@ -1,4 +1,4 @@
-/// <reference types="@documenso/prisma/types/types.d.ts" />
+/// <reference types="@hanzo/sign-prisma/types/types.d.ts" />
 import { PrismaClient } from '@prisma/client';
 import { readReplicas } from '@prisma/extension-read-replicas';
 import { Kysely, PostgresAdapter, PostgresIntrospector, PostgresQueryCompiler } from 'kysely';

@@ -1,8 +1,8 @@
 import { OrganisationGroupType, OrganisationMemberRole, TeamMemberRole } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@documenso/lib/types/search-params';
-import { OrganisationGroupSchema } from '@documenso/prisma/generated/zod/modelSchema/OrganisationGroupSchema';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
+import { OrganisationGroupSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationGroupSchema';
 
 // export const getOrganisationGroupsMeta: TrpcOpenApiMeta = {
 //   openapi: {

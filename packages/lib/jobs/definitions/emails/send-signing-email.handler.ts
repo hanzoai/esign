@@ -10,10 +10,10 @@ import {
   SendStatus,
 } from '@prisma/client';
 
-import { mailer } from '@documenso/email/mailer';
-import DocumentInviteEmailTemplate from '@documenso/email/templates/document-invite';
-import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
-import { prisma } from '@documenso/prisma';
+import { mailer } from '@hanzo/sign-email/mailer';
+import DocumentInviteEmailTemplate from '@hanzo/sign-email/templates/document-invite';
+import { isRecipientEmailValidForSending } from '@hanzo/sign-lib/utils/recipients';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';

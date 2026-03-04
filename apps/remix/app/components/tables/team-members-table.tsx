@@ -7,27 +7,27 @@ import { OrganisationGroupType, OrganisationMemberRole } from '@prisma/client';
 import { EditIcon, MoreHorizontal, Trash2Icon } from 'lucide-react';
 import { useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@documenso/lib/constants/teams-translations';
-import { ZUrlSearchParamsSchema } from '@documenso/lib/types/search-params';
-import { extractInitials } from '@documenso/lib/utils/recipient-formatter';
-import { isTeamRoleWithinUserHierarchy } from '@documenso/lib/utils/teams';
-import { trpc } from '@documenso/trpc/react';
-import { AnimateGenericFadeInOut } from '@documenso/ui/components/animate/animate-generic-fade-in-out';
-import { AvatarWithText } from '@documenso/ui/primitives/avatar';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
+import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
+import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
+import { isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
+import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@documenso/ui/primitives/dropdown-menu';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
+} from '@hanzo/sign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
 
 import { useCurrentTeam } from '~/providers/team';
 

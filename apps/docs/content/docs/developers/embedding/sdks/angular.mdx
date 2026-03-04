@@ -1,6 +1,6 @@
 ---
 title: Angular
-description: Embed Documenso signing in your Angular application using the official SDK.
+description: Embed Hanzo Sign signing in your Angular application using the official SDK.
 ---
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
@@ -8,9 +8,9 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ## Installation
 
 <Tabs items={['npm', 'yarn', 'pnpm']}>
-  <Tab value="npm">``` npm install @documenso/embed-angular ```</Tab>
-  <Tab value="yarn">``` yarn add @documenso/embed-angular ```</Tab>
-  <Tab value="pnpm">``` pnpm add @documenso/embed-angular ```</Tab>
+  <Tab value="npm">``` npm install @hanzo/sign-embed-angular ```</Tab>
+  <Tab value="yarn">``` yarn add @hanzo/sign-embed-angular ```</Tab>
+  <Tab value="pnpm">``` pnpm add @hanzo/sign-embed-angular ```</Tab>
 </Tabs>
 
 ---
@@ -19,7 +19,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ```typescript
 import { Component } from '@angular/core';
-import { EmbedDirectTemplate } from '@documenso/embed-angular';
+import { EmbedDirectTemplate } from '@hanzo/sign-embed-angular';
 
 @Component({
   selector: 'app-signing',
@@ -61,7 +61,7 @@ export class SigningComponent {
 
 ```typescript
 import { Component, Input } from '@angular/core';
-import { EmbedSignDocument } from '@documenso/embed-angular';
+import { EmbedSignDocument } from '@hanzo/sign-embed-angular';
 
 @Component({
   selector: 'app-signing',

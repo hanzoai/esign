@@ -7,16 +7,16 @@ import { useRevalidator } from 'react-router';
 import { Link } from 'react-router';
 import type { z } from 'zod';
 
-import { trpc } from '@documenso/trpc/react';
-import type { TGetUserResponse } from '@documenso/trpc/server/admin-router/get-user.types';
-import { ZUpdateUserRequestSchema } from '@documenso/trpc/server/admin-router/update-user.types';
+import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetUserResponse } from '@hanzo/sign-trpc/server/admin-router/get-user.types';
+import { ZUpdateUserRequestSchema } from '@hanzo/sign-trpc/server/admin-router/update-user.types';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@documenso/ui/primitives/accordion';
-import { Button } from '@documenso/ui/primitives/button';
+} from '@hanzo/sign-ui/primitives/accordion';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -24,10 +24,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { SpinnerBox } from '@documenso/ui/primitives/spinner';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { AdminOrganisationCreateDialog } from '~/components/dialogs/admin-organisation-create-dialog';
 import { AdminUserDeleteDialog } from '~/components/dialogs/admin-user-delete-dialog';

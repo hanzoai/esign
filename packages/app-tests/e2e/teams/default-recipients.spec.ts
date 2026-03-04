@@ -2,16 +2,16 @@ import { expect, test } from '@playwright/test';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { createApiToken } from '@documenso/lib/server-only/public-api/create-api-token';
-import { prisma } from '@documenso/prisma';
-import { EnvelopeType, RecipientRole } from '@documenso/prisma/client';
-import { seedTeam } from '@documenso/prisma/seed/teams';
-import { seedBlankTemplate } from '@documenso/prisma/seed/templates';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/sign-prisma';
+import { EnvelopeType, RecipientRole } from '@hanzo/sign-prisma/client';
+import { seedTeam } from '@hanzo/sign-prisma/seed/teams';
+import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
 import type {
   TCreateEnvelopePayload,
   TCreateEnvelopeResponse,
-} from '@documenso/trpc/server/envelope-router/create-envelope.types';
+} from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
 
 import { apiSignin } from '../fixtures/authentication';
 
@@ -113,7 +113,7 @@ test.describe('Default Recipients', () => {
     await page.getByRole('button', { name: 'Add Signer' }).click();
 
     // Add a regular signer using the v2 editor
-    await page.getByTestId('signer-email-input').last().fill('regular-signer@documenso.com');
+    await page.getByTestId('signer-email-input').last().fill('regular-signer@sign.hanzo.ai');
     await page
       .getByPlaceholder(/Recipient/)
       .first()
@@ -143,7 +143,7 @@ test.describe('Default Recipients', () => {
       expect(defaultRecipient?.role).toBe(RecipientRole.CC);
 
       const regularSigner = envelope.recipients.find(
-        (r) => r.email === 'regular-signer@documenso.com',
+        (r) => r.email === 'regular-signer@sign.hanzo.ai',
       );
       expect(regularSigner).toBeDefined();
     }).toPass();
@@ -210,7 +210,7 @@ test.describe('Default Recipients', () => {
     const documentId = urlParts.find((part) => part.startsWith('envelope_'));
 
     // Replace the default recipient with a regular signer
-    await page.getByTestId('signer-email-input').first().fill('regular-signer@documenso.com');
+    await page.getByTestId('signer-email-input').first().fill('regular-signer@sign.hanzo.ai');
     await page
       .getByPlaceholder(/Recipient/)
       .first()
@@ -290,7 +290,7 @@ test.describe('Default Recipients', () => {
       title: 'Test Document with Default Recipients',
       recipients: [
         {
-          email: 'api-recipient@documenso.com',
+          email: 'api-recipient@sign.hanzo.ai',
           name: 'API Recipient',
           role: RecipientRole.SIGNER,
         },
@@ -325,7 +325,7 @@ test.describe('Default Recipients', () => {
 
     expect(envelope.recipients.length).toBe(2);
 
-    const apiRecipient = envelope.recipients.find((r) => r.email === 'api-recipient@documenso.com');
+    const apiRecipient = envelope.recipients.find((r) => r.email === 'api-recipient@sign.hanzo.ai');
     expect(apiRecipient).toBeDefined();
     expect(apiRecipient?.role).toBe(RecipientRole.SIGNER);
 
@@ -383,7 +383,7 @@ test.describe('Default Recipients', () => {
     await expect(page.getByRole('heading', { name: 'Add Placeholder' })).toBeVisible();
 
     // Add a template recipient
-    await page.getByPlaceholder('Email').fill('template-recipient@documenso.com');
+    await page.getByPlaceholder('Email').fill('template-recipient@sign.hanzo.ai');
     await page.getByPlaceholder('Name').fill('Template Recipient');
 
     await page.getByRole('button', { name: 'Continue' }).click();
@@ -414,7 +414,7 @@ test.describe('Default Recipients', () => {
     expect(document.recipients.length).toBe(2);
 
     const templateRecipient = document.recipients.find(
-      (r) => r.email === 'template-recipient@documenso.com',
+      (r) => r.email === 'template-recipient@sign.hanzo.ai',
     );
     expect(templateRecipient).toBeDefined();
 

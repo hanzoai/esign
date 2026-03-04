@@ -1,8 +1,8 @@
 import { useLingui } from '@lingui/react/macro';
 
-import { trpc } from '@documenso/trpc/react';
-import { SpinnerBox } from '@documenso/ui/primitives/spinner';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import {
   EmailPreferencesForm,

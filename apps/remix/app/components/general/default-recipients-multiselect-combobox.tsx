@@ -3,11 +3,11 @@ import { useLingui } from '@lingui/react';
 import { Trans, useLingui as useLinguiMacro } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 
-import type { TDefaultRecipient } from '@documenso/lib/types/default-recipients';
-import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
-import { trpc } from '@documenso/trpc/react';
-import { MultiSelect, type Option } from '@documenso/ui/primitives/multiselect';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import type { TDefaultRecipient } from '@hanzo/sign-lib/types/default-recipients';
+import { isRecipientEmailValidForSending } from '@hanzo/sign-lib/utils/recipients';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { MultiSelect, type Option } from '@hanzo/sign-ui/primitives/multiselect';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 type DefaultRecipientsMultiSelectComboboxProps = {
   listValues: TDefaultRecipient[];

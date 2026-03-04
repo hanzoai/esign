@@ -2,19 +2,19 @@ import { msg } from '@lingui/core/macro';
 import { DocumentVisibility } from '@prisma/client';
 import { z } from 'zod';
 
-import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@documenso/lib/constants/date-formats';
-import { DocumentSignatureType } from '@documenso/lib/constants/document';
-import { SUPPORTED_LANGUAGE_CODES } from '@documenso/lib/constants/i18n';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@documenso/lib/constants/time-zones';
+import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
+import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
+import { SUPPORTED_LANGUAGE_CODES } from '@hanzo/sign-lib/constants/i18n';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
 import {
   ZDocumentAccessAuthTypesSchema,
   ZDocumentActionAuthTypesSchema,
-} from '@documenso/lib/types/document-auth';
+} from '@hanzo/sign-lib/types/document-auth';
 import {
   ZDocumentMetaDateFormatSchema,
   ZDocumentMetaTimezoneSchema,
-} from '@documenso/lib/types/document-meta';
-import { isValidRedirectUrl } from '@documenso/lib/utils/is-valid-redirect-url';
+} from '@hanzo/sign-lib/types/document-meta';
+import { isValidRedirectUrl } from '@hanzo/sign-lib/utils/is-valid-redirect-url';
 
 export const ZAddSettingsFormSchema = z.object({
   title: z

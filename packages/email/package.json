@@ -1,5 +1,5 @@
 {
-  "name": "@documenso/email",
+  "name": "@hanzo/sign-email",
   "version": "0.0.0",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -16,8 +16,8 @@
     "clean": "rimraf node_modules"
   },
   "dependencies": {
-    "@documenso/tailwind-config": "*",
-    "@documenso/nodemailer-resend": "4.0.0",
+    "@hanzo/sign-tailwind-config": "*",
+    "@hanzo/sign-nodemailer-resend": "4.0.0",
     "@react-email/body": "0.2.0",
     "@react-email/button": "0.2.0",
     "@react-email/code-block": "0.2.0",
@@ -42,7 +42,7 @@
     "resend": "^6.5.2"
   },
   "devDependencies": {
-    "@documenso/tsconfig": "*",
+    "@hanzo/sign-tsconfig": "*",
     "@types/nodemailer": "^7.0.4"
   }
 }

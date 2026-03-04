@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZDocumentManySchema } from '@documenso/lib/types/document';
+import { ZDocumentManySchema } from '@hanzo/sign-lib/types/document';
 
 import type { TrpcRouteMeta } from '../trpc';
 

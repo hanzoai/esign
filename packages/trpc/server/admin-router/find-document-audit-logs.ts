@@ -1,10 +1,10 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import type { FindResultResponse } from '@documenso/lib/types/search-params';
-import { parseDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
-import { unsafeBuildEnvelopeIdQuery } from '@documenso/lib/utils/envelope';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
+import { parseDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
+import { unsafeBuildEnvelopeIdQuery } from '@hanzo/sign-lib/utils/envelope';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { adminProcedure } from '../trpc';
 import {

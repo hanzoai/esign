@@ -3,12 +3,12 @@ import { OAuth2Client, decodeIdToken } from 'arctic';
 import type { Context } from 'hono';
 import { deleteCookie } from 'hono/cookie';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { onCreateUserHook } from '@documenso/lib/server-only/user/create-user';
-import { deletedServiceAccountEmail } from '@documenso/lib/server-only/user/service-accounts/deleted-account';
-import { legacyServiceAccountEmail } from '@documenso/lib/server-only/user/service-accounts/legacy-service-account';
-import { isValidReturnTo, normalizeReturnTo } from '@documenso/lib/utils/is-valid-return-to';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { onCreateUserHook } from '@hanzo/sign-lib/server-only/user/create-user';
+import { deletedServiceAccountEmail } from '@hanzo/sign-lib/server-only/user/service-accounts/deleted-account';
+import { legacyServiceAccountEmail } from '@hanzo/sign-lib/server-only/user/service-accounts/legacy-service-account';
+import { isValidReturnTo, normalizeReturnTo } from '@hanzo/sign-lib/utils/is-valid-return-to';
+import { prisma } from '@hanzo/sign-prisma';
 
 import type { OAuthClientOptions } from '../../config';
 import { AuthenticationErrorCode } from '../errors/error-codes';

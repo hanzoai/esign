@@ -3,7 +3,7 @@ import { z } from 'zod';
 import {
   ZConfidenceLevel,
   ZDetectableFieldType,
-} from '@documenso/lib/server-only/ai/envelope/detect-fields/schema';
+} from '@hanzo/sign-lib/server-only/ai/envelope/detect-fields/schema';
 
 export const ZDetectFieldsRequestSchema = z.object({
   envelopeId: z.string().min(1).describe('The ID of the envelope to detect fields from.'),

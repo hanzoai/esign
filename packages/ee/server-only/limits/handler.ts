@@ -1,6 +1,6 @@
 import { match } from 'ts-pattern';
 
-import { getSession } from '@documenso/auth/server/lib/utils/get-session';
+import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
 
 import { ERROR_CODES } from './errors';
 import { getServerLimits } from './server';

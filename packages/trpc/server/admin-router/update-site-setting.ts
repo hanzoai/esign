@@ -1,4 +1,4 @@
-import { upsertSiteSetting } from '@documenso/lib/server-only/site-settings/upsert-site-setting';
+import { upsertSiteSetting } from '@hanzo/sign-lib/server-only/site-settings/upsert-site-setting';
 
 import { adminProcedure } from '../trpc';
 import {

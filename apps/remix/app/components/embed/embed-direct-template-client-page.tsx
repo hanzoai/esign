@@ -15,30 +15,30 @@ import { LucideChevronDown, LucideChevronUp } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { useSearchParams } from 'react-router';
 
-import { useThrottleFn } from '@documenso/lib/client-only/hooks/use-throttle-fn';
-import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@documenso/lib/constants/date-formats';
-import { PDF_VIEWER_PAGE_SELECTOR } from '@documenso/lib/constants/pdf-viewer';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@documenso/lib/constants/time-zones';
-import { ZDirectTemplateEmbedDataSchema } from '@documenso/lib/types/embed-direct-template-schema';
+import { useThrottleFn } from '@hanzo/sign-lib/client-only/hooks/use-throttle-fn';
+import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
+import { ZDirectTemplateEmbedDataSchema } from '@hanzo/sign-lib/types/embed-direct-template-schema';
 import {
   isFieldUnsignedAndRequired,
   isRequiredField,
-} from '@documenso/lib/utils/advanced-fields-helpers';
-import { getDocumentDataUrlForPdfViewer } from '@documenso/lib/utils/envelope-download';
-import { sortFieldsByPosition, validateFieldsInserted } from '@documenso/lib/utils/fields';
-import { isSignatureFieldType } from '@documenso/prisma/guards/is-signature-field';
-import { trpc } from '@documenso/trpc/react';
+} from '@hanzo/sign-lib/utils/advanced-fields-helpers';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
+import { sortFieldsByPosition, validateFieldsInserted } from '@hanzo/sign-lib/utils/fields';
+import { isSignatureFieldType } from '@hanzo/sign-prisma/guards/is-signature-field';
+import { trpc } from '@hanzo/sign-trpc/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@documenso/trpc/server/field-router/schema';
-import { FieldToolTip } from '@documenso/ui/components/field/field-tooltip';
-import { Button } from '@documenso/ui/primitives/button';
-import { ElementVisible } from '@documenso/ui/primitives/element-visible';
-import { Input } from '@documenso/ui/primitives/input';
-import { Label } from '@documenso/ui/primitives/label';
-import { SignaturePadDialog } from '@documenso/ui/primitives/signature-pad/signature-pad-dialog';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-trpc/server/field-router/schema';
+import { FieldToolTip } from '@hanzo/sign-ui/components/field/field-tooltip';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { ElementVisible } from '@hanzo/sign-ui/primitives/element-visible';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { Label } from '@hanzo/sign-ui/primitives/label';
+import { SignaturePadDialog } from '@hanzo/sign-ui/primitives/signature-pad/signature-pad-dialog';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { BrandingLogo } from '~/components/general/branding-logo';
 import { PDFViewer } from '~/components/general/pdf-viewer/pdf-viewer';

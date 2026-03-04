@@ -1,5 +1,5 @@
-import { getHighestOrganisationRoleInGroup } from '@documenso/lib/utils/organisations';
-import { prisma } from '@documenso/prisma';
+import { getHighestOrganisationRoleInGroup } from '@hanzo/sign-lib/utils/organisations';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

@@ -1,6 +1,6 @@
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
-const LEGACY_DELETED_ACCOUNT_EMAIL = 'deleted-account@documenso.com';
+const LEGACY_DELETED_ACCOUNT_EMAIL = 'deleted-account@sign.hanzo.ai';
 
 export const deletedServiceAccountEmail = () => {
   try {

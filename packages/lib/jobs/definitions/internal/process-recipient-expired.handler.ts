@@ -1,6 +1,6 @@
 import { SigningStatus, WebhookTriggerEvents } from '@prisma/client';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { triggerWebhook } from '../../../server-only/webhooks/trigger/trigger-webhook';
 import { DOCUMENT_AUDIT_LOG_TYPE } from '../../../types/document-audit-logs';

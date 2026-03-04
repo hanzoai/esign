@@ -1,9 +1,9 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { PDF_SIZE_A4_72PPI } from '@documenso/lib/constants/pdf';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { generateAuditLogPdf } from '@documenso/lib/server-only/pdf/generate-audit-log-pdf';
+import { PDF_SIZE_A4_72PPI } from '@hanzo/sign-lib/constants/pdf';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { generateAuditLogPdf } from '@hanzo/sign-lib/server-only/pdf/generate-audit-log-pdf';
 
 import { authenticatedProcedure } from '../trpc';
 import {

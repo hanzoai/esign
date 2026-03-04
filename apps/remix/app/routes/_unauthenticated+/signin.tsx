@@ -1,8 +1,8 @@
 import { Trans } from '@lingui/react/macro';
 import { redirect } from 'react-router';
 
-import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
-import { isValidReturnTo, normalizeReturnTo } from '@documenso/lib/utils/is-valid-return-to';
+import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
+import { isValidReturnTo, normalizeReturnTo } from '@hanzo/sign-lib/utils/is-valid-return-to';
 
 import { SignInForm } from '~/components/forms/signin';
 import { appMetaTags } from '~/utils/meta';

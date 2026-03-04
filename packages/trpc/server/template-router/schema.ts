@@ -2,14 +2,14 @@ import { DocumentSigningOrder, DocumentVisibility, TemplateType } from '@prisma/
 import { z } from 'zod';
 import { zfd } from 'zod-form-data';
 
-import { ZEnvelopeExpirationPeriod } from '@documenso/lib/constants/envelope-expiration';
-import { ZDocumentSchema } from '@documenso/lib/types/document';
+import { ZEnvelopeExpirationPeriod } from '@hanzo/sign-lib/constants/envelope-expiration';
+import { ZDocumentSchema } from '@hanzo/sign-lib/types/document';
 import {
   ZDocumentAccessAuthTypesSchema,
   ZDocumentActionAuthTypesSchema,
-} from '@documenso/lib/types/document-auth';
-import { ZDocumentEmailSettingsSchema } from '@documenso/lib/types/document-email';
-import { ZDocumentFormValuesSchema } from '@documenso/lib/types/document-form-values';
+} from '@hanzo/sign-lib/types/document-auth';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+import { ZDocumentFormValuesSchema } from '@hanzo/sign-lib/types/document-form-values';
 import {
   ZDocumentMetaDateFormatSchema,
   ZDocumentMetaDistributionMethodSchema,
@@ -21,18 +21,18 @@ import {
   ZDocumentMetaTimezoneSchema,
   ZDocumentMetaTypedSignatureEnabledSchema,
   ZDocumentMetaUploadSignatureEnabledSchema,
-} from '@documenso/lib/types/document-meta';
-import { ZEnvelopeAttachmentTypeSchema } from '@documenso/lib/types/envelope-attachment';
-import { ZFieldMetaPrefillFieldsSchema } from '@documenso/lib/types/field-meta';
-import { ZRecipientEmailSchema } from '@documenso/lib/types/recipient';
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@documenso/lib/types/search-params';
+} from '@hanzo/sign-lib/types/document-meta';
+import { ZEnvelopeAttachmentTypeSchema } from '@hanzo/sign-lib/types/envelope-attachment';
+import { ZFieldMetaPrefillFieldsSchema } from '@hanzo/sign-lib/types/field-meta';
+import { ZRecipientEmailSchema } from '@hanzo/sign-lib/types/recipient';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import {
   ZTemplateLiteSchema,
   ZTemplateManySchema,
   ZTemplateSchema,
-} from '@documenso/lib/types/template';
-import { LegacyTemplateDirectLinkSchema } from '@documenso/prisma/types/template-legacy-schema';
-import { ZDocumentExternalIdSchema } from '@documenso/trpc/server/document-router/schema';
+} from '@hanzo/sign-lib/types/template';
+import { LegacyTemplateDirectLinkSchema } from '@hanzo/sign-prisma/types/template-legacy-schema';
+import { ZDocumentExternalIdSchema } from '@hanzo/sign-trpc/server/document-router/schema';
 
 import { zodFormData } from '../../utils/zod-form-data';
 import { ZSignFieldWithTokenMutationSchema } from '../field-router/schema';

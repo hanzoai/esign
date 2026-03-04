@@ -1,13 +1,13 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { completeDocumentWithToken } from '@documenso/lib/server-only/document/complete-document-with-token';
-import { rejectDocumentWithToken } from '@documenso/lib/server-only/document/reject-document-with-token';
-import { createEnvelopeRecipients } from '@documenso/lib/server-only/recipient/create-envelope-recipients';
-import { deleteEnvelopeRecipient } from '@documenso/lib/server-only/recipient/delete-envelope-recipient';
-import { getRecipientById } from '@documenso/lib/server-only/recipient/get-recipient-by-id';
-import { setDocumentRecipients } from '@documenso/lib/server-only/recipient/set-document-recipients';
-import { setTemplateRecipients } from '@documenso/lib/server-only/recipient/set-template-recipients';
-import { updateEnvelopeRecipients } from '@documenso/lib/server-only/recipient/update-envelope-recipients';
+import { completeDocumentWithToken } from '@hanzo/sign-lib/server-only/document/complete-document-with-token';
+import { rejectDocumentWithToken } from '@hanzo/sign-lib/server-only/document/reject-document-with-token';
+import { createEnvelopeRecipients } from '@hanzo/sign-lib/server-only/recipient/create-envelope-recipients';
+import { deleteEnvelopeRecipient } from '@hanzo/sign-lib/server-only/recipient/delete-envelope-recipient';
+import { getRecipientById } from '@hanzo/sign-lib/server-only/recipient/get-recipient-by-id';
+import { setDocumentRecipients } from '@hanzo/sign-lib/server-only/recipient/set-document-recipients';
+import { setTemplateRecipients } from '@hanzo/sign-lib/server-only/recipient/set-template-recipients';
+import { updateEnvelopeRecipients } from '@hanzo/sign-lib/server-only/recipient/update-envelope-recipients';
 
 import { ZGenericSuccessResponse, ZSuccessResponseSchema } from '../schema';
 import { authenticatedProcedure, procedure, router } from '../trpc';

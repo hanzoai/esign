@@ -11,16 +11,16 @@ import { useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 import * as z from 'zod';
 
-import { useCurrentEnvelopeEditor } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
-import { extractDocumentAuthMethods } from '@documenso/lib/utils/document-auth';
-import { getRecipientsWithMissingFields } from '@documenso/lib/utils/recipients';
-import { trpc, trpc as trpcReact } from '@documenso/trpc/react';
-import { DocumentSendEmailMessageHelper } from '@documenso/ui/components/document/document-send-email-message-helper';
-import { cn } from '@documenso/ui/lib/utils';
-import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
+import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
+import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
+import { getRecipientsWithMissingFields } from '@hanzo/sign-lib/utils/recipients';
+import { trpc, trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -30,7 +30,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -38,20 +38,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { SpinnerBox } from '@documenso/ui/primitives/spinner';
-import { Tabs, TabsList, TabsTrigger } from '@documenso/ui/primitives/tabs';
-import { Textarea } from '@documenso/ui/primitives/textarea';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitives/tooltip';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/select';
+import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
+import { Tabs, TabsList, TabsTrigger } from '@hanzo/sign-ui/primitives/tabs';
+import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type EnvelopeDistributeDialogProps = {
   onDistribute?: () => Promise<void>;
@@ -330,7 +330,7 @@ export const EnvelopeDistributeDialog = ({
                                             </SelectItem>
                                           ))}
 
-                                          <SelectItem value={'-1'}>Documenso</SelectItem>
+                                          <SelectItem value={'-1'}>Hanzo Sign</SelectItem>
                                         </SelectContent>
                                       </Select>
                                     </FormControl>

@@ -1,10 +1,10 @@
 import type { Envelope, Prisma } from '@prisma/client';
 import { DocumentStatus, EnvelopeType, RecipientRole } from '@prisma/client';
 
-import type { FindResultResponse } from '@documenso/lib/types/search-params';
-import { mapEnvelopesToDocumentMany } from '@documenso/lib/utils/document';
-import { maskRecipientTokensForDocument } from '@documenso/lib/utils/mask-recipient-tokens-for-document';
-import { prisma } from '@documenso/prisma';
+import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
+import { mapEnvelopesToDocumentMany } from '@hanzo/sign-lib/utils/document';
+import { maskRecipientTokensForDocument } from '@hanzo/sign-lib/utils/mask-recipient-tokens-for-document';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import { ZFindInboxRequestSchema, ZFindInboxResponseSchema } from './find-inbox.types';

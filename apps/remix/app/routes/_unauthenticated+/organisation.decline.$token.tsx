@@ -2,8 +2,8 @@ import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { Link } from 'react-router';
 
-import { prisma } from '@documenso/prisma';
-import { Button } from '@documenso/ui/primitives/button';
+import { prisma } from '@hanzo/sign-prisma';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import type { Route } from './+types/organisation.decline.$token';
 

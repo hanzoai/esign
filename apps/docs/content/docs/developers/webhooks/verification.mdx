@@ -10,17 +10,17 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Overview
 
-Verifying webhook requests ensures that incoming payloads originate from Documenso and have not been tampered with. Without verification, attackers could forge requests to your endpoint and trigger unintended actions.
+Verifying webhook requests ensures that incoming payloads originate from Hanzo Sign and have not been tampered with. Without verification, attackers could forge requests to your endpoint and trigger unintended actions.
 
-## How Documenso Signs Webhooks
+## How Hanzo Sign Signs Webhooks
 
-When you configure a webhook with a secret, Documenso includes that secret in every webhook request via the `X-Documenso-Secret` header. Your server should compare this header value against your stored secret to authenticate the request.
+When you configure a webhook with a secret, Hanzo Sign includes that secret in every webhook request via the `X-Hanzo Sign-Secret` header. Your server should compare this header value against your stored secret to authenticate the request.
 
 ```bash
 POST /your-webhook-endpoint HTTP/1.1
 Host: your-server.com
 Content-Type: application/json
-X-Documenso-Secret: your_webhook_secret_here
+X-Hanzo Sign-Secret: your_webhook_secret_here
 
 {"event": "DOCUMENT_COMPLETED", "payload": {...}}
 ```
@@ -29,7 +29,7 @@ X-Documenso-Secret: your_webhook_secret_here
 
 | Header               | Description                                             |
 | -------------------- | ------------------------------------------------------- |
-| `X-Documenso-Secret` | The secret key you configured when creating the webhook |
+| `X-Hanzo Sign-Secret` | The secret key you configured when creating the webhook |
 
 The header contains your webhook secret as a plain string. If you did not configure a secret, the header will be an empty string.
 
@@ -38,7 +38,7 @@ The header contains your webhook secret as a plain string. If you did not config
 {/* prettier-ignore */}
 <Steps>
   <Step>
-    Extract the `X-Documenso-Secret` header from the incoming request
+    Extract the `X-Hanzo Sign-Secret` header from the incoming request
   </Step>
   <Step>
     Compare it against your stored webhook secret using a constant-time comparison
@@ -67,7 +67,7 @@ const crypto = require('crypto');
 const app = express();
 app.use(express.json());
 
-const WEBHOOK_SECRET = process.env.DOCUMENSO_WEBHOOK_SECRET;
+const WEBHOOK_SECRET = process.env.SIGN_WEBHOOK_SECRET;
 
 function verifyWebhookSignature(receivedSecret, expectedSecret) {
   if (!expectedSecret) {
@@ -91,8 +91,8 @@ function verifyWebhookSignature(receivedSecret, expectedSecret) {
   }
 }
 
-app.post('/webhooks/documenso', (req, res) => {
-  const receivedSecret = req.headers['x-documenso-secret'];
+app.post('/webhooks/hanzo-sign', (req, res) => {
+  const receivedSecret = req.headers['x-hanzo-sign-secret'];
 
   if (!verifyWebhookSignature(receivedSecret, WEBHOOK_SECRET)) {
     console.error('Webhook verification failed');
@@ -122,7 +122,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-WEBHOOK_SECRET = os.environ.get('DOCUMENSO_WEBHOOK_SECRET')
+WEBHOOK_SECRET = os.environ.get('SIGN_WEBHOOK_SECRET')
 
 def verify_webhook_signature(received_secret, expected_secret):
     """Verify the webhook signature using constant-time comparison."""
@@ -137,9 +137,9 @@ def verify_webhook_signature(received_secret, expected_secret):
     # Use constant-time comparison to prevent timing attacks
     return hmac.compare_digest(received_secret, expected_secret)
 
-@app.route('/webhooks/documenso', methods=['POST'])
+@app.route('/webhooks/hanzo-sign', methods=['POST'])
 def handle_webhook():
-    received_secret = request.headers.get('X-Documenso-Secret', '')
+    received_secret = request.headers.get('X-Hanzo Sign-Secret', '')
 
     if not verify_webhook_signature(received_secret, WEBHOOK_SECRET):
         print('Webhook verification failed')
@@ -175,8 +175,8 @@ When verification fails, follow these practices:
 | Do not leak details | Avoid exposing information about why verification failed           |
 
 ```javascript
-app.post('/webhooks/documenso', (req, res) => {
-  const receivedSecret = req.headers['x-documenso-secret'];
+app.post('/webhooks/hanzo-sign', (req, res) => {
+  const receivedSecret = req.headers['x-hanzo-sign-secret'];
 
   if (!verifyWebhookSignature(receivedSecret, WEBHOOK_SECRET)) {
     // Log for monitoring but don't expose details
@@ -197,8 +197,8 @@ app.post('/webhooks/documenso', (req, res) => {
 
 | Issue           | Cause                                   | Solution                                                           |
 | --------------- | --------------------------------------- | ------------------------------------------------------------------ |
-| Secret mismatch | Webhook secret changed or misconfigured | Verify the secret in your environment matches the one in Documenso |
-| Empty header    | Webhook created without a secret        | Add a secret to the webhook configuration in Documenso             |
+| Secret mismatch | Webhook secret changed or misconfigured | Verify the secret in your environment matches the one in Hanzo Sign |
+| Empty header    | Webhook created without a secret        | Add a secret to the webhook configuration in Hanzo Sign             |
 | Encoding issues | String encoding mismatch                | Ensure both secrets use the same encoding (UTF-8)                  |
 
 ## Security Best Practices
@@ -218,7 +218,7 @@ openssl rand -hex 32
 
 ```javascript
 // Good: Environment variable
-const WEBHOOK_SECRET = process.env.DOCUMENSO_WEBHOOK_SECRET;
+const WEBHOOK_SECRET = process.env.SIGN_WEBHOOK_SECRET;
 
 // Bad: Hardcoded
 const WEBHOOK_SECRET = 'my-secret-key'; // Never do this
@@ -230,7 +230,7 @@ const WEBHOOK_SECRET = 'my-secret-key'; // Never do this
 
 1. Generate a new secret
 2. Update your server to accept both old and new secrets temporarily
-3. Update the webhook configuration in Documenso
+3. Update the webhook configuration in Hanzo Sign
 4. Remove the old secret from your server
 
 </Accordion>
@@ -276,7 +276,7 @@ const webhookLimiter = rateLimit({
   message: { error: 'Too many requests' },
 });
 
-app.post('/webhooks/documenso', webhookLimiter, (req, res) => {
+app.post('/webhooks/hanzo-sign', webhookLimiter, (req, res) => {
   // Handle webhook...
 });
 ```

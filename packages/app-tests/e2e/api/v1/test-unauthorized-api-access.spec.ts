@@ -1,21 +1,21 @@
 import { expect, test } from '@playwright/test';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { createApiToken } from '@documenso/lib/server-only/public-api/create-api-token';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
 import {
   mapSecondaryIdToDocumentId,
   mapSecondaryIdToTemplateId,
-} from '@documenso/lib/utils/envelope';
-import { prisma } from '@documenso/prisma';
-import { DocumentDataType, FieldType } from '@documenso/prisma/client';
+} from '@hanzo/sign-lib/utils/envelope';
+import { prisma } from '@hanzo/sign-prisma';
+import { DocumentDataType, FieldType } from '@hanzo/sign-prisma/client';
 import {
   seedBlankDocument,
   seedCompletedDocument,
   seedDraftDocument,
   seedPendingDocumentWithFullFields,
-} from '@documenso/prisma/seed/documents';
-import { seedBlankTemplate, seedTemplate } from '@documenso/prisma/seed/templates';
-import { seedUser } from '@documenso/prisma/seed/users';
+} from '@hanzo/sign-prisma/seed/documents';
+import { seedBlankTemplate, seedTemplate } from '@hanzo/sign-prisma/seed/templates';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 const WEBAPP_BASE_URL = NEXT_PUBLIC_WEBAPP_URL();
 

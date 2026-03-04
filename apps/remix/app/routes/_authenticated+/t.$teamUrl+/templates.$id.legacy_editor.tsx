@@ -2,10 +2,10 @@ import { Trans } from '@lingui/react/macro';
 import { ChevronLeft } from 'lucide-react';
 import { Link, redirect } from 'react-router';
 
-import { getSession } from '@documenso/auth/server/lib/utils/get-session';
-import { getTeamByUrl } from '@documenso/lib/server-only/team/get-team';
-import { getTemplateById } from '@documenso/lib/server-only/template/get-template-by-id';
-import { formatTemplatesPath } from '@documenso/lib/utils/teams';
+import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
+import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
+import { getTemplateById } from '@hanzo/sign-lib/server-only/template/get-template-by-id';
+import { formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
 
 import { TemplateDirectLinkDialog } from '~/components/dialogs/template-direct-link-dialog';
 import { DocumentAttachmentsPopover } from '~/components/general/document/document-attachments-popover';
@@ -61,7 +61,7 @@ export default function TemplateEditPage() {
         <div>
           <Link
             to={`${templateRootPath}/${template.envelopeId}`}
-            className="flex items-center text-documenso-700 hover:opacity-80"
+            className="flex items-center text-sign-700 hover:opacity-80"
           >
             <ChevronLeft className="mr-2 inline-block h-5 w-5" />
             <Trans>Template</Trans>

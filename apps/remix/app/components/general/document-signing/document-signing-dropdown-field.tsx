@@ -5,25 +5,25 @@ import { useLingui } from '@lingui/react';
 import { Loader } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import type { TRecipientActionAuth } from '@documenso/lib/types/document-auth';
-import { ZDropdownFieldMeta } from '@documenso/lib/types/field-meta';
-import type { FieldWithSignatureAndFieldMeta } from '@documenso/prisma/types/field-with-signature-and-fieldmeta';
-import { trpc } from '@documenso/trpc/react';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
+import { ZDropdownFieldMeta } from '@hanzo/sign-lib/types/field-meta';
+import type { FieldWithSignatureAndFieldMeta } from '@hanzo/sign-prisma/types/field-with-signature-and-fieldmeta';
+import { trpc } from '@hanzo/sign-trpc/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@documenso/trpc/server/field-router/schema';
-import { cn } from '@documenso/ui/lib/utils';
+} from '@hanzo/sign-trpc/server/field-router/schema';
+import { cn } from '@hanzo/sign-ui/lib/utils';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/select';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useRequiredDocumentSigningAuthContext } from './document-signing-auth-provider';
 import { DocumentSigningFieldContainer } from './document-signing-field-container';

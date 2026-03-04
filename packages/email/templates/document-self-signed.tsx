@@ -36,7 +36,7 @@ export const DocumentSelfSignedEmailTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Documenso Logo"
+                  alt="Hanzo Sign Logo"
                   className="mb-4 h-6"
                 />
               )}

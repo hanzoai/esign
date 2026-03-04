@@ -5,11 +5,11 @@ description: Embed document and template creation directly in your application.
 
 import { Callout } from 'fumadocs-ui/components/callout';
 
-In addition to embedding signing, Documenso supports embedded authoring. It allows your users to create and edit documents and templates without leaving your application.
+In addition to embedding signing, Hanzo Sign supports embedded authoring. It allows your users to create and edit documents and templates without leaving your application.
 
 <Callout type="warn">
-  Embedded authoring is included with [Enterprise](https://documen.so/enterprise-cta) plans. It is
-  also available as a paid add-on for the [Platform Plan](https://documen.so/platform-cta-pricing).
+  Embedded authoring is included with [Enterprise](https://sign.hanzo.ai/enterprise-cta) plans. It is
+  also available as a paid add-on for the [Platform Plan](https://sign.hanzo.ai/platform-cta-pricing).
   Contact sales for access.
 </Callout>
 
@@ -36,9 +36,9 @@ Before using any authoring component, obtain a presign token from your backend:
 POST /api/v2/embedding/create-presign-token
 ```
 
-This endpoint requires your Documenso API key. The token has a default expiration of 1 hour.
+This endpoint requires your Hanzo Sign API key. The token has a default expiration of 1 hour.
 
-See the [API documentation](https://openapi.documenso.com/reference#tag/embedding) for full details.
+See the [API documentation](https://openapi.sign.hanzo.ai/reference#tag/embedding) for full details.
 
 <Callout type="warn">
   Presign tokens should be created server-side. Never expose your API key in client-side code.
@@ -49,7 +49,7 @@ See the [API documentation](https://openapi.documenso.com/reference#tag/embeddin
 ## Creating Documents
 
 ```jsx
-import { EmbedCreateDocumentV1 } from '@documenso/embed-react';
+import { EmbedCreateDocumentV1 } from '@hanzo/sign-embed-react';
 
 const DocumentCreator = ({ presignToken }) => {
   return (
@@ -72,7 +72,7 @@ const DocumentCreator = ({ presignToken }) => {
 ## Creating Templates
 
 ```jsx
-import { EmbedCreateTemplateV1 } from '@documenso/embed-react';
+import { EmbedCreateTemplateV1 } from '@hanzo/sign-embed-react';
 
 const TemplateCreator = ({ presignToken }) => {
   return (
@@ -94,7 +94,7 @@ const TemplateCreator = ({ presignToken }) => {
 ## Editing Documents
 
 ```jsx
-import { EmbedUpdateDocumentV1 } from '@documenso/embed-react';
+import { EmbedUpdateDocumentV1 } from '@hanzo/sign-embed-react';
 
 const DocumentEditor = ({ presignToken, documentId }) => {
   return (
@@ -117,7 +117,7 @@ const DocumentEditor = ({ presignToken, documentId }) => {
 ## Editing Templates
 
 ```jsx
-import { EmbedUpdateTemplateV1 } from '@documenso/embed-react';
+import { EmbedUpdateTemplateV1 } from '@hanzo/sign-embed-react';
 
 const TemplateEditor = ({ presignToken, templateId }) => {
   return (
@@ -145,7 +145,7 @@ const TemplateEditor = ({ presignToken, templateId }) => {
 | ------------------ | --------- | -------- | -------------------------------------------------------- |
 | `presignToken`     | `string`  | Yes      | Authentication token from your backend                   |
 | `externalId`       | `string`  | No       | Your reference ID to link with the document or template  |
-| `host`             | `string`  | No       | Custom host URL. Defaults to `https://app.documenso.com` |
+| `host`             | `string`  | No       | Custom host URL. Defaults to `https://app.sign.hanzo.ai` |
 | `css`              | `string`  | No       | Custom CSS string (Platform Plan)                        |
 | `cssVars`          | `object`  | No       | CSS variable overrides (Platform Plan)                   |
 | `darkModeDisabled` | `boolean` | No       | Disable dark mode (Platform Plan)                        |
@@ -217,7 +217,7 @@ This example shows a full workflow where users create a document and then edit i
 ```tsx
 import { useState } from 'react';
 
-import { EmbedCreateDocumentV1, EmbedUpdateDocumentV1 } from '@documenso/embed-react';
+import { EmbedCreateDocumentV1, EmbedUpdateDocumentV1 } from '@hanzo/sign-embed-react';
 
 const DocumentManager = ({ presignToken }) => {
   const [documentId, setDocumentId] = useState(null);

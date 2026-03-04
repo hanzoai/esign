@@ -7,8 +7,8 @@ import {
   ZClampedFieldPositionYSchema,
   ZClampedFieldWidthSchema,
   ZEnvelopeFieldSchema,
-} from '@documenso/lib/types/field';
-import { ZFieldMetaSchema } from '@documenso/lib/types/field-meta';
+} from '@hanzo/sign-lib/types/field';
+import { ZFieldMetaSchema } from '@hanzo/sign-lib/types/field-meta';
 
 export const ZSetEnvelopeFieldsRequestSchema = z.object({
   envelopeId: z.string(),

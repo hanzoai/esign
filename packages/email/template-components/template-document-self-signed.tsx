@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { env } from '@documenso/lib/utils/env';
+import { env } from '@hanzo/sign-lib/utils/env';
 
 import { Button, Column, Img, Link, Section, Text } from '../components';
 import { TemplateDocumentImage } from './template-document-image';
@@ -49,7 +49,7 @@ export const TemplateDocumentSelfSigned = ({
             <Link
               href={signUpUrl}
               target="_blank"
-              className="text-documenso-700 hover:text-documenso-600 whitespace-nowrap"
+              className="text-sign-700 hover:text-sign-600 whitespace-nowrap"
             >
               free account
             </Link>{' '}
@@ -71,7 +71,7 @@ export const TemplateDocumentSelfSigned = ({
 
           <Button
             className="rounded-lg border border-solid border-slate-200 px-4 py-2 text-center text-sm font-medium text-black no-underline"
-            href="https://documenso.com/pricing"
+            href="https://sign.hanzo.ai/pricing"
           >
             <Img
               src={getAssetUrl('/static/review.png')}

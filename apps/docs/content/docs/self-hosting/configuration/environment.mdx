@@ -1,18 +1,18 @@
 ---
 title: Environment Variables
-description: Complete reference for all environment variables used to configure a self-hosted Documenso instance.
+description: Complete reference for all environment variables used to configure a self-hosted Hanzo Sign instance.
 ---
 
 ## Required Variables
 
-These variables must be set for Documenso to function:
+These variables must be set for Hanzo Sign to function:
 
 | Variable                                | Description                                                                                |
 | --------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `NEXTAUTH_SECRET`                       | Secret key for NextAuth.js encryption and signing. Generate with `openssl rand -base64 32` |
 | `NEXT_PRIVATE_ENCRYPTION_KEY`           | Primary encryption key for symmetric encryption (minimum 32 characters)                    |
 | `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY` | Secondary encryption key for symmetric encryption (minimum 32 characters)                  |
-| `NEXT_PUBLIC_WEBAPP_URL`                | Public URL of your Documenso instance (e.g., `https://sign.example.com`)                   |
+| `NEXT_PUBLIC_WEBAPP_URL`                | Public URL of your Hanzo Sign instance (e.g., `https://sign.example.com`)                   |
 | `NEXT_PRIVATE_DATABASE_URL`             | PostgreSQL connection URL with connection pooling                                          |
 | `NEXT_PRIVATE_SMTP_FROM_ADDRESS`        | Email address used as the sender for all outgoing emails                                   |
 | `NEXT_PRIVATE_SMTP_FROM_NAME`           | Display name for the sender of outgoing emails                                             |
@@ -30,7 +30,7 @@ These variables must be set for Documenso to function:
 
 ## Database Configuration
 
-Documenso requires PostgreSQL 14 or higher.
+Hanzo Sign requires PostgreSQL 14 or higher.
 
 | Variable                           | Required     | Description                                                                                |
 | ---------------------------------- | ------------ | ------------------------------------------------------------------------------------------ |
@@ -90,7 +90,7 @@ Callback URL: `https://<your-domain>/api/auth/callback/microsoft`
 
 ## Email Configuration
 
-Documenso supports multiple email transports for sending notifications.
+Hanzo Sign supports multiple email transports for sending notifications.
 
 ### Transport Selection
 
@@ -148,7 +148,7 @@ For detailed email setup, see [Email Configuration](/docs/self-hosting/configura
 
 ## Storage Configuration
 
-Documenso can store documents in the database or S3-compatible storage.
+Hanzo Sign can store documents in the database or S3-compatible storage.
 
 | Variable                                 | Description                                 | Default    |
 | ---------------------------------------- | ------------------------------------------- | ---------- |
@@ -182,7 +182,7 @@ For detailed storage setup, see [Storage Configuration](/docs/self-hosting/confi
 
 ## Signing Certificate Configuration
 
-Documenso requires a certificate to digitally sign documents.
+Hanzo Sign requires a certificate to digitally sign documents.
 
 ### Transport Selection
 
@@ -234,7 +234,7 @@ For detailed certificate setup, see [Signing Certificate](/docs/self-hosting/con
 
 ## AI Features
 
-Documenso can use Google Vertex AI for recipient and field detection.
+Hanzo Sign can use Google Vertex AI for recipient and field detection.
 
 | Variable                   | Description                                    | Default  |
 | -------------------------- | ---------------------------------------------- | -------- |
@@ -248,7 +248,7 @@ AI features must also be enabled in organisation/team settings after configurati
 
 ## Background Jobs
 
-Documenso uses a PostgreSQL-based job queue by default. Jobs (email delivery, document processing, webhook dispatch) are stored in the `BackgroundJob` table and processed via internal HTTP requests. No external queue service like Redis is required.
+Hanzo Sign uses a PostgreSQL-based job queue by default. Jobs (email delivery, document processing, webhook dispatch) are stored in the `BackgroundJob` table and processed via internal HTTP requests. No external queue service like Redis is required.
 
 | Variable                     | Description                                                                    | Default |
 | ---------------------------- | ------------------------------------------------------------------------------ | ------- |
@@ -269,7 +269,7 @@ Documenso uses a PostgreSQL-based job queue by default. Jobs (email delivery, do
 
 | Variable                      | Description                                  | Default |
 | ----------------------------- | -------------------------------------------- | ------- |
-| `DOCUMENSO_DISABLE_TELEMETRY` | Set to `true` to disable anonymous telemetry | `false` |
+| `SIGN_DISABLE_TELEMETRY` | Set to `true` to disable anonymous telemetry | `false` |
 
 Telemetry collects only: app version, installation ID, and node ID. No personal data is collected.
 
@@ -287,11 +287,11 @@ Telemetry collects only: app version, installation ID, and node ID. No personal 
 
 ## Enterprise Features
 
-These variables require an active [Enterprise Edition](/docs/policies/enterprise-edition) license. Obtain a license key from [license.documenso.com](https://license.documenso.com) and set it below to unlock enterprise features such as SSO, embed authoring, and 21 CFR Part 11 compliance.
+These variables require an active [Enterprise Edition](/docs/policies/enterprise-edition) license. Obtain a license key from [license.sign.hanzo.ai](https://license.sign.hanzo.ai) and set it below to unlock enterprise features such as SSO, embed authoring, and 21 CFR Part 11 compliance.
 
 | Variable                             | Description                                      |
 | ------------------------------------ | ------------------------------------------------ |
-| `NEXT_PRIVATE_DOCUMENSO_LICENSE_KEY` | License key for enterprise features              |
+| `NEXT_PRIVATE_SIGN_LICENSE_KEY` | License key for enterprise features              |
 | `NEXT_PRIVATE_STRIPE_API_KEY`        | Stripe API key for billing                       |
 | `NEXT_PRIVATE_STRIPE_WEBHOOK_SECRET` | Stripe webhook secret                            |
 | `NEXT_PRIVATE_SES_ACCESS_KEY_ID`     | AWS SES access key for email domain verification |
@@ -312,8 +312,8 @@ NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="your-secondary-key-at-least-32-chars"
 NEXT_PUBLIC_WEBAPP_URL="https://sign.example.com"
 
 # Database
-NEXT_PRIVATE_DATABASE_URL="postgres://user:password@localhost:5432/documenso"
-NEXT_PRIVATE_DIRECT_DATABASE_URL="postgres://user:password@localhost:5432/documenso"
+NEXT_PRIVATE_DATABASE_URL="postgres://user:password@localhost:5432/hanzo-sign"
+NEXT_PRIVATE_DIRECT_DATABASE_URL="postgres://user:password@localhost:5432/hanzo-sign"
 
 # Email
 NEXT_PRIVATE_SMTP_TRANSPORT="smtp-auth"
@@ -321,7 +321,7 @@ NEXT_PRIVATE_SMTP_HOST="smtp.example.com"
 NEXT_PRIVATE_SMTP_PORT=587
 NEXT_PRIVATE_SMTP_USERNAME="your-smtp-user"
 NEXT_PRIVATE_SMTP_PASSWORD="your-smtp-password"
-NEXT_PRIVATE_SMTP_FROM_NAME="Documenso"
+NEXT_PRIVATE_SMTP_FROM_NAME="Hanzo Sign"
 NEXT_PRIVATE_SMTP_FROM_ADDRESS="noreply@example.com"
 
 # Signing (certificate must be configured)

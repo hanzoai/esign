@@ -2,7 +2,7 @@ import type { I18n } from '@lingui/core';
 import { msg } from '@lingui/core/macro';
 import { type Envelope, type Field, FieldType } from '@prisma/client';
 
-import { PDF_VIEWER_CONTENT_SELECTOR } from '@documenso/lib/constants/pdf-viewer';
+import { PDF_VIEWER_CONTENT_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
 
 import { extractLegacyIds } from '../universal/id';
 

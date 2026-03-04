@@ -9,13 +9,13 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useSearchParams } from 'react-router';
 import { z } from 'zod';
 
-import communityCardsImage from '@documenso/assets/images/community-cards.png';
-import { authClient } from '@documenso/auth/client';
-import { useAnalytics } from '@documenso/lib/client-only/hooks/use-analytics';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { ZPasswordSchema } from '@documenso/trpc/server/auth-router/schema';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
+import communityCardsImage from '@hanzo/sign-assets/images/community-cards.png';
+import { authClient } from '@hanzo/sign-auth/client';
+import { useAnalytics } from '@hanzo/sign-lib/client-only/hooks/use-analytics';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { ZPasswordSchema } from '@hanzo/sign-trpc/server/auth-router/schema';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -23,11 +23,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { PasswordInput } from '@documenso/ui/primitives/password-input';
-import { SignaturePadDialog } from '@documenso/ui/primitives/signature-pad/signature-pad-dialog';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { PasswordInput } from '@hanzo/sign-ui/primitives/password-input';
+import { SignaturePadDialog } from '@hanzo/sign-ui/primitives/signature-pad/signature-pad-dialog';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { UserProfileTimur } from '~/components/general/user-profile-timur';
 
@@ -263,7 +263,7 @@ export const SignUpForm = ({ className, initialEmail, returnTo }: SignUpFormProp
               <p className="mt-4 text-sm text-muted-foreground">
                 <Trans>
                   Already have an account?{' '}
-                  <Link to="/signin" className="text-documenso-700 duration-200 hover:opacity-70">
+                  <Link to="/signin" className="text-sign-700 duration-200 hover:opacity-70">
                     Sign in instead
                   </Link>
                 </Trans>
@@ -284,17 +284,17 @@ export const SignUpForm = ({ className, initialEmail, returnTo }: SignUpFormProp
           <Trans>
             By proceeding, you agree to our{' '}
             <Link
-              to="https://documen.so/terms"
+              to="https://sign.hanzo.ai/terms"
               target="_blank"
-              className="text-documenso-700 duration-200 hover:opacity-70"
+              className="text-sign-700 duration-200 hover:opacity-70"
             >
               Terms of Service
             </Link>{' '}
             and{' '}
             <Link
-              to="https://documen.so/privacy"
+              to="https://sign.hanzo.ai/privacy"
               target="_blank"
-              className="text-documenso-700 duration-200 hover:opacity-70"
+              className="text-sign-700 duration-200 hover:opacity-70"
             >
               Privacy Policy
             </Link>

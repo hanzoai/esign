@@ -1,6 +1,6 @@
 import type { DocumentDataType } from '@prisma/client';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 export type CreateDocumentDataOptions = {
   type: DocumentDataType;

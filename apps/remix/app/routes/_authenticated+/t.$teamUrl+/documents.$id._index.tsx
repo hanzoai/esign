@@ -5,23 +5,23 @@ import { ChevronLeft, Users2 } from 'lucide-react';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { EnvelopeRenderProvider } from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { PDF_VIEWER_ERROR_MESSAGES } from '@documenso/lib/constants/pdf-viewer-i18n';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
-import { getDocumentDataUrlForPdfViewer } from '@documenso/lib/utils/envelope-download';
-import { formatDocumentsPath } from '@documenso/lib/utils/teams';
-import { trpc } from '@documenso/trpc/react';
+import { EnvelopeRenderProvider } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
+import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
+import { trpc } from '@hanzo/sign-trpc/react';
 import {
   DocumentReadOnlyFields,
   mapFieldsWithRecipients,
-} from '@documenso/ui/components/document/document-read-only-fields';
-import { cn } from '@documenso/ui/lib/utils';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
-import { Card, CardContent } from '@documenso/ui/primitives/card';
-import { Spinner } from '@documenso/ui/primitives/spinner';
+} from '@hanzo/sign-ui/components/document/document-read-only-fields';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
 
 import { DocumentPageViewButton } from '~/components/general/document/document-page-view-button';
 import { DocumentPageViewDropdown } from '~/components/general/document/document-page-view-dropdown';
@@ -103,7 +103,7 @@ export default function DocumentPage({ params }: Route.ComponentProps) {
         <DocumentRecipientLinkCopyDialog recipients={envelope.recipients} />
       )}
 
-      <Link to={documentRootPath} className="flex items-center text-documenso-700 hover:opacity-80">
+      <Link to={documentRootPath} className="flex items-center text-sign-700 hover:opacity-80">
         <ChevronLeft className="mr-2 inline-block h-5 w-5" />
         <Trans>Documents</Trans>
       </Link>

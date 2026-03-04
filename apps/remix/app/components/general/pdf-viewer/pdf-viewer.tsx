@@ -8,10 +8,10 @@ import pdfjsWorker from 'pdfjs-dist/build/pdf.worker?url';
 import type {
   ImageLoadingState,
   PageRenderData,
-} from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { PDF_VIEWER_PAGE_CLASSNAME } from '@documenso/lib/constants/pdf-viewer';
-import { cn } from '@documenso/ui/lib/utils';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { PDF_VIEWER_PAGE_CLASSNAME } from '@hanzo/sign-lib/constants/pdf-viewer';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import type { ScrollTarget } from '../virtual-list/use-virtual-list';
 import { useVirtualList } from '../virtual-list/use-virtual-list';

@@ -1,5 +1,5 @@
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/teams';
-import { prisma } from '@documenso/prisma';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { buildTeamWhereQuery } from '../../utils/teams';
 

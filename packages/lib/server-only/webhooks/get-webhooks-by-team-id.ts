@@ -1,4 +1,4 @@
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 export const getWebhooksByTeamId = async (teamId: number, userId: number) => {
   return await prisma.webhook.findMany({

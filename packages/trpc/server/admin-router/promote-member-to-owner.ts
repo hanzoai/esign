@@ -1,9 +1,9 @@
 import { OrganisationGroupType, OrganisationMemberRole } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { generateDatabaseId } from '@documenso/lib/universal/id';
-import { getHighestOrganisationRoleInGroup } from '@documenso/lib/utils/organisations';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { generateDatabaseId } from '@hanzo/sign-lib/universal/id';
+import { getHighestOrganisationRoleInGroup } from '@hanzo/sign-lib/utils/organisations';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { adminProcedure } from '../trpc';
 import {

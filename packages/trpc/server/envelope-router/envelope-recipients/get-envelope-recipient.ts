@@ -1,6 +1,6 @@
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { buildTeamWhereQuery } from '@documenso/lib/utils/teams';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { buildTeamWhereQuery } from '@hanzo/sign-lib/utils/teams';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../../trpc';
 import {

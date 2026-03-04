@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
 import type { Team, User } from '@prisma/client';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { createApiToken } from '@documenso/lib/server-only/public-api/create-api-token';
-import { prisma } from '@documenso/prisma';
-import { seedBlankDocument } from '@documenso/prisma/seed/documents';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/sign-prisma';
+import { seedBlankDocument } from '@hanzo/sign-prisma/seed/documents';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 const WEBAPP_BASE_URL = NEXT_PUBLIC_WEBAPP_URL();
 

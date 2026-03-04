@@ -3,10 +3,10 @@ import { useLayoutEffect } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Outlet, useLoaderData } from 'react-router';
 
-import { verifyEmbeddingPresignToken } from '@documenso/lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { getOrganisationClaimByTeamId } from '@documenso/lib/server-only/organisation/get-organisation-claims';
-import { ZBaseEmbedAuthoringSchema } from '@documenso/lib/types/embed-authoring-base-schema';
-import { TrpcProvider } from '@documenso/trpc/react';
+import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { getOrganisationClaimByTeamId } from '@hanzo/sign-lib/server-only/organisation/get-organisation-claims';
+import { ZBaseEmbedAuthoringSchema } from '@hanzo/sign-lib/types/embed-authoring-base-schema';
+import { TrpcProvider } from '@hanzo/sign-trpc/react';
 
 import { injectCss } from '~/utils/css-vars';
 

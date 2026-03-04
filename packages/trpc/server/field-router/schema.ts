@@ -1,7 +1,7 @@
 import { FieldType } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZRecipientActionAuthSchema } from '@documenso/lib/types/document-auth';
+import { ZRecipientActionAuthSchema } from '@hanzo/sign-lib/types/document-auth';
 import {
   ZFieldHeightSchema,
   ZFieldPageNumberSchema,
@@ -9,8 +9,8 @@ import {
   ZFieldPageYSchema,
   ZFieldSchema,
   ZFieldWidthSchema,
-} from '@documenso/lib/types/field';
-import { ZFieldAndMetaSchema, ZFieldMetaSchema } from '@documenso/lib/types/field-meta';
+} from '@hanzo/sign-lib/types/field';
+import { ZFieldAndMetaSchema, ZFieldMetaSchema } from '@hanzo/sign-lib/types/field-meta';
 
 const ZCreateFieldSchema = ZFieldAndMetaSchema.and(
   z.object({

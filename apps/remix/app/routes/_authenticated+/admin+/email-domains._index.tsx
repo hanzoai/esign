@@ -8,22 +8,22 @@ import { CheckCircle2Icon, ClockIcon, Loader } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import { trpc } from '@documenso/trpc/react';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
-import { Input } from '@documenso/ui/primitives/input';
+import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
+} from '@hanzo/sign-ui/primitives/select';
 
 export default function AdminEmailDomainsPage() {
   const { _, i18n } = useLingui();

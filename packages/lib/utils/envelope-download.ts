@@ -1,6 +1,6 @@
 import type { EnvelopeItem } from '@prisma/client';
 
-import type { DocumentDataVersion } from '@documenso/lib/types/document';
+import type { DocumentDataVersion } from '@hanzo/sign-lib/types/document';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '../constants/app';
 

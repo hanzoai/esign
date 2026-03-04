@@ -5,12 +5,12 @@ import { Trans } from '@lingui/react/macro';
 import { EnvelopeType } from '@prisma/client';
 import { Link, useNavigate } from 'react-router';
 
-import { EnvelopeEditorProvider } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
-import { formatDocumentsPath, formatTemplatesPath } from '@documenso/lib/utils/teams';
-import { trpc } from '@documenso/trpc/react';
-import { Button } from '@documenso/ui/primitives/button';
-import { Spinner } from '@documenso/ui/primitives/spinner';
+import { EnvelopeEditorProvider } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
+import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
 
 import { EnvelopeEditor } from '~/components/general/envelope-editor/envelope-editor';
 import { EnvelopeEditorRenderProviderWrapper } from '~/components/general/envelope-editor/envelope-editor-renderer-provider-wrapper';

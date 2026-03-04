@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-import { createDocumentAuthOptions } from '@documenso/lib/utils/document-auth';
-import { prisma } from '@documenso/prisma';
-import { seedPendingDocument } from '@documenso/prisma/seed/documents';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { createDocumentAuthOptions } from '@hanzo/sign-lib/utils/document-auth';
+import { prisma } from '@hanzo/sign-prisma';
+import { seedPendingDocument } from '@hanzo/sign-prisma/seed/documents';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 
@@ -14,7 +14,7 @@ test('[DOCUMENT_AUTH]: should grant access when not required', async ({ page }) 
 
   const document = await seedPendingDocument(user, team.id, [
     recipientWithAccount,
-    'recipientwithoutaccount@documenso.com',
+    'recipientwithoutaccount@sign.hanzo.ai',
   ]);
 
   const recipients = await prisma.recipient.findMany({
@@ -39,7 +39,7 @@ test('[DOCUMENT_AUTH]: should allow or deny access when required', async ({ page
   const document = await seedPendingDocument(
     user,
     team.id,
-    [recipientWithAccount, 'recipientwithoutaccount@documenso.com'],
+    [recipientWithAccount, 'recipientwithoutaccount@sign.hanzo.ai'],
     {
       createDocumentOptions: {
         authOptions: createDocumentAuthOptions({

@@ -4,10 +4,10 @@ import { useLingui } from '@lingui/react/macro';
 import { OrganisationGroupType, OrganisationMemberRole } from '@prisma/client';
 import { useLocation, useSearchParams } from 'react-router';
 
-import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
-import { trpc } from '@documenso/trpc/react';
-import { AnimateGenericFadeInOut } from '@documenso/ui/components/animate/animate-generic-fade-in-out';
-import { Input } from '@documenso/ui/primitives/input';
+import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 
 import { TeamGroupCreateDialog } from '~/components/dialogs/team-group-create-dialog';
 import { SettingsHeader } from '~/components/general/settings-header';

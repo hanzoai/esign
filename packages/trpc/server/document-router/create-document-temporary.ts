@@ -1,12 +1,12 @@
 import { DocumentDataType, EnvelopeType } from '@prisma/client';
 
-import { getServerLimits } from '@documenso/ee/server-only/limits/server';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { createDocumentData } from '@documenso/lib/server-only/document-data/create-document-data';
-import { createEnvelope } from '@documenso/lib/server-only/envelope/create-envelope';
-import { getPresignPostUrl } from '@documenso/lib/universal/upload/server-actions';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
-import { prisma } from '@documenso/prisma';
+import { getServerLimits } from '@hanzo/sign-ee/server-only/limits/server';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { createDocumentData } from '@hanzo/sign-lib/server-only/document-data/create-document-data';
+import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
+import { getPresignPostUrl } from '@hanzo/sign-lib/universal/upload/server-actions';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

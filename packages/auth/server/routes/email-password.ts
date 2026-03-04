@@ -6,16 +6,16 @@ import { HTTPException } from 'hono/http-exception';
 import { DateTime } from 'luxon';
 import { z } from 'zod';
 
-import { EMAIL_VERIFICATION_STATE } from '@documenso/lib/constants/email';
-import { AppError } from '@documenso/lib/errors/app-error';
-import { jobsClient } from '@documenso/lib/jobs/client';
-import { disableTwoFactorAuthentication } from '@documenso/lib/server-only/2fa/disable-2fa';
-import { enableTwoFactorAuthentication } from '@documenso/lib/server-only/2fa/enable-2fa';
-import { isTwoFactorAuthenticationEnabled } from '@documenso/lib/server-only/2fa/is-2fa-availble';
-import { setupTwoFactorAuthentication } from '@documenso/lib/server-only/2fa/setup-2fa';
-import { validateTwoFactorAuthentication } from '@documenso/lib/server-only/2fa/validate-2fa';
-import { viewBackupCodes } from '@documenso/lib/server-only/2fa/view-backup-codes';
-import { rateLimitResponse } from '@documenso/lib/server-only/rate-limit/rate-limit-middleware';
+import { EMAIL_VERIFICATION_STATE } from '@hanzo/sign-lib/constants/email';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { jobsClient } from '@hanzo/sign-lib/jobs/client';
+import { disableTwoFactorAuthentication } from '@hanzo/sign-lib/server-only/2fa/disable-2fa';
+import { enableTwoFactorAuthentication } from '@hanzo/sign-lib/server-only/2fa/enable-2fa';
+import { isTwoFactorAuthenticationEnabled } from '@hanzo/sign-lib/server-only/2fa/is-2fa-availble';
+import { setupTwoFactorAuthentication } from '@hanzo/sign-lib/server-only/2fa/setup-2fa';
+import { validateTwoFactorAuthentication } from '@hanzo/sign-lib/server-only/2fa/validate-2fa';
+import { viewBackupCodes } from '@hanzo/sign-lib/server-only/2fa/view-backup-codes';
+import { rateLimitResponse } from '@hanzo/sign-lib/server-only/rate-limit/rate-limit-middleware';
 import {
   forgotPasswordRateLimit,
   loginRateLimit,
@@ -23,18 +23,18 @@ import {
   resetPasswordRateLimit,
   signupRateLimit,
   verifyEmailRateLimit,
-} from '@documenso/lib/server-only/rate-limit/rate-limits';
-import { createUser } from '@documenso/lib/server-only/user/create-user';
-import { forgotPassword } from '@documenso/lib/server-only/user/forgot-password';
-import { getMostRecentEmailVerificationToken } from '@documenso/lib/server-only/user/get-most-recent-email-verification-token';
-import { getUserByResetToken } from '@documenso/lib/server-only/user/get-user-by-reset-token';
-import { resetPassword } from '@documenso/lib/server-only/user/reset-password';
-import { deletedServiceAccountEmail } from '@documenso/lib/server-only/user/service-accounts/deleted-account';
-import { legacyServiceAccountEmail } from '@documenso/lib/server-only/user/service-accounts/legacy-service-account';
-import { updatePassword } from '@documenso/lib/server-only/user/update-password';
-import { verifyEmail } from '@documenso/lib/server-only/user/verify-email';
-import { env } from '@documenso/lib/utils/env';
-import { prisma } from '@documenso/prisma';
+} from '@hanzo/sign-lib/server-only/rate-limit/rate-limits';
+import { createUser } from '@hanzo/sign-lib/server-only/user/create-user';
+import { forgotPassword } from '@hanzo/sign-lib/server-only/user/forgot-password';
+import { getMostRecentEmailVerificationToken } from '@hanzo/sign-lib/server-only/user/get-most-recent-email-verification-token';
+import { getUserByResetToken } from '@hanzo/sign-lib/server-only/user/get-user-by-reset-token';
+import { resetPassword } from '@hanzo/sign-lib/server-only/user/reset-password';
+import { deletedServiceAccountEmail } from '@hanzo/sign-lib/server-only/user/service-accounts/deleted-account';
+import { legacyServiceAccountEmail } from '@hanzo/sign-lib/server-only/user/service-accounts/legacy-service-account';
+import { updatePassword } from '@hanzo/sign-lib/server-only/user/update-password';
+import { verifyEmail } from '@hanzo/sign-lib/server-only/user/verify-email';
+import { env } from '@hanzo/sign-lib/utils/env';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { AuthenticationErrorCode } from '../lib/errors/error-codes';
 import { invalidateSessions } from '../lib/session/session';

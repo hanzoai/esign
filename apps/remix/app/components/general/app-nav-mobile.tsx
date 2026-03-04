@@ -5,13 +5,13 @@ import { Trans } from '@lingui/react/macro';
 import { ReadStatus } from '@prisma/client';
 import { Link } from 'react-router';
 
-import LogoImage from '@documenso/assets/logo.png';
-import { authClient } from '@documenso/auth/client';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { isPersonalLayout } from '@documenso/lib/utils/organisations';
-import { trpc } from '@documenso/trpc/react';
-import { Sheet, SheetContent } from '@documenso/ui/primitives/sheet';
-import { ThemeSwitcher } from '@documenso/ui/primitives/theme-switcher';
+import LogoImage from '@hanzo/sign-assets/logo.png';
+import { authClient } from '@hanzo/sign-auth/client';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Sheet, SheetContent } from '@hanzo/sign-ui/primitives/sheet';
+import { ThemeSwitcher } from '@hanzo/sign-ui/primitives/theme-switcher';
 
 import { useOptionalCurrentTeam } from '~/providers/team';
 
@@ -86,7 +86,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
         <Link to="/" onClick={handleMenuItemClick}>
           <img
             src={LogoImage}
-            alt="Documenso Logo"
+            alt="Hanzo Sign Logo"
             className="dark:invert"
             width={170}
             height={25}
@@ -124,7 +124,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
           </div>
 
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Documenso, Inc.
+            © {new Date().getFullYear()} Hanzo Sign, Inc.
             <br />
             <Trans>All rights reserved.</Trans>
           </p>

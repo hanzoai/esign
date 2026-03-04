@@ -1,4 +1,4 @@
-import { deletePasskey } from '@documenso/lib/server-only/auth/delete-passkey';
+import { deletePasskey } from '@hanzo/sign-lib/server-only/auth/delete-passkey';
 
 import { authenticatedProcedure } from '../trpc';
 import { ZDeletePasskeyRequestSchema, ZDeletePasskeyResponseSchema } from './delete-passkey.types';

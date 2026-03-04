@@ -1,4 +1,4 @@
-import { updateRecipient } from '@documenso/lib/server-only/admin/update-recipient';
+import { updateRecipient } from '@hanzo/sign-lib/server-only/admin/update-recipient';
 
 import { adminProcedure } from '../trpc';
 import {

@@ -8,10 +8,10 @@ import { useForm } from 'react-hook-form';
 import { renderSVG } from 'uqr';
 import { z } from 'zod';
 
-import { authClient } from '@documenso/auth/client';
-import { downloadFile } from '@documenso/lib/client-only/download-file';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { Button } from '@documenso/ui/primitives/button';
+import { authClient } from '@hanzo/sign-auth/client';
+import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -21,7 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -29,9 +29,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { PinInput, PinInputGroup, PinInputSlot } from '@documenso/ui/primitives/pin-input';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/sign-ui/primitives/pin-input';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { RecoveryCodeList } from './recovery-code-list';
 
@@ -122,7 +122,7 @@ export const EnableAuthenticatorAppDialog = ({ onSuccess }: EnableAuthenticatorA
       });
 
       downloadFile({
-        filename: 'documenso-2FA-recovery-codes.txt',
+        filename: 'sign-2FA-recovery-codes.txt',
         data: blob,
       });
     }

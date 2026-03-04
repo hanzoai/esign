@@ -10,12 +10,12 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ## Overview
 
-Microsoft Entra ID (formerly Azure Active Directory) is a popular identity provider for enterprise SSO. This guide will walk you through creating an app registration and configuring it for use with your Documenso SSO portal.
+Microsoft Entra ID (formerly Azure Active Directory) is a popular identity provider for enterprise SSO. This guide will walk you through creating an app registration and configuring it for use with your Hanzo Sign SSO portal.
 
 ## Prerequisites
 
 - Access to Microsoft Entra ID (Azure AD) admin center
-- Access to your Documenso organisation as an administrator or manager
+- Access to your Hanzo Sign organisation as an administrator or manager
 
 <Callout type="warn">Each user in your Azure AD will need an email associated with it.</Callout>
 
@@ -46,9 +46,9 @@ Microsoft Entra ID (formerly Azure Active Directory) is a popular identity provi
 
 Fill in the registration form with the following details:
 
-- **Name**: Your preferred name (e.g. `Documenso SSO Portal`)
+- **Name**: Your preferred name (e.g. `Hanzo Sign SSO Portal`)
 - **Supported account types**: Choose based on your needs
-- **Redirect URI (Web)**: Found in the Documenso SSO portal settings page
+- **Redirect URI (Web)**: Found in the Hanzo Sign SSO portal settings page
 
 Click "Register" to create the app registration.
 
@@ -57,7 +57,7 @@ Click "Register" to create the app registration.
 <Step>
 ### Get client ID
 
-After registration, you'll be taken to the app's overview page. The **Application (client) ID** is displayed prominently - this is your Client ID for Documenso.
+After registration, you'll be taken to the app's overview page. The **Application (client) ID** is displayed prominently - this is your Client ID for Hanzo Sign.
 
 </Step>
 
@@ -66,7 +66,7 @@ After registration, you'll be taken to the app's overview page. The **Applicatio
 
 - In the left sidebar, click on "Certificates & secrets"
 - Click "New client secret"
-- Add a description (e.g., "Documenso SSO Secret")
+- Add a description (e.g., "Hanzo Sign SSO Secret")
 - Choose an expiration period (recommended 12-24 months)
 - Click "Add"
 
@@ -108,9 +108,9 @@ Copy the **OpenID Connect metadata document** value.
 </Step>
 </Steps>
 
-## Configure Documenso SSO Portal
+## Configure Hanzo Sign SSO Portal
 
-Now you have all the information needed to configure your Documenso SSO portal:
+Now you have all the information needed to configure your Hanzo Sign SSO portal:
 
 | Field             | Value                                                               |
 | ----------------- | ------------------------------------------------------------------- |

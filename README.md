@@ -1,64 +1,64 @@
-<img src="https://github.com/documenso/documenso/assets/13398220/a643571f-0239-46a6-a73e-6bef38d1228b" alt="Documenso Logo">
+<img src="https://github.com/hanzoai/sign/assets/13398220/a643571f-0239-46a6-a73e-6bef38d1228b" alt="Hanzo Sign Logo">
 
 <p align="center" style="margin-top: 20px">
   <p align="center">
   The Open Source DocuSign Alternative.
   <br>
-    <a href="https://documenso.com"><strong>Learn more »</strong></a>
+    <a href="https://sign.hanzo.ai"><strong>Learn more »</strong></a>
     <br />
     <br />
-    <a href="https://documen.so/discord">Discord</a>
+    <a href="https://sign.hanzo.ai/discord">Discord</a>
     ·
-    <a href="https://documenso.com">Website</a>
+    <a href="https://sign.hanzo.ai">Website</a>
     ·
-    <a href="https://github.com/documenso/documenso/issues">Issues</a>
+    <a href="https://github.com/hanzoai/sign/issues">Issues</a>
     ·
-    <a href="https://documen.so/live">Upcoming Releases</a>
+    <a href="https://sign.hanzo.ai/live">Upcoming Releases</a>
     ·
-    <a href="https://documen.so/roadmap">Roadmap</a>
+    <a href="https://sign.hanzo.ai/roadmap">Roadmap</a>
   </p>
 </p>
 
 <p align="center">
-   <a href="https://documen.so/discord"><img src="https://img.shields.io/badge/Discord-documen.so/discord-%235865F2" alt="Join Documenso on Discord"></a>
-   <a href="https://github.com/documenso/documenso/stargazers"><img src="https://img.shields.io/github/stars/documenso/documenso" alt="Github Stars"></a>
-   <a href="https://github.com/documenso/documenso/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPLv3-purple" alt="License"></a>
-   <a href="https://github.com/documenso/documenso/pulse"><img src="https://img.shields.io/github/commit-activity/m/documenso/documenso" alt="Commits-per-month"></a>
-   <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/documenso/documenso">
+   <a href="https://sign.hanzo.ai/discord"><img src="https://img.shields.io/badge/Discord-sign.hanzo.ai/discord-%235865F2" alt="Join Hanzo Sign on Discord"></a>
+   <a href="https://github.com/hanzoai/sign/stargazers"><img src="https://img.shields.io/github/stars/hanzo-sign/hanzo-sign" alt="Github Stars"></a>
+   <a href="https://github.com/hanzoai/sign/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPLv3-purple" alt="License"></a>
+   <a href="https://github.com/hanzoai/sign/pulse"><img src="https://img.shields.io/github/commit-activity/m/hanzo-sign/hanzo-sign" alt="Commits-per-month"></a>
+   <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/hanzoai/sign">
    <img alt="open in devcontainer" src="https://img.shields.io/static/v1?label=Dev%20Containers&message=Enabled&color=blue&logo=visualstudiocode" />
    </a>
    <a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg" alt="Contributor Covenant"></a>
 </p>
 
 <div align="center">
-  <img src="https://github.com/documenso/documenso/assets/13398220/d96ed533-6f34-4a97-be9b-442bdb189c69" style="width: 80%;" />
+  <img src="https://github.com/hanzoai/sign/assets/13398220/d96ed533-6f34-4a97-be9b-442bdb189c69" style="width: 80%;" />
 </div>
 
-## About Documenso
+## About Hanzo Sign
 
-Signing documents digitally should be fast and easy and should be the best practice for every document signed worldwide. This is technically quite easy today, but it also introduces a new party to every signature: The signing tool providers. While this is not a problem in itself, it should make us think about how we want these providers of trust to work. Documenso aims to be the world's most trusted document-signing tool. This trust is built by empowering you to self-host Documenso and review how it works under the hood.
+Signing documents digitally should be fast and easy and should be the best practice for every document signed worldwide. This is technically quite easy today, but it also introduces a new party to every signature: The signing tool providers. While this is not a problem in itself, it should make us think about how we want these providers of trust to work. Hanzo Sign aims to be the world's most trusted document-signing tool. This trust is built by empowering you to self-host Hanzo Sign and review how it works under the hood.
 
 Join us in creating the next generation of open trust infrastructure.
 
 ## Recognition
 
 <p align="center">
-  <a href="https://www.producthunt.com/posts/documenso?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-documenso" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=395047&theme=light&period=daily" alt="Documenso - The&#0032;open&#0032;source&#0032;DocuSign&#0032;alternative | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-  <a href="https://www.producthunt.com/posts/documenso?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-documenso" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=395047&theme=light" alt="Documenso - The&#0032;Open&#0032;Source&#0032;DocuSign&#0032;Alternative&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+  <a href="https://www.producthunt.com/posts/hanzo-sign?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-hanzo-sign" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=395047&theme=light&period=daily" alt="Hanzo Sign - The&#0032;open&#0032;source&#0032;DocuSign&#0032;alternative | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+  <a href="https://www.producthunt.com/posts/hanzo-sign?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-hanzo-sign" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=395047&theme=light" alt="Hanzo Sign - The&#0032;Open&#0032;Source&#0032;DocuSign&#0032;Alternative&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 </p>
 
 ## Community and Next Steps 🎯
 
 - Check out the first source code release in this repository and test it.
-- Tell us what you think in the [Discussions](https://github.com/documenso/documenso/discussions).
-- Join the [Discord server](https://documen.so/discord) for any questions and getting to know to other community members.
+- Tell us what you think in the [Discussions](https://github.com/hanzoai/sign/discussions).
+- Join the [Discord server](https://sign.hanzo.ai/discord) for any questions and getting to know to other community members.
 - ⭐ the repository to help us raise awareness.
-- Spread the word on Twitter that Documenso is working towards a more open signing tool.
-- Fix or create [issues](https://github.com/documenso/documenso/issues), that are needed for the first production release.
+- Spread the word on Twitter that Hanzo Sign is working towards a more open signing tool.
+- Fix or create [issues](https://github.com/hanzoai/sign/issues), that are needed for the first production release.
 
 ## Contributing
 
-- To contribute, please see our [contribution guide](https://github.com/documenso/documenso/blob/main/CONTRIBUTING.md).
+- To contribute, please see our [contribution guide](https://github.com/hanzoai/sign/blob/main/CONTRIBUTING.md).
 
 ## Contact us
 
@@ -86,7 +86,7 @@ Contact us if you are interested in our Enterprise plan for large organizations 
 - [shadcn/ui](https://ui.shadcn.com/) - Component Library
 - [react-email](https://react.email/) - Email Templates
 - [tRPC](https://trpc.io/) - API
-- [@documenso/pdf-sign](https://www.npmjs.com/package/@documenso/pdf-sign) - PDF Signatures (launching soon)
+- [@hanzo/sign-pdf-sign](https://www.npmjs.com/package/@hanzo/sign-pdf-sign) - PDF Signatures (launching soon)
 - [React-PDF](https://github.com/wojtekmaj/react-pdf) - Viewing PDFs
 - [PDF-Lib](https://github.com/Hopding/pdf-lib) - PDF manipulation
 - [Stripe](https://stripe.com/) - Payments
@@ -97,7 +97,7 @@ Contact us if you are interested in our Enterprise plan for large organizations 
 
 ### Requirements
 
-To run Documenso locally, you will need
+To run Hanzo Sign locally, you will need
 
 - Node.js (v22 or above)
 - Postgres SQL Database
@@ -114,7 +114,7 @@ Want to get up and running quickly? Follow these steps:
 After forking the repository, clone it to your local device by using the following command:
 
 ```sh
-git clone https://github.com/<your-username>/documenso
+git clone https://github.com/<your-username>/hanzo-sign
 ```
 
 2. Set up your `.env` file using the recommendations in the `.env.example` file. Alternatively, just run `cp .env.example .env` to get started with our handpicked defaults.
@@ -146,14 +146,14 @@ npm run d
 
 ### Manual Setup
 
-Follow these steps to setup Documenso on your local machine:
+Follow these steps to setup Hanzo Sign on your local machine:
 
 1. [Fork this repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) to your GitHub account.
 
 After forking the repository, clone it to your local device by using the following command:
 
 ```sh
-git clone https://github.com/<your-username>/documenso
+git clone https://github.com/<your-username>/hanzo-sign
 ```
 
 2. Run `npm i` in the root directory
@@ -179,7 +179,7 @@ git clone https://github.com/<your-username>/documenso
 
 ---
 
-- Optional: Seed the database using `npm run prisma:seed -w @documenso/prisma` to create a test user and document.
+- Optional: Seed the database using `npm run prisma:seed -w @hanzo/sign-prisma` to create a test user and document.
 - Optional: Create your own signing certificate.
   - To generate your own using these steps and a Linux Terminal or Windows Subsystem for Linux (WSL), see **[Create your own signing certificate](./SIGNING.md)**.
 
@@ -187,24 +187,24 @@ git clone https://github.com/<your-username>/documenso
 
 - Click below to launch a ready-to-use Gitpod workspace in your browser.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/documenso/documenso)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/hanzoai/sign)
 
 ### Run in DevContainer
 
-We support DevContainers for VSCode. [Click here to get started.](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/documenso/documenso)
+We support DevContainers for VSCode. [Click here to get started.](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/hanzoai/sign)
 
 ### Video walkthrough
 
-If you're a visual learner and prefer to watch a video walkthrough of setting up Documenso locally, check out this video:
+If you're a visual learner and prefer to watch a video walkthrough of setting up Hanzo Sign locally, check out this video:
 
 [![Watch the video](https://img.youtube.com/vi/Y0ppIQrEnZs/hqdefault.jpg)](https://youtu.be/Y0ppIQrEnZs)
 
 ## Docker
 
-We provide a Docker container for Documenso, which is published on both DockerHub and GitHub Container Registry.
+We provide a Docker container for Hanzo Sign, which is published on both DockerHub and GitHub Container Registry.
 
-- DockerHub: [https://hub.docker.com/r/documenso/documenso](https://hub.docker.com/r/documenso/documenso)
-- GitHub Container Registry: [https://ghcr.io/documenso/documenso](https://ghcr.io/documenso/documenso)
+- DockerHub: [https://hub.docker.com/r/hanzo-sign/hanzo-sign](https://hub.docker.com/r/hanzo-sign/hanzo-sign)
+- GitHub Container Registry: [https://ghcr.io/hanzo-sign/hanzo-sign](https://ghcr.io/hanzo-sign/hanzo-sign)
 
 You can pull the Docker image from either of these registries and run it with your preferred container hosting provider.
 
@@ -221,10 +221,10 @@ We support a variety of deployment methods, and are actively working on adding m
 First, clone the code from Github:
 
 ```
-git clone https://github.com/documenso/documenso.git
+git clone https://github.com/hanzoai/sign.git
 ```
 
-Then, inside the `documenso` folder, copy the example env file:
+Then, inside the `hanzo-sign` folder, copy the example env file:
 
 ```
 cp .env.example .env
@@ -239,7 +239,7 @@ The following environment variables must be set:
 - `NEXT_PRIVATE_SMTP_FROM_NAME`
 - `NEXT_PRIVATE_SMTP_FROM_ADDRESS`
 
-> If you are using a reverse proxy in front of Documenso, don't forget to provide the public URL for the `NEXT_PUBLIC_WEBAPP_URL` variable!
+> If you are using a reverse proxy in front of Hanzo Sign, don't forget to provide the public URL for the `NEXT_PUBLIC_WEBAPP_URL` variable!
 
 Now you can install the dependencies and build it:
 
@@ -266,14 +266,14 @@ You can use a systemd service file to run the app. Here is a simple example of t
 
 ```bash
 [Unit]
-Description=documenso
+Description=hanzo-sign
 After=network.target
 
 [Service]
 Environment=PATH=/path/to/your/node/binaries
 Type=simple
 User=www-data
-WorkingDirectory=/var/www/documenso/apps/remix
+WorkingDirectory=/var/www/hanzo-sign/apps/remix
 ExecStart=/usr/bin/next start -p 3500
 TimeoutSec=15
 Restart=always
@@ -288,15 +288,15 @@ WantedBy=multi-user.target
 
 ### Render
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/documenso/documenso)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/hanzoai/sign)
 
 ### Koyeb
 
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/documenso/documenso&branch=main&name=documenso-app&builder=dockerfile&dockerfile=/docker/Dockerfile)
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/hanzoai/sign&branch=main&name=hanzo-sign-app&builder=dockerfile&dockerfile=/docker/Dockerfile)
 
 ## Elestio
 
-[![Deploy on Elestio](https://elest.io/images/logos/deploy-to-elestio-btn.png)](https://elest.io/open-source/documenso)
+[![Deploy on Elestio](https://elest.io/images/logos/deploy-to-elestio-btn.png)](https://elest.io/open-source/hanzo-sign)
 
 ## Troubleshooting
 
@@ -313,15 +313,15 @@ If you are deploying to a cluster that uses only IPv6, You can use a custom comm
 For local docker run
 
 ```bash
-docker run -it documenso:latest npm run start -- -H ::
+docker run -it hanzo-sign:latest npm run start -- -H ::
 ```
 
 For k8s or docker-compose
 
 ```yaml
 containers:
-  - name: documenso
-    image: documenso:latest
+  - name: hanzo-sign
+    image: hanzo-sign:latest
     imagePullPolicy: IfNotPresent
     command:
       - npm

@@ -1,7 +1,7 @@
 import { PDF, rgb } from '@libpdf/core';
 import type { FieldType, Recipient } from '@prisma/client';
 
-import { type TFieldAndMeta, ZEnvelopeFieldAndMetaSchema } from '@documenso/lib/types/field-meta';
+import { type TFieldAndMeta, ZEnvelopeFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
 
 import { parseFieldMetaFromPlaceholder, parseFieldTypeFromPlaceholder } from './helpers';
 

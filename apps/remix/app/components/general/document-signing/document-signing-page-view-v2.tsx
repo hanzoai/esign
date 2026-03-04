@@ -7,11 +7,11 @@ import { ArrowLeftIcon, BanIcon, DownloadCloudIcon, PaperclipIcon } from 'lucide
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useCurrentEnvelopeRender } from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { PDF_VIEWER_ERROR_MESSAGES } from '@documenso/lib/constants/pdf-viewer-i18n';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
-import { Button } from '@documenso/ui/primitives/button';
-import { Separator } from '@documenso/ui/primitives/separator';
+import { useCurrentEnvelopeRender } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Separator } from '@hanzo/sign-ui/primitives/separator';
 
 import { EnvelopeDownloadDialog } from '~/components/dialogs/envelope-download-dialog';
 import { SignFieldCheckboxDialog } from '~/components/dialogs/sign-field-checkbox-dialog';
@@ -252,7 +252,7 @@ export const DocumentSigningPageViewV2 = () => {
 
               {!hidePoweredBy && (
                 <a
-                  href="https://documenso.com"
+                  href="https://sign.hanzo.ai"
                   target="_blank"
                   className="fixed bottom-0 right-0 z-40 hidden cursor-pointer rounded-tl bg-primary px-2 py-1 text-xs font-medium text-primary-foreground opacity-60 hover:opacity-100 lg:block"
                 >

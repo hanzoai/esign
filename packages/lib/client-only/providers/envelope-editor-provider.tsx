@@ -4,19 +4,19 @@ import { useLingui } from '@lingui/react/macro';
 import { EnvelopeType, Prisma, ReadStatus, SendStatus, SigningStatus } from '@prisma/client';
 import { useSearchParams } from 'react-router';
 
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
 import {
   DEFAULT_EDITOR_CONFIG,
   type EnvelopeEditorConfig,
   type TEditorEnvelope,
-} from '@documenso/lib/types/envelope-editor';
-import { trpc } from '@documenso/trpc/react';
-import type { TSetEnvelopeFieldsResponse } from '@documenso/trpc/server/envelope-router/set-envelope-fields.types';
-import type { TSetEnvelopeRecipientsRequest } from '@documenso/trpc/server/envelope-router/set-envelope-recipients.types';
-import type { TUpdateEnvelopeRequest } from '@documenso/trpc/server/envelope-router/update-envelope.types';
-import type { TRecipientColor } from '@documenso/ui/lib/recipient-colors';
-import { AVAILABLE_RECIPIENT_COLORS } from '@documenso/ui/lib/recipient-colors';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-lib/types/envelope-editor';
+import { trpc } from '@hanzo/sign-trpc/react';
+import type { TSetEnvelopeFieldsResponse } from '@hanzo/sign-trpc/server/envelope-router/set-envelope-fields.types';
+import type { TSetEnvelopeRecipientsRequest } from '@hanzo/sign-trpc/server/envelope-router/set-envelope-recipients.types';
+import type { TUpdateEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/update-envelope.types';
+import type { TRecipientColor } from '@hanzo/sign-ui/lib/recipient-colors';
+import { AVAILABLE_RECIPIENT_COLORS } from '@hanzo/sign-ui/lib/recipient-colors';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import type { TDocumentEmailSettings } from '../../types/document-email';
 import { formatDocumentsPath, formatTemplatesPath } from '../../utils/teams';

@@ -1,32 +1,32 @@
 import type { Envelope } from '@prisma/client';
 import { DocumentDataType, EnvelopeType } from '@prisma/client';
 
-import { getServerLimits } from '@documenso/ee/server-only/limits/server';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { jobs } from '@documenso/lib/jobs/client';
-import { createDocumentData } from '@documenso/lib/server-only/document-data/create-document-data';
-import { getDocumentWithDetailsById } from '@documenso/lib/server-only/document/get-document-with-details-by-id';
-import { sendDocument } from '@documenso/lib/server-only/document/send-document';
-import { createEnvelope } from '@documenso/lib/server-only/envelope/create-envelope';
-import { duplicateEnvelope } from '@documenso/lib/server-only/envelope/duplicate-envelope';
-import { updateEnvelope } from '@documenso/lib/server-only/envelope/update-envelope';
+import { getServerLimits } from '@hanzo/sign-ee/server-only/limits/server';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { jobs } from '@hanzo/sign-lib/jobs/client';
+import { createDocumentData } from '@hanzo/sign-lib/server-only/document-data/create-document-data';
+import { getDocumentWithDetailsById } from '@hanzo/sign-lib/server-only/document/get-document-with-details-by-id';
+import { sendDocument } from '@hanzo/sign-lib/server-only/document/send-document';
+import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
+import { duplicateEnvelope } from '@hanzo/sign-lib/server-only/envelope/duplicate-envelope';
+import { updateEnvelope } from '@hanzo/sign-lib/server-only/envelope/update-envelope';
 import {
   ZCreateDocumentFromDirectTemplateResponseSchema,
   createDocumentFromDirectTemplate,
-} from '@documenso/lib/server-only/template/create-document-from-direct-template';
-import { createDocumentFromTemplate } from '@documenso/lib/server-only/template/create-document-from-template';
-import { createTemplateDirectLink } from '@documenso/lib/server-only/template/create-template-direct-link';
-import { deleteTemplate } from '@documenso/lib/server-only/template/delete-template';
-import { deleteTemplateDirectLink } from '@documenso/lib/server-only/template/delete-template-direct-link';
-import { findTemplates } from '@documenso/lib/server-only/template/find-templates';
-import { getTemplateById } from '@documenso/lib/server-only/template/get-template-by-id';
-import { toggleTemplateDirectLink } from '@documenso/lib/server-only/template/toggle-template-direct-link';
-import { putNormalizedPdfFileServerSide } from '@documenso/lib/universal/upload/put-file.server';
-import { getPresignPostUrl } from '@documenso/lib/universal/upload/server-actions';
-import { mapSecondaryIdToTemplateId } from '@documenso/lib/utils/envelope';
-import { mapFieldToLegacyField } from '@documenso/lib/utils/fields';
-import { mapRecipientToLegacyRecipient } from '@documenso/lib/utils/recipients';
-import { mapEnvelopeToTemplateLite } from '@documenso/lib/utils/templates';
+} from '@hanzo/sign-lib/server-only/template/create-document-from-direct-template';
+import { createDocumentFromTemplate } from '@hanzo/sign-lib/server-only/template/create-document-from-template';
+import { createTemplateDirectLink } from '@hanzo/sign-lib/server-only/template/create-template-direct-link';
+import { deleteTemplate } from '@hanzo/sign-lib/server-only/template/delete-template';
+import { deleteTemplateDirectLink } from '@hanzo/sign-lib/server-only/template/delete-template-direct-link';
+import { findTemplates } from '@hanzo/sign-lib/server-only/template/find-templates';
+import { getTemplateById } from '@hanzo/sign-lib/server-only/template/get-template-by-id';
+import { toggleTemplateDirectLink } from '@hanzo/sign-lib/server-only/template/toggle-template-direct-link';
+import { putNormalizedPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
+import { getPresignPostUrl } from '@hanzo/sign-lib/universal/upload/server-actions';
+import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
+import { mapFieldToLegacyField } from '@hanzo/sign-lib/utils/fields';
+import { mapRecipientToLegacyRecipient } from '@hanzo/sign-lib/utils/recipients';
+import { mapEnvelopeToTemplateLite } from '@hanzo/sign-lib/utils/templates';
 
 import { ZGenericSuccessResponse, ZSuccessResponseSchema } from '../schema';
 import { authenticatedProcedure, maybeAuthenticatedProcedure, router } from '../trpc';

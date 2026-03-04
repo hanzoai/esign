@@ -1,9 +1,9 @@
-import { createEmailDomain } from '@documenso/ee/server-only/lib/create-email-domain';
-import { IS_BILLING_ENABLED } from '@documenso/lib/constants/app';
-import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/organisations';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { buildOrganisationWhereQuery } from '@documenso/lib/utils/organisations';
-import { prisma } from '@documenso/prisma';
+import { createEmailDomain } from '@hanzo/sign-ee/server-only/lib/create-email-domain';
+import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
+import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

@@ -1,10 +1,10 @@
-# Documenso Architecture
+# Hanzo Sign Architecture
 
-This document provides a high-level overview of the Documenso codebase to help humans and agents understand how the application is structured.
+This document provides a high-level overview of the Hanzo Sign codebase to help humans and agents understand how the application is structured.
 
 ## Overview
 
-Documenso is an open-source document signing platform built as a **monorepo** using npm workspaces and Turborepo. The application enables users to create, send, and sign documents electronically.
+Hanzo Sign is an open-source document signing platform built as a **monorepo** using npm workspaces and Turborepo. The application enables users to create, send, and sign documents electronically.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -41,34 +41,34 @@ Documenso is an open-source document signing platform built as a **monorepo** us
 
 | Package                    | Description                                              | Port |
 | -------------------------- | -------------------------------------------------------- | ---- |
-| `@documenso/remix`         | Main application - React Router (Remix) with Hono server | 3000 |
-| `@documenso/documentation` | Documentation site (Next.js + Nextra)                    | 3002 |
-| `@documenso/openpage-api`  | Public analytics API                                     | 3003 |
+| `@hanzo/sign-remix`         | Main application - React Router (Remix) with Hono server | 3000 |
+| `@hanzo/sign-documentation` | Documentation site (Next.js + Nextra)                    | 3002 |
+| `@hanzo/sign-openpage-api`  | Public analytics API                                     | 3003 |
 
 ### Core Packages (`packages/`)
 
 | Package              | Description                                               |
 | -------------------- | --------------------------------------------------------- |
-| `@documenso/lib`     | Core business logic (server-only, client-only, universal) |
-| `@documenso/trpc`    | tRPC API layer with OpenAPI support (API V2)              |
-| `@documenso/api`     | REST API layer using ts-rest (API V1)                     |
-| `@documenso/prisma`  | Database layer (Prisma ORM + Kysely)                      |
-| `@documenso/ui`      | UI component library (Shadcn + Radix + Tailwind)          |
-| `@documenso/email`   | Email templates and mailer (React Email)                  |
-| `@documenso/auth`    | Authentication (OAuth via Arctic, WebAuthn/Passkeys)      |
-| `@documenso/signing` | PDF signing (Local P12, Google Cloud KMS)                 |
-| `@documenso/ee`      | Enterprise Edition features                               |
-| `@documenso/assets`  | Static assets                                             |
+| `@hanzo/sign-lib`     | Core business logic (server-only, client-only, universal) |
+| `@hanzo/sign-trpc`    | tRPC API layer with OpenAPI support (API V2)              |
+| `@hanzo/sign-api`     | REST API layer using ts-rest (API V1)                     |
+| `@hanzo/sign-prisma`  | Database layer (Prisma ORM + Kysely)                      |
+| `@hanzo/sign-ui`      | UI component library (Shadcn + Radix + Tailwind)          |
+| `@hanzo/sign-email`   | Email templates and mailer (React Email)                  |
+| `@hanzo/sign-auth`    | Authentication (OAuth via Arctic, WebAuthn/Passkeys)      |
+| `@hanzo/sign-signing` | PDF signing (Local P12, Google Cloud KMS)                 |
+| `@hanzo/sign-ee`      | Enterprise Edition features                               |
+| `@hanzo/sign-assets`  | Static assets                                             |
 
 ### Supporting Packages
 
 | Package                      | Description               |
 | ---------------------------- | ------------------------- |
-| `@documenso/app-tests`       | E2E tests (Playwright)    |
-| `@documenso/eslint-config`   | Shared ESLint config      |
-| `@documenso/prettier-config` | Shared Prettier config    |
-| `@documenso/tailwind-config` | Shared Tailwind config    |
-| `@documenso/tsconfig`        | Shared TypeScript configs |
+| `@hanzo/sign-app-tests`       | E2E tests (Playwright)    |
+| `@hanzo/sign-eslint-config`   | Shared ESLint config      |
+| `@hanzo/sign-prettier-config` | Shared Prettier config    |
+| `@hanzo/sign-tailwind-config` | Shared Tailwind config    |
+| `@hanzo/sign-tsconfig`        | Shared TypeScript configs |
 
 ## Tech Stack
 
@@ -294,7 +294,7 @@ Hono Server (apps/remix/server/)
 ## Key Directories
 
 ```
-documenso/
+hanzo-sign/
 ├── apps/
 │   └── remix/
 │       ├── app/

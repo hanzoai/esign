@@ -2,14 +2,14 @@ import { createElement } from 'react';
 
 import { msg } from '@lingui/core/macro';
 
-import { mailer } from '@documenso/email/mailer';
-import { ConfirmEmailTemplate } from '@documenso/email/templates/confirm-email';
-import { prisma } from '@documenso/prisma';
+import { mailer } from '@hanzo/sign-email/mailer';
+import { ConfirmEmailTemplate } from '@hanzo/sign-email/templates/confirm-email';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';
 import {
-  DOCUMENSO_INTERNAL_EMAIL,
+  SIGN_INTERNAL_EMAIL,
   USER_SIGNUP_VERIFICATION_TOKEN_IDENTIFIER,
 } from '../../constants/email';
 import { renderEmailWithI18N } from '../../utils/render-email-with-i18n';
@@ -62,7 +62,7 @@ export const sendConfirmationEmail = async ({ userId }: SendConfirmationEmailPro
       address: user.email,
       name: user.name || '',
     },
-    from: DOCUMENSO_INTERNAL_EMAIL,
+    from: SIGN_INTERNAL_EMAIL,
     subject: i18n._(msg`Please confirm your email`),
     html,
     text,

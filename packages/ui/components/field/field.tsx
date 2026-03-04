@@ -3,14 +3,14 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { type Field, FieldType } from '@prisma/client';
 import { createPortal } from 'react-dom';
 
-import { useElementBounds } from '@documenso/lib/client-only/hooks/use-element-bounds';
-import { useFieldPageCoords } from '@documenso/lib/client-only/hooks/use-field-page-coords';
-import { useIsPageInDom } from '@documenso/lib/client-only/hooks/use-is-page-in-dom';
+import { useElementBounds } from '@hanzo/sign-lib/client-only/hooks/use-element-bounds';
+import { useFieldPageCoords } from '@hanzo/sign-lib/client-only/hooks/use-field-page-coords';
+import { useIsPageInDom } from '@hanzo/sign-lib/client-only/hooks/use-is-page-in-dom';
 import {
   PDF_VIEWER_CONTENT_SELECTOR,
   PDF_VIEWER_PAGE_SELECTOR,
-} from '@documenso/lib/constants/pdf-viewer';
-import { isFieldUnsignedAndRequired } from '@documenso/lib/utils/advanced-fields-helpers';
+} from '@hanzo/sign-lib/constants/pdf-viewer';
+import { isFieldUnsignedAndRequired } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
 
 import type { RecipientColorStyles } from '../../lib/recipient-colors';
 import { cn } from '../../lib/utils';

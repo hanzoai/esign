@@ -9,8 +9,8 @@ import {
   type TEmailFieldMeta as EmailFieldMeta,
   FIELD_DEFAULT_GENERIC_ALIGN,
   ZEmailFieldMeta,
-} from '@documenso/lib/types/field-meta';
-import { Form } from '@documenso/ui/primitives/form/form';
+} from '@hanzo/sign-lib/types/field-meta';
+import { Form } from '@hanzo/sign-ui/primitives/form/form';
 
 import {
   EditorGenericFontSizeField,

@@ -3,16 +3,16 @@ import type { Envelope, EnvelopeItem, Recipient } from '@prisma/client';
 import {
   convertPlaceholdersToFieldInputs,
   extractPdfPlaceholders,
-} from '@documenso/lib/server-only/pdf/auto-place-fields';
-import { findRecipientByPlaceholder } from '@documenso/lib/server-only/pdf/helpers';
-import { insertFormValuesInPdf } from '@documenso/lib/server-only/pdf/insert-form-values-in-pdf';
-import { normalizePdf } from '@documenso/lib/server-only/pdf/normalize-pdf';
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@documenso/lib/types/document-audit-logs';
-import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
-import { prefixedId } from '@documenso/lib/universal/id';
-import { putPdfFileServerSide } from '@documenso/lib/universal/upload/put-file.server';
-import { createDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
-import { prisma } from '@documenso/prisma';
+} from '@hanzo/sign-lib/server-only/pdf/auto-place-fields';
+import { findRecipientByPlaceholder } from '@hanzo/sign-lib/server-only/pdf/helpers';
+import { insertFormValuesInPdf } from '@hanzo/sign-lib/server-only/pdf/insert-form-values-in-pdf';
+import { normalizePdf } from '@hanzo/sign-lib/server-only/pdf/normalize-pdf';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
+import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import { prefixedId } from '@hanzo/sign-lib/universal/id';
+import { putPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
+import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
+import { prisma } from '@hanzo/sign-prisma';
 
 type UnsafeCreateEnvelopeItemsOptions = {
   files: {

@@ -1,9 +1,9 @@
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/teams';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { getMemberRoles } from '@documenso/lib/server-only/team/get-member-roles';
-import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@documenso/lib/utils/teams';
-import { prisma } from '@documenso/prisma';
-import { OrganisationGroupType } from '@documenso/prisma/generated/types';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { getMemberRoles } from '@hanzo/sign-lib/server-only/team/get-member-roles';
+import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
+import { prisma } from '@hanzo/sign-prisma';
+import { OrganisationGroupType } from '@hanzo/sign-prisma/generated/types';
 
 import { authenticatedProcedure } from '../trpc';
 import {

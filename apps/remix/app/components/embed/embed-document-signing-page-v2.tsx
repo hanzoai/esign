@@ -3,8 +3,8 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { useLingui } from '@lingui/react';
 import { EnvelopeType } from '@prisma/client';
 
-import { ZSignDocumentEmbedDataSchema } from '@documenso/lib/types/embed-document-sign-schema';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
+import { ZSignDocumentEmbedDataSchema } from '@hanzo/sign-lib/types/embed-document-sign-schema';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
 
 import { injectCss } from '~/utils/css-vars';
 

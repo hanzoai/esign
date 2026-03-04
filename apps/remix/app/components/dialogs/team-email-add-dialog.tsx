@@ -8,10 +8,10 @@ import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
 import type { z } from 'zod';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { trpc } from '@documenso/trpc/react';
-import { ZCreateTeamEmailVerificationMutationSchema } from '@documenso/trpc/server/team-router/schema';
-import { Button } from '@documenso/ui/primitives/button';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { ZCreateTeamEmailVerificationMutationSchema } from '@hanzo/sign-trpc/server/team-router/schema';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -20,7 +20,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -28,9 +28,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type TeamEmailAddDialogProps = {
   teamId: number;

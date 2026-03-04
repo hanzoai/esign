@@ -1,8 +1,8 @@
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
-import { SUPPORT_EMAIL } from '@documenso/lib/constants/app';
-import { Button } from '@documenso/ui/primitives/button';
+import { SUPPORT_EMAIL } from '@hanzo/sign-lib/constants/app';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 export default function SignatureDisclosure() {
   return (
@@ -17,7 +17,7 @@ export default function SignatureDisclosure() {
         </h2>
         <p>
           <Trans>
-            Thank you for using Documenso to perform your electronic document signing. The purpose
+            Thank you for using Hanzo Sign to perform your electronic document signing. The purpose
             of this disclosure is to inform you about the process, legality, and your rights
             regarding the use of electronic signatures on our platform. By opting to use an
             electronic signature, you are agreeing to the terms and conditions outlined below.
@@ -135,7 +135,7 @@ export default function SignatureDisclosure() {
         </h2>
         <p>
           <Trans>
-            By proceeding to use the electronic signature service provided by Documenso, you affirm
+            By proceeding to use the electronic signature service provided by Hanzo Sign, you affirm
             that you have read and understood this disclosure. You agree to all terms and conditions
             related to the use of electronic signatures and electronic transactions as outlined
             herein.

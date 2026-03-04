@@ -7,13 +7,13 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import type { z } from 'zod';
 
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { trpc } from '@documenso/trpc/react';
-import { ZUpdateOrganisationRequestSchema } from '@documenso/trpc/server/organisation-router/update-organisation.types';
-import { Button } from '@documenso/ui/primitives/button';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { ZUpdateOrganisationRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation.types';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -21,9 +21,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 const ZOrganisationUpdateFormSchema = ZUpdateOrganisationRequestSchema.shape.data.pick({
   name: true,

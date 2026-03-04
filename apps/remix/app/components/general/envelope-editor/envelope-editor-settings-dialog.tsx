@@ -16,60 +16,60 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { useCurrentEnvelopeEditor } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@documenso/lib/constants/date-formats';
+import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
 import {
   DOCUMENT_DISTRIBUTION_METHODS,
   DOCUMENT_SIGNATURE_TYPES,
-} from '@documenso/lib/constants/document';
-import { ZEnvelopeExpirationPeriod } from '@documenso/lib/constants/envelope-expiration';
+} from '@hanzo/sign-lib/constants/document';
+import { ZEnvelopeExpirationPeriod } from '@hanzo/sign-lib/constants/envelope-expiration';
 import {
   SUPPORTED_LANGUAGES,
   SUPPORTED_LANGUAGE_CODES,
   isValidLanguageCode,
-} from '@documenso/lib/constants/i18n';
-import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@documenso/lib/constants/time-zones';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
-import { AppError } from '@documenso/lib/errors/app-error';
+} from '@hanzo/sign-lib/constants/i18n';
+import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
 import {
   ZDocumentAccessAuthTypesSchema,
   ZDocumentActionAuthTypesSchema,
-} from '@documenso/lib/types/document-auth';
-import { ZDocumentEmailSettingsSchema } from '@documenso/lib/types/document-email';
+} from '@hanzo/sign-lib/types/document-auth';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
 import {
   type TDocumentMetaDateFormat,
   ZDocumentMetaDateFormatSchema,
   ZDocumentMetaTimezoneSchema,
-} from '@documenso/lib/types/document-meta';
-import { extractDocumentAuthMethods } from '@documenso/lib/utils/document-auth';
-import { isValidRedirectUrl } from '@documenso/lib/utils/is-valid-redirect-url';
+} from '@hanzo/sign-lib/types/document-meta';
+import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
+import { isValidRedirectUrl } from '@hanzo/sign-lib/utils/is-valid-redirect-url';
 import {
   DocumentSignatureType,
   canAccessTeamDocument,
   extractTeamSignatureSettings,
-} from '@documenso/lib/utils/teams';
-import { trpc } from '@documenso/trpc/react';
-import { DocumentEmailCheckboxes } from '@documenso/ui/components/document/document-email-checkboxes';
+} from '@hanzo/sign-lib/utils/teams';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { DocumentEmailCheckboxes } from '@hanzo/sign-ui/components/document/document-email-checkboxes';
 import {
   DocumentGlobalAuthAccessSelect,
   DocumentGlobalAuthAccessTooltip,
-} from '@documenso/ui/components/document/document-global-auth-access-select';
+} from '@hanzo/sign-ui/components/document/document-global-auth-access-select';
 import {
   DocumentGlobalAuthActionSelect,
   DocumentGlobalAuthActionTooltip,
-} from '@documenso/ui/components/document/document-global-auth-action-select';
-import { DocumentSendEmailMessageHelper } from '@documenso/ui/components/document/document-send-email-message-helper';
-import { DocumentSignatureSettingsTooltip } from '@documenso/ui/components/document/document-signature-settings-tooltip';
+} from '@hanzo/sign-ui/components/document/document-global-auth-action-select';
+import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
+import { DocumentSignatureSettingsTooltip } from '@hanzo/sign-ui/components/document/document-signature-settings-tooltip';
 import {
   DocumentVisibilitySelect,
   DocumentVisibilityTooltip,
-} from '@documenso/ui/components/document/document-visibility-select';
-import { ExpirationPeriodPicker } from '@documenso/ui/components/document/expiration-period-picker';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
-import { CardDescription, CardHeader, CardTitle } from '@documenso/ui/primitives/card';
-import { Combobox } from '@documenso/ui/primitives/combobox';
+} from '@hanzo/sign-ui/components/document/document-visibility-select';
+import { ExpirationPeriodPicker } from '@hanzo/sign-ui/components/document/expiration-period-picker';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { CardDescription, CardHeader, CardTitle } from '@hanzo/sign-ui/primitives/card';
+import { Combobox } from '@hanzo/sign-ui/primitives/combobox';
 import {
   Dialog,
   DialogClose,
@@ -77,7 +77,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -85,19 +85,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { MultiSelectCombobox } from '@documenso/ui/primitives/multi-select-combobox';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { Textarea } from '@documenso/ui/primitives/textarea';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitives/tooltip';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/select';
+import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 
@@ -753,7 +753,7 @@ export const EnvelopeEditorSettingsDialog = ({
                                           </SelectItem>
                                         ))}
 
-                                        <SelectItem value={'-1'}>Documenso</SelectItem>
+                                        <SelectItem value={'-1'}>Hanzo Sign</SelectItem>
                                       </SelectContent>
                                     </Select>
                                   </FormControl>

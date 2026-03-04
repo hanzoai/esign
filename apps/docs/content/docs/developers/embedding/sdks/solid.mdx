@@ -1,6 +1,6 @@
 ---
 title: Solid
-description: Embed Documenso signing in your Solid application using the official SDK.
+description: Embed Hanzo Sign signing in your Solid application using the official SDK.
 ---
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
@@ -8,9 +8,9 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ## Installation
 
 <Tabs items={['npm', 'yarn', 'pnpm']}>
-  <Tab value="npm">``` npm install @documenso/embed-solid ```</Tab>
-  <Tab value="yarn">``` yarn add @documenso/embed-solid ```</Tab>
-  <Tab value="pnpm">``` pnpm add @documenso/embed-solid ```</Tab>
+  <Tab value="npm">``` npm install @hanzo/sign-embed-solid ```</Tab>
+  <Tab value="yarn">``` yarn add @hanzo/sign-embed-solid ```</Tab>
+  <Tab value="pnpm">``` pnpm add @hanzo/sign-embed-solid ```</Tab>
 </Tabs>
 
 ---
@@ -18,7 +18,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ## Direct Template
 
 ```tsx
-import { EmbedDirectTemplate } from '@documenso/embed-solid';
+import { EmbedDirectTemplate } from '@hanzo/sign-embed-solid';
 
 const SigningPage = () => {
   return (
@@ -43,7 +43,7 @@ const SigningPage = () => {
 ## Signing Token
 
 ```tsx
-import { EmbedSignDocument } from '@documenso/embed-solid';
+import { EmbedSignDocument } from '@hanzo/sign-embed-solid';
 
 const SigningPage = (props: { token: string }) => {
   return (
@@ -62,14 +62,14 @@ const SigningPage = (props: { token: string }) => {
 ## Styling (Platform Plan)
 
 ```tsx
-import { EmbedDirectTemplate } from '@documenso/embed-solid';
+import { EmbedDirectTemplate } from '@hanzo/sign-embed-solid';
 
 const StyledEmbed = () => {
   return (
     <EmbedDirectTemplate
       token="your-token"
       css={`
-        .documenso-embed {
+        .hanzo-sign-embed {
           border-radius: 8px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }

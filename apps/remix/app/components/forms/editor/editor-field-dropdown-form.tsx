@@ -11,7 +11,7 @@ import { z } from 'zod';
 import {
   DEFAULT_FIELD_FONT_SIZE,
   type TDropdownFieldMeta as DropdownFieldMeta,
-} from '@documenso/lib/types/field-meta';
+} from '@hanzo/sign-lib/types/field-meta';
 import {
   Form,
   FormControl,
@@ -19,16 +19,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { Separator } from '@documenso/ui/primitives/separator';
+} from '@hanzo/sign-ui/primitives/select';
+import { Separator } from '@hanzo/sign-ui/primitives/separator';
 
 import {
   EditorGenericFontSizeField,

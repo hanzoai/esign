@@ -1,11 +1,11 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { getEnvelopeWhereInput } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@documenso/lib/types/document-audit-logs';
-import { createDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
-import { canRecipientFieldsBeModified } from '@documenso/lib/utils/recipients';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { getEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
+import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
+import { canRecipientFieldsBeModified } from '@hanzo/sign-lib/utils/recipients';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { ZGenericSuccessResponse } from '../../schema';
 import { authenticatedProcedure } from '../../trpc';

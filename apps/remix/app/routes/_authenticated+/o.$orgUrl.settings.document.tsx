@@ -2,13 +2,13 @@ import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { useLoaderData } from 'react-router';
 
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { IS_AI_FEATURES_CONFIGURED } from '@documenso/lib/constants/app';
-import { DocumentSignatureType } from '@documenso/lib/constants/document';
-import { isPersonalLayout } from '@documenso/lib/utils/organisations';
-import { trpc } from '@documenso/trpc/react';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { IS_AI_FEATURES_CONFIGURED } from '@hanzo/sign-lib/constants/app';
+import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
+import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import {
   DocumentPreferencesForm,

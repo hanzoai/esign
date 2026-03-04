@@ -9,22 +9,22 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router';
 import { Theme, useTheme } from 'remix-themes';
 
-import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { SUPPORTED_LANGUAGES } from '@documenso/lib/constants/i18n';
+import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { SUPPORTED_LANGUAGES } from '@hanzo/sign-lib/constants/i18n';
 import {
   DOCUMENTS_PAGE_SHORTCUT,
   SETTINGS_PAGE_SHORTCUT,
   TEMPLATES_PAGE_SHORTCUT,
-} from '@documenso/lib/constants/keyboard-shortcuts';
+} from '@hanzo/sign-lib/constants/keyboard-shortcuts';
 import {
   DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
   SKIP_QUERY_BATCH_META,
-} from '@documenso/lib/constants/trpc';
-import { dynamicActivate } from '@documenso/lib/utils/i18n';
-import { isPersonalLayout } from '@documenso/lib/utils/organisations';
-import { trpc as trpcReact } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
+} from '@hanzo/sign-lib/constants/trpc';
+import { dynamicActivate } from '@hanzo/sign-lib/utils/i18n';
+import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
+import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
 import {
   CommandDialog,
   CommandEmpty,
@@ -33,8 +33,8 @@ import {
   CommandItem,
   CommandList,
   CommandShortcut,
-} from '@documenso/ui/primitives/command';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/command';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useOptionalCurrentTeam } from '~/providers/team';
 

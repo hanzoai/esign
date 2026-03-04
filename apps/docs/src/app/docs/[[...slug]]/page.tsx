@@ -7,8 +7,8 @@ import { getMDXComponents } from '@/mdx-components';
 import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/docs/page';
 
 const gitConfig = {
-  user: 'documenso',
-  repo: 'documenso',
+  user: 'hanzo-sign',
+  repo: 'hanzo-sign',
   branch: 'main',
   contentPath: 'apps/docs/content/docs',
 };

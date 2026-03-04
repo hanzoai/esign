@@ -4,18 +4,18 @@ import { DocumentSigningOrder, SigningStatus } from '@prisma/client';
 import { ChevronLeft, LucideEdit } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 
-import { EnvelopeRenderProvider } from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { PDF_VIEWER_ERROR_MESSAGES } from '@documenso/lib/constants/pdf-viewer-i18n';
-import { mapSecondaryIdToTemplateId } from '@documenso/lib/utils/envelope';
-import { getDocumentDataUrlForPdfViewer } from '@documenso/lib/utils/envelope-download';
-import { formatDocumentsPath, formatTemplatesPath } from '@documenso/lib/utils/teams';
-import { trpc } from '@documenso/trpc/react';
-import { DocumentReadOnlyFields } from '@documenso/ui/components/document/document-read-only-fields';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
-import { Card, CardContent } from '@documenso/ui/primitives/card';
-import { Spinner } from '@documenso/ui/primitives/spinner';
+import { EnvelopeRenderProvider } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
+import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
+import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { DocumentReadOnlyFields } from '@hanzo/sign-ui/components/document/document-read-only-fields';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
 
 import { TemplateBulkSendDialog } from '~/components/dialogs/template-bulk-send-dialog';
 import { TemplateDirectLinkDialog } from '~/components/dialogs/template-direct-link-dialog';
@@ -114,7 +114,7 @@ export default function TemplatePage({ params }: Route.ComponentProps) {
 
   return (
     <div className="mx-auto -mt-4 w-full max-w-screen-xl px-4 md:px-8">
-      <Link to={templateRootPath} className="flex items-center text-documenso-700 hover:opacity-80">
+      <Link to={templateRootPath} className="flex items-center text-sign-700 hover:opacity-80">
         <ChevronLeft className="mr-2 inline-block h-5 w-5" />
         <Trans>Templates</Trans>
       </Link>

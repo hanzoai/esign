@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { Spinner } from '@documenso/ui/primitives/spinner';
+import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
 
 export const PdfViewerLoadingState = () => {
   return (

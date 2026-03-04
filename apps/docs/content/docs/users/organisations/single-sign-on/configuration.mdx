@@ -12,7 +12,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Supported Providers
 
-Documenso supports any identity provider that implements the OpenID Connect (OIDC) protocol. Common providers include:
+Hanzo Sign supports any identity provider that implements the OpenID Connect (OIDC) protocol. Common providers include:
 
 - Microsoft Entra ID (formerly Azure AD)
 - Google Workspace
@@ -49,7 +49,7 @@ At the top of the SSO settings page, you'll find the **Redirect URI** and **Requ
 
 In your identity provider's admin console, create a new OIDC application with:
 
-- **Redirect URI**: The value from the Documenso SSO settings page
+- **Redirect URI**: The value from the Hanzo Sign SSO settings page
 - **Scopes**: `openid`, `email`, `profile`
 
 After creating the application, note down:
@@ -63,7 +63,7 @@ After creating the application, note down:
 <Step>
 ### Enter SSO configuration
 
-Back in Documenso, enter the following:
+Back in Hanzo Sign, enter the following:
 
 - **Issuer URL**: Your provider's OpenID Connect discovery endpoint
 - **Client ID**: The application client ID from your provider
@@ -143,7 +143,7 @@ When a user signs in through your SSO portal for the first time:
 <Step>
 ### Verify identity
 
-Documenso verifies their identity with your provider.
+Hanzo Sign verifies their identity with your provider.
 
 </Step>
 <Step>
@@ -169,7 +169,7 @@ They can immediately access organisation documents.
 Users provisioned through SSO:
 
 - Cannot change their email address
-- Cannot set a Documenso password (they must use SSO)
+- Cannot set a Hanzo Sign password (they must use SSO)
 - Are removed from SSO access if removed from your identity provider
 
 ## Signing In with SSO
@@ -177,7 +177,7 @@ Users provisioned through SSO:
 Once SSO is enabled, your organisation's SSO portal URL is displayed at the top of the SSO settings page. Share this URL with your members so they can sign in through your identity provider.
 
 <Callout type="info">
-  SSO-only enforcement is not currently available. Users who have an existing Documenso account with a password can still sign in with their original method in addition to SSO.
+  SSO-only enforcement is not currently available. Users who have an existing Hanzo Sign account with a password can still sign in with their original method in addition to SSO.
 </Callout>
 
 ## Troubleshooting
@@ -201,7 +201,7 @@ Once SSO is enabled, your organisation's SSO portal URL is displayed at the top 
 </Accordion>
   {/* prettier-ignore */}
   <Accordion title="Redirect URI mismatch">
-  - Copy the redirect URI exactly from Documenso's SSO settings
+  - Copy the redirect URI exactly from Hanzo Sign's SSO settings
   
   - Check for trailing slashes. They must match exactly. 
   
@@ -217,7 +217,7 @@ Once SSO is enabled, your organisation's SSO portal URL is displayed at the top 
 </Accordion>
   {/* prettier-ignore */}
   <Accordion title="User already exists">
-    If a user already has a Documenso account with the same email, their existing account will be linked to your team and they can sign in through your SSO portal going forward.
+    If a user already has a Hanzo Sign account with the same email, their existing account will be linked to your team and they can sign in through your SSO portal going forward.
   </Accordion>
 </Accordions>
 
@@ -249,7 +249,7 @@ Verify the user is provisioned with the correct organisation role.
 
 ### Custom Subdomain
 
-To reduce friction for your users, create a custom subdomain that redirects to your SSO portal link. For example, `documenso.your-organisation.com` can redirect to the portal URL shown in your SSO settings.
+To reduce friction for your users, create a custom subdomain that redirects to your SSO portal link. For example, `hanzo-sign.your-organisation.com` can redirect to the portal URL shown in your SSO settings.
 
 ---
 

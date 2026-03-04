@@ -1,6 +1,6 @@
 ---
 title: Upgrades
-description: Upgrade your self-hosted Documenso installation to get the latest features, security patches, and bug fixes.
+description: Upgrade your self-hosted Hanzo Sign installation to get the latest features, security patches, and bug fixes.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -10,7 +10,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Version Policy
 
-Documenso follows [Semantic Versioning](https://semver.org/):
+Hanzo Sign follows [Semantic Versioning](https://semver.org/):
 
 | Version Type | Format  | Description                                |
 | ------------ | ------- | ------------------------------------------ |
@@ -19,7 +19,7 @@ Documenso follows [Semantic Versioning](https://semver.org/):
 | Patch        | `x.y.z` | Bug fixes, security patches                |
 
 <Callout type="info">
-  Review the [release notes](https://github.com/documenso/documenso/releases) before upgrading to
+  Review the [release notes](https://github.com/hanzoai/sign/releases) before upgrading to
   understand what changes are included.
 </Callout>
 
@@ -37,13 +37,13 @@ For production deployments, pin to a specific version tag to avoid unexpected up
 
 ### View Current Version
 
-Check your running Documenso version:
+Check your running Hanzo Sign version:
 
 <Tabs items={['Docker', 'Docker Compose', 'Kubernetes']}>
 <Tab value="Docker">
 
 ```bash
-docker inspect documenso --format='{{.Config.Image}}'
+docker inspect hanzo-sign --format='{{.Config.Image}}'
 ```
 
 </Tab>
@@ -57,7 +57,7 @@ docker compose images
 <Tab value="Kubernetes">
 
 ```bash
-kubectl get deployment documenso -n documenso -o jsonpath='{.spec.template.spec.containers[0].image}'
+kubectl get deployment hanzo-sign -n hanzo-sign -o jsonpath='{.spec.template.spec.containers[0].image}'
 ```
 
 </Tab>
@@ -68,10 +68,10 @@ kubectl get deployment documenso -n documenso -o jsonpath='{.spec.template.spec.
 View available releases on GitHub:
 
 ```bash
-curl -s https://api.github.com/repos/documenso/documenso/releases/latest | grep tag_name
+curl -s https://api.github.com/repos/hanzo-sign/hanzo-sign/releases/latest | grep tag_name
 ```
 
-Or visit the [releases page](https://github.com/documenso/documenso/releases).
+Or visit the [releases page](https://github.com/hanzoai/sign/releases).
 
 ### Check Available Docker Tags
 
@@ -81,14 +81,14 @@ List available image tags:
 <Tab value="DockerHub">
 
 ```bash
-curl -s https://hub.docker.com/v2/repositories/documenso/documenso/tags | jq -r '.results[].name'
+curl -s https://hub.docker.com/v2/repositories/hanzo-sign/hanzo-sign/tags | jq -r '.results[].name'
 ```
 
 </Tab>
 <Tab value="GitHub Container Registry">
 
 ```bash
-curl -s https://api.github.com/orgs/documenso/packages/container/documenso/versions | jq -r '.[].metadata.container.tags[]'
+curl -s https://api.github.com/orgs/hanzo-sign/packages/container/hanzo-sign/versions | jq -r '.[].metadata.container.tags[]'
 ```
 
 </Tab>
@@ -107,14 +107,14 @@ curl -s https://api.github.com/orgs/documenso/packages/container/documenso/versi
 <Tab value="Docker Compose">
 
 ```bash
-docker compose exec database pg_dump -U documenso documenso > backup-$(date +%Y%m%d-%H%M%S).sql
+docker compose exec database pg_dump -U hanzo-sign hanzo-sign > backup-$(date +%Y%m%d-%H%M%S).sql
 ```
 
 </Tab>
 <Tab value="Kubernetes">
 
 ```bash
-kubectl exec -n documenso deploy/postgres -- pg_dump -U documenso documenso > backup-$(date +%Y%m%d-%H%M%S).sql
+kubectl exec -n hanzo-sign deploy/postgres -- pg_dump -U hanzo-sign hanzo-sign > backup-$(date +%Y%m%d-%H%M%S).sql
 ```
 
 </Tab>
@@ -123,7 +123,7 @@ kubectl exec -n documenso deploy/postgres -- pg_dump -U documenso documenso > ba
 Use your database provider's backup tools or `pg_dump`:
 
 ```bash
-pg_dump "postgresql://user:password@host:5432/documenso" > backup-$(date +%Y%m%d-%H%M%S).sql
+pg_dump "postgresql://user:password@host:5432/hanzo-sign" > backup-$(date +%Y%m%d-%H%M%S).sql
 ```
 
 </Tab>
@@ -146,8 +146,8 @@ cp .env .env.backup-$(date +%Y%m%d)
 Export your secrets and configmaps:
 
 ```bash
-kubectl get secret documenso-secrets -n documenso -o yaml > secrets-backup.yaml
-kubectl get configmap documenso-config -n documenso -o yaml > configmap-backup.yaml
+kubectl get secret hanzo-sign-secrets -n hanzo-sign -o yaml > secrets-backup.yaml
+kubectl get configmap hanzo-sign-config -n hanzo-sign -o yaml > configmap-backup.yaml
 ```
 
 </Tab>
@@ -165,7 +165,7 @@ See [Backups](/docs/self-hosting/maintenance/backups) for automated backup strat
 ### Pull the new image
 
 ```bash
-docker pull documenso/documenso:1.6.0
+docker pull hanzo-sign/hanzo-sign:1.6.0
 ```
 
 Replace `1.6.0` with your target version.
@@ -175,8 +175,8 @@ Replace `1.6.0` with your target version.
 ### Stop the current container
 
 ```bash
-docker stop documenso
-docker rm documenso
+docker stop hanzo-sign
+docker rm hanzo-sign
 ```
 
 </Step>
@@ -185,11 +185,11 @@ docker rm documenso
 
 ```bash
 docker run -d \
-  --name documenso \
+  --name hanzo-sign \
   -p 3000:3000 \
   --env-file .env \
-  -v /path/to/cert.p12:/opt/documenso/cert.p12:ro \
-  documenso/documenso:1.6.0
+  -v /path/to/cert.p12:/opt/hanzo-sign/cert.p12:ro \
+  hanzo-sign/hanzo-sign:1.6.0
 ```
 
 </Step>
@@ -197,7 +197,7 @@ docker run -d \
 ### Verify the upgrade
 
 ```bash
-docker logs -f documenso
+docker logs -f hanzo-sign
 ```
 
 Wait for "Ready" or "Listening on port 3000" in the output.
@@ -222,22 +222,22 @@ Edit `compose.yml` or your `.env` file to specify the new version:
 
 ```yaml
 services:
-  documenso:
-    image: documenso/documenso:1.6.0
+  hanzo-sign:
+    image: hanzo-sign/hanzo-sign:1.6.0
 ```
 
 Or if using environment variable substitution:
 
 ```bash
 # In .env
-DOCUMENSO_VERSION=1.6.0
+SIGN_VERSION=1.6.0
 ```
 
 ```yaml
 # In compose.yml
 services:
-  documenso:
-    image: documenso/documenso:${DOCUMENSO_VERSION:-latest}
+  hanzo-sign:
+    image: hanzo-sign/hanzo-sign:${SIGN_VERSION:-latest}
 ```
 
 </Step>
@@ -264,7 +264,7 @@ Docker Compose recreates containers that have changed images.
 
 ```bash
 docker compose ps
-docker compose logs -f documenso
+docker compose logs -f hanzo-sign
 ```
 
 Confirm the container is running and healthy.
@@ -282,9 +282,9 @@ Confirm the container is running and healthy.
 Edit the deployment directly:
 
 ```bash
-kubectl set image deployment/documenso \
-  documenso=documenso/documenso:1.6.0 \
-  -n documenso
+kubectl set image deployment/hanzo-sign \
+  hanzo-sign=hanzo-sign/hanzo-sign:1.6.0 \
+  -n hanzo-sign
 ```
 
 Or update your manifest file:
@@ -294,8 +294,8 @@ spec:
   template:
     spec:
       containers:
-        - name: documenso
-          image: documenso/documenso:1.6.0
+        - name: hanzo-sign
+          image: hanzo-sign/hanzo-sign:1.6.0
 ```
 
 Then apply:
@@ -309,13 +309,13 @@ kubectl apply -f deployment.yaml
 ### Monitor the rollout
 
 ```bash
-kubectl rollout status deployment/documenso -n documenso
+kubectl rollout status deployment/hanzo-sign -n hanzo-sign
 ```
 
 Watch pods transition:
 
 ```bash
-kubectl get pods -n documenso -w
+kubectl get pods -n hanzo-sign -w
 ```
 
 </Step>
@@ -325,13 +325,13 @@ kubectl get pods -n documenso -w
 Check the new pods are running:
 
 ```bash
-kubectl get pods -n documenso -o wide
+kubectl get pods -n hanzo-sign -o wide
 ```
 
 Test the health endpoint:
 
 ```bash
-kubectl port-forward svc/documenso 3000:80 -n documenso &
+kubectl port-forward svc/hanzo-sign 3000:80 -n hanzo-sign &
 curl http://localhost:3000/api/health
 ```
 
@@ -340,7 +340,7 @@ curl http://localhost:3000/api/health
 
 ## Database Migrations
 
-Documenso runs database migrations automatically when the container starts. No manual intervention is required.
+Hanzo Sign runs database migrations automatically when the container starts. No manual intervention is required.
 
 ### Migration Process
 
@@ -380,14 +380,14 @@ View migration logs:
 <Tab value="Docker / Docker Compose">
 
 ```bash
-docker logs documenso 2>&1 | grep -i migration
+docker logs hanzo-sign 2>&1 | grep -i migration
 ```
 
 </Tab>
 <Tab value="Kubernetes">
 
 ```bash
-kubectl logs -l app.kubernetes.io/name=documenso -n documenso | grep -i migration
+kubectl logs -l app.kubernetes.io/name=hanzo-sign -n hanzo-sign | grep -i migration
 ```
 
 </Tab>
@@ -421,12 +421,12 @@ To run migrations manually before upgrading:
 
 ```bash
 # Pull the new image
-docker pull documenso/documenso:1.6.0
+docker pull hanzo-sign/hanzo-sign:1.6.0
 
 # Run migrations only
 docker run --rm \
-  -e NEXT_PRIVATE_DATABASE_URL="postgresql://user:password@host:5432/documenso" \
-  documenso/documenso:1.6.0 \
+  -e NEXT_PRIVATE_DATABASE_URL="postgresql://user:password@host:5432/hanzo-sign" \
+  hanzo-sign/hanzo-sign:1.6.0 \
   npx prisma migrate deploy
 ```
 
@@ -445,7 +445,7 @@ Major version upgrades may include breaking changes that require manual steps.
 <Step>
 ### Read release notes
 
-Read the [release notes](https://github.com/documenso/documenso/releases) carefully.
+Read the [release notes](https://github.com/hanzoai/sign/releases) carefully.
 
 </Step>
 <Step>
@@ -490,7 +490,7 @@ Compare your current environment with the latest example:
 
 ```bash
 # Download latest example
-curl -O https://raw.githubusercontent.com/documenso/documenso/main/.env.example
+curl -O https://raw.githubusercontent.com/hanzo-sign/hanzo-sign/main/.env.example
 
 # Compare with your current config
 diff .env .env.example
@@ -507,16 +507,16 @@ If an upgrade fails, roll back to the previous version.
 
 ```bash
 # Stop the new container
-docker stop documenso
-docker rm documenso
+docker stop hanzo-sign
+docker rm hanzo-sign
 
 # Start with the previous image
 docker run -d \
-  --name documenso \
+  --name hanzo-sign \
   -p 3000:3000 \
   --env-file .env \
-  -v /path/to/cert.p12:/opt/documenso/cert.p12:ro \
-  documenso/documenso:1.5.0
+  -v /path/to/cert.p12:/opt/hanzo-sign/cert.p12:ro \
+  hanzo-sign/hanzo-sign:1.5.0
 ```
 
 </Tab>
@@ -533,13 +533,13 @@ docker compose --env-file .env up -d
 
 ```bash
 # View rollout history
-kubectl rollout history deployment/documenso -n documenso
+kubectl rollout history deployment/hanzo-sign -n hanzo-sign
 
 # Rollback to previous version
-kubectl rollout undo deployment/documenso -n documenso
+kubectl rollout undo deployment/hanzo-sign -n hanzo-sign
 
 # Or rollback to a specific revision
-kubectl rollout undo deployment/documenso -n documenso --to-revision=2
+kubectl rollout undo deployment/hanzo-sign -n hanzo-sign --to-revision=2
 ```
 
 </Tab>
@@ -558,14 +558,14 @@ Restore from backup:
 <Tab value="Docker Compose">
 
 ```bash
-docker compose exec -T database psql -U documenso documenso < backup-20240115-120000.sql
+docker compose exec -T database psql -U hanzo-sign hanzo-sign < backup-20240115-120000.sql
 ```
 
 </Tab>
 <Tab value="External Database">
 
 ```bash
-psql "postgresql://user:password@host:5432/documenso" < backup-20240115-120000.sql
+psql "postgresql://user:password@host:5432/hanzo-sign" < backup-20240115-120000.sql
 ```
 
 </Tab>
@@ -575,7 +575,7 @@ psql "postgresql://user:password@host:5432/documenso" < backup-20240115-120000.s
 
 <Accordions type="multiple">
   <Accordion title="Container fails to start after upgrade">
-    **Check logs:** `docker logs documenso`
+    **Check logs:** `docker logs hanzo-sign`
 
     **Common causes:**
     - Missing env variable: check release notes for new required variables
@@ -594,7 +594,7 @@ psql "postgresql://user:password@host:5432/documenso" < backup-20240115-120000.s
     **Test connectivity:**
 
     ```bash
-    docker run --rm postgres:15 psql "postgresql://user:password@host:5432/documenso" -c "SELECT 1"
+    docker run --rm postgres:15 psql "postgresql://user:password@host:5432/hanzo-sign" -c "SELECT 1"
     ```
 
   </Accordion>
@@ -606,7 +606,7 @@ psql "postgresql://user:password@host:5432/documenso" < backup-20240115-120000.s
     - Check application logs: 
     
     ```bash
-    docker logs documenso 2>&1 | grep -i -E "(warn|error)"
+    docker logs hanzo-sign 2>&1 | grep -i -E "(warn|error)"
     ```
   </Accordion>
   <Accordion title="Performance issues after upgrade">

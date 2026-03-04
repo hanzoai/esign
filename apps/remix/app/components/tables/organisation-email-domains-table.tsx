@@ -6,20 +6,20 @@ import { CheckCircle2Icon, ClockIcon } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { ZUrlSearchParamsSchema } from '@documenso/lib/types/search-params';
-import { trpc } from '@documenso/trpc/react';
-import { AnimateGenericFadeInOut } from '@documenso/ui/components/animate/animate-generic-fade-in-out';
-import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { OrganisationEmailDomainDeleteDialog } from '../dialogs/organisation-email-domain-delete-dialog';
 

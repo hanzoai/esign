@@ -3,9 +3,9 @@ import { AlertTriangleIcon, KeyRoundIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import type { TCachedLicense } from '@documenso/lib/types/license';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
+import type { TCachedLicense } from '@hanzo/sign-lib/types/license';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 export type AdminLicenseStatusBannerProps = {
   license: TCachedLicense | null;
@@ -43,12 +43,12 @@ export const AdminLicenseStatusBanner = ({ license }: AdminLicenseStatusBannerPr
             .with('UNAUTHORIZED', () =>
               license ? (
                 <Trans>
-                  Invalid License Type - Your Documenso instance is using features that are not part
+                  Invalid License Type - Your Hanzo Sign instance is using features that are not part
                   of your license.
                 </Trans>
               ) : (
                 <Trans>
-                  Missing License - Your Documenso instance is using features that require a
+                  Missing License - Your Hanzo Sign instance is using features that require a
                   license.
                 </Trans>
               ),
@@ -67,7 +67,7 @@ export const AdminLicenseStatusBanner = ({ license }: AdminLicenseStatusBannerPr
           })}
           asChild
         >
-          <Link to="https://docs.documenso.com/users/licenses/enterprise-edition" target="_blank">
+          <Link to="https://docs.sign.hanzo.ai/users/licenses/enterprise-edition" target="_blank">
             <KeyRoundIcon className="mr-1.5 h-4 w-4" />
             <Trans>See Documentation</Trans>
           </Link>

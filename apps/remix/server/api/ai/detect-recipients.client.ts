@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZDetectedRecipientSchema } from '@documenso/lib/server-only/ai/envelope/detect-recipients/schema';
+import { ZDetectedRecipientSchema } from '@hanzo/sign-lib/server-only/ai/envelope/detect-recipients/schema';
 
 import { type TDetectRecipientsRequest } from './detect-recipients.types';
 

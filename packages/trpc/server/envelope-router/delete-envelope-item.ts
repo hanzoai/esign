@@ -1,8 +1,8 @@
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { UNSAFE_deleteEnvelopeItem } from '@documenso/lib/server-only/envelope-item/delete-envelope-item';
-import { getEnvelopeWhereInput } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { canEnvelopeItemsBeModified } from '@documenso/lib/utils/envelope';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { UNSAFE_deleteEnvelopeItem } from '@hanzo/sign-lib/server-only/envelope-item/delete-envelope-item';
+import { getEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { canEnvelopeItemsBeModified } from '@hanzo/sign-lib/utils/envelope';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { ZGenericSuccessResponse } from '../schema';
 import { authenticatedProcedure } from '../trpc';

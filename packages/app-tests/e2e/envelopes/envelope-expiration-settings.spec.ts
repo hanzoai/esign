@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-import { getTeamSettings } from '@documenso/lib/server-only/team/get-team-settings';
-import { prisma } from '@documenso/prisma';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { getTeamSettings } from '@hanzo/sign-lib/server-only/team/get-team-settings';
+import { prisma } from '@hanzo/sign-prisma';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

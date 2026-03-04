@@ -5,24 +5,24 @@ import { EnvelopeType, RecipientRole, SigningStatus } from '@prisma/client';
 import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
 
-import { unsafeGetEntireEnvelope } from '@documenso/lib/server-only/admin/get-entire-document';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
-import { trpc } from '@documenso/trpc/react';
+import { unsafeGetEntireEnvelope } from '@hanzo/sign-lib/server-only/admin/get-entire-document';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { trpc } from '@hanzo/sign-trpc/react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@documenso/ui/primitives/accordion';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
+} from '@hanzo/sign-ui/primitives/accordion';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@documenso/ui/primitives/tooltip';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { AdminDocumentDeleteDialog } from '~/components/dialogs/admin-document-delete-dialog';
 import { DocumentStatus } from '~/components/general/document/document-status';

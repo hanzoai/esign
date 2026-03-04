@@ -4,13 +4,13 @@ import { Trans } from '@lingui/react/macro';
 import type { DocumentStatus } from '@prisma/client';
 import { DownloadIcon } from 'lucide-react';
 
-import { downloadFile } from '@documenso/lib/client-only/download-file';
-import { base64 } from '@documenso/lib/universal/base64';
-import { isDocumentCompleted } from '@documenso/lib/utils/document';
-import { trpc } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
+import { base64 } from '@hanzo/sign-lib/universal/base64';
+import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type DocumentCertificateDownloadButtonProps = {
   className?: string;

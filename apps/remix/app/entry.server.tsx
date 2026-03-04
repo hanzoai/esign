@@ -8,8 +8,8 @@ import { renderToPipeableStream } from 'react-dom/server';
 import type { AppLoadContext, EntryContext } from 'react-router';
 import { ServerRouter } from 'react-router';
 
-import { APP_I18N_OPTIONS } from '@documenso/lib/constants/i18n';
-import { dynamicActivate, extractLocaleData } from '@documenso/lib/utils/i18n';
+import { APP_I18N_OPTIONS } from '@hanzo/sign-lib/constants/i18n';
+import { dynamicActivate, extractLocaleData } from '@hanzo/sign-lib/utils/i18n';
 
 import { langCookie } from './storage/lang-cookie.server';
 

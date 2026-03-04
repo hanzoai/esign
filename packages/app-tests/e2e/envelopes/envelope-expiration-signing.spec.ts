@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-import { prisma } from '@documenso/prisma';
-import { FieldType } from '@documenso/prisma/client';
-import { seedPendingDocumentWithFullFields } from '@documenso/prisma/seed/documents';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { prisma } from '@hanzo/sign-prisma';
+import { FieldType } from '@hanzo/sign-prisma/client';
+import { seedPendingDocumentWithFullFields } from '@hanzo/sign-prisma/seed/documents';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 import { signSignaturePad } from '../fixtures/signature';
@@ -15,7 +15,7 @@ test('[ENVELOPE_EXPIRATION]: expired recipient is redirected to expired page', a
 
   const { recipients } = await seedPendingDocumentWithFullFields({
     owner: user,
-    recipients: ['expired-recipient@test.documenso.com'],
+    recipients: ['expired-recipient@test.sign.hanzo.ai'],
     teamId: team.id,
   });
 
@@ -39,7 +39,7 @@ test('[ENVELOPE_EXPIRATION]: non-expired recipient can access signing page', asy
 
   const { recipients } = await seedPendingDocumentWithFullFields({
     owner: user,
-    recipients: ['active-recipient@test.documenso.com'],
+    recipients: ['active-recipient@test.sign.hanzo.ai'],
     teamId: team.id,
   });
 
@@ -61,7 +61,7 @@ test('[ENVELOPE_EXPIRATION]: recipient with null expiresAt can sign normally', a
 
   const { recipients } = await seedPendingDocumentWithFullFields({
     owner: user,
-    recipients: ['null-expiry@test.documenso.com'],
+    recipients: ['null-expiry@test.sign.hanzo.ai'],
     teamId: team.id,
   });
 

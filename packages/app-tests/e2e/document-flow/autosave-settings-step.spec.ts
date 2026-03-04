@@ -2,9 +2,9 @@ import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { EnvelopeType } from '@prisma/client';
 
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { seedBlankDocument } from '@documenso/prisma/seed/documents';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { seedBlankDocument } from '@hanzo/sign-prisma/seed/documents';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 
@@ -215,7 +215,7 @@ test.describe('AutoSave Settings Step', () => {
   test('should autosave the redirect URL change', async ({ page }) => {
     const { user, document, team } = await setupDocument(page);
 
-    const newRedirectUrl = 'https://documenso.com/test/';
+    const newRedirectUrl = 'https://sign.hanzo.ai/test/';
 
     await page.getByRole('button', { name: 'Advanced Options' }).click();
 

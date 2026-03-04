@@ -8,20 +8,20 @@ import type { DateTimeFormatOptions } from 'luxon';
 import { useSearchParams } from 'react-router';
 import { UAParser } from 'ua-parser-js';
 
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import type { TDocumentAuditLog } from '@documenso/lib/types/document-audit-logs';
-import { ZUrlSearchParamsSchema } from '@documenso/lib/types/search-params';
-import { formatDocumentAuditLogAction } from '@documenso/lib/utils/document-audit-logs';
-import { trpc } from '@documenso/trpc/react';
-import { CopyTextButton } from '@documenso/ui/components/common/copy-text-button';
-import { Button } from '@documenso/ui/primitives/button';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@documenso/ui/primitives/dialog';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import type { TDocumentAuditLog } from '@hanzo/sign-lib/types/document-audit-logs';
+import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
+import { formatDocumentAuditLogAction } from '@hanzo/sign-lib/utils/document-audit-logs';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@hanzo/sign-ui/primitives/dialog';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type AdminDocumentLogsTableProps = {
   envelopeId: string;

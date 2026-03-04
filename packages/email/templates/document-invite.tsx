@@ -4,7 +4,7 @@ import { Trans } from '@lingui/react/macro';
 import type { RecipientRole } from '@prisma/client';
 import { OrganisationType } from '@prisma/client';
 
-import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
+import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient-roles';
 
 import { Body, Container, Head, Hr, Html, Img, Link, Preview, Section, Text } from '../components';
 import { useBranding } from '../providers/branding';
@@ -25,9 +25,9 @@ export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInvitePro
 
 export const DocumentInviteEmailTemplate = ({
   inviterName = 'Lucas Smith',
-  inviterEmail = 'lucas@documenso.com',
+  inviterEmail = 'lucas@sign.hanzo.ai',
   documentName = 'Open Source Pledge.pdf',
-  signDocumentLink = 'https://documenso.com',
+  signDocumentLink = 'https://sign.hanzo.ai',
   assetBaseUrl = 'http://localhost:3002',
   customBody,
   role,
@@ -71,7 +71,7 @@ export const DocumentInviteEmailTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Documenso Logo"
+                  alt="Hanzo Sign Logo"
                   className="mb-4 h-6"
                 />
               )}

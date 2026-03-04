@@ -5,28 +5,28 @@ import { useLingui } from '@lingui/react';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
 
-import { DocumentSignatureType } from '@documenso/lib/constants/document';
-import { isValidLanguageCode } from '@documenso/lib/constants/i18n';
+import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
+import { isValidLanguageCode } from '@hanzo/sign-lib/constants/i18n';
 import {
   DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
   SKIP_QUERY_BATCH_META,
-} from '@documenso/lib/constants/trpc';
-import { ZDocumentAccessAuthTypesSchema } from '@documenso/lib/types/document-auth';
-import type { TTemplate } from '@documenso/lib/types/template';
-import { getDocumentDataUrlForPdfViewer } from '@documenso/lib/utils/envelope-download';
-import { trpc } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Card, CardContent } from '@documenso/ui/primitives/card';
-import { DocumentFlowFormContainer } from '@documenso/ui/primitives/document-flow/document-flow-root';
-import type { DocumentFlowStep } from '@documenso/ui/primitives/document-flow/types';
-import { Stepper } from '@documenso/ui/primitives/stepper';
-import { AddTemplateFieldsFormPartial } from '@documenso/ui/primitives/template-flow/add-template-fields';
-import type { TAddTemplateFieldsFormSchema } from '@documenso/ui/primitives/template-flow/add-template-fields.types';
-import { AddTemplatePlaceholderRecipientsFormPartial } from '@documenso/ui/primitives/template-flow/add-template-placeholder-recipients';
-import type { TAddTemplatePlacholderRecipientsFormSchema } from '@documenso/ui/primitives/template-flow/add-template-placeholder-recipients.types';
-import { AddTemplateSettingsFormPartial } from '@documenso/ui/primitives/template-flow/add-template-settings';
-import type { TAddTemplateSettingsFormSchema } from '@documenso/ui/primitives/template-flow/add-template-settings.types';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-lib/constants/trpc';
+import { ZDocumentAccessAuthTypesSchema } from '@hanzo/sign-lib/types/document-auth';
+import type { TTemplate } from '@hanzo/sign-lib/types/template';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+import { DocumentFlowFormContainer } from '@hanzo/sign-ui/primitives/document-flow/document-flow-root';
+import type { DocumentFlowStep } from '@hanzo/sign-ui/primitives/document-flow/types';
+import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
+import { AddTemplateFieldsFormPartial } from '@hanzo/sign-ui/primitives/template-flow/add-template-fields';
+import type { TAddTemplateFieldsFormSchema } from '@hanzo/sign-ui/primitives/template-flow/add-template-fields.types';
+import { AddTemplatePlaceholderRecipientsFormPartial } from '@hanzo/sign-ui/primitives/template-flow/add-template-placeholder-recipients';
+import type { TAddTemplatePlacholderRecipientsFormSchema } from '@hanzo/sign-ui/primitives/template-flow/add-template-placeholder-recipients.types';
+import { AddTemplateSettingsFormPartial } from '@hanzo/sign-ui/primitives/template-flow/add-template-settings';
+import type { TAddTemplateSettingsFormSchema } from '@hanzo/sign-ui/primitives/template-flow/add-template-settings.types';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { PDFViewer } from '~/components/general/pdf-viewer/pdf-viewer';
 import { useCurrentTeam } from '~/providers/team';

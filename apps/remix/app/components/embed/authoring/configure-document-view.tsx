@@ -4,10 +4,10 @@ import { DocumentDistributionMethod, DocumentSigningOrder, RecipientRole } from 
 import { nanoid } from 'nanoid';
 import { useForm } from 'react-hook-form';
 
-import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@documenso/lib/constants/date-formats';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@documenso/lib/constants/time-zones';
-import { ZDocumentEmailSettingsSchema } from '@documenso/lib/types/document-email';
-import { Button } from '@documenso/ui/primitives/button';
+import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -15,8 +15,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 
 import { ConfigureDocumentAdvancedSettings } from './configure-document-advanced-settings';
 import { useConfigureDocument } from './configure-document-context';

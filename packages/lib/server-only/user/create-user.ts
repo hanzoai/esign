@@ -1,7 +1,7 @@
 import { hash } from '@node-rs/bcrypt';
 import type { User } from '@prisma/client';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { SALT_ROUNDS } from '../../constants/auth';
 import { AppError, AppErrorCode } from '../../errors/app-error';
@@ -42,7 +42,7 @@ export const createUser = async ({ name, email, password, signature }: CreateUse
     //   data: {
     //     userId: user.id,
     //     type: 'emailPassword', // Todo: (RR7)
-    //     provider: 'DOCUMENSO', // Todo: (RR7) Enums
+    //     provider: 'HANZO_SIGN', // Todo: (RR7) Enums
     //     providerAccountId: user.id.toString(),
     //     password: hashedPassword,
     //   },

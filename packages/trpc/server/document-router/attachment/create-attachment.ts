@@ -1,7 +1,7 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { createAttachment } from '@documenso/lib/server-only/envelope-attachment/create-attachment';
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
+import { createAttachment } from '@hanzo/sign-lib/server-only/envelope-attachment/create-attachment';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
 
 import { authenticatedProcedure } from '../../trpc';
 import {

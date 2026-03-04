@@ -1,6 +1,6 @@
 ---
 title: Tips & Common Pitfalls
-description: Practical advice for running Documenso in production.
+description: Practical advice for running Hanzo Sign in production.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -8,11 +8,11 @@ import { Callout } from 'fumadocs-ui/components/callout';
 ## Always Configure a Signing Certificate
 
 <Callout type="error">
-  This is the single most common issue when self-hosting Documenso. Without a signing certificate,
+  This is the single most common issue when self-hosting Hanzo Sign. Without a signing certificate,
   the application starts normally but document signing fails.
 </Callout>
 
-Documenso does **not** bundle a [signing certificate](/docs/self-hosting/configuration/signing-certificate) in the Docker image. You must provide one yourself using one of two methods:
+Hanzo Sign does **not** bundle a [signing certificate](/docs/self-hosting/configuration/signing-certificate) in the Docker image. You must provide one yourself using one of two methods:
 
 ### Volume Mount (Recommended)
 
@@ -20,12 +20,12 @@ Mount your `.p12` certificate file into the container at the default path:
 
 ```bash
 docker run -d \
-  -v /path/to/your/cert.p12:/opt/documenso/cert.p12:ro \
+  -v /path/to/your/cert.p12:/opt/hanzo-sign/cert.p12:ro \
   -e NEXT_PRIVATE_SIGNING_PASSPHRASE="your-certificate-password" \
-  documenso/documenso:latest
+  hanzo-sign/hanzo-sign:latest
 ```
 
-The default certificate path inside the container is `/opt/documenso/cert.p12`. You can change this with `NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH`.
+The default certificate path inside the container is `/opt/hanzo-sign/cert.p12`. You can change this with `NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH`.
 
 ### Base64 Environment Variable
 
@@ -51,7 +51,7 @@ NEXT_PRIVATE_SIGNING_PASSPHRASE=your-certificate-password
 
 ### Verify Your Certificate
 
-After starting Documenso, check the certificate status endpoint:
+After starting Hanzo Sign, check the certificate status endpoint:
 
 ```bash
 curl http://localhost:3000/api/certificate-status
@@ -69,13 +69,13 @@ Certificates without a password cause signing to fail with:
 Error: Failed to get private key bags
 ```
 
-Always set a password when creating your `.p12` certificate. When using OpenSSL, set the password during the export step and provide it to Documenso via `NEXT_PRIVATE_SIGNING_PASSPHRASE`.
+Always set a password when creating your `.p12` certificate. When using OpenSSL, set the password during the export step and provide it to Hanzo Sign via `NEXT_PRIVATE_SIGNING_PASSPHRASE`.
 
 ---
 
 ## Use the Health Check Endpoints
 
-Documenso exposes two endpoints for monitoring:
+Hanzo Sign exposes two endpoints for monitoring:
 
 | Endpoint                  | Purpose                              |
 | ------------------------- | ------------------------------------ |
@@ -92,13 +92,13 @@ Use a specific version tag in production:
 
 ```bash
 # Good — predictable, reproducible
-docker pull documenso/documenso:1.8.0
+docker pull hanzo-sign/hanzo-sign:1.8.0
 
 # Risky — may pull breaking changes
-docker pull documenso/documenso:latest
+docker pull hanzo-sign/hanzo-sign:latest
 ```
 
-Check the [GitHub releases](https://github.com/documenso/documenso/releases) page for available versions.
+Check the [GitHub releases](https://github.com/hanzoai/sign/releases) page for available versions.
 
 ---
 
@@ -114,7 +114,7 @@ The Docker container runs `prisma migrate deploy` every time it starts. This mea
 
 ## Set Internal Webapp URL for Background Jobs
 
-Background jobs work by Documenso sending HTTP requests to itself. If your reverse proxy or network setup causes issues with the app reaching its own public URL, set the internal URL:
+Background jobs work by Hanzo Sign sending HTTP requests to itself. If your reverse proxy or network setup causes issues with the app reaching its own public URL, set the internal URL:
 
 ```bash
 NEXT_PRIVATE_INTERNAL_WEBAPP_URL=http://localhost:3000
@@ -132,7 +132,7 @@ For high-volume deployments, switch to S3-compatible storage to keep your databa
 
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
-NEXT_PRIVATE_UPLOAD_BUCKET=documenso-documents
+NEXT_PRIVATE_UPLOAD_BUCKET=hanzo-sign-documents
 NEXT_PRIVATE_UPLOAD_REGION=us-east-1
 NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=your-key
 NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=your-secret
@@ -146,9 +146,9 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage) for full s
 
 ## Background Jobs Don't Need Redis
 
-Documenso uses a PostgreSQL-based job queue by default. No Redis, no external message broker. The job system uses your existing database to store and process background tasks like email delivery and document processing.
+Hanzo Sign uses a PostgreSQL-based job queue by default. No Redis, no external message broker. The job system uses your existing database to store and process background tasks like email delivery and document processing.
 
-For high-throughput deployments, Documenso optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider:
+For high-throughput deployments, Hanzo Sign optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider:
 
 ```bash
 NEXT_PRIVATE_JOBS_PROVIDER=inngest
@@ -162,7 +162,7 @@ Most self-hosted instances do not need Inngest.
 
 ## Docker File Permissions
 
-The Documenso container runs as a non-root user (UID 1001). If you mount files into the container (certificates, configuration), ensure they're readable:
+The Hanzo Sign container runs as a non-root user (UID 1001). If you mount files into the container (certificates, configuration), ensure they're readable:
 
 ```bash
 # On the host, before mounting

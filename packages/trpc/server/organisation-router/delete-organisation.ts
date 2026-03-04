@@ -1,11 +1,11 @@
 import {
   ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP,
   ORGANISATION_USER_ACCOUNT_TYPE,
-} from '@documenso/lib/constants/organisations';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { orphanEnvelopes } from '@documenso/lib/server-only/envelope/orphan-envelopes';
-import { buildOrganisationWhereQuery } from '@documenso/lib/utils/organisations';
-import { prisma } from '@documenso/prisma';
+} from '@hanzo/sign-lib/constants/organisations';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { orphanEnvelopes } from '@hanzo/sign-lib/server-only/envelope/orphan-envelopes';
+import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 
-import { trpc } from '@documenso/trpc/react';
-import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -14,8 +14,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dialog';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type EnvelopeItemDeleteDialogProps = {
   canItemBeDeleted: boolean;

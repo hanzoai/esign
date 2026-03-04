@@ -15,16 +15,16 @@ import {
   Users,
 } from 'lucide-react';
 
-import { getDocumentStats } from '@documenso/lib/server-only/admin/get-documents-stats';
-import { getRecipientsStats } from '@documenso/lib/server-only/admin/get-recipients-stats';
+import { getDocumentStats } from '@hanzo/sign-lib/server-only/admin/get-documents-stats';
+import { getRecipientsStats } from '@hanzo/sign-lib/server-only/admin/get-recipients-stats';
 import {
   getMonthlyActiveUsers,
   getOrganisationsWithSubscriptionsCount,
   getUserWithSignedDocumentMonthlyGrowth,
   getUsersCount,
-} from '@documenso/lib/server-only/admin/get-users-stats';
-import { LicenseClient } from '@documenso/lib/server-only/license/license-client';
-import { getSignerConversionMonthly } from '@documenso/lib/server-only/user/get-signer-conversion';
+} from '@hanzo/sign-lib/server-only/admin/get-users-stats';
+import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
+import { getSignerConversionMonthly } from '@hanzo/sign-lib/server-only/user/get-signer-conversion';
 
 import { AdminLicenseCard } from '~/components/general/admin-license-card';
 import { MonthlyActiveUsersChart } from '~/components/general/admin-monthly-active-user-charts';

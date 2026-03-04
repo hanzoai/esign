@@ -24,7 +24,7 @@ Direct links are unique URLs tied to a template that allow anyone to:
   </Step>
 </Steps>
 
-When someone uses a direct link, Documenso creates a new document from the template with that person as the signer.
+When someone uses a direct link, Hanzo Sign creates a new document from the template with that person as the signer.
 
 ### When to Use Direct Links
 
@@ -78,7 +78,7 @@ Create a direct link for an existing template:
 <Tab value="curl">
 ```bash
 # Create direct link for template
-curl -X POST "https://app.documenso.com/api/v2/template/direct/create" \
+curl -X POST "https://app.sign.hanzo.ai/api/v2/template/direct/create" \
   -H "Authorization: api_xxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
@@ -89,8 +89,8 @@ curl -X POST "https://app.documenso.com/api/v2/template/direct/create" \
 </Tab>
 <Tab value="TypeScript">
 ```typescript
-const API_TOKEN = process.env.DOCUMENSO_API_TOKEN;
-const BASE_URL = 'https://app.documenso.com/api/v2';
+const API_TOKEN = process.env.SIGN_API_TOKEN;
+const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
 
 const response = await fetch(`${BASE_URL}/template/direct/create`, {
   method: 'POST',
@@ -106,7 +106,7 @@ const response = await fetch(`${BASE_URL}/template/direct/create`, {
 
 const directLink = await response.json();
 console.log('Direct link token:', directLink.token);
-// URL: https://app.documenso.com/d/{token}
+// URL: https://app.sign.hanzo.ai/d/{token}
 ````
 </Tab>
 </Tabs>
@@ -127,7 +127,7 @@ console.log('Direct link token:', directLink.token);
 The direct link URL format is:
 
 ```
-https://app.documenso.com/d/{token}
+https://app.sign.hanzo.ai/d/{token}
 ```
 
 ![Copy recipient token](/embedding/copy-recipient-token.png)
@@ -142,7 +142,7 @@ Embed the signing experience directly in your application using an iframe.
 
 ```html
 <iframe
-  src="https://app.documenso.com/embed/direct/abc123xyz"
+  src="https://app.sign.hanzo.ai/embed/direct/abc123xyz"
   width="100%"
   height="800"
   frameborder="0"
@@ -155,7 +155,7 @@ Embed the signing experience directly in your application using an iframe.
 ```html
 <div style="position: relative; width: 100%; padding-bottom: 75%; height: 0; overflow: hidden;">
   <iframe
-    src="https://app.documenso.com/embed/direct/abc123xyz"
+    src="https://app.sign.hanzo.ai/embed/direct/abc123xyz"
     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
     allow="clipboard-write"
   ></iframe>
@@ -169,7 +169,7 @@ function DocumentSigner({ token }: { token: string }) {
   return (
     <div className="h-[800px] w-full">
       <iframe
-        src={`https://app.documenso.com/embed/direct/${token}`}
+        src={`https://app.sign.hanzo.ai/embed/direct/${token}`}
         className="h-full w-full border-0"
         allow="clipboard-write"
         title="Sign Document"
@@ -194,7 +194,7 @@ Instead of an iframe, redirect users to the signing page and bring them back aft
 
 ```typescript
 function redirectToSigning(token: string) {
-  window.location.href = `https://app.documenso.com/d/${token}`;
+  window.location.href = `https://app.sign.hanzo.ai/d/${token}`;
 }
 ```
 
@@ -246,7 +246,7 @@ Pass additional data through the direct link URL using query parameters.
 Track which document belongs to which transaction in your system:
 
 ```
-https://app.documenso.com/d/abc123xyz?externalId=order-12345
+https://app.sign.hanzo.ai/d/abc123xyz?externalId=order-12345
 ```
 
 The external ID is stored with the created document and included in webhook payloads.
@@ -259,12 +259,12 @@ function getSigningUrl(token: string, orderId: string) {
     externalId: orderId,
   });
 
-  return `https://app.documenso.com/d/${token}?${params.toString()}`;
+  return `https://app.sign.hanzo.ai/d/${token}?${params.toString()}`;
 }
 
 // Usage
 const url = getSigningUrl('abc123xyz', 'order-12345');
-// https://app.documenso.com/d/abc123xyz?externalId=order-12345
+// https://app.sign.hanzo.ai/d/abc123xyz?externalId=order-12345
 ```
 
 ### Embed URL Parameters
@@ -272,7 +272,7 @@ const url = getSigningUrl('abc123xyz', 'order-12345');
 The embed URL supports the same parameters:
 
 ```
-https://app.documenso.com/embed/direct/abc123xyz?externalId=order-12345
+https://app.sign.hanzo.ai/embed/direct/abc123xyz?externalId=order-12345
 ```
 
 ---
@@ -286,7 +286,7 @@ Direct links can require authentication before signing. Configure this in your t
 | Auth Type | Description                                    |
 | --------- | ---------------------------------------------- |
 | None      | Anyone with the link can sign                  |
-| Account   | Signer must be logged into a Documenso account |
+| Account   | Signer must be logged into a Hanzo Sign account |
 
 To require authentication, set `globalAccessAuth` when creating or updating the template:
 
@@ -313,7 +313,7 @@ Temporarily disable a direct link without deleting it:
 <Tabs items={['curl', 'TypeScript']}>
 <Tab value="curl">
 ```bash
-curl -X POST "https://app.documenso.com/api/v2/template/direct/toggle" \
+curl -X POST "https://app.sign.hanzo.ai/api/v2/template/direct/toggle" \
   -H "Authorization: api_xxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
@@ -346,7 +346,7 @@ Re-enable later by setting `enabled: true`. The URL remains the same.
 Permanently remove a direct link:
 
 ```bash
-curl -X POST "https://app.documenso.com/api/v2/template/direct/delete" \
+curl -X POST "https://app.sign.hanzo.ai/api/v2/template/direct/delete" \
   -H "Authorization: api_xxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
@@ -397,7 +397,7 @@ const response = await fetch(`${BASE_URL}/template/update`, {
 
 ### White-labeling
 
-Enterprise plans support white-label embedding with the "Powered by Documenso" badge removed. [Contact sales](mailto:support@documenso.com) for details.
+Enterprise plans support white-label embedding with the "Powered by Hanzo Sign" badge removed. [Contact sales](mailto:support@sign.hanzo.ai) for details.
 
 ---
 
@@ -454,8 +454,8 @@ async function checkDocumentStatus(externalId: string) {
 This example shows a complete workflow for embedding direct link signing:
 
 ```typescript
-const API_TOKEN = process.env.DOCUMENSO_API_TOKEN;
-const BASE_URL = 'https://app.documenso.com/api/v2';
+const API_TOKEN = process.env.SIGN_API_TOKEN;
+const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
 
 // 1. Get template with direct link
 async function getDirectLinkTemplate(templateId: number) {
@@ -493,7 +493,7 @@ async function ensureDirectLink(templateId: number, recipientId: number) {
 // 3. Generate signing URL with tracking
 function getEmbedUrl(token: string, orderId: string) {
   const params = new URLSearchParams({ externalId: orderId });
-  return `https://app.documenso.com/embed/direct/${token}?${params}`;
+  return `https://app.sign.hanzo.ai/embed/direct/${token}?${params}`;
 }
 
 // Usage

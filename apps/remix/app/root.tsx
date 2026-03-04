@@ -10,15 +10,15 @@ import {
 } from 'react-router';
 import { PreventFlashOnWrongTheme, ThemeProvider, useTheme } from 'remix-themes';
 
-import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
-import { SessionProvider } from '@documenso/lib/client-only/providers/session';
-import { APP_I18N_OPTIONS, type SupportedLanguageCodes } from '@documenso/lib/constants/i18n';
-import { createPublicEnv } from '@documenso/lib/utils/env';
-import { extractLocaleData } from '@documenso/lib/utils/i18n';
-import { TrpcProvider } from '@documenso/trpc/react';
-import { getOrganisationSession } from '@documenso/trpc/server/organisation-router/get-organisation-session';
-import { Toaster } from '@documenso/ui/primitives/toaster';
-import { TooltipProvider } from '@documenso/ui/primitives/tooltip';
+import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
+import { SessionProvider } from '@hanzo/sign-lib/client-only/providers/session';
+import { APP_I18N_OPTIONS, type SupportedLanguageCodes } from '@hanzo/sign-lib/constants/i18n';
+import { createPublicEnv } from '@hanzo/sign-lib/utils/env';
+import { extractLocaleData } from '@hanzo/sign-lib/utils/i18n';
+import { TrpcProvider } from '@hanzo/sign-trpc/react';
+import { getOrganisationSession } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-session';
+import { Toaster } from '@hanzo/sign-ui/primitives/toaster';
+import { TooltipProvider } from '@hanzo/sign-ui/primitives/tooltip';
 
 import type { Route } from './+types/root';
 import stylesheet from './app.css?url';
@@ -132,7 +132,7 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
             <div className="mx-auto flex h-auto max-w-screen-xl items-center justify-center px-4 py-3 text-sm font-medium">
               <div className="flex items-center">
                 <AlertTriangleIcon className="mr-2 h-4 w-4" />
-                <Trans>This is an expired license instance of Documenso</Trans>
+                <Trans>This is an expired license instance of Hanzo Sign</Trans>
               </div>
             </div>
           </div>

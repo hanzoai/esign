@@ -10,16 +10,16 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import { z } from 'zod';
 
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@documenso/lib/constants/organisations';
-import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@documenso/lib/constants/organisations-translations';
-import { TEAM_MEMBER_ROLE_MAP } from '@documenso/lib/constants/teams-translations';
-import { AppError } from '@documenso/lib/errors/app-error';
-import { trpc } from '@documenso/trpc/react';
-import type { TFindOrganisationGroupsResponse } from '@documenso/trpc/server/organisation-router/find-organisation-groups.types';
-import type { TFindOrganisationMembersResponse } from '@documenso/trpc/server/organisation-router/find-organisation-members.types';
-import { Button } from '@documenso/ui/primitives/button';
-import { DataTable, type DataTableColumnDef } from '@documenso/ui/primitives/data-table';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
+import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
+import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindOrganisationGroupsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-groups.types';
+import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { DataTable, type DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import {
   Form,
   FormControl,
@@ -28,17 +28,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { MultiSelectCombobox } from '@documenso/ui/primitives/multi-select-combobox';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/select';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { OrganisationGroupDeleteDialog } from '~/components/dialogs/organisation-group-delete-dialog';
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';

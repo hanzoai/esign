@@ -1,1 +1,1 @@
-declare module '@documenso/tailwind-config';
+declare module '@hanzo/sign-tailwind-config';

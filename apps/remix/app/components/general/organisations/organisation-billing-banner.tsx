@@ -8,13 +8,13 @@ import { AlertTriangle } from 'lucide-react';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useOptionalCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { SUPPORT_EMAIL } from '@documenso/lib/constants/app';
-import { canExecuteOrganisationAction } from '@documenso/lib/utils/organisations';
-import { trpc } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
+import { useOptionalCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { SUPPORT_EMAIL } from '@hanzo/sign-lib/constants/app';
+import { canExecuteOrganisationAction } from '@hanzo/sign-lib/utils/organisations';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -23,8 +23,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@documenso/ui/primitives/dialog';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dialog';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export const OrganisationBillingBanner = () => {
   const { _ } = useLingui();
@@ -145,7 +145,7 @@ export const OrganisationBillingBanner = () => {
                 <DialogDescription>
                   <Trans>
                     Your plan is no longer valid. Please subscribe to a new plan to continue using
-                    Documenso.
+                    Hanzo Sign.
                   </Trans>
                 </DialogDescription>
               </DialogHeader>

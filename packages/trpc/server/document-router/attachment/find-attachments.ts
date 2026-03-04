@@ -1,7 +1,7 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { findAttachmentsByEnvelopeId } from '@documenso/lib/server-only/envelope-attachment/find-attachments-by-envelope-id';
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
+import { findAttachmentsByEnvelopeId } from '@hanzo/sign-lib/server-only/envelope-attachment/find-attachments-by-envelope-id';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
 
 import { authenticatedProcedure } from '../../trpc';
 import {

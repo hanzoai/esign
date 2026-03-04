@@ -1,9 +1,9 @@
 import { SubscriptionStatus } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { createOrganisationClaimUpsertData } from '@documenso/lib/server-only/organisation/create-organisation';
-import { INTERNAL_CLAIM_ID, internalClaims } from '@documenso/lib/types/subscription';
-import { prisma } from '@documenso/prisma';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { createOrganisationClaimUpsertData } from '@hanzo/sign-lib/server-only/organisation/create-organisation';
+import { INTERNAL_CLAIM_ID, internalClaims } from '@hanzo/sign-lib/types/subscription';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { adminProcedure } from '../trpc';
 import {

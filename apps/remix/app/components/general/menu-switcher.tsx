@@ -6,22 +6,22 @@ import { Trans } from '@lingui/react/macro';
 import { ChevronsUpDown, Plus } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { authClient } from '@documenso/auth/client';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { formatAvatarUrl } from '@documenso/lib/utils/avatars';
-import { isAdmin } from '@documenso/lib/utils/is-admin';
-import { extractInitials } from '@documenso/lib/utils/recipient-formatter';
-import { LanguageSwitcherDialog } from '@documenso/ui/components/common/language-switcher-dialog';
-import { cn } from '@documenso/ui/lib/utils';
-import { AvatarWithText } from '@documenso/ui/primitives/avatar';
-import { Button } from '@documenso/ui/primitives/button';
+import { authClient } from '@hanzo/sign-auth/client';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
+import { isAdmin } from '@hanzo/sign-lib/utils/is-admin';
+import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
+import { LanguageSwitcherDialog } from '@hanzo/sign-ui/components/common/language-switcher-dialog';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@documenso/ui/primitives/dropdown-menu';
+} from '@hanzo/sign-ui/primitives/dropdown-menu';
 
 export const MenuSwitcher = () => {
   const { _ } = useLingui();

@@ -8,21 +8,21 @@ import { redirect, useLoaderData } from 'react-router';
 import {
   DEFAULT_DOCUMENT_DATE_FORMAT,
   isValidDateFormat,
-} from '@documenso/lib/constants/date-formats';
-import { DocumentSignatureType } from '@documenso/lib/constants/document';
-import { isValidLanguageCode } from '@documenso/lib/constants/i18n';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@documenso/lib/constants/time-zones';
-import { getDocumentWithDetailsById } from '@documenso/lib/server-only/document/get-document-with-details-by-id';
-import { verifyEmbeddingPresignToken } from '@documenso/lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { ZDocumentEmailSettingsSchema } from '@documenso/lib/types/document-email';
+} from '@hanzo/sign-lib/constants/date-formats';
+import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
+import { isValidLanguageCode } from '@hanzo/sign-lib/constants/i18n';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
+import { getDocumentWithDetailsById } from '@hanzo/sign-lib/server-only/document/get-document-with-details-by-id';
+import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
 import {
   type TBaseEmbedAuthoringSchema,
   ZBaseEmbedAuthoringEditSchema,
-} from '@documenso/lib/types/embed-authoring-base-schema';
-import { nanoid } from '@documenso/lib/universal/id';
-import { trpc } from '@documenso/trpc/react';
-import { Stepper } from '@documenso/ui/primitives/stepper';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-lib/types/embed-authoring-base-schema';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { ConfigureDocumentProvider } from '~/components/embed/authoring/configure-document-context';
 import { ConfigureDocumentView } from '~/components/embed/authoring/configure-document-view';

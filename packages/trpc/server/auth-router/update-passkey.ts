@@ -1,4 +1,4 @@
-import { updatePasskey } from '@documenso/lib/server-only/auth/update-passkey';
+import { updatePasskey } from '@hanzo/sign-lib/server-only/auth/update-passkey';
 
 import { authenticatedProcedure } from '../trpc';
 import { ZUpdatePasskeyRequestSchema, ZUpdatePasskeyResponseSchema } from './update-passkey.types';

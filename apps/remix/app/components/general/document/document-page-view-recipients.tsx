@@ -20,22 +20,22 @@ import { DateTime } from 'luxon';
 import { Link, useSearchParams } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { RECIPIENT_ROLES_DESCRIPTION } from '@documenso/lib/constants/recipient-roles';
-import type { TEnvelope } from '@documenso/lib/types/envelope';
-import { isDocumentCompleted } from '@documenso/lib/utils/document';
-import { formatSigningLink, isRecipientExpired } from '@documenso/lib/utils/recipients';
-import { CopyTextButton } from '@documenso/ui/components/common/copy-text-button';
-import { SignatureIcon } from '@documenso/ui/icons/signature';
-import { AvatarWithText } from '@documenso/ui/primitives/avatar';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { PopoverHover } from '@documenso/ui/primitives/popover';
+import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient-roles';
+import type { TEnvelope } from '@hanzo/sign-lib/types/envelope';
+import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
+import { formatSigningLink, isRecipientExpired } from '@hanzo/sign-lib/utils/recipients';
+import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
+import { SignatureIcon } from '@hanzo/sign-ui/icons/signature';
+import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { PopoverHover } from '@hanzo/sign-ui/primitives/popover';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@documenso/ui/primitives/tooltip';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type DocumentPageViewRecipientsProps = {
   envelope: TEnvelope;

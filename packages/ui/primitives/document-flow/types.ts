@@ -3,7 +3,7 @@ import { msg } from '@lingui/core/macro';
 import { FieldType } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZFieldMetaSchema } from '@documenso/lib/types/field-meta';
+import { ZFieldMetaSchema } from '@hanzo/sign-lib/types/field-meta';
 
 export const ZDocumentFlowFormSchema = z.object({
   title: z.string().min(1),

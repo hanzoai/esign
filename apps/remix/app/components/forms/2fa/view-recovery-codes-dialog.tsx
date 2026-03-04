@@ -6,11 +6,11 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { authClient } from '@documenso/auth/client';
-import { downloadFile } from '@documenso/lib/client-only/download-file';
-import { AppError } from '@documenso/lib/errors/app-error';
-import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
+import { authClient } from '@hanzo/sign-auth/client';
+import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -20,15 +20,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { PinInput, PinInputGroup, PinInputSlot } from '@documenso/ui/primitives/pin-input';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/sign-ui/primitives/pin-input';
 
 import { RecoveryCodeList } from './recovery-code-list';
 
@@ -74,7 +74,7 @@ export const ViewRecoveryCodesDialog = () => {
       });
 
       downloadFile({
-        filename: 'documenso-2FA-recovery-codes.txt',
+        filename: 'sign-2FA-recovery-codes.txt',
         data: blob,
       });
     }

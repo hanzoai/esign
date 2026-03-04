@@ -7,10 +7,10 @@ import { Trans } from '@lingui/react/macro';
 import { Copy, Sparkles } from 'lucide-react';
 import { FaXTwitter } from 'react-icons/fa6';
 
-import { useCopyShareLink } from '@documenso/lib/client-only/hooks/use-copy-share-link';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { generateTwitterIntent } from '@documenso/lib/universal/generate-twitter-intent';
-import { trpc } from '@documenso/trpc/react';
+import { useCopyShareLink } from '@hanzo/sign-lib/client-only/hooks/use-copy-share-link';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { generateTwitterIntent } from '@hanzo/sign-lib/universal/generate-twitter-intent';
+import { trpc } from '@hanzo/sign-trpc/react';
 
 import { cn } from '../../lib/utils';
 import { Button } from '../../primitives/button';
@@ -108,7 +108,7 @@ export const DocumentShareButton = ({
 
     window.open(
       generateTwitterIntent(
-        `I just ${token ? 'signed' : 'sent'} a document in style with @documenso. Check it out!`,
+        `I just ${token ? 'signed' : 'sent'} a document in style with @hanzoai. Check it out!`,
         `${NEXT_PUBLIC_WEBAPP_URL()}/share/${slug}`,
       ),
       '_blank',
@@ -154,7 +154,7 @@ export const DocumentShareButton = ({
         <div className="flex w-full flex-col">
           <div className="rounded-md border p-4">
             I just {token ? 'signed' : 'sent'} a document in style with{' '}
-            <span className="font-medium text-blue-400">@documenso</span>
+            <span className="font-medium text-blue-400">@hanzoai</span>
             . Check it out!
             <span className="mt-2 block" />
             <span

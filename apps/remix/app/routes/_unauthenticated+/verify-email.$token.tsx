@@ -7,11 +7,11 @@ import { AlertTriangle, CheckCircle2, Loader, XCircle } from 'lucide-react';
 import { Link, redirect, useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { authClient } from '@documenso/auth/client';
-import { useOptionalSession } from '@documenso/lib/client-only/providers/session';
-import { EMAIL_VERIFICATION_STATE } from '@documenso/lib/constants/email';
-import { Button } from '@documenso/ui/primitives/button';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { authClient } from '@hanzo/sign-auth/client';
+import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { EMAIL_VERIFICATION_STATE } from '@hanzo/sign-lib/constants/email';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import type { Route } from './+types/verify-email.$token';
 
@@ -70,7 +70,7 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
   if (isLoading || state === null) {
     return (
       <div className="relative">
-        <Loader className="text-documenso h-8 w-8 animate-spin" />
+        <Loader className="text-sign h-8 w-8 animate-spin" />
       </div>
     );
   }
@@ -147,7 +147,7 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
             <p className="text-muted-foreground mt-4">
               <Trans>
                 Your email has been successfully confirmed! You can now use all features of
-                Documenso.
+                Hanzo Sign.
               </Trans>
             </p>
 
@@ -174,7 +174,7 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
 
             <p className="text-muted-foreground mt-4">
               <Trans>
-                Your email has already been confirmed. You can now use all features of Documenso.
+                Your email has already been confirmed. You can now use all features of Hanzo Sign.
               </Trans>
             </p>
 

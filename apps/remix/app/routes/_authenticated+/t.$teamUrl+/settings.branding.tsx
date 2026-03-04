@@ -1,9 +1,9 @@
 import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 
-import { putFile } from '@documenso/lib/universal/upload/put-file';
-import { trpc } from '@documenso/trpc/react';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { putFile } from '@hanzo/sign-lib/universal/upload/put-file';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import {
   BrandingPreferencesForm,

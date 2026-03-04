@@ -9,8 +9,8 @@ import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { generateEmailDomainRecords } from '@documenso/lib/utils/email-domains';
-import { trpc } from '@documenso/trpc/react';
+import { generateEmailDomainRecords } from '@hanzo/sign-lib/utils/email-domains';
+import { trpc } from '@hanzo/sign-trpc/react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -21,12 +21,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@documenso/ui/primitives/alert-dialog';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/alert-dialog';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import type { Route } from './+types/email-domains.$id';
 

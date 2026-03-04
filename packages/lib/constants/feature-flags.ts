@@ -1,4 +1,4 @@
-import { env } from '@documenso/lib/utils/env';
+import { env } from '@hanzo/sign-lib/utils/env';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from './app';
 

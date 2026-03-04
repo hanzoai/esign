@@ -6,20 +6,20 @@ import { FieldType, SigningStatus } from '@prisma/client';
 import { FileTextIcon } from 'lucide-react';
 import { match } from 'ts-pattern';
 
-import { useCurrentEnvelopeEditor } from '@documenso/lib/client-only/providers/envelope-editor-provider';
+import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
 import {
   EnvelopeRenderProvider,
   useCurrentEnvelopeRender,
-} from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { PDF_VIEWER_ERROR_MESSAGES } from '@documenso/lib/constants/pdf-viewer-i18n';
-import { ZFieldAndMetaSchema } from '@documenso/lib/types/field-meta';
-import { extractFieldInsertionValues } from '@documenso/lib/utils/envelope-signing';
-import { toCheckboxCustomText } from '@documenso/lib/utils/fields';
-import { extractInitials } from '@documenso/lib/utils/recipient-formatter';
-import { AnimateGenericFadeInOut } from '@documenso/ui/components/animate/animate-generic-fade-in-out';
-import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
-import { RecipientSelector } from '@documenso/ui/primitives/recipient-selector';
-import { Separator } from '@documenso/ui/primitives/separator';
+} from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
+import { ZFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
+import { extractFieldInsertionValues } from '@hanzo/sign-lib/utils/envelope-signing';
+import { toCheckboxCustomText } from '@hanzo/sign-lib/utils/fields';
+import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
+import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
+import { RecipientSelector } from '@hanzo/sign-ui/primitives/recipient-selector';
+import { Separator } from '@hanzo/sign-ui/primitives/separator';
 
 import { EnvelopeGenericPageRenderer } from '~/components/general/envelope-editor/envelope-generic-page-renderer';
 import { EnvelopePdfViewer } from '~/components/general/pdf-viewer/envelope-pdf-viewer';

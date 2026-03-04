@@ -8,10 +8,10 @@ import {
 import type { Expression, ExpressionBuilder, SelectQueryBuilder, SqlBool } from 'kysely';
 import { DateTime } from 'luxon';
 
-import type { PeriodSelectorValue } from '@documenso/lib/server-only/document/find-documents';
-import { kyselyPrisma, prisma, sql } from '@documenso/prisma';
-import type { DB } from '@documenso/prisma/generated/types';
-import { ExtendedDocumentStatus } from '@documenso/prisma/types/extended-document-status';
+import type { PeriodSelectorValue } from '@hanzo/sign-lib/server-only/document/find-documents';
+import { kyselyPrisma, prisma, sql } from '@hanzo/sign-prisma';
+import type { DB } from '@hanzo/sign-prisma/generated/types';
+import { ExtendedDocumentStatus } from '@hanzo/sign-prisma/types/extended-document-status';
 
 import { STATS_COUNT_CAP } from '../../constants/document';
 import { TEAM_DOCUMENT_VISIBILITY_MAP } from '../../constants/teams';

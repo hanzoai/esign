@@ -3,21 +3,21 @@ import { base32 } from '@scure/base';
 import crypto from 'crypto';
 import { createTOTPKeyURI } from 'oslo/otp';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
-import { DOCUMENSO_ENCRYPTION_KEY } from '../../constants/crypto';
+import { SIGN_ENCRYPTION_KEY } from '../../constants/crypto';
 import { symmetricEncrypt } from '../../universal/crypto';
 
 type SetupTwoFactorAuthenticationOptions = {
   user: Pick<User, 'id' | 'email'>;
 };
 
-const ISSUER = 'Documenso';
+const ISSUER = process.env.NEXT_PUBLIC_APP_NAME || 'Hanzo Sign';
 
 export const setupTwoFactorAuthentication = async ({
   user,
 }: SetupTwoFactorAuthenticationOptions) => {
-  const key = DOCUMENSO_ENCRYPTION_KEY;
+  const key = SIGN_ENCRYPTION_KEY;
 
   if (!key) {
     throw new Error('MISSING_ENCRYPTION_KEY');

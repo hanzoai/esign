@@ -1,12 +1,12 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { getServerLimits } from '@documenso/ee/server-only/limits/server';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { sendDocument } from '@documenso/lib/server-only/document/send-document';
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { createDocumentFromTemplate } from '@documenso/lib/server-only/template/create-document-from-template';
-import { putNormalizedPdfFileServerSide } from '@documenso/lib/universal/upload/put-file.server';
-import { formatSigningLink } from '@documenso/lib/utils/recipients';
+import { getServerLimits } from '@hanzo/sign-ee/server-only/limits/server';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { sendDocument } from '@hanzo/sign-lib/server-only/document/send-document';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { createDocumentFromTemplate } from '@hanzo/sign-lib/server-only/template/create-document-from-template';
+import { putNormalizedPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
+import { formatSigningLink } from '@hanzo/sign-lib/utils/recipients';
 
 import { authenticatedProcedure } from '../trpc';
 import {

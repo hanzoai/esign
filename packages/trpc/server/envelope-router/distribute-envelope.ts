@@ -1,6 +1,6 @@
-import { updateDocumentMeta } from '@documenso/lib/server-only/document-meta/upsert-document-meta';
-import { sendDocument } from '@documenso/lib/server-only/document/send-document';
-import { formatSigningLink } from '@documenso/lib/utils/recipients';
+import { updateDocumentMeta } from '@hanzo/sign-lib/server-only/document-meta/upsert-document-meta';
+import { sendDocument } from '@hanzo/sign-lib/server-only/document/send-document';
+import { formatSigningLink } from '@hanzo/sign-lib/utils/recipients';
 
 import { authenticatedProcedure } from '../trpc';
 import {

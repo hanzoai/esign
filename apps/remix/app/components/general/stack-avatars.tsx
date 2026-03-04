@@ -5,8 +5,8 @@ import type { Recipient } from '@prisma/client';
 import {
   getExtraRecipientsType,
   getRecipientType,
-} from '@documenso/lib/client-only/recipient-type';
-import { recipientAbbreviation } from '@documenso/lib/utils/recipient-formatter';
+} from '@hanzo/sign-lib/client-only/recipient-type';
+import { recipientAbbreviation } from '@hanzo/sign-lib/utils/recipient-formatter';
 
 import { StackAvatar } from './stack-avatar';
 

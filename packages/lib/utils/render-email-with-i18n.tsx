@@ -1,5 +1,5 @@
-import type { RenderOptions } from '@documenso/email/render';
-import { renderWithI18N } from '@documenso/email/render';
+import type { RenderOptions } from '@hanzo/sign-email/render';
+import { renderWithI18N } from '@hanzo/sign-email/render';
 
 import { getI18nInstance } from '../client-only/providers/i18n-server';
 import {

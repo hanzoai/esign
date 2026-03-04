@@ -1,5 +1,5 @@
-import { findDocuments } from '@documenso/lib/server-only/document/find-documents';
-import { mapEnvelopesToDocumentMany } from '@documenso/lib/utils/document';
+import { findDocuments } from '@hanzo/sign-lib/server-only/document/find-documents';
+import { mapEnvelopesToDocumentMany } from '@hanzo/sign-lib/utils/document';
 
 import { authenticatedProcedure } from '../trpc';
 import {

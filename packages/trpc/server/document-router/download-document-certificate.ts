@@ -1,11 +1,11 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { PDF_SIZE_A4_72PPI } from '@documenso/lib/constants/pdf';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { getEnvelopeWhereInput } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { generateCertificatePdf } from '@documenso/lib/server-only/pdf/generate-certificate-pdf';
-import { isDocumentCompleted } from '@documenso/lib/utils/document';
-import { prisma } from '@documenso/prisma';
+import { PDF_SIZE_A4_72PPI } from '@hanzo/sign-lib/constants/pdf';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { getEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { generateCertificatePdf } from '@hanzo/sign-lib/server-only/pdf/generate-certificate-pdf';
+import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

@@ -13,19 +13,19 @@ import { GripVerticalIcon, HelpCircle, Plus, Trash } from 'lucide-react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { prop, sortBy } from 'remeda';
 
-import { useLimits } from '@documenso/ee/server-only/limits/provider/client';
-import { useAutoSave } from '@documenso/lib/client-only/hooks/use-autosave';
-import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { ZRecipientAuthOptionsSchema } from '@documenso/lib/types/document-auth';
-import { nanoid } from '@documenso/lib/universal/id';
-import { canRecipientBeModified as utilCanRecipientBeModified } from '@documenso/lib/utils/recipients';
-import { trpc } from '@documenso/trpc/react';
-import { AnimateGenericFadeInOut } from '@documenso/ui/components/animate/animate-generic-fade-in-out';
-import { RecipientActionAuthSelect } from '@documenso/ui/components/recipient/recipient-action-auth-select';
-import { RecipientRoleSelect } from '@documenso/ui/components/recipient/recipient-role-select';
-import { cn } from '@documenso/ui/lib/utils';
+import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
+import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { ZRecipientAuthOptionsSchema } from '@hanzo/sign-lib/types/document-auth';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { canRecipientBeModified as utilCanRecipientBeModified } from '@hanzo/sign-lib/utils/recipients';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
+import { RecipientActionAuthSelect } from '@hanzo/sign-ui/components/recipient/recipient-action-auth-select';
+import { RecipientRoleSelect } from '@hanzo/sign-ui/components/recipient/recipient-role-select';
+import { cn } from '@hanzo/sign-ui/lib/utils';
 
 import {
   DocumentReadOnlyFields,

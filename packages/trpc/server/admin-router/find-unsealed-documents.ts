@@ -1,4 +1,4 @@
-import { adminFindUnsealedDocuments } from '@documenso/lib/server-only/admin/admin-find-unsealed-documents';
+import { adminFindUnsealedDocuments } from '@hanzo/sign-lib/server-only/admin/admin-find-unsealed-documents';
 
 import { adminProcedure } from '../trpc';
 import {

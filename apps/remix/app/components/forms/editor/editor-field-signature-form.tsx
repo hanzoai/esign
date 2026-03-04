@@ -5,9 +5,9 @@ import { Trans } from '@lingui/react/macro';
 import { useForm, useWatch } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { DEFAULT_SIGNATURE_TEXT_FONT_SIZE } from '@documenso/lib/constants/pdf';
-import { type TSignatureFieldMeta, ZSignatureFieldMeta } from '@documenso/lib/types/field-meta';
-import { Form } from '@documenso/ui/primitives/form/form';
+import { DEFAULT_SIGNATURE_TEXT_FONT_SIZE } from '@hanzo/sign-lib/constants/pdf';
+import { type TSignatureFieldMeta, ZSignatureFieldMeta } from '@hanzo/sign-lib/types/field-meta';
+import { Form } from '@hanzo/sign-ui/primitives/form/form';
 
 import { EditorGenericFontSizeField } from './editor-field-generic-field-forms';
 

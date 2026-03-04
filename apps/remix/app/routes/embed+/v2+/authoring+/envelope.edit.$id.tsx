@@ -5,24 +5,24 @@ import { EnvelopeType } from '@prisma/client';
 import { CheckCircle2Icon } from 'lucide-react';
 import { redirect } from 'react-router';
 
-import { EnvelopeEditorProvider } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import type { SupportedLanguageCodes } from '@documenso/lib/constants/i18n';
-import { verifyEmbeddingPresignToken } from '@documenso/lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { getEditorEnvelopeById } from '@documenso/lib/server-only/envelope/get-editor-envelope-by-id';
-import { getTeamSettings } from '@documenso/lib/server-only/team/get-team-settings';
-import type { TDocumentMetaDateFormat } from '@documenso/lib/types/document-meta';
-import type { TEditorEnvelope } from '@documenso/lib/types/envelope-editor';
+import { EnvelopeEditorProvider } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import type { SupportedLanguageCodes } from '@hanzo/sign-lib/constants/i18n';
+import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { getEditorEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-editor-envelope-by-id';
+import { getTeamSettings } from '@hanzo/sign-lib/server-only/team/get-team-settings';
+import type { TDocumentMetaDateFormat } from '@hanzo/sign-lib/types/document-meta';
+import type { TEditorEnvelope } from '@hanzo/sign-lib/types/envelope-editor';
 import {
   type TEmbedEditEnvelopeAuthoring,
   ZEmbedEditEnvelopeAuthoringSchema,
-} from '@documenso/lib/types/envelope-editor';
-import type { TEnvelopeFieldAndMeta } from '@documenso/lib/types/field-meta';
-import { buildEmbeddedEditorOptions } from '@documenso/lib/utils/embed-config';
-import { prisma } from '@documenso/prisma';
-import { trpc } from '@documenso/trpc/react';
-import type { TUpdateEmbeddingEnvelopePayload } from '@documenso/trpc/server/embedding-router/update-embedding-envelope.types';
-import { Spinner } from '@documenso/ui/primitives/spinner';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-lib/types/envelope-editor';
+import type { TEnvelopeFieldAndMeta } from '@hanzo/sign-lib/types/field-meta';
+import { buildEmbeddedEditorOptions } from '@hanzo/sign-lib/utils/embed-config';
+import { prisma } from '@hanzo/sign-prisma';
+import { trpc } from '@hanzo/sign-trpc/react';
+import type { TUpdateEmbeddingEnvelopePayload } from '@hanzo/sign-trpc/server/embedding-router/update-embedding-envelope.types';
+import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { EnvelopeEditor } from '~/components/general/envelope-editor/envelope-editor';
 import { EnvelopeEditorRenderProviderWrapper } from '~/components/general/envelope-editor/envelope-editor-renderer-provider-wrapper';

@@ -1,7 +1,7 @@
 import { DocumentSource, EnvelopeType, WebhookTriggerEvents } from '@prisma/client';
 import { omit } from 'remeda';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import {

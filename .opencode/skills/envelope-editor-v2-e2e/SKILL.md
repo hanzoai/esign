@@ -79,8 +79,8 @@ import { type Page, expect, test } from '@playwright/test';
 // Prisma enums if needed for DB assertions
 import { SomePrismaEnum } from '@prisma/client';
 
-import { nanoid } from '@documenso/lib/universal/id';
-import { prisma } from '@documenso/prisma';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { prisma } from '@hanzo/sign-prisma';
 
 import {
   type TEnvelopeEditorSurface, // Import needed helpers from the fixture
@@ -333,16 +333,16 @@ Every test uses an `externalId` (e.g., `e2e-feature-${nanoid()}`) set via the se
 
 ```bash
 # Run all envelope editor tests
-npm run test:dev -w @documenso/app-tests -- --grep "Envelope Editor V2"
+npm run test:dev -w @hanzo/sign-app-tests -- --grep "Envelope Editor V2"
 
 # Run a specific test file
-npm run test:dev -w @documenso/app-tests -- e2e/envelope-editor-v2/envelope-recipients.spec.ts
+npm run test:dev -w @hanzo/sign-app-tests -- e2e/envelope-editor-v2/envelope-recipients.spec.ts
 
 # Run with UI
-npm run test-ui:dev -w @documenso/app-tests -- e2e/envelope-editor-v2/
+npm run test-ui:dev -w @hanzo/sign-app-tests -- e2e/envelope-editor-v2/
 
 # Run specific test by name
-npm run test:dev -w @documenso/app-tests -- --grep "documents/<id>: add myself"
+npm run test:dev -w @hanzo/sign-app-tests -- --grep "documents/<id>: add myself"
 ```
 
 ## Checklist When Writing a New Test

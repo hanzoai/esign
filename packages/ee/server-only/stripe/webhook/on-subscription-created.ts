@@ -4,17 +4,17 @@ import { match } from 'ts-pattern';
 import {
   createOrganisation,
   createOrganisationClaimUpsertData,
-} from '@documenso/lib/server-only/organisation/create-organisation';
-import { type Stripe } from '@documenso/lib/server-only/stripe';
+} from '@hanzo/sign-lib/server-only/organisation/create-organisation';
+import { type Stripe } from '@hanzo/sign-lib/server-only/stripe';
 import type {
   InternalClaim,
   StripeOrganisationCreateMetadata,
-} from '@documenso/lib/types/subscription';
+} from '@hanzo/sign-lib/types/subscription';
 import {
   INTERNAL_CLAIM_ID,
   ZStripeOrganisationCreateMetadataSchema,
-} from '@documenso/lib/types/subscription';
-import { prisma } from '@documenso/prisma';
+} from '@hanzo/sign-lib/types/subscription';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { extractStripeClaim } from './on-subscription-updated';
 

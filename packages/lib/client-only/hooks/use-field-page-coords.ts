@@ -2,11 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 import type { Field } from '@prisma/client';
 
-import { getBoundingClientRect } from '@documenso/lib/client-only/get-bounding-client-rect';
+import { getBoundingClientRect } from '@hanzo/sign-lib/client-only/get-bounding-client-rect';
 import {
   PDF_VIEWER_CONTENT_SELECTOR,
   PDF_VIEWER_PAGE_SELECTOR,
-} from '@documenso/lib/constants/pdf-viewer';
+} from '@hanzo/sign-lib/constants/pdf-viewer';
 
 export const useFieldPageCoords = (
   field: Pick<Field, 'positionX' | 'positionY' | 'width' | 'height' | 'page'>,

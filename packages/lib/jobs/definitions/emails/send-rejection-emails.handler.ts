@@ -3,15 +3,15 @@ import { createElement } from 'react';
 import { msg } from '@lingui/core/macro';
 import { EnvelopeType, SendStatus, SigningStatus } from '@prisma/client';
 
-import { mailer } from '@documenso/email/mailer';
-import DocumentRejectedEmail from '@documenso/email/templates/document-rejected';
-import DocumentRejectionConfirmedEmail from '@documenso/email/templates/document-rejection-confirmed';
-import { isRecipientEmailValidForSending } from '@documenso/lib/utils/recipients';
-import { prisma } from '@documenso/prisma';
+import { mailer } from '@hanzo/sign-email/mailer';
+import DocumentRejectedEmail from '@hanzo/sign-email/templates/document-rejected';
+import DocumentRejectionConfirmedEmail from '@hanzo/sign-email/templates/document-rejection-confirmed';
+import { isRecipientEmailValidForSending } from '@hanzo/sign-lib/utils/recipients';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';
-import { DOCUMENSO_INTERNAL_EMAIL } from '../../../constants/email';
+import { SIGN_INTERNAL_EMAIL } from '../../../constants/email';
 import { getEmailContext } from '../../../server-only/email/get-email-context';
 import { extractDerivedDocumentEmailSettings } from '../../../types/document-email';
 import { unsafeBuildEnvelopeIdQuery } from '../../../utils/envelope';
@@ -145,7 +145,7 @@ export const run = async ({
         name: documentOwner.name || '',
         address: documentOwner.email,
       },
-      from: DOCUMENSO_INTERNAL_EMAIL, // Purposefully using internal email here.
+      from: SIGN_INTERNAL_EMAIL, // Purposefully using internal email here.
       subject: i18n._(msg`Document "${envelope.title}" - Rejected by ${recipient.name}`),
       html,
       text,

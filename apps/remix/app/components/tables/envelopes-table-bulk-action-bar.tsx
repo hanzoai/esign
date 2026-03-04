@@ -2,7 +2,7 @@ import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import { FolderInputIcon, Trash2Icon, XIcon } from 'lucide-react';
 
-import { Button } from '@documenso/ui/primitives/button';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 export type EnvelopesTableBulkActionBarProps = {
   selectedCount: number;

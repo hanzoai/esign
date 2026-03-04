@@ -1,20 +1,20 @@
 import { expect, test } from '@playwright/test';
 import type { Team, User } from '@prisma/client';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { createApiToken } from '@documenso/lib/server-only/public-api/create-api-token';
-import { prisma } from '@documenso/prisma';
-import { DocumentStatus, DocumentVisibility, TeamMemberRole } from '@documenso/prisma/client';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/sign-prisma';
+import { DocumentStatus, DocumentVisibility, TeamMemberRole } from '@hanzo/sign-prisma/client';
 import {
   seedBlankDocument,
   seedCompletedDocument,
   seedDocuments,
   seedDraftDocument,
   seedPendingDocument,
-} from '@documenso/prisma/seed/documents';
-import { seedTeam, seedTeamEmail, seedTeamMember } from '@documenso/prisma/seed/teams';
-import { seedUser } from '@documenso/prisma/seed/users';
-import type { TFindDocumentsResponse } from '@documenso/trpc/server/document-router/find-documents.types';
+} from '@hanzo/sign-prisma/seed/documents';
+import { seedTeam, seedTeamEmail, seedTeamMember } from '@hanzo/sign-prisma/seed/teams';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import type { TFindDocumentsResponse } from '@hanzo/sign-trpc/server/document-router/find-documents.types';
 
 import { apiSignin } from '../../fixtures/authentication';
 
@@ -932,7 +932,7 @@ test.describe('Find Documents API - Team with Team Email', () => {
   }) => {
     const { team, owner } = await seedTeam();
 
-    const teamEmail = `team-email-${team.id}@test.documenso.com`;
+    const teamEmail = `team-email-${team.id}@test.sign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmail, teamId: team.id });
 
     const { user: externalUser, team: externalTeam } = await seedUser();
@@ -983,7 +983,7 @@ test.describe('Find Documents API - Team with Team Email', () => {
   }) => {
     const { team } = await seedTeam();
 
-    const teamEmail = `team-vis-email-${team.id}@test.documenso.com`;
+    const teamEmail = `team-vis-email-${team.id}@test.sign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmail, teamId: team.id });
 
     const admin = await seedTeamMember({ teamId: team.id, role: TeamMemberRole.ADMIN });

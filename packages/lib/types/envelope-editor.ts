@@ -1,15 +1,15 @@
 import { EnvelopeType } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZBaseEmbedDataSchema } from '@documenso/lib/types/embed-base-schemas';
-import { ZEnvelopeFieldSchema } from '@documenso/lib/types/field';
-import { ZEnvelopeRecipientLiteSchema } from '@documenso/lib/types/recipient';
-import { DocumentMetaSchema } from '@documenso/prisma/generated/zod/modelSchema/DocumentMetaSchema';
-import { EnvelopeAttachmentSchema } from '@documenso/prisma/generated/zod/modelSchema/EnvelopeAttachmentSchema';
-import { EnvelopeItemSchema } from '@documenso/prisma/generated/zod/modelSchema/EnvelopeItemSchema';
-import { EnvelopeSchema } from '@documenso/prisma/generated/zod/modelSchema/EnvelopeSchema';
-import { TeamSchema } from '@documenso/prisma/generated/zod/modelSchema/TeamSchema';
-import { TemplateDirectLinkSchema } from '@documenso/prisma/generated/zod/modelSchema/TemplateDirectLinkSchema';
+import { ZBaseEmbedDataSchema } from '@hanzo/sign-lib/types/embed-base-schemas';
+import { ZEnvelopeFieldSchema } from '@hanzo/sign-lib/types/field';
+import { ZEnvelopeRecipientLiteSchema } from '@hanzo/sign-lib/types/recipient';
+import { DocumentMetaSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/DocumentMetaSchema';
+import { EnvelopeAttachmentSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeAttachmentSchema';
+import { EnvelopeItemSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
+import { EnvelopeSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeSchema';
+import { TeamSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/TeamSchema';
+import { TemplateDirectLinkSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/TemplateDirectLinkSchema';
 
 /**
  * DO NOT MAKE ANY BREAKING BACKWARD CHANGES HERE UNLESS YOU'RE SURE

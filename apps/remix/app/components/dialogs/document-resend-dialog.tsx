@@ -9,14 +9,14 @@ import { History } from 'lucide-react';
 import { useForm, useWatch } from 'react-hook-form';
 import * as z from 'zod';
 
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { getRecipientType } from '@documenso/lib/client-only/recipient-type';
-import { recipientAbbreviation } from '@documenso/lib/utils/recipient-formatter';
-import type { Document } from '@documenso/prisma/types/document-legacy-schema';
-import { trpc as trpcReact } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
-import { Checkbox } from '@documenso/ui/primitives/checkbox';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { getRecipientType } from '@hanzo/sign-lib/client-only/recipient-type';
+import { recipientAbbreviation } from '@hanzo/sign-lib/utils/recipient-formatter';
+import type { Document } from '@hanzo/sign-prisma/types/document-legacy-schema';
+import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
 import {
   Dialog,
   DialogClose,
@@ -25,16 +25,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
-import { DropdownMenuItem } from '@documenso/ui/primitives/dropdown-menu';
+} from '@hanzo/sign-ui/primitives/dialog';
+import { DropdownMenuItem } from '@hanzo/sign-ui/primitives/dropdown-menu';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from '@documenso/ui/primitives/form/form';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

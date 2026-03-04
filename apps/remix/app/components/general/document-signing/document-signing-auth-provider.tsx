@@ -2,17 +2,17 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import { type Envelope, FieldType, type Passkey, type Recipient } from '@prisma/client';
 
-import type { SessionUser } from '@documenso/auth/server/lib/session/session';
-import { MAXIMUM_PASSKEYS } from '@documenso/lib/constants/auth';
+import type { SessionUser } from '@hanzo/sign-auth/server/lib/session/session';
+import { MAXIMUM_PASSKEYS } from '@hanzo/sign-lib/constants/auth';
 import type {
   TDocumentAuthOptions,
   TRecipientAccessAuthTypes,
   TRecipientActionAuthTypes,
   TRecipientAuthOptions,
-} from '@documenso/lib/types/document-auth';
-import { DocumentAuth } from '@documenso/lib/types/document-auth';
-import { extractDocumentAuthMethods } from '@documenso/lib/utils/document-auth';
-import { trpc } from '@documenso/trpc/react';
+} from '@hanzo/sign-lib/types/document-auth';
+import { DocumentAuth } from '@hanzo/sign-lib/types/document-auth';
+import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
+import { trpc } from '@hanzo/sign-trpc/react';
 
 import type { DocumentSigningAuthDialogProps } from './document-signing-auth-dialog';
 import { DocumentSigningAuthDialog } from './document-signing-auth-dialog';

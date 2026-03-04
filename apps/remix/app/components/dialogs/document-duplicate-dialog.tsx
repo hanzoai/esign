@@ -3,17 +3,17 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useNavigate } from 'react-router';
 
-import { formatDocumentsPath } from '@documenso/lib/utils/teams';
-import { trpc as trpcReact } from '@documenso/trpc/react';
-import { Button } from '@documenso/ui/primitives/button';
+import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
+import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@documenso/ui/primitives/dialog';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dialog';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

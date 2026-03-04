@@ -1,7 +1,7 @@
 import { WebhookCallStatus, WebhookTriggerEvents } from '@prisma/client';
 import { z } from 'zod';
 
-import WebhookCallSchema from '@documenso/prisma/generated/zod/modelSchema/WebhookCallSchema';
+import WebhookCallSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/WebhookCallSchema';
 
 export const ZResendWebhookCallRequestSchema = z.object({
   webhookId: z.string(),

@@ -1,24 +1,24 @@
 import { expect, test } from '@playwright/test';
 import type { Team, User } from '@prisma/client';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { createApiToken } from '@documenso/lib/server-only/public-api/create-api-token';
-import { prisma } from '@documenso/prisma';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/sign-prisma';
 import {
   DocumentStatus,
   DocumentVisibility,
   EnvelopeType,
   TeamMemberRole,
-} from '@documenso/prisma/client';
+} from '@hanzo/sign-prisma/client';
 import {
   seedBlankDocument,
   seedCompletedDocument,
   seedDraftDocument,
   seedPendingDocument,
-} from '@documenso/prisma/seed/documents';
-import { seedTeam, seedTeamEmail, seedTeamMember } from '@documenso/prisma/seed/teams';
-import { seedUser } from '@documenso/prisma/seed/users';
-import type { TFindEnvelopesResponse } from '@documenso/trpc/server/envelope-router/find-envelopes.types';
+} from '@hanzo/sign-prisma/seed/documents';
+import { seedTeam, seedTeamEmail, seedTeamMember } from '@hanzo/sign-prisma/seed/teams';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import type { TFindEnvelopesResponse } from '@hanzo/sign-trpc/server/envelope-router/find-envelopes.types';
 
 import { apiSignin } from '../../fixtures/authentication';
 
@@ -676,7 +676,7 @@ test.describe('Find Envelopes API - Team Email', () => {
     request,
   }) => {
     const { team, owner } = await seedTeam();
-    const teamEmailAddr = `team-find-env-${team.id}@test.documenso.com`;
+    const teamEmailAddr = `team-find-env-${team.id}@test.sign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmailAddr, teamId: team.id });
 
     const { user: externalUser, team: externalTeam } = await seedUser();
@@ -715,7 +715,7 @@ test.describe('Find Envelopes API - Team Email', () => {
     request,
   }) => {
     const { team: teamA, owner: ownerA } = await seedTeam();
-    const teamEmailAddr = `team-noise-${teamA.id}@test.documenso.com`;
+    const teamEmailAddr = `team-noise-${teamA.id}@test.sign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmailAddr, teamId: teamA.id });
 
     const { team: teamB, owner: ownerB } = await seedTeam();
@@ -742,7 +742,7 @@ test.describe('Find Envelopes API - Team Email', () => {
 
   test('team email received docs bypass visibility for managers', async ({ request }) => {
     const { team, owner } = await seedTeam();
-    const teamEmailAddr = `team-vis-env-${team.id}@test.documenso.com`;
+    const teamEmailAddr = `team-vis-env-${team.id}@test.sign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmailAddr, teamId: team.id });
 
     const { user: externalUser, team: externalTeam } = await seedUser();

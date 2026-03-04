@@ -2,9 +2,9 @@ import { createElement } from 'react';
 
 import { msg } from '@lingui/core/macro';
 
-import { mailer } from '@documenso/email/mailer';
-import { ForgotPasswordTemplate } from '@documenso/email/templates/forgot-password';
-import { prisma } from '@documenso/prisma';
+import { mailer } from '@hanzo/sign-email/mailer';
+import { ForgotPasswordTemplate } from '@hanzo/sign-email/templates/forgot-password';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';
@@ -56,8 +56,8 @@ export const sendForgotPassword = async ({ userId }: SendForgotPasswordOptions) 
       name: user.name || '',
     },
     from: {
-      name: env('NEXT_PRIVATE_SMTP_FROM_NAME') || 'Documenso',
-      address: env('NEXT_PRIVATE_SMTP_FROM_ADDRESS') || 'noreply@documenso.com',
+      name: env('NEXT_PRIVATE_SMTP_FROM_NAME') || 'Hanzo Sign',
+      address: env('NEXT_PRIVATE_SMTP_FROM_ADDRESS') || 'noreply@sign.hanzo.ai',
     },
     subject: i18n._(msg`Forgot Password?`),
     html,

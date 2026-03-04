@@ -5,13 +5,13 @@ import { EnvelopeType } from '@prisma/client';
 import { Bird } from 'lucide-react';
 import { useParams, useSearchParams } from 'react-router';
 
-import { useSessionStorage } from '@documenso/lib/client-only/hooks/use-session-storage';
-import { FolderType } from '@documenso/lib/types/folder-type';
-import { formatAvatarUrl } from '@documenso/lib/utils/avatars';
-import { formatDocumentsPath, formatTemplatesPath } from '@documenso/lib/utils/teams';
-import { trpc } from '@documenso/trpc/react';
-import { Avatar, AvatarFallback, AvatarImage } from '@documenso/ui/primitives/avatar';
-import type { RowSelectionState } from '@documenso/ui/primitives/data-table';
+import { useSessionStorage } from '@hanzo/sign-lib/client-only/hooks/use-session-storage';
+import { FolderType } from '@hanzo/sign-lib/types/folder-type';
+import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
+import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
+import type { RowSelectionState } from '@hanzo/sign-ui/primitives/data-table';
 
 import { EnvelopesBulkDeleteDialog } from '~/components/dialogs/envelopes-bulk-delete-dialog';
 import { EnvelopesBulkMoveDialog } from '~/components/dialogs/envelopes-bulk-move-dialog';

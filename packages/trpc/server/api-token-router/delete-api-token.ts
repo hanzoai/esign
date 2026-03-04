@@ -1,4 +1,4 @@
-import { deleteTokenById } from '@documenso/lib/server-only/public-api/delete-api-token-by-id';
+import { deleteTokenById } from '@hanzo/sign-lib/server-only/public-api/delete-api-token-by-id';
 
 import { authenticatedProcedure } from '../trpc';
 import {

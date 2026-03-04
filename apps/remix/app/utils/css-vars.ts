@@ -1,7 +1,7 @@
 import { colord } from 'colord';
 import { toKebabCase } from 'remeda';
 
-import type { TCssVarsSchema } from '@documenso/lib/types/css-vars';
+import type { TCssVarsSchema } from '@hanzo/sign-lib/types/css-vars';
 
 export const toNativeCssVars = (vars: TCssVarsSchema) => {
   const cssVars: Record<string, string> = {};

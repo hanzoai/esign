@@ -5,15 +5,15 @@ import { SubscriptionStatus } from '@prisma/client';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { formatAvatarUrl } from '@documenso/lib/utils/avatars';
-import { canExecuteOrganisationAction } from '@documenso/lib/utils/organisations';
-import { AvatarWithText } from '@documenso/ui/primitives/avatar';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
+import { canExecuteOrganisationAction } from '@hanzo/sign-lib/utils/organisations';
+import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
 
 export const UserBillingOrganisationsTable = () => {
   const { t } = useLingui();

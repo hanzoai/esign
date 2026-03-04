@@ -15,20 +15,20 @@ import {
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import type { TEnvelope } from '@documenso/lib/types/envelope';
-import { isDocumentCompleted } from '@documenso/lib/utils/document';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
-import { formatDocumentsPath } from '@documenso/lib/utils/teams';
-import { DocumentShareButton } from '@documenso/ui/components/document/document-share-button';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import type { TEnvelope } from '@hanzo/sign-lib/types/envelope';
+import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
+import { DocumentShareButton } from '@hanzo/sign-ui/components/document/document-share-button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@documenso/ui/primitives/dropdown-menu';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dropdown-menu';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { DocumentDeleteDialog } from '~/components/dialogs/document-delete-dialog';
 import { DocumentDuplicateDialog } from '~/components/dialogs/document-duplicate-dialog';

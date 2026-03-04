@@ -1,6 +1,6 @@
 import { posthog } from 'posthog-js';
 
-import { extractPostHogConfig } from '@documenso/lib/constants/feature-flags';
+import { extractPostHogConfig } from '@hanzo/sign-lib/constants/feature-flags';
 
 export function useAnalytics() {
   // const featureFlags = useFeatureFlags();

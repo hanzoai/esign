@@ -1,9 +1,9 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { verifyEmbeddingPresignToken } from '@documenso/lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { createEnvelope } from '@documenso/lib/server-only/envelope/create-envelope';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
 
 import { procedure } from '../trpc';
 import {

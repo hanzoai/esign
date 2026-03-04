@@ -1,4 +1,4 @@
-import { getEditorEnvelopeById } from '@documenso/lib/server-only/envelope/get-editor-envelope-by-id';
+import { getEditorEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-editor-envelope-by-id';
 
 import { authenticatedProcedure } from '../trpc';
 import {

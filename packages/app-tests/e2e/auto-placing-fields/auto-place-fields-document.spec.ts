@@ -1,9 +1,9 @@
 import { type Page, expect, test } from '@playwright/test';
 import path from 'path';
 
-import { prisma } from '@documenso/prisma';
-import { RecipientRole } from '@documenso/prisma/client';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { prisma } from '@hanzo/sign-prisma';
+import { RecipientRole } from '@hanzo/sign-prisma/client';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 
@@ -116,7 +116,7 @@ test.describe('PDF Placeholders with single recipient', () => {
       });
 
       const placeholderRecipient = recipients.find(
-        (recipient) => recipient.email === 'recipient.1@documenso.com',
+        (recipient) => recipient.email === 'recipient.1@sign.hanzo.ai',
       );
 
       const defaultRecipient = recipients.find((recipient) => recipient.email === user.email);
@@ -142,7 +142,7 @@ test.describe('PDF Placeholders with single recipient', () => {
     // V2 editor shows recipients on the upload page under "Recipients" heading.
     await expect(page.getByRole('heading', { name: 'Recipients' })).toBeVisible();
     await expect(page.getByTestId('signer-email-input').first()).toHaveValue(
-      'recipient.1@documenso.com',
+      'recipient.1@sign.hanzo.ai',
     );
     await expect(page.getByLabel('Name').first()).toHaveValue('Recipient 1');
   });
@@ -197,15 +197,15 @@ test.describe('PDF Placeholders with multiple recipients', () => {
     await expect(page.getByRole('heading', { name: 'Recipients' })).toBeVisible();
 
     await expect(page.getByTestId('signer-email-input').first()).toHaveValue(
-      'recipient.1@documenso.com',
+      'recipient.1@sign.hanzo.ai',
     );
 
     await expect(page.getByTestId('signer-email-input').nth(1)).toHaveValue(
-      'recipient.2@documenso.com',
+      'recipient.2@sign.hanzo.ai',
     );
 
     await expect(page.getByTestId('signer-email-input').nth(2)).toHaveValue(
-      'recipient.3@documenso.com',
+      'recipient.3@sign.hanzo.ai',
     );
 
     // Verify recipients via the database for name validation since the v2 editor

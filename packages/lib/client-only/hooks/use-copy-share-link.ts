@@ -1,5 +1,5 @@
-import { trpc } from '@documenso/trpc/react';
-import type { TShareDocumentRequest } from '@documenso/trpc/server/document-router/share-document.types';
+import { trpc } from '@hanzo/sign-trpc/react';
+import type { TShareDocumentRequest } from '@hanzo/sign-trpc/server/document-router/share-document.types';
 
 import { useCopyToClipboard } from './use-copy-to-clipboard';
 

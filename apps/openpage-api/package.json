@@ -1,5 +1,5 @@
 {
-  "name": "@documenso/openpage-api",
+  "name": "@hanzo/sign-openpage-api",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "clean": "rimraf .next && rimraf node_modules"
   },
   "dependencies": {
-    "@documenso/prisma": "*",
+    "@hanzo/sign-prisma": "*",
     "luxon": "^3.7.2",
     "next": "15.5.12"
   },

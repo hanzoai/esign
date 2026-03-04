@@ -1,6 +1,6 @@
 import { UserSecurityAuditLogType } from '@prisma/client';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import type { RequestMetadata } from '../../universal/extract-request-metadata';
 

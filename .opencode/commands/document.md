@@ -3,7 +3,7 @@ description: Generate MDX documentation for a module or feature
 argument-hint: <module-path-or-feature>
 ---
 
-You are creating proper MDX documentation for a module or feature in Documenso using Nextra.
+You are creating proper MDX documentation for a module or feature in Hanzo Sign using Nextra.
 
 ## Your Task
 
@@ -66,14 +66,14 @@ Brief description of what this module/feature does and when to use it.
 If there are specific packages or imports needed:
 
 ```bash
-npm install @documenso/package-name
+npm install @hanzo/sign-package-name
 ```
 
 ## Quick Start
 
 ```jsx
 // Minimal working example
-import { Component } from '@documenso/package';
+import { Component } from '@hanzo/sign-package';
 
 const Example = () => {
   return <Component />;
@@ -96,7 +96,7 @@ Description of what it does.
 #### Example
 
 ```jsx
-import { Component } from '@documenso/package';
+import { Component } from '@hanzo/sign-package';
 
 <Component prop="value" optional={true} />;
 ```
@@ -198,4 +198,4 @@ import { Callout, Steps } from 'nextra/components';
 
 ## Begin
 
-Analyze `$ARGUMENTS`, read the relevant source code, check existing documentation patterns, and create comprehensive MDX documentation following the Documenso documentation style.
+Analyze `$ARGUMENTS`, read the relevant source code, check existing documentation patterns, and create comprehensive MDX documentation following the Hanzo Sign documentation style.

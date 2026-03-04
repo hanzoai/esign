@@ -1,7 +1,7 @@
-import { getInvoices } from '@documenso/ee/server-only/stripe/get-invoices';
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/teams';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { prisma } from '@documenso/prisma';
+import { getInvoices } from '@hanzo/sign-ee/server-only/stripe/get-invoices';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { prisma } from '@hanzo/sign-prisma';
 
 export interface FindTeamInvoicesOptions {
   userId: number;

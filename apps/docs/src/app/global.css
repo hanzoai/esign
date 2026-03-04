@@ -4,9 +4,9 @@
 
 @theme {
   /* Brand utility colors */
-  --color-documenso: hsl(95.08, 71.08%, 67.45%);
-  --color-documenso-dark: hsl(95.08, 71.08%, 54%);
-  --color-documenso-darker: hsl(95.08, 71.08%, 41%);
+  --color-sign: hsl(95.08, 71.08%, 67.45%);
+  --color-sign-dark: hsl(95.08, 71.08%, 54%);
+  --color-sign-darker: hsl(95.08, 71.08%, 41%);
 }
 
 :root {

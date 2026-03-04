@@ -16,34 +16,34 @@ import { useFieldArray, useWatch } from 'react-hook-form';
 import { useRevalidator, useSearchParams } from 'react-router';
 import { isDeepEqual } from 'remeda';
 
-import { useLimits } from '@documenso/ee/server-only/limits/provider/client';
-import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
-import { ZEditorRecipientsFormSchema } from '@documenso/lib/client-only/hooks/use-editor-recipients';
-import { useCurrentEnvelopeEditor } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { useOptionalSession } from '@documenso/lib/client-only/providers/session';
-import type { TDetectedRecipientSchema } from '@documenso/lib/server-only/ai/envelope/detect-recipients/schema';
-import { ZRecipientAuthOptionsSchema } from '@documenso/lib/types/document-auth';
-import { nanoid } from '@documenso/lib/universal/id';
-import { canRecipientBeModified as utilCanRecipientBeModified } from '@documenso/lib/utils/recipients';
-import { trpc } from '@documenso/trpc/react';
-import { RecipientActionAuthSelect } from '@documenso/ui/components/recipient/recipient-action-auth-select';
+import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
+import { ZEditorRecipientsFormSchema } from '@hanzo/sign-lib/client-only/hooks/use-editor-recipients';
+import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
+import type { TDetectedRecipientSchema } from '@hanzo/sign-lib/server-only/ai/envelope/detect-recipients/schema';
+import { ZRecipientAuthOptionsSchema } from '@hanzo/sign-lib/types/document-auth';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { canRecipientBeModified as utilCanRecipientBeModified } from '@hanzo/sign-lib/utils/recipients';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { RecipientActionAuthSelect } from '@hanzo/sign-ui/components/recipient/recipient-action-auth-select';
 import {
   RecipientAutoCompleteInput,
   type RecipientAutoCompleteOption,
-} from '@documenso/ui/components/recipient/recipient-autocomplete-input';
-import { RecipientRoleSelect } from '@documenso/ui/components/recipient/recipient-role-select';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
+} from '@hanzo/sign-ui/components/recipient/recipient-autocomplete-input';
+import { RecipientRoleSelect } from '@hanzo/sign-ui/components/recipient/recipient-role-select';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@documenso/ui/primitives/card';
-import { Checkbox } from '@documenso/ui/primitives/checkbox';
-import { SigningOrderConfirmation } from '@documenso/ui/primitives/document-flow/signing-order-confirmation';
+} from '@hanzo/sign-ui/primitives/card';
+import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+import { SigningOrderConfirmation } from '@hanzo/sign-ui/primitives/document-flow/signing-order-confirmation';
 import {
   Form,
   FormControl,
@@ -51,11 +51,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { FormErrorMessage } from '@documenso/ui/primitives/form/form-error-message';
-import { Input } from '@documenso/ui/primitives/input';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@documenso/ui/primitives/tooltip';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { FormErrorMessage } from '@hanzo/sign-ui/primitives/form/form-error-message';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { AiFeaturesEnableDialog } from '~/components/dialogs/ai-features-enable-dialog';
 import { AiRecipientDetectionDialog } from '~/components/dialogs/ai-recipient-detection-dialog';

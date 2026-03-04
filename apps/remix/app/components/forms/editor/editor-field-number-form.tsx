@@ -13,8 +13,8 @@ import {
   FIELD_DEFAULT_LINE_HEIGHT,
   type TNumberFieldMeta as NumberFieldMeta,
   ZNumberFieldMeta,
-} from '@documenso/lib/types/field-meta';
-import { numberFormatValues } from '@documenso/ui/primitives/document-flow/field-items-advanced-settings/constants';
+} from '@hanzo/sign-lib/types/field-meta';
+import { numberFormatValues } from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
 import {
   Form,
   FormControl,
@@ -22,16 +22,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@documenso/ui/primitives/select';
-import { Separator } from '@documenso/ui/primitives/separator';
+} from '@hanzo/sign-ui/primitives/select';
+import { Separator } from '@hanzo/sign-ui/primitives/separator';
 
 import {
   EditorGenericFontSizeField,

@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 import { TeamMemberRole } from '@prisma/client';
 
-import { mapSecondaryIdToTemplateId } from '@documenso/lib/utils/envelope';
-import { seedTeam, seedTeamMember } from '@documenso/prisma/seed/teams';
-import { seedBlankTemplate } from '@documenso/prisma/seed/templates';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
+import { seedTeam, seedTeamMember } from '@hanzo/sign-prisma/seed/teams';
+import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

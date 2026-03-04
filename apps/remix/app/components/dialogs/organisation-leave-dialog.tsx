@@ -4,12 +4,12 @@ import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import type { OrganisationMemberRole } from '@prisma/client';
 
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@documenso/lib/constants/organisations-translations';
-import { formatAvatarUrl } from '@documenso/lib/utils/avatars';
-import { trpc } from '@documenso/trpc/react';
-import { Alert } from '@documenso/ui/primitives/alert';
-import { AvatarWithText } from '@documenso/ui/primitives/avatar';
-import { Button } from '@documenso/ui/primitives/button';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
+import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Alert } from '@hanzo/sign-ui/primitives/alert';
+import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -18,8 +18,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/dialog';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type OrganisationLeaveDialogProps = {
   organisationId: string;

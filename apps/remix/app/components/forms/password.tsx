@@ -6,12 +6,12 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { authClient } from '@documenso/auth/client';
-import type { SessionUser } from '@documenso/auth/server/lib/session/session';
-import { AppError } from '@documenso/lib/errors/app-error';
-import { ZCurrentPasswordSchema, ZPasswordSchema } from '@documenso/trpc/server/auth-router/schema';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
+import { authClient } from '@hanzo/sign-auth/client';
+import type { SessionUser } from '@hanzo/sign-auth/server/lib/session/session';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { ZCurrentPasswordSchema, ZPasswordSchema } from '@hanzo/sign-trpc/server/auth-router/schema';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -19,9 +19,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { PasswordInput } from '@documenso/ui/primitives/password-input';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { PasswordInput } from '@hanzo/sign-ui/primitives/password-input';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export const ZPasswordFormSchema = z
   .object({

@@ -149,7 +149,7 @@ Mount the certificate file and set the path:
 
 ```bash
 NEXT_PRIVATE_SIGNING_TRANSPORT=local
-NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH=/opt/documenso/cert.p12
+NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH=/opt/hanzo-sign/cert.p12
 NEXT_PRIVATE_SIGNING_PASSPHRASE=your-certificate-password
 ```
 
@@ -157,10 +157,10 @@ NEXT_PRIVATE_SIGNING_PASSPHRASE=your-certificate-password
 
 ```bash
 docker run -d \
-  -v /path/to/certificate.p12:/opt/documenso/cert.p12:ro \
-  -e NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH=/opt/documenso/cert.p12 \
+  -v /path/to/certificate.p12:/opt/hanzo-sign/cert.p12:ro \
+  -e NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH=/opt/hanzo-sign/cert.p12 \
   -e NEXT_PRIVATE_SIGNING_PASSPHRASE="your-certificate-password" \
-  documenso/documenso:latest
+  hanzo-sign/hanzo-sign:latest
 ```
 
 ## Using Base64-Encoded Contents

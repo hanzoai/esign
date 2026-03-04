@@ -3,7 +3,7 @@ import { BackgroundJobStatus, Prisma } from '@prisma/client';
 import { CronExpressionParser } from 'cron-parser';
 import type { Context as HonoContext } from 'hono';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { NEXT_PRIVATE_INTERNAL_WEBAPP_URL } from '../../constants/app';
 import { sign } from '../../server-only/crypto/sign';

@@ -12,19 +12,19 @@ import { Link, useSearchParams } from 'react-router';
 import { match } from 'ts-pattern';
 import type { z } from 'zod';
 
-import type { InternalClaimPlans } from '@documenso/ee/server-only/stripe/get-internal-claim-plans';
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { IS_BILLING_ENABLED } from '@documenso/lib/constants/app';
-import { AppError } from '@documenso/lib/errors/app-error';
-import { INTERNAL_CLAIM_ID } from '@documenso/lib/types/subscription';
-import { parseMessageDescriptorMacro } from '@documenso/lib/utils/i18n';
-import { isPersonalLayout } from '@documenso/lib/utils/organisations';
-import { trpc } from '@documenso/trpc/react';
-import { ZCreateOrganisationRequestSchema } from '@documenso/trpc/server/organisation-router/create-organisation.types';
-import { cn } from '@documenso/ui/lib/utils';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
+import type { InternalClaimPlans } from '@hanzo/sign-ee/server-only/stripe/get-internal-claim-plans';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { INTERNAL_CLAIM_ID } from '@hanzo/sign-lib/types/subscription';
+import { parseMessageDescriptorMacro } from '@hanzo/sign-lib/utils/i18n';
+import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { ZCreateOrganisationRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation.types';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -33,7 +33,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -41,11 +41,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { SpinnerBox } from '@documenso/ui/primitives/spinner';
-import { Tabs, TabsList, TabsTrigger } from '@documenso/ui/primitives/tabs';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
+import { Tabs, TabsList, TabsTrigger } from '@hanzo/sign-ui/primitives/tabs';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { IndividualPersonalLayoutCheckoutButton } from '../general/billing-plans';
 
@@ -415,7 +415,7 @@ const BillingPlanForm = ({
         ))}
 
         <Link
-          to="https://documen.so/enterprise-cta"
+          to="https://sign.hanzo.ai/enterprise-cta"
           target="_blank"
           className="bg-muted/30 flex items-center space-x-2 rounded-md border p-4"
         >
@@ -433,7 +433,7 @@ const BillingPlanForm = ({
 
       <div className="mt-6 text-center">
         <Link
-          to="https://documenso.com/pricing"
+          to="https://sign.hanzo.ai/pricing"
           className="text-primary hover:text-primary/80 flex items-center justify-center gap-1 text-sm hover:underline"
           target="_blank"
         >

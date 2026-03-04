@@ -4,8 +4,8 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { useSearchParams } from 'react-router';
 
-import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
-import { Input } from '@documenso/ui/primitives/input';
+import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 
 export const DocumentSearch = ({ initialValue = '' }: { initialValue?: string }) => {
   const { _ } = useLingui();

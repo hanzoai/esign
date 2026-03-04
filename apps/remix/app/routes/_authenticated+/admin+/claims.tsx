@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useLingui } from '@lingui/react/macro';
 import { useLocation, useSearchParams } from 'react-router';
 
-import { useDebouncedValue } from '@documenso/lib/client-only/hooks/use-debounced-value';
-import { LicenseClient } from '@documenso/lib/server-only/license/license-client';
-import { Input } from '@documenso/ui/primitives/input';
+import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
+import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
+import { Input } from '@hanzo/sign-ui/primitives/input';
 
 import { ClaimCreateDialog } from '~/components/dialogs/claim-create-dialog';
 import { SettingsHeader } from '~/components/general/settings-header';

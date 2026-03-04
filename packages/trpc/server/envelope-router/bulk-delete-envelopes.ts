@@ -1,10 +1,10 @@
 import { EnvelopeType } from '@prisma/client';
 import pMap from 'p-map';
 
-import { deleteDocument } from '@documenso/lib/server-only/document/delete-document';
-import { getMultipleEnvelopeWhereInput } from '@documenso/lib/server-only/envelope/get-envelopes-by-ids';
-import { deleteTemplate } from '@documenso/lib/server-only/template/delete-template';
-import { prisma } from '@documenso/prisma';
+import { deleteDocument } from '@hanzo/sign-lib/server-only/document/delete-document';
+import { getMultipleEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelopes-by-ids';
+import { deleteTemplate } from '@hanzo/sign-lib/server-only/template/delete-template';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

@@ -5,14 +5,14 @@ import { useLingui } from '@lingui/react';
 import { DateTime } from 'luxon';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import { ZUrlSearchParamsSchema } from '@documenso/lib/types/search-params';
-import { trpc } from '@documenso/trpc/react';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
+import { trpc } from '@hanzo/sign-trpc/react';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
 
 import { SettingsSecurityPasskeyTableActions } from './settings-security-passkey-table-actions';
 

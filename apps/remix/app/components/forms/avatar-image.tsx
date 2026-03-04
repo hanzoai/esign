@@ -9,15 +9,15 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { AppError } from '@documenso/lib/errors/app-error';
-import { base64 } from '@documenso/lib/universal/base64';
-import { formatAvatarUrl } from '@documenso/lib/utils/avatars';
-import { extractInitials } from '@documenso/lib/utils/recipient-formatter';
-import { trpc } from '@documenso/trpc/react';
-import { cn } from '@documenso/ui/lib/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '@documenso/ui/primitives/avatar';
-import { Button } from '@documenso/ui/primitives/button';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { base64 } from '@hanzo/sign-lib/universal/base64';
+import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
+import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -25,8 +25,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export const ZAvatarImageFormSchema = z.object({
   bytes: z.string().nullish(),

@@ -1,4 +1,4 @@
-import { findEnvelopes } from '@documenso/lib/server-only/envelope/find-envelopes';
+import { findEnvelopes } from '@hanzo/sign-lib/server-only/envelope/find-envelopes';
 
 import { authenticatedProcedure } from '../trpc';
 import {

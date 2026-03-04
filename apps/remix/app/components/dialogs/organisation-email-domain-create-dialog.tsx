@@ -7,11 +7,11 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { trpc } from '@documenso/trpc/react';
-import { ZCreateOrganisationEmailDomainRequestSchema } from '@documenso/trpc/server/enterprise-router/create-organisation-email-domain.types';
-import { Button } from '@documenso/ui/primitives/button';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { ZCreateOrganisationEmailDomainRequestSchema } from '@hanzo/sign-trpc/server/enterprise-router/create-organisation-email-domain.types';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -20,7 +20,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@documenso/ui/primitives/dialog';
+} from '@hanzo/sign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -29,9 +29,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { OrganisationEmailDomainRecordContent } from './organisation-email-domain-records-dialog';
 

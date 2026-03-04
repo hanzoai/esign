@@ -1,4 +1,4 @@
-import { findDocumentAuditLogs } from '@documenso/lib/server-only/document/find-document-audit-logs';
+import { findDocumentAuditLogs } from '@hanzo/sign-lib/server-only/document/find-document-audit-logs';
 
 import { authenticatedProcedure } from '../trpc';
 import {

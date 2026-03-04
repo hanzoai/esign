@@ -1,7 +1,7 @@
 import { EnvelopeType } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { alphaid } from '../../universal/id';

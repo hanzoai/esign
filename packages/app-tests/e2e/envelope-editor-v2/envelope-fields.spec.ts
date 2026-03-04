@@ -1,8 +1,8 @@
 import { type Page, expect, test } from '@playwright/test';
 import { FieldType } from '@prisma/client';
 
-import { nanoid } from '@documenso/lib/universal/id';
-import { prisma } from '@documenso/prisma';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { prisma } from '@hanzo/sign-prisma';
 
 import {
   type TEnvelopeEditorSurface,
@@ -30,7 +30,7 @@ type TFieldFlowResult = {
 
 const TEST_FIELD_VALUES = {
   embeddedRecipient: {
-    email: 'embedded-field-recipient@documenso.com',
+    email: 'embedded-field-recipient@sign.hanzo.ai',
     name: 'Embedded Field Recipient',
   },
 };
@@ -209,7 +209,7 @@ type TMultiRecipientFlowResult = {
 
 const MULTI_RECIPIENT_VALUES = {
   secondSigner: {
-    email: 'second-signer@test.documenso.com',
+    email: 'second-signer@test.sign.hanzo.ai',
     name: 'Second Signer',
   },
 };

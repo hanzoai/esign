@@ -1,1 +1,1 @@
-# @documenso/openpage-api
+# @hanzo/sign-openpage-api

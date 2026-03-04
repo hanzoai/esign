@@ -8,7 +8,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 <Callout type="warn">
   This guide may not reflect the latest endpoints or parameters. For an always up-to-date reference,
-  see the [OpenAPI Reference](https://openapi.documenso.com).
+  see the [OpenAPI Reference](https://openapi.sign.hanzo.ai).
 </Callout>
 
 ## Field Object
@@ -93,14 +93,14 @@ GET /envelope/field/{fieldId}
 <Tabs items={['curl', 'TypeScript']}>
 <Tab value="curl">
 ```bash
-curl -X GET "https://app.documenso.com/api/v2/envelope/field/456" \
+curl -X GET "https://app.sign.hanzo.ai/api/v2/envelope/field/456" \
   -H "Authorization: api_xxxxxxxxxxxxxxxx"
 ```
 </Tab>
 <Tab value="TypeScript">
 ```typescript
 const response = await fetch(
-  'https://app.documenso.com/api/v2/envelope/field/456',
+  'https://app.sign.hanzo.ai/api/v2/envelope/field/456',
   {
     method: 'GET',
     headers: {
@@ -144,7 +144,7 @@ POST /envelope/field/create-many
 <Tabs items={['curl', 'TypeScript']}>
 <Tab value="curl">
 ```bash
-curl -X POST "https://app.documenso.com/api/v2/envelope/field/create-many" \
+curl -X POST "https://app.sign.hanzo.ai/api/v2/envelope/field/create-many" \
   -H "Authorization: api_xxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
@@ -191,7 +191,7 @@ curl -X POST "https://app.documenso.com/api/v2/envelope/field/create-many" \
 <Tab value="TypeScript">
 ```typescript
 const response = await fetch(
-  'https://app.documenso.com/api/v2/envelope/field/create-many',
+  'https://app.sign.hanzo.ai/api/v2/envelope/field/create-many',
   {
     method: 'POST',
     headers: {
@@ -307,7 +307,7 @@ POST /envelope/field/update-many
 <Tabs items={['curl', 'TypeScript']}>
 <Tab value="curl">
 ```bash
-curl -X POST "https://app.documenso.com/api/v2/envelope/field/update-many" \
+curl -X POST "https://app.sign.hanzo.ai/api/v2/envelope/field/update-many" \
   -H "Authorization: api_xxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
@@ -330,7 +330,7 @@ curl -X POST "https://app.documenso.com/api/v2/envelope/field/update-many" \
 <Tab value="TypeScript">
 ```typescript
 const response = await fetch(
-  'https://app.documenso.com/api/v2/envelope/field/update-many',
+  'https://app.sign.hanzo.ai/api/v2/envelope/field/update-many',
   {
     method: 'POST',
     headers: {
@@ -385,7 +385,7 @@ POST /envelope/field/delete
 <Tabs items={['curl', 'TypeScript']}>
 <Tab value="curl">
 ```bash
-curl -X POST "https://app.documenso.com/api/v2/envelope/field/delete" \
+curl -X POST "https://app.sign.hanzo.ai/api/v2/envelope/field/delete" \
   -H "Authorization: api_xxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/json" \
   -d '{
@@ -396,7 +396,7 @@ curl -X POST "https://app.documenso.com/api/v2/envelope/field/delete" \
 <Tab value="TypeScript">
 ```typescript
 const response = await fetch(
-  'https://app.documenso.com/api/v2/envelope/field/delete',
+  'https://app.sign.hanzo.ai/api/v2/envelope/field/delete',
   {
     method: 'POST',
     headers: {
@@ -469,7 +469,7 @@ const field = {
 
 ## Placeholder-Based Field Positioning
 
-Instead of specifying exact coordinates, you can position fields using placeholder text embedded in your PDF. Include placeholder markers such as `{{signature, r1}}` in your document, and Documenso will create fields at those locations when the document is uploaded.
+Instead of specifying exact coordinates, you can position fields using placeholder text embedded in your PDF. Include placeholder markers such as `{{signature, r1}}` in your document, and Hanzo Sign will create fields at those locations when the document is uploaded.
 
 This approach is useful when generating PDFs programmatically or using templates with consistent layouts.
 
@@ -704,7 +704,7 @@ async function addSignatureBlock(documentId: number, recipientId: number) {
     },
   ];
 
-  const response = await fetch('https://app.documenso.com/api/v2/envelope/field/create-many', {
+  const response = await fetch('https://app.sign.hanzo.ai/api/v2/envelope/field/create-many', {
     method: 'POST',
     headers: {
       Authorization: 'api_xxxxxxxxxxxxxxxx',

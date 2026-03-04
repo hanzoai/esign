@@ -1,4 +1,4 @@
-import { SIGNATURE_CANVAS_DPI } from '@documenso/lib/constants/signatures';
+import { SIGNATURE_CANVAS_DPI } from '@hanzo/sign-lib/constants/signatures';
 
 import { Point } from './point';
 

@@ -8,20 +8,20 @@ import { Paperclip, Plus, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useCurrentEnvelopeEditor } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { nanoid } from '@documenso/lib/universal/id';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
+import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
-import { Input } from '@documenso/ui/primitives/input';
-import { Popover, PopoverContent, PopoverTrigger } from '@documenso/ui/primitives/popover';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/form/form';
+import { Input } from '@hanzo/sign-ui/primitives/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/sign-ui/primitives/popover';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export type EmbeddedEditorAttachmentPopoverProps = {
   buttonClassName?: string;

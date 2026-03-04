@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
-import { ZOrganisationSchema } from '@documenso/lib/types/organisation';
-import OrganisationClaimSchema from '@documenso/prisma/generated/zod/modelSchema/OrganisationClaimSchema';
-import OrganisationGlobalSettingsSchema from '@documenso/prisma/generated/zod/modelSchema/OrganisationGlobalSettingsSchema';
-import OrganisationMemberSchema from '@documenso/prisma/generated/zod/modelSchema/OrganisationMemberSchema';
-import SubscriptionSchema from '@documenso/prisma/generated/zod/modelSchema/SubscriptionSchema';
-import TeamSchema from '@documenso/prisma/generated/zod/modelSchema/TeamSchema';
+import { ZOrganisationSchema } from '@hanzo/sign-lib/types/organisation';
+import OrganisationClaimSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationClaimSchema';
+import OrganisationGlobalSettingsSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationGlobalSettingsSchema';
+import OrganisationMemberSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationMemberSchema';
+import SubscriptionSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/SubscriptionSchema';
+import TeamSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/TeamSchema';
 
 // export const getOrganisationMeta: TrpcOpenApiMeta = {
 //   openapi: {

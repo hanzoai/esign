@@ -5,23 +5,23 @@ import { useLingui } from '@lingui/react';
 import { Loader } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@documenso/lib/constants/trpc';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import type { TRecipientActionAuth } from '@documenso/lib/types/document-auth';
-import { ZCheckboxFieldMeta } from '@documenso/lib/types/field-meta';
-import { fromCheckboxValue, toCheckboxValue } from '@documenso/lib/universal/field-checkbox';
-import type { FieldWithSignatureAndFieldMeta } from '@documenso/prisma/types/field-with-signature-and-fieldmeta';
-import { trpc } from '@documenso/trpc/react';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
+import { ZCheckboxFieldMeta } from '@hanzo/sign-lib/types/field-meta';
+import { fromCheckboxValue, toCheckboxValue } from '@hanzo/sign-lib/universal/field-checkbox';
+import type { FieldWithSignatureAndFieldMeta } from '@hanzo/sign-prisma/types/field-with-signature-and-fieldmeta';
+import { trpc } from '@hanzo/sign-trpc/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@documenso/trpc/server/field-router/schema';
-import { FieldToolTip } from '@documenso/ui/components/field/field-tooltip';
-import { cn } from '@documenso/ui/lib/utils';
-import { Checkbox } from '@documenso/ui/primitives/checkbox';
-import { checkboxValidationSigns } from '@documenso/ui/primitives/document-flow/field-items-advanced-settings/constants';
-import { Label } from '@documenso/ui/primitives/label';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-trpc/server/field-router/schema';
+import { FieldToolTip } from '@hanzo/sign-ui/components/field/field-tooltip';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+import { checkboxValidationSigns } from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
+import { Label } from '@hanzo/sign-ui/primitives/label';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useRequiredDocumentSigningAuthContext } from './document-signing-auth-provider';
 import { DocumentSigningFieldContainer } from './document-signing-field-container';

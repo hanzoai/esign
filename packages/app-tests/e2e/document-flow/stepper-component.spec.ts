@@ -9,13 +9,13 @@ import {
 import { DateTime } from 'luxon';
 import path from 'node:path';
 
-import { PDF_VIEWER_PAGE_SELECTOR } from '@documenso/lib/constants/pdf-viewer';
-import { prisma } from '@documenso/prisma';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
+import { prisma } from '@hanzo/sign-prisma';
 import {
   seedBlankDocument,
   seedPendingDocumentWithFullFields,
-} from '@documenso/prisma/seed/documents';
-import { seedUser } from '@documenso/prisma/seed/users';
+} from '@hanzo/sign-prisma/seed/documents';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 import { signSignaturePad } from '../fixtures/signature';
@@ -348,14 +348,14 @@ test('[DOCUMENT_FLOW]: should be able to approve a document', async ({ page }) =
   const { recipients } = await seedPendingDocumentWithFullFields({
     owner: user,
     teamId: team.id,
-    recipients: ['user@documenso.com', 'approver@documenso.com'],
+    recipients: ['user@sign.hanzo.ai', 'approver@sign.hanzo.ai'],
     recipientsCreateOptions: [
       {
-        email: 'user@documenso.com',
+        email: 'user@sign.hanzo.ai',
         role: RecipientRole.SIGNER,
       },
       {
-        email: 'approver@documenso.com',
+        email: 'approver@sign.hanzo.ai',
         role: RecipientRole.APPROVER,
       },
     ],
@@ -410,7 +410,7 @@ test('[DOCUMENT_FLOW]: should be able to create, send with redirect url, sign a 
   await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
   await page.getByLabel('Title').fill(documentTitle);
   await page.getByRole('button', { name: 'Advanced Options' }).click();
-  await page.getByLabel('Redirect URL').fill('https://documenso.com');
+  await page.getByLabel('Redirect URL').fill('https://sign.hanzo.ai');
 
   await page.getByRole('button', { name: 'Continue' }).click();
 
@@ -467,7 +467,7 @@ test('[DOCUMENT_FLOW]: should be able to create, send with redirect url, sign a 
   ).toBeVisible();
   await page.getByRole('button', { name: 'Approve' }).click();
 
-  await page.waitForURL('https://documenso.com');
+  await page.waitForURL('https://sign.hanzo.ai');
 
   await expect(async () => {
     // Check if document has been signed

@@ -3,11 +3,11 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
-import { getSession } from '@documenso/auth/server/lib/utils/get-session';
-import { useSession } from '@documenso/lib/client-only/providers/session';
-import { prisma } from '@documenso/prisma';
-import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
+import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
+import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { prisma } from '@hanzo/sign-prisma';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import { DisableAuthenticatorAppDialog } from '~/components/forms/2fa/disable-authenticator-app-dialog';
 import { EnableAuthenticatorAppDialog } from '~/components/forms/2fa/enable-authenticator-app-dialog';
@@ -36,7 +36,7 @@ export async function loader({ request }: Route.LoaderArgs) {
   // });
 
   // const providers = accounts.map((account) => account.provider);
-  // let hasEmailPasswordAccount = providers.includes('DOCUMENSO');
+  // let hasEmailPasswordAccount = providers.includes('HANZO_SIGN');
 
   const hasEmailPasswordAccount: boolean = await prisma.user
     .count({

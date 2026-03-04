@@ -1,8 +1,8 @@
 import { type Page, expect, test } from '@playwright/test';
 import { DocumentSigningOrder, RecipientRole } from '@prisma/client';
 
-import { nanoid } from '@documenso/lib/universal/id';
-import { prisma } from '@documenso/prisma';
+import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { prisma } from '@hanzo/sign-prisma';
 
 import {
   type TEnvelopeEditorSurface,

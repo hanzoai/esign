@@ -1,12 +1,16 @@
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { env } from '@hanzo/sign-lib/utils/env';
+
+const APP_NAME = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo Sign';
+const COMPANY_NAME = env('NEXT_PUBLIC_COMPANY_NAME') || 'Hanzo AI, Inc.';
+const TWITTER_HANDLE = env('NEXT_PUBLIC_TWITTER_HANDLE') || '@hanzoai';
 
 export const appMetaTags = (title?: string) => {
-  const description =
-    'Hanzo Sign — Secure document signing infrastructure. Fast, smart, and beautiful document signing with integrations and customizable templates.';
+  const description = `${APP_NAME} — Secure document signing infrastructure. Fast, smart, and beautiful document signing with integrations and customizable templates.`;
 
   return [
     {
-      title: title ? `${title} - Hanzo Sign` : 'Hanzo Sign',
+      title: title ? `${title} - ${APP_NAME}` : APP_NAME,
     },
     {
       name: 'description',
@@ -14,12 +18,11 @@ export const appMetaTags = (title?: string) => {
     },
     {
       name: 'keywords',
-      content:
-        'Hanzo Sign, document signing, secure signing infrastructure, smart templates, e-signatures',
+      content: `${APP_NAME}, document signing, secure signing infrastructure, smart templates, e-signatures`,
     },
     {
       name: 'author',
-      content: 'Hanzo AI, Inc.',
+      content: COMPANY_NAME,
     },
     {
       name: 'robots',
@@ -27,7 +30,7 @@ export const appMetaTags = (title?: string) => {
     },
     {
       property: 'og:title',
-      content: 'Hanzo Sign — Secure Document Signing Infrastructure',
+      content: `${APP_NAME} — Secure Document Signing Infrastructure`,
     },
     {
       property: 'og:description',
@@ -47,7 +50,7 @@ export const appMetaTags = (title?: string) => {
     },
     {
       name: 'twitter:site',
-      content: '@hanzoai',
+      content: TWITTER_HANDLE,
     },
     {
       name: 'twitter:description',

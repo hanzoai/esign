@@ -3,10 +3,10 @@ import { Trans } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
 import { DateTime } from 'luxon';
 
-import { trpc } from '@documenso/trpc/react';
-import { Alert, AlertDescription } from '@documenso/ui/primitives/alert';
-import { AlertTitle } from '@documenso/ui/primitives/alert';
-import { Button } from '@documenso/ui/primitives/button';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
+import { AlertTitle } from '@hanzo/sign-ui/primitives/alert';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import TokenDeleteDialog from '~/components/dialogs/token-delete-dialog';
 import { ApiTokenForm } from '~/components/forms/token';
@@ -34,7 +34,7 @@ export default function ApiTokensPage() {
             On this page, you can create and manage API tokens. See our{' '}
             <a
               className="text-primary underline"
-              href={'https://docs.documenso.com/developers/public-api'}
+              href={'https://docs.sign.hanzo.ai/developers/public-api'}
               target="_blank"
             >
               Documentation

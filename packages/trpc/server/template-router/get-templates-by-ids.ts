@@ -1,10 +1,10 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { getMultipleEnvelopeWhereInput } from '@documenso/lib/server-only/envelope/get-envelopes-by-ids';
-import { mapSecondaryIdToTemplateId } from '@documenso/lib/utils/envelope';
-import { mapFieldToLegacyField } from '@documenso/lib/utils/fields';
-import { mapRecipientToLegacyRecipient } from '@documenso/lib/utils/recipients';
-import { prisma } from '@documenso/prisma';
+import { getMultipleEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelopes-by-ids';
+import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
+import { mapFieldToLegacyField } from '@hanzo/sign-lib/utils/fields';
+import { mapRecipientToLegacyRecipient } from '@hanzo/sign-lib/utils/recipients';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

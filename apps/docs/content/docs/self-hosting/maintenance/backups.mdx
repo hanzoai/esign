@@ -1,6 +1,6 @@
 ---
 title: Backups
-description: Backup strategies for Documenso data.
+description: Backup strategies for Hanzo Sign data.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -9,7 +9,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## What to Back Up
 
-Documenso stores data in three locations:
+Hanzo Sign stores data in three locations:
 
 | Component             | Location                      | Contains                                           |
 | --------------------- | ----------------------------- | -------------------------------------------------- |
@@ -56,14 +56,14 @@ Create a logical backup with `pg_dump`:
 <Tab value="Direct">
 
 ```bash
-pg_dump -h localhost -U documenso -d documenso -F c -f documenso_backup.dump
+pg_dump -h localhost -U hanzo-sign -d hanzo-sign -F c -f hanzo-sign_backup.dump
 ```
 
 </Tab>
 <Tab value="Docker Compose">
 
 ```bash
-docker compose exec database pg_dump -U documenso -F c documenso > documenso_backup.dump
+docker compose exec database pg_dump -U hanzo-sign -F c hanzo-sign > hanzo-sign_backup.dump
 ```
 
 </Tab>
@@ -74,8 +74,8 @@ docker compose exec database pg_dump -U documenso -F c documenso > documenso_bac
 Include timestamps in backup filenames for easier management:
 
 ```bash
-pg_dump -h localhost -U documenso -d documenso -F c \
-  -f "documenso_$(date +%Y%m%d_%H%M%S).dump"
+pg_dump -h localhost -U hanzo-sign -d hanzo-sign -F c \
+  -f "hanzo-sign_$(date +%Y%m%d_%H%M%S).dump"
 ```
 
 ### Plain SQL Backup
@@ -83,7 +83,7 @@ pg_dump -h localhost -U documenso -d documenso -F c \
 For human-readable backups or cross-version compatibility:
 
 ```bash
-pg_dump -h localhost -U documenso -d documenso -F p -f documenso_backup.sql
+pg_dump -h localhost -U hanzo-sign -d hanzo-sign -F p -f hanzo-sign_backup.sql
 ```
 
 ### Compressed Backup
@@ -91,7 +91,7 @@ pg_dump -h localhost -U documenso -d documenso -F p -f documenso_backup.sql
 Compress backups to save storage space:
 
 ```bash
-pg_dump -h localhost -U documenso -d documenso | gzip > documenso_backup.sql.gz
+pg_dump -h localhost -U hanzo-sign -d hanzo-sign | gzip > hanzo-sign_backup.sql.gz
 ```
 
 ---
@@ -129,7 +129,7 @@ echo $NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS
 Copy the certificate to a secure backup location:
 
 ```bash
-cp /opt/documenso/cert.p12 /backup/documenso/cert.p12
+cp /opt/hanzo-sign/cert.p12 /backup/hanzo-sign/cert.p12
 ```
 
 </Tab>
@@ -138,7 +138,7 @@ cp /opt/documenso/cert.p12 /backup/documenso/cert.p12
 If using base64-encoded certificate contents:
 
 ```bash
-echo "$NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS" | base64 -d > /backup/documenso/cert.p12
+echo "$NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS" | base64 -d > /backup/hanzo-sign/cert.p12
 ```
 
 </Tab>
@@ -166,16 +166,16 @@ Enable versioning on your bucket:
 
 ```bash
 aws s3api put-bucket-versioning \
-  --bucket your-documenso-bucket \
+  --bucket your-hanzo-sign-bucket \
   --versioning-configuration Status=Enabled
 ```
 
 Sync to a backup location or download locally:
 
 ```bash
-aws s3 sync s3://your-documenso-bucket s3://your-backup-bucket
+aws s3 sync s3://your-hanzo-sign-bucket s3://your-backup-bucket
 # or
-aws s3 sync s3://your-documenso-bucket /backup/documenso/documents/
+aws s3 sync s3://your-hanzo-sign-bucket /backup/hanzo-sign/documents/
 ```
 
 </Tab>
@@ -184,7 +184,7 @@ aws s3 sync s3://your-documenso-bucket /backup/documenso/documents/
 Use the same commands with the `--endpoint-url` flag:
 
 ```bash
-aws s3 sync s3://your-bucket /backup/documenso/documents/ \
+aws s3 sync s3://your-bucket /backup/hanzo-sign/documents/ \
   --endpoint-url https://your-s3-endpoint.com
 ```
 
@@ -199,34 +199,34 @@ For disaster recovery, enable cross-region replication on your S3 bucket. This a
 
 ## Automated Backup Script
 
-Create a script to back up all Documenso components:
+Create a script to back up all Hanzo Sign components:
 
 <Tabs items={['Standalone', 'Docker Compose']}>
 <Tab value="Standalone">
 
 ```bash
 #!/bin/bash
-# documenso-backup.sh
+# hanzo-sign-backup.sh
 
 set -e
 
 # Configuration
-BACKUP_DIR="/backup/documenso"
+BACKUP_DIR="/backup/hanzo-sign"
 RETENTION_DAYS=30
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 
 # Database connection
 DB_HOST="localhost"
-DB_USER="documenso"
-DB_NAME="documenso"
+DB_USER="hanzo-sign"
+DB_NAME="hanzo-sign"
 
 # S3 configuration (if applicable)
-S3_BUCKET="your-documenso-bucket"
+S3_BUCKET="your-hanzo-sign-bucket"
 
 # Create backup directory
 mkdir -p "$BACKUP_DIR/$TIMESTAMP"
 
-echo "Starting Documenso backup: $TIMESTAMP"
+echo "Starting Hanzo Sign backup: $TIMESTAMP"
 
 # Database backup
 echo "Backing up database..."
@@ -234,9 +234,9 @@ PGPASSWORD="$DB_PASSWORD" pg_dump -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -F c
   -f "$BACKUP_DIR/$TIMESTAMP/database.dump"
 
 # Certificate backup (if file exists)
-if [ -f "/opt/documenso/cert.p12" ]; then
+if [ -f "/opt/hanzo-sign/cert.p12" ]; then
   echo "Backing up certificate..."
-  cp /opt/documenso/cert.p12 "$BACKUP_DIR/$TIMESTAMP/cert.p12"
+  cp /opt/hanzo-sign/cert.p12 "$BACKUP_DIR/$TIMESTAMP/cert.p12"
 fi
 
 # S3 backup (if configured)
@@ -247,18 +247,18 @@ fi
 
 # Compress backup
 echo "Compressing backup..."
-tar -czf "$BACKUP_DIR/documenso_$TIMESTAMP.tar.gz" -C "$BACKUP_DIR" "$TIMESTAMP"
+tar -czf "$BACKUP_DIR/hanzo-sign_$TIMESTAMP.tar.gz" -C "$BACKUP_DIR" "$TIMESTAMP"
 rm -rf "$BACKUP_DIR/$TIMESTAMP"
 
 # Calculate checksum
-sha256sum "$BACKUP_DIR/documenso_$TIMESTAMP.tar.gz" > "$BACKUP_DIR/documenso_$TIMESTAMP.sha256"
+sha256sum "$BACKUP_DIR/hanzo-sign_$TIMESTAMP.tar.gz" > "$BACKUP_DIR/hanzo-sign_$TIMESTAMP.sha256"
 
 # Remove old backups
 echo "Removing backups older than $RETENTION_DAYS days..."
-find "$BACKUP_DIR" -name "documenso_*.tar.gz" -mtime +$RETENTION_DAYS -delete
-find "$BACKUP_DIR" -name "documenso_*.sha256" -mtime +$RETENTION_DAYS -delete
+find "$BACKUP_DIR" -name "hanzo-sign_*.tar.gz" -mtime +$RETENTION_DAYS -delete
+find "$BACKUP_DIR" -name "hanzo-sign_*.sha256" -mtime +$RETENTION_DAYS -delete
 
-echo "Backup completed: documenso_$TIMESTAMP.tar.gz"
+echo "Backup completed: hanzo-sign_$TIMESTAMP.tar.gz"
 ```
 
 </Tab>
@@ -266,13 +266,13 @@ echo "Backup completed: documenso_$TIMESTAMP.tar.gz"
 
 ```bash
 #!/bin/bash
-# documenso-backup-docker.sh
+# hanzo-sign-backup-docker.sh
 
 set -e
 
-BACKUP_DIR="/backup/documenso"
+BACKUP_DIR="/backup/hanzo-sign"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-COMPOSE_PROJECT="documenso-production"
+COMPOSE_PROJECT="hanzo-sign-production"
 
 mkdir -p "$BACKUP_DIR"
 
@@ -280,11 +280,11 @@ echo "Starting backup: $TIMESTAMP"
 
 # Database backup via Docker
 docker compose -p "$COMPOSE_PROJECT" exec -T database \
-  pg_dump -U documenso -F c documenso > "$BACKUP_DIR/database_$TIMESTAMP.dump"
+  pg_dump -U hanzo-sign -F c hanzo-sign > "$BACKUP_DIR/database_$TIMESTAMP.dump"
 
 # Certificate backup (copy from container if needed)
 docker compose -p "$COMPOSE_PROJECT" cp \
-  documenso:/opt/documenso/cert.p12 "$BACKUP_DIR/cert_$TIMESTAMP.p12" 2>/dev/null || true
+  hanzo-sign:/opt/hanzo-sign/cert.p12 "$BACKUP_DIR/cert_$TIMESTAMP.p12" 2>/dev/null || true
 
 echo "Backup completed"
 ```
@@ -295,7 +295,7 @@ echo "Backup completed"
 Make the script executable:
 
 ```bash
-chmod +x /usr/local/bin/documenso-backup.sh
+chmod +x /usr/local/bin/hanzo-sign-backup.sh
 ```
 
 ---
@@ -340,32 +340,32 @@ Add to crontab (`crontab -e`):
 
 ```
 # Daily backup at 2:00 AM
-0 2 * * * /usr/local/bin/documenso-backup.sh >> /var/log/documenso-backup.log 2>&1
+0 2 * * * /usr/local/bin/hanzo-sign-backup.sh >> /var/log/hanzo-sign-backup.log 2>&1
 
 # Hourly backup (for high-activity instances)
-0 * * * * /usr/local/bin/documenso-backup-hourly.sh >> /var/log/documenso-backup.log 2>&1
+0 * * * * /usr/local/bin/hanzo-sign-backup-hourly.sh >> /var/log/hanzo-sign-backup.log 2>&1
 ```
 
 </Tab>
 <Tab value="Systemd timer">
 
-Create `/etc/systemd/system/documenso-backup.service`:
+Create `/etc/systemd/system/hanzo-sign-backup.service`:
 
 ```ini
 [Unit]
-Description=Documenso Backup
+Description=Hanzo Sign Backup
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/documenso-backup.sh
+ExecStart=/usr/local/bin/hanzo-sign-backup.sh
 User=root
 ```
 
-Create `/etc/systemd/system/documenso-backup.timer`:
+Create `/etc/systemd/system/hanzo-sign-backup.timer`:
 
 ```ini
 [Unit]
-Description=Daily Documenso Backup
+Description=Daily Hanzo Sign Backup
 
 [Timer]
 OnCalendar=*-*-* 02:00:00
@@ -379,7 +379,7 @@ Enable the timer:
 
 ```bash
 systemctl daemon-reload
-systemctl enable --now documenso-backup.timer
+systemctl enable --now hanzo-sign-backup.timer
 ```
 
 </Tab>
@@ -402,26 +402,26 @@ systemctl enable --now documenso-backup.timer
 Direct:
 
 ```bash
-pg_restore -h localhost -U documenso -d documenso -c documenso_backup.dump
+pg_restore -h localhost -U hanzo-sign -d hanzo-sign -c hanzo-sign_backup.dump
 ```
 
 Docker Compose:
 
 ```bash
-docker compose exec -T database pg_restore -U documenso -d documenso -c < documenso_backup.dump
+docker compose exec -T database pg_restore -U hanzo-sign -d hanzo-sign -c < hanzo-sign_backup.dump
 ```
 
 </Tab>
 <Tab value="Plain SQL">
 
 ```bash
-psql -h localhost -U documenso -d documenso < documenso_backup.sql
+psql -h localhost -U hanzo-sign -d hanzo-sign < hanzo-sign_backup.sql
 ```
 
 For compressed backups:
 
 ```bash
-gunzip -c documenso_backup.sql.gz | psql -h localhost -U documenso -d documenso
+gunzip -c hanzo-sign_backup.sql.gz | psql -h localhost -U hanzo-sign -d hanzo-sign
 ```
 
 </Tab>
@@ -432,9 +432,9 @@ gunzip -c documenso_backup.sql.gz | psql -h localhost -U documenso -d documenso
 Copy the certificate back to the expected location:
 
 ```bash
-cp /backup/documenso/cert.p12 /opt/documenso/cert.p12
-chmod 644 /opt/documenso/cert.p12
-chown 1001:1001 /opt/documenso/cert.p12
+cp /backup/hanzo-sign/cert.p12 /opt/hanzo-sign/cert.p12
+chmod 644 /opt/hanzo-sign/cert.p12
+chown 1001:1001 /opt/hanzo-sign/cert.p12
 ```
 
 ### Restore S3 Documents
@@ -442,7 +442,7 @@ chown 1001:1001 /opt/documenso/cert.p12
 Sync documents back to S3:
 
 ```bash
-aws s3 sync /backup/documenso/documents/ s3://your-documenso-bucket
+aws s3 sync /backup/hanzo-sign/documents/ s3://your-hanzo-sign-bucket
 ```
 
 ### Full Restore Procedure
@@ -450,10 +450,10 @@ aws s3 sync /backup/documenso/documents/ s3://your-documenso-bucket
 {/* prettier-ignore */}
 <Steps>
 <Step>
-### Stop Documenso
+### Stop Hanzo Sign
 
 ```bash
-docker compose stop documenso
+docker compose stop hanzo-sign
 ```
 
 </Step>
@@ -461,7 +461,7 @@ docker compose stop documenso
 ### Restore the database
 
 ```bash
-docker compose exec -T database pg_restore -U documenso -d documenso -c < backup.dump
+docker compose exec -T database pg_restore -U hanzo-sign -d hanzo-sign -c < backup.dump
 ```
 
 </Step>
@@ -469,7 +469,7 @@ docker compose exec -T database pg_restore -U documenso -d documenso -c < backup
 ### Restore the certificate
 
 ```bash
-docker compose cp cert.p12 documenso:/opt/documenso/cert.p12
+docker compose cp cert.p12 hanzo-sign:/opt/hanzo-sign/cert.p12
 ```
 
 </Step>
@@ -482,10 +482,10 @@ aws s3 sync /backup/documents/ s3://your-bucket
 
 </Step>
 <Step>
-### Start Documenso
+### Start Hanzo Sign
 
 ```bash
-docker compose start documenso
+docker compose start hanzo-sign
 ```
 
 </Step>
@@ -554,7 +554,7 @@ Add verification to your backup script:
 # verify-backup.sh
 
 BACKUP_FILE="$1"
-TEST_DB="documenso_restore_test"
+TEST_DB="hanzo-sign_restore_test"
 
 # Create test database
 psql -h localhost -U postgres -c "CREATE DATABASE $TEST_DB"
@@ -578,10 +578,10 @@ Verify backup file integrity:
 
 ```bash
 # Check checksum
-sha256sum -c documenso_backup.sha256
+sha256sum -c hanzo-sign_backup.sha256
 
 # Verify pg_dump format
-pg_restore --list documenso_backup.dump > /dev/null && echo "Backup is valid"
+pg_restore --list hanzo-sign_backup.dump > /dev/null && echo "Backup is valid"
 ```
 
 ---
@@ -645,7 +645,7 @@ Store backups in a separate location from your production system.
 <Tab value="Upload to S3">
 
 ```bash
-aws s3 cp documenso_backup.tar.gz s3://your-backup-bucket/documenso/
+aws s3 cp hanzo-sign_backup.tar.gz s3://your-backup-bucket/hanzo-sign/
 ```
 
 </Tab>
@@ -655,10 +655,10 @@ Encrypt backups before storing off-site:
 
 ```bash
 # Encrypt
-gpg --symmetric --cipher-algo AES256 documenso_backup.tar.gz
+gpg --symmetric --cipher-algo AES256 hanzo-sign_backup.tar.gz
 
 # Decrypt
-gpg --decrypt documenso_backup.tar.gz.gpg > documenso_backup.tar.gz
+gpg --decrypt hanzo-sign_backup.tar.gz.gpg > hanzo-sign_backup.tar.gz
 ```
 
 </Tab>

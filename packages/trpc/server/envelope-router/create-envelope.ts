@@ -1,12 +1,12 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { getServerLimits } from '@documenso/ee/server-only/limits/server';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { createEnvelope } from '@documenso/lib/server-only/envelope/create-envelope';
-import { extractPdfPlaceholders } from '@documenso/lib/server-only/pdf/auto-place-fields';
-import { normalizePdf } from '@documenso/lib/server-only/pdf/normalize-pdf';
-import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
-import { putPdfFileServerSide } from '@documenso/lib/universal/upload/put-file.server';
+import { getServerLimits } from '@hanzo/sign-ee/server-only/limits/server';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
+import { extractPdfPlaceholders } from '@hanzo/sign-lib/server-only/pdf/auto-place-fields';
+import { normalizePdf } from '@hanzo/sign-lib/server-only/pdf/normalize-pdf';
+import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import { putPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
 
 import { insertFormValuesInPdf } from '../../../lib/server-only/pdf/insert-form-values-in-pdf';
 import { authenticatedProcedure } from '../trpc';

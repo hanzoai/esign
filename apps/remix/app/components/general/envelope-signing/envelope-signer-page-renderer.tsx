@@ -13,27 +13,27 @@ import type Konva from 'konva';
 import type { KonvaEventObject } from 'konva/lib/Node';
 import { match } from 'ts-pattern';
 
-import { usePageRenderer } from '@documenso/lib/client-only/hooks/use-page-renderer';
+import { usePageRenderer } from '@hanzo/sign-lib/client-only/hooks/use-page-renderer';
 import {
   type PageRenderData,
   useCurrentEnvelopeRender,
-} from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { useOptionalSession } from '@documenso/lib/client-only/providers/session';
-import { DIRECT_TEMPLATE_RECIPIENT_EMAIL } from '@documenso/lib/constants/direct-templates';
-import { isBase64Image } from '@documenso/lib/constants/signatures';
-import type { TRecipientActionAuth } from '@documenso/lib/types/document-auth';
-import type { TEnvelope } from '@documenso/lib/types/envelope';
-import { ZFullFieldSchema } from '@documenso/lib/types/field';
-import { createSpinner } from '@documenso/lib/universal/field-renderer/field-generic-items';
-import { renderField } from '@documenso/lib/universal/field-renderer/render-field';
-import { isFieldUnsignedAndRequired } from '@documenso/lib/utils/advanced-fields-helpers';
-import { getClientSideFieldTranslations } from '@documenso/lib/utils/fields';
-import { extractInitials } from '@documenso/lib/utils/recipient-formatter';
-import type { TSignEnvelopeFieldValue } from '@documenso/trpc/server/envelope-router/sign-envelope-field.types';
-import { EnvelopeRecipientFieldTooltip } from '@documenso/ui/components/document/envelope-recipient-field-tooltip';
-import { EnvelopeFieldToolTip } from '@documenso/ui/components/field/envelope-field-tooltip';
-import type { TRecipientColor } from '@documenso/ui/lib/recipient-colors';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { DIRECT_TEMPLATE_RECIPIENT_EMAIL } from '@hanzo/sign-lib/constants/direct-templates';
+import { isBase64Image } from '@hanzo/sign-lib/constants/signatures';
+import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
+import type { TEnvelope } from '@hanzo/sign-lib/types/envelope';
+import { ZFullFieldSchema } from '@hanzo/sign-lib/types/field';
+import { createSpinner } from '@hanzo/sign-lib/universal/field-renderer/field-generic-items';
+import { renderField } from '@hanzo/sign-lib/universal/field-renderer/render-field';
+import { isFieldUnsignedAndRequired } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
+import { getClientSideFieldTranslations } from '@hanzo/sign-lib/utils/fields';
+import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
+import type { TSignEnvelopeFieldValue } from '@hanzo/sign-trpc/server/envelope-router/sign-envelope-field.types';
+import { EnvelopeRecipientFieldTooltip } from '@hanzo/sign-ui/components/document/envelope-recipient-field-tooltip';
+import { EnvelopeFieldToolTip } from '@hanzo/sign-ui/components/field/envelope-field-tooltip';
+import type { TRecipientColor } from '@hanzo/sign-ui/lib/recipient-colors';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useEmbedSigningContext } from '~/components/embed/embed-signing-context';
 import { handleCheckboxFieldClick } from '~/utils/field-signing/checkbox-field';

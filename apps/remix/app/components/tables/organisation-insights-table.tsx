@@ -6,14 +6,14 @@ import { Building2, Loader, TrendingUp, Users } from 'lucide-react';
 import { Link } from 'react-router';
 import { useNavigation } from 'react-router';
 
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import type { OrganisationDetailedInsights } from '@documenso/lib/server-only/admin/get-organisation-detailed-insights';
-import type { DateRange } from '@documenso/lib/types/search-params';
-import type { ExtendedDocumentStatus } from '@documenso/prisma/types/extended-document-status';
-import { Button } from '@documenso/ui/primitives/button';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import type { OrganisationDetailedInsights } from '@hanzo/sign-lib/server-only/admin/get-organisation-detailed-insights';
+import type { DateRange } from '@hanzo/sign-lib/types/search-params';
+import type { ExtendedDocumentStatus } from '@hanzo/sign-prisma/types/extended-document-status';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
 
 import { DateRangeFilter } from '~/components/filters/date-range-filter';
 import { DocumentStatus } from '~/components/general/document/document-status';

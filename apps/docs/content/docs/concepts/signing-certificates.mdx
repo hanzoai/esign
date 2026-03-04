@@ -1,15 +1,15 @@
 ---
 title: Signing Certificates
-description: Documenso digitally signs completed documents using X.509 certificates, providing cryptographic proof of authenticity and integrity.
+description: Hanzo Sign digitally signs completed documents using X.509 certificates, providing cryptographic proof of authenticity and integrity.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Step, Steps } from 'fumadocs-ui/components/steps';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-## How Documenso Signs Documents
+## How Hanzo Sign Signs Documents
 
-Documenso applies a digital signature to the PDF when all recipients complete their actions.
+Hanzo Sign applies a digital signature to the PDF when all recipients complete their actions.
 
 {/* prettier-ignore */}
 <Steps>
@@ -44,13 +44,13 @@ The digital signature provides two guarantees:
 | Guarantee        | Description                                                                |
 | ---------------- | -------------------------------------------------------------------------- |
 | **Integrity**    | The document has not been altered since signing                            |
-| **Authenticity** | The document was signed by the certificate holder (the Documenso instance) |
+| **Authenticity** | The document was signed by the certificate holder (the Hanzo Sign instance) |
 
 If anyone modifies the PDF after signing, the signature becomes invalid. PDF readers will display a warning that the document has been changed.
 
 ## Timestamps
 
-Documenso can include a trusted timestamp from a Time Stamping Authority (TSA) in the signature. This proves when the document was signed, independent of the signer's system clock. Timestamps are important for:
+Hanzo Sign can include a trusted timestamp from a Time Stamping Authority (TSA) in the signature. This proves when the document was signed, independent of the signer's system clock. Timestamps are important for:
 
 - Legal evidence of when signing occurred
 - Long-term validation (LTV) of signatures
@@ -89,13 +89,13 @@ PDF readers validate signatures against their list of trusted Certificate Author
 <Callout type="info">
   A self-signed certificate still provides integrity verification. The document cannot be modified without invalidating the signature. The warning only indicates that a third-party CA has not verified the certificate issuer's identity.
 
-For most use cases, self-signed certificates are sufficient. The signature still proves the document came from your Documenso instance and has not been tampered with.
+For most use cases, self-signed certificates are sufficient. The signature still proves the document came from your Hanzo Sign instance and has not been tampered with.
 
 </Callout>
 
 ## Using Custom Certificates
 
-If you self-host Documenso, you can use your own signing certificate.
+If you self-host Hanzo Sign, you can use your own signing certificate.
 
 <Tabs items={['Self-signed', 'CA-issued']}>
   <Tab value="Self-signed">

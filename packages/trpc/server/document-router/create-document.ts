@@ -1,11 +1,11 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { getServerLimits } from '@documenso/ee/server-only/limits/server';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { createEnvelope } from '@documenso/lib/server-only/envelope/create-envelope';
-import { insertFormValuesInPdf } from '@documenso/lib/server-only/pdf/insert-form-values-in-pdf';
-import { putNormalizedPdfFileServerSide } from '@documenso/lib/universal/upload/put-file.server';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
+import { getServerLimits } from '@hanzo/sign-ee/server-only/limits/server';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
+import { insertFormValuesInPdf } from '@hanzo/sign-lib/server-only/pdf/insert-form-values-in-pdf';
+import { putNormalizedPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
 
 import { authenticatedProcedure } from '../trpc';
 import {

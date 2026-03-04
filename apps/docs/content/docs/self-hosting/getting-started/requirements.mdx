@@ -1,13 +1,13 @@
 ---
 title: Requirements
-description: System requirements and prerequisites for self-hosting Documenso.
+description: System requirements and prerequisites for self-hosting Hanzo Sign.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
 
 ## What You Need
 
-Documenso requires the following external services:
+Hanzo Sign requires the following external services:
 
 | Service       | Purpose                      | Minimum Version |
 | ------------- | ---------------------------- | --------------- |
@@ -17,9 +17,9 @@ Documenso requires the following external services:
 
 ### PostgreSQL Database
 
-Documenso uses PostgreSQL for all data storage including documents, users, and audit logs. You cannot use MySQL, SQLite, or other databases.
+Hanzo Sign uses PostgreSQL for all data storage including documents, users, and audit logs. You cannot use MySQL, SQLite, or other databases.
 
-Documenso requires two connection strings:
+Hanzo Sign requires two connection strings:
 
 - **Pooled connection** (`NEXT_PRIVATE_DATABASE_URL`) - For general application queries
 - **Direct connection** (`NEXT_PRIVATE_DIRECT_DATABASE_URL`) - For migrations and operations that require a direct connection
@@ -28,7 +28,7 @@ If you're not using a connection pooler (like PgBouncer), both can point to the 
 
 ### Email Server
 
-Documenso sends transactional emails for:
+Hanzo Sign sends transactional emails for:
 
 - Document signing requests
 - Signing reminders
@@ -51,7 +51,7 @@ Supported transports:
 
 ### Reverse Proxy
 
-For production deployments, place Documenso behind a reverse proxy such as:
+For production deployments, place Hanzo Sign behind a reverse proxy such as:
 
 - nginx
 - Caddy
@@ -59,7 +59,7 @@ For production deployments, place Documenso behind a reverse proxy such as:
 - HAProxy
 - Cloud load balancers (AWS ALB, GCP Load Balancer, etc.)
 
-The reverse proxy handles SSL/TLS termination and forwards requests to Documenso on port 3000.
+The reverse proxy handles SSL/TLS termination and forwards requests to Hanzo Sign on port 3000.
 
 ---
 
@@ -73,7 +73,7 @@ These services are not required but improve functionality or scalability:
 
 ### Document Storage
 
-By default, Documenso stores documents in the PostgreSQL database. For production deployments with significant document volume, use S3-compatible storage:
+By default, Hanzo Sign stores documents in the PostgreSQL database. For production deployments with significant document volume, use S3-compatible storage:
 
 - Amazon S3
 - MinIO
@@ -85,9 +85,9 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage) for setup 
 
 ### Background Jobs
 
-Documenso processes background jobs (email delivery, document processing) using a PostgreSQL-based queue. No additional services like Redis are required: the job queue is built into the application and uses your existing database.
+Hanzo Sign processes background jobs (email delivery, document processing) using a PostgreSQL-based queue. No additional services like Redis are required: the job queue is built into the application and uses your existing database.
 
-For high-throughput deployments, Documenso optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider. Set `NEXT_PRIVATE_JOBS_PROVIDER=inngest` and configure `INNGEST_EVENT_KEY` and `INNGEST_SIGNING_KEY`. Most self-hosted instances do not need this.
+For high-throughput deployments, Hanzo Sign optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider. Set `NEXT_PRIVATE_JOBS_PROVIDER=inngest` and configure `INNGEST_EVENT_KEY` and `INNGEST_SIGNING_KEY`. Most self-hosted instances do not need this.
 
 ---
 
@@ -129,7 +129,7 @@ If building from source (not using Docker images):
 
 ## Supported Platforms
 
-Documenso runs on:
+Hanzo Sign runs on:
 
 - **Linux** - Any modern distribution (Ubuntu, Debian, CentOS, Alpine)
 - **Docker** - Official images available on DockerHub and GitHub Container Registry
@@ -161,7 +161,7 @@ Before proceeding to deployment, confirm you have:
 - [ ] PostgreSQL 14+ database accessible
 - [ ] SMTP credentials or email provider API key
 - [ ] Signing certificate (`.p12`) for document signing — see [Tips](/docs/self-hosting/getting-started/tips)
-- [ ] Domain name for your Documenso instance
+- [ ] Domain name for your Hanzo Sign instance
 - [ ] SSL certificate (or reverse proxy that handles SSL)
 - [ ] Server meeting minimum hardware requirements
 
@@ -169,6 +169,6 @@ Before proceeding to deployment, confirm you have:
 
 ## See Also
 
-- [Quick Start](/docs/self-hosting/getting-started/quick-start) - Deploy Documenso with Docker in 5 minutes
+- [Quick Start](/docs/self-hosting/getting-started/quick-start) - Deploy Hanzo Sign with Docker in 5 minutes
 - [Docker Compose](/docs/self-hosting/deployment/docker-compose) - Production setup with Docker Compose
 - [Environment Variables](/docs/self-hosting/configuration/environment) - Full configuration reference

@@ -2,7 +2,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { formatTeamUrl } from '@documenso/lib/utils/teams';
+import { formatTeamUrl } from '@hanzo/sign-lib/utils/teams';
 
 import {
   Body,
@@ -31,7 +31,7 @@ export type ConfirmTeamEmailProps = {
 
 export const ConfirmTeamEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  baseUrl = 'https://documenso.com',
+  baseUrl = 'https://sign.hanzo.ai',
   teamName = 'Team Name',
   teamUrl = 'demo',
   token = '',
@@ -39,7 +39,7 @@ export const ConfirmTeamEmailTemplate = ({
   const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`Accept team email request for ${teamName} on Documenso`;
+  const previewText = msg`Accept team email request for ${teamName} on Hanzo Sign`;
 
   return (
     <Html>
@@ -75,7 +75,7 @@ export const ConfirmTeamEmailTemplate = ({
               <Text className="text-center text-base">
                 <Trans>
                   <span className="font-bold">{teamName}</span> has requested to use your email
-                  address for their team on Documenso.
+                  address for their team on Hanzo Sign.
                 </Trans>
               </Text>
 
@@ -105,7 +105,7 @@ export const ConfirmTeamEmailTemplate = ({
 
                 <Text className="mt-2 text-sm">
                   <Trans>
-                    You can revoke access at any time in your team settings on Documenso{' '}
+                    You can revoke access at any time in your team settings on Hanzo Sign{' '}
                     <Link href={`${baseUrl}/settings/teams`}>here</Link>.
                   </Trans>
                 </Text>
@@ -113,7 +113,7 @@ export const ConfirmTeamEmailTemplate = ({
 
               <Section className="mb-6 mt-8 text-center">
                 <Button
-                  className="inline-flex items-center justify-center rounded-lg bg-documenso-500 px-6 py-3 text-center text-sm font-medium text-black no-underline"
+                  className="inline-flex items-center justify-center rounded-lg bg-sign-500 px-6 py-3 text-center text-sm font-medium text-black no-underline"
                   href={`${baseUrl}/team/verify/email/${token}`}
                 >
                   <Trans>Accept</Trans>

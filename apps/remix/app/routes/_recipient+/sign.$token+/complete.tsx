@@ -5,23 +5,23 @@ import { CheckCircle2, Clock8, DownloadIcon, Loader2 } from 'lucide-react';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import signingCelebration from '@documenso/assets/images/signing-celebration.png';
-import { getOptionalSession } from '@documenso/auth/server/lib/utils/get-session';
-import { useOptionalSession } from '@documenso/lib/client-only/providers/session';
-import { getDocumentAndSenderByToken } from '@documenso/lib/server-only/document/get-document-by-token';
-import { isRecipientAuthorized } from '@documenso/lib/server-only/document/is-recipient-authorized';
-import { getFieldsForToken } from '@documenso/lib/server-only/field/get-fields-for-token';
-import { getRecipientByToken } from '@documenso/lib/server-only/recipient/get-recipient-by-token';
-import { getRecipientSignatures } from '@documenso/lib/server-only/recipient/get-recipient-signatures';
-import { getUserByEmail } from '@documenso/lib/server-only/user/get-user-by-email';
-import { isDocumentCompleted } from '@documenso/lib/utils/document';
-import { env } from '@documenso/lib/utils/env';
-import { trpc } from '@documenso/trpc/react';
-import { DocumentShareButton } from '@documenso/ui/components/document/document-share-button';
-import { SigningCard3D } from '@documenso/ui/components/signing-card';
-import { cn } from '@documenso/ui/lib/utils';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
+import signingCelebration from '@hanzo/sign-assets/images/signing-celebration.png';
+import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
+import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
+import { getDocumentAndSenderByToken } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
+import { isRecipientAuthorized } from '@hanzo/sign-lib/server-only/document/is-recipient-authorized';
+import { getFieldsForToken } from '@hanzo/sign-lib/server-only/field/get-fields-for-token';
+import { getRecipientByToken } from '@hanzo/sign-lib/server-only/recipient/get-recipient-by-token';
+import { getRecipientSignatures } from '@hanzo/sign-lib/server-only/recipient/get-recipient-signatures';
+import { getUserByEmail } from '@hanzo/sign-lib/server-only/user/get-user-by-email';
+import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
+import { env } from '@hanzo/sign-lib/utils/env';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { DocumentShareButton } from '@hanzo/sign-ui/components/document/document-share-button';
+import { SigningCard3D } from '@hanzo/sign-ui/components/signing-card';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import { EnvelopeDownloadDialog } from '~/components/dialogs/envelope-download-dialog';
 import { ClaimAccount } from '~/components/general/claim-account';
@@ -179,7 +179,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
 
           {match({ status: signingStatus, deletedAt: document.deletedAt })
             .with({ status: 'COMPLETED' }, () => (
-              <div className="mt-4 flex items-center text-center text-documenso-700">
+              <div className="mt-4 flex items-center text-center text-sign-700">
                 <CheckCircle2 className="mr-2 h-5 w-5" />
                 <span className="text-sm">
                   <Trans>Everyone has signed</Trans>

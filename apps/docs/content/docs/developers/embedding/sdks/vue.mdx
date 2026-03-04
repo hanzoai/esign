@@ -1,6 +1,6 @@
 ---
 title: Vue
-description: Embed Documenso signing in your Vue application using the official SDK.
+description: Embed Hanzo Sign signing in your Vue application using the official SDK.
 ---
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
@@ -8,9 +8,9 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ## Installation
 
 <Tabs items={['npm', 'yarn', 'pnpm']}>
-  <Tab value="npm">``` npm install @documenso/embed-vue ```</Tab>
-  <Tab value="yarn">``` yarn add @documenso/embed-vue ```</Tab>
-  <Tab value="pnpm">``` pnpm add @documenso/embed-vue ```</Tab>
+  <Tab value="npm">``` npm install @hanzo/sign-embed-vue ```</Tab>
+  <Tab value="yarn">``` yarn add @hanzo/sign-embed-vue ```</Tab>
+  <Tab value="pnpm">``` pnpm add @hanzo/sign-embed-vue ```</Tab>
 </Tabs>
 
 ---
@@ -19,7 +19,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ```html
 <script setup lang="ts">
-  import { EmbedDirectTemplate } from '@documenso/embed-vue';
+  import { EmbedDirectTemplate } from '@hanzo/sign-embed-vue';
 
   const token = 'your-template-token';
 
@@ -48,7 +48,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ```html
 <script setup lang="ts">
-  import { EmbedSignDocument } from '@documenso/embed-vue';
+  import { EmbedSignDocument } from '@hanzo/sign-embed-vue';
 
   const props = defineProps<{ token: string }>();
 
@@ -68,12 +68,12 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ```html
 <script setup lang="ts">
-  import { EmbedDirectTemplate } from '@documenso/embed-vue';
+  import { EmbedDirectTemplate } from '@hanzo/sign-embed-vue';
 
   const token = 'your-token';
 
   const customCss = `
-  .documenso-embed {
+  .hanzo-sign-embed {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }

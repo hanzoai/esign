@@ -3,7 +3,7 @@ import { initContract } from '@ts-rest/core';
 import {
   ZCreateTemplateV2RequestSchema,
   ZCreateTemplateV2ResponseSchema,
-} from '@documenso/trpc/server/template-router/schema';
+} from '@hanzo/sign-trpc/server/template-router/schema';
 
 import {
   ZAuthorizationHeadersSchema,
@@ -44,7 +44,7 @@ import {
 const c = initContract();
 
 const deprecatedDescription =
-  'This endpoint is deprecated, but will continue to be supported. For more details, see https://docs.documenso.com/developers/public-api.';
+  'This endpoint is deprecated, but will continue to be supported. For more details, see https://docs.sign.hanzo.ai/developers/public-api.';
 
 export const ApiContractV1 = c.router(
   {

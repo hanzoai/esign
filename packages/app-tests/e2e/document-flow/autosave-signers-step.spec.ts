@@ -2,11 +2,11 @@ import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { EnvelopeType } from '@prisma/client';
 
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { getRecipientsForDocument } from '@documenso/lib/server-only/recipient/get-recipients-for-document';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
-import { seedBlankDocument } from '@documenso/prisma/seed/documents';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { getRecipientsForDocument } from '@hanzo/sign-lib/server-only/recipient/get-recipients-for-document';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { seedBlankDocument } from '@hanzo/sign-prisma/seed/documents';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 
@@ -35,7 +35,7 @@ const triggerAutosave = async (page: Page) => {
 };
 
 const addSignerAndSave = async (page: Page) => {
-  await page.getByPlaceholder('Email').fill('recipient1@documenso.com');
+  await page.getByPlaceholder('Email').fill('recipient1@sign.hanzo.ai');
   await page.getByPlaceholder('Name').fill('Recipient 1');
 
   await triggerAutosave(page);
@@ -55,7 +55,7 @@ test.describe('AutoSave Signers Step', () => {
       });
 
       expect(retrievedRecipients.length).toBe(1);
-      expect(retrievedRecipients[0].email).toBe('recipient1@documenso.com');
+      expect(retrievedRecipients[0].email).toBe('recipient1@sign.hanzo.ai');
       expect(retrievedRecipients[0].name).toBe('Recipient 1');
     }).toPass();
   });
@@ -89,8 +89,8 @@ test.describe('AutoSave Signers Step', () => {
 
     await addSignerAndSave(page);
 
-    await page.getByPlaceholder('Name').fill('Documenso Manager');
-    await page.getByPlaceholder('Email').fill('manager@documenso.com');
+    await page.getByPlaceholder('Name').fill('Hanzo Sign Manager');
+    await page.getByPlaceholder('Email').fill('manager@sign.hanzo.ai');
 
     await triggerAutosave(page);
 
@@ -107,8 +107,8 @@ test.describe('AutoSave Signers Step', () => {
       });
 
       expect(retrievedRecipients.length).toBe(1);
-      expect(retrievedRecipients[0].email).toBe('manager@documenso.com');
-      expect(retrievedRecipients[0].name).toBe('Documenso Manager');
+      expect(retrievedRecipients[0].email).toBe('manager@sign.hanzo.ai');
+      expect(retrievedRecipients[0].name).toBe('Hanzo Sign Manager');
       expect(retrievedRecipients[0].role).toBe('CC');
     }).toPass();
   });
@@ -120,12 +120,12 @@ test.describe('AutoSave Signers Step', () => {
 
     await page.getByRole('button', { name: 'Add signer' }).click();
 
-    await page.getByTestId('signer-email-input').nth(1).fill('recipient2@documenso.com');
+    await page.getByTestId('signer-email-input').nth(1).fill('recipient2@sign.hanzo.ai');
     await page.getByLabel('Name').nth(1).fill('Recipient 2');
 
     await page.getByRole('button', { name: 'Add Signer' }).click();
 
-    await page.getByTestId('signer-email-input').nth(2).fill('recipient3@documenso.com');
+    await page.getByTestId('signer-email-input').nth(2).fill('recipient3@sign.hanzo.ai');
     await page.getByLabel('Name').nth(2).fill('Recipient 3');
 
     await triggerAutosave(page);
@@ -168,13 +168,13 @@ test.describe('AutoSave Signers Step', () => {
       expect(retrievedRecipients.length).toBe(3);
 
       const firstRecipient = retrievedRecipients.find(
-        (r) => r.email === 'recipient1@documenso.com',
+        (r) => r.email === 'recipient1@sign.hanzo.ai',
       );
       const secondRecipient = retrievedRecipients.find(
-        (r) => r.email === 'recipient2@documenso.com',
+        (r) => r.email === 'recipient2@sign.hanzo.ai',
       );
       const thirdRecipient = retrievedRecipients.find(
-        (r) => r.email === 'recipient3@documenso.com',
+        (r) => r.email === 'recipient3@sign.hanzo.ai',
       );
 
       expect(firstRecipient?.signingOrder).toBe(2);

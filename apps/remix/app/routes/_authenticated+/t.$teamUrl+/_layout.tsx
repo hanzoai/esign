@@ -8,11 +8,11 @@ import { Link, Outlet } from 'react-router';
 import {
   DEFAULT_MINIMUM_ENVELOPE_ITEM_COUNT,
   PAID_PLAN_LIMITS,
-} from '@documenso/ee/server-only/limits/constants';
-import { LimitsProvider } from '@documenso/ee/server-only/limits/provider/client';
-import { useOptionalCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { TrpcProvider } from '@documenso/trpc/react';
-import { Button } from '@documenso/ui/primitives/button';
+} from '@hanzo/sign-ee/server-only/limits/constants';
+import { LimitsProvider } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useOptionalCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { TrpcProvider } from '@hanzo/sign-trpc/react';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
 import { useOptionalCurrentTeam } from '~/providers/team';

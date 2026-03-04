@@ -1,4 +1,4 @@
-import { prisma } from '@documenso/prisma';
+import { prisma } from '@hanzo/sign-prisma';
 
 import type { TSiteSettingSchema } from './schema';
 import { ZSiteSettingSchema } from './schema';

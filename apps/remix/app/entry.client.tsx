@@ -7,8 +7,8 @@ import posthog from 'posthog-js';
 import { hydrateRoot } from 'react-dom/client';
 import { HydratedRouter } from 'react-router/dom';
 
-import { extractPostHogConfig } from '@documenso/lib/constants/feature-flags';
-import { dynamicActivate } from '@documenso/lib/utils/i18n';
+import { extractPostHogConfig } from '@hanzo/sign-lib/constants/feature-flags';
+import { dynamicActivate } from '@hanzo/sign-lib/utils/i18n';
 
 import './utils/polyfills/promise-with-resolvers';
 

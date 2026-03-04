@@ -1,10 +1,10 @@
-import { IS_BILLING_ENABLED } from '@documenso/lib/constants/app';
-import { DOCUMENSO_ENCRYPTION_KEY } from '@documenso/lib/constants/crypto';
-import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/organisations';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { symmetricEncrypt } from '@documenso/lib/universal/crypto';
-import { buildOrganisationWhereQuery } from '@documenso/lib/utils/organisations';
-import { prisma } from '@documenso/prisma';
+import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
+import { SIGN_ENCRYPTION_KEY } from '@hanzo/sign-lib/constants/crypto';
+import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { symmetricEncrypt } from '@hanzo/sign-lib/universal/crypto';
+import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {
@@ -80,10 +80,10 @@ export const updateOrganisationAuthenticationPortalRoute = authenticatedProcedur
 
     // Encrypt the secret if it is provided.
     if (clientSecret) {
-      const encryptionKey = DOCUMENSO_ENCRYPTION_KEY;
+      const encryptionKey = SIGN_ENCRYPTION_KEY;
 
       if (!encryptionKey) {
-        throw new Error('Missing DOCUMENSO_ENCRYPTION_KEY');
+        throw new Error('Missing SIGN_ENCRYPTION_KEY');
       }
 
       encryptedClientSecret = symmetricEncrypt({

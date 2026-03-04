@@ -8,40 +8,40 @@ import { InfoIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 
-import { useAutoSave } from '@documenso/lib/client-only/hooks/use-autosave';
-import { useCurrentOrganisation } from '@documenso/lib/client-only/providers/organisation';
-import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@documenso/lib/constants/date-formats';
+import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
+import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
+import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
 import {
   DOCUMENT_DISTRIBUTION_METHODS,
   DOCUMENT_SIGNATURE_TYPES,
-} from '@documenso/lib/constants/document';
-import { SUPPORTED_LANGUAGES } from '@documenso/lib/constants/i18n';
-import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@documenso/lib/constants/time-zones';
-import { ZDocumentEmailSettingsSchema } from '@documenso/lib/types/document-email';
-import type { TDocumentMetaDateFormat } from '@documenso/lib/types/document-meta';
-import type { TTemplate } from '@documenso/lib/types/template';
-import { extractDocumentAuthMethods } from '@documenso/lib/utils/document-auth';
-import { extractTeamSignatureSettings } from '@documenso/lib/utils/teams';
-import { trpc } from '@documenso/trpc/react';
+} from '@hanzo/sign-lib/constants/document';
+import { SUPPORTED_LANGUAGES } from '@hanzo/sign-lib/constants/i18n';
+import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+import type { TDocumentMetaDateFormat } from '@hanzo/sign-lib/types/document-meta';
+import type { TTemplate } from '@hanzo/sign-lib/types/template';
+import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
+import { extractTeamSignatureSettings } from '@hanzo/sign-lib/utils/teams';
+import { trpc } from '@hanzo/sign-trpc/react';
 import {
   DocumentGlobalAuthAccessSelect,
   DocumentGlobalAuthAccessTooltip,
-} from '@documenso/ui/components/document/document-global-auth-access-select';
+} from '@hanzo/sign-ui/components/document/document-global-auth-access-select';
 import {
   DocumentGlobalAuthActionSelect,
   DocumentGlobalAuthActionTooltip,
-} from '@documenso/ui/components/document/document-global-auth-action-select';
-import { DocumentSendEmailMessageHelper } from '@documenso/ui/components/document/document-send-email-message-helper';
+} from '@hanzo/sign-ui/components/document/document-global-auth-action-select';
+import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
 import {
   DocumentVisibilitySelect,
   DocumentVisibilityTooltip,
-} from '@documenso/ui/components/document/document-visibility-select';
+} from '@hanzo/sign-ui/components/document/document-visibility-select';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@documenso/ui/primitives/accordion';
+} from '@hanzo/sign-ui/primitives/accordion';
 import {
   Form,
   FormControl,
@@ -49,7 +49,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@documenso/ui/primitives/form/form';
+} from '@hanzo/sign-ui/primitives/form/form';
 
 import { DocumentEmailCheckboxes } from '../../components/document/document-email-checkboxes';
 import {
@@ -501,7 +501,7 @@ export const AddTemplateSettingsFormPartial = ({
                                       </SelectItem>
                                     ))}
 
-                                    <SelectItem value={'-1'}>Documenso</SelectItem>
+                                    <SelectItem value={'-1'}>Hanzo Sign</SelectItem>
                                   </SelectContent>
                                 </Select>
                               </FormControl>

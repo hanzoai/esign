@@ -3,10 +3,10 @@ import React, { useRef } from 'react';
 import type { MessageDescriptor } from '@lingui/core';
 import { Trans, useLingui } from '@lingui/react/macro';
 
-import { useCurrentEnvelopeRender } from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { PDF_VIEWER_ERROR_MESSAGES } from '@documenso/lib/constants/pdf-viewer-i18n';
-import { cn } from '@documenso/ui/lib/utils';
-import { Alert, AlertDescription, AlertTitle } from '@documenso/ui/primitives/alert';
+import { useCurrentEnvelopeRender } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 
 import { PDFViewer, type PDFViewerProps } from './pdf-viewer';
 

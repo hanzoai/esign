@@ -22,13 +22,13 @@ import { useNavigate, useSearchParams } from 'react-router';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import type { EnvelopeEditorStep } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { useCurrentEnvelopeEditor } from '@documenso/lib/client-only/providers/envelope-editor-provider';
-import { mapSecondaryIdToTemplateId } from '@documenso/lib/utils/envelope';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
-import { Separator } from '@documenso/ui/primitives/separator';
-import { SpinnerBox } from '@documenso/ui/primitives/spinner';
+import type { EnvelopeEditorStep } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Separator } from '@hanzo/sign-ui/primitives/separator';
+import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
 
 import { EnvelopeDeleteDialog } from '~/components/dialogs/envelope-delete-dialog';
 import { EnvelopeDistributeDialog } from '~/components/dialogs/envelope-distribute-dialog';

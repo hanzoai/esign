@@ -1,8 +1,8 @@
 import { TeamMemberRole } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@documenso/lib/types/search-params';
-import TeamSchema from '@documenso/prisma/generated/zod/modelSchema/TeamSchema';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
+import TeamSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/TeamSchema';
 
 // export const getTeamsMeta: TrpcOpenApiMeta = {
 //   openapi: {

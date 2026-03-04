@@ -1,8 +1,8 @@
 import { Trans } from '@lingui/react/macro';
 
-import type { ImageLoadingState } from '@documenso/lib/client-only/providers/envelope-render-provider';
-import { cn } from '@documenso/ui/lib/utils';
-import { Spinner } from '@documenso/ui/primitives/spinner';
+import type { ImageLoadingState } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
 
 type PdfViewerPageImageProps = {
   imageLoadingState: ImageLoadingState;

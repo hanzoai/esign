@@ -2,16 +2,16 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { CheckIcon } from 'lucide-react';
 
-import { SUPPORTED_LANGUAGES } from '@documenso/lib/constants/i18n';
-import { dynamicActivate } from '@documenso/lib/utils/i18n';
-import { cn } from '@documenso/ui/lib/utils';
+import { SUPPORTED_LANGUAGES } from '@hanzo/sign-lib/constants/i18n';
+import { dynamicActivate } from '@hanzo/sign-lib/utils/i18n';
+import { cn } from '@hanzo/sign-ui/lib/utils';
 import {
   CommandDialog,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-} from '@documenso/ui/primitives/command';
+} from '@hanzo/sign-ui/primitives/command';
 
 type LanguageSwitcherDialogProps = {
   open: boolean;

@@ -57,7 +57,7 @@ No configuration required. Database storage is enabled when `NEXT_PUBLIC_UPLOAD_
 
 ## S3 Configuration
 
-S3 storage is recommended for production deployments. Documenso supports AWS S3 and any S3-compatible storage service.
+S3 storage is recommended for production deployments. Hanzo Sign supports AWS S3 and any S3-compatible storage service.
 
 ### Required Variables
 
@@ -89,7 +89,7 @@ S3 storage is recommended for production deployments. Documenso supports AWS S3 
 Create a bucket in the AWS Console or using the CLI:
 
 ```bash
-aws s3 mb s3://your-documenso-bucket --region us-east-1
+aws s3 mb s3://your-hanzo-sign-bucket --region us-east-1
 ```
 
 </Step>
@@ -105,7 +105,7 @@ Block public access and configure CORS for presigned URL uploads:
   {
     "AllowedHeaders": ["*"],
     "AllowedMethods": ["GET", "PUT", "POST"],
-    "AllowedOrigins": ["https://your-documenso-domain.com"],
+    "AllowedOrigins": ["https://your-hanzo-sign-domain.com"],
     "ExposeHeaders": ["ETag"]
   }
 ]
@@ -114,7 +114,7 @@ Block public access and configure CORS for presigned URL uploads:
 Apply via AWS Console (Bucket > Permissions > CORS configuration) or CLI:
 
 ```bash
-aws s3api put-bucket-cors --bucket your-documenso-bucket --cors-configuration file://cors.json
+aws s3api put-bucket-cors --bucket your-hanzo-sign-bucket --cors-configuration file://cors.json
 ```
 
 </Step>
@@ -130,7 +130,7 @@ Create an IAM user with programmatic access and attach this policy:
     {
       "Effect": "Allow",
       "Action": ["s3:PutObject", "s3:GetObject", "s3:DeleteObject"],
-      "Resource": "arn:aws:s3:::your-documenso-bucket/*"
+      "Resource": "arn:aws:s3:::your-hanzo-sign-bucket/*"
     }
   ]
 }
@@ -142,7 +142,7 @@ Create an IAM user with programmatic access and attach this policy:
 
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
-NEXT_PRIVATE_UPLOAD_BUCKET=your-documenso-bucket
+NEXT_PRIVATE_UPLOAD_BUCKET=your-hanzo-sign-bucket
 NEXT_PRIVATE_UPLOAD_REGION=us-east-1
 NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
 NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
@@ -175,7 +175,7 @@ docker run -d \
   minio/minio server /data --console-address ":9001"
 ```
 
-Using Docker Compose with Documenso:
+Using Docker Compose with Hanzo Sign:
 
 ```yaml
 services:
@@ -206,7 +206,7 @@ Access the MinIO Console at `http://localhost:9001` and create a bucket, or use 
 mc alias set myminio http://localhost:9000 minioadmin minioadmin
 
 # Create bucket
-mc mb myminio/documenso
+mc mb myminio/hanzo-sign
 ```
 
 </Step>
@@ -215,7 +215,7 @@ mc mb myminio/documenso
 
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
-NEXT_PRIVATE_UPLOAD_BUCKET=documenso
+NEXT_PRIVATE_UPLOAD_BUCKET=hanzo-sign
 NEXT_PRIVATE_UPLOAD_ENDPOINT=http://minio:9000
 NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE=true
 NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=minioadmin
@@ -235,13 +235,13 @@ NEXT_PRIVATE_UPLOAD_REGION=us-east-1
 
 ## Other S3-Compatible Services
 
-Documenso works with any S3-compatible storage service. Configure the endpoint and enable path-style URLs if required.
+Hanzo Sign works with any S3-compatible storage service. Configure the endpoint and enable path-style URLs if required.
 
 ### Cloudflare R2
 
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
-NEXT_PRIVATE_UPLOAD_BUCKET=documenso
+NEXT_PRIVATE_UPLOAD_BUCKET=hanzo-sign
 NEXT_PRIVATE_UPLOAD_ENDPOINT=https://<account-id>.r2.cloudflarestorage.com
 NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=your-r2-access-key
 NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=your-r2-secret-key
@@ -252,7 +252,7 @@ NEXT_PRIVATE_UPLOAD_REGION=auto
 
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
-NEXT_PRIVATE_UPLOAD_BUCKET=documenso
+NEXT_PRIVATE_UPLOAD_BUCKET=hanzo-sign
 NEXT_PRIVATE_UPLOAD_ENDPOINT=https://nyc3.digitaloceanspaces.com
 NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=your-spaces-key
 NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=your-spaces-secret
@@ -263,7 +263,7 @@ NEXT_PRIVATE_UPLOAD_REGION=nyc3
 
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
-NEXT_PRIVATE_UPLOAD_BUCKET=documenso
+NEXT_PRIVATE_UPLOAD_BUCKET=hanzo-sign
 NEXT_PRIVATE_UPLOAD_ENDPOINT=https://s3.us-west-004.backblazeb2.com
 NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=your-b2-key-id
 NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=your-b2-application-key
@@ -274,7 +274,7 @@ NEXT_PRIVATE_UPLOAD_REGION=us-west-004
 
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
-NEXT_PRIVATE_UPLOAD_BUCKET=documenso
+NEXT_PRIVATE_UPLOAD_BUCKET=hanzo-sign
 NEXT_PRIVATE_UPLOAD_ENDPOINT=https://s3.us-east-1.wasabisys.com
 NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=your-wasabi-key
 NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=your-wasabi-secret
@@ -289,7 +289,7 @@ Use Amazon CloudFront to serve documents with lower latency and reduced S3 costs
 
 ### Prerequisites
 
-- An S3 bucket configured for Documenso
+- An S3 bucket configured for Hanzo Sign
 - A CloudFront distribution with the S3 bucket as origin
 - A CloudFront key pair for signing URLs
 
@@ -377,7 +377,7 @@ Signed URLs expire after 1 hour.
 
 ## Migration Between Storage Backends
 
-Documenso does not provide automatic migration between storage backends. Each document's storage location is recorded in the database.
+Hanzo Sign does not provide automatic migration between storage backends. Each document's storage location is recorded in the database.
 
 <Callout type="warn">
   Documents uploaded to one storage backend cannot be automatically migrated to another. Plan your
@@ -418,7 +418,7 @@ This requires custom scripts and database modifications.
 
 ### Hybrid Operation
 
-During migration, Documenso can read from both backends. The `DocumentData.type` field indicates where each document is stored.
+During migration, Hanzo Sign can read from both backends. The `DocumentData.type` field indicates where each document is stored.
 
 - `BYTES_64`: Stored in database
 - `S3_PATH`: Stored in S3

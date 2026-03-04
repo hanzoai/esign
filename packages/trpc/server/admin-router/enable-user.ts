@@ -1,6 +1,6 @@
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { enableUser } from '@documenso/lib/server-only/user/enable-user';
-import { getUserById } from '@documenso/lib/server-only/user/get-user-by-id';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { enableUser } from '@hanzo/sign-lib/server-only/user/enable-user';
+import { getUserById } from '@hanzo/sign-lib/server-only/user/get-user-by-id';
 
 import { adminProcedure } from '../trpc';
 import { ZEnableUserRequestSchema, ZEnableUserResponseSchema } from './enable-user.types';

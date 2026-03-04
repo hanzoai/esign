@@ -5,17 +5,17 @@ import type { Team, User } from '@prisma/client';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@documenso/lib/constants/app';
-import { createApiToken } from '@documenso/lib/server-only/public-api/create-api-token';
-import { prisma } from '@documenso/prisma';
-import { EnvelopeType, FieldType, RecipientRole } from '@documenso/prisma/client';
-import { seedUser } from '@documenso/prisma/seed/users';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/sign-prisma';
+import { EnvelopeType, FieldType, RecipientRole } from '@hanzo/sign-prisma/client';
+import { seedUser } from '@hanzo/sign-prisma/seed/users';
 import type {
   TCreateEnvelopePayload,
   TCreateEnvelopeResponse,
-} from '@documenso/trpc/server/envelope-router/create-envelope.types';
-import type { TCreateEnvelopeRecipientsRequest } from '@documenso/trpc/server/envelope-router/envelope-recipients/create-envelope-recipients.types';
-import type { TGetEnvelopeResponse } from '@documenso/trpc/server/envelope-router/get-envelope.types';
+} from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
+import type { TCreateEnvelopeRecipientsRequest } from '@hanzo/sign-trpc/server/envelope-router/envelope-recipients/create-envelope-recipients.types';
+import type { TGetEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-envelope.types';
 
 const WEBAPP_BASE_URL = NEXT_PUBLIC_WEBAPP_URL();
 const baseUrl = `${WEBAPP_BASE_URL}/api/v2-beta`;
@@ -416,7 +416,7 @@ test.describe('Placeholder-based field creation', () => {
 
     await addRecipients(request, envelope.id, [
       {
-        email: 'second.recipient@documenso.com',
+        email: 'second.recipient@sign.hanzo.ai',
         name: 'Second Recipient',
         role: RecipientRole.SIGNER,
         signingOrder: 2,
@@ -424,7 +424,7 @@ test.describe('Placeholder-based field creation', () => {
         actionAuth: [],
       },
       {
-        email: 'first.recipient@documenso.com',
+        email: 'first.recipient@sign.hanzo.ai',
         name: 'First Recipient',
         role: RecipientRole.SIGNER,
         signingOrder: 1,

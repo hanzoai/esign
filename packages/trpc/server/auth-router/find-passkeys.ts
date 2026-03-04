@@ -1,4 +1,4 @@
-import { findPasskeys } from '@documenso/lib/server-only/auth/find-passkeys';
+import { findPasskeys } from '@hanzo/sign-lib/server-only/auth/find-passkeys';
 
 import { authenticatedProcedure } from '../trpc';
 import { ZFindPasskeysRequestSchema, ZFindPasskeysResponseSchema } from './find-passkeys.types';

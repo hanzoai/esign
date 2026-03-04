@@ -5,24 +5,24 @@ import type { RequestIdVariables } from 'hono/request-id';
 import { requestId } from 'hono/request-id';
 import type { Logger } from 'pino';
 
-import { tsRestHonoApp } from '@documenso/api/hono';
-import { auth } from '@documenso/auth/server';
-import { jobsClient } from '@documenso/lib/jobs/client';
-import { LicenseClient } from '@documenso/lib/server-only/license/license-client';
-import { createRateLimitMiddleware } from '@documenso/lib/server-only/rate-limit/rate-limit-middleware';
+import { tsRestHonoApp } from '@hanzo/sign-api/hono';
+import { auth } from '@hanzo/sign-auth/server';
+import { jobsClient } from '@hanzo/sign-lib/jobs/client';
+import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
+import { createRateLimitMiddleware } from '@hanzo/sign-lib/server-only/rate-limit/rate-limit-middleware';
 import {
   aiRateLimit,
   apiTrpcRateLimit,
   apiV1RateLimit,
   apiV2RateLimit,
   fileUploadRateLimit,
-} from '@documenso/lib/server-only/rate-limit/rate-limits';
-import { TelemetryClient } from '@documenso/lib/server-only/telemetry/telemetry-client';
-import { migrateDeletedAccountServiceAccount } from '@documenso/lib/server-only/user/service-accounts/deleted-account';
-import { migrateLegacyServiceAccount } from '@documenso/lib/server-only/user/service-accounts/legacy-service-account';
-import { env } from '@documenso/lib/utils/env';
-import { logger } from '@documenso/lib/utils/logger';
-import { openApiDocument } from '@documenso/trpc/server/open-api';
+} from '@hanzo/sign-lib/server-only/rate-limit/rate-limits';
+import { TelemetryClient } from '@hanzo/sign-lib/server-only/telemetry/telemetry-client';
+import { migrateDeletedAccountServiceAccount } from '@hanzo/sign-lib/server-only/user/service-accounts/deleted-account';
+import { migrateLegacyServiceAccount } from '@hanzo/sign-lib/server-only/user/service-accounts/legacy-service-account';
+import { env } from '@hanzo/sign-lib/utils/env';
+import { logger } from '@hanzo/sign-lib/utils/logger';
+import { openApiDocument } from '@hanzo/sign-trpc/server/open-api';
 
 import { aiRoute } from './api/ai/route';
 import { downloadRoute } from './api/download/download';
@@ -123,7 +123,7 @@ app.use(`/api/v2-beta/*`, async (c) =>
 );
 
 // Start telemetry client for anonymous usage tracking.
-// Can be disabled by setting DOCUMENSO_DISABLE_TELEMETRY=true
+// Can be disabled by setting SIGN_DISABLE_TELEMETRY=true
 if (env('NODE_ENV') !== 'development') {
   void TelemetryClient.start();
 }

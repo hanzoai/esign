@@ -1,14 +1,14 @@
 import { z } from 'zod';
 
-import { ZEnvelopeExpirationPeriod } from '@documenso/lib/constants/envelope-expiration';
-import { SUPPORTED_LANGUAGE_CODES } from '@documenso/lib/constants/i18n';
-import { ZDefaultRecipientsSchema } from '@documenso/lib/types/default-recipients';
-import { ZDocumentEmailSettingsSchema } from '@documenso/lib/types/document-email';
+import { ZEnvelopeExpirationPeriod } from '@hanzo/sign-lib/constants/envelope-expiration';
+import { SUPPORTED_LANGUAGE_CODES } from '@hanzo/sign-lib/constants/i18n';
+import { ZDefaultRecipientsSchema } from '@hanzo/sign-lib/types/default-recipients';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
 import {
   ZDocumentMetaDateFormatSchema,
   ZDocumentMetaTimezoneSchema,
-} from '@documenso/lib/types/document-meta';
-import { DocumentVisibility } from '@documenso/lib/types/document-visibility';
+} from '@hanzo/sign-lib/types/document-meta';
+import { DocumentVisibility } from '@hanzo/sign-lib/types/document-visibility';
 
 /**
  * Null = Inherit from organisation.

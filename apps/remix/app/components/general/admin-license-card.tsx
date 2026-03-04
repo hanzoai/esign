@@ -11,18 +11,18 @@ import { DateTime } from 'luxon';
 import { Link, useRevalidator } from 'react-router';
 import { match } from 'ts-pattern';
 
-import type { TCachedLicense } from '@documenso/lib/types/license';
-import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@documenso/lib/types/subscription';
-import { trpc } from '@documenso/trpc/react';
-import { Badge } from '@documenso/ui/primitives/badge';
-import { Button } from '@documenso/ui/primitives/button';
+import type { TCachedLicense } from '@hanzo/sign-lib/types/license';
+import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/sign-lib/types/subscription';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@documenso/ui/primitives/tooltip';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+} from '@hanzo/sign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { CardMetric } from './metric-card';
 
@@ -62,7 +62,7 @@ export const AdminLicenseCard = ({ licenseData }: AdminLicenseCardProps) => {
               )}
 
               <Link
-                to="https://docs.documenso.com/users/licenses/enterprise-edition"
+                to="https://docs.sign.hanzo.ai/users/licenses/enterprise-edition"
                 target="_blank"
                 className="flex flex-row items-center text-xs text-muted-foreground hover:text-muted-foreground/80"
               >
@@ -89,7 +89,7 @@ export const AdminLicenseCard = ({ licenseData }: AdminLicenseCardProps) => {
         </div>
 
         <h3 className="text-primary-forground mb-2 flex items-end text-sm font-medium leading-tight">
-          <Trans>Documenso License</Trans>
+          <Trans>Hanzo Sign License</Trans>
         </h3>
 
         {match(license.status)

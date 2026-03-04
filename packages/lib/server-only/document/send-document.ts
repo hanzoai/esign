@@ -10,12 +10,12 @@ import {
   WebhookTriggerEvents,
 } from '@prisma/client';
 
-import { resolveExpiresAt } from '@documenso/lib/constants/envelope-expiration';
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@documenso/lib/types/document-audit-logs';
-import type { ApiRequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
-import { createDocumentAuditLogData } from '@documenso/lib/utils/document-audit-logs';
-import { prisma } from '@documenso/prisma';
-import { checkboxValidationSigns } from '@documenso/ui/primitives/document-flow/field-items-advanced-settings/constants';
+import { resolveExpiresAt } from '@hanzo/sign-lib/constants/envelope-expiration';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
+import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
+import { prisma } from '@hanzo/sign-prisma';
+import { checkboxValidationSigns } from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
 
 import { validateCheckboxLength } from '../../advanced-fields-validation/validate-checkbox';
 import { AppError, AppErrorCode } from '../../errors/app-error';

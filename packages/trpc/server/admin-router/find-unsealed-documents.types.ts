@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@documenso/lib/types/search-params';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 
 export const ZFindUnsealedDocumentsRequestSchema = ZFindSearchParamsSchema.pick({
   page: true,

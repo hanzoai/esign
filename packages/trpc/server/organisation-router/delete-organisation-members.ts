@@ -1,11 +1,11 @@
-import { syncMemberCountWithStripeSeatPlan } from '@documenso/ee/server-only/stripe/update-subscription-item-quantity';
-import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/organisations';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { jobs } from '@documenso/lib/jobs/client';
-import { validateIfSubscriptionIsRequired } from '@documenso/lib/utils/billing';
-import { buildOrganisationWhereQuery } from '@documenso/lib/utils/organisations';
-import { prisma } from '@documenso/prisma';
-import { OrganisationMemberInviteStatus } from '@documenso/prisma/client';
+import { syncMemberCountWithStripeSeatPlan } from '@hanzo/sign-ee/server-only/stripe/update-subscription-item-quantity';
+import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { jobs } from '@hanzo/sign-lib/jobs/client';
+import { validateIfSubscriptionIsRequired } from '@hanzo/sign-lib/utils/billing';
+import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
+import { prisma } from '@hanzo/sign-prisma';
+import { OrganisationMemberInviteStatus } from '@hanzo/sign-prisma/client';
 
 import { authenticatedProcedure } from '../trpc';
 import {

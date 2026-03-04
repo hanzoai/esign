@@ -5,7 +5,7 @@ import {
   type OrganisationMemberRole,
 } from '@prisma/client';
 
-import type { ORGANISATION_MEMBER_ROLE_MAP } from '@documenso/lib/constants/organisations-translations';
+import type { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 
 import { DEFAULT_DOCUMENT_DATE_FORMAT } from '../constants/date-formats';
 import { DEFAULT_ENVELOPE_EXPIRATION_PERIOD } from '../constants/envelope-expiration';

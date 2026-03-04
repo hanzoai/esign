@@ -7,13 +7,13 @@ import { ChevronLeft } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { Link } from 'react-router';
 
-import { getSession } from '@documenso/auth/server/lib/utils/get-session';
-import { getEnvelopeById } from '@documenso/lib/server-only/envelope/get-envelope-by-id';
-import { getTeamByUrl } from '@documenso/lib/server-only/team/get-team';
-import { mapSecondaryIdToDocumentId } from '@documenso/lib/utils/envelope';
-import { logDocumentAccess } from '@documenso/lib/utils/logger';
-import { formatDocumentsPath } from '@documenso/lib/utils/teams';
-import { Card } from '@documenso/ui/primitives/card';
+import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
+import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
+import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
+import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { logDocumentAccess } from '@hanzo/sign-lib/utils/logger';
+import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
+import { Card } from '@hanzo/sign-ui/primitives/card';
 
 import { DocumentAuditLogDownloadButton } from '~/components/general/document/document-audit-log-download-button';
 import { DocumentCertificateDownloadButton } from '~/components/general/document/document-certificate-download-button';
@@ -134,7 +134,7 @@ export default function DocumentsLogsPage({ loaderData }: Route.ComponentProps) 
     <div className="mx-auto -mt-4 w-full max-w-screen-xl px-4 md:px-8">
       <Link
         to={`${documentRootPath}/${document.envelopeId}`}
-        className="flex items-center text-documenso-700 hover:opacity-80"
+        className="flex items-center text-sign-700 hover:opacity-80"
       >
         <ChevronLeft className="mr-2 inline-block h-5 w-5" />
         <Trans>Document</Trans>

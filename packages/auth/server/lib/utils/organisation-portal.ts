@@ -1,9 +1,9 @@
-import { IS_BILLING_ENABLED } from '@documenso/lib/constants/app';
-import { DOCUMENSO_ENCRYPTION_KEY } from '@documenso/lib/constants/crypto';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { symmetricDecrypt } from '@documenso/lib/universal/crypto';
-import { formatOrganisationCallbackUrl } from '@documenso/lib/utils/organisation-authentication-portal';
-import { prisma } from '@documenso/prisma';
+import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
+import { SIGN_ENCRYPTION_KEY } from '@hanzo/sign-lib/constants/crypto';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { symmetricDecrypt } from '@hanzo/sign-lib/universal/crypto';
+import { formatOrganisationCallbackUrl } from '@hanzo/sign-lib/utils/organisation-authentication-portal';
+import { prisma } from '@hanzo/sign-prisma';
 
 type GetOrganisationAuthenticationPortalOptions =
   | {
@@ -67,14 +67,14 @@ export const getOrganisationAuthenticationPortalOptions = async (
     });
   }
 
-  if (!DOCUMENSO_ENCRYPTION_KEY) {
+  if (!SIGN_ENCRYPTION_KEY) {
     throw new AppError(AppErrorCode.NOT_SETUP, {
       message: 'Encryption key is not set',
     });
   }
 
   const clientSecret = Buffer.from(
-    symmetricDecrypt({ key: DOCUMENSO_ENCRYPTION_KEY, data: encryptedClientSecret }),
+    symmetricDecrypt({ key: SIGN_ENCRYPTION_KEY, data: encryptedClientSecret }),
   ).toString('utf-8');
 
   return {

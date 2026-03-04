@@ -1,9 +1,9 @@
 import { compare, hash } from '@node-rs/bcrypt';
 import { UserSecurityAuditLogType } from '@prisma/client';
 
-import { SALT_ROUNDS } from '@documenso/lib/constants/auth';
-import type { RequestMetadata } from '@documenso/lib/universal/extract-request-metadata';
-import { prisma } from '@documenso/prisma';
+import { SALT_ROUNDS } from '@hanzo/sign-lib/constants/auth';
+import type { RequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { AppError } from '../../errors/app-error';
 

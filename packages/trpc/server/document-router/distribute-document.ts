@@ -1,6 +1,6 @@
-import { updateDocumentMeta } from '@documenso/lib/server-only/document-meta/upsert-document-meta';
-import { sendDocument } from '@documenso/lib/server-only/document/send-document';
-import { mapEnvelopeToDocumentLite } from '@documenso/lib/utils/document';
+import { updateDocumentMeta } from '@hanzo/sign-lib/server-only/document-meta/upsert-document-meta';
+import { sendDocument } from '@hanzo/sign-lib/server-only/document/send-document';
+import { mapEnvelopeToDocumentLite } from '@hanzo/sign-lib/utils/document';
 
 import { authenticatedProcedure } from '../trpc';
 import {

@@ -1,8 +1,8 @@
-import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@documenso/lib/constants/organisations';
-import { AppError, AppErrorCode } from '@documenso/lib/errors/app-error';
-import { sendOrganisationMemberInviteEmail } from '@documenso/lib/server-only/organisation/create-organisation-member-invites';
-import { buildOrganisationWhereQuery } from '@documenso/lib/utils/organisations';
-import { prisma } from '@documenso/prisma';
+import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
+import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { sendOrganisationMemberInviteEmail } from '@hanzo/sign-lib/server-only/organisation/create-organisation-member-invites';
+import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { authenticatedProcedure } from '../trpc';
 import {

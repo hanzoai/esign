@@ -1,6 +1,6 @@
 ---
 title: React
-description: Embed Documenso signing in your React application using the official SDK.
+description: Embed Hanzo Sign signing in your React application using the official SDK.
 ---
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
@@ -8,9 +8,9 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ## Installation
 
 <Tabs items={['npm', 'yarn', 'pnpm']}>
-  <Tab value="npm">``` npm install @documenso/embed-react ```</Tab>
-  <Tab value="yarn">``` yarn add @documenso/embed-react ```</Tab>
-  <Tab value="pnpm">``` pnpm add @documenso/embed-react ```</Tab>
+  <Tab value="npm">``` npm install @hanzo/sign-embed-react ```</Tab>
+  <Tab value="yarn">``` yarn add @hanzo/sign-embed-react ```</Tab>
+  <Tab value="pnpm">``` pnpm add @hanzo/sign-embed-react ```</Tab>
 </Tabs>
 
 ---
@@ -18,7 +18,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ## Direct Template
 
 ```tsx
-import { EmbedDirectTemplate } from '@documenso/embed-react';
+import { EmbedDirectTemplate } from '@hanzo/sign-embed-react';
 
 const SigningPage = () => {
   return (
@@ -43,7 +43,7 @@ const SigningPage = () => {
 ## Signing Token
 
 ```tsx
-import { EmbedSignDocument } from '@documenso/embed-react';
+import { EmbedSignDocument } from '@hanzo/sign-embed-react';
 
 const SigningPage = ({ token }: { token: string }) => {
   return (
@@ -62,14 +62,14 @@ const SigningPage = ({ token }: { token: string }) => {
 ## Styling (Platform Plan)
 
 ```tsx
-import { EmbedDirectTemplate } from '@documenso/embed-react';
+import { EmbedDirectTemplate } from '@hanzo/sign-embed-react';
 
 const StyledEmbed = () => {
   return (
     <EmbedDirectTemplate
       token="your-token"
       css={`
-        .documenso-embed {
+        .hanzo-sign-embed {
           border-radius: 8px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -94,7 +94,7 @@ See [CSS Variables](/docs/developers/embedding/css-variables) for all available 
 ```tsx
 import { useState } from 'react';
 
-import { EmbedDirectTemplate } from '@documenso/embed-react';
+import { EmbedDirectTemplate } from '@hanzo/sign-embed-react';
 
 type Status = 'loading' | 'ready' | 'completed' | 'error';
 

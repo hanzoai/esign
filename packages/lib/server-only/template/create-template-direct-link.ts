@@ -4,8 +4,8 @@ import { nanoid } from 'nanoid';
 import {
   DIRECT_TEMPLATE_RECIPIENT_EMAIL,
   DIRECT_TEMPLATE_RECIPIENT_NAME,
-} from '@documenso/lib/constants/direct-templates';
-import { prisma } from '@documenso/prisma';
+} from '@hanzo/sign-lib/constants/direct-templates';
+import { prisma } from '@hanzo/sign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { type EnvelopeIdOptions, mapSecondaryIdToTemplateId } from '../../utils/envelope';

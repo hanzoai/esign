@@ -1,12 +1,12 @@
 import { expect, test } from '@playwright/test';
 import path from 'node:path';
 
-import { prisma } from '@documenso/prisma';
-import { DocumentVisibility, FolderType, TeamMemberRole } from '@documenso/prisma/client';
-import { seedBlankDocument, seedTeamDocuments } from '@documenso/prisma/seed/documents';
-import { seedBlankFolder } from '@documenso/prisma/seed/folders';
-import { seedTeamMember } from '@documenso/prisma/seed/teams';
-import { seedBlankTemplate } from '@documenso/prisma/seed/templates';
+import { prisma } from '@hanzo/sign-prisma';
+import { DocumentVisibility, FolderType, TeamMemberRole } from '@hanzo/sign-prisma/client';
+import { seedBlankDocument, seedTeamDocuments } from '@hanzo/sign-prisma/seed/documents';
+import { seedBlankFolder } from '@hanzo/sign-prisma/seed/folders';
+import { seedTeamMember } from '@hanzo/sign-prisma/seed/teams';
+import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
 
 import { apiSignin } from '../fixtures/authentication';
 import { expectTextToBeVisible, openDropdownMenu } from '../fixtures/generic';
@@ -89,16 +89,16 @@ test('[TEAMS]: can create a document inside a document folder', async ({ page })
   ]);
 
   await fileChooser.setFiles(
-    path.join(__dirname, '../../../assets/documenso-supporter-pledge.pdf'),
+    path.join(__dirname, '../../../assets/sign-supporter-pledge.pdf'),
   );
 
   await page.waitForTimeout(3000);
 
-  await expectTextToBeVisible(page, 'documenso-supporter-pledge.pdf');
+  await expectTextToBeVisible(page, 'sign-supporter-pledge.pdf');
 
   await page.goto(`/t/${team.url}/documents/f/${teamFolder.id}`);
 
-  await expectTextToBeVisible(page, 'documenso-supporter-pledge.pdf');
+  await expectTextToBeVisible(page, 'sign-supporter-pledge.pdf');
 });
 
 test('[TEAMS]: can pin a document folder', async ({ page }) => {
@@ -124,7 +124,7 @@ test('[TEAMS]: can pin a document folder', async ({ page }) => {
 
   await page.reload();
 
-  await expect(page.locator('svg.text-documenso.h-3.w-3')).toBeVisible();
+  await expect(page.locator('svg.text-sign.h-3.w-3')).toBeVisible();
 });
 
 test('[TEAMS]: can unpin a document folder', async ({ page }) => {
@@ -151,7 +151,7 @@ test('[TEAMS]: can unpin a document folder', async ({ page }) => {
 
   await page.reload();
 
-  await expect(page.locator('svg.text-documenso.h-3.w-3')).not.toBeVisible();
+  await expect(page.locator('svg.text-sign.h-3.w-3')).not.toBeVisible();
 });
 
 test('[TEAMS]: can rename a document folder', async ({ page }) => {
@@ -406,17 +406,17 @@ test('[TEAMS]: can create a template inside a template folder', async ({ page })
   ]);
 
   await fileChooser.setFiles(
-    path.join(__dirname, '../../../assets/documenso-supporter-pledge.pdf'),
+    path.join(__dirname, '../../../assets/sign-supporter-pledge.pdf'),
   );
 
   await page.waitForTimeout(3000);
 
   // Expect redirect.
-  await expectTextToBeVisible(page, 'documenso-supporter-pledge.pdf');
+  await expectTextToBeVisible(page, 'sign-supporter-pledge.pdf');
 
   // Return to folder and verify file is visible.
   await page.goto(`/t/${team.url}/templates/f/${folder.id}`);
-  await expectTextToBeVisible(page, 'documenso-supporter-pledge.pdf');
+  await expectTextToBeVisible(page, 'sign-supporter-pledge.pdf');
 });
 
 test('[TEAMS]: can pin a template folder', async ({ page }) => {
@@ -443,7 +443,7 @@ test('[TEAMS]: can pin a template folder', async ({ page }) => {
 
   await page.reload();
 
-  await expect(page.locator('svg.text-documenso.h-3.w-3')).toBeVisible();
+  await expect(page.locator('svg.text-sign.h-3.w-3')).toBeVisible();
 });
 
 test('[TEAMS]: can unpin a template folder', async ({ page }) => {
@@ -472,7 +472,7 @@ test('[TEAMS]: can unpin a template folder', async ({ page }) => {
   await page.reload();
   await page.waitForTimeout(1000);
 
-  await expect(page.locator('svg.text-documenso.h-3.w-3')).not.toBeVisible();
+  await expect(page.locator('svg.text-sign.h-3.w-3')).not.toBeVisible();
 });
 
 test('[TEAMS]: can rename a template folder', async ({ page }) => {
@@ -894,12 +894,12 @@ test('[TEAMS]: documents inherit folder visibility', async ({ page }) => {
   ]);
 
   await fileChooser.setFiles(
-    path.join(__dirname, '../../../assets/documenso-supporter-pledge.pdf'),
+    path.join(__dirname, '../../../assets/sign-supporter-pledge.pdf'),
   );
 
   await page.waitForTimeout(3000);
 
-  await expectTextToBeVisible(page, 'documenso-supporter-pledge.pdf');
+  await expectTextToBeVisible(page, 'sign-supporter-pledge.pdf');
 
   await expect(page.getByRole('combobox').filter({ hasText: 'Admins only' })).toBeVisible();
 });

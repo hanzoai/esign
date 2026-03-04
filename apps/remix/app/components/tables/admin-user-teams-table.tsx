@@ -4,18 +4,18 @@ import { useLingui } from '@lingui/react';
 import { useLingui as useLinguiMacro } from '@lingui/react/macro';
 import { Link, useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@documenso/lib/client-only/hooks/use-update-search-params';
-import { TEAM_MEMBER_ROLE_MAP } from '@documenso/lib/constants/teams-translations';
-import { ZUrlSearchParamsSchema } from '@documenso/lib/types/search-params';
-import type { TeamMemberRole } from '@documenso/prisma/generated/types';
-import { trpc } from '@documenso/trpc/react';
-import { Badge } from '@documenso/ui/primitives/badge';
-import type { DataTableColumnDef } from '@documenso/ui/primitives/data-table';
-import { DataTable } from '@documenso/ui/primitives/data-table';
-import { DataTablePagination } from '@documenso/ui/primitives/data-table-pagination';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@documenso/ui/primitives/hover-card';
-import { Skeleton } from '@documenso/ui/primitives/skeleton';
-import { TableCell } from '@documenso/ui/primitives/table';
+import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
+import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
+import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
+import type { TeamMemberRole } from '@hanzo/sign-prisma/generated/types';
+import { trpc } from '@hanzo/sign-trpc/react';
+import { Badge } from '@hanzo/sign-ui/primitives/badge';
+import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@hanzo/sign-ui/primitives/hover-card';
+import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/sign-ui/primitives/table';
 
 type AdminUserTeamsTableProps = {
   userId: number;

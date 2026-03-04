@@ -1,6 +1,6 @@
 ---
 title: Security
-description: Security practices for Documenso Cloud and self-hosted deployments, along with our vulnerability disclosure process.
+description: Security practices for Hanzo Sign Cloud and self-hosted deployments, along with our vulnerability disclosure process.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -15,7 +15,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
     Dependencies are regularly updated and monitored for vulnerabilities - **Static analysis**:
     Automated security scanning is part of the CI/CD pipeline - **Open source**: The codebase is
     publicly available for security review at
-    [github.com/documenso/documenso](https://github.com/documenso/documenso)
+    [github.com/hanzoai/sign](https://github.com/hanzoai/sign)
   </Accordion>
   <Accordion title="Access Controls">
     - **Role-based access**: Teams support member, manager, and admin roles with distinct
@@ -27,7 +27,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Infrastructure Security
 
-### Documenso Cloud
+### Hanzo Sign Cloud
 
 The hosted cloud service uses the following security measures:
 
@@ -48,7 +48,7 @@ Self-hosted deployments are responsible for their own infrastructure security. S
 
 <Accordions type="multiple">
   <Accordion title="Encryption in Transit">
-    All data transmitted to and from Documenso is encrypted using TLS 1.2 or higher. This includes:
+    All data transmitted to and from Hanzo Sign is encrypted using TLS 1.2 or higher. This includes:
 
     - Web application traffic
     - API requests
@@ -57,7 +57,7 @@ Self-hosted deployments are responsible for their own infrastructure security. S
 
   </Accordion>
   <Accordion title="Encryption at Rest">
-    For Documenso Cloud:
+    For Hanzo Sign Cloud:
 
     - Database contents are encrypted at rest
     - Document storage uses encrypted object storage
@@ -67,7 +67,7 @@ Self-hosted deployments are responsible for their own infrastructure security. S
 
   </Accordion>
   <Accordion title="Application-Level Encryption">
-    Documenso encrypts sensitive data at the application level:
+    Hanzo Sign encrypts sensitive data at the application level:
 
     - Encryption keys are configured via `NEXT_PRIVATE_ENCRYPTION_KEY` and `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`
     - Session tokens are signed using `NEXTAUTH_SECRET`
@@ -103,13 +103,13 @@ Self-hosted deployments are responsible for their own infrastructure security. S
 
 ## Vulnerability Disclosure
 
-Documenso operates a responsible disclosure process for security vulnerabilities.
+Hanzo Sign operates a responsible disclosure process for security vulnerabilities.
 
 <Accordions type="multiple">
   <Accordion title="Reporting a Vulnerability">
     If you discover a security vulnerability, please report it by emailing:
 
-    **security@documenso.com**
+    **security@sign.hanzo.ai**
 
     Include the following information:
 
@@ -133,7 +133,7 @@ Documenso operates a responsible disclosure process for security vulnerabilities
 
 The following are in scope for vulnerability reports:
 
-- Documenso application code
+- Hanzo Sign application code
 - Authentication and authorization flaws
 - Data exposure vulnerabilities
 - Injection vulnerabilities
@@ -171,8 +171,8 @@ The following are out of scope:
 
 Security updates are announced through:
 
-- [GitHub releases](https://github.com/documenso/documenso/releases)
-- [GitHub security advisories](https://github.com/documenso/documenso/security/advisories)
+- [GitHub releases](https://github.com/hanzoai/sign/releases)
+- [GitHub security advisories](https://github.com/hanzoai/sign/security/advisories)
 
 ### Update Policy
 
@@ -184,7 +184,7 @@ Security updates are announced through:
 
 For self-hosted deployments:
 
-1. Watch the [GitHub repository](https://github.com/documenso/documenso) for releases
+1. Watch the [GitHub repository](https://github.com/hanzoai/sign) for releases
 2. Subscribe to security advisories
 3. Apply updates promptly, especially security patches
 
@@ -192,7 +192,7 @@ See [Upgrades](/docs/self-hosting/maintenance/upgrades) for update procedures.
 
 ## Self-Hosted Security Considerations
 
-When self-hosting Documenso, you are responsible for the security of your deployment. The following recommendations apply:
+When self-hosting Hanzo Sign, you are responsible for the security of your deployment. The following recommendations apply:
 
 <Accordions type="multiple">
   <Accordion title="Infrastructure">
@@ -229,9 +229,9 @@ See [Environment Variables](/docs/self-hosting/configuration/environment) for se
 
 For security-related inquiries:
 
-- **Security vulnerabilities**: security@documenso.com
-- **General questions**: support@documenso.com
-- **GitHub**: [github.com/documenso/documenso](https://github.com/documenso/documenso)
+- **Security vulnerabilities**: security@sign.hanzo.ai
+- **General questions**: support@sign.hanzo.ai
+- **GitHub**: [github.com/hanzoai/sign](https://github.com/hanzoai/sign)
 
 ## Related
 

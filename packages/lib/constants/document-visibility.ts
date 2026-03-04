@@ -1,7 +1,7 @@
 import type { MessageDescriptor } from '@lingui/core';
 import { msg } from '@lingui/core/macro';
 
-import { DocumentVisibility } from '@documenso/lib/types/document-visibility';
+import { DocumentVisibility } from '@hanzo/sign-lib/types/document-visibility';
 
 import type { TDocumentVisibility } from '../types/document-visibility';
 

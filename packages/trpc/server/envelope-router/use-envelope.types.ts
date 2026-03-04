@@ -1,9 +1,9 @@
 import { z } from 'zod';
 import { zfd } from 'zod-form-data';
 
-import { ZEnvelopeExpirationPeriod } from '@documenso/lib/constants/envelope-expiration';
-import { ZDocumentEmailSettingsSchema } from '@documenso/lib/types/document-email';
-import { ZDocumentFormValuesSchema } from '@documenso/lib/types/document-form-values';
+import { ZEnvelopeExpirationPeriod } from '@hanzo/sign-lib/constants/envelope-expiration';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+import { ZDocumentFormValuesSchema } from '@hanzo/sign-lib/types/document-form-values';
 import {
   ZDocumentMetaDateFormatSchema,
   ZDocumentMetaDistributionMethodSchema,
@@ -15,10 +15,10 @@ import {
   ZDocumentMetaTimezoneSchema,
   ZDocumentMetaTypedSignatureEnabledSchema,
   ZDocumentMetaUploadSignatureEnabledSchema,
-} from '@documenso/lib/types/document-meta';
-import { ZEnvelopeAttachmentTypeSchema } from '@documenso/lib/types/envelope-attachment';
-import { ZFieldMetaPrefillFieldsSchema } from '@documenso/lib/types/field-meta';
-import { ZRecipientEmailSchema } from '@documenso/lib/types/recipient';
+} from '@hanzo/sign-lib/types/document-meta';
+import { ZEnvelopeAttachmentTypeSchema } from '@hanzo/sign-lib/types/envelope-attachment';
+import { ZFieldMetaPrefillFieldsSchema } from '@hanzo/sign-lib/types/field-meta';
+import { ZRecipientEmailSchema } from '@hanzo/sign-lib/types/recipient';
 
 import { zodFormData } from '../../utils/zod-form-data';
 import type { TrpcRouteMeta } from '../trpc';

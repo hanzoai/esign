@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { Trans } from '@lingui/react/macro';
 
-import { authClient } from '@documenso/auth/client';
-import { cn } from '@documenso/ui/lib/utils';
-import { Button } from '@documenso/ui/primitives/button';
-import { useToast } from '@documenso/ui/primitives/use-toast';
+import { authClient } from '@hanzo/sign-auth/client';
+import { env } from '@hanzo/sign-lib/utils/env';
+import { cn } from '@hanzo/sign-ui/lib/utils';
+import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 const LOGIN_REDIRECT_PATH = '/';
 
@@ -19,6 +19,8 @@ export type SignInFormProps = {
 export const SignInForm = ({ className, returnTo }: SignInFormProps) => {
   const { _ } = useLingui();
   const { toast } = useToast();
+
+  const providerName = env('NEXT_PUBLIC_IAM_PROVIDER_NAME') || 'Hanzo';
 
   const redirectPath = useMemo(() => {
     if (typeof window === 'undefined') {
@@ -34,7 +36,7 @@ export const SignInForm = ({ className, returnTo }: SignInFormProps) => {
     return url.toString();
   }, [returnTo]);
 
-  const onSignInWithHanzoClick = async () => {
+  const onSignInClick = async () => {
     try {
       await authClient.hanzo.signIn({
         redirectPath,
@@ -56,16 +58,9 @@ export const SignInForm = ({ className, returnTo }: SignInFormProps) => {
         type="button"
         size="lg"
         className="border bg-red-500 text-white hover:bg-red-600"
-        onClick={onSignInWithHanzoClick}
+        onClick={onSignInClick}
       >
-        <svg className="mr-2 h-5 w-5" viewBox="0 0 67 67" fill="currentColor">
-          <path d="M22.21 67V44.6369H0V67H22.21Z" />
-          <path d="M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z" />
-          <path d="M22.21 0H0V22.3184H22.21V0Z" />
-          <path d="M66.7198 0H44.5098V22.3184H66.7198V0Z" />
-          <path d="M66.7198 67V44.6369H44.5098V67H66.7198Z" />
-        </svg>
-        <Trans>Sign in with Hanzo</Trans>
+        Sign in with <span className="ml-1 font-bold">{providerName}</span>
       </Button>
     </div>
   );

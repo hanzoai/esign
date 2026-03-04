@@ -1,6 +1,6 @@
 ---
 title: AI Recipient & Field Detection (Self-hosting)
-description: Configure Google Vertex AI so Documenso can detect recipients and fields automatically.
+description: Configure Google Vertex AI so Hanzo Sign can detect recipients and fields automatically.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -9,7 +9,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ## Overview
 
-This guide covers how to enable the AI recipient and field detection features when you self-host Documenso.
+This guide covers how to enable the AI recipient and field detection features when you self-host Hanzo Sign.
 
 ## What This Enables
 
@@ -21,7 +21,7 @@ This guide covers how to enable the AI recipient and field detection features wh
 
 - A Google Cloud project with the **Vertex AI API** enabled and billing active.
 - A **Vertex AI Express API key** with access to Gemini models (create via the [Vertex AI Express flow](https://cloud.google.com/vertex-ai/generative-ai/docs/start/express-mode/overview) and manage keys in [API keys](https://cloud.google.com/vertex-ai/generative-ai/docs/start/api-keys)).
-- Documenso version that includes the AI detection feature and the corresponding database migration.
+- Hanzo Sign version that includes the AI detection feature and the corresponding database migration.
 
 ## Configure Environment Variables
 
@@ -36,17 +36,17 @@ GOOGLE_VERTEX_LOCATION="global"
 
 <Callout type="info">
   Use a region close to your users if you need data residency considerations (e.g. `europe-west1`).
-  If you omit the location, Documenso uses `global`. Not all models are available in every region;
+  If you omit the location, Hanzo Sign uses `global`. Not all models are available in every region;
   if a model is unavailable, switch to a supported region.
 </Callout>
 
 ## Deploy with the Published Container
 
-- Use the official Documenso image (DockerHub or GHCR) and supply the Vertex env vars above.
+- Use the official Hanzo Sign image (DockerHub or GHCR) and supply the Vertex env vars above.
 - Ensure migrations run on startup (the container runs `prisma migrate deploy` in production mode).
 - Restart the container after adding or changing Vertex env vars.
 
-## Enable the Feature in Documenso
+## Enable the Feature in Hanzo Sign
 
 Once the service is running with the Vertex env vars:
 

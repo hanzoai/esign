@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Diagnose and resolve common issues with your self-hosted Documenso instance, organized by component.
+description: Diagnose and resolve common issues with your self-hosted Hanzo Sign instance, organized by component.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -18,21 +18,21 @@ Application logs are your primary source of debugging information.
 <Tab value="Docker">
 
 ```bash
-docker logs documenso
+docker logs hanzo-sign
 ```
 
 </Tab>
 <Tab value="Docker Compose">
 
 ```bash
-docker compose logs -f documenso
+docker compose logs -f hanzo-sign
 ```
 
 </Tab>
 <Tab value="Kubernetes">
 
 ```bash
-kubectl logs -l app.kubernetes.io/name=documenso -n documenso -f
+kubectl logs -l app.kubernetes.io/name=hanzo-sign -n hanzo-sign -f
 ```
 
 </Tab>
@@ -44,18 +44,18 @@ Filter logs to find specific errors:
 
 ```bash
 # Docker - find errors
-docker logs documenso 2>&1 | grep -i error
+docker logs hanzo-sign 2>&1 | grep -i error
 
 # Docker - find warnings
-docker logs documenso 2>&1 | grep -i warn
+docker logs hanzo-sign 2>&1 | grep -i warn
 
 # Show last 100 lines
-docker logs --tail 100 documenso
+docker logs --tail 100 hanzo-sign
 ```
 
 ### Health Checks
 
-Documenso exposes a health endpoint to verify the application is running:
+Hanzo Sign exposes a health endpoint to verify the application is running:
 
 ```bash
 curl http://localhost:3000/api/health
@@ -84,7 +84,7 @@ Check if containers are running and healthy:
 <Tab value="Docker">
 
 ```bash
-docker ps -a | grep documenso
+docker ps -a | grep hanzo-sign
 ```
 
 </Tab>
@@ -98,7 +98,7 @@ docker compose ps
 <Tab value="Kubernetes">
 
 ```bash
-kubectl get pods -n documenso -o wide
+kubectl get pods -n hanzo-sign -o wide
 ```
 
 </Tab>
@@ -112,14 +112,14 @@ Verify environment variables are set correctly inside the container:
 <Tab value="Docker">
 
 ```bash
-docker exec documenso printenv | grep NEXT
+docker exec hanzo-sign printenv | grep NEXT
 ```
 
 </Tab>
 <Tab value="Docker Compose">
 
 ```bash
-docker compose exec documenso printenv | grep NEXT
+docker compose exec hanzo-sign printenv | grep NEXT
 ```
 
 </Tab>
@@ -141,7 +141,7 @@ docker compose exec documenso printenv | grep NEXT
 **Check the exit code:**
 
 ```bash
-docker inspect documenso --format='{{.State.ExitCode}}'
+docker inspect hanzo-sign --format='{{.State.ExitCode}}'
 ```
 
 | Exit Code | Meaning                    |
@@ -170,10 +170,10 @@ docker inspect documenso --format='{{.State.ExitCode}}'
 
 ```bash
 # Docker
-docker stats documenso
+docker stats hanzo-sign
 
 # Kubernetes
-kubectl top pod -n documenso
+kubectl top pod -n hanzo-sign
 ```
 
 **Solutions:**
@@ -232,7 +232,7 @@ netstat -tlnp | grep 3000
     Stop the conflicting service
   </Step>
   <Step>
-    Change Documenso's port mapping: `-p 3001:3000`
+    Change Hanzo Sign's port mapping: `-p 3001:3000`
   </Step>
 </Steps>
 
@@ -283,7 +283,7 @@ docker compose ps database
 ### Authentication Failed
 
 ```
-Error: password authentication failed for user "documenso"
+Error: password authentication failed for user "hanzo-sign"
 ```
 
 **Causes:**
@@ -306,7 +306,7 @@ Error: password authentication failed for user "documenso"
     Reset the password:
 
 ```sql
-ALTER USER documenso WITH PASSWORD 'newpassword';
+ALTER USER hanzo-sign WITH PASSWORD 'newpassword';
 ```
 
   </Step>
@@ -315,20 +315,20 @@ ALTER USER documenso WITH PASSWORD 'newpassword';
 ### Database Does Not Exist
 
 ```
-Error: database "documenso" does not exist
+Error: database "hanzo-sign" does not exist
 ```
 
 **Solution:** Create the database:
 
 ```sql
-CREATE DATABASE documenso;
-GRANT ALL PRIVILEGES ON DATABASE documenso TO documenso;
+CREATE DATABASE hanzo-sign;
+GRANT ALL PRIVILEGES ON DATABASE hanzo-sign TO hanzo-sign;
 ```
 
 ### Too Many Connections
 
 ```
-Error: too many connections for role "documenso"
+Error: too many connections for role "hanzo-sign"
 ```
 
 **Causes:**
@@ -345,7 +345,7 @@ Error: too many connections for role "documenso"
     Reduce connection pool size in connection string:
 
 ```
-postgresql://user:password@host:5432/documenso?connection_limit=5
+postgresql://user:password@host:5432/hanzo-sign?connection_limit=5
 ```
 
   </Step>
@@ -405,7 +405,7 @@ Error: SSL/TLS required
 **Solution:** Add SSL mode to connection string:
 
 ```
-postgresql://user:password@host:5432/documenso?sslmode=require
+postgresql://user:password@host:5432/hanzo-sign?sslmode=require
 ```
 
 ---
@@ -424,7 +424,7 @@ postgresql://user:password@host:5432/documenso?sslmode=require
     Check email configuration:
 
 ```bash
-docker exec documenso printenv | grep SMTP
+docker exec hanzo-sign printenv | grep SMTP
 ```
 
   </Step>
@@ -475,7 +475,7 @@ Error: Connection timeout
     Test connectivity from the container:
 
 ```bash
-docker exec documenso nc -zv smtp.example.com 587
+docker exec hanzo-sign nc -zv smtp.example.com 587
 ```
 
   </Step>
@@ -585,7 +585,7 @@ Error: No certificate found for local signing
     Verify certificate configuration:
 
 ```bash
-docker exec documenso printenv | grep SIGNING
+docker exec hanzo-sign printenv | grep SIGNING
 ```
 
   </Step>
@@ -593,7 +593,7 @@ docker exec documenso printenv | grep SIGNING
     Check file exists at configured path:
 
 ```bash
-docker exec documenso ls -la /opt/documenso/cert.p12
+docker exec hanzo-sign ls -la /opt/hanzo-sign/cert.p12
 ```
 
   </Step>
@@ -605,7 +605,7 @@ docker exec documenso ls -la /opt/documenso/cert.p12
 ### Certificate Permission Denied
 
 ```
-Error: EACCES: permission denied, open '/opt/documenso/cert.p12'
+Error: EACCES: permission denied, open '/opt/hanzo-sign/cert.p12'
 ```
 
 **Cause:** Application cannot read the certificate file.
@@ -690,7 +690,7 @@ openssl pkcs12 -in certificate.p12 -nokeys | openssl x509 -noout -dates
     Generate a new certificate or obtain a renewed one from your CA
   </Step>
   <Step>
-    Update the certificate file and restart Documenso
+    Update the certificate file and restart Hanzo Sign
   </Step>
 </Steps>
 
@@ -869,7 +869,7 @@ NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE=true
     Check container resource usage:
 
 ```bash
-docker stats documenso
+docker stats hanzo-sign
 ```
 
   </Step>
@@ -912,7 +912,7 @@ LIMIT 10;
 ```yaml
 # Docker Compose
 services:
-  documenso:
+  hanzo-sign:
     deploy:
       resources:
         limits:
@@ -1009,7 +1009,7 @@ VACUUM ANALYZE;
     Verify container is running and port is exposed:
 
 ```bash
-docker ps | grep documenso
+docker ps | grep hanzo-sign
 ```
 
   </Step>
@@ -1095,7 +1095,7 @@ Error: getaddrinfo ENOTFOUND hostname
     Check DNS configuration:
 
 ```bash
-docker exec documenso cat /etc/resolv.conf
+docker exec hanzo-sign cat /etc/resolv.conf
 ```
 
   </Step>
@@ -1115,10 +1115,10 @@ Gather this information before seeking support:
 {/* prettier-ignore */}
 <Steps>
   <Step>
-    **Documenso version:**
+    **Hanzo Sign version:**
 
 ```bash
-docker inspect documenso --format='{{.Config.Image}}'
+docker inspect hanzo-sign --format='{{.Config.Image}}'
 ```
 
   </Step>
@@ -1138,9 +1138,9 @@ docker inspect documenso --format='{{.Config.Image}}'
 
 ### Community Support
 
-- **[GitHub Discussions](https://github.com/documenso/documenso/discussions)**
-- **[Discord](https://documen.so/discord)**: Join the Documenso community Discord
-- **[GitHub Issues](https://github.com/documenso/documenso/issues)**: For confirmed bugs, open an issue
+- **[GitHub Discussions](https://github.com/hanzoai/sign/discussions)**
+- **[Discord](https://sign.hanzo.ai/discord)**: Join the Hanzo Sign community Discord
+- **[GitHub Issues](https://github.com/hanzoai/sign/issues)**: For confirmed bugs, open an issue
 
 ### Reporting Bugs
 
@@ -1155,7 +1155,7 @@ When reporting bugs, include:
     Steps to reproduce
   </Step>
   <Step>
-    Documenso version
+    Hanzo Sign version
   </Step>
   <Step>
     Relevant logs (redact sensitive information)
@@ -1167,7 +1167,7 @@ When reporting bugs, include:
 
 ### Security Issues
 
-For security vulnerabilities, do not open a public issue. Contact security@documenso.com directly.
+For security vulnerabilities, do not open a public issue. Contact security@sign.hanzo.ai directly.
 
 ---
 
@@ -1177,7 +1177,7 @@ Use this checklist when diagnosing issues:
 
 <Accordions type="multiple">
   <Accordion title="Check application logs for errors">
-    Run `docker logs documenso` or `docker compose logs documenso` (or `kubectl logs` for
+    Run `docker logs hanzo-sign` or `docker compose logs hanzo-sign` (or `kubectl logs` for
     Kubernetes) and look for error messages.
   </Accordion>
   <Accordion title="Verify all required environment variables are set">

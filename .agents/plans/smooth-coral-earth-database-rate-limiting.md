@@ -279,7 +279,7 @@ Create a reusable Hono middleware factory in `packages/lib/server-only/rate-limi
 ```typescript
 import { type MiddlewareHandler } from 'hono';
 
-import { getIpAddress } from '@documenso/lib/universal/get-ip-address';
+import { getIpAddress } from '@hanzo/sign-lib/universal/get-ip-address';
 
 export const createRateLimitMiddleware = (
   limiter: ReturnType<typeof rateLimit>,
@@ -326,8 +326,8 @@ import { rateLimiter } from 'hono-rate-limiter';
 const rateLimitMiddleware = rateLimiter({ ... });
 
 // After
-import { createRateLimitMiddleware } from '@documenso/lib/server-only/rate-limit/rate-limit-middleware';
-import { apiV1RateLimit, apiV2RateLimit, aiRateLimit } from '@documenso/lib/server-only/rate-limit/rate-limits';
+import { createRateLimitMiddleware } from '@hanzo/sign-lib/server-only/rate-limit/rate-limit-middleware';
+import { apiV1RateLimit, apiV2RateLimit, aiRateLimit } from '@hanzo/sign-lib/server-only/rate-limit/rate-limits';
 
 const apiV1RateLimitMiddleware = createRateLimitMiddleware(apiV1RateLimit);
 const apiV2RateLimitMiddleware = createRateLimitMiddleware(apiV2RateLimit);
