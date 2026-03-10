@@ -1811,12 +1811,6 @@ msgstr "Ocorreu um erro inesperado."
 #: apps/remix/app/components/forms/profile.tsx
 #: apps/remix/app/components/forms/public-profile-form.tsx
 #: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signup.tsx
-#: apps/remix/app/components/forms/signup.tsx
-#: apps/remix/app/components/forms/signup.tsx
 #: apps/remix/app/components/forms/team-update-form.tsx
 #: apps/remix/app/components/general/app-command-menu.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
@@ -2126,7 +2120,6 @@ msgid "Background Jobs"
 msgstr "Trabalhos em Segundo Plano"
 
 #: apps/remix/app/components/forms/2fa/disable-authenticator-app-dialog.tsx
-#: apps/remix/app/components/forms/signin.tsx
 msgid "Backup Code"
 msgstr "Código de Backup"
 
@@ -4141,7 +4134,6 @@ msgid "Domain re-registered"
 msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/reset-password.$token.tsx
-#: apps/remix/app/routes/_unauthenticated+/signin.tsx
 msgid "Don't have an account? <0>Sign up</0>"
 msgstr "Não tem uma conta? <0>Inscreva-se</0>"
 
@@ -4349,7 +4341,6 @@ msgstr "Divulgação de Assinatura Eletrônica"
 #: apps/remix/app/components/embed/multisign/multi-sign-document-signing-view.tsx
 #: apps/remix/app/components/forms/forgot-password.tsx
 #: apps/remix/app/components/forms/profile.tsx
-#: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/general/direct-template/direct-template-configure-form.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-email-field.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-drag-drop.tsx
@@ -5205,7 +5196,6 @@ msgstr "Por exemplo, se a reivindicação tiver um novo sinalizador \"FLAG_1\" d
 msgid "Forgot Password?"
 msgstr "Esqueceu a senha?"
 
-#: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/routes/_unauthenticated+/forgot-password.tsx
 #: packages/email/template-components/template-forgot-password.tsx
 msgid "Forgot your password?"
@@ -6744,10 +6734,6 @@ msgstr "Não encontrado"
 msgid "Not Found"
 msgstr ""
 
-#: apps/remix/app/components/forms/signin.tsx
-msgid "Not supported"
-msgstr "Não suportado"
-
 #: apps/remix/app/components/tables/documents-table-empty-state.tsx
 #: apps/remix/app/components/tables/documents-table-empty-state.tsx
 msgid "Nothing to do"
@@ -6873,17 +6859,12 @@ msgid "Options"
 msgstr "Opções"
 
 #: apps/remix/app/components/dialogs/template-direct-link-dialog.tsx
-#: apps/remix/app/components/forms/signup.tsx
 msgid "Or"
 msgstr "Ou"
 
 #: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
 msgid "OR"
 msgstr "OU"
-
-#: apps/remix/app/components/forms/signin.tsx
-msgid "Or continue with"
-msgstr "Ou continue com"
 
 #: apps/remix/app/components/tables/admin-organisations-table.tsx
 #: apps/remix/app/components/tables/admin-user-teams-table.tsx
@@ -7069,7 +7050,6 @@ msgctxt "Subscription status"
 msgid "Paid"
 msgstr "Pago"
 
-#: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
 msgid "Passkey"
@@ -7109,12 +7089,7 @@ msgstr "Passkeys"
 msgid "Passkeys allow you to sign in and authenticate using biometrics, password managers, etc."
 msgstr "Passkeys permitem que você faça login e se autentique usando biometria, gerenciadores de senhas, etc."
 
-#: apps/remix/app/components/forms/signin.tsx
-msgid "Passkeys are not supported on this browser"
-msgstr "Passkeys não são suportadas neste navegador"
-
 #: apps/remix/app/components/forms/reset-password.tsx
-#: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/forms/signup.tsx
 #: apps/remix/app/components/general/app-command-menu.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-dialog.tsx
@@ -8761,8 +8736,6 @@ msgstr "Assinar campo"
 msgid "Sign Here"
 msgstr "Assine Aqui"
 
-#: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
 #: packages/email/template-components/template-reset-password.tsx
 msgid "Sign In"
@@ -8773,6 +8746,10 @@ msgstr "Entrar"
 #: apps/remix/app/routes/_unauthenticated+/signin.tsx
 msgid "Sign in to your account"
 msgstr "Entre na sua conta"
+
+#: apps/remix/app/components/forms/signin.tsx
+msgid "Sign in with Hanzo"
+msgstr ""
 
 #: apps/remix/app/components/general/app-nav-mobile.tsx
 #: apps/remix/app/components/general/menu-switcher.tsx
@@ -8793,18 +8770,6 @@ msgstr "Assine o documento para completar o processo."
 #: apps/remix/app/components/general/document-signing/document-signing-auth-page.tsx
 msgid "Sign up"
 msgstr "Inscrever-se"
-
-#: apps/remix/app/components/forms/signup.tsx
-msgid "Sign Up with Google"
-msgstr "Inscrever-se com Google"
-
-#: apps/remix/app/components/forms/signup.tsx
-msgid "Sign Up with Microsoft"
-msgstr "Inscrever-se com Microsoft"
-
-#: apps/remix/app/components/forms/signup.tsx
-msgid "Sign Up with OIDC"
-msgstr "Inscrever-se com OIDC"
 
 #: apps/remix/app/components/dialogs/ai-field-detection-dialog.tsx
 #: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
@@ -8917,11 +8882,6 @@ msgstr ""
 msgid "Signing for"
 msgstr "Assinando para"
 
-#: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signin.tsx
-msgid "Signing in..."
-msgstr "Entrando..."
-
 #: apps/remix/app/components/general/document/document-page-view-dropdown.tsx
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
 msgid "Signing Links"
@@ -9003,7 +8963,6 @@ msgstr "Alguns signatários não receberam um campo de assinatura. Por favor, at
 #: apps/remix/app/components/dialogs/template-direct-link-dialog.tsx
 #: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
 #: apps/remix/app/components/embed/embed-document-signing-page-v1.tsx
-#: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/components/general/billing-plans.tsx
 #: apps/remix/app/components/general/billing-plans.tsx
 #: apps/remix/app/components/general/direct-template/direct-template-page.tsx
@@ -9781,10 +9740,6 @@ msgstr "O endereço de e-mail que aparecerá no campo \"Responder para\" nos e-m
 msgid "The email domain you are looking for may have been removed, renamed or may have never existed."
 msgstr "O domínio de e-mail que você está procurando pode ter sido removido, renomeado ou nunca ter existido."
 
-#: apps/remix/app/components/forms/signin.tsx
-msgid "The email or password provided is incorrect."
-msgstr ""
-
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
 msgid "The events that will trigger a webhook to be sent to your URL."
@@ -10006,10 +9961,6 @@ msgstr "O token foi excluído com sucesso."
 msgid "The token you have used to reset your password is either expired or it never existed. If you have still forgotten your password, please request a new reset link."
 msgstr "O token que você usou para redefinir sua senha expirou ou nunca existiu. Se você ainda esqueceu sua senha, solicite um novo link de redefinição."
 
-#: apps/remix/app/components/forms/signin.tsx
-msgid "The two-factor authentication code provided is incorrect."
-msgstr ""
-
 #: apps/remix/app/components/forms/editor/editor-field-signature-form.tsx
 msgid "The typed signature font size"
 msgstr "O tamanho da fonte da assinatura digitada"
@@ -10078,14 +10029,6 @@ msgstr "Estes substituirão quaisquer configurações globais. Vários métodos 
 #: apps/remix/app/components/general/teams/team-email-usage.tsx
 msgid "They have permission on your behalf to:"
 msgstr "Eles têm permissão em seu nome para:"
-
-#: apps/remix/app/components/forms/signin.tsx
-msgid "This account has been disabled. Please contact support."
-msgstr "Esta conta foi desativada. Entre em contato com o suporte."
-
-#: apps/remix/app/components/forms/signin.tsx
-msgid "This account has not been verified. Please verify your account before signing in."
-msgstr "Esta conta não foi verificada. Verifique sua conta antes de entrar."
 
 #: apps/remix/app/components/dialogs/admin-user-reset-two-factor-dialog.tsx
 msgid "This action is irreversible. Please ensure you have informed the user before proceeding."
@@ -10263,18 +10206,10 @@ msgstr "Esta organização e quaisquer dados associados serão excluídos perman
 msgid "This passkey has already been registered."
 msgstr "Esta passkey já foi registrada."
 
-#: apps/remix/app/components/forms/signin.tsx
-msgid "This passkey is not configured for this application. Please login and add one in the user settings."
-msgstr "Esta passkey não está configurada para este aplicativo. Faça login e adicione uma nas configurações do usuário."
-
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 #: packages/ui/primitives/document-flow/add-fields.tsx
 msgid "This recipient can no longer be modified as they have signed a field, or completed the document."
 msgstr "Este destinatário não pode mais ser modificado, pois assinou um campo ou concluiu o documento."
-
-#: apps/remix/app/components/forms/signin.tsx
-msgid "This session has expired. Please try again."
-msgstr "Esta sessão expirou. Por favor, tente novamente."
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-recipient-form.tsx
 #: packages/ui/primitives/document-flow/add-signers.tsx
@@ -10625,7 +10560,6 @@ msgstr "Autenticação de dois fatores"
 msgid "Two factor authentication recovery codes are used to access your account in the event that you lose access to your authenticator app."
 msgstr "Os códigos de recuperação da autenticação de dois fatores são usados para acessar sua conta caso você perca o acesso ao seu aplicativo autenticador."
 
-#: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/routes/_internal+/[__htmltopdf]+/certificate.tsx
 #: packages/lib/server-only/pdf/generate-certificate-pdf.ts
 msgid "Two-Factor Authentication"
@@ -10751,11 +10685,6 @@ msgstr "Não foi possível redefinir a senha"
 #: apps/remix/app/components/forms/2fa/enable-authenticator-app-dialog.tsx
 msgid "Unable to setup two-factor authentication"
 msgstr "Não foi possível configurar a autenticação de dois fatores"
-
-#: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signin.tsx
-msgid "Unable to sign in"
-msgstr "Não foi possível entrar"
 
 #: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
@@ -11087,12 +11016,10 @@ msgid "Use"
 msgstr "Usar"
 
 #: apps/remix/app/components/forms/2fa/disable-authenticator-app-dialog.tsx
-#: apps/remix/app/components/forms/signin.tsx
 msgid "Use Authenticator"
 msgstr "Usar Autenticador"
 
 #: apps/remix/app/components/forms/2fa/disable-authenticator-app-dialog.tsx
-#: apps/remix/app/components/forms/signin.tsx
 msgid "Use Backup Code"
 msgstr "Usar Código de Backup"
 
@@ -11600,17 +11527,9 @@ msgid "We encountered an unknown error while attempting to revoke access. Please
 msgstr "Encontramos um erro desconhecido ao tentar revogar o acesso. Por favor, tente novamente ou entre em contato com o suporte."
 
 #: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signin.tsx
-#: apps/remix/app/components/forms/signin.tsx
 #: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
 msgid "We encountered an unknown error while attempting to sign you In. Please try again later."
 msgstr "Encontramos um erro desconhecido ao tentar fazer seu login. Por favor, tente novamente mais tarde."
-
-#: apps/remix/app/components/forms/signup.tsx
-#: apps/remix/app/components/forms/signup.tsx
-#: apps/remix/app/components/forms/signup.tsx
-msgid "We encountered an unknown error while attempting to sign you Up. Please try again later."
-msgstr "Encontramos um erro desconhecido ao tentar fazer seu cadastro. Por favor, tente novamente mais tarde."
 
 #: apps/remix/app/routes/_authenticated+/admin+/site-settings.tsx
 msgid "We encountered an unknown error while attempting to update the banner. Please try again later."
