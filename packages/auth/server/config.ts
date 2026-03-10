@@ -46,14 +46,14 @@ export const OidcAuthOptions: OAuthClientOptions = {
   bypassEmailVerification: env('NEXT_PRIVATE_OIDC_SKIP_VERIFY') === 'true',
 };
 
-const hanzoIamUrl = env('HANZO_IAM_URL') ?? 'https://hanzo.id';
+const iamUrl = env('IAM_URL') ?? 'https://hanzo.id';
 
 export const HanzoAuthOptions: OAuthClientOptions = {
   id: 'hanzo',
   scope: ['openid', 'email', 'profile'],
-  clientId: env('HANZO_IAM_CLIENT_ID') ?? '',
-  clientSecret: env('HANZO_IAM_CLIENT_SECRET') ?? '',
+  clientId: env('IAM_CLIENT_ID') ?? '',
+  clientSecret: env('IAM_CLIENT_SECRET') ?? '',
   redirectUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/api/auth/callback/hanzo`,
-  wellKnownUrl: `${hanzoIamUrl}/.well-known/openid-configuration`,
+  wellKnownUrl: `${iamUrl}/.well-known/openid-configuration`,
   bypassEmailVerification: true,
 };
