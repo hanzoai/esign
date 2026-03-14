@@ -94,7 +94,7 @@
     "cron-parser": "^5.5.0",
     "luxon": "^3.7.2",
     "patch-package": "^8.0.1",
-    "@hanzo/insights-node": "npm:posthog-node@4.18.0",
+    "@hanzo/insights-node": "^6.0.0",
     "react": "^18",
     "typescript": "5.9.3",
     "zod": "^3.25.76"
