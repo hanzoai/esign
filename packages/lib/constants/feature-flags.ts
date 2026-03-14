@@ -2,7 +2,7 @@ import { env } from '@hanzo/sign-lib/utils/env';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from './app';
 
-const NEXT_PUBLIC_POSTHOG_KEY = () => env('NEXT_PUBLIC_POSTHOG_KEY');
+const NEXT_PUBLIC_INSIGHTS_KEY = () => env('NEXT_PUBLIC_INSIGHTS_KEY');
 
 /**
  * The flag name for global session recording feature flag.
@@ -10,18 +10,18 @@ const NEXT_PUBLIC_POSTHOG_KEY = () => env('NEXT_PUBLIC_POSTHOG_KEY');
 export const FEATURE_FLAG_GLOBAL_SESSION_RECORDING = 'global_session_recording';
 
 /**
- * Extract the PostHog configuration from the environment.
+ * Extract the Insights configuration from the environment.
  */
-export function extractPostHogConfig(): { key: string; host: string } | null {
-  const postHogKey = NEXT_PUBLIC_POSTHOG_KEY();
-  const postHogHost = `${NEXT_PUBLIC_WEBAPP_URL()}/ingest`;
+export function extractInsightsConfig(): { key: string; host: string } | null {
+  const insightsKey = NEXT_PUBLIC_INSIGHTS_KEY();
+  const insightsHost = `${NEXT_PUBLIC_WEBAPP_URL()}/ingest`;
 
-  if (!postHogKey || !postHogHost) {
+  if (!insightsKey || !insightsHost) {
     return null;
   }
 
   return {
-    key: postHogKey,
-    host: postHogHost,
+    key: insightsKey,
+    host: insightsHost,
   };
 }

@@ -1,4 +1,5 @@
 /**
+ * Insights analytics proxy (PostHog-compatible ingestion endpoint)
  * https://posthog.com/docs/advanced/proxy/remix
  */
 import type { Route } from './+types/ingest.$';
@@ -6,7 +7,7 @@ import type { Route } from './+types/ingest.$';
 const API_HOST = 'eu.i.posthog.com';
 const ASSET_HOST = 'eu-assets.i.posthog.com';
 
-const posthogProxy = async (request: Request) => {
+const insightsProxy = async (request: Request) => {
   const url = new URL(request.url);
   const hostname = url.pathname.startsWith('/ingest/static/') ? ASSET_HOST : API_HOST;
 
@@ -47,9 +48,9 @@ const posthogProxy = async (request: Request) => {
 };
 
 export async function loader({ request }: Route.LoaderArgs) {
-  return posthogProxy(request);
+  return insightsProxy(request);
 }
 
 export async function action({ request }: Route.ActionArgs) {
-  return posthogProxy(request);
+  return insightsProxy(request);
 }

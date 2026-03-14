@@ -1,10 +1,10 @@
-import { posthog } from 'posthog-js';
+import { posthog } from '@hanzo/insights';
 
-import { extractPostHogConfig } from '@hanzo/sign-lib/constants/feature-flags';
+import { extractInsightsConfig } from '@hanzo/sign-lib/constants/feature-flags';
 
 export function useAnalytics() {
   // const featureFlags = useFeatureFlags();
-  const isPostHogEnabled = extractPostHogConfig();
+  const isInsightsEnabled = extractInsightsConfig();
 
   /**
    * Capture an analytic event.
@@ -13,7 +13,7 @@ export function useAnalytics() {
    * @param properties Properties to attach to the event.
    */
   const capture = (event: string, properties?: Record<string, unknown>) => {
-    if (!isPostHogEnabled) {
+    if (!isInsightsEnabled) {
       return;
     }
 
@@ -27,7 +27,7 @@ export function useAnalytics() {
    * @param properties Properties to attach to the event.
    */
   const captureException = (error: Error, properties?: Record<string, unknown>) => {
-    if (!isPostHogEnabled) {
+    if (!isInsightsEnabled) {
       return;
     }
 

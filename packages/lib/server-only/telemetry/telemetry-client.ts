@@ -2,7 +2,7 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { PostHog } from 'posthog-node';
+import { PostHog } from '@hanzo/insights-node';
 
 import { version } from '../../../../package.json';
 import { prefixedId } from '../../universal/id';
@@ -35,7 +35,7 @@ export class TelemetryClient {
   /**
    * Start the telemetry client.
    *
-   * This will initialize the PostHog client, load or create the installation ID and node ID,
+   * This will initialize the Insights client, load or create the installation ID and node ID,
    * capture a startup event, and start a heartbeat interval.
    *
    * If telemetry is disabled via `SIGN_DISABLE_TELEMETRY=true` or credentials are not
