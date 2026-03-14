@@ -2,7 +2,7 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { PostHog } from '@hanzo/insights-node';
+import { PostHog as InsightsClient } from '@hanzo/insights-node';
 
 import { version } from '../../../../package.json';
 import { prefixedId } from '../../universal/id';
@@ -23,7 +23,7 @@ const APP_VERSION = version;
 export class TelemetryClient {
   private static instance: TelemetryClient | null = null;
 
-  private client: PostHog | null = null;
+  private client: InsightsClient | null = null;
 
   private heartbeatInterval: NodeJS.Timeout | null = null;
 
@@ -68,7 +68,7 @@ export class TelemetryClient {
   /**
    * Stop the telemetry client.
    *
-   * This will clear the heartbeat interval and shutdown the PostHog client.
+   * This will clear the heartbeat interval and shutdown the Insights client.
    */
   public static async stop(): Promise<void> {
     const instance = TelemetryClient.instance;
@@ -89,7 +89,7 @@ export class TelemetryClient {
   }
 
   private async initialize(): Promise<void> {
-    this.client = new PostHog(TELEMETRY_KEY!, {
+    this.client = new InsightsClient(TELEMETRY_KEY!, {
       host: TELEMETRY_HOST,
       disableGeoip: false,
     });

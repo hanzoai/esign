@@ -1,11 +1,11 @@
 /**
- * Insights analytics proxy (PostHog-compatible ingestion endpoint)
- * https://posthog.com/docs/advanced/proxy/remix
+ * Insights analytics proxy (ingestion endpoint)
+ * https://insights.hanzo.ai/docs/advanced/proxy/remix
  */
 import type { Route } from './+types/ingest.$';
 
-const API_HOST = 'eu.i.posthog.com';
-const ASSET_HOST = 'eu-assets.i.posthog.com';
+const API_HOST = 'eu.i.insights.hanzo.ai';
+const ASSET_HOST = 'eu-assets.i.insights.hanzo.ai';
 
 const insightsProxy = async (request: Request) => {
   const url = new URL(request.url);

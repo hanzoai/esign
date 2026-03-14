@@ -1,4 +1,4 @@
-import { posthog } from '@hanzo/insights';
+import { posthog as insights } from '@hanzo/insights';
 
 import { extractInsightsConfig } from '@hanzo/sign-lib/constants/feature-flags';
 
@@ -17,7 +17,7 @@ export function useAnalytics() {
       return;
     }
 
-    posthog.capture(event, properties);
+    insights.capture(event, properties);
   };
 
   /**
@@ -31,7 +31,7 @@ export function useAnalytics() {
       return;
     }
 
-    posthog.captureException(error, properties);
+    insights.captureException(error, properties);
   };
 
   /**
@@ -44,11 +44,11 @@ export function useAnalytics() {
     // const isSessionRecordingEnabled = featureFlags.getFlag(FEATURE_FLAG_GLOBAL_SESSION_RECORDING);
     // const isSessionRecordingEnabledForEvent = Boolean(eventFlag && featureFlags.getFlag(eventFlag));
 
-    // if (!isPostHogEnabled || !isSessionRecordingEnabled || !isSessionRecordingEnabledForEvent) {
+    // if (!isInsightsEnabled || !isSessionRecordingEnabled || !isSessionRecordingEnabledForEvent) {
     //   return;
     // }
 
-    // posthog.startSessionRecording();
+    // insights.startSessionRecording();
   };
 
   /**
@@ -58,11 +58,11 @@ export function useAnalytics() {
     return;
     // const isSessionRecordingEnabled = featureFlags.getFlag(FEATURE_FLAG_GLOBAL_SESSION_RECORDING);
 
-    // if (!isPostHogEnabled || !isSessionRecordingEnabled) {
+    // if (!isInsightsEnabled || !isSessionRecordingEnabled) {
     //   return;
     // }
 
-    // posthog.stopSessionRecording();
+    // insights.stopSessionRecording();
   };
 
   return {
