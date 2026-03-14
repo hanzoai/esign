@@ -2,7 +2,7 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { PostHog as InsightsClient } from '@hanzo/insights-node';
+import { Insights as InsightsClient } from '@hanzo/insights-node';
 
 import { version } from '../../../../package.json';
 import { prefixedId } from '../../universal/id';
