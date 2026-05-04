@@ -1,10 +1,16 @@
 # Pull down translations from Crowdin every two hours or when triggered manually.
+#
+# 2026-05-04 — schedule disabled. The composite `node-install` step calls
+# `npm ci` which 404s on `insights-node@5.10.4` (private Hanzo package not
+# on the public registry; this workflow has no .npmrc auth). Cron-firing
+# every 2h produced steady failure-noise. Re-enable the schedule once
+# node-install has registry auth wired up.
 
 name: 'Pull translations'
 
 on:
-  schedule:
-    - cron: '0 */2 * * *' # Every two hours.
+  # schedule:
+  #   - cron: '0 */2 * * *' # Every two hours.
   workflow_dispatch:
   workflow_call:
 
