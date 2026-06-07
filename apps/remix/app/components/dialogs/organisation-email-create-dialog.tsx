@@ -8,7 +8,7 @@ import type { z } from 'zod';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { trpc } from '@hanzo/sign-trpc/react';
-import { ZCreateOrganisationEmailRequestSchema } from '@hanzo/sign-trpc/server/enterprise-router/create-organisation-email.types';
+import { ZCreateOrganisationEmailRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-email.types';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -70,7 +70,7 @@ export const OrganisationEmailCreateDialog = ({
   });
 
   const { mutateAsync: createOrganisationEmail, isPending } =
-    trpc.enterprise.organisation.email.create.useMutation();
+    trpc.organisation.email.create.useMutation();
 
   // Reset state when dialog closes
   useEffect(() => {

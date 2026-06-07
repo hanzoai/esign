@@ -6,7 +6,7 @@ import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
-import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';

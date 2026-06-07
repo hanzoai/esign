@@ -13,7 +13,7 @@ import { GripVerticalIcon, HelpCircle, Plus, Trash } from 'lucide-react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { prop, sortBy } from 'remeda';
 
-import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
 import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';

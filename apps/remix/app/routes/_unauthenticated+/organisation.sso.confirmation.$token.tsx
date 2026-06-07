@@ -133,7 +133,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
   const [isConfirmationChecked, setIsConfirmationChecked] = useState(false);
 
   const { mutate: declineLinkOrganisationAccount, isPending: isDeclining } =
-    trpc.enterprise.organisation.authenticationPortal.declineLinkAccount.useMutation({
+    trpc.organisation.authenticationPortal.declineLinkAccount.useMutation({
       onSuccess: async () => {
         await navigate('/');
 
@@ -150,7 +150,7 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
     });
 
   const { mutate: linkOrganisationAccount, isPending: isLinking } =
-    trpc.enterprise.organisation.authenticationPortal.linkAccount.useMutation({
+    trpc.organisation.authenticationPortal.linkAccount.useMutation({
       onSuccess: async () => {
         await navigate(formatOrganisationLoginPath(organisation.url));
 

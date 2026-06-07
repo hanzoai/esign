@@ -14,7 +14,6 @@
       "@hanzo/sign-api": ["../../packages/api"],
       "@hanzo/sign-assets": ["../../packages/assets"],
       "@hanzo/sign-auth": ["../../packages/auth"],
-      "@hanzo/sign-ee": ["../../packages/ee"],
       "@hanzo/sign-lib": ["../../packages/lib"],
       "@hanzo/sign-prisma": ["../../packages/prisma"],
       "@hanzo/sign-trpc": ["../../packages/trpc"],

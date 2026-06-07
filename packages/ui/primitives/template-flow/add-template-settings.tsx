@@ -137,7 +137,7 @@ export const AddTemplateSettingsFormPartial = ({
   const emailSettings = form.watch('meta.emailSettings');
 
   const { data: emailData, isLoading: isLoadingEmails } =
-    trpc.enterprise.organisation.email.find.useQuery({
+    trpc.organisation.email.find.useQuery({
       organisationId: organisation.id,
       perPage: 100,
     });
@@ -501,7 +501,7 @@ export const AddTemplateSettingsFormPartial = ({
                                       </SelectItem>
                                     ))}
 
-                                    <SelectItem value={'-1'}>Hanzo Sign</SelectItem>
+                                    <SelectItem value={'-1'}>Hanzo eSign</SelectItem>
                                   </SelectContent>
                                 </Select>
                               </FormControl>

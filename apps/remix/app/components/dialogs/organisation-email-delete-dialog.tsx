@@ -37,7 +37,7 @@ export const OrganisationEmailDeleteDialog = ({
   const organisation = useCurrentOrganisation();
 
   const { mutateAsync: deleteEmail, isPending: isDeleting } =
-    trpc.enterprise.organisation.email.delete.useMutation({
+    trpc.organisation.email.delete.useMutation({
       onSuccess: () => {
         toast({
           title: t`Success`,

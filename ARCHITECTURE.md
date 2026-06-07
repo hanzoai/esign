@@ -1,10 +1,10 @@
-# Hanzo Sign Architecture
+# Hanzo eSign Architecture
 
-This document provides a high-level overview of the Hanzo Sign codebase to help humans and agents understand how the application is structured.
+This document provides a high-level overview of the Hanzo eSign codebase to help humans and agents understand how the application is structured.
 
 ## Overview
 
-Hanzo Sign is an open-source document signing platform built as a **monorepo** using npm workspaces and Turborepo. The application enables users to create, send, and sign documents electronically.
+Hanzo eSign is an open-source document signing platform built as a **monorepo** using npm workspaces and Turborepo. The application enables users to create, send, and sign documents electronically.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -57,7 +57,6 @@ Hanzo Sign is an open-source document signing platform built as a **monorepo** u
 | `@hanzo/sign-email`   | Email templates and mailer (React Email)                  |
 | `@hanzo/sign-auth`    | Authentication (OAuth via Arctic, WebAuthn/Passkeys)      |
 | `@hanzo/sign-signing` | PDF signing (Local P12, Google Cloud KMS)                 |
-| `@hanzo/sign-ee`      | Enterprise Edition features                               |
 | `@hanzo/sign-assets`  | Static assets                                             |
 
 ### Supporting Packages

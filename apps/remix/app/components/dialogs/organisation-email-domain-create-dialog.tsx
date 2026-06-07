@@ -10,7 +10,7 @@ import type { z } from 'zod';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { trpc } from '@hanzo/sign-trpc/react';
-import { ZCreateOrganisationEmailDomainRequestSchema } from '@hanzo/sign-trpc/server/enterprise-router/create-organisation-email-domain.types';
+import { ZCreateOrganisationEmailDomainRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-email-domain.types';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -73,7 +73,7 @@ export const OrganisationEmailDomainCreateDialog = ({
   });
 
   const { mutateAsync: createOrganisationEmail } =
-    trpc.enterprise.organisation.emailDomain.create.useMutation();
+    trpc.organisation.emailDomain.create.useMutation();
 
   // Reset state when dialog closes
   useEffect(() => {

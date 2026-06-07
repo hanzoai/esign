@@ -1,11 +1,8 @@
-import { syncMemberCountWithStripeSeatPlan } from '@hanzo/sign-ee/server-only/stripe/update-subscription-item-quantity';
 import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { jobs } from '@hanzo/sign-lib/jobs/client';
-import { validateIfSubscriptionIsRequired } from '@hanzo/sign-lib/utils/billing';
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
-import { OrganisationMemberInviteStatus } from '@hanzo/sign-prisma/client';
 
 import { authenticatedProcedure } from '../trpc';
 import {
@@ -53,20 +50,10 @@ export const deleteOrganisationMembers = async ({
       roles: ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP['MANAGE_ORGANISATION'],
     }),
     include: {
-      subscription: true,
-      organisationClaim: true,
       members: {
         select: {
           id: true,
           userId: true,
-        },
-      },
-      invites: {
-        where: {
-          status: OrganisationMemberInviteStatus.PENDING,
-        },
-        select: {
-          id: true,
         },
       },
     },
@@ -76,20 +63,9 @@ export const deleteOrganisationMembers = async ({
     throw new AppError(AppErrorCode.UNAUTHORIZED);
   }
 
-  const { organisationClaim } = organisation;
-
   const membersToDelete = organisation.members.filter((member) =>
     organisationMemberIds.includes(member.id),
   );
-
-  const subscription = validateIfSubscriptionIsRequired(organisation.subscription);
-
-  const inviteCount = organisation.invites.length;
-  const newMemberCount = organisation.members.length + inviteCount - membersToDelete.length;
-
-  if (subscription) {
-    await syncMemberCountWithStripeSeatPlan(subscription, organisationClaim, newMemberCount);
-  }
 
   await prisma.$transaction(async (tx) => {
     await tx.organisationMember.deleteMany({

@@ -34,7 +34,7 @@ export const OrganisationEmailDomainsDataTable = () => {
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
   const { mutate: verifyEmails, isPending: isVerifyingEmails } =
-    trpc.enterprise.organisation.emailDomain.verify.useMutation({
+    trpc.organisation.emailDomain.verify.useMutation({
       onSuccess: () => {
         toast({
           title: t`Email domains synced`,
@@ -44,7 +44,7 @@ export const OrganisationEmailDomainsDataTable = () => {
     });
 
   const { data, isLoading, isLoadingError } =
-    trpc.enterprise.organisation.emailDomain.find.useQuery(
+    trpc.organisation.emailDomain.find.useQuery(
       {
         organisationId: organisation.id,
         query: parsedSearchParams.query,

@@ -1,6 +1,5 @@
 import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { stripe } from '@hanzo/sign-lib/server-only/stripe';
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
@@ -39,7 +38,7 @@ export const updateOrganisationRoute = authenticatedProcedure
       });
     }
 
-    const updatedOrganisation = await prisma.organisation.update({
+    await prisma.organisation.update({
       where: {
         id: organisationId,
       },
@@ -48,12 +47,4 @@ export const updateOrganisationRoute = authenticatedProcedure
         url: data.url,
       },
     });
-
-    if (updatedOrganisation.customerId) {
-      await stripe.customers.update(updatedOrganisation.customerId, {
-        metadata: {
-          organisationName: data.name,
-        },
-      });
-    }
   });

@@ -69,7 +69,7 @@ export const EmailPreferencesForm = ({
   });
 
   const { data: emailData, isLoading: isLoadingEmails } =
-    trpc.enterprise.organisation.email.find.useQuery({
+    trpc.organisation.email.find.useQuery({
       organisationId: organisation.id,
       perPage: 100,
     });

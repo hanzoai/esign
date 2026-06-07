@@ -117,7 +117,7 @@ export const EnvelopeDistributeDialog = ({
   } = form;
 
   const { data: emailData, isLoading: isLoadingEmails } =
-    trpc.enterprise.organisation.email.find.useQuery(
+    trpc.organisation.email.find.useQuery(
       {
         organisationId: organisation.id,
         perPage: 100,
@@ -330,7 +330,7 @@ export const EnvelopeDistributeDialog = ({
                                             </SelectItem>
                                           ))}
 
-                                          <SelectItem value={'-1'}>Hanzo Sign</SelectItem>
+                                          <SelectItem value={'-1'}>Hanzo eSign</SelectItem>
                                         </SelectContent>
                                       </Select>
                                     </FormControl>

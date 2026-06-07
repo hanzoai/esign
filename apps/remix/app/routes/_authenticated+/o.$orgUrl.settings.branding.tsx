@@ -1,15 +1,11 @@
-import { Trans, useLingui } from '@lingui/react/macro';
+import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
-import { Link } from 'react-router';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
 import { putFile } from '@hanzo/sign-lib/universal/upload/put-file';
-import { canExecuteOrganisationAction, isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
+import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
 import { trpc } from '@hanzo/sign-trpc/react';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import {
@@ -96,45 +92,13 @@ export default function OrganisationSettingsBrandingPage() {
     <div className="max-w-2xl">
       <SettingsHeader title={settingsHeaderText} subtitle={settingsHeaderSubtitle} />
 
-      {organisationWithSettings.organisationClaim.flags.allowCustomBranding ||
-      !IS_BILLING_ENABLED() ? (
-        <section>
-          <BrandingPreferencesForm
-            context="Organisation"
-            settings={organisationWithSettings.organisationGlobalSettings}
-            onFormSubmit={onBrandingPreferencesFormSubmit}
-          />
-        </section>
-      ) : (
-        <Alert
-          className="mt-8 flex flex-col justify-between p-6 sm:flex-row sm:items-center"
-          variant="neutral"
-        >
-          <div className="mb-4 sm:mb-0">
-            <AlertTitle>
-              <Trans>Branding Preferences</Trans>
-            </AlertTitle>
-
-            <AlertDescription className="mr-2">
-              <Trans>Currently branding can only be configured for Teams and above plans.</Trans>
-            </AlertDescription>
-          </div>
-
-          {canExecuteOrganisationAction('MANAGE_BILLING', organisation.currentOrganisationRole) && (
-            <Button asChild variant="outline">
-              <Link
-                to={
-                  isPersonalLayoutMode
-                    ? '/settings/billing'
-                    : `/o/${organisation.url}/settings/billing`
-                }
-              >
-                <Trans>Update Billing</Trans>
-              </Link>
-            </Button>
-          )}
-        </Alert>
-      )}
+      <section>
+        <BrandingPreferencesForm
+          context="Organisation"
+          settings={organisationWithSettings.organisationGlobalSettings}
+          onFormSubmit={onBrandingPreferencesFormSubmit}
+        />
+      </section>
     </div>
   );
 }

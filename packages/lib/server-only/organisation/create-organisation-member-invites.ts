@@ -5,7 +5,6 @@ import type { Organisation, Prisma } from '@prisma/client';
 import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { nanoid } from 'nanoid';
 
-import { syncMemberCountWithStripeSeatPlan } from '@hanzo/sign-ee/server-only/stripe/update-subscription-item-quantity';
 import { mailer } from '@hanzo/sign-email/mailer';
 import { OrganisationInviteEmailTemplate } from '@hanzo/sign-email/templates/organisation-invite';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
@@ -17,7 +16,6 @@ import type { TCreateOrganisationMemberInvitesRequestSchema } from '@hanzo/sign-
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { generateDatabaseId } from '../../universal/id';
-import { validateIfSubscriptionIsRequired } from '../../utils/billing';
 import { buildOrganisationWhereQuery } from '../../utils/organisations';
 import { renderEmailWithI18N } from '../../utils/render-email-with-i18n';
 import { getEmailContext } from '../email/get-email-context';
@@ -62,18 +60,12 @@ export const createOrganisationMemberInvites = async ({
         },
       },
       organisationGlobalSettings: true,
-      organisationClaim: true,
-      subscription: true,
     },
   });
 
   if (!organisation) {
     throw new AppError(AppErrorCode.NOT_FOUND);
   }
-
-  const { organisationClaim } = organisation;
-
-  const subscription = validateIfSubscriptionIsRequired(organisation.subscription);
 
   const currentOrganisationMemberRole = await getMemberOrganisationRole({
     organisationId: organisation.id,
@@ -119,22 +111,6 @@ export const createOrganisationMemberInvites = async ({
       organisationRole,
       token: nanoid(32),
     }));
-
-  const numberOfCurrentMembers = organisation.members.length;
-  const numberOfCurrentInvites = organisation.invites.length;
-  const numberOfNewInvites = organisationMemberInvites.length;
-
-  const totalMemberCountWithInvites =
-    numberOfCurrentMembers + numberOfCurrentInvites + numberOfNewInvites;
-
-  // Handle billing for seat based plans.
-  if (subscription) {
-    await syncMemberCountWithStripeSeatPlan(
-      subscription,
-      organisationClaim,
-      totalMemberCountWithInvites,
-    );
-  }
 
   await prisma.organisationMemberInvite.createMany({
     data: organisationMemberInvites,
@@ -214,7 +190,7 @@ export const sendOrganisationMemberInviteEmail = async ({
   await mailer.sendMail({
     to: email,
     from: senderEmail,
-    subject: i18n._(msg`You have been invited to join ${organisation.name} on Hanzo Sign`),
+    subject: i18n._(msg`You have been invited to join ${organisation.name} on Hanzo eSign`),
     html,
     text,
   });

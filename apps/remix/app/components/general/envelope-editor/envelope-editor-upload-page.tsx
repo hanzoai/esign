@@ -9,7 +9,7 @@ import { FileWarningIcon, GripVerticalIcon, Loader2 } from 'lucide-react';
 import { X } from 'lucide-react';
 import { ErrorCode as DropzoneErrorCode, type FileRejection } from 'react-dropzone';
 
-import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { useEnvelopeAutosave } from '@hanzo/sign-lib/client-only/hooks/use-envelope-autosave';
 import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';

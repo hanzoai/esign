@@ -7,10 +7,9 @@ import { EditIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
 import { generateEmailDomainRecords } from '@hanzo/sign-lib/utils/email-domains';
 import { trpc } from '@hanzo/sign-trpc/react';
-import type { TGetOrganisationEmailDomainResponse } from '@hanzo/sign-trpc/server/enterprise-router/get-organisation-email-domain.types';
+import type { TGetOrganisationEmailDomainResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-email-domain.types';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { DataTable, type DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
@@ -41,7 +40,7 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
   const emailDomainId = params.id;
 
   const { data: emailDomain, isLoading: isLoadingEmailDomain } =
-    trpc.enterprise.organisation.emailDomain.get.useQuery(
+    trpc.organisation.emailDomain.get.useQuery(
       {
         emailDomainId,
       },
@@ -99,10 +98,6 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
       },
     ] satisfies DataTableColumnDef<TGetOrganisationEmailDomainResponse['emails'][number]>[];
   }, [organisation]);
-
-  if (!IS_BILLING_ENABLED()) {
-    return null;
-  }
 
   if (isLoadingEmailDomain) {
     return <SpinnerBox className="py-32" />;

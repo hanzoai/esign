@@ -1,6 +1,6 @@
 import { DocumentDataType, EnvelopeType } from '@prisma/client';
 
-import { getServerLimits } from '@hanzo/sign-ee/server-only/limits/server';
+import { getServerLimits } from '@hanzo/sign-lib/server-only/limits/server';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { createDocumentData } from '@hanzo/sign-lib/server-only/document-data/create-document-data';
 import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';

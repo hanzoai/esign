@@ -1,6 +1,6 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { getServerLimits } from '@hanzo/sign-ee/server-only/limits/server';
+import { getServerLimits } from '@hanzo/sign-lib/server-only/limits/server';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
 import { extractPdfPlaceholders } from '@hanzo/sign-lib/server-only/pdf/auto-place-fields';
