@@ -11,6 +11,10 @@ jobs:
   docker:
     uses: hanzoai/.github/.github/workflows/docker-build.yml@main
     with:
-      image: ghcr.io/hanzoai/sign
+      image: ghcr.io/hanzoai/esign
       dockerfile: docker/Dockerfile
+      # arm64 builds run on spark.local — canonical org pool label is
+      # spark-hanzo. The older spark-hanzoai-arm64 label is dead (0
+      # online registrations).
+      runner-arm64: spark-hanzo
     secrets: inherit
