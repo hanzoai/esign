@@ -36,7 +36,7 @@ export const DocumentPendingEmailTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Hanzo Sign Logo"
+                  alt="Hanzo eSign Logo"
                   className="mb-4 h-6"
                 />
               )}

@@ -114,7 +114,7 @@ test.describe('PDF Viewer Rendering', () => {
       const { recipients: recipientsV1 } = await seedPendingDocumentWithFullFields({
         owner: user,
         teamId: team.id,
-        recipients: ['signer-v1@test.sign.hanzo.ai'],
+        recipients: ['signer-v1@test.esign.hanzo.ai'],
         fields: [FieldType.SIGNATURE],
       });
 
@@ -122,7 +122,7 @@ test.describe('PDF Viewer Rendering', () => {
         await seedPendingDocumentWithFullFields({
           owner: user,
           teamId: team.id,
-          recipients: ['signer-v2@test.sign.hanzo.ai'],
+          recipients: ['signer-v2@test.esign.hanzo.ai'],
           fields: [FieldType.SIGNATURE],
           updateDocumentOptions: { internalVersion: 2 },
         });
@@ -176,7 +176,7 @@ test.describe('PDF Viewer Rendering', () => {
       const documentV1 = await seedCompletedDocument(
         user,
         team.id,
-        ['share-v1@test.sign.hanzo.ai'],
+        ['share-v1@test.esign.hanzo.ai'],
         {
           createDocumentOptions: { qrToken: qrTokenV1 },
         },
@@ -185,7 +185,7 @@ test.describe('PDF Viewer Rendering', () => {
       const documentV2 = await seedCompletedDocument(
         user,
         team.id,
-        ['share-v2@test.sign.hanzo.ai'],
+        ['share-v2@test.esign.hanzo.ai'],
         {
           createDocumentOptions: { qrToken: qrTokenV2 },
           internalVersion: 2,
@@ -211,7 +211,7 @@ test.describe('PDF Viewer Rendering', () => {
       const { recipients: recipientsV1 } = await seedPendingDocumentWithFullFields({
         owner: user,
         teamId: team.id,
-        recipients: ['embed-signer-v1@test.sign.hanzo.ai'],
+        recipients: ['embed-signer-v1@test.esign.hanzo.ai'],
         fields: [FieldType.SIGNATURE],
       });
 
@@ -219,7 +219,7 @@ test.describe('PDF Viewer Rendering', () => {
         await seedPendingDocumentWithFullFields({
           owner: user,
           teamId: team.id,
-          recipients: ['embed-signer-v2@test.sign.hanzo.ai'],
+          recipients: ['embed-signer-v2@test.esign.hanzo.ai'],
           fields: [FieldType.SIGNATURE],
           updateDocumentOptions: { internalVersion: 2 },
         });
@@ -268,7 +268,7 @@ test.describe('PDF Viewer Rendering', () => {
       const { recipients: recipientsV1 } = await seedPendingDocumentWithFullFields({
         owner: user,
         teamId: team.id,
-        recipients: ['multisign-v1@test.sign.hanzo.ai'],
+        recipients: ['multisign-v1@test.esign.hanzo.ai'],
         fields: [FieldType.SIGNATURE],
       });
 
@@ -276,7 +276,7 @@ test.describe('PDF Viewer Rendering', () => {
         await seedPendingDocumentWithFullFields({
           owner: user,
           teamId: team.id,
-          recipients: ['multisign-v2@test.sign.hanzo.ai'],
+          recipients: ['multisign-v2@test.esign.hanzo.ai'],
           fields: [FieldType.SIGNATURE],
           updateDocumentOptions: { internalVersion: 2 },
         });
@@ -328,7 +328,7 @@ test.describe('PDF Viewer Rendering', () => {
 
       const emailInput = page.getByPlaceholder('Email').first();
       await emailInput.click();
-      await emailInput.fill('test-signer@sign.hanzo.ai');
+      await emailInput.fill('test-signer@esign.hanzo.ai');
 
       const [fileChooser] = await Promise.all([
         page.waitForEvent('filechooser'),

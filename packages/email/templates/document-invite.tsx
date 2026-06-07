@@ -25,9 +25,9 @@ export type DocumentInviteEmailTemplateProps = Partial<TemplateDocumentInvitePro
 
 export const DocumentInviteEmailTemplate = ({
   inviterName = 'Lucas Smith',
-  inviterEmail = 'lucas@sign.hanzo.ai',
+  inviterEmail = 'lucas@esign.hanzo.ai',
   documentName = 'Open Source Pledge.pdf',
-  signDocumentLink = 'https://sign.hanzo.ai',
+  signDocumentLink = 'https://esign.hanzo.ai',
   assetBaseUrl = 'http://localhost:3002',
   customBody,
   role,
@@ -71,7 +71,7 @@ export const DocumentInviteEmailTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Hanzo Sign Logo"
+                  alt="Hanzo eSign Logo"
                   className="mb-4 h-6"
                 />
               )}

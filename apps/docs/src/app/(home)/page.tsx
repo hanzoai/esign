@@ -12,9 +12,9 @@ import {
 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Hanzo Sign Docs',
+  title: 'Hanzo eSign Docs',
   description:
-    'The official documentation for Hanzo Sign, the open-source document signing platform. Send documents for signatures, integrate with the API, or self-host with full control.',
+    'The official documentation for Hanzo eSign, the open-source document signing platform. Send documents for signatures, integrate with the API, or self-host with full control.',
 };
 
 export default function HomePage() {
@@ -22,7 +22,7 @@ export default function HomePage() {
     <main className="mx-auto max-w-4xl px-4 py-12">
       {/* Hero */}
       <div className="mb-16 pt-6 text-center">
-        <h1 className="mb-4 text-4xl font-bold tracking-tight">Hanzo Sign Documentation</h1>
+        <h1 className="mb-4 text-4xl font-bold tracking-tight">Hanzo eSign Documentation</h1>
         <p className="text-fd-muted-foreground mx-auto mb-8 max-w-2xl text-lg">
           The open-source document signing platform. Send documents for signatures, integrate with
           your apps, or self-host with full control.
@@ -35,7 +35,7 @@ export default function HomePage() {
             Get Started
           </Link>
           <a
-            href="https://github.com/hanzoai/sign"
+            href="https://github.com/hanzoai/esign"
             className="bg-fd-background hover:bg-fd-accent inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors"
           >
             <GithubIcon className="size-4" />
@@ -84,7 +84,7 @@ export default function HomePage() {
           </div>
           <h2 className="mb-2 text-lg font-semibold">Self-Hosting Guide</h2>
           <p className="text-fd-muted-foreground mb-4 flex-1 text-sm">
-            Deploy your own Hanzo Sign instance with Docker, Kubernetes, or Railway.
+            Deploy your own Hanzo eSign instance with Docker, Kubernetes, or Railway.
           </p>
           <span className="text-fd-primary text-sm font-medium">Deploy now →</span>
         </Link>
@@ -239,18 +239,18 @@ export default function HomePage() {
       <div className="from-fd-primary/5 to-fd-primary/10 rounded-xl border bg-gradient-to-r p-8 text-center">
         <h3 className="mb-2 text-lg font-semibold">Join the Community</h3>
         <p className="text-fd-muted-foreground mb-6 text-sm">
-          Hanzo Sign is open source. Contribute, ask questions, or share feedback.
+          Hanzo eSign is open source. Contribute, ask questions, or share feedback.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <a
-            href="https://github.com/hanzoai/sign"
+            href="https://github.com/hanzoai/esign"
             className="bg-fd-background hover:bg-fd-accent inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
           >
             <GithubIcon className="size-4" />
             GitHub
           </a>
           <a
-            href="https://sign.hanzo.ai/discord"
+            href="https://esign.hanzo.ai/discord"
             className="bg-fd-background hover:bg-fd-accent inline-flex items-center gap-2 rounded-lg border px-4 py-2 text-sm font-medium transition-colors"
           >
             <svg className="size-4" viewBox="0 0 24 24" fill="currentColor">
@@ -259,10 +259,10 @@ export default function HomePage() {
             Discord
           </a>
           <a
-            href="https://app.sign.hanzo.ai/signup"
+            href="https://app.esign.hanzo.ai/signup"
             className="bg-sign text-fd-primary-foreground hover:bg-sign/90 inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors"
           >
-            Try Hanzo Sign
+            Try Hanzo eSign
           </a>
         </div>
       </div>

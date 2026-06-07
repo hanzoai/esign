@@ -1,4 +1,4 @@
-# LLM.md - Hanzo Sign
+# LLM.md - Hanzo eSign
 
 ## Overview
 The Open Source DocuSign Alternative.

@@ -56,8 +56,8 @@ export const sendForgotPassword = async ({ userId }: SendForgotPasswordOptions) 
       name: user.name || '',
     },
     from: {
-      name: env('NEXT_PRIVATE_SMTP_FROM_NAME') || 'Hanzo Sign',
-      address: env('NEXT_PRIVATE_SMTP_FROM_ADDRESS') || 'noreply@sign.hanzo.ai',
+      name: env('NEXT_PRIVATE_SMTP_FROM_NAME') || 'Hanzo eSign',
+      address: env('NEXT_PRIVATE_SMTP_FROM_ADDRESS') || 'noreply@esign.hanzo.ai',
     },
     subject: i18n._(msg`Forgot Password?`),
     html,

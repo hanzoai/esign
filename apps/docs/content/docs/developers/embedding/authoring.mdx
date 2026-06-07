@@ -5,11 +5,11 @@ description: Embed document and template creation directly in your application.
 
 import { Callout } from 'fumadocs-ui/components/callout';
 
-In addition to embedding signing, Hanzo Sign supports embedded authoring. It allows your users to create and edit documents and templates without leaving your application.
+In addition to embedding signing, Hanzo eSign supports embedded authoring. It allows your users to create and edit documents and templates without leaving your application.
 
 <Callout type="warn">
-  Embedded authoring is included with [Enterprise](https://sign.hanzo.ai/enterprise-cta) plans. It is
-  also available as a paid add-on for the [Platform Plan](https://sign.hanzo.ai/platform-cta-pricing).
+  Embedded authoring is included with [Enterprise](https://esign.hanzo.ai/enterprise-cta) plans. It is
+  also available as a paid add-on for the [Platform Plan](https://esign.hanzo.ai/platform-cta-pricing).
   Contact sales for access.
 </Callout>
 
@@ -36,9 +36,9 @@ Before using any authoring component, obtain a presign token from your backend:
 POST /api/v2/embedding/create-presign-token
 ```
 
-This endpoint requires your Hanzo Sign API key. The token has a default expiration of 1 hour.
+This endpoint requires your Hanzo eSign API key. The token has a default expiration of 1 hour.
 
-See the [API documentation](https://openapi.sign.hanzo.ai/reference#tag/embedding) for full details.
+See the [API documentation](https://openapi.esign.hanzo.ai/reference#tag/embedding) for full details.
 
 <Callout type="warn">
   Presign tokens should be created server-side. Never expose your API key in client-side code.
@@ -145,7 +145,7 @@ const TemplateEditor = ({ presignToken, templateId }) => {
 | ------------------ | --------- | -------- | -------------------------------------------------------- |
 | `presignToken`     | `string`  | Yes      | Authentication token from your backend                   |
 | `externalId`       | `string`  | No       | Your reference ID to link with the document or template  |
-| `host`             | `string`  | No       | Custom host URL. Defaults to `https://app.sign.hanzo.ai` |
+| `host`             | `string`  | No       | Custom host URL. Defaults to `https://app.esign.hanzo.ai` |
 | `css`              | `string`  | No       | Custom CSS string (Platform Plan)                        |
 | `cssVars`          | `object`  | No       | CSS variable overrides (Platform Plan)                   |
 | `darkModeDisabled` | `boolean` | No       | Disable dark mode (Platform Plan)                        |

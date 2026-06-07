@@ -1,6 +1,6 @@
 ---
 title: Upgrades
-description: Upgrade your self-hosted Hanzo Sign installation to get the latest features, security patches, and bug fixes.
+description: Upgrade your self-hosted Hanzo eSign installation to get the latest features, security patches, and bug fixes.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -10,7 +10,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Version Policy
 
-Hanzo Sign follows [Semantic Versioning](https://semver.org/):
+Hanzo eSign follows [Semantic Versioning](https://semver.org/):
 
 | Version Type | Format  | Description                                |
 | ------------ | ------- | ------------------------------------------ |
@@ -19,7 +19,7 @@ Hanzo Sign follows [Semantic Versioning](https://semver.org/):
 | Patch        | `x.y.z` | Bug fixes, security patches                |
 
 <Callout type="info">
-  Review the [release notes](https://github.com/hanzoai/sign/releases) before upgrading to
+  Review the [release notes](https://github.com/hanzoai/esign/releases) before upgrading to
   understand what changes are included.
 </Callout>
 
@@ -37,7 +37,7 @@ For production deployments, pin to a specific version tag to avoid unexpected up
 
 ### View Current Version
 
-Check your running Hanzo Sign version:
+Check your running Hanzo eSign version:
 
 <Tabs items={['Docker', 'Docker Compose', 'Kubernetes']}>
 <Tab value="Docker">
@@ -71,7 +71,7 @@ View available releases on GitHub:
 curl -s https://api.github.com/repos/hanzo-sign/hanzo-sign/releases/latest | grep tag_name
 ```
 
-Or visit the [releases page](https://github.com/hanzoai/sign/releases).
+Or visit the [releases page](https://github.com/hanzoai/esign/releases).
 
 ### Check Available Docker Tags
 
@@ -340,7 +340,7 @@ curl http://localhost:3000/api/health
 
 ## Database Migrations
 
-Hanzo Sign runs database migrations automatically when the container starts. No manual intervention is required.
+Hanzo eSign runs database migrations automatically when the container starts. No manual intervention is required.
 
 ### Migration Process
 
@@ -445,7 +445,7 @@ Major version upgrades may include breaking changes that require manual steps.
 <Step>
 ### Read release notes
 
-Read the [release notes](https://github.com/hanzoai/sign/releases) carefully.
+Read the [release notes](https://github.com/hanzoai/esign/releases) carefully.
 
 </Step>
 <Step>

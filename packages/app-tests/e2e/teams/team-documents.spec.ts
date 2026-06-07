@@ -155,7 +155,7 @@ test('[TEAMS]: check team documents count with external team email', async ({ pa
 
   const { team: team2, teamMember2: team2Member2 } = await seedTeamDocuments();
 
-  const teamEmail = `external-team-email-${team.id}@test.sign.hanzo.ai`;
+  const teamEmail = `external-team-email-${team.id}@test.esign.hanzo.ai`;
 
   await seedTeamEmail({
     email: teamEmail,
@@ -248,7 +248,7 @@ test('[TEAMS]: resend pending team document', async ({ page }) => {
   await openDropdownMenu(page, actionBtn);
   await expect(page.getByRole('menuitem', { name: 'Resend' })).toBeVisible();
   await page.getByRole('menuitem', { name: 'Resend' }).click();
-  await page.getByLabel('test.sign.hanzo.ai').first().click();
+  await page.getByLabel('test.esign.hanzo.ai').first().click();
   await page.getByRole('button', { name: 'Send reminder' }).click();
 
   await expectToastTextToBeVisible(page, 'Document re-sent');

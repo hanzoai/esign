@@ -29,7 +29,7 @@ The most common workflow: upload a PDF, add recipients with signature fields, an
 <Tab value="TypeScript">
 ```typescript
 const API_TOKEN = process.env.SIGN_API_TOKEN;
-const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
+const BASE_URL = 'https://app.esign.hanzo.ai/api/v2';
 
 type Recipient = {
   email: string;
@@ -160,7 +160,7 @@ result.recipients.forEach((r) => console.log(`${r.email}: ${r.signingUrl}`));
 set -e
 
 API_TOKEN="YOUR_API_TOKEN"
-BASE_URL="https://app.sign.hanzo.ai/api/v2"
+BASE_URL="https://app.esign.hanzo.ai/api/v2"
 PDF_FILE="./contract.pdf"
 
 # Step 1: Create envelope with recipients and fields
@@ -263,7 +263,7 @@ Use templates for repeatable document workflows. This example creates an employm
 <Tab value="TypeScript">
 ```typescript
 const API_TOKEN = process.env.SIGN_API_TOKEN;
-const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
+const BASE_URL = 'https://app.esign.hanzo.ai/api/v2';
 
 type EmployeeData = {
   email: string;
@@ -403,7 +403,7 @@ console.log('Signing URL:', result.signingUrl);
 set -e
 
 API_TOKEN="YOUR_API_TOKEN"
-BASE_URL="https://app.sign.hanzo.ai/api/v2"
+BASE_URL="https://app.esign.hanzo.ai/api/v2"
 TEMPLATE_ID=123
 
 # Variables
@@ -480,7 +480,7 @@ Send the same document to multiple recipients in parallel. Useful for policy ack
 <Tab value="TypeScript">
 ```typescript
 const API_TOKEN = process.env.SIGN_API_TOKEN;
-const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
+const BASE_URL = 'https://app.esign.hanzo.ai/api/v2';
 
 type BulkRecipient = {
   email: string;
@@ -588,7 +588,7 @@ results.failed.forEach((f) => console.error(`${f.email}: ${f.error}`));
 #!/bin/bash
 
 API_TOKEN="YOUR_API_TOKEN"
-BASE_URL="https://app.sign.hanzo.ai/api/v2"
+BASE_URL="https://app.esign.hanzo.ai/api/v2"
 TEMPLATE_ID=456
 
 # Get signer slot ID from template
@@ -750,7 +750,7 @@ app.listen(3000, () => console.log('Webhook server running on port 3000'));
 
 ### Register the Webhook
 
-Register your endpoint in the Hanzo Sign dashboard:
+Register your endpoint in the Hanzo eSign dashboard:
 
 {/* prettier-ignore */}
 <Steps>
@@ -833,7 +833,7 @@ After a document is completed, download the signed PDF with all signatures embed
 <Tab value="TypeScript">
 ```typescript
 const API_TOKEN = process.env.SIGN_API_TOKEN;
-const BASE_URL = 'https://app.sign.hanzo.ai/api/v2';
+const BASE_URL = 'https://app.esign.hanzo.ai/api/v2';
 
 type DownloadVersion = 'signed' | 'original';
 
@@ -919,7 +919,7 @@ await downloadAllCompletedDocuments('./downloads');
 #!/bin/bash
 
 API_TOKEN="YOUR_API_TOKEN"
-BASE_URL="https://app.sign.hanzo.ai/api/v2"
+BASE_URL="https://app.esign.hanzo.ai/api/v2"
 ENVELOPE_ID="envelope_abc123"
 OUTPUT_DIR="./downloads"
 
@@ -1150,7 +1150,7 @@ function validatePdfFile(buffer: Buffer, maxSizeMb = 10) {
 
 ## See Also
 
-- [API Reference](https://openapi.sign.hanzo.ai/) - Full endpoint documentation
+- [API Reference](https://openapi.esign.hanzo.ai/) - Full endpoint documentation
 - [Documents API](/docs/developers/api/documents) - Document operations
 - [Templates API](/docs/developers/api/templates) - Template management
 - [Webhooks](/docs/developers/webhooks/setup) - Webhook configuration

@@ -62,7 +62,7 @@ const createPendingEnvelopeViaApi = async () => {
     expiresIn: null,
   });
 
-  const recipientEmail = `resend-${Date.now()}@test.sign.hanzo.ai`;
+  const recipientEmail = `resend-${Date.now()}@test.esign.hanzo.ai`;
 
   // 1. Create envelope with a PDF.
   const payload = {

@@ -932,7 +932,7 @@ test.describe('Find Documents API - Team with Team Email', () => {
   }) => {
     const { team, owner } = await seedTeam();
 
-    const teamEmail = `team-email-${team.id}@test.sign.hanzo.ai`;
+    const teamEmail = `team-email-${team.id}@test.esign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmail, teamId: team.id });
 
     const { user: externalUser, team: externalTeam } = await seedUser();
@@ -983,7 +983,7 @@ test.describe('Find Documents API - Team with Team Email', () => {
   }) => {
     const { team } = await seedTeam();
 
-    const teamEmail = `team-vis-email-${team.id}@test.sign.hanzo.ai`;
+    const teamEmail = `team-vis-email-${team.id}@test.esign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmail, teamId: team.id });
 
     const admin = await seedTeamMember({ teamId: team.id, role: TeamMemberRole.ADMIN });

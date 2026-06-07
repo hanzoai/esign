@@ -43,12 +43,12 @@ export const AdminLicenseStatusBanner = ({ license }: AdminLicenseStatusBannerPr
             .with('UNAUTHORIZED', () =>
               license ? (
                 <Trans>
-                  Invalid License Type - Your Hanzo Sign instance is using features that are not part
+                  Invalid License Type - Your Hanzo eSign instance is using features that are not part
                   of your license.
                 </Trans>
               ) : (
                 <Trans>
-                  Missing License - Your Hanzo Sign instance is using features that require a
+                  Missing License - Your Hanzo eSign instance is using features that require a
                   license.
                 </Trans>
               ),
@@ -67,7 +67,7 @@ export const AdminLicenseStatusBanner = ({ license }: AdminLicenseStatusBannerPr
           })}
           asChild
         >
-          <Link to="https://docs.sign.hanzo.ai/users/licenses/enterprise-edition" target="_blank">
+          <Link to="https://docs.esign.hanzo.ai/users/licenses/enterprise-edition" target="_blank">
             <KeyRoundIcon className="mr-1.5 h-4 w-4" />
             <Trans>See Documentation</Trans>
           </Link>

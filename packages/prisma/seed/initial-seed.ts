@@ -45,13 +45,13 @@ export const seedDatabase = async () => {
 
   const exampleUserExists = await prisma.user.findFirst({
     where: {
-      email: 'example@sign.hanzo.ai',
+      email: 'example@esign.hanzo.ai',
     },
   });
 
   const adminUserExists = await prisma.user.findFirst({
     where: {
-      email: 'admin@sign.hanzo.ai',
+      email: 'admin@esign.hanzo.ai',
     },
   });
 
@@ -61,12 +61,12 @@ export const seedDatabase = async () => {
 
   const exampleUser = await seedUser({
     name: 'Example User',
-    email: 'example@sign.hanzo.ai',
+    email: 'example@esign.hanzo.ai',
   });
 
   const adminUser = await seedUser({
     name: 'Admin User',
-    email: 'admin@sign.hanzo.ai',
+    email: 'admin@esign.hanzo.ai',
     isAdmin: true,
   });
 

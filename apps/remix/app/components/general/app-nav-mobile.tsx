@@ -86,7 +86,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
         <Link to="/" onClick={handleMenuItemClick}>
           <img
             src={LogoImage}
-            alt="Hanzo Sign Logo"
+            alt="Hanzo eSign Logo"
             className="dark:invert"
             width={170}
             height={25}
@@ -124,7 +124,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
           </div>
 
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Hanzo Sign, Inc.
+            © {new Date().getFullYear()} Hanzo eSign, Inc.
             <br />
             <Trans>All rights reserved.</Trans>
           </p>

@@ -5,7 +5,7 @@ import { env } from '@hanzo/sign-lib/utils/env';
 
 import { ApiContractV1 } from './contract';
 
-const appName = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo Sign';
+const appName = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo eSign';
 
 export const OpenAPIV1 = Object.assign(
   generateOpenApi(
@@ -14,7 +14,7 @@ export const OpenAPIV1 = Object.assign(
       info: {
         title: `${appName} API`,
         version: '1.0.0',
-        description: `API V1 is deprecated, but will continue to be supported. For more details, see https://docs.sign.hanzo.ai/developers/public-api. \n\nThe ${appName} API for retrieving, creating, updating and deleting documents.`,
+        description: `API V1 is deprecated, but will continue to be supported. For more details, see https://docs.esign.hanzo.ai/developers/public-api. \n\nThe ${appName} API for retrieving, creating, updating and deleting documents.`,
       },
       servers: [
         {

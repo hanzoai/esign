@@ -17,7 +17,7 @@ import { env } from '../../utils/env';
 
 const LICENSE_KEY = env('NEXT_PRIVATE_SIGN_LICENSE_KEY');
 const LICENSE_SERVER_URL =
-  env('INTERNAL_OVERRIDE_LICENSE_SERVER_URL') || 'https://license.sign.hanzo.ai';
+  env('INTERNAL_OVERRIDE_LICENSE_SERVER_URL') || 'https://license.esign.hanzo.ai';
 
 declare global {
   // eslint-disable-next-line no-var

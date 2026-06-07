@@ -10,7 +10,7 @@ import { TemplateForgotPassword } from '../template-components/template-forgot-p
 export type ForgotPasswordTemplateProps = Partial<TemplateForgotPasswordProps>;
 
 export const ForgotPasswordTemplate = ({
-  resetPasswordLink = 'https://sign.hanzo.ai',
+  resetPasswordLink = 'https://esign.hanzo.ai',
   assetBaseUrl = 'http://localhost:3002',
 }: ForgotPasswordTemplateProps) => {
   const { _ } = useLingui();
@@ -36,7 +36,7 @@ export const ForgotPasswordTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Hanzo Sign Logo"
+                  alt="Hanzo eSign Logo"
                   className="mb-4 h-6"
                 />
               )}

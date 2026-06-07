@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Diagnose and resolve common issues with your self-hosted Hanzo Sign instance, organized by component.
+description: Diagnose and resolve common issues with your self-hosted Hanzo eSign instance, organized by component.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -55,7 +55,7 @@ docker logs --tail 100 hanzo-sign
 
 ### Health Checks
 
-Hanzo Sign exposes a health endpoint to verify the application is running:
+Hanzo eSign exposes a health endpoint to verify the application is running:
 
 ```bash
 curl http://localhost:3000/api/health
@@ -232,7 +232,7 @@ netstat -tlnp | grep 3000
     Stop the conflicting service
   </Step>
   <Step>
-    Change Hanzo Sign's port mapping: `-p 3001:3000`
+    Change Hanzo eSign's port mapping: `-p 3001:3000`
   </Step>
 </Steps>
 
@@ -690,7 +690,7 @@ openssl pkcs12 -in certificate.p12 -nokeys | openssl x509 -noout -dates
     Generate a new certificate or obtain a renewed one from your CA
   </Step>
   <Step>
-    Update the certificate file and restart Hanzo Sign
+    Update the certificate file and restart Hanzo eSign
   </Step>
 </Steps>
 
@@ -1115,7 +1115,7 @@ Gather this information before seeking support:
 {/* prettier-ignore */}
 <Steps>
   <Step>
-    **Hanzo Sign version:**
+    **Hanzo eSign version:**
 
 ```bash
 docker inspect hanzo-sign --format='{{.Config.Image}}'
@@ -1138,9 +1138,9 @@ docker inspect hanzo-sign --format='{{.Config.Image}}'
 
 ### Community Support
 
-- **[GitHub Discussions](https://github.com/hanzoai/sign/discussions)**
-- **[Discord](https://sign.hanzo.ai/discord)**: Join the Hanzo Sign community Discord
-- **[GitHub Issues](https://github.com/hanzoai/sign/issues)**: For confirmed bugs, open an issue
+- **[GitHub Discussions](https://github.com/hanzoai/esign/discussions)**
+- **[Discord](https://esign.hanzo.ai/discord)**: Join the Hanzo eSign community Discord
+- **[GitHub Issues](https://github.com/hanzoai/esign/issues)**: For confirmed bugs, open an issue
 
 ### Reporting Bugs
 
@@ -1155,7 +1155,7 @@ When reporting bugs, include:
     Steps to reproduce
   </Step>
   <Step>
-    Hanzo Sign version
+    Hanzo eSign version
   </Step>
   <Step>
     Relevant logs (redact sensitive information)
@@ -1167,7 +1167,7 @@ When reporting bugs, include:
 
 ### Security Issues
 
-For security vulnerabilities, do not open a public issue. Contact security@sign.hanzo.ai directly.
+For security vulnerabilities, do not open a public issue. Contact security@esign.hanzo.ai directly.
 
 ---
 

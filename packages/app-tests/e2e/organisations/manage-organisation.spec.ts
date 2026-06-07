@@ -92,11 +92,11 @@ test('[ORGANISATIONS]: inherit members', async ({ page }) => {
     inheritMembers: false,
   });
 
-  const memberEmail = `member-${nanoid()}@test.sign.hanzo.ai`;
-  const memberEmail2 = `member-2-${nanoid()}@test.sign.hanzo.ai`;
-  const memberEmail3 = `member-3-${nanoid()}@test.sign.hanzo.ai`;
-  const managerEmail = `manager-${nanoid()}@test.sign.hanzo.ai`;
-  const adminEmail = `admin-${nanoid()}@test.sign.hanzo.ai`;
+  const memberEmail = `member-${nanoid()}@test.esign.hanzo.ai`;
+  const memberEmail2 = `member-2-${nanoid()}@test.esign.hanzo.ai`;
+  const memberEmail3 = `member-3-${nanoid()}@test.esign.hanzo.ai`;
+  const managerEmail = `manager-${nanoid()}@test.esign.hanzo.ai`;
+  const adminEmail = `admin-${nanoid()}@test.esign.hanzo.ai`;
   const ownerEmail = user.email;
 
   await seedOrganisationMembers({
@@ -237,16 +237,16 @@ test('[ORGANISATIONS]: manage groups and members', async ({ page }) => {
     inheritMembers: false,
   });
 
-  const memberEmail1 = `member-1-${nanoid()}@test.sign.hanzo.ai`;
-  const memberEmail2 = `member-2-${nanoid()}@test.sign.hanzo.ai`;
-  const memberEmail3 = `member-3-${nanoid()}@test.sign.hanzo.ai`;
-  const memberEmail4 = `member-4-${nanoid()}@test.sign.hanzo.ai`;
-  const memberEmail5 = `member-5-${nanoid()}@test.sign.hanzo.ai`;
-  const memberEmail6 = `member-6-${nanoid()}@test.sign.hanzo.ai`;
+  const memberEmail1 = `member-1-${nanoid()}@test.esign.hanzo.ai`;
+  const memberEmail2 = `member-2-${nanoid()}@test.esign.hanzo.ai`;
+  const memberEmail3 = `member-3-${nanoid()}@test.esign.hanzo.ai`;
+  const memberEmail4 = `member-4-${nanoid()}@test.esign.hanzo.ai`;
+  const memberEmail5 = `member-5-${nanoid()}@test.esign.hanzo.ai`;
+  const memberEmail6 = `member-6-${nanoid()}@test.esign.hanzo.ai`;
 
-  const adminEmail1 = `admin-1-${nanoid()}@test.sign.hanzo.ai`;
-  const adminEmail2 = `admin-2-${nanoid()}@test.sign.hanzo.ai`;
-  const adminEmail3 = `admin-3-${nanoid()}@test.sign.hanzo.ai`;
+  const adminEmail1 = `admin-1-${nanoid()}@test.esign.hanzo.ai`;
+  const adminEmail2 = `admin-2-${nanoid()}@test.esign.hanzo.ai`;
+  const adminEmail3 = `admin-3-${nanoid()}@test.esign.hanzo.ai`;
 
   const ownerEmail = user.email;
 
@@ -551,7 +551,7 @@ test('[ORGANISATIONS]: leave organisation', async ({ page }) => {
     isPersonalOrganisation: false,
   });
 
-  const memberEmail = `member-${nanoid()}@test.sign.hanzo.ai`;
+  const memberEmail = `member-${nanoid()}@test.esign.hanzo.ai`;
 
   await seedOrganisationMembers({
     members: [

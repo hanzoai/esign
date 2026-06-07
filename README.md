@@ -1,64 +1,64 @@
-<img src="https://github.com/hanzoai/sign/assets/13398220/a643571f-0239-46a6-a73e-6bef38d1228b" alt="Hanzo Sign Logo">
+<img src="https://github.com/hanzoai/esign/assets/13398220/a643571f-0239-46a6-a73e-6bef38d1228b" alt="Hanzo eSign Logo">
 
 <p align="center" style="margin-top: 20px">
   <p align="center">
   The Open Source DocuSign Alternative.
   <br>
-    <a href="https://sign.hanzo.ai"><strong>Learn more »</strong></a>
+    <a href="https://esign.hanzo.ai"><strong>Learn more »</strong></a>
     <br />
     <br />
-    <a href="https://sign.hanzo.ai/discord">Discord</a>
+    <a href="https://esign.hanzo.ai/discord">Discord</a>
     ·
-    <a href="https://sign.hanzo.ai">Website</a>
+    <a href="https://esign.hanzo.ai">Website</a>
     ·
-    <a href="https://github.com/hanzoai/sign/issues">Issues</a>
+    <a href="https://github.com/hanzoai/esign/issues">Issues</a>
     ·
-    <a href="https://sign.hanzo.ai/live">Upcoming Releases</a>
+    <a href="https://esign.hanzo.ai/live">Upcoming Releases</a>
     ·
-    <a href="https://sign.hanzo.ai/roadmap">Roadmap</a>
+    <a href="https://esign.hanzo.ai/roadmap">Roadmap</a>
   </p>
 </p>
 
 <p align="center">
-   <a href="https://sign.hanzo.ai/discord"><img src="https://img.shields.io/badge/Discord-sign.hanzo.ai/discord-%235865F2" alt="Join Hanzo Sign on Discord"></a>
-   <a href="https://github.com/hanzoai/sign/stargazers"><img src="https://img.shields.io/github/stars/hanzo-sign/hanzo-sign" alt="Github Stars"></a>
-   <a href="https://github.com/hanzoai/sign/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPLv3-purple" alt="License"></a>
-   <a href="https://github.com/hanzoai/sign/pulse"><img src="https://img.shields.io/github/commit-activity/m/hanzo-sign/hanzo-sign" alt="Commits-per-month"></a>
-   <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/hanzoai/sign">
+   <a href="https://esign.hanzo.ai/discord"><img src="https://img.shields.io/badge/Discord-esign.hanzo.ai/discord-%235865F2" alt="Join Hanzo eSign on Discord"></a>
+   <a href="https://github.com/hanzoai/esign/stargazers"><img src="https://img.shields.io/github/stars/hanzo-sign/hanzo-sign" alt="Github Stars"></a>
+   <a href="https://github.com/hanzoai/esign/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPLv3-purple" alt="License"></a>
+   <a href="https://github.com/hanzoai/esign/pulse"><img src="https://img.shields.io/github/commit-activity/m/hanzo-sign/hanzo-sign" alt="Commits-per-month"></a>
+   <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/hanzoai/esign">
    <img alt="open in devcontainer" src="https://img.shields.io/static/v1?label=Dev%20Containers&message=Enabled&color=blue&logo=visualstudiocode" />
    </a>
    <a href="CODE_OF_CONDUCT.md"><img src="https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg" alt="Contributor Covenant"></a>
 </p>
 
 <div align="center">
-  <img src="https://github.com/hanzoai/sign/assets/13398220/d96ed533-6f34-4a97-be9b-442bdb189c69" style="width: 80%;" />
+  <img src="https://github.com/hanzoai/esign/assets/13398220/d96ed533-6f34-4a97-be9b-442bdb189c69" style="width: 80%;" />
 </div>
 
-## About Hanzo Sign
+## About Hanzo eSign
 
-Signing documents digitally should be fast and easy and should be the best practice for every document signed worldwide. This is technically quite easy today, but it also introduces a new party to every signature: The signing tool providers. While this is not a problem in itself, it should make us think about how we want these providers of trust to work. Hanzo Sign aims to be the world's most trusted document-signing tool. This trust is built by empowering you to self-host Hanzo Sign and review how it works under the hood.
+Signing documents digitally should be fast and easy and should be the best practice for every document signed worldwide. This is technically quite easy today, but it also introduces a new party to every signature: The signing tool providers. While this is not a problem in itself, it should make us think about how we want these providers of trust to work. Hanzo eSign aims to be the world's most trusted document-signing tool. This trust is built by empowering you to self-host Hanzo eSign and review how it works under the hood.
 
 Join us in creating the next generation of open trust infrastructure.
 
 ## Recognition
 
 <p align="center">
-  <a href="https://www.producthunt.com/posts/hanzo-sign?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-hanzo-sign" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=395047&theme=light&period=daily" alt="Hanzo Sign - The&#0032;open&#0032;source&#0032;DocuSign&#0032;alternative | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
-  <a href="https://www.producthunt.com/posts/hanzo-sign?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-hanzo-sign" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=395047&theme=light" alt="Hanzo Sign - The&#0032;Open&#0032;Source&#0032;DocuSign&#0032;Alternative&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+  <a href="https://www.producthunt.com/posts/hanzo-sign?utm_source=badge-top-post-badge&utm_medium=badge&utm_souce=badge-hanzo-sign" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/top-post-badge.svg?post_id=395047&theme=light&period=daily" alt="Hanzo eSign - The&#0032;open&#0032;source&#0032;DocuSign&#0032;alternative | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+  <a href="https://www.producthunt.com/posts/hanzo-sign?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-hanzo-sign" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=395047&theme=light" alt="Hanzo eSign - The&#0032;Open&#0032;Source&#0032;DocuSign&#0032;Alternative&#0046; | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 </p>
 
 ## Community and Next Steps 🎯
 
 - Check out the first source code release in this repository and test it.
-- Tell us what you think in the [Discussions](https://github.com/hanzoai/sign/discussions).
-- Join the [Discord server](https://sign.hanzo.ai/discord) for any questions and getting to know to other community members.
+- Tell us what you think in the [Discussions](https://github.com/hanzoai/esign/discussions).
+- Join the [Discord server](https://esign.hanzo.ai/discord) for any questions and getting to know to other community members.
 - ⭐ the repository to help us raise awareness.
-- Spread the word on Twitter that Hanzo Sign is working towards a more open signing tool.
-- Fix or create [issues](https://github.com/hanzoai/sign/issues), that are needed for the first production release.
+- Spread the word on Twitter that Hanzo eSign is working towards a more open signing tool.
+- Fix or create [issues](https://github.com/hanzoai/esign/issues), that are needed for the first production release.
 
 ## Contributing
 
-- To contribute, please see our [contribution guide](https://github.com/hanzoai/sign/blob/main/CONTRIBUTING.md).
+- To contribute, please see our [contribution guide](https://github.com/hanzoai/esign/blob/main/CONTRIBUTING.md).
 
 ## Contact us
 
@@ -97,7 +97,7 @@ Contact us if you are interested in our Enterprise plan for large organizations 
 
 ### Requirements
 
-To run Hanzo Sign locally, you will need
+To run Hanzo eSign locally, you will need
 
 - Node.js (v22 or above)
 - Postgres SQL Database
@@ -146,7 +146,7 @@ npm run d
 
 ### Manual Setup
 
-Follow these steps to setup Hanzo Sign on your local machine:
+Follow these steps to setup Hanzo eSign on your local machine:
 
 1. [Fork this repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/about-forks) to your GitHub account.
 
@@ -187,21 +187,21 @@ git clone https://github.com/<your-username>/hanzo-sign
 
 - Click below to launch a ready-to-use Gitpod workspace in your browser.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/hanzoai/sign)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/hanzoai/esign)
 
 ### Run in DevContainer
 
-We support DevContainers for VSCode. [Click here to get started.](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/hanzoai/sign)
+We support DevContainers for VSCode. [Click here to get started.](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/hanzoai/esign)
 
 ### Video walkthrough
 
-If you're a visual learner and prefer to watch a video walkthrough of setting up Hanzo Sign locally, check out this video:
+If you're a visual learner and prefer to watch a video walkthrough of setting up Hanzo eSign locally, check out this video:
 
 [![Watch the video](https://img.youtube.com/vi/Y0ppIQrEnZs/hqdefault.jpg)](https://youtu.be/Y0ppIQrEnZs)
 
 ## Docker
 
-We provide a Docker container for Hanzo Sign, which is published on both DockerHub and GitHub Container Registry.
+We provide a Docker container for Hanzo eSign, which is published on both DockerHub and GitHub Container Registry.
 
 - DockerHub: [https://hub.docker.com/r/hanzo-sign/hanzo-sign](https://hub.docker.com/r/hanzo-sign/hanzo-sign)
 - GitHub Container Registry: [https://ghcr.io/hanzo-sign/hanzo-sign](https://ghcr.io/hanzo-sign/hanzo-sign)
@@ -221,7 +221,7 @@ We support a variety of deployment methods, and are actively working on adding m
 First, clone the code from Github:
 
 ```
-git clone https://github.com/hanzoai/sign.git
+git clone https://github.com/hanzoai/esign.git
 ```
 
 Then, inside the `hanzo-sign` folder, copy the example env file:
@@ -239,7 +239,7 @@ The following environment variables must be set:
 - `NEXT_PRIVATE_SMTP_FROM_NAME`
 - `NEXT_PRIVATE_SMTP_FROM_ADDRESS`
 
-> If you are using a reverse proxy in front of Hanzo Sign, don't forget to provide the public URL for the `NEXT_PUBLIC_WEBAPP_URL` variable!
+> If you are using a reverse proxy in front of Hanzo eSign, don't forget to provide the public URL for the `NEXT_PUBLIC_WEBAPP_URL` variable!
 
 Now you can install the dependencies and build it:
 
@@ -288,11 +288,11 @@ WantedBy=multi-user.target
 
 ### Render
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/hanzoai/sign)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/hanzoai/esign)
 
 ### Koyeb
 
-[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/hanzoai/sign&branch=main&name=hanzo-sign-app&builder=dockerfile&dockerfile=/docker/Dockerfile)
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/hanzoai/esign&branch=main&name=hanzo-sign-app&builder=dockerfile&dockerfile=/docker/Dockerfile)
 
 ## Elestio
 

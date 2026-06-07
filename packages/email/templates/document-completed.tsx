@@ -12,7 +12,7 @@ export type DocumentCompletedEmailTemplateProps = Partial<TemplateDocumentComple
 };
 
 export const DocumentCompletedEmailTemplate = ({
-  downloadLink = 'https://sign.hanzo.ai',
+  downloadLink = 'https://esign.hanzo.ai',
   documentName = 'Open Source Pledge.pdf',
   assetBaseUrl = 'http://localhost:3002',
   customBody,
@@ -40,7 +40,7 @@ export const DocumentCompletedEmailTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Hanzo Sign Logo"
+                  alt="Hanzo eSign Logo"
                   className="mb-4 h-6"
                 />
               )}

@@ -13,7 +13,7 @@ export const RecipientExpiredTemplate = ({
   documentName = 'Open Source Pledge.pdf',
   recipientName = 'John Doe',
   recipientEmail = 'john@example.com',
-  documentLink = 'https://sign.hanzo.ai',
+  documentLink = 'https://esign.hanzo.ai',
   assetBaseUrl = 'http://localhost:3002',
 }: RecipientExpiredEmailTemplateProps) => {
   const { _ } = useLingui();
@@ -39,7 +39,7 @@ export const RecipientExpiredTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Hanzo Sign Logo"
+                  alt="Hanzo eSign Logo"
                   className="mb-4 h-6"
                 />
               )}

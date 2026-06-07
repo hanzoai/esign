@@ -608,7 +608,7 @@ test.describe('Find Documents UI - Team with Team Email', () => {
   test('should show documents sent TO team email', async ({ page }) => {
     const { team, owner } = await seedTeam();
 
-    const teamEmail = `team-ui-email-${team.id}@test.sign.hanzo.ai`;
+    const teamEmail = `team-ui-email-${team.id}@test.esign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmail, teamId: team.id });
 
     const { user: externalUser, team: externalTeam } = await seedUser();
@@ -655,7 +655,7 @@ test.describe('Find Documents UI - Team with Team Email', () => {
   test('should NOT show drafts sent TO team email', async ({ page }) => {
     const { team, owner } = await seedTeam();
 
-    const teamEmail = `team-ui-draft-${team.id}@test.sign.hanzo.ai`;
+    const teamEmail = `team-ui-draft-${team.id}@test.esign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmail, teamId: team.id });
 
     const { user: externalUser, team: externalTeam } = await seedUser();
@@ -686,7 +686,7 @@ test.describe('Find Documents UI - Team with Team Email', () => {
   test('should show inbox count for team email recipients', async ({ page }) => {
     const { team, owner } = await seedTeam();
 
-    const teamEmail = `team-ui-inbox-${team.id}@test.sign.hanzo.ai`;
+    const teamEmail = `team-ui-inbox-${team.id}@test.esign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmail, teamId: team.id });
 
     const { user: sender1, team: sender1Team } = await seedUser();
@@ -1122,7 +1122,7 @@ test.describe('Find Documents UI - Tab Counts Consistency', () => {
   test('team with team email tab counts should include received documents', async ({ page }) => {
     const { team, owner } = await seedTeam();
 
-    const teamEmail = `team-count-${team.id}@test.sign.hanzo.ai`;
+    const teamEmail = `team-count-${team.id}@test.esign.hanzo.ai`;
     await seedTeamEmail({ email: teamEmail, teamId: team.id });
 
     const { user: external1, team: ext1Team } = await seedUser();

@@ -1,6 +1,6 @@
 ---
 title: Database Configuration
-description: Configure PostgreSQL connection strings, pooling, SSL, migrations, and performance tuning for your Hanzo Sign deployment.
+description: Configure PostgreSQL connection strings, pooling, SSL, migrations, and performance tuning for your Hanzo eSign deployment.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -9,7 +9,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Supported Databases
 
-Hanzo Sign requires **PostgreSQL 14 or later**. No other databases are supported.
+Hanzo eSign requires **PostgreSQL 14 or later**. No other databases are supported.
 
 PostgreSQL provides the reliability, performance, and feature set required for document signing workflows, including:
 
@@ -61,7 +61,7 @@ postgresql://hanzo-sign:p%40ss%23word@localhost:5432/hanzo-sign
 
 ## Environment Variables
 
-Hanzo Sign uses two database connection variables:
+Hanzo eSign uses two database connection variables:
 
 | Variable                           | Purpose                                             |
 | ---------------------------------- | --------------------------------------------------- |
@@ -79,7 +79,7 @@ NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@host:5432/hanzo-sign
 
 ### Automatic Detection
 
-Hanzo Sign automatically detects common database environment variable formats used by hosting providers:
+Hanzo eSign automatically detects common database environment variable formats used by hosting providers:
 
 | Provider Variable          | Maps To                            |
 | -------------------------- | ---------------------------------- |
@@ -89,7 +89,7 @@ Hanzo Sign automatically detects common database environment variable formats us
 | `DATABASE_URL_UNPOOLED`    | `NEXT_PRIVATE_DIRECT_DATABASE_URL` |
 | `POSTGRES_URL_NON_POOLING` | `NEXT_PRIVATE_DIRECT_DATABASE_URL` |
 
-If your hosting provider sets these variables, Hanzo Sign will use them automatically.
+If your hosting provider sets these variables, Hanzo eSign will use them automatically.
 
 ## Connection Pooling
 
@@ -125,7 +125,7 @@ NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@db-host:5432/hanzo-s
 
 ### Prisma Connection Pool
 
-Hanzo Sign uses Prisma, which maintains its own connection pool. Configure pool size with connection string parameters:
+Hanzo eSign uses Prisma, which maintains its own connection pool. Configure pool size with connection string parameters:
 
 ```
 postgresql://user:password@host:5432/hanzo-sign?connection_limit=10&pool_timeout=30
@@ -178,11 +178,11 @@ docker run -d \
 
 ## Running Migrations
 
-Database migrations update your schema when upgrading Hanzo Sign.
+Database migrations update your schema when upgrading Hanzo eSign.
 
 ### Automatic Migrations
 
-When running Hanzo Sign via Docker, migrations run automatically on container startup. No manual intervention is required.
+When running Hanzo eSign via Docker, migrations run automatically on container startup. No manual intervention is required.
 
 ### Manual Migrations
 
@@ -369,7 +369,7 @@ Most managed database services provide automated backups:
 
 ### PostgreSQL Configuration
 
-Key parameters for Hanzo Sign workloads:
+Key parameters for Hanzo eSign workloads:
 
 | Parameter              | Recommended Value | Description                           |
 | ---------------------- | ----------------- | ------------------------------------- |
@@ -391,7 +391,7 @@ Example: 3 app instances with pool size 10 = `(3 × 10) + 10 = 40` connections m
 
 ### Indexing
 
-Hanzo Sign includes necessary indexes by default. Additional indexes may help for:
+Hanzo eSign includes necessary indexes by default. Additional indexes may help for:
 
 - Custom reporting queries
 - High-volume document searches

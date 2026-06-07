@@ -19,15 +19,15 @@ export type TeamEmailRemovedTemplateProps = {
 
 export const TeamEmailRemovedTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  baseUrl = 'https://sign.hanzo.ai',
-  teamEmail = 'example@sign.hanzo.ai',
+  baseUrl = 'https://esign.hanzo.ai',
+  teamEmail = 'example@esign.hanzo.ai',
   teamName = 'Team Name',
   teamUrl = 'demo',
 }: TeamEmailRemovedTemplateProps) => {
   const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`Team email removed for ${teamName} on Hanzo Sign`;
+  const previewText = msg`Team email removed for ${teamName} on Hanzo eSign`;
 
   return (
     <Html>

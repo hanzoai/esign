@@ -1,6 +1,6 @@
 # Documentation Writing Style Guide
 
-This document defines the writing conventions for Hanzo Sign documentation.
+This document defines the writing conventions for Hanzo eSign documentation.
 
 Documentation lives in `apps/docs/` as MDX files and uses [Fumadocs](https://fumadocs.dev).
 
@@ -31,9 +31,9 @@ Documentation lives in `apps/docs/` as MDX files and uses [Fumadocs](https://fum
 
 The docs serve three distinct audiences:
 
-1. **Users** - People using the Hanzo Sign web application to send and sign documents
+1. **Users** - People using the Hanzo eSign web application to send and sign documents
 2. **Developers** - Building integrations with the API or SDKs
-3. **Self-hosters** - Running their own Hanzo Sign instance
+3. **Self-hosters** - Running their own Hanzo eSign instance
 
 Tailor content to the audience:
 

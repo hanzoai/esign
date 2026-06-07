@@ -1,6 +1,6 @@
-# Docker Setup for Hanzo Sign
+# Docker Setup for Hanzo eSign
 
-The following guide will walk you through setting up Hanzo Sign using Docker. You can choose between a production setup using Docker Compose or a standalone container.
+The following guide will walk you through setting up Hanzo eSign using Docker. You can choose between a production setup using Docker Compose or a standalone container.
 
 ## Prerequisites
 
@@ -11,9 +11,9 @@ Before you begin, ensure that you have the following installed:
 
 ## Option 1: Production Docker Compose Setup
 
-This setup includes a PostgreSQL database and the Hanzo Sign application. You will need to provide your own SMTP details via environment variables.
+This setup includes a PostgreSQL database and the Hanzo eSign application. You will need to provide your own SMTP details via environment variables.
 
-1. Download the Docker Compose file from the Hanzo Sign repository: [compose.yml](https://raw.githubusercontent.com/hanzo-sign/hanzo-sign/release/docker/production/compose.yml)
+1. Download the Docker Compose file from the Hanzo eSign repository: [compose.yml](https://raw.githubusercontent.com/hanzo-sign/hanzo-sign/release/docker/production/compose.yml)
 2. Navigate to the directory containing the `compose.yml` file.
 3. Create a `.env` file in the same directory and add your SMTP details as well as a few extra environment variables, following the example below:
 
@@ -84,15 +84,15 @@ NEXT_PRIVATE_SIGNING_PASSPHRASE="<your-certificate-password>"
 docker-compose --env-file ./.env up -d
 ```
 
-This will start the PostgreSQL database and the Hanzo Sign application containers.
+This will start the PostgreSQL database and the Hanzo eSign application containers.
 
-6. Access the Hanzo Sign application by visiting `http://localhost:3000` in your web browser.
+6. Access the Hanzo eSign application by visiting `http://localhost:3000` in your web browser.
 
 ## Option 2: Standalone Docker Container
 
-If you prefer to host the Hanzo Sign application on your container provider of choice, you can use the pre-built Docker image from DockerHub or GitHub's Package Registry. Note that you will need to provide your own database and SMTP host.
+If you prefer to host the Hanzo eSign application on your container provider of choice, you can use the pre-built Docker image from DockerHub or GitHub's Package Registry. Note that you will need to provide your own database and SMTP host.
 
-1. Pull the Hanzo Sign Docker image:
+1. Pull the Hanzo eSign Docker image:
 
 ```
 docker pull hanzo-sign/hanzo-sign
@@ -126,11 +126,11 @@ docker run -d \
 
 Replace the placeholders with your actual database and SMTP details.
 
-3. Access the Hanzo Sign application by visiting the URL you provided in the `NEXT_PUBLIC_WEBAPP_URL` environment variable in your web browser.
+3. Access the Hanzo eSign application by visiting the URL you provided in the `NEXT_PUBLIC_WEBAPP_URL` environment variable in your web browser.
 
 ## Success
 
-You have now successfully set up Hanzo Sign using Docker. You can start organizing and managing your documents efficiently.
+You have now successfully set up Hanzo eSign using Docker. You can start organizing and managing your documents efficiently.
 
 ## Troubleshooting
 
@@ -172,7 +172,7 @@ docker logs -f <container_name>
 
 ### Health Checks
 
-Check the status of your Hanzo Sign instance:
+Check the status of your Hanzo eSign instance:
 
 ```bash
 # Basic health check (database + certificate)
@@ -194,17 +194,17 @@ The health endpoint will show:
 2. **Database connection issues:** Ensure your database is running and accessible
 3. **SMTP errors:** Verify your email server settings in the .env file
 
-If you encounter any issues or have further questions, please refer to the official Hanzo Sign documentation or seek assistance from the community.
+If you encounter any issues or have further questions, please refer to the official Hanzo eSign documentation or seek assistance from the community.
 
 ## Advanced Configuration
 
-The environment variables listed above are a subset of those that are available for configuring Hanzo Sign. For a complete list of environment variables and their descriptions, refer to the table below:
+The environment variables listed above are a subset of those that are available for configuring Hanzo eSign. For a complete list of environment variables and their descriptions, refer to the table below:
 
 Here's a markdown table documenting all the provided environment variables:
 
 | Variable                                                       | Description                                                                                         |
 | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `PORT`                                                         | The port to run the Hanzo Sign application on, defaults to `3000`.                                   |
+| `PORT`                                                         | The port to run the Hanzo eSign application on, defaults to `3000`.                                   |
 | `NEXTAUTH_SECRET`                                              | The secret key used by NextAuth.js for encryption and signing.                                      |
 | `NEXT_PRIVATE_ENCRYPTION_KEY`                                  | The primary encryption key for symmetric encryption and decryption (at least 32 characters).        |
 | `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`                        | The secondary encryption key for symmetric encryption and decryption (at least 32 characters).      |

@@ -30,7 +30,7 @@ type TFieldFlowResult = {
 
 const TEST_FIELD_VALUES = {
   embeddedRecipient: {
-    email: 'embedded-field-recipient@sign.hanzo.ai',
+    email: 'embedded-field-recipient@esign.hanzo.ai',
     name: 'Embedded Field Recipient',
   },
 };
@@ -209,7 +209,7 @@ type TMultiRecipientFlowResult = {
 
 const MULTI_RECIPIENT_VALUES = {
   secondSigner: {
-    email: 'second-signer@test.sign.hanzo.ai',
+    email: 'second-signer@test.esign.hanzo.ai',
     name: 'Second Signer',
   },
 };

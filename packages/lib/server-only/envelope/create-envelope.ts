@@ -481,7 +481,7 @@ export const createEnvelope = async ({
           uniqueRecipientRefs.entries(),
           ([recipientIndex, name]) => ({
             envelopeId: envelope.id,
-            email: `recipient.${recipientIndex}@sign.hanzo.ai`,
+            email: `recipient.${recipientIndex}@esign.hanzo.ai`,
             name,
             role: RecipientRole.SIGNER,
             signingOrder: recipientIndex,

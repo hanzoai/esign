@@ -348,14 +348,14 @@ test('[DOCUMENT_FLOW]: should be able to approve a document', async ({ page }) =
   const { recipients } = await seedPendingDocumentWithFullFields({
     owner: user,
     teamId: team.id,
-    recipients: ['user@sign.hanzo.ai', 'approver@sign.hanzo.ai'],
+    recipients: ['user@esign.hanzo.ai', 'approver@esign.hanzo.ai'],
     recipientsCreateOptions: [
       {
-        email: 'user@sign.hanzo.ai',
+        email: 'user@esign.hanzo.ai',
         role: RecipientRole.SIGNER,
       },
       {
-        email: 'approver@sign.hanzo.ai',
+        email: 'approver@esign.hanzo.ai',
         role: RecipientRole.APPROVER,
       },
     ],
@@ -410,7 +410,7 @@ test('[DOCUMENT_FLOW]: should be able to create, send with redirect url, sign a 
   await expect(page.getByRole('heading', { name: 'General' })).toBeVisible();
   await page.getByLabel('Title').fill(documentTitle);
   await page.getByRole('button', { name: 'Advanced Options' }).click();
-  await page.getByLabel('Redirect URL').fill('https://sign.hanzo.ai');
+  await page.getByLabel('Redirect URL').fill('https://esign.hanzo.ai');
 
   await page.getByRole('button', { name: 'Continue' }).click();
 
@@ -467,7 +467,7 @@ test('[DOCUMENT_FLOW]: should be able to create, send with redirect url, sign a 
   ).toBeVisible();
   await page.getByRole('button', { name: 'Approve' }).click();
 
-  await page.waitForURL('https://sign.hanzo.ai');
+  await page.waitForURL('https://esign.hanzo.ai');
 
   await expect(async () => {
     // Check if document has been signed

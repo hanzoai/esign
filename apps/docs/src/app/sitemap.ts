@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 import { source } from '@/lib/source';
 
-const BASE_URL = 'https://docs.sign.hanzo.ai';
+const BASE_URL = 'https://docs.esign.hanzo.ai';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

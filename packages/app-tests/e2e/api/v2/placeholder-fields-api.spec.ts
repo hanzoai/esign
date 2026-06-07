@@ -416,7 +416,7 @@ test.describe('Placeholder-based field creation', () => {
 
     await addRecipients(request, envelope.id, [
       {
-        email: 'second.recipient@sign.hanzo.ai',
+        email: 'second.recipient@esign.hanzo.ai',
         name: 'Second Recipient',
         role: RecipientRole.SIGNER,
         signingOrder: 2,
@@ -424,7 +424,7 @@ test.describe('Placeholder-based field creation', () => {
         actionAuth: [],
       },
       {
-        email: 'first.recipient@sign.hanzo.ai',
+        email: 'first.recipient@esign.hanzo.ai',
         name: 'First Recipient',
         role: RecipientRole.SIGNER,
         signingOrder: 1,

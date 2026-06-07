@@ -15,7 +15,7 @@ test('[ENVELOPE_EXPIRATION]: expired recipient is redirected to expired page', a
 
   const { recipients } = await seedPendingDocumentWithFullFields({
     owner: user,
-    recipients: ['expired-recipient@test.sign.hanzo.ai'],
+    recipients: ['expired-recipient@test.esign.hanzo.ai'],
     teamId: team.id,
   });
 
@@ -39,7 +39,7 @@ test('[ENVELOPE_EXPIRATION]: non-expired recipient can access signing page', asy
 
   const { recipients } = await seedPendingDocumentWithFullFields({
     owner: user,
-    recipients: ['active-recipient@test.sign.hanzo.ai'],
+    recipients: ['active-recipient@test.esign.hanzo.ai'],
     teamId: team.id,
   });
 
@@ -61,7 +61,7 @@ test('[ENVELOPE_EXPIRATION]: recipient with null expiresAt can sign normally', a
 
   const { recipients } = await seedPendingDocumentWithFullFields({
     owner: user,
-    recipients: ['null-expiry@test.sign.hanzo.ai'],
+    recipients: ['null-expiry@test.esign.hanzo.ai'],
     teamId: team.id,
   });
 

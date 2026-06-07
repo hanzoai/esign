@@ -15,7 +15,7 @@ type LoginOptions = {
 
 export const apiSignin = async ({
   page,
-  email = 'example@sign.hanzo.ai',
+  email = 'example@esign.hanzo.ai',
   password = 'password',
   redirectPath = '/',
 }: LoginOptions) => {

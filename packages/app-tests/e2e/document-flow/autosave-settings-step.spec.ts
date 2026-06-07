@@ -215,7 +215,7 @@ test.describe('AutoSave Settings Step', () => {
   test('should autosave the redirect URL change', async ({ page }) => {
     const { user, document, team } = await setupDocument(page);
 
-    const newRedirectUrl = 'https://sign.hanzo.ai/test/';
+    const newRedirectUrl = 'https://esign.hanzo.ai/test/';
 
     await page.getByRole('button', { name: 'Advanced Options' }).click();
 

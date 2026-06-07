@@ -41,7 +41,7 @@ test('[ENVELOPE_EXPIRATION]: sending document sets expiresAt on recipients', asy
     title: '[TEST] Expiration Send Test',
     recipients: [
       {
-        email: 'signer-expiry@test.sign.hanzo.ai',
+        email: 'signer-expiry@test.esign.hanzo.ai',
         name: 'Signer Expiry',
         role: RecipientRole.SIGNER,
         fields: [
@@ -121,7 +121,7 @@ test('[ENVELOPE_EXPIRATION]: sending document with custom org expiration period'
     title: '[TEST] Custom Expiration Send Test',
     recipients: [
       {
-        email: 'signer-custom@test.sign.hanzo.ai',
+        email: 'signer-custom@test.esign.hanzo.ai',
         name: 'Signer Custom',
         role: RecipientRole.SIGNER,
         fields: [
@@ -197,7 +197,7 @@ test('[ENVELOPE_EXPIRATION]: sending document with expiration disabled', async (
     title: '[TEST] Disabled Expiration Send Test',
     recipients: [
       {
-        email: 'signer-disabled@test.sign.hanzo.ai',
+        email: 'signer-disabled@test.esign.hanzo.ai',
         name: 'Signer Disabled',
         role: RecipientRole.SIGNER,
         fields: [
@@ -246,7 +246,7 @@ test('[ENVELOPE_EXPIRATION]: sending document with expiration disabled', async (
 test('[ENVELOPE_EXPIRATION]: resending refreshes expiresAt', async ({ page }) => {
   const { user, team } = await seedUser();
 
-  const document = await seedPendingDocument(user, team.id, ['resend-target@test.sign.hanzo.ai']);
+  const document = await seedPendingDocument(user, team.id, ['resend-target@test.esign.hanzo.ai']);
 
   const recipient = document.recipients[0];
 
@@ -272,7 +272,7 @@ test('[ENVELOPE_EXPIRATION]: resending refreshes expiresAt', async ({ page }) =>
   await page.getByRole('menuitem', { name: 'Resend' }).click();
 
   // Select the recipient and send.
-  await page.getByLabel('test.sign.hanzo.ai').first().click();
+  await page.getByLabel('test.esign.hanzo.ai').first().click();
   await page.getByRole('button', { name: 'Send reminder' }).click();
 
   await expect(page.getByText('Document re-sent', { exact: true })).toBeVisible({
