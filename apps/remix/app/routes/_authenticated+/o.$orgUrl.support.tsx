@@ -6,7 +6,6 @@ import { Link, useSearchParams } from 'react-router';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import { SupportTicketForm } from '~/components/forms/support-ticket-form';
@@ -24,8 +23,6 @@ export default function SupportPage() {
   const [searchParams] = useSearchParams();
 
   const teamId = searchParams.get('team');
-
-  const subscriptionStatus = organisation.subscription?.status;
 
   const handleSuccess = () => {
     setShowForm(false);
@@ -52,7 +49,7 @@ export default function SupportPage() {
             <h2 className="flex items-center gap-2 text-lg font-bold">
               <BookIcon className="text-muted-foreground h-5 w-5" />
               <Link
-                to="https://docs.sign.hanzo.ai"
+                to="https://docs.esign.hanzo.ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -61,14 +58,14 @@ export default function SupportPage() {
               </Link>
             </h2>
             <p className="text-muted-foreground mt-1">
-              <Trans>Read our documentation to get started with Hanzo Sign.</Trans>
+              <Trans>Read our documentation to get started with Hanzo eSign.</Trans>
             </p>
           </div>
           <div className="rounded-lg border p-4">
             <h2 className="flex items-center gap-2 text-lg font-bold">
               <Link2Icon className="text-muted-foreground h-5 w-5" />
               <Link
-                to="https://sign.hanzo.ai/discord"
+                to="https://esign.hanzo.ai/discord"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
@@ -80,7 +77,7 @@ export default function SupportPage() {
               <Trans>
                 Join our community on{' '}
                 <Link
-                  to="https://sign.hanzo.ai/discord"
+                  to="https://esign.hanzo.ai/discord"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:underline"
@@ -91,7 +88,7 @@ export default function SupportPage() {
               </Trans>
             </p>
           </div>
-          {organisation && IS_BILLING_ENABLED() && subscriptionStatus && (
+          {organisation && (
             <>
               <div className="rounded-lg border p-4">
                 <h2 className="flex items-center gap-2 text-lg font-bold">

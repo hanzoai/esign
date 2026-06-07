@@ -7,8 +7,8 @@ import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
 import { trpc } from '@hanzo/sign-trpc/react';
-import type { TGetOrganisationEmailDomainResponse } from '@hanzo/sign-trpc/server/enterprise-router/get-organisation-email-domain.types';
-import { ZUpdateOrganisationEmailRequestSchema } from '@hanzo/sign-trpc/server/enterprise-router/update-organisation-email.types';
+import type { TGetOrganisationEmailDomainResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-email-domain.types';
+import { ZUpdateOrganisationEmailRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-email.types';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -62,7 +62,7 @@ export const OrganisationEmailUpdateDialog = ({
   });
 
   const { mutateAsync: updateOrganisationEmail, isPending } =
-    trpc.enterprise.organisation.email.update.useMutation();
+    trpc.organisation.email.update.useMutation();
 
   const onFormSubmit = async ({ emailName }: ZUpdateOrganisationEmailSchema) => {
     try {

@@ -6,7 +6,7 @@ import { Trans } from '@lingui/react/macro';
 import { AlertTriangle, Globe2Icon, InfoIcon, Link2Icon, Loader, LockIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';

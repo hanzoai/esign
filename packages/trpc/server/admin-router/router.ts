@@ -1,6 +1,5 @@
 import { router } from '../trpc';
 import { createAdminOrganisationRoute } from './create-admin-organisation';
-import { createStripeCustomerRoute } from './create-stripe-customer';
 import { createSubscriptionClaimRoute } from './create-subscription-claim';
 import { deleteDocumentRoute } from './delete-document';
 import { deleteSubscriptionClaimRoute } from './delete-subscription-claim';
@@ -48,9 +47,6 @@ export const adminRouter = router({
     create: createSubscriptionClaimRoute,
     update: updateSubscriptionClaimRoute,
     delete: deleteSubscriptionClaimRoute,
-  },
-  stripe: {
-    createCustomer: createStripeCustomerRoute,
   },
   license: {
     resync: resyncLicenseRoute,

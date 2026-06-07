@@ -2,7 +2,6 @@ import { msg } from '@lingui/core/macro';
 import { Trans, useLingui } from '@lingui/react/macro';
 import {
   Building2Icon,
-  CreditCardIcon,
   GroupIcon,
   MailboxIcon,
   Settings2Icon,
@@ -13,7 +12,6 @@ import { FaUsers } from 'react-icons/fa6';
 import { Link, NavLink, Outlet } from 'react-router';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
 import { canExecuteOrganisationAction } from '@hanzo/sign-lib/utils/organisations';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -28,7 +26,6 @@ export function meta() {
 export default function SettingsLayout() {
   const { t } = useLingui();
 
-  const isBillingEnabled = IS_BILLING_ENABLED();
   const organisation = useCurrentOrganisation();
 
   const organisationSettingRoutes = [
@@ -83,32 +80,7 @@ export default function SettingsLayout() {
       label: t`SSO`,
       icon: ShieldCheckIcon,
     },
-    {
-      path: `/o/${organisation.url}/settings/billing`,
-      label: t`Billing`,
-      icon: CreditCardIcon,
-    },
-  ].filter((route) => {
-    if (!isBillingEnabled && route.path.includes('/billing')) {
-      return false;
-    }
-
-    if (
-      (!isBillingEnabled || !organisation.organisationClaim.flags.emailDomains) &&
-      route.path.includes('/email-domains')
-    ) {
-      return false;
-    }
-
-    if (
-      (!isBillingEnabled || !organisation.organisationClaim.flags.authenticationPortal) &&
-      route.path.includes('/sso')
-    ) {
-      return false;
-    }
-
-    return true;
-  });
+  ];
 
   if (!canExecuteOrganisationAction('MANAGE_ORGANISATION', organisation.currentOrganisationRole)) {
     return (

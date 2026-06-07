@@ -15,7 +15,7 @@ import {
 import { Link, useRevalidator } from 'react-router';
 import { P, match } from 'ts-pattern';
 
-import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { DIRECT_TEMPLATE_RECIPIENT_EMAIL } from '@hanzo/sign-lib/constants/direct-templates';

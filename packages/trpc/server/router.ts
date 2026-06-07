@@ -3,7 +3,6 @@ import { apiTokenRouter } from './api-token-router/router';
 import { authRouter } from './auth-router/router';
 import { documentRouter } from './document-router/router';
 import { embeddingPresignRouter } from './embedding-router/_router';
-import { enterpriseRouter } from './enterprise-router/router';
 import { envelopeRouter } from './envelope-router/router';
 import { fieldRouter } from './field-router/router';
 import { folderRouter } from './folder-router/router';
@@ -16,7 +15,6 @@ import { router } from './trpc';
 import { webhookRouter } from './webhook-router/router';
 
 export const appRouter = router({
-  enterprise: enterpriseRouter,
   envelope: envelopeRouter,
   auth: authRouter,
   profile: profileRouter,

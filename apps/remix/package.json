@@ -18,7 +18,6 @@
     "@hanzo/sign-api": "*",
     "@hanzo/sign-assets": "*",
     "@hanzo/sign-auth": "*",
-    "@hanzo/sign-ee": "*",
     "@hanzo/sign-lib": "*",
     "@hanzo/sign-prisma": "*",
     "@hanzo/sign-tailwind-config": "*",

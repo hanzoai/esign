@@ -7,7 +7,7 @@ import { EnvelopeType } from '@prisma/client';
 import { useNavigate, useParams } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { useAnalytics } from '@hanzo/sign-lib/client-only/hooks/use-analytics';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';

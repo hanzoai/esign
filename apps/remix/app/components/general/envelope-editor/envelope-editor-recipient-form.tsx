@@ -16,7 +16,7 @@ import { useFieldArray, useWatch } from 'react-hook-form';
 import { useRevalidator, useSearchParams } from 'react-router';
 import { isDeepEqual } from 'remeda';
 
-import { useLimits } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
 import { ZEditorRecipientsFormSchema } from '@hanzo/sign-lib/client-only/hooks/use-editor-recipients';
 import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';

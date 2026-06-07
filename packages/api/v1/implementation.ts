@@ -2,7 +2,7 @@ import { DocumentDataType, EnvelopeType, SigningStatus } from '@prisma/client';
 import { tsr } from '@ts-rest/serverless/fetch';
 import { match } from 'ts-pattern';
 
-import { getServerLimits } from '@hanzo/sign-ee/server-only/limits/server';
+import { getServerLimits } from '@hanzo/sign-lib/server-only/limits/server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
 import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
 import '@hanzo/sign-lib/constants/time-zones';

@@ -13,9 +13,9 @@ import {
   formatOrganisationLoginUrl,
 } from '@hanzo/sign-lib/utils/organisation-authentication-portal';
 import { trpc } from '@hanzo/sign-trpc/react';
-import { domainRegex } from '@hanzo/sign-trpc/server/enterprise-router/create-organisation-email-domain.types';
-import type { TGetOrganisationAuthenticationPortalResponse } from '@hanzo/sign-trpc/server/enterprise-router/get-organisation-authentication-portal.types';
-import { ZUpdateOrganisationAuthenticationPortalRequestSchema } from '@hanzo/sign-trpc/server/enterprise-router/update-organisation-authentication-portal.types';
+import { domainRegex } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-email-domain.types';
+import type { TGetOrganisationAuthenticationPortalResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-authentication-portal.types';
+import { ZUpdateOrganisationAuthenticationPortalRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-authentication-portal.types';
 import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -77,7 +77,7 @@ export default function OrganisationSettingSSOLoginPage() {
   const organisation = useCurrentOrganisation();
 
   const { data: authenticationPortal, isLoading: isLoadingAuthenticationPortal } =
-    trpc.enterprise.organisation.authenticationPortal.get.useQuery({
+    trpc.organisation.authenticationPortal.get.useQuery({
       organisationId: organisation.id,
     });
 
@@ -108,7 +108,7 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
   const organisation = useCurrentOrganisation();
 
   const { mutateAsync: updateOrganisationAuthenticationPortal } =
-    trpc.enterprise.organisation.authenticationPortal.update.useMutation();
+    trpc.organisation.authenticationPortal.update.useMutation();
 
   const form = useForm<TProviderFormSchema>({
     resolver: zodResolver(ZProviderFormSchema),

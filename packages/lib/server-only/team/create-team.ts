@@ -9,7 +9,6 @@ import { match } from 'ts-pattern';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { IS_BILLING_ENABLED } from '../../constants/app';
 import {
   LOWEST_ORGANISATION_ROLE,
   ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP,
@@ -33,7 +32,7 @@ export type CreateTeamOptions = {
   /**
    * Unique URL of the team.
    *
-   * Used as the URL path, example: https://sign.hanzo.ai/t/{teamUrl}/settings
+   * Used as the URL path, example: https://esign.hanzo.ai/t/{teamUrl}/settings
    */
   teamUrl: string;
 
@@ -71,8 +70,6 @@ export const createTeam = async ({
     }),
     include: {
       groups: true,
-      subscription: true,
-      organisationClaim: true,
       owner: {
         select: {
           id: true,
@@ -87,21 +84,6 @@ export const createTeam = async ({
     throw new AppError(AppErrorCode.NOT_FOUND, {
       message: 'Organisation not found.',
     });
-  }
-
-  // Validate they have enough team slots. 0 means they can create unlimited teams.
-  if (organisation.organisationClaim.teamCount !== 0 && IS_BILLING_ENABLED()) {
-    const teamCount = await prisma.team.count({
-      where: {
-        organisationId,
-      },
-    });
-
-    if (teamCount >= organisation.organisationClaim.teamCount) {
-      throw new AppError(AppErrorCode.LIMIT_EXCEEDED, {
-        message: 'You have reached the maximum number of teams for your plan.',
-      });
-    }
   }
 
   // Inherit internal organisation groups to the team.

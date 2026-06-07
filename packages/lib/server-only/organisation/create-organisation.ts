@@ -2,10 +2,8 @@ import { Prisma } from '@prisma/client';
 import { OrganisationType } from '@prisma/client';
 import { OrganisationMemberRole } from '@prisma/client';
 
-import { createCustomer } from '@hanzo/sign-ee/server-only/stripe/create-customer';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { IS_BILLING_ENABLED } from '../../constants/app';
 import { ORGANISATION_INTERNAL_GROUPS } from '../../constants/organisations';
 import { AppErrorCode } from '../../errors/app-error';
 import { AppError } from '../../errors/app-error';
@@ -32,32 +30,7 @@ export const createOrganisation = async ({
   customerId,
   claim,
 }: CreateOrganisationOptions) => {
-  let customerIdToUse = customerId;
-
-  if (!customerId && IS_BILLING_ENABLED()) {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-      },
-    });
-
-    if (!user) {
-      throw new AppError(AppErrorCode.NOT_FOUND, {
-        message: 'User not found',
-      });
-    }
-
-    customerIdToUse = await createCustomer({
-      name: user.name || user.email,
-      email: user.email,
-    })
-      .then((customer) => customer.id)
-      .catch((err) => {
-        console.error(err);
-
-        return undefined;
-      });
-  }
+  const customerIdToUse = customerId;
 
   return await prisma.$transaction(async (tx) => {
     const organisationSetting = await tx.organisationGlobalSettings.create({

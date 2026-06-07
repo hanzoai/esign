@@ -5,8 +5,8 @@ import { OrganisationMemberRole, OrganisationType, TeamMemberRole } from '@prism
 import { Outlet, isRouteErrorResponse, useLoaderData } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { PAID_PLAN_LIMITS } from '@hanzo/sign-ee/server-only/limits/constants';
-import { LimitsProvider } from '@hanzo/sign-ee/server-only/limits/provider/client';
+import { PAID_PLAN_LIMITS } from '@hanzo/sign-lib/server-only/limits/constants';
+import { LimitsProvider } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { OrganisationProvider } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
 import { getOrganisationClaimByTeamId } from '@hanzo/sign-lib/server-only/organisation/get-organisation-claims';
@@ -164,7 +164,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
               <li>
                 <Trans>
                   If you are using staging, ensure that you have set the host prop on the embedding
-                  component to the staging domain (https://stg-app.sign.hanzo.ai)
+                  component to the staging domain (https://stg-app.esign.hanzo.ai)
                 </Trans>
               </li>
             </ul>

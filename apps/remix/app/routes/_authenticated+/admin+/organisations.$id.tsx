@@ -4,13 +4,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
-import { ExternalLinkIcon, InfoIcon, Loader } from 'lucide-react';
+import { InfoIcon, Loader } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router';
+import { Link } from 'react-router';
 import type { z } from 'zod';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { SUBSCRIPTION_STATUS_MAP } from '@hanzo/sign-lib/constants/billing';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
 import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
 import type { TLicenseClaim } from '@hanzo/sign-lib/types/license';
@@ -18,7 +17,7 @@ import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/sign-lib/types/subscrip
 import { trpc } from '@hanzo/sign-trpc/react';
 import type { TGetAdminOrganisationResponse } from '@hanzo/sign-trpc/server/admin-router/get-admin-organisation.types';
 import { ZUpdateAdminOrganisationRequestSchema } from '@hanzo/sign-trpc/server/admin-router/update-admin-organisation.types';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
+import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
@@ -56,35 +55,14 @@ export default function OrganisationGroupSettingsPage({
 }: Route.ComponentProps) {
   const { licenseFlags } = loaderData;
 
-  const { t, i18n } = useLingui();
+  const { t } = useLingui();
   const { toast } = useToast();
-
-  const navigate = useNavigate();
 
   const organisationId = params.id;
 
   const { data: organisation, isLoading: isLoadingOrganisation } =
     trpc.admin.organisation.get.useQuery({
       organisationId,
-    });
-
-  const { mutateAsync: createStripeCustomer, isPending: isCreatingStripeCustomer } =
-    trpc.admin.stripe.createCustomer.useMutation({
-      onSuccess: async () => {
-        await navigate(0);
-
-        toast({
-          title: t`Success`,
-          description: t`Stripe customer created successfully`,
-        });
-      },
-      onError: () => {
-        toast({
-          title: t`Error`,
-          description: t`We couldn't create a Stripe customer. Please try again.`,
-          variant: 'destructive',
-        });
-      },
     });
 
   const teamsColumns = useMemo(() => {
@@ -190,76 +168,6 @@ export default function OrganisationGroupSettingsPage({
       </SettingsHeader>
 
       <GenericOrganisationAdminForm organisation={organisation} />
-
-      <SettingsHeader
-        title={t`Manage subscription`}
-        subtitle={t`Manage the ${organisation.name} organisation subscription`}
-        className="mt-16"
-      />
-
-      <Alert
-        className="my-6 flex flex-col justify-between p-6 sm:flex-row sm:items-center"
-        variant="neutral"
-      >
-        <div className="mb-4 sm:mb-0">
-          <AlertTitle>
-            <Trans>Subscription</Trans>
-          </AlertTitle>
-
-          <AlertDescription className="mr-2">
-            {organisation.subscription ? (
-              <span>
-                {i18n._(SUBSCRIPTION_STATUS_MAP[organisation.subscription.status])} subscription
-                found
-              </span>
-            ) : (
-              <span>
-                <Trans>No subscription found</Trans>
-              </span>
-            )}
-          </AlertDescription>
-        </div>
-
-        {!organisation.customerId && (
-          <div>
-            <Button
-              variant="outline"
-              loading={isCreatingStripeCustomer}
-              onClick={async () => createStripeCustomer({ organisationId })}
-            >
-              <Trans>Create Stripe customer</Trans>
-            </Button>
-          </div>
-        )}
-
-        {organisation.customerId && !organisation.subscription && (
-          <div>
-            <Button variant="outline" asChild>
-              <Link
-                target="_blank"
-                to={`https://dashboard.stripe.com/customers/${organisation.customerId}?create=subscription&subscription_default_customer=${organisation.customerId}`}
-              >
-                <Trans>Create subscription</Trans>
-                <ExternalLinkIcon className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        )}
-
-        {organisation.subscription && (
-          <div>
-            <Button variant="outline" asChild>
-              <Link
-                target="_blank"
-                to={`https://dashboard.stripe.com/subscriptions/${organisation.subscription.planId}`}
-              >
-                <Trans>Manage subscription</Trans>
-                <ExternalLinkIcon className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        )}
-      </Alert>
 
       <OrganisationAdminForm organisation={organisation} licenseFlags={licenseFlags} />
 
@@ -652,7 +560,7 @@ const OrganisationAdminForm = ({ organisation, licenseFlags }: OrganisationAdmin
                 <span>¹&nbsp;</span>
                 <Trans>Your current license does not include these features.</Trans>{' '}
                 <Link
-                  to="https://docs.sign.hanzo.ai/users/licenses/enterprise-edition"
+                  to="https://docs.esign.hanzo.ai/users/licenses/enterprise-edition"
                   target="_blank"
                   className="text-foreground underline hover:opacity-80"
                 >
