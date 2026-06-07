@@ -33,18 +33,27 @@ export default function SignIn({ loaderData }: Route.ComponentProps) {
   const { returnTo } = loaderData;
 
   return (
-    <div className="w-screen max-w-lg px-4">
-      <div className="z-10 rounded-xl border border-border bg-neutral-100 p-6 dark:bg-background">
-        <h1 className="text-2xl font-semibold">
+    <div className="flex min-h-screen w-full items-center justify-center bg-black px-6 text-white">
+      <div className="w-full max-w-sm">
+        <div className="mb-12 flex items-center gap-3">
+          <span className="grid h-8 w-8 place-items-center rounded-md bg-white text-base font-extrabold text-black">
+            H
+          </span>
+          <span className="text-base font-medium tracking-tight">
+            Hanzo <span className="text-zinc-400">eSign</span>
+          </span>
+        </div>
+
+        <h1 className="text-balance text-3xl font-semibold">
           <Trans>Sign in to your account</Trans>
         </h1>
-
-        <p className="mt-2 text-sm text-muted-foreground">
+        <p className="mt-2 text-balance text-sm text-zinc-400">
           <Trans>Welcome back, we are lucky to have you.</Trans>
         </p>
-        <hr className="-mx-6 my-4" />
 
-        <SignInForm returnTo={returnTo} />
+        <div className="mt-8">
+          <SignInForm returnTo={returnTo} />
+        </div>
       </div>
     </div>
   );
