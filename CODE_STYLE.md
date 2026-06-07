@@ -1,6 +1,6 @@
-# Hanzo Sign Code Style Guide
+# Hanzo eSign Code Style Guide
 
-This document captures the code style, patterns, and conventions used in the Hanzo Sign codebase. It covers both enforceable rules and subjective "taste" elements that make our code consistent and maintainable.
+This document captures the code style, patterns, and conventions used in the Hanzo eSign codebase. It covers both enforceable rules and subjective "taste" elements that make our code consistent and maintainable.
 
 ## Table of Contents
 

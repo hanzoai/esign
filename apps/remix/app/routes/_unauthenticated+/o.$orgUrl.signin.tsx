@@ -209,7 +209,7 @@ export default function OrganisationSignIn({ loaderData }: Route.ComponentProps)
 
         <div className="text-muted-foreground mt-1 flex items-center justify-center text-xs">
           <Link to="/signin">
-            <Trans>Return to Hanzo Sign sign in page here</Trans>
+            <Trans>Return to Hanzo eSign sign in page here</Trans>
           </Link>
         </div>
       </div>

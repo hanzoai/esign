@@ -126,7 +126,7 @@ test('[ORGANISATIONS]: manage branding preferences', async ({ page }) => {
   await page.getByTestId('enable-branding').click();
   await page.getByRole('option', { name: 'Yes' }).click();
   await page.getByRole('textbox', { name: 'Brand Website' }).click();
-  await page.getByRole('textbox', { name: 'Brand Website' }).fill('https://sign.hanzo.ai');
+  await page.getByRole('textbox', { name: 'Brand Website' }).fill('https://esign.hanzo.ai');
   await page.getByRole('textbox', { name: 'Brand Details' }).click();
   await page.getByRole('textbox', { name: 'Brand Details' }).fill('BrandDetails');
   await page.getByRole('button', { name: 'Update' }).first().click();
@@ -138,7 +138,7 @@ test('[ORGANISATIONS]: manage branding preferences', async ({ page }) => {
 
   // Check that the team settings have inherited these values.
   expect(teamSettings.brandingEnabled).toEqual(true);
-  expect(teamSettings.brandingUrl).toEqual('https://sign.hanzo.ai');
+  expect(teamSettings.brandingUrl).toEqual('https://esign.hanzo.ai');
   expect(teamSettings.brandingCompanyDetails).toEqual('BrandDetails');
 
   // Edit the team branding settings
@@ -177,7 +177,7 @@ test('[ORGANISATIONS]: manage branding preferences', async ({ page }) => {
 
   // Check that the team settings now inherit from organisation again.
   expect(inheritedTeamSettings.brandingEnabled).toEqual(true);
-  expect(inheritedTeamSettings.brandingUrl).toEqual('https://sign.hanzo.ai');
+  expect(inheritedTeamSettings.brandingUrl).toEqual('https://esign.hanzo.ai');
   expect(inheritedTeamSettings.brandingCompanyDetails).toEqual('BrandDetails');
 
   // Verify that a document can be created successfully with the branding settings
@@ -202,7 +202,7 @@ test('[ORGANISATIONS]: manage email preferences', async ({ page }) => {
   // Update email preferences at organisation level.
   // Set reply to email
   await page.getByRole('textbox', { name: 'Reply to email' }).click();
-  await page.getByRole('textbox', { name: 'Reply to email' }).fill('organisation@sign.hanzo.ai');
+  await page.getByRole('textbox', { name: 'Reply to email' }).fill('organisation@esign.hanzo.ai');
 
   // Update email document settings by enabling/disabling some checkboxes
   await page.getByRole('checkbox', { name: 'Email the owner when a recipient signs' }).uncheck();
@@ -221,7 +221,7 @@ test('[ORGANISATIONS]: manage email preferences', async ({ page }) => {
   });
 
   // Check that the team settings have inherited these values.
-  expect(teamSettings.emailReplyTo).toEqual('organisation@sign.hanzo.ai');
+  expect(teamSettings.emailReplyTo).toEqual('organisation@esign.hanzo.ai');
   expect(teamSettings.emailDocumentSettings).toEqual({
     recipientSigningRequest: true,
     recipientRemoved: true,
@@ -308,7 +308,7 @@ test('[ORGANISATIONS]: manage email preferences', async ({ page }) => {
   });
 
   // Check that the team settings now inherit from organisation again.
-  expect(inheritedTeamSettings.emailReplyTo).toEqual('organisation@sign.hanzo.ai');
+  expect(inheritedTeamSettings.emailReplyTo).toEqual('organisation@esign.hanzo.ai');
   expect(inheritedTeamSettings.emailDocumentSettings).toEqual({
     recipientSigningRequest: true,
     recipientRemoved: true,
@@ -329,7 +329,7 @@ test('[ORGANISATIONS]: manage email preferences', async ({ page }) => {
     },
   });
 
-  expect(documentMeta.emailReplyTo).toEqual('organisation@sign.hanzo.ai');
+  expect(documentMeta.emailReplyTo).toEqual('organisation@esign.hanzo.ai');
   expect(documentMeta.emailSettings).toEqual({
     recipientSigningRequest: true,
     recipientRemoved: true,

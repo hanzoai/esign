@@ -16,7 +16,7 @@ import type { HonoEnv } from '@hanzo/sign-remix/server/router';
 export const tsRestHonoApp = new Hono<HonoEnv>();
 
 tsRestHonoApp
-  .get('/openapi', (c) => c.redirect('https://openapi-v1.sign.hanzo.ai'))
+  .get('/openapi', (c) => c.redirect('https://openapi-v1.esign.hanzo.ai'))
   .get('/openapi.json', (c) => c.json(OpenAPIV1))
   .get('/me', async (c) => testCredentialsHandler(c.req.raw));
 

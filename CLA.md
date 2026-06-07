@@ -1,16 +1,16 @@
-# Hanzo Sign Contributors License Agreement
+# Hanzo eSign Contributors License Agreement
 
-This Contributors License Agreement ("CLA") is entered into between the Contributor, and Hanzo Sign Inc. ("Hanzo Sign"), collectively referred to as the "Parties."
+This Contributors License Agreement ("CLA") is entered into between the Contributor, and Hanzo eSign Inc. ("Hanzo eSign"), collectively referred to as the "Parties."
 
 ## Background:
 
-Hanzo Sign is an open-source project aimed at providing an open-source document signing platform for all parties. This CLA governs the rights and contributions made by the Contributor to the Hanzo Sign project.
+Hanzo eSign is an open-source project aimed at providing an open-source document signing platform for all parties. This CLA governs the rights and contributions made by the Contributor to the Hanzo eSign project.
 
 ## Agreement:
 
 **Contributor Grant of License:**
 
-By submitting code, documentation, or any other materials (collectively, "Contributions") to the Hanzo Sign project, the Contributor grants Hanzo Sign a perpetual, worldwide, non-exclusive, royalty-free, sublicensable license to use, modify, distribute, and otherwise exploit the Contributions, including any intellectual property rights therein, for the purposes of the Hanzo Sign project.
+By submitting code, documentation, or any other materials (collectively, "Contributions") to the Hanzo eSign project, the Contributor grants Hanzo eSign a perpetual, worldwide, non-exclusive, royalty-free, sublicensable license to use, modify, distribute, and otherwise exploit the Contributions, including any intellectual property rights therein, for the purposes of the Hanzo eSign project.
 
 **Representation of Ownership and Right to Contribute:**
 
@@ -18,11 +18,11 @@ The Contributor represents that they have the legal right to grant the license s
 
 **Patent Grant:**
 
-If the Contributions include any method, process, or apparatus that is covered by a patent, the Contributor agrees to grant Hanzo Sign a non-exclusive, worldwide, royalty-free license under any patent claims necessary to use, modify, distribute, and otherwise exploit the Contributions for the purposes of the Hanzo Sign project.
+If the Contributions include any method, process, or apparatus that is covered by a patent, the Contributor agrees to grant Hanzo eSign a non-exclusive, worldwide, royalty-free license under any patent claims necessary to use, modify, distribute, and otherwise exploit the Contributions for the purposes of the Hanzo eSign project.
 
 **No Implied Warranties or Support:**
 
-The Contributor acknowledges that the Contributions are provided "as is," without any warranties or support of any kind. Hanzo Sign shall have no obligation to provide maintenance, updates, bug fixes, or support for the Contributions.
+The Contributor acknowledges that the Contributions are provided "as is," without any warranties or support of any kind. Hanzo eSign shall have no obligation to provide maintenance, updates, bug fixes, or support for the Contributions.
 
 **Retention of Contributor Rights:**
 
@@ -38,8 +38,8 @@ This CLA constitutes the entire agreement between the Parties with respect to th
 
 **Acceptance:**
 
-By submitting Contributions to the Hanzo Sign project, the Contributor acknowledges and agrees to the terms and conditions of this CLA. If the Contributor is agreeing to this CLA on behalf of an entity, they represent that they have the necessary authority to bind that entity to these terms.
+By submitting Contributions to the Hanzo eSign project, the Contributor acknowledges and agrees to the terms and conditions of this CLA. If the Contributor is agreeing to this CLA on behalf of an entity, they represent that they have the necessary authority to bind that entity to these terms.
 
 **Effective Date:**
 
-This CLA is effective as of the date of the first Contribution made by the Contributor to the Hanzo Sign project.
+This CLA is effective as of the date of the first Contribution made by the Contributor to the Hanzo eSign project.

@@ -196,7 +196,7 @@ export const SubscriptionClaimForm = ({
                   <span>¹&nbsp;</span>
                   <Trans>Your current license does not include these features.</Trans>{' '}
                   <Link
-                    to="https://docs.sign.hanzo.ai/users/licenses/enterprise-edition"
+                    to="https://docs.esign.hanzo.ai/users/licenses/enterprise-edition"
                     target="_blank"
                     className="text-foreground underline hover:opacity-80"
                   >

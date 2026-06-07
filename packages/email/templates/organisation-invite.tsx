@@ -28,7 +28,7 @@ export type OrganisationInviteEmailProps = {
 
 export const OrganisationInviteEmailTemplate = ({
   assetBaseUrl = 'http://localhost:3002',
-  baseUrl = 'https://sign.hanzo.ai',
+  baseUrl = 'https://esign.hanzo.ai',
   senderName = 'John Doe',
   organisationName = 'Organisation Name',
   token = '',
@@ -36,7 +36,7 @@ export const OrganisationInviteEmailTemplate = ({
   const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`Accept invitation to join an organisation on Hanzo Sign`;
+  const previewText = msg`Accept invitation to join an organisation on Hanzo eSign`;
 
   return (
     <Html>
@@ -66,7 +66,7 @@ export const OrganisationInviteEmailTemplate = ({
 
             <Section className="p-2 text-slate-500">
               <Text className="text-center text-lg font-medium text-black">
-                <Trans>Join {organisationName} on Hanzo Sign</Trans>
+                <Trans>Join {organisationName} on Hanzo eSign</Trans>
               </Text>
 
               <Text className="my-1 text-center text-base">

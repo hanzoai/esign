@@ -34,7 +34,7 @@ export const run = async ({
     body: JSON.stringify(payloadData),
     headers: {
       'Content-Type': 'application/json',
-      'X-Hanzo Sign-Secret': secret ?? '',
+      'X-Hanzo eSign-Secret': secret ?? '',
     },
   });
 

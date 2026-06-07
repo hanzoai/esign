@@ -52,7 +52,7 @@ export const resendWebhookCallRoute = authenticatedProcedure
       body: JSON.stringify(webhookCall.requestBody),
       headers: {
         'Content-Type': 'application/json',
-        'X-Hanzo Sign-Secret': webhook.secret ?? '',
+        'X-Hanzo eSign-Secret': webhook.secret ?? '',
       },
     });
 

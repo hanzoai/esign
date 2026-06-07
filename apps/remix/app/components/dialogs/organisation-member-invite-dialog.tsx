@@ -253,9 +253,9 @@ export const OrganisationMemberInviteDialog = ({
 
   const downloadTemplate = () => {
     const data = [
-      { email: 'admin@sign.hanzo.ai', role: 'Admin' },
-      { email: 'manager@sign.hanzo.ai', role: 'Manager' },
-      { email: 'member@sign.hanzo.ai', role: 'Member' },
+      { email: 'admin@esign.hanzo.ai', role: 'Admin' },
+      { email: 'manager@esign.hanzo.ai', role: 'Manager' },
+      { email: 'member@esign.hanzo.ai', role: 'Member' },
     ];
 
     const csvContent =

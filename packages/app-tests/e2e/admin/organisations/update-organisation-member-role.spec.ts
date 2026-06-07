@@ -18,9 +18,9 @@ test('[ADMIN]: promote member to owner', async ({ page }) => {
   });
 
   // Create organisation members with different roles
-  const memberEmail = `member-${nanoid()}@test.sign.hanzo.ai`;
-  const managerEmail = `manager-${nanoid()}@test.sign.hanzo.ai`;
-  const adminMemberEmail = `admin-member-${nanoid()}@test.sign.hanzo.ai`;
+  const memberEmail = `member-${nanoid()}@test.esign.hanzo.ai`;
+  const managerEmail = `manager-${nanoid()}@test.esign.hanzo.ai`;
+  const adminMemberEmail = `admin-member-${nanoid()}@test.esign.hanzo.ai`;
 
   const [memberUser, managerUser, adminMemberUser] = await seedOrganisationMembers({
     members: [
@@ -128,7 +128,7 @@ test('[ADMIN]: promote manager to owner', async ({ page }) => {
     isPersonalOrganisation: false,
   });
 
-  const managerEmail = `manager-${nanoid()}@test.sign.hanzo.ai`;
+  const managerEmail = `manager-${nanoid()}@test.esign.hanzo.ai`;
 
   const [managerUser] = await seedOrganisationMembers({
     members: [
@@ -187,7 +187,7 @@ test('[ADMIN]: promote admin member to owner', async ({ page }) => {
     isPersonalOrganisation: false,
   });
 
-  const adminMemberEmail = `admin-member-${nanoid()}@test.sign.hanzo.ai`;
+  const adminMemberEmail = `admin-member-${nanoid()}@test.esign.hanzo.ai`;
 
   const [adminMemberUser] = await seedOrganisationMembers({
     members: [
@@ -272,7 +272,7 @@ test('[ADMIN]: verify role hierarchy after promotion', async ({ page }) => {
     isPersonalOrganisation: false,
   });
 
-  const memberEmail = `member-${nanoid()}@test.sign.hanzo.ai`;
+  const memberEmail = `member-${nanoid()}@test.esign.hanzo.ai`;
 
   const [memberUser] = await seedOrganisationMembers({
     members: [
@@ -373,8 +373,8 @@ test('[ADMIN]: multiple promotions in sequence', async ({ page }) => {
     isPersonalOrganisation: false,
   });
 
-  const member1Email = `member1-${nanoid()}@test.sign.hanzo.ai`;
-  const member2Email = `member2-${nanoid()}@test.sign.hanzo.ai`;
+  const member1Email = `member1-${nanoid()}@test.esign.hanzo.ai`;
+  const member2Email = `member2-${nanoid()}@test.esign.hanzo.ai`;
 
   const [member1User, member2User] = await seedOrganisationMembers({
     members: [
@@ -476,7 +476,7 @@ test('[ADMIN]: verify organisation access after ownership change', async ({ page
     isPersonalOrganisation: false,
   });
 
-  const memberEmail = `member-${nanoid()}@test.sign.hanzo.ai`;
+  const memberEmail = `member-${nanoid()}@test.esign.hanzo.ai`;
 
   const [memberUser] = await seedOrganisationMembers({
     members: [

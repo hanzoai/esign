@@ -9,7 +9,7 @@ import { ZOrganisationNameSchema } from '@hanzo/sign-trpc/server/organisation-ro
  */
 export const ZClaimFlagsSchema = z.object({
   /**
-   * Allows disabling of Hanzo Sign branding for:
+   * Allows disabling of Hanzo eSign branding for:
    * - Certificates
    * - Emails
    * - Other?
@@ -55,7 +55,7 @@ export const SUBSCRIPTION_CLAIM_FEATURE_FLAGS: Record<
   },
   hidePoweredBy: {
     key: 'hidePoweredBy',
-    label: 'Hide Hanzo Sign branding by',
+    label: 'Hide Hanzo eSign branding by',
   },
   emailDomains: {
     key: 'emailDomains',

@@ -1,6 +1,6 @@
 ---
 title: Kubernetes
-description: Deploy Hanzo Sign on Kubernetes for production environments requiring high availability, auto-scaling, and enterprise-grade infrastructure.
+description: Deploy Hanzo eSign on Kubernetes for production environments requiring high availability, auto-scaling, and enterprise-grade infrastructure.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -26,7 +26,7 @@ kubectl get nodes
 
 ## Architecture Overview
 
-A typical Hanzo Sign Kubernetes deployment consists of:
+A typical Hanzo eSign Kubernetes deployment consists of:
 
 ```mermaid
 flowchart TD
@@ -41,7 +41,7 @@ flowchart TD
 
 ## Namespace Setup
 
-Create a dedicated namespace for Hanzo Sign:
+Create a dedicated namespace for Hanzo eSign:
 
 ```yaml
 # namespace.yaml
@@ -128,7 +128,7 @@ data:
   NEXT_PRIVATE_SMTP_TRANSPORT: 'smtp-auth'
   NEXT_PRIVATE_SMTP_HOST: 'smtp.example.com'
   NEXT_PRIVATE_SMTP_PORT: '587'
-  NEXT_PRIVATE_SMTP_FROM_NAME: 'Hanzo Sign'
+  NEXT_PRIVATE_SMTP_FROM_NAME: 'Hanzo eSign'
   NEXT_PRIVATE_SMTP_FROM_ADDRESS: 'noreply@example.com'
   NEXT_PRIVATE_INTERNAL_WEBAPP_URL: 'http://localhost:3000'
   NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: '/opt/hanzo-sign/cert.p12'
@@ -143,7 +143,7 @@ kubectl apply -f configmap.yaml
 
 ## Deployment
 
-Create the Hanzo Sign Deployment:
+Create the Hanzo eSign Deployment:
 
 ```yaml
 # deployment.yaml
@@ -465,7 +465,7 @@ spec:
   backups, and point-in-time recovery that managed services provide.
 </Callout>
 
-Update your Hanzo Sign secret to use the in-cluster database:
+Update your Hanzo eSign secret to use the in-cluster database:
 
 ```yaml
 NEXT_PRIVATE_DATABASE_URL: 'postgresql://hanzo-sign:your-secure-password@postgres.hanzo-sign.svc.cluster.local:5432/hanzo-sign'
@@ -474,7 +474,7 @@ NEXT_PRIVATE_DIRECT_DATABASE_URL: 'postgresql://hanzo-sign:your-secure-password@
 
 ## Persistent Storage
 
-Hanzo Sign stores documents in the database by default. For high-volume deployments, configure S3-compatible storage.
+Hanzo eSign stores documents in the database by default. For high-volume deployments, configure S3-compatible storage.
 
 ### S3 Configuration
 
@@ -500,7 +500,7 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage) for detail
 
 ### Horizontal Pod Autoscaler (HPA)
 
-Scale Hanzo Sign based on CPU and memory utilization:
+Scale Hanzo eSign based on CPU and memory utilization:
 
 ```yaml
 # hpa.yaml
@@ -696,7 +696,7 @@ data:
   NEXT_PRIVATE_SMTP_TRANSPORT: 'smtp-auth'
   NEXT_PRIVATE_SMTP_HOST: 'smtp.example.com'
   NEXT_PRIVATE_SMTP_PORT: '587'
-  NEXT_PRIVATE_SMTP_FROM_NAME: 'Hanzo Sign'
+  NEXT_PRIVATE_SMTP_FROM_NAME: 'Hanzo eSign'
   NEXT_PRIVATE_SMTP_FROM_ADDRESS: 'noreply@example.com'
   NEXT_PRIVATE_INTERNAL_WEBAPP_URL: 'http://localhost:3000'
   NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: '/opt/hanzo-sign/cert.p12'

@@ -119,7 +119,7 @@ export const DirectTemplateConfigureForm = ({
                         derivedRecipientAccessAuth.length > 0 ||
                         user?.email !== undefined
                       }
-                      placeholder="recipient@sign.hanzo.ai"
+                      placeholder="recipient@esign.hanzo.ai"
                     />
                   </FormControl>
 

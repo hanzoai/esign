@@ -80,7 +80,7 @@ export const DocumentCertificateQRView = ({
 
               <DialogDescription>
                 <Trans>
-                  This document is available in your Hanzo Sign account. You can view more details,
+                  This document is available in your Hanzo eSign account. You can view more details,
                   recipients, and audit logs there.
                 </Trans>
               </DialogDescription>

@@ -99,7 +99,7 @@ export class TelemetryClient {
     this.nodeId = await this.getOrCreateNodeId();
 
     console.log(
-      '[Telemetry] Telemetry is enabled. Hanzo Sign collects anonymous usage data to help improve the product.',
+      '[Telemetry] Telemetry is enabled. Hanzo eSign collects anonymous usage data to help improve the product.',
     );
     console.log(
       '[Telemetry] We collect: app version, installation ID, and node ID. No personal data, document contents, or user information is collected.',
@@ -108,7 +108,7 @@ export class TelemetryClient {
       '[Telemetry] To disable telemetry, set SIGN_DISABLE_TELEMETRY=true in your environment variables.',
     );
     console.log(
-      '[Telemetry] Learn more: https://sign.hanzo.ai/docs/developers/self-hosting/telemetry',
+      '[Telemetry] Learn more: https://esign.hanzo.ai/docs/developers/self-hosting/telemetry',
     );
 
     // Capture startup event

@@ -45,8 +45,8 @@ services:
       - NEXT_PRIVATE_SMTP_PORT=2500
       - NEXT_PRIVATE_SMTP_USERNAME=hanzo-sign
       - NEXT_PRIVATE_SMTP_PASSWORD=password
-      - NEXT_PRIVATE_SMTP_FROM_NAME="No Reply @ Hanzo Sign"
-      - NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@sign.hanzo.ai
+      - NEXT_PRIVATE_SMTP_FROM_NAME="No Reply @ Hanzo eSign"
+      - NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@esign.hanzo.ai
       - NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH=/opt/hanzo-sign/cert.p12
     ports:
       - 3000:3000

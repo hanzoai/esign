@@ -284,7 +284,7 @@ export const SignUpForm = ({ className, initialEmail, returnTo }: SignUpFormProp
           <Trans>
             By proceeding, you agree to our{' '}
             <Link
-              to="https://sign.hanzo.ai/terms"
+              to="https://esign.hanzo.ai/terms"
               target="_blank"
               className="text-sign-700 duration-200 hover:opacity-70"
             >
@@ -292,7 +292,7 @@ export const SignUpForm = ({ className, initialEmail, returnTo }: SignUpFormProp
             </Link>{' '}
             and{' '}
             <Link
-              to="https://sign.hanzo.ai/privacy"
+              to="https://esign.hanzo.ai/privacy"
               target="_blank"
               className="text-sign-700 duration-200 hover:opacity-70"
             >

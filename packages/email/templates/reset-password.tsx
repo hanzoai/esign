@@ -12,7 +12,7 @@ export type ResetPasswordTemplateProps = Partial<TemplateResetPasswordProps>;
 
 export const ResetPasswordTemplate = ({
   userName = 'Lucas Smith',
-  userEmail = 'lucas@sign.hanzo.ai',
+  userEmail = 'lucas@esign.hanzo.ai',
   assetBaseUrl = 'http://localhost:3002',
 }: ResetPasswordTemplateProps) => {
   const { _ } = useLingui();
@@ -38,7 +38,7 @@ export const ResetPasswordTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Hanzo Sign Logo"
+                  alt="Hanzo eSign Logo"
                   className="mb-4 h-6"
                 />
               )}
@@ -72,7 +72,7 @@ export const ResetPasswordTemplate = ({
                 <Trans>
                   Didn't request a password change? We are here to help you secure your account,
                   just{' '}
-                  <Link className="font-normal text-sign-700" href="mailto:hi@sign.hanzo.ai">
+                  <Link className="font-normal text-sign-700" href="mailto:hi@esign.hanzo.ai">
                     contact us
                   </Link>
                   .

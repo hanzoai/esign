@@ -1,6 +1,6 @@
 ---
 title: Docker Compose
-description: Deploy Hanzo Sign with Docker Compose, including PostgreSQL. This production-ready setup is suitable for most self-hosted deployments.
+description: Deploy Hanzo eSign with Docker Compose, including PostgreSQL. This production-ready setup is suitable for most self-hosted deployments.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -41,7 +41,7 @@ curl -O https://raw.githubusercontent.com/hanzo-sign/hanzo-sign/release/docker/p
 Alternatively, clone the full repository:
 
 ```bash
-git clone https://github.com/hanzoai/sign.git
+git clone https://github.com/hanzoai/esign.git
 cd hanzo-sign/docker/production
 ```
 
@@ -109,7 +109,7 @@ volumes:
 | `database`  | PostgreSQL 15 database with persistent storage               |
 | `hanzo-sign` | Main application container, waits for database to be healthy |
 
-The Hanzo Sign container waits for the database health check to pass before starting.
+The Hanzo eSign container waits for the database health check to pass before starting.
 
 ## Environment Configuration
 
@@ -128,7 +128,7 @@ NEXTAUTH_SECRET=your-nextauth-secret
 NEXT_PRIVATE_ENCRYPTION_KEY=your-encryption-key-min-32-characters
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=your-secondary-key-min-32-characters
 
-# Public URL where Hanzo Sign is accessible
+# Public URL where Hanzo eSign is accessible
 NEXT_PUBLIC_WEBAPP_URL=https://sign.example.com
 NEXT_PRIVATE_INTERNAL_WEBAPP_URL=http://localhost:3000
 
@@ -141,7 +141,7 @@ NEXT_PRIVATE_SMTP_HOST=smtp.example.com
 NEXT_PRIVATE_SMTP_PORT=587
 NEXT_PRIVATE_SMTP_USERNAME=your-smtp-username
 NEXT_PRIVATE_SMTP_PASSWORD=your-smtp-password
-NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo Sign
+NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo eSign
 NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@example.com
 ```
 
@@ -237,7 +237,7 @@ docker compose logs -f hanzo-sign
 
 Look for "Ready" or "Listening on port 3000" in the output.
 
-## Accessing Hanzo Sign
+## Accessing Hanzo eSign
 
 Once the containers are running:
 
@@ -309,7 +309,7 @@ docker compose down -v
   Using `down -v` deletes the database volume. Back up your data first.
 </Callout>
 
-### Update Hanzo Sign
+### Update Hanzo eSign
 
 {/* prettier-ignore */}
 <Steps>
@@ -341,7 +341,7 @@ Database migrations run automatically on container startup.
 
 ### Reverse Proxy
 
-For production, place Hanzo Sign behind a reverse proxy for SSL termination:
+For production, place Hanzo eSign behind a reverse proxy for SSL termination:
 
 **nginx example:**
 

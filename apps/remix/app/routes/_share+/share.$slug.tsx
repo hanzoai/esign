@@ -13,15 +13,15 @@ export function meta({ params: { slug } }: Route.MetaArgs) {
   }
 
   return [
-    { title: 'Hanzo Sign - Share' },
-    { description: 'I just signed a document in style with Hanzo Sign!' },
+    { title: 'Hanzo eSign - Share' },
+    { description: 'I just signed a document in style with Hanzo eSign!' },
     {
       property: 'og:title',
-      content: 'Hanzo Sign - Join the open source signing revolution',
+      content: 'Hanzo eSign - Join the open source signing revolution',
     },
     {
       property: 'og:description',
-      content: 'I just signed with Hanzo Sign!',
+      content: 'I just signed with Hanzo eSign!',
     },
     {
       property: 'og:type',
@@ -45,7 +45,7 @@ export function meta({ params: { slug } }: Route.MetaArgs) {
     },
     {
       name: 'twitter:description',
-      content: 'I just signed with Hanzo Sign!',
+      content: 'I just signed with Hanzo eSign!',
     },
   ];
 }
@@ -70,8 +70,8 @@ export const loader = async ({ request, params: { slug } }: Route.LoaderArgs) =>
     return {};
   }
 
-  // Is hardcoded because this whole meta is hardcoded anyway for Hanzo Sign.
-  throw redirect('https://sign.hanzo.ai');
+  // Is hardcoded because this whole meta is hardcoded anyway for Hanzo eSign.
+  throw redirect('https://esign.hanzo.ai');
 };
 
 export default function SharePage() {

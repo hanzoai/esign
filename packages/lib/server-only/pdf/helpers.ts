@@ -102,7 +102,7 @@ const extractRecipientPlaceholder = (placeholder: string): RecipientPlaceholderI
   const recipientIndex = Number(indexMatch[1]);
 
   return {
-    email: `recipient.${recipientIndex}@sign.hanzo.ai`,
+    email: `recipient.${recipientIndex}@esign.hanzo.ai`,
     name: `Recipient ${recipientIndex}`,
     recipientIndex,
   };

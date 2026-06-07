@@ -10,7 +10,7 @@ export const getAuthenticatorOptions = () => {
   const rpId = webAppBaseUrl.hostname;
 
   return {
-    rpName: env('NEXT_PUBLIC_APP_NAME') || 'Hanzo Sign',
+    rpName: env('NEXT_PUBLIC_APP_NAME') || 'Hanzo eSign',
     rpId,
     origin: NEXT_PUBLIC_WEBAPP_URL(),
     timeout: PASSKEY_TIMEOUT,

@@ -5,7 +5,7 @@ import { env } from '@hanzo/sign-lib/utils/env';
 
 import { appRouter } from './router';
 
-const appName = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo Sign';
+const appName = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo eSign';
 
 export const openApiDocument = {
   ...generateOpenApiDocument(appRouter, {

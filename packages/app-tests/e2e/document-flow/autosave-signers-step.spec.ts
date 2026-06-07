@@ -35,7 +35,7 @@ const triggerAutosave = async (page: Page) => {
 };
 
 const addSignerAndSave = async (page: Page) => {
-  await page.getByPlaceholder('Email').fill('recipient1@sign.hanzo.ai');
+  await page.getByPlaceholder('Email').fill('recipient1@esign.hanzo.ai');
   await page.getByPlaceholder('Name').fill('Recipient 1');
 
   await triggerAutosave(page);
@@ -55,7 +55,7 @@ test.describe('AutoSave Signers Step', () => {
       });
 
       expect(retrievedRecipients.length).toBe(1);
-      expect(retrievedRecipients[0].email).toBe('recipient1@sign.hanzo.ai');
+      expect(retrievedRecipients[0].email).toBe('recipient1@esign.hanzo.ai');
       expect(retrievedRecipients[0].name).toBe('Recipient 1');
     }).toPass();
   });
@@ -89,8 +89,8 @@ test.describe('AutoSave Signers Step', () => {
 
     await addSignerAndSave(page);
 
-    await page.getByPlaceholder('Name').fill('Hanzo Sign Manager');
-    await page.getByPlaceholder('Email').fill('manager@sign.hanzo.ai');
+    await page.getByPlaceholder('Name').fill('Hanzo eSign Manager');
+    await page.getByPlaceholder('Email').fill('manager@esign.hanzo.ai');
 
     await triggerAutosave(page);
 
@@ -107,8 +107,8 @@ test.describe('AutoSave Signers Step', () => {
       });
 
       expect(retrievedRecipients.length).toBe(1);
-      expect(retrievedRecipients[0].email).toBe('manager@sign.hanzo.ai');
-      expect(retrievedRecipients[0].name).toBe('Hanzo Sign Manager');
+      expect(retrievedRecipients[0].email).toBe('manager@esign.hanzo.ai');
+      expect(retrievedRecipients[0].name).toBe('Hanzo eSign Manager');
       expect(retrievedRecipients[0].role).toBe('CC');
     }).toPass();
   });
@@ -120,12 +120,12 @@ test.describe('AutoSave Signers Step', () => {
 
     await page.getByRole('button', { name: 'Add signer' }).click();
 
-    await page.getByTestId('signer-email-input').nth(1).fill('recipient2@sign.hanzo.ai');
+    await page.getByTestId('signer-email-input').nth(1).fill('recipient2@esign.hanzo.ai');
     await page.getByLabel('Name').nth(1).fill('Recipient 2');
 
     await page.getByRole('button', { name: 'Add Signer' }).click();
 
-    await page.getByTestId('signer-email-input').nth(2).fill('recipient3@sign.hanzo.ai');
+    await page.getByTestId('signer-email-input').nth(2).fill('recipient3@esign.hanzo.ai');
     await page.getByLabel('Name').nth(2).fill('Recipient 3');
 
     await triggerAutosave(page);
@@ -168,13 +168,13 @@ test.describe('AutoSave Signers Step', () => {
       expect(retrievedRecipients.length).toBe(3);
 
       const firstRecipient = retrievedRecipients.find(
-        (r) => r.email === 'recipient1@sign.hanzo.ai',
+        (r) => r.email === 'recipient1@esign.hanzo.ai',
       );
       const secondRecipient = retrievedRecipients.find(
-        (r) => r.email === 'recipient2@sign.hanzo.ai',
+        (r) => r.email === 'recipient2@esign.hanzo.ai',
       );
       const thirdRecipient = retrievedRecipients.find(
-        (r) => r.email === 'recipient3@sign.hanzo.ai',
+        (r) => r.email === 'recipient3@esign.hanzo.ai',
       );
 
       expect(firstRecipient?.signingOrder).toBe(2);

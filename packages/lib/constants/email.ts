@@ -1,7 +1,7 @@
 import { env } from '../utils/env';
 
-export const FROM_ADDRESS = env('NEXT_PRIVATE_SMTP_FROM_ADDRESS') || 'noreply@sign.hanzo.ai';
-export const FROM_NAME = env('NEXT_PRIVATE_SMTP_FROM_NAME') || 'Hanzo Sign';
+export const FROM_ADDRESS = env('NEXT_PRIVATE_SMTP_FROM_ADDRESS') || 'noreply@esign.hanzo.ai';
+export const FROM_NAME = env('NEXT_PRIVATE_SMTP_FROM_NAME') || 'Hanzo eSign';
 
 export const SIGN_INTERNAL_EMAIL = {
   name: FROM_NAME,

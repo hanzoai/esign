@@ -1,7 +1,7 @@
 import cors from '@/lib/cors';
 
 export async function GET(request: Request) {
-  const res = await fetch('https://api.github.com/repos/hanzoai/sign');
+  const res = await fetch('https://api.github.com/repos/hanzoai/esign');
   const { forks_count } = await res.json();
 
   return cors(

@@ -1,6 +1,6 @@
 ---
 title: Backups
-description: Backup strategies for Hanzo Sign data.
+description: Backup strategies for Hanzo eSign data.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -9,7 +9,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## What to Back Up
 
-Hanzo Sign stores data in three locations:
+Hanzo eSign stores data in three locations:
 
 | Component             | Location                      | Contains                                           |
 | --------------------- | ----------------------------- | -------------------------------------------------- |
@@ -199,7 +199,7 @@ For disaster recovery, enable cross-region replication on your S3 bucket. This a
 
 ## Automated Backup Script
 
-Create a script to back up all Hanzo Sign components:
+Create a script to back up all Hanzo eSign components:
 
 <Tabs items={['Standalone', 'Docker Compose']}>
 <Tab value="Standalone">
@@ -226,7 +226,7 @@ S3_BUCKET="your-hanzo-sign-bucket"
 # Create backup directory
 mkdir -p "$BACKUP_DIR/$TIMESTAMP"
 
-echo "Starting Hanzo Sign backup: $TIMESTAMP"
+echo "Starting Hanzo eSign backup: $TIMESTAMP"
 
 # Database backup
 echo "Backing up database..."
@@ -353,7 +353,7 @@ Create `/etc/systemd/system/hanzo-sign-backup.service`:
 
 ```ini
 [Unit]
-Description=Hanzo Sign Backup
+Description=Hanzo eSign Backup
 
 [Service]
 Type=oneshot
@@ -365,7 +365,7 @@ Create `/etc/systemd/system/hanzo-sign-backup.timer`:
 
 ```ini
 [Unit]
-Description=Daily Hanzo Sign Backup
+Description=Daily Hanzo eSign Backup
 
 [Timer]
 OnCalendar=*-*-* 02:00:00
@@ -450,7 +450,7 @@ aws s3 sync /backup/hanzo-sign/documents/ s3://your-hanzo-sign-bucket
 {/* prettier-ignore */}
 <Steps>
 <Step>
-### Stop Hanzo Sign
+### Stop Hanzo eSign
 
 ```bash
 docker compose stop hanzo-sign
@@ -482,7 +482,7 @@ aws s3 sync /backup/documents/ s3://your-bucket
 
 </Step>
 <Step>
-### Start Hanzo Sign
+### Start Hanzo eSign
 
 ```bash
 docker compose start hanzo-sign

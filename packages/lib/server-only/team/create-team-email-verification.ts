@@ -143,7 +143,7 @@ export const sendTeamEmailVerificationEmail = async (email: string, token: strin
     to: email,
     from: senderEmail,
     subject: i18n._(
-      msg`A request to use your email has been initiated by ${team.name} on Hanzo Sign`,
+      msg`A request to use your email has been initiated by ${team.name} on Hanzo eSign`,
     ),
     html,
     text,

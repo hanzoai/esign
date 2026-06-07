@@ -378,10 +378,10 @@ const SigningPageV1 = ({ data }: { data: Awaited<ReturnType<typeof handleV1Loade
               <Trans>
                 Want to send slick signing links like this one?{' '}
                 <Link
-                  to="https://sign.hanzo.ai"
+                  to="https://esign.hanzo.ai"
                   className="text-sign-700 hover:text-sign-600"
                 >
-                  Check out Hanzo Sign
+                  Check out Hanzo eSign
                 </Link>
                 .
               </Trans>
@@ -478,10 +478,10 @@ const SigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV2Loade
               <Trans>
                 Want to send slick signing links like this one?{' '}
                 <Link
-                  to="https://sign.hanzo.ai"
+                  to="https://esign.hanzo.ai"
                   className="text-sign-700 hover:text-sign-600"
                 >
-                  Check out Hanzo Sign
+                  Check out Hanzo eSign
                 </Link>
                 .
               </Trans>

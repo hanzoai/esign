@@ -110,7 +110,7 @@ export const getEmailContext = async (
   const senderEmailId = match(meta?.emailId)
     .with(P.string, (emailId) => emailId) // Explicit string means to use the provided email ID.
     .with(undefined, () => emailContext.settings.emailId) // Undefined means to use the inherited email ID.
-    .with(null, () => null) // Explicit null means to use the Hanzo Sign email.
+    .with(null, () => null) // Explicit null means to use the Hanzo eSign email.
     .exhaustive();
 
   const foundSenderEmail = emailContext.allowedEmails.find((email) => email.id === senderEmailId);

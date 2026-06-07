@@ -34,7 +34,7 @@ export default function ApiTokensPage() {
             On this page, you can create and manage API tokens. See our{' '}
             <a
               className="text-primary underline"
-              href={'https://docs.sign.hanzo.ai/developers/public-api'}
+              href={'https://docs.esign.hanzo.ai/developers/public-api'}
               target="_blank"
             >
               Documentation

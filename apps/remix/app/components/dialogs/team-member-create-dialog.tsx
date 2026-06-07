@@ -194,7 +194,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
                       To be able to add members to a team, you must first add them to the
                       organisation. For more information, please see the{' '}
                       <Link
-                        to="https://docs.sign.hanzo.ai/users/organisations/members"
+                        to="https://docs.esign.hanzo.ai/users/organisations/members"
                         target="_blank"
                         rel="noreferrer"
                         className="text-sign-700 hover:text-sign-600 hover:underline"
