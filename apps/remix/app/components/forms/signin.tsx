@@ -57,7 +57,7 @@ export const SignInForm = ({ className, returnTo }: SignInFormProps) => {
       <Button
         type="button"
         size="lg"
-        className="border bg-red-500 text-white hover:bg-red-600"
+        className="bg-white font-normal text-black hover:bg-zinc-200"
         onClick={onSignInClick}
       >
         Sign in with <span className="ml-1 font-bold">{providerName}</span>
