@@ -13,8 +13,8 @@ jobs:
     with:
       image: ghcr.io/hanzoai/esign
       dockerfile: docker/Dockerfile
-      # arm64 builds run on spark.local — canonical org pool label is
-      # spark-hanzo. The older spark-hanzoai-arm64 label is dead (0
-      # online registrations).
-      runner-arm64: spark-hanzo
+      # arm64 builds run on canonical native arcd labels — matches
+      # spark (self-hosted + linux + arm64). Org isolation comes from
+      # GitHub runner group + arcd's repo allowlist.
+      runner-arm64: self-hosted
     secrets: inherit
