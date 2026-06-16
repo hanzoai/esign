@@ -10,6 +10,8 @@ import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
 import handle from 'hono-react-router-adapter/node';
 
+import { serveZap } from '@hanzo/sign-trpc/zap/server';
+
 import server from './hono/server/router.js';
 import * as build from './index.js';
 
@@ -32,4 +34,13 @@ const handler = handle(build, server);
 
 const port = parseInt(process.env.PORT || '3000', 10);
 
-serve({ fetch: handler.fetch, port });
+// @hono/node-server's serve() returns the underlying Node http.Server; attach
+// the ZAP-over-WebSocket RPC endpoint to it so it shares the app's port. This
+// is the @zap-proto/web replacement for mounting the tRPC HTTP handler — the
+// migrated routers (folder/profile/apiToken) are served over ZAP; everything
+// else still flows through the legacy tRPC HTTP path until ported.
+const httpServer = serve({ fetch: handler.fetch, port });
+
+serveZap(httpServer, {
+  onError: (err) => console.error('[zap-rpc]', err),
+});

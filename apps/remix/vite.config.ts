@@ -85,6 +85,11 @@ export default defineConfig({
         '../../node_modules/.prisma/client/index-browser.js',
       ),
       canvas: path.resolve(__dirname, './app/types/empty-module.ts'),
+      // @zap-proto/zap bundles a Node-only TCP client (`import { Socket } from
+      // "net"`) in its single entry; the browser build only uses its
+      // view/builder primitives (ZAP RPC rides WebSocket via @zap-proto/web).
+      // Shim `net` so the unused named import resolves at link time.
+      net: path.resolve(__dirname, './app/types/net-shim.ts'),
     },
   },
   /**
