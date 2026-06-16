@@ -12,7 +12,6 @@ import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-clien
 import { createRateLimitMiddleware } from '@hanzo/sign-lib/server-only/rate-limit/rate-limit-middleware';
 import {
   aiRateLimit,
-  apiTrpcRateLimit,
   apiV1RateLimit,
   apiV2RateLimit,
   fileUploadRateLimit,
@@ -22,15 +21,13 @@ import { migrateDeletedAccountServiceAccount } from '@hanzo/sign-lib/server-only
 import { migrateLegacyServiceAccount } from '@hanzo/sign-lib/server-only/user/service-accounts/legacy-service-account';
 import { env } from '@hanzo/sign-lib/utils/env';
 import { logger } from '@hanzo/sign-lib/utils/logger';
-import { openApiDocument } from '@hanzo/sign-trpc/server/open-api';
+import openApiDocument from '@hanzo/sign-trpc/zap/gen/openapi.json';
 
 import { aiRoute } from './api/ai/route';
 import { downloadRoute } from './api/download/download';
 import { filesRoute } from './api/files/files';
 import { type AppContext, appContext } from './context';
 import { appMiddleware } from './middleware';
-import { openApiTrpcServerHandler } from './trpc/hono-trpc-open-api';
-import { reactRouterTrpcServer } from './trpc/hono-trpc-remix';
 
 export interface HonoEnv {
   Variables: RequestIdVariables & {
@@ -47,7 +44,6 @@ const app = new Hono<HonoEnv>();
 const apiV1RateLimitMiddleware = createRateLimitMiddleware(apiV1RateLimit);
 const apiV2RateLimitMiddleware = createRateLimitMiddleware(apiV2RateLimit);
 const aiRateLimitMiddleware = createRateLimitMiddleware(aiRateLimit);
-const trpcRateLimitMiddleware = createRateLimitMiddleware(apiTrpcRateLimit);
 const fileRateLimitMiddleware = createRateLimitMiddleware(fileUploadRateLimit);
 
 /**
@@ -99,28 +95,16 @@ app.route('/api/ai', aiRoute);
 // API servers.
 app.route('/api/v1', tsRestHonoApp);
 app.use('/api/jobs/*', jobsClient.getApiHandler());
-app.use('/api/trpc/*', trpcRateLimitMiddleware);
-app.use('/api/trpc/*', reactRouterTrpcServer);
 
-// Unstable API server routes. Order matters for these two.
+// Unstable API server routes. The /api/v2 + /api/v2-beta REST surface is served
+// over JSON-over-HTTP ZAP, mounted on the http.Server in main.js (serveZapHttpApi).
+// httpServe terminates only its POST routes there, so these GET specs and the GET
+// download routes still reach Hono.
 app.get(`/api/v2/openapi.json`, (c) => c.json(openApiDocument));
-// Shadows the download routes that tRPC defines since tRPC-to-openapi doesn't support their return types.
 app.route(`/api/v2`, downloadRoute);
-app.use(`/api/v2/*`, async (c) =>
-  openApiTrpcServerHandler(c, {
-    isBeta: false,
-  }),
-);
 
-// Unstable API server routes. Order matters for these two.
 app.get(`/api/v2-beta/openapi.json`, (c) => c.json(openApiDocument));
-// Shadows the download routes that tRPC defines since tRPC-to-openapi doesn't support their return types.
 app.route(`/api/v2-beta`, downloadRoute);
-app.use(`/api/v2-beta/*`, async (c) =>
-  openApiTrpcServerHandler(c, {
-    isBeta: true,
-  }),
-);
 
 // Start telemetry client for anonymous usage tracking.
 // Can be disabled by setting SIGN_DISABLE_TELEMETRY=true

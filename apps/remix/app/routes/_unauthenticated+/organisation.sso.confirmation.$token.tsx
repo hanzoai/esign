@@ -14,7 +14,9 @@ import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
 import { formatOrganisationLoginPath } from '@hanzo/sign-lib/utils/organisation-authentication-portal';
 import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
 import { prisma } from '@hanzo/sign-prisma';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TDeclineLinkOrganisationAccountRequest } from '@hanzo/sign-trpc/server/organisation-router/decline-link-organisation-account.types';
+import type { TLinkOrganisationAccountRequest } from '@hanzo/sign-trpc/server/organisation-router/link-organisation-account.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
@@ -133,38 +135,44 @@ export default function OrganisationSsoConfirmationTokenPage({ loaderData }: Rou
   const [isConfirmationChecked, setIsConfirmationChecked] = useState(false);
 
   const { mutate: declineLinkOrganisationAccount, isPending: isDeclining } =
-    trpc.organisation.authenticationPortal.declineLinkAccount.useMutation({
-      onSuccess: async () => {
-        await navigate('/');
+    useZapMutation<void, TDeclineLinkOrganisationAccountRequest>(
+      'organisation.authenticationPortal.declineLinkAccount',
+      {
+        onSuccess: async () => {
+          await navigate('/');
 
-        toast({
-          title: _(msg`Account link declined`),
-        });
+          toast({
+            title: _(msg`Account link declined`),
+          });
+        },
+        onError: (error) => {
+          toast({
+            title: _(msg`Error declining account link`),
+            description: error.message,
+          });
+        },
       },
-      onError: (error) => {
-        toast({
-          title: _(msg`Error declining account link`),
-          description: error.message,
-        });
-      },
-    });
+    );
 
   const { mutate: linkOrganisationAccount, isPending: isLinking } =
-    trpc.organisation.authenticationPortal.linkAccount.useMutation({
-      onSuccess: async () => {
-        await navigate(formatOrganisationLoginPath(organisation.url));
+    useZapMutation<void, TLinkOrganisationAccountRequest>(
+      'organisation.authenticationPortal.linkAccount',
+      {
+        onSuccess: async () => {
+          await navigate(formatOrganisationLoginPath(organisation.url));
 
-        toast({
-          title: _(msg`Account linked successfully`),
-        });
+          toast({
+            title: _(msg`Account linked successfully`),
+          });
+        },
+        onError: (error) => {
+          toast({
+            title: _(msg`Error linking account`),
+            description: error.message,
+          });
+        },
       },
-      onError: (error) => {
-        toast({
-          title: _(msg`Error linking account`),
-          description: error.message,
-        });
-      },
-    });
+    );
 
   return (
     <div>

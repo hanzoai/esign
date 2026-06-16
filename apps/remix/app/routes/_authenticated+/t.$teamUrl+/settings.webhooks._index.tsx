@@ -17,7 +17,7 @@ import { DateTime } from 'luxon';
 import { Link } from 'react-router';
 
 import { toFriendlyWebhookEventName } from '@hanzo/sign-lib/universal/webhook/to-friendly-webhook-event-name';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -49,7 +49,7 @@ export default function WebhookPage() {
 
   const team = useCurrentTeam();
 
-  const { data, isLoading, isError } = trpc.webhook.getTeamWebhooks.useQuery();
+  const { data, isLoading, isError } = useZapQuery<Webhook[]>('webhook.getTeamWebhooks');
 
   const results = {
     data: data ?? [],

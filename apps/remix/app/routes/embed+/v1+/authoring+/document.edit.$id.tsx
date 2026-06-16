@@ -4,6 +4,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { DocumentDistributionMethod, DocumentSigningOrder, SigningStatus } from '@prisma/client';
 import { redirect, useLoaderData } from 'react-router';
+import type { z } from 'zod';
 
 import {
   DEFAULT_DOCUMENT_DATE_FORMAT,
@@ -20,7 +21,11 @@ import {
   ZBaseEmbedAuthoringEditSchema,
 } from '@hanzo/sign-lib/types/embed-authoring-base-schema';
 import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { trpc } from '@hanzo/sign-trpc/react';
+import {
+  type TUpdateEmbeddingDocumentRequestSchema,
+  ZUpdateEmbeddingDocumentResponseSchema,
+} from '@hanzo/sign-trpc/server/embedding-router/update-embedding-document.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
@@ -166,8 +171,10 @@ export default function EmbeddingAuthoringDocumentEditPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [canGoBack, setCanGoBack] = useState(true);
 
-  const { mutateAsync: updateEmbeddingDocument } =
-    trpc.embeddingPresign.updateEmbeddingDocument.useMutation();
+  const { mutateAsync: updateEmbeddingDocument } = useZapMutation<
+    z.infer<typeof ZUpdateEmbeddingDocumentResponseSchema>,
+    TUpdateEmbeddingDocumentRequestSchema
+  >('embeddingPresign.updateEmbeddingDocument');
 
   const handleConfigurePageViewSubmit = (data: TConfigureEmbedFormSchema) => {
     // Store the configuration data and move to the field placement stage

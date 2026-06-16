@@ -8,8 +8,11 @@ import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
 import { getTeamPublicProfile } from '@hanzo/sign-lib/server-only/team/get-team-public-profile';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { FindTemplateRow } from '@hanzo/sign-trpc/server/template-router/schema';
+import type {
+  FindTemplateRow,
+  TFindTemplatesResponse,
+} from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Switch } from '@hanzo/sign-ui/primitives/switch';
@@ -66,12 +69,12 @@ export default function PublicProfilePage({ loaderData }: Route.ComponentProps) 
   const [isPublicProfileVisible, setIsPublicProfileVisible] = useState(profile.enabled);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
-  const { data } = trpc.template.findTemplates.useQuery({
+  const { data } = useZapQuery<TFindTemplatesResponse>('template.findTemplates', {
     perPage: 100,
   });
 
   const { mutateAsync: updateTeam, isPending: isUpdatingTeamProfile } =
-    trpc.team.update.useMutation({
+    useZapMutation<void, unknown>('team.update', {
       onSuccess: async () => {
         await refreshSession();
       },

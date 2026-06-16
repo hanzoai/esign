@@ -8,7 +8,8 @@ import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-upd
 import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import type { TeamMemberRole } from '@hanzo/sign-prisma/generated/types';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindUserTeamsResponse } from '@hanzo/sign-trpc/server/admin-router/find-user-teams.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -30,12 +31,15 @@ export const AdminUserTeamsTable = ({ userId }: AdminUserTeamsTableProps) => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.admin.user.findTeams.useQuery({
-    userId,
-    query: parsedSearchParams.query,
-    page: parsedSearchParams.page,
-    perPage: parsedSearchParams.perPage,
-  });
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindUserTeamsResponse>(
+    'admin.user.findTeams',
+    {
+      userId,
+      query: parsedSearchParams.query,
+      page: parsedSearchParams.page,
+      perPage: parsedSearchParams.perPage,
+    },
+  );
 
   const onPaginationChange = (page: number, perPage: number) => {
     updateSearchParams({

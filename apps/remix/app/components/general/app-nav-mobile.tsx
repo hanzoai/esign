@@ -9,7 +9,8 @@ import LogoImage from '@hanzo/sign-assets/logo.png';
 import { authClient } from '@hanzo/sign-auth/client';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TGetInboxCountResponse } from '@hanzo/sign-trpc/server/document-router/get-inbox-count.types';
 import { Sheet, SheetContent } from '@hanzo/sign-ui/primitives/sheet';
 import { ThemeSwitcher } from '@hanzo/sign-ui/primitives/theme-switcher';
 
@@ -27,7 +28,8 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
 
   const currentTeam = useOptionalCurrentTeam();
 
-  const { data: unreadCountData } = trpc.document.inbox.getCount.useQuery(
+  const { data: unreadCountData } = useZapQuery<TGetInboxCountResponse>(
+    'document.inbox.getCount',
     {
       readStatus: ReadStatus.NOT_OPENED,
     },

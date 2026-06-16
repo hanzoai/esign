@@ -7,7 +7,10 @@ import { BellIcon } from 'lucide-react';
 
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TAcceptOrganisationMemberInviteResponse } from '@hanzo/sign-trpc/server/organisation-router/accept-organisation-member-invite.types';
+import type { TDeclineOrganisationMemberInviteResponse } from '@hanzo/sign-trpc/server/organisation-router/decline-organisation-member-invite.types';
+import type { TGetOrganisationMemberInvitesResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-member-invites.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
@@ -23,9 +26,12 @@ import {
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 export const OrganisationInvitations = ({ className }: { className?: string }) => {
-  const { data, isLoading } = trpc.organisation.member.invite.getMany.useQuery({
-    status: OrganisationMemberInviteStatus.PENDING,
-  });
+  const { data, isLoading } = useZapQuery<TGetOrganisationMemberInvitesResponse>(
+    'organisation.member.invite.getMany',
+    {
+      status: OrganisationMemberInviteStatus.PENDING,
+    },
+  );
 
   return (
     <AnimatePresence>
@@ -125,7 +131,9 @@ const AcceptOrganisationInvitationButton = ({ token }: { token: string }) => {
     mutateAsync: acceptOrganisationInvitation,
     isPending,
     isSuccess,
-  } = trpc.organisation.member.invite.accept.useMutation({
+  } = useZapMutation<TAcceptOrganisationMemberInviteResponse, { token: string }>(
+    'organisation.member.invite.accept',
+    {
     onSuccess: async () => {
       await refreshSession();
 
@@ -165,7 +173,9 @@ const DeclineOrganisationInvitationButton = ({ token }: { token: string }) => {
     mutateAsync: declineOrganisationInvitation,
     isPending,
     isSuccess,
-  } = trpc.organisation.member.invite.decline.useMutation({
+  } = useZapMutation<TDeclineOrganisationMemberInviteResponse, { token: string }>(
+    'organisation.member.invite.decline',
+    {
     onSuccess: async () => {
       await refreshSession();
 

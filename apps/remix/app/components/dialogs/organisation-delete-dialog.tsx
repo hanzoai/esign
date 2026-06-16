@@ -11,7 +11,7 @@ import { z } from 'zod';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -62,7 +62,7 @@ export const OrganisationDeleteDialog = ({ trigger }: OrganisationDeleteDialogPr
     },
   });
 
-  const { mutateAsync: deleteOrganisation } = trpc.organisation.delete.useMutation();
+  const { mutateAsync: deleteOrganisation } = useZapMutation<void, unknown>('organisation.delete');
 
   const onFormSubmit = async () => {
     try {

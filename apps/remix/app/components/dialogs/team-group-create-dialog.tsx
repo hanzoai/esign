@@ -10,7 +10,10 @@ import { z } from 'zod';
 
 import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/teams';
 import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZCreateTeamGroupsRequestSchema } from '@hanzo/sign-trpc/server/team-router/create-team-groups.types';
+import type { TFindTeamGroupsResponse } from '@hanzo/sign-trpc/server/team-router/find-team-groups.types';
+import type { TFindOrganisationGroupsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-groups.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -72,15 +75,21 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
     },
   });
 
-  const { mutateAsync: createTeamGroups } = trpc.team.group.createMany.useMutation();
+  const { mutateAsync: createTeamGroups } = useZapMutation<
+    void,
+    z.infer<typeof ZCreateTeamGroupsRequestSchema>
+  >('team.group.createMany');
 
-  const organisationGroupQuery = trpc.organisation.group.find.useQuery({
-    organisationId: team.organisationId,
-    perPage: 100, // Won't really work if they somehow have more than 100 groups.
-    types: [OrganisationGroupType.CUSTOM],
-  });
+  const organisationGroupQuery = useZapQuery<TFindOrganisationGroupsResponse>(
+    'organisation.group.find',
+    {
+      organisationId: team.organisationId,
+      perPage: 100, // Won't really work if they somehow have more than 100 groups.
+      types: [OrganisationGroupType.CUSTOM],
+    },
+  );
 
-  const teamGroupQuery = trpc.team.group.find.useQuery({
+  const teamGroupQuery = useZapQuery<TFindTeamGroupsResponse>('team.group.find', {
     teamId: team.id,
     perPage: 100, // Won't really work if they somehow have more than 100 groups.
   });

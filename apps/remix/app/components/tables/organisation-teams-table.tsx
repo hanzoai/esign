@@ -11,7 +11,8 @@ import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/or
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindTeamsResponse } from '@hanzo/sign-trpc/server/team-router/find-teams.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
@@ -31,7 +32,7 @@ export const OrganisationTeamsTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.team.find.useQuery({
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindTeamsResponse>('team.find', {
     organisationId: organisation.id,
     query: parsedSearchParams.query,
     page: parsedSearchParams.page,

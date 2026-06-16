@@ -9,7 +9,8 @@ import { useSessionStorage } from '@hanzo/sign-lib/client-only/hooks/use-session
 import { FolderType } from '@hanzo/sign-lib/types/folder-type';
 import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindTemplatesResponse } from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
 import type { RowSelectionState } from '@hanzo/sign-ui/primitives/data-table';
 
@@ -49,11 +50,14 @@ export default function TemplatesPage() {
   const documentRootPath = formatDocumentsPath(team.url);
   const templateRootPath = formatTemplatesPath(team.url);
 
-  const { data, isLoading, isLoadingError } = trpc.template.findTemplates.useQuery({
-    page: page,
-    perPage: perPage,
-    folderId,
-  });
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindTemplatesResponse>(
+    'template.findTemplates',
+    {
+      page: page,
+      perPage: perPage,
+      folderId,
+    },
+  );
 
   return (
     <EnvelopeDropZoneWrapper type={EnvelopeType.TEMPLATE}>

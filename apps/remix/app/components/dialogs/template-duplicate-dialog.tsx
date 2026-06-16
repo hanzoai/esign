@@ -2,7 +2,8 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type { TDuplicateTemplateMutationSchema } from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -28,8 +29,10 @@ export const TemplateDuplicateDialog = ({
   const { _ } = useLingui();
   const { toast } = useToast();
 
-  const { mutateAsync: duplicateTemplate, isPending } =
-    trpcReact.template.duplicateTemplate.useMutation({
+  const { mutateAsync: duplicateTemplate, isPending } = useZapMutation<
+    unknown,
+    TDuplicateTemplateMutationSchema
+  >('template.duplicateTemplate', {
       onSuccess: () => {
         toast({
           title: _(msg`Template duplicated`),

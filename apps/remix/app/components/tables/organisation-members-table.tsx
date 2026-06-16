@@ -13,7 +13,8 @@ import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/organisations';
 import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -40,7 +41,8 @@ export const OrganisationMembersDataTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.organisation.member.find.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindOrganisationMembersResponse>(
+    'organisation.member.find',
     {
       organisationId: organisation.id,
       query: parsedSearchParams.query,

@@ -5,7 +5,11 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useNavigate } from 'react-router';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type {
+  TDeleteDocumentRequest,
+  TDeleteDocumentResponse,
+} from '@hanzo/sign-trpc/server/admin-router/delete-document.types';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -32,8 +36,10 @@ export const AdminDocumentDeleteDialog = ({ envelopeId }: AdminDocumentDeleteDia
 
   const [reason, setReason] = useState('');
 
-  const { mutateAsync: deleteDocument, isPending: isDeletingDocument } =
-    trpc.admin.document.delete.useMutation();
+  const { mutateAsync: deleteDocument, isPending: isDeletingDocument } = useZapMutation<
+    TDeleteDocumentResponse,
+    TDeleteDocumentRequest
+  >('admin.document.delete');
 
   const handleDeleteDocument = async () => {
     try {

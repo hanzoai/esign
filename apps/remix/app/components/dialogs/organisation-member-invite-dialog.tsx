@@ -17,8 +17,12 @@ import { IS_BILLING_ENABLED, SUPPORT_EMAIL } from '@hanzo/sign-lib/constants/app
 import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
 import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 import { INTERNAL_CLAIM_ID } from '@hanzo/sign-lib/types/subscription';
-import { trpc } from '@hanzo/sign-trpc/react';
-import { ZCreateOrganisationMemberInvitesRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-member-invites.types';
+import {
+  type TCreateOrganisationMemberInvitesRequestSchema,
+  ZCreateOrganisationMemberInvitesRequestSchema,
+} from '@hanzo/sign-trpc/server/organisation-router/create-organisation-member-invites.types';
+import type { TGetOrganisationResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -133,10 +137,12 @@ export const OrganisationMemberInviteDialog = ({
     name: 'invitations',
   });
 
-  const { mutateAsync: createOrganisationMemberInvites } =
-    trpc.organisation.member.invite.createMany.useMutation();
+  const { mutateAsync: createOrganisationMemberInvites } = useZapMutation<
+    void,
+    TCreateOrganisationMemberInvitesRequestSchema
+  >('organisation.member.invite.createMany');
 
-  const { data: fullOrganisation } = trpc.organisation.get.useQuery({
+  const { data: fullOrganisation } = useZapQuery<TGetOrganisationResponse>('organisation.get', {
     organisationReference: organisation.id,
   });
 

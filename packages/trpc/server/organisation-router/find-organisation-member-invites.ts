@@ -7,35 +7,10 @@ import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZFindOrganisationMemberInvitesRequestSchema,
   ZFindOrganisationMemberInvitesResponseSchema,
 } from './find-organisation-member-invites.types';
-
-export const findOrganisationMemberInvitesRoute = authenticatedProcedure
-  //   .meta(getOrganisationMemberInvitesMeta)
-  .input(ZFindOrganisationMemberInvitesRequestSchema)
-  .output(ZFindOrganisationMemberInvitesResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { organisationId, query, page, perPage, status } = input;
-    const { user } = ctx;
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-      },
-    });
-
-    return await findOrganisationMemberInvites({
-      userId: user.id,
-      organisationId,
-      query,
-      page,
-      perPage,
-      status,
-    });
-  });
 
 type FindOrganisationMemberInvitesOptions = {
   userId: number;

@@ -3,18 +3,6 @@ import { z } from 'zod';
 import { ZDocumentAuditLogSchema } from '@hanzo/sign-lib/types/document-audit-logs';
 import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const findEnvelopeAuditLogsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'GET',
-    path: '/envelope/{envelopeId}/audit-log',
-    summary: 'Get envelope audit logs',
-    description: 'Find audit logs based on a search criteria',
-    tags: ['Envelope'],
-  },
-};
-
 export const ZFindEnvelopeAuditLogsRequestSchema = ZFindSearchParamsSchema.omit({
   query: true,
 }).extend({

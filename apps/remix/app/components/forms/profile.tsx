@@ -6,7 +6,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { TUpdateProfileMutationSchema } from '@hanzo/sign-trpc/server/profile-router/schema';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -56,7 +57,9 @@ export const ProfileForm = ({ className }: ProfileFormProps) => {
 
   const isSubmitting = form.formState.isSubmitting;
 
-  const { mutateAsync: updateProfile } = trpc.profile.updateProfile.useMutation();
+  const { mutateAsync: updateProfile } = useZapMutation<void, TUpdateProfileMutationSchema>(
+    'profile.updateProfile',
+  );
 
   const onFormSubmit = async ({ name, signature }: TProfileFormSchema) => {
     try {

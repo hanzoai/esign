@@ -4,33 +4,10 @@ import { jobs } from '@hanzo/sign-lib/jobs/client';
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZDeleteOrganisationMembersRequestSchema,
   ZDeleteOrganisationMembersResponseSchema,
 } from './delete-organisation-members.types';
-
-export const deleteOrganisationMembersRoute = authenticatedProcedure
-  //   .meta(deleteOrganisationMembersMeta)
-  .input(ZDeleteOrganisationMembersRequestSchema)
-  .output(ZDeleteOrganisationMembersResponseSchema)
-  .mutation(async ({ ctx, input }) => {
-    const { organisationId, organisationMemberIds } = input;
-    const userId = ctx.user.id;
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-        organisationMemberIds,
-      },
-    });
-
-    await deleteOrganisationMembers({
-      userId,
-      organisationId,
-      organisationMemberIds,
-    });
-  });
 
 type DeleteOrganisationMembersProps = {
   userId: number;

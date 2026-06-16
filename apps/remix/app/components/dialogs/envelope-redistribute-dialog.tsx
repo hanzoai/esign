@@ -11,7 +11,8 @@ import * as z from 'zod';
 import { getRecipientType } from '@hanzo/sign-lib/client-only/recipient-type';
 import type { TEnvelope } from '@hanzo/sign-lib/types/envelope';
 import { recipientAbbreviation } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type { TRedistributeEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/redistribute-envelope.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
@@ -62,7 +63,10 @@ export const EnvelopeRedistributeDialog = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { mutateAsync: redistributeEnvelope } = trpcReact.envelope.redistribute.useMutation();
+  const { mutateAsync: redistributeEnvelope } = useZapMutation<
+    unknown,
+    TRedistributeEnvelopeRequest
+  >('envelope.redistribute');
 
   const form = useForm<TEnvelopeRedistributeFormSchema>({
     defaultValues: {

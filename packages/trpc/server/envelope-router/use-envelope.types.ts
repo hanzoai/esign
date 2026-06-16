@@ -21,20 +21,7 @@ import { ZFieldMetaPrefillFieldsSchema } from '@hanzo/sign-lib/types/field-meta'
 import { ZRecipientEmailSchema } from '@hanzo/sign-lib/types/recipient';
 
 import { zodFormData } from '../../utils/zod-form-data';
-import type { TrpcRouteMeta } from '../trpc';
 import { ZRecipientWithSigningUrlSchema } from './schema';
-
-export const useEnvelopeMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/use',
-    contentTypes: ['multipart/form-data'],
-    summary: 'Use envelope',
-    description:
-      'Create a document envelope from a template envelope. Upload custom files to replace the template PDFs and map them to specific envelope items using identifiers.',
-    tags: ['Envelope'],
-  },
-};
 
 export const ZUseEnvelopePayloadSchema = z.object({
   envelopeId: z.string().describe('The ID of the template envelope to use.'),

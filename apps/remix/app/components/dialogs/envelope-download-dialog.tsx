@@ -6,7 +6,7 @@ import { DocumentStatus, type EnvelopeItem } from '@prisma/client';
 import { DownloadIcon, FileTextIcon } from 'lucide-react';
 
 import { downloadPDF } from '@hanzo/sign-lib/client-only/download-pdf';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -54,17 +54,19 @@ export const EnvelopeDownloadDialog = ({
   const generateDownloadKey = (envelopeItemId: string, version: 'original' | 'signed') =>
     `${envelopeItemId}-${version}`;
 
-  const { data: envelopeItemsPayload, isLoading: isLoadingEnvelopeItems } =
-    trpc.envelope.item.getManyByToken.useQuery(
-      {
-        envelopeId,
-        access: token ? { type: 'recipient', token } : { type: 'user' },
-      },
-      {
-        initialData: initialEnvelopeItems ? { data: initialEnvelopeItems } : undefined,
-        enabled: open,
-      },
-    );
+  const { data: envelopeItemsPayload, isLoading: isLoadingEnvelopeItems } = useZapQuery<{
+    data: EnvelopeItemToDownload[];
+  }>(
+    'envelope.item.getManyByToken',
+    {
+      envelopeId,
+      access: token ? { type: 'recipient', token } : { type: 'user' },
+    },
+    {
+      initialData: initialEnvelopeItems ? { data: initialEnvelopeItems } : undefined,
+      enabled: open,
+    },
+  );
 
   const envelopeItems = envelopeItemsPayload?.data || [];
 

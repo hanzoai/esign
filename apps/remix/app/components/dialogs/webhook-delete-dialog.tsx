@@ -8,7 +8,8 @@ import type { Webhook } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TDeleteWebhookRequestSchema } from '@hanzo/sign-trpc/server/webhook-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -56,7 +57,9 @@ export const WebhookDeleteDialog = ({ webhook, children }: WebhookDeleteDialogPr
 
   type TDeleteWebhookFormSchema = z.infer<typeof ZDeleteWebhookFormSchema>;
 
-  const { mutateAsync: deleteWebhook } = trpc.webhook.deleteWebhook.useMutation();
+  const { mutateAsync: deleteWebhook } = useZapMutation<unknown, TDeleteWebhookRequestSchema>(
+    'webhook.deleteWebhook',
+  );
 
   const form = useForm<TDeleteWebhookFormSchema>({
     resolver: zodResolver(ZDeleteWebhookFormSchema),

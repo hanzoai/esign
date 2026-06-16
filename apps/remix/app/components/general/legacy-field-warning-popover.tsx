@@ -4,7 +4,7 @@ import { Trans } from '@lingui/react/macro';
 import { AlertCircle } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { PopoverHover } from '@hanzo/sign-ui/primitives/popover';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
@@ -25,10 +25,14 @@ export const LegacyFieldWarningPopover = ({
 
   const revalidator = useRevalidator();
 
-  const { mutateAsync: updateTemplate, isPending: isUpdatingTemplate } =
-    trpc.template.updateTemplate.useMutation();
-  const { mutateAsync: updateDocument, isPending: isUpdatingDocument } =
-    trpc.document.update.useMutation();
+  const { mutateAsync: updateTemplate, isPending: isUpdatingTemplate } = useZapMutation<
+    unknown,
+    { templateId: number; data: { useLegacyFieldInsertion: boolean } }
+  >('template.updateTemplate');
+  const { mutateAsync: updateDocument, isPending: isUpdatingDocument } = useZapMutation<
+    unknown,
+    { documentId: number; data: { useLegacyFieldInsertion: boolean } }
+  >('document.update');
 
   const onUpdateFieldsClick = async () => {
     if (type === 'document') {

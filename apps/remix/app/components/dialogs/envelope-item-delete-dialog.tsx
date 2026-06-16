@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TDeleteEnvelopeItemRequest,
+  TDeleteEnvelopeItemResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/delete-envelope-item.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -39,28 +43,30 @@ export const EnvelopeItemDeleteDialog = ({
   const { t } = useLingui();
   const { toast } = useToast();
 
-  const { mutateAsync: deleteEnvelopeItem, isPending: isDeleting } =
-    trpc.envelope.item.delete.useMutation({
-      onSuccess: () => {
-        toast({
-          title: t`Success`,
-          description: t`You have successfully removed this envelope item.`,
-          duration: 5000,
-        });
+  const { mutateAsync: deleteEnvelopeItem, isPending: isDeleting } = useZapMutation<
+    TDeleteEnvelopeItemResponse,
+    TDeleteEnvelopeItemRequest
+  >('envelope.item.delete', {
+    onSuccess: () => {
+      toast({
+        title: t`Success`,
+        description: t`You have successfully removed this envelope item.`,
+        duration: 5000,
+      });
 
-        onDelete?.(envelopeItemId);
+      onDelete?.(envelopeItemId);
 
-        setOpen(false);
-      },
-      onError: () => {
-        toast({
-          title: t`An unknown error occurred`,
-          description: t`We encountered an unknown error while attempting to remove this envelope item. Please try again later.`,
-          variant: 'destructive',
-          duration: 10000,
-        });
-      },
-    });
+      setOpen(false);
+    },
+    onError: () => {
+      toast({
+        title: t`An unknown error occurred`,
+        description: t`We encountered an unknown error while attempting to remove this envelope item. Please try again later.`,
+        variant: 'destructive',
+        duration: 10000,
+      });
+    },
+  });
 
   return (
     <Dialog open={open} onOpenChange={(value) => !isDeleting && setOpen(value)}>

@@ -4,14 +4,17 @@ import { AnimatePresence } from 'framer-motion';
 
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 
 import { AccountDeleteDialog } from '~/components/dialogs/account-delete-dialog';
 import { AvatarImageForm } from '~/components/forms/avatar-image';
 import { ProfileForm } from '~/components/forms/profile';
 import { SettingsHeader } from '~/components/general/settings-header';
-import { TeamEmailUsage } from '~/components/general/teams/team-email-usage';
+import {
+  TeamEmailUsage,
+  type TeamEmailUsageProps,
+} from '~/components/general/teams/team-email-usage';
 import { appMetaTags } from '~/utils/meta';
 
 export function meta() {
@@ -22,7 +25,9 @@ export default function SettingsProfile() {
   const { _ } = useLingui();
   const { organisations, user } = useSession();
 
-  const { data: teamEmail } = trpc.team.email.get.useQuery();
+  const { data: teamEmail } = useZapQuery<TeamEmailUsageProps['teamEmail'] | null>(
+    'team.email.get',
+  );
 
   const isPersonalLayoutMode = isPersonalLayout(organisations);
 

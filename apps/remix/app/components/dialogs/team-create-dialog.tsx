@@ -18,8 +18,12 @@ import {
   SUPPORT_EMAIL,
 } from '@hanzo/sign-lib/constants/app';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
-import { ZCreateTeamRequestSchema } from '@hanzo/sign-trpc/server/team-router/create-team.types';
+import type { TGetOrganisationResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation.types';
+import {
+  type TCreateTeamRequest,
+  ZCreateTeamRequestSchema,
+} from '@hanzo/sign-trpc/server/team-router/create-team.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
@@ -68,7 +72,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
 
   const [open, setOpen] = useState(false);
 
-  const { data: fullOrganisation } = trpc.organisation.get.useQuery({
+  const { data: fullOrganisation } = useZapQuery<TGetOrganisationResponse>('organisation.get', {
     organisationReference: organisation.id,
   });
 
@@ -83,7 +87,7 @@ export const TeamCreateDialog = ({ trigger, onCreated, ...props }: TeamCreateDia
     },
   });
 
-  const { mutateAsync: createTeam } = trpc.team.create.useMutation();
+  const { mutateAsync: createTeam } = useZapMutation<void, TCreateTeamRequest>('team.create');
 
   const onFormSubmit = async ({ teamName, teamUrl, inheritMembers }: TCreateTeamFormSchema) => {
     try {

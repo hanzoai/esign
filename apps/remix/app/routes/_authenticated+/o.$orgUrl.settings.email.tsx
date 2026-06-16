@@ -1,7 +1,10 @@
 import { useLingui } from '@lingui/react/macro';
+import type { z } from 'zod';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TGetOrganisationResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation.types';
+import type { ZUpdateOrganisationSettingsRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-settings.types';
 import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
@@ -23,12 +26,14 @@ export default function OrganisationSettingsGeneral() {
   const organisation = useCurrentOrganisation();
 
   const { data: organisationWithSettings, isLoading: isLoadingOrganisation } =
-    trpc.organisation.get.useQuery({
+    useZapQuery<TGetOrganisationResponse>('organisation.get', {
       organisationReference: organisation.url,
     });
 
-  const { mutateAsync: updateOrganisationSettings } =
-    trpc.organisation.settings.update.useMutation();
+  const { mutateAsync: updateOrganisationSettings } = useZapMutation<
+    void,
+    z.infer<typeof ZUpdateOrganisationSettingsRequestSchema>
+  >('organisation.settings.update');
 
   const onEmailPreferencesSubmit = async (data: TEmailPreferencesFormSchema) => {
     try {
@@ -40,7 +45,7 @@ export default function OrganisationSettingsGeneral() {
           emailId,
           emailReplyTo: emailReplyTo || null,
           // emailReplyToName,
-          emailDocumentSettings,
+          emailDocumentSettings: emailDocumentSettings ?? undefined,
         },
       });
 

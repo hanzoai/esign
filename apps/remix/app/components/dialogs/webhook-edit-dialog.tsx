@@ -8,8 +8,11 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
-import { ZEditWebhookRequestSchema } from '@hanzo/sign-trpc/server/webhook-router/schema';
+import {
+  type TEditWebhookRequestSchema,
+  ZEditWebhookRequestSchema,
+} from '@hanzo/sign-trpc/server/webhook-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -52,7 +55,9 @@ export const WebhookEditDialog = ({ trigger, webhook, ...props }: WebhookEditDia
 
   const [open, setOpen] = useState(false);
 
-  const { mutateAsync: updateWebhook } = trpc.webhook.editWebhook.useMutation();
+  const { mutateAsync: updateWebhook } = useZapMutation<unknown, TEditWebhookRequestSchema>(
+    'webhook.editWebhook',
+  );
 
   const form = useForm<TEditWebhookFormSchema>({
     resolver: zodResolver(ZEditWebhookFormSchema),

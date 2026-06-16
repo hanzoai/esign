@@ -5,7 +5,7 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import type { TeamEmail } from '@prisma/client';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -29,8 +29,10 @@ export const TeamEmailUsage = ({ teamEmail }: TeamEmailUsageProps) => {
   const { _ } = useLingui();
   const { toast } = useToast();
 
-  const { mutateAsync: deleteTeamEmail, isPending: isDeletingTeamEmail } =
-    trpc.team.email.delete.useMutation({
+  const { mutateAsync: deleteTeamEmail, isPending: isDeletingTeamEmail } = useZapMutation<
+    unknown,
+    { teamId: number }
+  >('team.email.delete', {
       onSuccess: () => {
         toast({
           title: _(msg`Success`),

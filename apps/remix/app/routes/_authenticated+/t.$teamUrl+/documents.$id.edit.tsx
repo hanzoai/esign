@@ -8,7 +8,8 @@ import { Link, useNavigate } from 'react-router';
 import { EnvelopeEditorProvider } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
 import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetEditorEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-editor-envelope.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
 
@@ -27,7 +28,8 @@ export default function EnvelopeEditorPage({ params }: Route.ComponentProps) {
     data: envelope,
     isLoading: isLoadingEnvelope,
     isError: isErrorEnvelope,
-  } = trpc.envelope.editor.get.useQuery(
+  } = useZapQuery<TGetEditorEnvelopeResponse>(
+    'envelope.editor.get',
     {
       envelopeId: params.id,
     },

@@ -4,18 +4,6 @@ import { zfd } from 'zod-form-data';
 import EnvelopeItemSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
 
 import { zodFormData } from '../../utils/zod-form-data';
-import type { TrpcRouteMeta } from '../trpc';
-
-export const createEnvelopeItemsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/item/create-many',
-    summary: 'Create envelope items',
-    contentTypes: ['multipart/form-data'],
-    description: 'Create multiple envelope items for an envelope',
-    tags: ['Envelope Items'],
-  },
-};
 
 export const ZCreateEnvelopeItemsPayloadSchema = z.object({
   envelopeId: z.string(),

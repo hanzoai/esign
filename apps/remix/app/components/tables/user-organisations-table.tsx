@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
+import type { OrganisationType } from '@prisma/client';
 import { Link } from 'react-router';
 
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
@@ -10,7 +11,8 @@ import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
 import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
 import { canExecuteOrganisationAction, isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetOrganisationsResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisations.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
@@ -24,14 +26,18 @@ export const UserOrganisationsTable = () => {
   const { _, i18n } = useLingui();
   const { user, organisations } = useSession();
 
-  const { data, isLoading, isLoadingError } = trpc.organisation.getMany.useQuery(undefined, {
-    initialData: organisations.map((org) => ({
-      ...org,
-      currentMemberId: '', // Unsed dummy data.
-    })),
-  });
+  const { data, isLoading, isLoadingError } = useZapQuery<TGetOrganisationsResponse>(
+    'organisation.getMany',
+    undefined,
+    {
+      initialData: organisations.map((org) => ({
+        ...org,
+        currentMemberId: '', // Unsed dummy data.
+      })),
+    },
+  );
 
-  const isPersonalLayoutMode = isPersonalLayout(data);
+  const isPersonalLayoutMode = isPersonalLayout(data as { type: OrganisationType }[]);
 
   const results = {
     data: data || [],

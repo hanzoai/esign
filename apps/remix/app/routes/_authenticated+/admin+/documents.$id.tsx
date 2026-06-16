@@ -7,7 +7,11 @@ import { Link, redirect } from 'react-router';
 
 import { unsafeGetEntireEnvelope } from '@hanzo/sign-lib/server-only/admin/get-entire-document';
 import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TResealDocumentRequest,
+  TResealDocumentResponse,
+} from '@hanzo/sign-trpc/server/admin-router/reseal-document.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import {
   Accordion,
   AccordionContent,
@@ -57,7 +61,7 @@ export default function AdminDocumentDetailsPage({ loaderData }: Route.Component
   const { toast } = useToast();
 
   const { mutate: resealDocument, isPending: isResealDocumentLoading } =
-    trpc.admin.document.reseal.useMutation({
+    useZapMutation<TResealDocumentResponse, TResealDocumentRequest>('admin.document.reseal', {
       onSuccess: () => {
         toast({
           title: _(msg`Sealing job started`),

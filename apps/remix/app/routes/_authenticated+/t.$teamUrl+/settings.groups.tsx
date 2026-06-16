@@ -5,7 +5,8 @@ import { OrganisationGroupType, OrganisationMemberRole } from '@prisma/client';
 import { useLocation, useSearchParams } from 'react-router';
 
 import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindTeamGroupsResponse } from '@hanzo/sign-trpc/server/team-router/find-team-groups.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 import { Input } from '@hanzo/sign-ui/primitives/input';
 
@@ -47,7 +48,7 @@ export default function TeamsSettingsGroupsPage() {
     setSearchParams(params);
   }, [debouncedSearchQuery, pathname, searchParams]);
 
-  const everyoneGroupQuery = trpc.team.group.find.useQuery({
+  const everyoneGroupQuery = useZapQuery<TFindTeamGroupsResponse>('team.group.find', {
     teamId: team.id,
     types: [OrganisationGroupType.INTERNAL_ORGANISATION],
     organisationRoles: [OrganisationMemberRole.MEMBER],

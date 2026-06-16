@@ -10,7 +10,7 @@ import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient
 import type { TTemplate } from '@hanzo/sign-lib/types/template';
 import { isRequiredField } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
 import { DocumentFlowFormContainer } from '@hanzo/sign-ui/primitives/document-flow/document-flow-root';
 import type { DocumentFlowStep } from '@hanzo/sign-ui/primitives/document-flow/types';
@@ -73,8 +73,10 @@ export const DirectTemplatePageView = ({
     },
   };
 
-  const { mutateAsync: createDocumentFromDirectTemplate } =
-    trpc.template.createDocumentFromDirectTemplate.useMutation();
+  const { mutateAsync: createDocumentFromDirectTemplate } = useZapMutation<
+    { token: string },
+    unknown
+  >('template.createDocumentFromDirectTemplate');
 
   /**
    * Set the email into a temporary recipient so it can be used for reauth and signing email fields.

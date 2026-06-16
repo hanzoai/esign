@@ -11,8 +11,11 @@ import type { z } from 'zod';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
-import { ZCreateOrganisationRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation.types';
+import {
+  type TCreateOrganisationResponse,
+  ZCreateOrganisationRequestSchema,
+} from '@hanzo/sign-trpc/server/organisation-router/create-organisation.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -63,7 +66,9 @@ export const OrganisationCreateDialog = ({ trigger, ...props }: OrganisationCrea
     },
   });
 
-  const { mutateAsync: createOrganisation } = trpc.organisation.create.useMutation();
+  const { mutateAsync: createOrganisation } = useZapMutation<TCreateOrganisationResponse, unknown>(
+    'organisation.create',
+  );
 
   const onFormSubmit = async ({ name }: TCreateOrganisationFormSchema) => {
     try {

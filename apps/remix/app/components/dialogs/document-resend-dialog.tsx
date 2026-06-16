@@ -13,7 +13,11 @@ import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { getRecipientType } from '@hanzo/sign-lib/client-only/recipient-type';
 import { recipientAbbreviation } from '@hanzo/sign-lib/utils/recipient-formatter';
 import type { Document } from '@hanzo/sign-prisma/types/document-legacy-schema';
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type {
+  TRedistributeDocumentRequest,
+  TRedistributeDocumentResponse,
+} from '@hanzo/sign-trpc/server/document-router/redistribute-document.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
@@ -75,7 +79,10 @@ export const DocumentResendDialog = ({ document, recipients }: DocumentResendDia
     document.status !== 'PENDING' ||
     !recipients.some((r) => r.signingStatus === SigningStatus.NOT_SIGNED);
 
-  const { mutateAsync: resendDocument } = trpcReact.document.redistribute.useMutation();
+  const { mutateAsync: resendDocument } = useZapMutation<
+    TRedistributeDocumentResponse,
+    TRedistributeDocumentRequest
+  >('document.redistribute');
 
   const form = useForm<TResendDocumentFormSchema>({
     resolver: zodResolver(ZResendDocumentFormSchema),

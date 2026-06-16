@@ -13,7 +13,12 @@ import { z } from 'zod';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { FolderType } from '@hanzo/sign-lib/types/folder-type';
 import { formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZFindFoldersInternalResponseSchema } from '@hanzo/sign-trpc/server/folder-router/schema';
+import type {
+  ZUpdateTemplateRequestSchema,
+  ZUpdateTemplateResponseSchema,
+} from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -73,7 +78,10 @@ export function TemplateMoveToFolderDialog({
     },
   });
 
-  const { data: folders, isLoading: isFoldersLoading } = trpc.folder.findFoldersInternal.useQuery(
+  const { data: folders, isLoading: isFoldersLoading } = useZapQuery<
+    z.infer<typeof ZFindFoldersInternalResponseSchema>
+  >(
+    'folder.findFoldersInternal',
     {
       parentId: currentFolderId ?? null,
       type: FolderType.TEMPLATE,
@@ -83,7 +91,10 @@ export function TemplateMoveToFolderDialog({
     },
   );
 
-  const { mutateAsync: updateTemplate } = trpc.template.updateTemplate.useMutation();
+  const { mutateAsync: updateTemplate } = useZapMutation<
+    z.infer<typeof ZUpdateTemplateResponseSchema>,
+    z.input<typeof ZUpdateTemplateRequestSchema>
+  >('template.updateTemplate');
 
   useEffect(() => {
     if (!isOpen) {

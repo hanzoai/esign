@@ -10,18 +10,6 @@ import {
   ZRecipientEmailSchema,
 } from '@hanzo/sign-lib/types/recipient';
 
-import type { TrpcRouteMeta } from '../../trpc';
-
-export const createEnvelopeRecipientsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/recipient/create-many',
-    summary: 'Create envelope recipients',
-    description: 'Create multiple recipients for an envelope',
-    tags: ['Envelope Recipients'],
-  },
-};
-
 export const ZCreateEnvelopeRecipientSchema = z.object({
   email: ZRecipientEmailSchema,
   name: z.string().max(255),

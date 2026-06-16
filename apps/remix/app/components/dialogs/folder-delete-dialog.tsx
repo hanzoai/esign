@@ -8,8 +8,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -41,7 +41,7 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
   const { t } = useLingui();
 
   const { toast } = useToast();
-  const { mutateAsync: deleteFolder } = trpc.folder.deleteFolder.useMutation();
+  const { mutateAsync: deleteFolder } = useZapMutation<void, unknown>('folder.deleteFolder');
 
   const deleteMessage = t`delete ${folder.name}`;
 

@@ -12,16 +12,6 @@ import {
   ZDocumentTitleSchema,
   ZDocumentVisibilitySchema,
 } from '../document-router/schema';
-import type { TrpcRouteMeta } from '../trpc';
-
-export const updateEnvelopeMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/update',
-    summary: 'Update envelope',
-    tags: ['Envelope'],
-  },
-};
 
 export const ZUpdateEnvelopeRequestSchema = z.object({
   envelopeId: z.string(),

@@ -6,33 +6,10 @@ import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
 import { buildTeamWhereQuery } from '@hanzo/sign-lib/utils/teams';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZFindWebhookCallsRequestSchema,
   ZFindWebhookCallsResponseSchema,
 } from './find-webhook-calls.types';
-
-export const findWebhookCallsRoute = authenticatedProcedure
-  .input(ZFindWebhookCallsRequestSchema)
-  .output(ZFindWebhookCallsResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { webhookId, page, perPage, status, query, events } = input;
-
-    ctx.logger.info({
-      input: { webhookId, status },
-    });
-
-    return await findWebhookCalls({
-      userId: ctx.user.id,
-      teamId: ctx.teamId,
-      webhookId,
-      page,
-      perPage,
-      status,
-      query,
-      events,
-    });
-  });
 
 type FindWebhookCallsOptions = {
   userId: number;

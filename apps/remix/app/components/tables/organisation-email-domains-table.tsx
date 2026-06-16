@@ -9,7 +9,8 @@ import { match } from 'ts-pattern';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindOrganisationEmailDomainsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-email-domain.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
@@ -33,28 +34,30 @@ export const OrganisationEmailDomainsDataTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { mutate: verifyEmails, isPending: isVerifyingEmails } =
-    trpc.organisation.emailDomain.verify.useMutation({
+  const { mutate: verifyEmails, isPending: isVerifyingEmails } = useZapMutation<unknown, unknown>(
+    'organisation.emailDomain.verify',
+    {
       onSuccess: () => {
         toast({
           title: t`Email domains synced`,
           description: t`All email domains have been synced successfully`,
         });
       },
-    });
+    },
+  );
 
-  const { data, isLoading, isLoadingError } =
-    trpc.organisation.emailDomain.find.useQuery(
-      {
-        organisationId: organisation.id,
-        query: parsedSearchParams.query,
-        page: parsedSearchParams.page,
-        perPage: parsedSearchParams.perPage,
-      },
-      {
-        placeholderData: (previousData) => previousData,
-      },
-    );
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindOrganisationEmailDomainsResponse>(
+    'organisation.emailDomain.find',
+    {
+      organisationId: organisation.id,
+      query: parsedSearchParams.query,
+      page: parsedSearchParams.page,
+      perPage: parsedSearchParams.perPage,
+    },
+    {
+      placeholderData: (previousData) => previousData,
+    },
+  );
 
   const onPaginationChange = (page: number, perPage: number) => {
     updateSearchParams({

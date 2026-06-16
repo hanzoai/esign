@@ -23,8 +23,11 @@ import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/sign-lib/constant
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { megabytesToBytes } from '@hanzo/sign-lib/universal/unit-convertions';
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { TCreateEnvelopePayload } from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
+import type {
+  TCreateEnvelopePayload,
+  TCreateEnvelopeResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
@@ -60,7 +63,9 @@ export const EnvelopeDropZoneWrapper = ({
 
   const { quota, remaining, refreshLimits, maximumEnvelopeItemCount } = useLimits();
 
-  const { mutateAsync: createEnvelope } = trpc.envelope.create.useMutation();
+  const { mutateAsync: createEnvelope } = useZapMutation<TCreateEnvelopeResponse, FormData>(
+    'envelope.create',
+  );
 
   const isUploadDisabled = remaining.documents === 0 || !user.emailVerified;
 

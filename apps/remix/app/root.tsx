@@ -15,7 +15,7 @@ import { SessionProvider } from '@hanzo/sign-lib/client-only/providers/session';
 import { APP_I18N_OPTIONS, type SupportedLanguageCodes } from '@hanzo/sign-lib/constants/i18n';
 import { createPublicEnv } from '@hanzo/sign-lib/utils/env';
 import { extractLocaleData } from '@hanzo/sign-lib/utils/i18n';
-import { TrpcProvider } from '@hanzo/sign-trpc/react';
+import { ZapProvider } from '@hanzo/sign-trpc/zap/react';
 import { getOrganisationSession } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-session';
 import { Toaster } from '@hanzo/sign-ui/primitives/toaster';
 import { TooltipProvider } from '@hanzo/sign-ui/primitives/tooltip';
@@ -140,11 +140,11 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
 
         <SessionProvider initialSession={session}>
           <TooltipProvider>
-            <TrpcProvider>
+            <ZapProvider>
               {children}
 
               <Toaster />
-            </TrpcProvider>
+            </ZapProvider>
           </TooltipProvider>
         </SessionProvider>
 

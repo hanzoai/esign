@@ -12,18 +12,6 @@ import {
   ZDocumentMetaTimezoneSchema,
 } from '@hanzo/sign-lib/types/document-meta';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const distributeDocumentMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/document/distribute',
-    summary: 'Distribute document',
-    description: 'Send the document out to recipients based on your distribution method',
-    tags: ['Document'],
-  },
-};
-
 export const ZDistributeDocumentRequestSchema = z.object({
   documentId: z.number().describe('The ID of the document to send.'),
   meta: z

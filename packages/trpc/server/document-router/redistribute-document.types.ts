@@ -1,18 +1,6 @@
 import { z } from 'zod';
 
 import { ZSuccessResponseSchema } from '../schema';
-import type { TrpcRouteMeta } from '../trpc';
-
-export const redistributeDocumentMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/document/redistribute',
-    summary: 'Redistribute document',
-    description:
-      'Redistribute the document to the provided recipients who have not actioned the document. Will use the distribution method set in the document',
-    tags: ['Document'],
-  },
-};
 
 export const ZRedistributeDocumentRequestSchema = z.object({
   documentId: z.number(),

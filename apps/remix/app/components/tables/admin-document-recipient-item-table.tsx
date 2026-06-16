@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -52,7 +52,9 @@ export const AdminDocumentRecipientItemTable = ({ recipient }: RecipientItemProp
     },
   });
 
-  const { mutateAsync: updateRecipient } = trpc.admin.recipient.update.useMutation();
+  const { mutateAsync: updateRecipient } = useZapMutation<unknown, unknown>(
+    'admin.recipient.update',
+  );
 
   const columns = useMemo(() => {
     return [

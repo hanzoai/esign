@@ -2,18 +2,6 @@ import { z } from 'zod';
 
 import { ZDocumentManySchema } from '@hanzo/sign-lib/types/document';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const getDocumentsByIdsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/document/get-many',
-    summary: 'Get multiple documents',
-    description: 'Retrieve multiple documents by their IDs',
-    tags: ['Document'],
-  },
-};
-
 export const ZGetDocumentsByIdsRequestSchema = z.object({
   documentIds: z.array(z.number()).min(1),
 });

@@ -16,7 +16,8 @@ import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient
 import type { TDocument } from '@hanzo/sign-lib/types/document';
 import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
 import { formatSigningLink } from '@hanzo/sign-lib/utils/recipients';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
 import {
   Form,
@@ -106,7 +107,7 @@ export const AddSubjectFormPartial = ({
   } = form;
 
   const { data: emailData, isLoading: isLoadingEmails } =
-    trpc.organisation.email.find.useQuery({
+    useZapQuery<TFindOrganisationEmailsResponse>('organisation.email.find', {
       organisationId: organisation.id,
       perPage: 100,
     });

@@ -1,6 +1,7 @@
 import { useLingui } from '@lingui/react/macro';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetTeamResponse } from '@hanzo/sign-trpc/server/team-router/get-team.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
@@ -22,11 +23,14 @@ export default function TeamEmailSettingsGeneral() {
 
   const team = useCurrentTeam();
 
-  const { data: teamWithSettings, isLoading: isLoadingTeam } = trpc.team.get.useQuery({
-    teamReference: team.url,
-  });
+  const { data: teamWithSettings, isLoading: isLoadingTeam } = useZapQuery<TGetTeamResponse>(
+    'team.get',
+    {
+      teamReference: team.url,
+    },
+  );
 
-  const { mutateAsync: updateTeamSettings } = trpc.team.settings.update.useMutation();
+  const { mutateAsync: updateTeamSettings } = useZapMutation<void, unknown>('team.settings.update');
 
   const onEmailPreferencesSubmit = async (data: TEmailPreferencesFormSchema) => {
     try {
