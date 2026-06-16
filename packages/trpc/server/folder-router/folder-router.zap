@@ -1,37 +1,25 @@
-# folder-router ZAP schema — typed scalar inputs for the fully-ported routes.
+# folder-router ZAP interface schema.
 #
-# Maps tRPC folderRouter procedures to ZAP structs. Rich list/object outputs
-# (folders[], breadcrumbs[]) ride the generic ZapReply.Result (superjson),
-# while scalar inputs get first-class typed structs here. Procedure ↔ route:
-#   getFolders          -> folder.getFolders
-#   findFolders         -> folder.findFolders
-#   findFoldersInternal -> folder.findFoldersInternal
-#   createFolder        -> folder.createFolder
-#   updateFolder        -> folder.updateFolder
-#   deleteFolder        -> folder.deleteFolder
+# Declares the folder router surface as a ZAP `interface` (one method per tRPC
+# procedure, ordinals auto-assigned in declaration order). Wire payloads ride
+# the shared ZapRequest/ZapReply envelope (../../zap/schema/transport.zap) as
+# superjson; the route key on the envelope selects the handler. Inputs are
+# validated by the SAME Zod schemas the tRPC procedures used.
+#
+# Route keys:
+#   folder.getFolders / findFolders / findFoldersInternal
+#   folder.createFolder / updateFolder / deleteFolder
 
 package esign
 
-# Folder type discriminator ("DOCUMENT" | "TEMPLATE" | "CHAT") + optional parent.
-struct FolderQuery {
-    Type     text @0    # folder type discriminator
-    ParentId text @8    # parent folder id ("" = root)
-    Page     u32  @16   # pagination (0 = unset)
-    PerPage  u32  @20   # pagination (0 = unset)
-}
+struct Req  { Body text @0 }
+struct Resp { Body text @0 }
 
-struct CreateFolderInput {
-    Name     text @0
-    Type     text @8
-    ParentId text @16   # "" = root
-}
-
-struct UpdateFolderInput {
-    Id         text @0
-    Name       text @8
-    Visibility text @16  # "" = unchanged
-}
-
-struct DeleteFolderInput {
-    Id text @0
+interface Folder {
+    getFolders(req: Req) returns (resp: Resp)
+    findFolders(req: Req) returns (resp: Resp)
+    findFoldersInternal(req: Req) returns (resp: Resp)
+    createFolder(req: Req) returns (resp: Resp)
+    updateFolder(req: Req) returns (resp: Resp)
+    deleteFolder(req: Req) returns (resp: Resp)
 }

@@ -10,12 +10,10 @@
 // typed-object semantics every callsite depends on survive the transport swap.
 // The wire itself is binary ZAP (ZapRequest/ZapReply structs over WS frames),
 // not JSON-RPC.
-
-import SuperJSON from 'superjson';
-
-import type { Call, Response } from '@hanzo/zap';
-import { Status } from '@hanzo/zap';
 import type { CallHandler } from '@zap-proto/web';
+import type { Call, Response } from '@zap-proto/zap';
+import { Status } from '@zap-proto/zap';
+import SuperJSON from 'superjson';
 
 import { ZapReply, ZapRequest, newZapReply } from '../gen/transport_zap';
 import { toWireError } from '../runtime/error';
@@ -27,8 +25,7 @@ export type ZapHandler = (ctx: ZapContext, input: unknown) => Promise<unknown> |
 /** route ("<router>.<procedure>") → handler. */
 export type ZapRouteMap = Record<string, ZapHandler>;
 
-const encoder = (value: unknown): string =>
-  value === undefined ? '' : SuperJSON.stringify(value);
+const encoder = (value: unknown): string => (value === undefined ? '' : SuperJSON.stringify(value));
 const decoder = (s: string): unknown => (s === '' ? undefined : SuperJSON.parse(s));
 
 /**

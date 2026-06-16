@@ -11,10 +11,8 @@
 //   - else session cookie                 → getOptionalSession,  auth:'session'
 // The same getApiTokenByToken + session validation functions are reused, so
 // there is no second auth code path.
-
+import type { MintCap } from '@zap-proto/web/server';
 import type { IncomingMessage } from 'node:http';
-
-import type { MintCap } from '@zap-proto/web';
 
 import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
 import { getApiTokenByToken } from '@hanzo/sign-lib/server-only/public-api/get-api-token-by-token';
@@ -51,9 +49,7 @@ function parseBearer(value: string | undefined): string | null {
  * The esign MintCap: bearer/session → ZapContext, or null (401).
  * `source` mirrors the tRPC `requestSource` ('app' | 'apiV1' | 'apiV2').
  */
-export function makeMintCap(
-  source: 'app' | 'apiV1' | 'apiV2' = 'app',
-): MintCap<ZapContext> {
+export function makeMintCap(source: 'app' | 'apiV1' | 'apiV2' = 'app'): MintCap<ZapContext> {
   return async (req: IncomingMessage): Promise<ZapContext | null> => {
     const fetchReq = toFetchRequest(req);
     const requestMetadata = extractRequestMetadata(fetchReq);

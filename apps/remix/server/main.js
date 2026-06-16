@@ -36,9 +36,10 @@ const port = parseInt(process.env.PORT || '3000', 10);
 
 // @hono/node-server's serve() returns the underlying Node http.Server; attach
 // the ZAP-over-WebSocket RPC endpoint to it so it shares the app's port. This
-// is the @zap-proto/web replacement for mounting the tRPC HTTP handler — the
-// migrated routers (folder/profile/apiToken) are served over ZAP; everything
-// else still flows through the legacy tRPC HTTP path until ported.
+// is the @zap-proto/web replacement for mounting the tRPC HTTP handler — all
+// 14 routers are served over ZAP (see @hanzo/sign-trpc/zap/server/routes). The
+// legacy tRPC HTTP path remains mounted only to back the trpc-to-openapi REST
+// surface (apps/openpage-api) and any not-yet-cutover client callsites.
 const httpServer = serve({ fetch: handler.fetch, port });
 
 serveZap(httpServer, {
