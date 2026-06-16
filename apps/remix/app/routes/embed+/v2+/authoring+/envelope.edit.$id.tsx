@@ -19,8 +19,8 @@ import {
 import type { TEnvelopeFieldAndMeta } from '@hanzo/sign-lib/types/field-meta';
 import { buildEmbeddedEditorOptions } from '@hanzo/sign-lib/utils/embed-config';
 import { prisma } from '@hanzo/sign-prisma';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TUpdateEmbeddingEnvelopePayload } from '@hanzo/sign-trpc/server/embedding-router/update-embedding-envelope.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
@@ -158,8 +158,9 @@ const EnvelopeEditPage = ({ embedAuthoringOptions }: EnvelopeEditPageProps) => {
   const [isUpdatingEnvelope, setIsUpdatingEnvelope] = useState(false);
   const [updatedEnvelope, setUpdatedEnvelope] = useState<{ id: string } | null>(null);
 
-  const { mutateAsync: updateEmbeddingEnvelope } =
-    trpc.embeddingPresign.updateEmbeddingEnvelope.useMutation();
+  const { mutateAsync: updateEmbeddingEnvelope } = useZapMutation<void, FormData>(
+    'embeddingPresign.updateEmbeddingEnvelope',
+  );
 
   const buildUpdateEnvelopeRequest = (
     envelope: TEditorEnvelope,

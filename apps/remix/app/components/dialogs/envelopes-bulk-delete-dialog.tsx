@@ -4,7 +4,11 @@ import { Trans } from '@lingui/react/macro';
 import { EnvelopeType } from '@prisma/client';
 import type * as DialogPrimitive from '@radix-ui/react-dialog';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TBulkDeleteEnvelopesRequest,
+  TBulkDeleteEnvelopesResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/bulk-delete-envelopes.types';
+import { useZapMutation, useZapUtils } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -36,17 +40,20 @@ export const EnvelopesBulkDeleteDialog = ({
   const { t } = useLingui();
   const { toast } = useToast();
 
-  const trpcUtils = trpc.useUtils();
+  const zapUtils = useZapUtils();
 
   const isDocument = envelopeType === EnvelopeType.DOCUMENT;
 
-  const { mutateAsync: bulkDeleteEnvelopes, isPending } = trpc.envelope.bulk.delete.useMutation({
+  const { mutateAsync: bulkDeleteEnvelopes, isPending } = useZapMutation<
+    TBulkDeleteEnvelopesResponse,
+    TBulkDeleteEnvelopesRequest
+  >('envelope.bulk.delete', {
     onSuccess: async (result) => {
       // Invalidate the appropriate query based on envelope type.
       if (isDocument) {
-        await trpcUtils.document.findDocumentsInternal.invalidate();
+        await zapUtils.invalidate('document.findDocumentsInternal');
       } else {
-        await trpcUtils.template.findTemplates.invalidate();
+        await zapUtils.invalidate('template.findTemplates');
       }
 
       if (result.failedIds.length > 0) {

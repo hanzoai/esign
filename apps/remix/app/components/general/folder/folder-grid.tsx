@@ -7,8 +7,11 @@ import { Link } from 'react-router';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
-import { type TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import {
+  type TFolderWithSubfolders,
+  type TGetFoldersResponse,
+} from '@hanzo/sign-trpc/server/folder-router/schema';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
 
 import { FolderCreateDialog } from '~/components/dialogs/folder-create-dialog';
@@ -37,7 +40,7 @@ export const FolderGrid = ({ type, parentId }: FolderGridProps) => {
   const [isSettingsFolderOpen, setIsSettingsFolderOpen] = useState(false);
   const [folderToSettings, setFolderToSettings] = useState<TFolderWithSubfolders | null>(null);
 
-  const { data: foldersData, isPending } = trpc.folder.getFolders.useQuery({
+  const { data: foldersData, isPending } = useZapQuery<TGetFoldersResponse>('folder.getFolders', {
     type,
     parentId,
   });

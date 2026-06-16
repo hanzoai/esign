@@ -14,7 +14,8 @@ import { AppError } from '@hanzo/sign-lib/errors/app-error';
 import { base64 } from '@hanzo/sign-lib/universal/base64';
 import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
 import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { TSetProfileImageMutationSchema } from '@hanzo/sign-trpc/server/profile-router/schema';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -53,7 +54,9 @@ export const AvatarImageForm = ({ className, team, organisation }: AvatarImageFo
   const { _ } = useLingui();
   const { toast } = useToast();
 
-  const { mutateAsync: setProfileImage } = trpc.profile.setProfileImage.useMutation();
+  const { mutateAsync: setProfileImage } = useZapMutation<void, TSetProfileImageMutationSchema>(
+    'profile.setProfileImage',
+  );
 
   const initials = extractInitials(team?.name || organisation?.name || user.name || '');
 

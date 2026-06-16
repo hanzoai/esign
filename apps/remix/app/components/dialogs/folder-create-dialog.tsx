@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -49,7 +49,7 @@ export const FolderCreateDialog = ({ type, trigger, ...props }: FolderCreateDial
 
   const [isCreateFolderOpen, setIsCreateFolderOpen] = useState(false);
 
-  const { mutateAsync: createFolder } = trpc.folder.createFolder.useMutation();
+  const { mutateAsync: createFolder } = useZapMutation<void, unknown>('folder.createFolder');
 
   const form = useForm<TCreateFolderFormSchema>({
     resolver: zodResolver(ZCreateFolderFormSchema),

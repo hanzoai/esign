@@ -7,7 +7,8 @@ import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindPasskeysResponse } from '@hanzo/sign-trpc/server/auth-router/find-passkeys.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
@@ -26,7 +27,8 @@ export const SettingsSecurityPasskeyTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.auth.passkey.find.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindPasskeysResponse>(
+    'auth.passkey.find',
     {
       page: parsedSearchParams.page,
       perPage: parsedSearchParams.perPage,

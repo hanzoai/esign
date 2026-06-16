@@ -13,7 +13,11 @@ import { z } from 'zod';
 
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
 import { DocumentAuth, type TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type {
+  TCreatePasskeyAuthenticationOptionsRequest,
+  TCreatePasskeyAuthenticationOptionsResponse,
+} from '@hanzo/sign-trpc/server/auth-router/create-passkey-authentication-options.types';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { DialogFooter } from '@hanzo/sign-ui/primitives/dialog';
@@ -75,8 +79,10 @@ export const DocumentSigningAuthPasskey = ({
     },
   });
 
-  const { mutateAsync: createPasskeyAuthenticationOptions } =
-    trpc.auth.passkey.createAuthenticationOptions.useMutation();
+  const { mutateAsync: createPasskeyAuthenticationOptions } = useZapMutation<
+    TCreatePasskeyAuthenticationOptionsResponse,
+    TCreatePasskeyAuthenticationOptionsRequest
+  >('auth.passkey.createAuthenticationOptions');
 
   const [formErrorCode, setFormErrorCode] = useState<string | null>(null);
 

@@ -4,18 +4,6 @@ import { z } from 'zod';
 import { ZEnvelopeManySchema } from '@hanzo/sign-lib/types/envelope';
 import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const findEnvelopesMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'GET',
-    path: '/envelope',
-    summary: 'Find envelopes',
-    description: 'Find envelopes based on search criteria',
-    tags: ['Envelope'],
-  },
-};
-
 export const ZFindEnvelopesRequestSchema = ZFindSearchParamsSchema.extend({
   type: z
     .nativeEnum(EnvelopeType)

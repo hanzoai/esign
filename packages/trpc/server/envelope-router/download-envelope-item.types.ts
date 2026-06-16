@@ -1,20 +1,5 @@
 import { z } from 'zod';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const downloadEnvelopeItemMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'GET',
-    path: '/envelope/item/{envelopeItemId}/download',
-    summary: 'Download an envelope item',
-    description: 'Download an envelope item by its ID',
-    tags: ['Envelope Items'],
-    responseHeaders: z.object({
-      'Content-Type': z.literal('application/pdf'),
-    }),
-  },
-};
-
 export const ZDownloadEnvelopeItemRequestSchema = z.object({
   envelopeItemId: z.string().describe('The ID of the envelope item to download.'),
   version: z

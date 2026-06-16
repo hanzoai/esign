@@ -8,7 +8,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { toFriendlyWebhookEventName } from '@hanzo/sign-lib/universal/webhook/to-friendly-webhook-event-name';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TTriggerTestWebhookRequestSchema } from '@hanzo/sign-trpc/server/webhook-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -53,7 +54,9 @@ export const WebhookTestDialog = ({ webhook, children }: WebhookTestDialogProps)
 
   const [open, setOpen] = useState(false);
 
-  const { mutateAsync: testWebhook } = trpc.webhook.testWebhook.useMutation();
+  const { mutateAsync: testWebhook } = useZapMutation<unknown, TTriggerTestWebhookRequestSchema>(
+    'webhook.testWebhook',
+  );
 
   const form = useForm<TTestWebhookFormSchema>({
     resolver: zodResolver(ZTestWebhookFormSchema),

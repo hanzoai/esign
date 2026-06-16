@@ -13,7 +13,8 @@ import { unsafe_useEffectOnce } from '@hanzo/sign-lib/client-only/hooks/use-effe
 import { AUTO_SIGNABLE_FIELD_TYPES } from '@hanzo/sign-lib/constants/autosign';
 import { DocumentAuth } from '@hanzo/sign-lib/types/document-auth';
 import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TSignFieldWithTokenMutationSchema } from '@hanzo/sign-trpc/server/field-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -65,7 +66,10 @@ export const DocumentSigningAutoSign = ({ recipient, fields }: DocumentSigningAu
 
   const form = useForm();
 
-  const { mutateAsync: signFieldWithToken } = trpc.field.signFieldWithToken.useMutation();
+  const { mutateAsync: signFieldWithToken } = useZapMutation<
+    unknown,
+    TSignFieldWithTokenMutationSchema
+  >('field.signFieldWithToken');
 
   const autoSignableFields = fields.filter((field) => {
     if (field.inserted) {

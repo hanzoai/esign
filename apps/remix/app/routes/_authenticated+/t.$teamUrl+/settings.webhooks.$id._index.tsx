@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
+import type { Webhook } from '@prisma/client';
 import { WebhookCallStatus, WebhookTriggerEvents } from '@prisma/client';
 import {
   CheckCircle2Icon,
@@ -22,7 +23,8 @@ import { useIsMounted } from '@hanzo/sign-lib/client-only/hooks/use-is-mounted';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import { toFriendlyWebhookEventName } from '@hanzo/sign-lib/universal/webhook/to-friendly-webhook-event-name';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindWebhookCallsResponse } from '@hanzo/sign-trpc/server/webhook-router/find-webhook-calls.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
@@ -75,7 +77,8 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
     Object.fromEntries(searchParams ?? []),
   );
 
-  const { data: webhook, isLoading } = trpc.webhook.getWebhookById.useQuery(
+  const { data: webhook, isLoading } = useZapQuery<Webhook>(
+    'webhook.getWebhookById',
     {
       id: params.id,
     },
@@ -86,7 +89,7 @@ export default function WebhookPage({ params }: Route.ComponentProps) {
     data,
     isLoading: isLogsLoading,
     isLoadingError: isLogsLoadingError,
-  } = trpc.webhook.calls.find.useQuery({
+  } = useZapQuery<TFindWebhookCallsResponse>('webhook.calls.find', {
     webhookId: params.id,
     page: parsedSearchParams.page,
     perPage: parsedSearchParams.perPage,

@@ -7,7 +7,11 @@ import { useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type {
+  TDeleteUserRequest,
+  TDeleteUserResponse,
+} from '@hanzo/sign-trpc/server/admin-router/delete-user.types';
 import type { TGetUserResponse } from '@hanzo/sign-trpc/server/admin-router/get-user.types';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -34,8 +38,10 @@ export const AdminUserDeleteDialog = ({ className, user }: AdminUserDeleteDialog
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
 
-  const { mutateAsync: deleteUser, isPending: isDeletingUser } =
-    trpc.admin.user.delete.useMutation();
+  const { mutateAsync: deleteUser, isPending: isDeletingUser } = useZapMutation<
+    TDeleteUserResponse,
+    TDeleteUserRequest
+  >('admin.user.delete');
 
   const onDeleteAccount = async () => {
     try {

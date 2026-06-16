@@ -12,6 +12,7 @@ import handle from 'hono-react-router-adapter/node';
 
 import { serveZap } from '@hanzo/sign-trpc/zap/server';
 
+import { serveZapHttpApi } from './hono/server/zap/http-api.js';
 import server from './hono/server/router.js';
 import * as build from './index.js';
 
@@ -37,11 +38,19 @@ const port = parseInt(process.env.PORT || '3000', 10);
 // @hono/node-server's serve() returns the underlying Node http.Server; attach
 // the ZAP-over-WebSocket RPC endpoint to it so it shares the app's port. This
 // is the @zap-proto/web replacement for mounting the tRPC HTTP handler — all
-// 14 routers are served over ZAP (see @hanzo/sign-trpc/zap/server/routes). The
-// legacy tRPC HTTP path remains mounted only to back the trpc-to-openapi REST
-// surface (apps/openpage-api) and any not-yet-cutover client callsites.
+// 14 routers are served over ZAP (see @hanzo/sign-trpc/zap/server/routes).
 const httpServer = serve({ fetch: handler.fetch, port });
 
 serveZap(httpServer, {
   onError: (err) => console.error('[zap-rpc]', err),
+});
+
+// Re-back the /api/v2 + /api/v2-beta REST surface (external integrators) with
+// the same ZAP service over JSON-over-HTTP. httpServe terminates only its
+// declared POST routes at the http.Server level (before Hono), dispatching
+// through the SAME zapRoutes + makeDispatcher + makeMintCap('apiV2'); all other
+// requests (GET /api/v2/openapi.json, the download routes, the RR7 app) pass
+// through to Hono untouched.
+serveZapHttpApi(httpServer, {
+  onError: (err) => console.error('[zap-http-api]', err),
 });

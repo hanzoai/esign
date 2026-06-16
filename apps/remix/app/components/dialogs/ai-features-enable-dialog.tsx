@@ -5,7 +5,7 @@ import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberRole, TeamMemberRole } from '@prisma/client';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -40,10 +40,14 @@ export const AiFeaturesEnableDialog = ({
 
   const [error, setError] = useState<string | null>(null);
 
-  const { mutateAsync: updateTeamSettings, isPending: isUpdatingTeamSettings } =
-    trpc.team.settings.update.useMutation();
+  const { mutateAsync: updateTeamSettings, isPending: isUpdatingTeamSettings } = useZapMutation<
+    void,
+    { teamId: number; data: { aiFeaturesEnabled: boolean } }
+  >('team.settings.update');
   const { mutateAsync: updateOrganisationSettings, isPending: isUpdatingOrganisationSettings } =
-    trpc.organisation.settings.update.useMutation();
+    useZapMutation<void, { organisationId: string; data: { aiFeaturesEnabled: boolean } }>(
+      'organisation.settings.update',
+    );
 
   const isSubmitting = isUpdatingTeamSettings || isUpdatingOrganisationSettings;
 

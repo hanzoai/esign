@@ -12,7 +12,10 @@ import { z } from 'zod';
 
 import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/teams';
 import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TCreateTeamMembersRequestSchema } from '@hanzo/sign-trpc/server/team-router/create-team-members.types';
+import type { TFindTeamMembersResponse } from '@hanzo/sign-trpc/server/team-router/find-team-members.types';
+import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -73,7 +76,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
   const { toast } = useToast();
 
   const team = useCurrentTeam();
-  const utils = trpc.useUtils();
+  const utils = useZapUtils();
 
   const form = useForm<TAddTeamMembersFormSchema>({
     resolver: zodResolver(ZAddTeamMembersFormSchema),
@@ -82,13 +85,18 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
     },
   });
 
-  const { mutateAsync: createTeamMembers } = trpc.team.member.createMany.useMutation();
+  const { mutateAsync: createTeamMembers } = useZapMutation<void, TCreateTeamMembersRequestSchema>(
+    'team.member.createMany',
+  );
 
-  const organisationMemberQuery = trpc.organisation.member.find.useQuery({
-    organisationId: team.organisationId,
-  });
+  const organisationMemberQuery = useZapQuery<TFindOrganisationMembersResponse>(
+    'organisation.member.find',
+    {
+      organisationId: team.organisationId,
+    },
+  );
 
-  const teamMemberQuery = trpc.team.member.find.useQuery({
+  const teamMemberQuery = useZapQuery<TFindTeamMembersResponse>('team.member.find', {
     teamId: team.id,
   });
 
@@ -157,7 +165,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
   // Invalidate queries when invite dialog closes (transitions from true to false) to refresh available members
   useEffect(() => {
     if (prevInviteDialogOpenRef.current && !inviteDialogOpen) {
-      void utils.organisation.member.find.invalidate({
+      void utils.invalidate('organisation.member.find', {
         organisationId: team.organisationId,
       });
     }

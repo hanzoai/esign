@@ -1,8 +1,11 @@
 import { Trans, useLingui } from '@lingui/react/macro';
 import { OrganisationGroupType, OrganisationMemberRole, TeamMemberRole } from '@prisma/client';
+import { z } from 'zod';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZCreateTeamGroupsRequestSchema } from '@hanzo/sign-trpc/server/team-router/create-team-groups.types';
+import type { TFindOrganisationGroupsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-groups.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -25,7 +28,10 @@ export const TeamMemberInheritEnableDialog = () => {
   const { toast } = useToast();
   const { t } = useLingui();
 
-  const { mutateAsync: createTeamGroups, isPending } = trpc.team.group.createMany.useMutation({
+  const { mutateAsync: createTeamGroups, isPending } = useZapMutation<
+    void,
+    z.infer<typeof ZCreateTeamGroupsRequestSchema>
+  >('team.group.createMany', {
     onSuccess: () => {
       toast({
         title: t`Access enabled`,
@@ -42,12 +48,15 @@ export const TeamMemberInheritEnableDialog = () => {
     },
   });
 
-  const organisationGroupQuery = trpc.organisation.group.find.useQuery({
-    organisationId: organisation.id,
-    perPage: 1,
-    types: [OrganisationGroupType.INTERNAL_ORGANISATION],
-    organisationRoles: [OrganisationMemberRole.MEMBER],
-  });
+  const organisationGroupQuery = useZapQuery<TFindOrganisationGroupsResponse>(
+    'organisation.group.find',
+    {
+      organisationId: organisation.id,
+      perPage: 1,
+      types: [OrganisationGroupType.INTERNAL_ORGANISATION],
+      organisationRoles: [OrganisationMemberRole.MEMBER],
+    },
+  );
 
   const enableAccessGroup = async () => {
     if (!organisationGroupQuery.data?.data[0]?.id) {

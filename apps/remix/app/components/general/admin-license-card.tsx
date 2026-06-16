@@ -13,7 +13,11 @@ import { match } from 'ts-pattern';
 
 import type { TCachedLicense } from '@hanzo/sign-lib/types/license';
 import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/sign-lib/types/subscription';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type {
+  TResyncLicenseRequest,
+  TResyncLicenseResponse,
+} from '@hanzo/sign-trpc/server/admin-router/resync-license.types';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -168,8 +172,10 @@ const AdminLicenseResyncButton = () => {
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
-  const { mutate: resyncLicense, isPending: isResyncingLicense } =
-    trpc.admin.license.resync.useMutation({
+  const { mutate: resyncLicense, isPending: isResyncingLicense } = useZapMutation<
+    TResyncLicenseResponse,
+    TResyncLicenseRequest
+  >('admin.license.resync', {
       onSuccess: async () => {
         toast({
           title: t`License synced`,

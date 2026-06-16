@@ -1,7 +1,8 @@
 import { Trans } from '@lingui/react/macro';
 import { ExternalLink, PaperclipIcon } from 'lucide-react';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TFindAttachmentsResponse } from '@hanzo/sign-trpc/server/envelope-router/attachment/find-attachments.types';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/sign-ui/primitives/popover';
 
@@ -16,7 +17,7 @@ export const DocumentSigningAttachmentsPopover = ({
   token,
   trigger,
 }: DocumentSigningAttachmentsPopoverProps) => {
-  const { data: attachments } = trpc.envelope.attachment.find.useQuery({
+  const { data: attachments } = useZapQuery<TFindAttachmentsResponse>('envelope.attachment.find', {
     envelopeId,
     token,
   });

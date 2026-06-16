@@ -12,7 +12,8 @@ import { z } from 'zod';
 import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
 import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/organisations';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZUpdateOrganisationMemberRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-members.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -76,7 +77,10 @@ export const OrganisationMemberUpdateDialog = ({
     },
   });
 
-  const { mutateAsync: updateOrganisationMember } = trpc.organisation.member.update.useMutation();
+  const { mutateAsync: updateOrganisationMember } = useZapMutation<
+    void,
+    z.infer<typeof ZUpdateOrganisationMemberRequestSchema>
+  >('organisation.member.update');
 
   const onFormSubmit = async ({ role }: ZUpdateOrganisationMemberSchema) => {
     try {

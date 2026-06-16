@@ -12,11 +12,12 @@ import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
 import { sortFieldsByPosition } from '@hanzo/sign-lib/utils/fields';
 import { isSignatureFieldType } from '@hanzo/sign-prisma/guards/is-signature-field';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetMultiSignDocumentResponseSchema } from '@hanzo/sign-trpc/server/embedding-router/get-multi-sign-document.types';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
 } from '@hanzo/sign-trpc/server/field-router/schema';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { DocumentReadOnlyFields } from '@hanzo/sign-ui/components/document/document-read-only-fields';
 import { FieldToolTip } from '@hanzo/sign-ui/components/field/field-tooltip';
 import { cn } from '@hanzo/sign-ui/lib/utils';
@@ -73,19 +74,27 @@ export const MultiSignDocumentSigningView = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPendingFieldTooltip, setShowPendingFieldTooltip] = useState(false);
 
-  const { data: document, isLoading } = trpc.embeddingPresign.getMultiSignDocument.useQuery(
+  const { data: document, isLoading } = useZapQuery<TGetMultiSignDocumentResponseSchema>(
+    'embeddingPresign.getMultiSignDocument',
     { token },
     {
       staleTime: 0,
     },
   );
 
-  const { mutateAsync: signFieldWithToken } = trpc.field.signFieldWithToken.useMutation();
-  const { mutateAsync: removeSignedFieldWithToken } =
-    trpc.field.removeSignedFieldWithToken.useMutation();
+  const { mutateAsync: signFieldWithToken } = useZapMutation<
+    unknown,
+    TSignFieldWithTokenMutationSchema
+  >('field.signFieldWithToken');
+  const { mutateAsync: removeSignedFieldWithToken } = useZapMutation<
+    unknown,
+    TRemovedSignedFieldWithTokenMutationSchema
+  >('field.removeSignedFieldWithToken');
 
-  const { mutateAsync: completeDocumentWithToken } =
-    trpc.recipient.completeDocumentWithToken.useMutation();
+  const { mutateAsync: completeDocumentWithToken } = useZapMutation<
+    unknown,
+    { documentId: number; token: string }
+  >('recipient.completeDocumentWithToken');
 
   const hasSignatureField = document?.fields.some((field) => isSignatureFieldType(field.type));
 

@@ -7,7 +7,8 @@ import { Link, useParams } from 'react-router';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
 import { getRootHref } from '@hanzo/sign-lib/utils/params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TGetInboxCountResponse } from '@hanzo/sign-trpc/server/document-router/get-inbox-count.types';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 
@@ -30,7 +31,8 @@ export const Header = ({ className, ...props }: HeaderProps) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
-  const { data: unreadCountData } = trpc.document.inbox.getCount.useQuery(
+  const { data: unreadCountData } = useZapQuery<TGetInboxCountResponse>(
+    'document.inbox.getCount',
     {
       readStatus: ReadStatus.NOT_OPENED,
     },

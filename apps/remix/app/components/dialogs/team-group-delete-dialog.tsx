@@ -4,9 +4,11 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import type { TeamMemberRole } from '@prisma/client';
+import { z } from 'zod';
 
 import { isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZDeleteTeamGroupRequestSchema } from '@hanzo/sign-trpc/server/team-router/delete-team-group.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -42,7 +44,10 @@ export const TeamGroupDeleteDialog = ({
 
   const team = useCurrentTeam();
 
-  const { mutateAsync: deleteGroup, isPending: isDeleting } = trpc.team.group.delete.useMutation({
+  const { mutateAsync: deleteGroup, isPending: isDeleting } = useZapMutation<
+    void,
+    z.infer<typeof ZDeleteTeamGroupRequestSchema>
+  >('team.group.delete', {
     onSuccess: () => {
       toast({
         title: _(msg`Success`),

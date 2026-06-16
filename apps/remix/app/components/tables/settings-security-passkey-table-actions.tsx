@@ -7,7 +7,7 @@ import { Trans } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -62,7 +62,7 @@ export const SettingsSecurityPasskeyTableActions = ({
   });
 
   const { mutateAsync: updatePasskey, isPending: isUpdatingPasskey } =
-    trpc.auth.passkey.update.useMutation({
+    useZapMutation<unknown, unknown>('auth.passkey.update', {
       onSuccess: () => {
         toast({
           title: _(msg`Success`),
@@ -84,7 +84,7 @@ export const SettingsSecurityPasskeyTableActions = ({
     });
 
   const { mutateAsync: deletePasskey, isPending: isDeletingPasskey } =
-    trpc.auth.passkey.delete.useMutation({
+    useZapMutation<unknown, unknown>('auth.passkey.delete', {
       onSuccess: () => {
         toast({
           title: _(msg`Success`),

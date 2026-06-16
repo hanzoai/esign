@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 
 import type { TLicenseClaim } from '@hanzo/sign-lib/types/license';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TFindSubscriptionClaimsResponse } from '@hanzo/sign-trpc/server/admin-router/find-subscription-claims.types';
+import type { TUpdateSubscriptionClaimRequest } from '@hanzo/sign-trpc/server/admin-router/update-subscription-claim.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -31,7 +32,10 @@ export const ClaimUpdateDialog = ({ claim, trigger, licenseFlags }: ClaimUpdateD
 
   const [open, setOpen] = useState(false);
 
-  const { mutateAsync: updateClaim, isPending } = trpc.admin.claims.update.useMutation({
+  const { mutateAsync: updateClaim, isPending } = useZapMutation<
+    void,
+    TUpdateSubscriptionClaimRequest
+  >('admin.claims.update', {
     onSuccess: () => {
       toast({
         title: t`Subscription claim updated successfully.`,

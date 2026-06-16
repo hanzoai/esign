@@ -1,4 +1,3 @@
-// import type { OpenApiMeta } from 'trpc-to-openapi';
 import type { z } from 'zod';
 
 import { ZDocumentManySchema } from '@hanzo/sign-lib/types/document';

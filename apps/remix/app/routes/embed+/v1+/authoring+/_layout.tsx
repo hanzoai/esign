@@ -6,7 +6,7 @@ import { Outlet, useLoaderData } from 'react-router';
 import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
 import { getOrganisationClaimByTeamId } from '@hanzo/sign-lib/server-only/organisation/get-organisation-claims';
 import { ZBaseEmbedAuthoringSchema } from '@hanzo/sign-lib/types/embed-authoring-base-schema';
-import { TrpcProvider } from '@hanzo/sign-trpc/react';
+import { ZapProvider } from '@hanzo/sign-trpc/zap/react';
 
 import { injectCss } from '~/utils/css-vars';
 
@@ -84,8 +84,8 @@ export default function AuthoringLayout() {
   }
 
   return (
-    <TrpcProvider headers={{ authorization: `Bearer ${token}` }}>
+    <ZapProvider>
       <Outlet />
-    </TrpcProvider>
+    </ZapProvider>
   );
 }

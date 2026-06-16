@@ -5,34 +5,10 @@ import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZFindOrganisationEmailsRequestSchema,
   ZFindOrganisationEmailsResponseSchema,
 } from './find-organisation-emails.types';
-
-export const findOrganisationEmailsRoute = authenticatedProcedure
-  .input(ZFindOrganisationEmailsRequestSchema)
-  .output(ZFindOrganisationEmailsResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { organisationId, emailDomainId, query, page, perPage } = input;
-    const { user } = ctx;
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-      },
-    });
-
-    return await findOrganisationEmails({
-      userId: user.id,
-      organisationId,
-      emailDomainId,
-      query,
-      page,
-      perPage,
-    });
-  });
 
 type FindOrganisationEmailsOptions = {
   userId: number;

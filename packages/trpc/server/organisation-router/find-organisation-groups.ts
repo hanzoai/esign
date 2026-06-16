@@ -6,38 +6,10 @@ import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZFindOrganisationGroupsRequestSchema,
   ZFindOrganisationGroupsResponseSchema,
 } from './find-organisation-groups.types';
-
-export const findOrganisationGroupsRoute = authenticatedProcedure
-  // .meta(findOrganisationGroupsMeta)
-  .input(ZFindOrganisationGroupsRequestSchema)
-  .output(ZFindOrganisationGroupsResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { organisationId, types, query, page, perPage, organisationGroupId, organisationRoles } =
-      input;
-    const { user } = ctx;
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-      },
-    });
-
-    return await findOrganisationGroups({
-      userId: user.id,
-      organisationId,
-      organisationGroupId,
-      organisationRoles,
-      types,
-      query,
-      page,
-      perPage,
-    });
-  });
 
 type FindOrganisationGroupsOptions = {
   userId: number;

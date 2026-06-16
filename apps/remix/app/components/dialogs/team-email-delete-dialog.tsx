@@ -5,10 +5,15 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import type { Prisma } from '@prisma/client';
 import { useRevalidator } from 'react-router';
+import type { z } from 'zod';
 
 import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
 import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TDeleteTeamEmailMutationSchema,
+  ZDeleteTeamEmailVerificationMutationSchema,
+} from '@hanzo/sign-trpc/server/team-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert } from '@hanzo/sign-ui/primitives/alert';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -47,43 +52,50 @@ export const TeamEmailDeleteDialog = ({ trigger, teamName, team }: TeamEmailDele
   const { toast } = useToast();
   const { revalidate } = useRevalidator();
 
-  const { mutateAsync: deleteTeamEmail, isPending: isDeletingTeamEmail } =
-    trpc.team.email.delete.useMutation({
-      onSuccess: () => {
-        toast({
-          title: _(msg`Success`),
-          description: _(msg`Team email has been removed`),
-          duration: 5000,
-        });
-      },
-      onError: () => {
-        toast({
-          title: _(msg`Something went wrong`),
-          description: _(msg`Unable to remove team email at this time. Please try again.`),
-          variant: 'destructive',
-          duration: 10000,
-        });
-      },
-    });
+  const { mutateAsync: deleteTeamEmail, isPending: isDeletingTeamEmail } = useZapMutation<
+    unknown,
+    TDeleteTeamEmailMutationSchema
+  >('team.email.delete', {
+    onSuccess: () => {
+      toast({
+        title: _(msg`Success`),
+        description: _(msg`Team email has been removed`),
+        duration: 5000,
+      });
+    },
+    onError: () => {
+      toast({
+        title: _(msg`Something went wrong`),
+        description: _(msg`Unable to remove team email at this time. Please try again.`),
+        variant: 'destructive',
+        duration: 10000,
+      });
+    },
+  });
 
   const { mutateAsync: deleteTeamEmailVerification, isPending: isDeletingTeamEmailVerification } =
-    trpc.team.email.verification.delete.useMutation({
-      onSuccess: () => {
-        toast({
-          title: _(msg`Success`),
-          description: _(msg`Email verification has been removed`),
-          duration: 5000,
-        });
+    useZapMutation<unknown, z.infer<typeof ZDeleteTeamEmailVerificationMutationSchema>>(
+      'team.email.verification.delete',
+      {
+        onSuccess: () => {
+          toast({
+            title: _(msg`Success`),
+            description: _(msg`Email verification has been removed`),
+            duration: 5000,
+          });
+        },
+        onError: () => {
+          toast({
+            title: _(msg`Something went wrong`),
+            description: _(
+              msg`Unable to remove email verification at this time. Please try again.`,
+            ),
+            variant: 'destructive',
+            duration: 10000,
+          });
+        },
       },
-      onError: () => {
-        toast({
-          title: _(msg`Something went wrong`),
-          description: _(msg`Unable to remove email verification at this time. Please try again.`),
-          variant: 'destructive',
-          duration: 10000,
-        });
-      },
-    });
+    );
 
   const onRemove = async () => {
     if (team.teamEmail) {

@@ -10,7 +10,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import type { TRecipientAccessAuth } from '@hanzo/sign-lib/types/document-auth';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type {
+  TAccessAuthRequest2FAEmailRequest,
+  TAccessAuthRequest2FAEmailResponse,
+} from '@hanzo/sign-trpc/server/document-router/access-auth-request-2fa-email.types';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Alert } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -47,8 +51,10 @@ export const AccessAuth2FAForm = ({ onSubmit, token, error }: AccessAuth2FAFormP
 
   const { user } = useRequiredDocumentSigningAuthContext();
 
-  const { mutateAsync: request2FAEmail, isPending: isRequesting2FAEmail } =
-    trpc.document.accessAuth.request2FAEmail.useMutation();
+  const { mutateAsync: request2FAEmail, isPending: isRequesting2FAEmail } = useZapMutation<
+    TAccessAuthRequest2FAEmailResponse,
+    TAccessAuthRequest2FAEmailRequest
+  >('document.accessAuth.request2FAEmail');
 
   const form = useForm({
     resolver: zodResolver(ZAccessAuth2FAFormSchema),

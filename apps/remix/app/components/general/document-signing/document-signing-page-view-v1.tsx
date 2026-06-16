@@ -26,7 +26,8 @@ import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-d
 import { validateFieldsInserted } from '@hanzo/sign-lib/utils/fields';
 import type { FieldWithSignatureAndFieldMeta } from '@hanzo/sign-prisma/types/field-with-signature-and-fieldmeta';
 import type { RecipientWithFields } from '@hanzo/sign-prisma/types/recipient-with-fields';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/sign-trpc/server/recipient-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { DocumentReadOnlyFields } from '@hanzo/sign-ui/components/document/document-read-only-fields';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
@@ -89,7 +90,9 @@ export const DocumentSigningPageViewV1 = ({
     mutateAsync: completeDocumentWithToken,
     isPending,
     isSuccess,
-  } = trpc.recipient.completeDocumentWithToken.useMutation();
+  } = useZapMutation<unknown, TCompleteDocumentWithTokenMutationSchema>(
+    'recipient.completeDocumentWithToken',
+  );
 
   // Keep the loading state going if successful since the redirect may take some time.
   const isSubmitting = isPending || isSuccess;

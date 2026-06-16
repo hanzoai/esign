@@ -1,17 +1,5 @@
 import { z } from 'zod';
 
-import type { TrpcRouteMeta } from '../../trpc';
-
-export const createAttachmentMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/attachment/create',
-    summary: 'Create attachment',
-    description: 'Create a new attachment for an envelope',
-    tags: ['Envelope Attachments'],
-  },
-};
-
 export const ZCreateAttachmentRequestSchema = z.object({
   envelopeId: z.string(),
   data: z.object({

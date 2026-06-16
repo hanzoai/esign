@@ -1,16 +1,5 @@
 import { z } from 'zod';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const duplicateDocumentMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/document/duplicate',
-    summary: 'Duplicate document',
-    tags: ['Document'],
-  },
-};
-
 export const ZDuplicateDocumentRequestSchema = z.object({
   documentId: z.number(),
 });

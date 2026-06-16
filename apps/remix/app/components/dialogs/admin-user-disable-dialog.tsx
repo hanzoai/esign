@@ -6,7 +6,11 @@ import { Trans } from '@lingui/react/macro';
 import { match } from 'ts-pattern';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type {
+  TDisableUserRequest,
+  TDisableUserResponse,
+} from '@hanzo/sign-trpc/server/admin-router/disable-user.types';
 import type { TGetUserResponse } from '@hanzo/sign-trpc/server/admin-router/get-user.types';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -36,8 +40,10 @@ export const AdminUserDisableDialog = ({
 
   const [email, setEmail] = useState('');
 
-  const { mutateAsync: disableUser, isPending: isDisablingUser } =
-    trpc.admin.user.disable.useMutation();
+  const { mutateAsync: disableUser, isPending: isDisablingUser } = useZapMutation<
+    TDisableUserResponse,
+    TDisableUserRequest
+  >('admin.user.disable');
 
   const onDisableAccount = async () => {
     try {

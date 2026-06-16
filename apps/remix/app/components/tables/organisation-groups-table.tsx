@@ -10,7 +10,8 @@ import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-upd
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindOrganisationGroupsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-groups.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -29,7 +30,8 @@ export const OrganisationGroupsDataTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.organisation.group.find.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindOrganisationGroupsResponse>(
+    'organisation.group.find',
     {
       organisationId: organisation.id,
       query: parsedSearchParams.query,

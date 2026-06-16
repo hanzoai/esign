@@ -1,13 +1,16 @@
 import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { useLoaderData } from 'react-router';
+import type { z } from 'zod';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { IS_AI_FEATURES_CONFIGURED } from '@hanzo/sign-lib/constants/app';
 import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
 import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TGetOrganisationResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation.types';
+import type { ZUpdateOrganisationSettingsRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-settings.types';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import {
@@ -39,12 +42,14 @@ export default function OrganisationSettingsDocumentPage() {
   const isPersonalLayoutMode = isPersonalLayout(organisations);
 
   const { data: organisationWithSettings, isLoading: isLoadingOrganisation } =
-    trpc.organisation.get.useQuery({
+    useZapQuery<TGetOrganisationResponse>('organisation.get', {
       organisationReference: organisation.url,
     });
 
-  const { mutateAsync: updateOrganisationSettings } =
-    trpc.organisation.settings.update.useMutation();
+  const { mutateAsync: updateOrganisationSettings } = useZapMutation<
+    void,
+    z.infer<typeof ZUpdateOrganisationSettingsRequestSchema>
+  >('organisation.settings.update');
 
   const onDocumentPreferencesFormSubmit = async (data: TDocumentPreferencesFormSchema) => {
     try {

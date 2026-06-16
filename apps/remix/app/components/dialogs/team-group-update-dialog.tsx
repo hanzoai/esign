@@ -12,7 +12,8 @@ import { z } from 'zod';
 import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/teams';
 import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
 import { isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TUpdateTeamGroupRequest } from '@hanzo/sign-trpc/server/team-router/update-team-group.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -77,7 +78,9 @@ export const TeamGroupUpdateDialog = ({
     },
   });
 
-  const { mutateAsync: updateTeamGroup } = trpc.team.group.update.useMutation();
+  const { mutateAsync: updateTeamGroup } = useZapMutation<void, TUpdateTeamGroupRequest>(
+    'team.group.update',
+  );
 
   const onFormSubmit = async ({ role }: ZUpdateTeamGroupSchema) => {
     try {

@@ -6,28 +6,7 @@ import { mapEnvelopesToDocumentMany } from '@hanzo/sign-lib/utils/document';
 import { maskRecipientTokensForDocument } from '@hanzo/sign-lib/utils/mask-recipient-tokens-for-document';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import { ZFindInboxRequestSchema, ZFindInboxResponseSchema } from './find-inbox.types';
-
-export const findInboxRoute = authenticatedProcedure
-  .input(ZFindInboxRequestSchema)
-  .output(ZFindInboxResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { page, perPage } = input;
-
-    const userId = ctx.user.id;
-
-    const envelopes = await findInbox({
-      userId,
-      page,
-      perPage,
-    });
-
-    return {
-      ...envelopes,
-      data: envelopes.data.map(mapEnvelopesToDocumentMany),
-    };
-  });
 
 export type FindInboxOptions = {
   userId: number;

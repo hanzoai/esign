@@ -2,7 +2,8 @@ import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 
 import { putFile } from '@hanzo/sign-lib/universal/upload/put-file';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetTeamResponse } from '@hanzo/sign-trpc/server/team-router/get-team.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import {
@@ -23,11 +24,14 @@ export default function TeamsSettingsPage() {
   const { t } = useLingui();
   const { toast } = useToast();
 
-  const { data: teamWithSettings, isLoading: isLoadingTeam } = trpc.team.get.useQuery({
-    teamReference: team.id,
-  });
+  const { data: teamWithSettings, isLoading: isLoadingTeam } = useZapQuery<TGetTeamResponse>(
+    'team.get',
+    {
+      teamReference: team.id,
+    },
+  );
 
-  const { mutateAsync: updateTeamSettings } = trpc.team.settings.update.useMutation();
+  const { mutateAsync: updateTeamSettings } = useZapMutation<void, unknown>('team.settings.update');
 
   const onBrandingPreferencesFormSubmit = async (data: TBrandingPreferencesFormSchema) => {
     try {

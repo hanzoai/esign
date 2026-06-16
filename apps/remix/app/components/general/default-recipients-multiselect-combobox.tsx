@@ -5,7 +5,9 @@ import { RecipientRole } from '@prisma/client';
 
 import type { TDefaultRecipient } from '@hanzo/sign-lib/types/default-recipients';
 import { isRecipientEmailValidForSending } from '@hanzo/sign-lib/utils/recipients';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
+import type { TFindTeamMembersResponse } from '@hanzo/sign-trpc/server/team-router/find-team-members.types';
 import { MultiSelect, type Option } from '@hanzo/sign-ui/primitives/multiselect';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
@@ -27,7 +29,8 @@ export const DefaultRecipientsMultiSelectCombobox = ({
   const { toast } = useToast();
 
   const { data: organisationData, isLoading: isLoadingOrganisation } =
-    trpc.organisation.member.find.useQuery(
+    useZapQuery<TFindOrganisationMembersResponse>(
+      'organisation.member.find',
       {
         organisationId: organisationId!,
         query: '',
@@ -39,7 +42,8 @@ export const DefaultRecipientsMultiSelectCombobox = ({
       },
     );
 
-  const { data: teamData, isLoading: isLoadingTeam } = trpc.team.member.find.useQuery(
+  const { data: teamData, isLoading: isLoadingTeam } = useZapQuery<TFindTeamMembersResponse>(
+    'team.member.find',
     {
       teamId: teamId!,
       query: '',

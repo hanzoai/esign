@@ -12,7 +12,7 @@ import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embeddi
 import { getOrganisationClaimByTeamId } from '@hanzo/sign-lib/server-only/organisation/get-organisation-claims';
 import { getTeamSettings } from '@hanzo/sign-lib/server-only/team/get-team-settings';
 import { ZBaseEmbedDataSchema } from '@hanzo/sign-lib/types/embed-base-schemas';
-import { TrpcProvider } from '@hanzo/sign-trpc/react';
+import { ZapProvider } from '@hanzo/sign-trpc/zap/react';
 import type { OrganisationSession } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-session.types';
 
 import { TeamProvider } from '~/providers/team';
@@ -125,9 +125,7 @@ export default function AuthoringLayout() {
   return (
     <OrganisationProvider organisation={organisation}>
       <TeamProvider team={team}>
-        <TrpcProvider
-          headers={{ authorization: `Bearer ${token}`, 'x-team-Id': team.id.toString() }}
-        >
+        <ZapProvider>
           <LimitsProvider
             disableLimitsFetch={true}
             initialValue={{
@@ -139,7 +137,7 @@ export default function AuthoringLayout() {
           >
             <Outlet />
           </LimitsProvider>
-        </TrpcProvider>
+        </ZapProvider>
       </TeamProvider>
     </OrganisationProvider>
   );

@@ -11,7 +11,7 @@ import {
 } from '@hanzo/sign-lib/server-only/limits/constants';
 import { LimitsProvider } from '@hanzo/sign-lib/server-only/limits/provider/client';
 import { useOptionalCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { TrpcProvider } from '@hanzo/sign-trpc/react';
+import { ZapProvider } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
@@ -74,19 +74,15 @@ export default function Layout() {
     );
   }
 
-  const trpcHeaders = {
-    'x-team-Id': team.id.toString(),
-  };
-
   // Note: We use a key to force a re-render if the team context changes.
   // This is required otherwise you would see the wrong page content.
   return (
     <div key={team.url}>
-      <TrpcProvider headers={trpcHeaders}>
+      <ZapProvider>
         <LimitsProvider initialValue={limits} teamId={team.id}>
           <Outlet />
         </LimitsProvider>
-      </TrpcProvider>
+      </ZapProvider>
     </div>
   );
 }

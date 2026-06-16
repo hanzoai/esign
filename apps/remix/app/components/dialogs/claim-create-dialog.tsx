@@ -5,8 +5,11 @@ import type { z } from 'zod';
 
 import type { TLicenseClaim } from '@hanzo/sign-lib/types/license';
 import { generateDefaultSubscriptionClaim } from '@hanzo/sign-lib/utils/organisations-claims';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { ZCreateSubscriptionClaimRequestSchema } from '@hanzo/sign-trpc/server/admin-router/create-subscription-claim.types';
+import type {
+  TCreateSubscriptionClaimRequest,
+  ZCreateSubscriptionClaimRequestSchema,
+} from '@hanzo/sign-trpc/server/admin-router/create-subscription-claim.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -33,7 +36,10 @@ export const ClaimCreateDialog = ({ licenseFlags }: ClaimCreateDialogProps) => {
 
   const [open, setOpen] = useState(false);
 
-  const { mutateAsync: createClaim, isPending } = trpc.admin.claims.create.useMutation({
+  const { mutateAsync: createClaim, isPending } = useZapMutation<
+    void,
+    TCreateSubscriptionClaimRequest
+  >('admin.claims.create', {
     onSuccess: () => {
       toast({
         title: t`Subscription claim created successfully.`,

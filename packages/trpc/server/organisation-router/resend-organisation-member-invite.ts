@@ -4,36 +4,10 @@ import { sendOrganisationMemberInviteEmail } from '@hanzo/sign-lib/server-only/o
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZResendOrganisationMemberInviteRequestSchema,
   ZResendOrganisationMemberInviteResponseSchema,
 } from './resend-organisation-member-invite.types';
-
-export const resendOrganisationMemberInviteRoute = authenticatedProcedure
-  //   .meta(resendOrganisationMemberInviteMeta)
-  .input(ZResendOrganisationMemberInviteRequestSchema)
-  .output(ZResendOrganisationMemberInviteResponseSchema)
-  .mutation(async ({ ctx, input }) => {
-    const { organisationId, invitationId } = input;
-
-    const userId = ctx.user.id;
-    const userName = ctx.user.name || '';
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-        invitationId,
-      },
-    });
-
-    await resendOrganisationMemberInvitation({
-      userId,
-      userName,
-      organisationId,
-      invitationId,
-    });
-  });
 
 export type ResendOrganisationMemberInvitationOptions = {
   /**

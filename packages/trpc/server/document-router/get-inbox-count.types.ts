@@ -1,4 +1,3 @@
-// import type { OpenApiMeta } from 'trpc-to-openapi';
 import { ReadStatus } from '@prisma/client';
 import { z } from 'zod';
 

@@ -5,7 +5,8 @@ import { DateTime } from 'luxon';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindDocumentsResponse } from '@hanzo/sign-trpc/server/document-router/find-documents.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 
@@ -18,12 +19,15 @@ export const TemplatePageViewRecentActivity = ({
   templateId,
   documentRootPath,
 }: TemplatePageViewRecentActivityProps) => {
-  const { data, isLoading, isLoadingError, refetch } = trpc.document.find.useQuery({
-    templateId,
-    orderByColumn: 'createdAt',
-    orderByDirection: 'asc',
-    perPage: 5,
-  });
+  const { data, isLoading, isLoadingError, refetch } = useZapQuery<TFindDocumentsResponse>(
+    'document.find',
+    {
+      templateId,
+      orderByColumn: 'createdAt',
+      orderByDirection: 'asc',
+      perPage: 5,
+    },
+  );
 
   const results = data ?? {
     data: [],

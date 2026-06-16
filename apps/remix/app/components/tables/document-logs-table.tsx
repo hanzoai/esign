@@ -11,7 +11,8 @@ import { UAParser } from 'ua-parser-js';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import { formatDocumentAuditLogAction } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindDocumentAuditLogsResponse } from '@hanzo/sign-trpc/server/document-router/find-document-audit-logs.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
@@ -36,7 +37,8 @@ export const DocumentLogsTable = ({ documentId, userId }: DocumentLogsTableProps
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.document.auditLog.find.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindDocumentAuditLogsResponse>(
+    'document.auditLog.find',
     {
       documentId,
       page: parsedSearchParams.page,

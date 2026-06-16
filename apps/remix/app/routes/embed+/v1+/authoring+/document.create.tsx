@@ -2,6 +2,7 @@ import { useLayoutEffect, useState } from 'react';
 
 import { useLingui } from '@lingui/react';
 import { useNavigate } from 'react-router';
+import type { z } from 'zod';
 
 import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
 import {
@@ -9,7 +10,11 @@ import {
   ZBaseEmbedAuthoringSchema,
 } from '@hanzo/sign-lib/types/embed-authoring-base-schema';
 import { putPdfFile } from '@hanzo/sign-lib/universal/upload/put-file';
-import { trpc } from '@hanzo/sign-trpc/react';
+import {
+  type TCreateEmbeddingDocumentRequestSchema,
+  ZCreateEmbeddingDocumentResponseSchema,
+} from '@hanzo/sign-trpc/server/embedding-router/create-embedding-document.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
@@ -31,8 +36,10 @@ export default function EmbeddingAuthoringDocumentCreatePage() {
   const [externalId, setExternalId] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(1);
 
-  const { mutateAsync: createEmbeddingDocument } =
-    trpc.embeddingPresign.createEmbeddingDocument.useMutation();
+  const { mutateAsync: createEmbeddingDocument } = useZapMutation<
+    z.infer<typeof ZCreateEmbeddingDocumentResponseSchema>,
+    TCreateEmbeddingDocumentRequestSchema
+  >('embeddingPresign.createEmbeddingDocument');
 
   const handleConfigurePageViewSubmit = (data: TConfigureEmbedFormSchema) => {
     // Store the configuration data and move to the field placement stage

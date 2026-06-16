@@ -11,7 +11,7 @@ import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/or
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { ZUpdateOrganisationRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation.types';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -49,7 +49,10 @@ export const OrganisationUpdateForm = () => {
     },
   });
 
-  const { mutateAsync: updateOrganisation } = trpc.organisation.update.useMutation();
+  const { mutateAsync: updateOrganisation } = useZapMutation<
+    void,
+    z.infer<typeof ZUpdateOrganisationRequestSchema>
+  >('organisation.update');
 
   const onFormSubmit = async ({ name, url }: TOrganisationUpdateFormSchema) => {
     try {

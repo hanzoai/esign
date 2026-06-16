@@ -6,7 +6,7 @@ import type { OrganisationMemberRole } from '@prisma/client';
 
 import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert } from '@hanzo/sign-ui/primitives/alert';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -41,26 +41,28 @@ export const OrganisationLeaveDialog = ({
   const { t } = useLingui();
   const { toast } = useToast();
 
-  const { mutateAsync: leaveOrganisation, isPending: isLeavingOrganisation } =
-    trpc.organisation.leave.useMutation({
-      onSuccess: () => {
-        toast({
-          title: t`Success`,
-          description: t`You have successfully left this organisation.`,
-          duration: 5000,
-        });
+  const { mutateAsync: leaveOrganisation, isPending: isLeavingOrganisation } = useZapMutation<
+    void,
+    unknown
+  >('organisation.leave', {
+    onSuccess: () => {
+      toast({
+        title: t`Success`,
+        description: t`You have successfully left this organisation.`,
+        duration: 5000,
+      });
 
-        setOpen(false);
-      },
-      onError: () => {
-        toast({
-          title: t`An unknown error occurred`,
-          description: t`We encountered an unknown error while attempting to leave this organisation. Please try again later.`,
-          variant: 'destructive',
-          duration: 10000,
-        });
-      },
-    });
+      setOpen(false);
+    },
+    onError: () => {
+      toast({
+        title: t`An unknown error occurred`,
+        description: t`We encountered an unknown error while attempting to leave this organisation. Please try again later.`,
+        variant: 'destructive',
+        duration: 10000,
+      });
+    },
+  });
 
   return (
     <Dialog open={open} onOpenChange={(value) => !isLeavingOrganisation && setOpen(value)}>

@@ -12,11 +12,13 @@ import { P, match } from 'ts-pattern';
 import { z } from 'zod';
 
 import { type Template } from '@hanzo/sign-prisma/types/template-legacy-schema';
-import { trpc } from '@hanzo/sign-trpc/react';
 import {
   MAX_TEMPLATE_PUBLIC_DESCRIPTION_LENGTH,
   MAX_TEMPLATE_PUBLIC_TITLE_LENGTH,
+  type ZUpdateTemplateRequestSchema,
+  type ZUpdateTemplateResponseSchema,
 } from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -116,7 +118,10 @@ export const ManagePublicTemplateDialog = ({
   });
 
   const { mutateAsync: updateTemplateSettings, isPending: isUpdatingTemplateSettings } =
-    trpc.template.updateTemplate.useMutation();
+    useZapMutation<
+      z.infer<typeof ZUpdateTemplateResponseSchema>,
+      z.input<typeof ZUpdateTemplateRequestSchema>
+    >('template.updateTemplate');
 
   const setTemplateToPrivate = async (templateId: number) => {
     try {

@@ -8,8 +8,8 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
 import { ZCreateWebhookRequestSchema } from '@hanzo/sign-trpc/server/webhook-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -64,7 +64,9 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
     },
   });
 
-  const { mutateAsync: createWebhook } = trpc.webhook.createWebhook.useMutation();
+  const { mutateAsync: createWebhook } = useZapMutation<unknown, TCreateWebhookFormSchema>(
+    'webhook.createWebhook',
+  );
 
   const onSubmit = async ({
     enabled,

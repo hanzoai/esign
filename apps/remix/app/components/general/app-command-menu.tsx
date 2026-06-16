@@ -23,7 +23,8 @@ import {
 } from '@hanzo/sign-lib/constants/trpc';
 import { dynamicActivate } from '@hanzo/sign-lib/utils/i18n';
 import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type { TSearchDocumentResponse } from '@hanzo/sign-trpc/server/document-router/search-document.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import {
   CommandDialog,
@@ -67,7 +68,8 @@ export function AppCommandMenu({ open, onOpenChange }: AppCommandMenuProps) {
   const debouncedSearch = useDebouncedValue(search, 200);
 
   const { data: searchDocumentsData, isPending: isSearchingDocuments } =
-    trpcReact.document.search.useQuery(
+    useZapQuery<TSearchDocumentResponse>(
+      'document.search',
       {
         query: debouncedSearch,
       },

@@ -4,7 +4,8 @@ import { useLoaderData } from 'react-router';
 
 import { IS_AI_FEATURES_CONFIGURED } from '@hanzo/sign-lib/constants/app';
 import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetTeamResponse } from '@hanzo/sign-trpc/server/team-router/get-team.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import {
@@ -33,11 +34,14 @@ export default function TeamsSettingsPage() {
   const { t } = useLingui();
   const { toast } = useToast();
 
-  const { data: teamWithSettings, isLoading: isLoadingTeam } = trpc.team.get.useQuery({
-    teamReference: team.id,
-  });
+  const { data: teamWithSettings, isLoading: isLoadingTeam } = useZapQuery<TGetTeamResponse>(
+    'team.get',
+    {
+      teamReference: team.id,
+    },
+  );
 
-  const { mutateAsync: updateTeamSettings } = trpc.team.settings.update.useMutation();
+  const { mutateAsync: updateTeamSettings } = useZapMutation<void, unknown>('team.settings.update');
 
   const onDocumentPreferencesSubmit = async (data: TDocumentPreferencesFormSchema) => {
     try {

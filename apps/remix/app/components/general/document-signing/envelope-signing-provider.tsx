@@ -19,8 +19,12 @@ import {
   isRequiredField,
 } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
 import { extractFieldInsertionValues } from '@hanzo/sign-lib/utils/envelope-signing';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { TSignEnvelopeFieldValue } from '@hanzo/sign-trpc/server/envelope-router/sign-envelope-field.types';
+import type {
+  TSignEnvelopeFieldRequest,
+  TSignEnvelopeFieldResponse,
+  TSignEnvelopeFieldValue,
+} from '@hanzo/sign-trpc/server/envelope-router/sign-envelope-field.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 
 export type EnvelopeSigningContextValue = {
   isDirectTemplate: boolean;
@@ -101,7 +105,10 @@ export const EnvelopeSigningProvider = ({
 
   const isDirectTemplate = envelope.type === EnvelopeType.TEMPLATE;
 
-  const { mutateAsync: signEnvelopeField } = trpc.envelope.field.sign.useMutation({
+  const { mutateAsync: signEnvelopeField } = useZapMutation<
+    TSignEnvelopeFieldResponse,
+    TSignEnvelopeFieldRequest
+  >('envelope.field.sign', {
     ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
     onSuccess: (data) => {
       setEnvelopeData((prev) => ({

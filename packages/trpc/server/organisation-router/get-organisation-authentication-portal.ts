@@ -3,29 +3,10 @@ import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZGetOrganisationAuthenticationPortalRequestSchema,
   ZGetOrganisationAuthenticationPortalResponseSchema,
 } from './get-organisation-authentication-portal.types';
-
-export const getOrganisationAuthenticationPortalRoute = authenticatedProcedure
-  .input(ZGetOrganisationAuthenticationPortalRequestSchema)
-  .output(ZGetOrganisationAuthenticationPortalResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { organisationId } = input;
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-      },
-    });
-
-    return await getOrganisationAuthenticationPortal({
-      userId: ctx.user.id,
-      organisationId,
-    });
-  });
 
 type GetOrganisationAuthenticationPortalOptions = {
   userId: number;

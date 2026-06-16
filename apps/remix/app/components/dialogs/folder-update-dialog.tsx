@@ -9,8 +9,8 @@ import { z } from 'zod';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { DocumentVisibility } from '@hanzo/sign-lib/types/document-visibility';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -59,7 +59,7 @@ export const FolderUpdateDialog = ({ folder, isOpen, onOpenChange }: FolderUpdat
   const team = useOptionalCurrentTeam();
 
   const { toast } = useToast();
-  const { mutateAsync: updateFolder } = trpc.folder.updateFolder.useMutation();
+  const { mutateAsync: updateFolder } = useZapMutation<void, unknown>('folder.updateFolder');
 
   const form = useForm<z.infer<typeof ZUpdateFolderFormSchema>>({
     resolver: zodResolver(ZUpdateFolderFormSchema),

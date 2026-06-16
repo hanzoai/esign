@@ -11,7 +11,8 @@ import { isBase64Image } from '@hanzo/sign-lib/constants/signatures';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import type { TRecipientAccessAuth } from '@hanzo/sign-lib/types/document-auth';
 import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/sign-trpc/server/recipient-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
 import { useEmbedSigningContext } from '~/components/embed/embed-signing-context';
@@ -44,11 +45,15 @@ export const EnvelopeSignerCompleteDialog = () => {
 
   const { onDocumentCompleted, onDocumentError } = useEmbedSigningContext() || {};
 
-  const { mutateAsync: completeDocument, isPending } =
-    trpc.recipient.completeDocumentWithToken.useMutation();
+  const { mutateAsync: completeDocument, isPending } = useZapMutation<
+    unknown,
+    TCompleteDocumentWithTokenMutationSchema
+  >('recipient.completeDocumentWithToken');
 
-  const { mutateAsync: createDocumentFromDirectTemplate } =
-    trpc.template.createDocumentFromDirectTemplate.useMutation();
+  const { mutateAsync: createDocumentFromDirectTemplate } = useZapMutation<
+    { token: string },
+    unknown
+  >('template.createDocumentFromDirectTemplate');
 
   const handleOnNextFieldClick = () => {
     const nextField = recipientFieldsRemaining[0];

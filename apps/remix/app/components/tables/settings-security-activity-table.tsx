@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import type { UserSecurityAuditLog } from '@prisma/client';
 import type { DateTimeFormatOptions } from 'luxon';
 import { DateTime } from 'luxon';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
@@ -9,8 +10,9 @@ import { UAParser } from 'ua-parser-js';
 
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { USER_SECURITY_AUDIT_LOG_MAP } from '@hanzo/sign-lib/constants/auth';
+import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
@@ -32,7 +34,10 @@ export const SettingsSecurityActivityTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.profile.findUserSecurityAuditLogs.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<
+    FindResultResponse<UserSecurityAuditLog[]>
+  >(
+    'profile.findUserSecurityAuditLogs',
     {
       page: parsedSearchParams.page,
       perPage: parsedSearchParams.perPage,

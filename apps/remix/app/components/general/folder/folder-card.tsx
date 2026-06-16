@@ -12,8 +12,11 @@ import {
 import { Link } from 'react-router';
 
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
-import { type TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import {
+  type TFolderWithSubfolders,
+  type TUpdateFolderRequestSchema,
+} from '@hanzo/sign-trpc/server/folder-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
 import {
@@ -36,7 +39,9 @@ export type FolderCardProps = {
 export const FolderCard = ({ folder, onMove, onSettings, onDelete }: FolderCardProps) => {
   const team = useCurrentTeam();
 
-  const { mutateAsync: updateFolderMutation } = trpc.folder.updateFolder.useMutation();
+  const { mutateAsync: updateFolderMutation } = useZapMutation<unknown, TUpdateFolderRequestSchema>(
+    'folder.updateFolder',
+  );
 
   const formatPath = () => {
     const rootPath =
