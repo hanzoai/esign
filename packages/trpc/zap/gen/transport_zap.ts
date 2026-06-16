@@ -5,7 +5,7 @@ import {
   Builder,
   Message,
   StructView,
-} from "@hanzo/zap";
+} from "@zap-proto/zap";
 
 const zapRequestOff = {
   Method: 0,

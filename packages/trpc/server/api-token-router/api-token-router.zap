@@ -1,19 +1,16 @@
-# api-token-router ZAP schema — typed scalar inputs for the fully-ported routes.
+# api-token-router ZAP interface schema.
 #
-# Procedure ↔ route:
-#   create  -> apiToken.create
-#   getMany -> apiToken.getMany   (input from ctx.teamId only; void payload)
-#   delete  -> apiToken.delete
+# Route keys: apiToken.create / getMany / delete
+# Wire payloads ride the shared ZapRequest/ZapReply envelope as superjson;
+# inputs validated by the SAME Zod schemas the tRPC procedures used.
 
 package esign
 
-struct CreateApiTokenInput {
-    TokenName      text @0
-    TeamId         u32  @8    # 0 = personal
-    ExpirationDate text @12   # "" = never; otherwise enum key
-}
+struct Req  { Body text @0 }
+struct Resp { Body text @0 }
 
-struct DeleteApiTokenInput {
-    Id     u32 @0
-    TeamId u32 @4   # 0 = personal
+interface ApiToken {
+    create(req: Req) returns (resp: Resp)
+    getMany(req: Req) returns (resp: Resp)
+    delete(req: Req) returns (resp: Resp)
 }

@@ -12,8 +12,8 @@
   "dependencies": {
     "@hanzo/sign-lib": "*",
     "@hanzo/sign-prisma": "*",
-    "@hanzo/zap": "1.1.0",
-    "@zap-proto/web": "0.1.0",
+    "@zap-proto/zap": "^1.2.0",
+    "@zap-proto/web": "^0.1.1",
     "@simplewebauthn/server": "^13.2.2",
     "@tanstack/react-query": "5.90.10",
     "@trpc/client": "11.8.1",

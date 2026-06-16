@@ -3,7 +3,6 @@
 // Verbatim tRPC procedure bodies rewired to (ctx, input). Routes:
 // profile.findUserSecurityAuditLogs / updateProfile / deleteAccount /
 // setProfileImage / submitSupportTicket.
-
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import type { SetAvatarImageOptions } from '@hanzo/sign-lib/server-only/profile/set-avatar-image';
 import { setAvatarImage } from '@hanzo/sign-lib/server-only/profile/set-avatar-image';

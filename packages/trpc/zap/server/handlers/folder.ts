@@ -5,7 +5,6 @@
 // procedure used (type-level validation preserved); the server-only functions
 // are reused unchanged. Routes: folder.getFolders / findFolders /
 // findFoldersInternal / createFolder / updateFolder / deleteFolder.
-
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { createFolder } from '@hanzo/sign-lib/server-only/folder/create-folder';
 import { deleteFolder } from '@hanzo/sign-lib/server-only/folder/delete-folder';

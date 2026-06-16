@@ -10,7 +10,7 @@
 // into a ZapReply. This is the replacement the migration brief calls for
 // ("AppError → methodError(...)").
 
-import { Status } from '@hanzo/zap';
+import { Status } from '@zap-proto/zap';
 
 import {
   AppError,
