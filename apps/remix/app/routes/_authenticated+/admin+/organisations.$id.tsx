@@ -14,9 +14,12 @@ import { AppError } from '@hanzo/sign-lib/errors/app-error';
 import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
 import type { TLicenseClaim } from '@hanzo/sign-lib/types/license';
 import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/sign-lib/types/subscription';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TGetAdminOrganisationResponse } from '@hanzo/sign-trpc/server/admin-router/get-admin-organisation.types';
-import { ZUpdateAdminOrganisationRequestSchema } from '@hanzo/sign-trpc/server/admin-router/update-admin-organisation.types';
+import {
+  type TUpdateAdminOrganisationRequest,
+  ZUpdateAdminOrganisationRequestSchema,
+} from '@hanzo/sign-trpc/server/admin-router/update-admin-organisation.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -61,7 +64,7 @@ export default function OrganisationGroupSettingsPage({
   const organisationId = params.id;
 
   const { data: organisation, isLoading: isLoadingOrganisation } =
-    trpc.admin.organisation.get.useQuery({
+    useZapQuery<TGetAdminOrganisationResponse>('admin.organisation.get', {
       organisationId,
     });
 
@@ -215,7 +218,10 @@ const GenericOrganisationAdminForm = ({ organisation }: OrganisationAdminFormOpt
   const { toast } = useToast();
   const { t } = useLingui();
 
-  const { mutateAsync: updateOrganisation } = trpc.admin.organisation.update.useMutation();
+  const { mutateAsync: updateOrganisation } = useZapMutation<
+    unknown,
+    TUpdateAdminOrganisationRequest
+  >('admin.organisation.update');
 
   const form = useForm<TUpdateGenericOrganisationDataFormSchema>({
     resolver: zodResolver(ZUpdateGenericOrganisationDataFormSchema),
@@ -316,7 +322,10 @@ const OrganisationAdminForm = ({ organisation, licenseFlags }: OrganisationAdmin
   const { toast } = useToast();
   const { t } = useLingui();
 
-  const { mutateAsync: updateOrganisation } = trpc.admin.organisation.update.useMutation();
+  const { mutateAsync: updateOrganisation } = useZapMutation<
+    unknown,
+    TUpdateAdminOrganisationRequest
+  >('admin.organisation.update');
 
   const hasRestrictedEnterpriseFeatures = Object.values(SUBSCRIPTION_CLAIM_FEATURE_FLAGS).some(
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

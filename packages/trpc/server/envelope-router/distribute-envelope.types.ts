@@ -3,18 +3,7 @@ import { z } from 'zod';
 import { ZDocumentMetaUpdateSchema } from '@hanzo/sign-lib/types/document-meta';
 
 import { ZSuccessResponseSchema } from '../schema';
-import type { TrpcRouteMeta } from '../trpc';
 import { ZRecipientWithSigningUrlSchema } from './schema';
-
-export const distributeEnvelopeMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/distribute',
-    summary: 'Distribute envelope',
-    description: 'Send the envelope to recipients based on your distribution method',
-    tags: ['Envelope'],
-  },
-};
 
 export const ZDistributeEnvelopeRequestSchema = z.object({
   envelopeId: z.string().describe('The ID of the envelope to send.'),

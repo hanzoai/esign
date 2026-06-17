@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TRejectDocumentWithTokenMutationSchema } from '@hanzo/sign-trpc/server/recipient-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -55,8 +56,10 @@ export function DocumentSigningRejectDialog({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const { mutateAsync: rejectDocumentWithToken } =
-    trpc.recipient.rejectDocumentWithToken.useMutation();
+  const { mutateAsync: rejectDocumentWithToken } = useZapMutation<
+    unknown,
+    TRejectDocumentWithTokenMutationSchema
+  >('recipient.rejectDocumentWithToken');
 
   const form = useForm<TRejectDocumentFormSchema>({
     resolver: zodResolver(ZRejectDocumentFormSchema),

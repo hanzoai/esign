@@ -7,7 +7,8 @@ import { DownloadIcon } from 'lucide-react';
 import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
 import { base64 } from '@hanzo/sign-lib/universal/base64';
 import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { TDownloadDocumentCertificateRequest, TDownloadDocumentCertificateResponse } from '@hanzo/sign-trpc/server/document-router/download-document-certificate.types';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
@@ -26,8 +27,10 @@ export const DocumentCertificateDownloadButton = ({
   const { toast } = useToast();
   const { _ } = useLingui();
 
-  const { mutateAsync: downloadCertificate, isPending } =
-    trpc.document.downloadCertificate.useMutation();
+  const { mutateAsync: downloadCertificate, isPending } = useZapMutation<
+    TDownloadDocumentCertificateResponse,
+    TDownloadDocumentCertificateRequest
+  >('document.downloadCertificate');
 
   const onDownloadCertificatesClick = async () => {
     try {

@@ -6,19 +6,11 @@ import {
 } from '@hanzo/sign-lib/utils/teams';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import type { TGetOrganisationSessionResponse } from './get-organisation-session.types';
-import { ZGetOrganisationSessionResponseSchema } from './get-organisation-session.types';
 
 /**
  * Get all the organisations and teams a user belongs to.
  */
-export const getOrganisationSessionRoute = authenticatedProcedure
-  .output(ZGetOrganisationSessionResponseSchema)
-  .query(async ({ ctx }) => {
-    return await getOrganisationSession({ userId: ctx.user.id });
-  });
-
 export const getOrganisationSession = async ({
   userId,
 }: {

@@ -12,7 +12,8 @@ import type {
 } from '@hanzo/sign-lib/types/document-auth';
 import { DocumentAuth } from '@hanzo/sign-lib/types/document-auth';
 import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TFindPasskeysResponse } from '@hanzo/sign-trpc/server/auth-router/find-passkeys.types';
 
 import type { DocumentSigningAuthDialogProps } from './document-signing-auth-dialog';
 import { DocumentSigningAuthDialog } from './document-signing-auth-dialog';
@@ -101,7 +102,8 @@ export const DocumentSigningAuthProvider = ({
     [documentAuthOptions, recipient],
   );
 
-  const passkeyQuery = trpc.auth.passkey.find.useQuery(
+  const passkeyQuery = useZapQuery<TFindPasskeysResponse>(
+    'auth.passkey.find',
     {
       perPage: MAXIMUM_PASSKEYS,
     },

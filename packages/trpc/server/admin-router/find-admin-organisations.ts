@@ -3,26 +3,10 @@ import { Prisma } from '@prisma/client';
 import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { adminProcedure } from '../trpc';
 import {
   ZFindAdminOrganisationsRequestSchema,
   ZFindAdminOrganisationsResponseSchema,
 } from './find-admin-organisations.types';
-
-export const findAdminOrganisationsRoute = adminProcedure
-  .input(ZFindAdminOrganisationsRequestSchema)
-  .output(ZFindAdminOrganisationsResponseSchema)
-  .query(async ({ input }) => {
-    const { query, page, perPage, ownerUserId, memberUserId } = input;
-
-    return await findAdminOrganisations({
-      query,
-      page,
-      perPage,
-      ownerUserId,
-      memberUserId,
-    });
-  });
 
 type FindAdminOrganisationsOptions = {
   query?: string;

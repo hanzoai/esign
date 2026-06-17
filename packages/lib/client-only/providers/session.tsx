@@ -6,10 +6,8 @@ import { useLocation } from 'react-router';
 
 import { authClient } from '@hanzo/sign-auth/client';
 import type { SessionUser } from '@hanzo/sign-auth/server/lib/session/session';
-import { trpc } from '@hanzo/sign-trpc/client';
 import type { TGetOrganisationSessionResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-session.types';
-
-import { SKIP_QUERY_BATCH_META } from '../../constants/trpc';
+import { zapCall } from '@hanzo/sign-trpc/zap/client';
 
 export type AppSession = {
   session: Session;
@@ -69,12 +67,12 @@ export const SessionProvider = ({ children, initialSession }: SessionProviderPro
       return;
     }
 
-    const organisations = await trpc.organisation.internal.getOrganisationSession
-      .query(undefined, SKIP_QUERY_BATCH_META.trpc)
-      .catch(() => {
-        // Todo: (RR7) Log
-        return [];
-      });
+    const organisations = await zapCall<TGetOrganisationSessionResponse>(
+      'organisation.internal.getOrganisationSession',
+    ).catch(() => {
+      // Todo: (RR7) Log
+      return [];
+    });
 
     setSession({
       session: newSession.session,

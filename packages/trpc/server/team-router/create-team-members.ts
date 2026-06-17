@@ -8,33 +8,6 @@ import { generateDatabaseId } from '@hanzo/sign-lib/universal/id';
 import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
-import {
-  ZCreateTeamMembersRequestSchema,
-  ZCreateTeamMembersResponseSchema,
-} from './create-team-members.types';
-
-export const createTeamMembersRoute = authenticatedProcedure
-  .input(ZCreateTeamMembersRequestSchema)
-  .output(ZCreateTeamMembersResponseSchema)
-  .mutation(async ({ input, ctx }) => {
-    const { teamId, organisationMembers } = input;
-    const { user } = ctx;
-
-    ctx.logger.info({
-      input: {
-        teamId,
-        organisationMembers,
-      },
-    });
-
-    return await createTeamMembers({
-      userId: user.id,
-      teamId,
-      membersToCreate: organisationMembers,
-    });
-  });
-
 type CreateTeamMembersOptions = {
   userId: number;
   teamId: number;

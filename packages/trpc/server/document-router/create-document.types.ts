@@ -20,19 +20,7 @@ import { ZFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
 
 import { zodFormData } from '../../utils/zod-form-data';
 import { ZCreateRecipientSchema } from '../recipient-router/schema';
-import type { TrpcRouteMeta } from '../trpc';
 import { ZDocumentExternalIdSchema, ZDocumentTitleSchema } from './schema';
-
-export const createDocumentMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/document/create',
-    contentTypes: ['multipart/form-data'],
-    summary: 'Create document',
-    description: 'Create a document using form data.',
-    tags: ['Document'],
-  },
-};
 
 export const ZCreateDocumentPayloadSchema = z.object({
   title: ZDocumentTitleSchema,

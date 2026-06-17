@@ -15,9 +15,12 @@ import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/sign-lib/constants/app';
 import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { TCreateDocumentPayloadSchema } from '@hanzo/sign-trpc/server/document-router/create-document.types';
+import type {
+  TCreateDocumentPayloadSchema,
+  TCreateDocumentResponse,
+} from '@hanzo/sign-trpc/server/document-router/create-document.types';
 import type { TCreateTemplatePayloadSchema } from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { DocumentUploadButton as DocumentUploadButtonPrimitive } from '@hanzo/sign-ui/primitives/document-upload-button';
 import {
@@ -58,8 +61,12 @@ export const DocumentUploadButtonLegacy = ({
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutateAsync: createDocument } = trpc.document.create.useMutation();
-  const { mutateAsync: createTemplate } = trpc.template.createTemplate.useMutation();
+  const { mutateAsync: createDocument } = useZapMutation<TCreateDocumentResponse, FormData>(
+    'document.create',
+  );
+  const { mutateAsync: createTemplate } = useZapMutation<{ envelopeId: string }, FormData>(
+    'template.createTemplate',
+  );
 
   const disabledMessage = useMemo(() => {
     if (!user.emailVerified) {

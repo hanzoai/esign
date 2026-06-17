@@ -3,7 +3,8 @@ import { Trans } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
 import { DateTime } from 'luxon';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetApiTokensResponse } from '@hanzo/sign-trpc/server/api-token-router/get-api-tokens.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -21,7 +22,7 @@ export function meta() {
 export default function ApiTokensPage() {
   const { i18n } = useLingui();
 
-  const { data: tokens } = trpc.apiToken.getMany.useQuery();
+  const { data: tokens } = useZapQuery<TGetApiTokensResponse>('apiToken.getMany');
 
   const team = useOptionalCurrentTeam();
 

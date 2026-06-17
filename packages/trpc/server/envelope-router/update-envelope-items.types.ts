@@ -3,17 +3,6 @@ import { z } from 'zod';
 import EnvelopeItemSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
 
 import { ZDocumentTitleSchema } from '../document-router/schema';
-import type { TrpcRouteMeta } from '../trpc';
-
-export const updateEnvelopeItemsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/item/update-many',
-    summary: 'Update envelope items',
-    description: 'Update multiple envelope items for an envelope',
-    tags: ['Envelope Items'],
-  },
-};
 
 export const ZUpdateEnvelopeItemsRequestSchema = z.object({
   envelopeId: z.string(),

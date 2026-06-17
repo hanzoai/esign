@@ -5,7 +5,8 @@ import { DownloadIcon } from 'lucide-react';
 
 import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
 import { base64 } from '@hanzo/sign-lib/universal/base64';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { TDownloadDocumentAuditLogsRequest, TDownloadDocumentAuditLogsResponse } from '@hanzo/sign-trpc/server/document-router/download-document-audit-logs.types';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
@@ -22,8 +23,10 @@ export const DocumentAuditLogDownloadButton = ({
   const { toast } = useToast();
   const { _ } = useLingui();
 
-  const { mutateAsync: downloadAuditLogs, isPending } =
-    trpc.document.auditLog.download.useMutation();
+  const { mutateAsync: downloadAuditLogs, isPending } = useZapMutation<
+    TDownloadDocumentAuditLogsResponse,
+    TDownloadDocumentAuditLogsRequest
+  >('document.auditLog.download');
 
   const onDownloadAuditLogsClick = async () => {
     try {

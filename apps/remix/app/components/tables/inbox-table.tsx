@@ -13,8 +13,8 @@ import { match } from 'ts-pattern';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TFindInboxResponse } from '@hanzo/sign-trpc/server/document-router/find-inbox.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -49,10 +49,13 @@ export const InboxTable = () => {
   const page = searchParams?.get?.('page') ? Number(searchParams.get('page')) : undefined;
   const perPage = searchParams?.get?.('perPage') ? Number(searchParams.get('perPage')) : undefined;
 
-  const { data, isLoading, isLoadingError } = trpc.document.inbox.find.useQuery({
-    page: page || 1,
-    perPage: perPage || 10,
-  });
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindInboxResponse>(
+    'document.inbox.find',
+    {
+      page: page || 1,
+      perPage: perPage || 10,
+    },
+  );
 
   const columns = useMemo(() => {
     return [

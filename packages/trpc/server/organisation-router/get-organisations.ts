@@ -1,21 +1,10 @@
 import { getHighestOrganisationRoleInGroup } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZGetOrganisationsRequestSchema,
   ZGetOrganisationsResponseSchema,
 } from './get-organisations.types';
-
-export const getOrganisationsRoute = authenticatedProcedure
-  //   .meta(getOrganisationsMeta)
-  .input(ZGetOrganisationsRequestSchema)
-  .output(ZGetOrganisationsResponseSchema)
-  .query(async ({ ctx }) => {
-    const { user } = ctx;
-
-    return getOrganisations({ userId: user.id });
-  });
 
 export const getOrganisations = async ({ userId }: { userId: number }) => {
   const organisations = await prisma.organisation.findMany({

@@ -15,7 +15,8 @@ import { Link, useSearchParams } from 'react-router';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { SUBSCRIPTION_STATUS_MAP } from '@hanzo/sign-lib/constants/billing';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindAdminOrganisationsResponse } from '@hanzo/sign-trpc/server/admin-router/find-admin-organisations.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -58,13 +59,16 @@ export const AdminOrganisationsTable = ({
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.admin.organisation.find.useQuery({
-    query: parsedSearchParams.query,
-    page: parsedSearchParams.page,
-    perPage: parsedSearchParams.perPage,
-    ownerUserId,
-    memberUserId,
-  });
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindAdminOrganisationsResponse>(
+    'admin.organisation.find',
+    {
+      query: parsedSearchParams.query,
+      page: parsedSearchParams.page,
+      perPage: parsedSearchParams.perPage,
+      ownerUserId,
+      memberUserId,
+    },
+  );
 
   const onPaginationChange = (page: number, perPage: number) => {
     updateSearchParams({

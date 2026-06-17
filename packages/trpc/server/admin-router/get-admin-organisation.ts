@@ -1,29 +1,6 @@
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { adminProcedure } from '../trpc';
-import {
-  ZGetAdminOrganisationRequestSchema,
-  ZGetAdminOrganisationResponseSchema,
-} from './get-admin-organisation.types';
-
-export const getAdminOrganisationRoute = adminProcedure
-  .input(ZGetAdminOrganisationRequestSchema)
-  .output(ZGetAdminOrganisationResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { organisationId } = input;
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-      },
-    });
-
-    return await getAdminOrganisation({
-      organisationId,
-    });
-  });
-
 type GetOrganisationOptions = {
   organisationId: string;
 };

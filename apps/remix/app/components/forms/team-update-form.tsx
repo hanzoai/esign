@@ -9,7 +9,7 @@ import type { z } from 'zod';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { ZUpdateTeamRequestSchema } from '@hanzo/sign-trpc/server/team-router/update-team.types';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -49,7 +49,10 @@ export const TeamUpdateForm = ({ teamId, teamName, teamUrl }: UpdateTeamDialogPr
     },
   });
 
-  const { mutateAsync: updateTeam } = trpc.team.update.useMutation();
+  const { mutateAsync: updateTeam } = useZapMutation<
+    void,
+    z.infer<typeof ZUpdateTeamRequestSchema>
+  >('team.update');
 
   const onFormSubmit = async ({ name, url }: TTeamUpdateFormSchema) => {
     try {

@@ -1,0 +1,247 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Profile",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/profile/find-user-security-audit-logs": {
+      "post": {
+        "operationId": "profile.findUserSecurityAuditLogs",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile/update-profile": {
+      "post": {
+        "operationId": "profile.updateProfile",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile/delete-account": {
+      "post": {
+        "operationId": "profile.deleteAccount",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile/set-profile-image": {
+      "post": {
+        "operationId": "profile.setProfileImage",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile/submit-support-ticket": {
+      "post": {
+        "operationId": "profile.submitSupportTicket",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Req": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "Resp": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

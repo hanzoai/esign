@@ -4,7 +4,11 @@ import { Trans } from '@lingui/react/macro';
 import { useNavigate } from 'react-router';
 
 import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type {
+  TDuplicateEnvelopeRequest,
+  TDuplicateEnvelopeResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/duplicate-envelope.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -39,8 +43,10 @@ export const DocumentDuplicateDialog = ({
 
   const documentsPath = formatDocumentsPath(team.url);
 
-  const { mutateAsync: duplicateEnvelope, isPending: isDuplicating } =
-    trpcReact.envelope.duplicate.useMutation({
+  const { mutateAsync: duplicateEnvelope, isPending: isDuplicating } = useZapMutation<
+    TDuplicateEnvelopeResponse,
+    TDuplicateEnvelopeRequest
+  >('envelope.duplicate', {
       onSuccess: async ({ id }) => {
         toast({
           title: _(msg`Document Duplicated`),

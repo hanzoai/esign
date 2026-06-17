@@ -15,7 +15,8 @@ import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-d
 import { sortFieldsByPosition, validateFieldsInserted } from '@hanzo/sign-lib/utils/fields';
 import { isSignatureFieldType } from '@hanzo/sign-prisma/guards/is-signature-field';
 import type { RecipientWithFields } from '@hanzo/sign-prisma/types/recipient-with-fields';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/sign-trpc/server/recipient-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import {
   type DocumentField,
   DocumentReadOnlyFields,
@@ -109,8 +110,10 @@ export const EmbedSignDocumentV1ClientPage = ({
     fields.filter((field) => field.inserted),
   ];
 
-  const { mutateAsync: completeDocumentWithToken, isPending: isSubmitting } =
-    trpc.recipient.completeDocumentWithToken.useMutation();
+  const { mutateAsync: completeDocumentWithToken, isPending: isSubmitting } = useZapMutation<
+    unknown,
+    TCompleteDocumentWithTokenMutationSchema
+  >('recipient.completeDocumentWithToken');
 
   const fieldsRequiringValidation = useMemo(
     () => fields.filter(isFieldUnsignedAndRequired),

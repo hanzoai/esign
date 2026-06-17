@@ -11,7 +11,8 @@ import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-upd
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindOrganisationMemberInvitesResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-member-invites.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -37,21 +38,24 @@ export const OrganisationMemberInvitesTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.organisation.member.invite.find.useQuery(
-    {
-      organisationId: organisation.id,
-      query: parsedSearchParams.query,
-      page: parsedSearchParams.page,
-      perPage: parsedSearchParams.perPage,
-      status: OrganisationMemberInviteStatus.PENDING,
-    },
-    {
-      placeholderData: (previousData) => previousData,
-    },
-  );
+  const { data, isLoading, isLoadingError } =
+    useZapQuery<TFindOrganisationMemberInvitesResponse>(
+      'organisation.member.invite.find',
+      {
+        organisationId: organisation.id,
+        query: parsedSearchParams.query,
+        page: parsedSearchParams.page,
+        perPage: parsedSearchParams.perPage,
+        status: OrganisationMemberInviteStatus.PENDING,
+      },
+      {
+        placeholderData: (previousData) => previousData,
+      },
+    );
 
-  const { mutateAsync: resendOrganisationMemberInvitation } =
-    trpc.organisation.member.invite.resend.useMutation({
+  const { mutateAsync: resendOrganisationMemberInvitation } = useZapMutation<unknown, unknown>(
+    'organisation.member.invite.resend',
+    {
       onSuccess: () => {
         toast({
           title: _(msg`Success`),
@@ -65,10 +69,12 @@ export const OrganisationMemberInvitesTable = () => {
           variant: 'destructive',
         });
       },
-    });
+    },
+  );
 
-  const { mutateAsync: deleteOrganisationMemberInvitations } =
-    trpc.organisation.member.invite.deleteMany.useMutation({
+  const { mutateAsync: deleteOrganisationMemberInvitations } = useZapMutation<unknown, unknown>(
+    'organisation.member.invite.deleteMany',
+    {
       onSuccess: () => {
         toast({
           title: _(msg`Success`),
@@ -82,7 +88,8 @@ export const OrganisationMemberInvitesTable = () => {
           variant: 'destructive',
         });
       },
-    });
+    },
+  );
 
   const onPaginationChange = (page: number, perPage: number) => {
     updateSearchParams({

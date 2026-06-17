@@ -22,7 +22,8 @@ import type { TDocumentMetaDateFormat } from '@hanzo/sign-lib/types/document-met
 import type { TTemplate } from '@hanzo/sign-lib/types/template';
 import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
 import { extractTeamSignatureSettings } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import {
   DocumentGlobalAuthAccessSelect,
   DocumentGlobalAuthAccessTooltip,
@@ -137,7 +138,7 @@ export const AddTemplateSettingsFormPartial = ({
   const emailSettings = form.watch('meta.emailSettings');
 
   const { data: emailData, isLoading: isLoadingEmails } =
-    trpc.organisation.email.find.useQuery({
+    useZapQuery<TFindOrganisationEmailsResponse>('organisation.email.find', {
       organisationId: organisation.id,
       perPage: 100,
     });

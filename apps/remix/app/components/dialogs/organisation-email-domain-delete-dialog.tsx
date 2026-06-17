@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -62,8 +62,9 @@ export const OrganisationEmailDomainDeleteDialog = ({
     },
   });
 
-  const { mutateAsync: deleteEmailDomain, isPending: isDeleting } =
-    trpc.organisation.emailDomain.delete.useMutation({
+  const { mutateAsync: deleteEmailDomain, isPending: isDeleting } = useZapMutation<void, unknown>(
+    'organisation.emailDomain.delete',
+    {
       onSuccess: () => {
         toast({
           title: t`Success`,
@@ -81,7 +82,8 @@ export const OrganisationEmailDomainDeleteDialog = ({
           duration: 10000,
         });
       },
-    });
+    },
+  );
 
   const onFormSubmit = async () => {
     await deleteEmailDomain({

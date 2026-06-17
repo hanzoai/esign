@@ -4,18 +4,6 @@ import { z } from 'zod';
 import { ZDocumentManySchema } from '@hanzo/sign-lib/types/document';
 import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const ZFindDocumentsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'GET',
-    path: '/document',
-    summary: 'Find documents',
-    description: 'Find documents based on a search criteria',
-    tags: ['Document'],
-  },
-};
-
 export const ZFindDocumentsRequestSchema = ZFindSearchParamsSchema.extend({
   templateId: z
     .number()

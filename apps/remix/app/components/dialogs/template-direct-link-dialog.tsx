@@ -22,7 +22,16 @@ import { DIRECT_TEMPLATE_RECIPIENT_EMAIL } from '@hanzo/sign-lib/constants/direc
 import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient-roles';
 import { DIRECT_TEMPLATE_DOCUMENTATION } from '@hanzo/sign-lib/constants/template';
 import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import {
+  ZCreateTemplateDirectLinkRequestSchema,
+  ZCreateTemplateDirectLinkResponseSchema,
+  ZDeleteTemplateDirectLinkRequestSchema,
+  ZToggleTemplateDirectLinkRequestSchema,
+  ZToggleTemplateDirectLinkResponseSchema,
+} from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { z } from 'zod';
+
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -98,7 +107,10 @@ export const TemplateDirectLinkDialog = ({
     mutateAsync: createTemplateDirectLink,
     isPending: isCreatingTemplateDirectLink,
     reset: resetCreateTemplateDirectLink,
-  } = trpcReact.template.createTemplateDirectLink.useMutation({
+  } = useZapMutation<
+    z.infer<typeof ZCreateTemplateDirectLinkResponseSchema>,
+    z.infer<typeof ZCreateTemplateDirectLinkRequestSchema>
+  >('template.createTemplateDirectLink', {
     onSuccess: async (data) => {
       await revalidate();
       await onCreateSuccess?.();
@@ -119,7 +131,10 @@ export const TemplateDirectLinkDialog = ({
   });
 
   const { mutateAsync: toggleTemplateDirectLink, isPending: isTogglingTemplateAccess } =
-    trpcReact.template.toggleTemplateDirectLink.useMutation({
+    useZapMutation<
+      z.infer<typeof ZToggleTemplateDirectLinkResponseSchema>,
+      z.infer<typeof ZToggleTemplateDirectLinkRequestSchema>
+    >('template.toggleTemplateDirectLink', {
       onSuccess: async (data) => {
         await revalidate();
 
@@ -144,7 +159,9 @@ export const TemplateDirectLinkDialog = ({
     });
 
   const { mutateAsync: deleteTemplateDirectLink, isPending: isDeletingTemplateDirectLink } =
-    trpcReact.template.deleteTemplateDirectLink.useMutation({
+    useZapMutation<unknown, z.infer<typeof ZDeleteTemplateDirectLinkRequestSchema>>(
+      'template.deleteTemplateDirectLink',
+      {
       onSuccess: async () => {
         await revalidate();
         await onDeleteSuccess?.();

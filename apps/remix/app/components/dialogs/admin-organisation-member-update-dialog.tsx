@@ -11,8 +11,12 @@ import { match } from 'ts-pattern';
 import { z } from 'zod';
 
 import { getHighestOrganisationRoleInGroup } from '@hanzo/sign-lib/utils/organisations';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import type { TGetAdminOrganisationResponse } from '@hanzo/sign-trpc/server/admin-router/get-admin-organisation.types';
+import type {
+  TUpdateOrganisationMemberRoleRequest,
+  TUpdateOrganisationMemberRoleResponse,
+} from '@hanzo/sign-trpc/server/admin-router/update-organisation-member-role.types';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -81,8 +85,10 @@ export const AdminOrganisationMemberUpdateDialog = ({
     },
   });
 
-  const { mutateAsync: updateOrganisationMemberRole } =
-    trpc.admin.organisationMember.updateRole.useMutation();
+  const { mutateAsync: updateOrganisationMemberRole } = useZapMutation<
+    TUpdateOrganisationMemberRoleResponse,
+    TUpdateOrganisationMemberRoleRequest
+  >('admin.organisationMember.updateRole');
 
   const onFormSubmit = async ({ role }: ZUpdateOrganisationMemberSchema) => {
     try {

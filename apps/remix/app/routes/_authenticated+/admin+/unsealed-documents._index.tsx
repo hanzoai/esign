@@ -8,7 +8,12 @@ import { DateTime } from 'luxon';
 import { Link, useSearchParams } from 'react-router';
 
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TFindUnsealedDocumentsResponse } from '@hanzo/sign-trpc/server/admin-router/find-unsealed-documents.types';
+import type {
+  TResealDocumentRequest,
+  TResealDocumentResponse,
+} from '@hanzo/sign-trpc/server/admin-router/reseal-document.types';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
@@ -32,7 +37,8 @@ export default function AdminUnsealedDocumentsPage() {
     data: findUnsealedData,
     isPending: isLoading,
     refetch,
-  } = trpc.admin.document.findUnsealed.useQuery(
+  } = useZapQuery<TFindUnsealedDocumentsResponse>(
+    'admin.document.findUnsealed',
     {
       page: page || 1,
       perPage: perPage || 20,
@@ -43,7 +49,7 @@ export default function AdminUnsealedDocumentsPage() {
   );
 
   const { mutateAsync: resealDocument, isPending: isResealing } =
-    trpc.admin.document.reseal.useMutation({
+    useZapMutation<TResealDocumentResponse, TResealDocumentRequest>('admin.document.reseal', {
       onSuccess: () => {
         toast({ title: _(msg`Seal job triggered`), variant: 'default' });
         void refetch();

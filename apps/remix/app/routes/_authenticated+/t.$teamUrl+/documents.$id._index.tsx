@@ -12,7 +12,8 @@ import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/t
 import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
 import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-envelope.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import {
   DocumentReadOnlyFields,
   mapFieldsWithRecipients,
@@ -53,7 +54,8 @@ export default function DocumentPage({ params }: Route.ComponentProps) {
     data: envelope,
     isLoading: isLoadingEnvelope,
     isError: isErrorEnvelope,
-  } = trpc.envelope.get.useQuery(
+  } = useZapQuery<TGetEnvelopeResponse>(
+    'envelope.get',
     {
       envelopeId: params.id,
     },

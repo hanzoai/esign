@@ -14,6 +14,7 @@ import {
 import { LucideChevronDown, LucideChevronUp } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { useSearchParams } from 'react-router';
+import type { z } from 'zod';
 
 import { useThrottleFn } from '@hanzo/sign-lib/client-only/hooks/use-throttle-fn';
 import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
@@ -26,12 +27,14 @@ import {
 } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
 import { sortFieldsByPosition, validateFieldsInserted } from '@hanzo/sign-lib/utils/fields';
+import type { TCreateDocumentFromDirectTemplateResponse } from '@hanzo/sign-lib/server-only/template/create-document-from-direct-template';
 import { isSignatureFieldType } from '@hanzo/sign-prisma/guards/is-signature-field';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
 } from '@hanzo/sign-trpc/server/field-router/schema';
+import type { ZCreateDocumentFromDirectTemplateRequestSchema } from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { FieldToolTip } from '@hanzo/sign-ui/components/field/field-tooltip';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { ElementVisible } from '@hanzo/sign-ui/primitives/element-visible';
@@ -106,8 +109,10 @@ export const EmbedDirectTemplateClientPage = ({
 
   const signatureValid = !hasSignatureField || (signature && signature.trim() !== '');
 
-  const { mutateAsync: createDocumentFromDirectTemplate, isPending: isSubmitting } =
-    trpc.template.createDocumentFromDirectTemplate.useMutation();
+  const { mutateAsync: createDocumentFromDirectTemplate, isPending: isSubmitting } = useZapMutation<
+    TCreateDocumentFromDirectTemplateResponse,
+    z.infer<typeof ZCreateDocumentFromDirectTemplateRequestSchema>
+  >('template.createDocumentFromDirectTemplate');
 
   const onSignField = (payload: TSignFieldWithTokenMutationSchema) => {
     setLocalFields((fields) =>

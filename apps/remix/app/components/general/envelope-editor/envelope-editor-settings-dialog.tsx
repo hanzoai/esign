@@ -49,7 +49,8 @@ import {
   canAccessTeamDocument,
   extractTeamSignatureSettings,
 } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { DocumentEmailCheckboxes } from '@hanzo/sign-ui/components/document/document-email-checkboxes';
 import {
   DocumentGlobalAuthAccessSelect,
@@ -232,7 +233,8 @@ export const EnvelopeEditorSettingsDialog = ({
   const emailSettings = form.watch('meta.emailSettings');
 
   const { data: emailData, isLoading: isLoadingEmails } =
-    trpc.organisation.email.find.useQuery(
+    useZapQuery<TFindOrganisationEmailsResponse>(
+      'organisation.email.find',
       {
         organisationId: organisation.id,
         perPage: 100,

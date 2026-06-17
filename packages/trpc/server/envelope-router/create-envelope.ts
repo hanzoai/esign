@@ -9,32 +9,7 @@ import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-reque
 import { putPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
 
 import { insertFormValuesInPdf } from '../../../lib/server-only/pdf/insert-form-values-in-pdf';
-import { authenticatedProcedure } from '../trpc';
 import type { TCreateEnvelopeRequest } from './create-envelope.types';
-import {
-  ZCreateEnvelopeRequestSchema,
-  ZCreateEnvelopeResponseSchema,
-  createEnvelopeMeta,
-} from './create-envelope.types';
-
-export const createEnvelopeRoute = authenticatedProcedure
-  .meta(createEnvelopeMeta)
-  .input(ZCreateEnvelopeRequestSchema)
-  .output(ZCreateEnvelopeResponseSchema)
-  .mutation(async ({ input, ctx }) => {
-    ctx.logger.info({
-      input: {
-        folderId: input.payload.folderId,
-      },
-    });
-
-    return await createEnvelopeRouteCaller({
-      userId: ctx.user.id,
-      teamId: ctx.teamId,
-      input,
-      apiRequestMetadata: ctx.metadata,
-    });
-  });
 
 type CreateEnvelopeRouteOptions = {
   /**

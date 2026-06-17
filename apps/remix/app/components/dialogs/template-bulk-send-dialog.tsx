@@ -6,7 +6,8 @@ import { File as FileIcon, Upload, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TBulkSendTemplateMutationSchema } from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
 import {
@@ -55,7 +56,10 @@ export const TemplateBulkSendDialog = ({
     },
   });
 
-  const { mutateAsync: uploadBulkSend } = trpc.template.uploadBulkSend.useMutation();
+  const { mutateAsync: uploadBulkSend } = useZapMutation<
+    { success: boolean },
+    TBulkSendTemplateMutationSchema
+  >('template.uploadBulkSend');
 
   const onDownloadTemplate = () => {
     const headers = recipients.flatMap((_, index) => [

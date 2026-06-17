@@ -12,7 +12,8 @@ import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-upd
 import type { TDocumentAuditLog } from '@hanzo/sign-lib/types/document-audit-logs';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import { formatDocumentAuditLogAction } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindDocumentAuditLogsResponse } from '@hanzo/sign-trpc/server/admin-router/find-document-audit-logs.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
@@ -43,7 +44,8 @@ export const AdminDocumentLogsTable = ({ envelopeId }: AdminDocumentLogsTablePro
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.admin.document.findAuditLogs.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindDocumentAuditLogsResponse>(
+    'admin.document.findAuditLogs',
     {
       envelopeId,
       page: parsedSearchParams.page,

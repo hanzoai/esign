@@ -4,7 +4,12 @@ import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
+import type { TFindAdminOrganisationsResponse } from '@hanzo/sign-trpc/server/admin-router/find-admin-organisations.types';
+import type {
+  TSwapOrganisationSubscriptionRequest,
+  TSwapOrganisationSubscriptionResponse,
+} from '@hanzo/sign-trpc/server/admin-router/swap-organisation-subscription.types';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -45,7 +50,8 @@ export const AdminSwapSubscriptionDialog = ({
   const [selectedOrgId, setSelectedOrgId] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { data: orgsData } = trpc.admin.organisation.find.useQuery(
+  const { data: orgsData } = useZapQuery<TFindAdminOrganisationsResponse>(
+    'admin.organisation.find',
     {
       ownerUserId: userId,
       perPage: 100,
@@ -55,7 +61,7 @@ export const AdminSwapSubscriptionDialog = ({
     },
   );
 
-  const trpcUtils = trpc.useUtils();
+  const trpcUtils = useZapUtils();
 
   const eligibleOrgs = useMemo(() => {
     if (!orgsData?.data) {
@@ -77,7 +83,10 @@ export const AdminSwapSubscriptionDialog = ({
 
   const selectedOrg = eligibleOrgs.find((org) => org.id === selectedOrgId);
 
-  const { mutateAsync: swapSubscription } = trpc.admin.organisation.swapSubscription.useMutation();
+  const { mutateAsync: swapSubscription } = useZapMutation<
+    TSwapOrganisationSubscriptionResponse,
+    TSwapOrganisationSubscriptionRequest
+  >('admin.organisation.swapSubscription');
 
   const onSubmit = async () => {
     if (!selectedOrgId) {
@@ -92,8 +101,8 @@ export const AdminSwapSubscriptionDialog = ({
         targetOrganisationId: selectedOrgId,
       });
 
-      await trpcUtils.admin.organisation.find.invalidate();
-      await trpcUtils.admin.organisation.get.invalidate();
+      await trpcUtils.invalidate('admin.organisation.find');
+      await trpcUtils.invalidate('admin.organisation.get');
 
       onOpenChange(false);
 

@@ -15,8 +15,11 @@ import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/sign-lib/constants/app';
 import { TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { TCreateEnvelopePayload } from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
+import type {
+  TCreateEnvelopePayload,
+  TCreateEnvelopeResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { DocumentUploadButton } from '@hanzo/sign-ui/primitives/document-upload-button';
 import {
@@ -56,7 +59,9 @@ export const EnvelopeUploadButton = ({ className, type, folderId }: EnvelopeUplo
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { mutateAsync: createEnvelope } = trpc.envelope.create.useMutation();
+  const { mutateAsync: createEnvelope } = useZapMutation<TCreateEnvelopeResponse, FormData>(
+    'envelope.create',
+  );
 
   const disabledMessage = useMemo(() => {
     if (organisation.subscription && remaining.documents === 0) {

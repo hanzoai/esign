@@ -14,7 +14,7 @@ import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
 import { parseToIntegerArray } from '@hanzo/sign-lib/utils/params';
 import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
 import { ExtendedDocumentStatus } from '@hanzo/sign-prisma/types/extended-document-status';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { TFindDocumentsInternalResponse } from '@hanzo/sign-trpc/server/document-router/find-documents-internal.types';
 import { ZFindDocumentsInternalRequestSchema } from '@hanzo/sign-trpc/server/document-router/find-documents-internal.types';
 import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
@@ -85,10 +85,13 @@ export default function DocumentsPage() {
     [searchParams],
   );
 
-  const { data, isLoading, isLoadingError } = trpc.document.findDocumentsInternal.useQuery({
-    ...findDocumentSearchParams,
-    folderId,
-  });
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindDocumentsInternalResponse>(
+    'document.findDocumentsInternal',
+    {
+      ...findDocumentSearchParams,
+      folderId,
+    },
+  );
 
   const getTabHref = (value: keyof typeof ExtendedDocumentStatus) => {
     const params = new URLSearchParams(searchParams);

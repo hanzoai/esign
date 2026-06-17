@@ -12,7 +12,7 @@ import type { z } from 'zod';
 
 import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { ZCreateApiTokenRequestSchema } from '@hanzo/sign-trpc/server/api-token-router/create-api-token.types';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -75,7 +75,10 @@ export const ApiTokenForm = ({ className, tokens }: ApiTokenFormProps) => {
   const [newlyCreatedToken, setNewlyCreatedToken] = useState<NewlyCreatedToken | null>();
   const [noExpirationDate, setNoExpirationDate] = useState(false);
 
-  const { mutateAsync: createTokenMutation } = trpc.apiToken.create.useMutation({
+  const { mutateAsync: createTokenMutation } = useZapMutation<
+    NewlyCreatedToken,
+    { teamId: number; tokenName: string; expirationDate: string | null }
+  >('apiToken.create', {
     onSuccess(data) {
       setNewlyCreatedToken(data);
     },

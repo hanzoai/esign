@@ -9,8 +9,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -53,7 +53,7 @@ export const FolderMoveDialog = ({
   const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { mutateAsync: moveFolder } = trpc.folder.updateFolder.useMutation();
+  const { mutateAsync: moveFolder } = useZapMutation<void, unknown>('folder.updateFolder');
 
   const form = useForm<TMoveFolderFormSchema>({
     resolver: zodResolver(ZMoveFolderFormSchema),

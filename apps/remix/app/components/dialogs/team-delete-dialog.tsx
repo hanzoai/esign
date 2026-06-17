@@ -11,7 +11,8 @@ import { z } from 'zod';
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZDeleteTeamRequestSchema } from '@hanzo/sign-trpc/server/team-router/delete-team.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -82,7 +83,10 @@ export const TeamDeleteDialog = ({
     },
   });
 
-  const { mutateAsync: deleteTeam } = trpc.team.delete.useMutation();
+  const { mutateAsync: deleteTeam } = useZapMutation<
+    void,
+    z.infer<typeof ZDeleteTeamRequestSchema>
+  >('team.delete');
 
   const onFormSubmit = async (data: z.infer<typeof ZDeleteTeamFormSchema>) => {
     try {

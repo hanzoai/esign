@@ -26,7 +26,8 @@ import type { TDetectedRecipientSchema } from '@hanzo/sign-lib/server-only/ai/en
 import { ZRecipientAuthOptionsSchema } from '@hanzo/sign-lib/types/document-auth';
 import { nanoid } from '@hanzo/sign-lib/universal/id';
 import { canRecipientBeModified as utilCanRecipientBeModified } from '@hanzo/sign-lib/utils/recipients';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetRecipientSuggestionsResponseSchema } from '@hanzo/sign-trpc/server/recipient-router/find-recipient-suggestions.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { RecipientActionAuthSelect } from '@hanzo/sign-ui/components/recipient/recipient-action-auth-select';
 import {
   RecipientAutoCompleteInput,
@@ -134,15 +135,17 @@ export const EnvelopeEditorRecipientForm = () => {
   const isFirstRender = useRef(true);
   const { recipients, fields } = envelope;
 
-  const { data: recipientSuggestionsData, isLoading } = trpc.recipient.suggestions.find.useQuery(
-    {
-      query: debouncedRecipientSearchQuery,
-    },
-    {
-      enabled: debouncedRecipientSearchQuery.length > 1 && !isEmbedded,
-      retry: false,
-    },
-  );
+  const { data: recipientSuggestionsData, isLoading } =
+    useZapQuery<TGetRecipientSuggestionsResponseSchema>(
+      'recipient.suggestions.find',
+      {
+        query: debouncedRecipientSearchQuery,
+      },
+      {
+        enabled: debouncedRecipientSearchQuery.length > 1 && !isEmbedded,
+        retry: false,
+      },
+    );
 
   const recipientSuggestions = recipientSuggestionsData?.results || [];
 

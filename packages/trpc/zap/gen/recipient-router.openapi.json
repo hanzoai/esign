@@ -1,0 +1,751 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Recipient",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/recipient/suggestions-find": {
+      "post": {
+        "operationId": "recipient.suggestionsFind",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/get-document-recipient": {
+      "post": {
+        "operationId": "recipient.getDocumentRecipient",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/create-document-recipient": {
+      "post": {
+        "operationId": "recipient.createDocumentRecipient",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/create-document-recipients": {
+      "post": {
+        "operationId": "recipient.createDocumentRecipients",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/update-document-recipient": {
+      "post": {
+        "operationId": "recipient.updateDocumentRecipient",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/update-document-recipients": {
+      "post": {
+        "operationId": "recipient.updateDocumentRecipients",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/delete-document-recipient": {
+      "post": {
+        "operationId": "recipient.deleteDocumentRecipient",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/set-document-recipients": {
+      "post": {
+        "operationId": "recipient.setDocumentRecipients",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/get-template-recipient": {
+      "post": {
+        "operationId": "recipient.getTemplateRecipient",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/create-template-recipient": {
+      "post": {
+        "operationId": "recipient.createTemplateRecipient",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/create-template-recipients": {
+      "post": {
+        "operationId": "recipient.createTemplateRecipients",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/update-template-recipient": {
+      "post": {
+        "operationId": "recipient.updateTemplateRecipient",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/update-template-recipients": {
+      "post": {
+        "operationId": "recipient.updateTemplateRecipients",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/delete-template-recipient": {
+      "post": {
+        "operationId": "recipient.deleteTemplateRecipient",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/set-template-recipients": {
+      "post": {
+        "operationId": "recipient.setTemplateRecipients",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/complete-document-with-token": {
+      "post": {
+        "operationId": "recipient.completeDocumentWithToken",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recipient/reject-document-with-token": {
+      "post": {
+        "operationId": "recipient.rejectDocumentWithToken",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Req": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "Resp": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

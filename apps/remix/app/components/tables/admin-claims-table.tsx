@@ -9,7 +9,8 @@ import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-upd
 import type { TLicenseClaim } from '@hanzo/sign-lib/types/license';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/sign-lib/types/subscription';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindSubscriptionClaimsResponse } from '@hanzo/sign-trpc/server/admin-router/find-subscription-claims.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -41,11 +42,14 @@ export const AdminClaimsTable = ({ licenseFlags }: AdminClaimsTableProps) => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.admin.claims.find.useQuery({
-    query: parsedSearchParams.query,
-    page: parsedSearchParams.page,
-    perPage: parsedSearchParams.perPage,
-  });
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindSubscriptionClaimsResponse>(
+    'admin.claims.find',
+    {
+      query: parsedSearchParams.query,
+      page: parsedSearchParams.page,
+      perPage: parsedSearchParams.perPage,
+    },
+  );
 
   const onPaginationChange = (page: number, perPage: number) => {
     updateSearchParams({

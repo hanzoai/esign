@@ -10,10 +10,20 @@ import {
   type EnvelopeEditorConfig,
   type TEditorEnvelope,
 } from '@hanzo/sign-lib/types/envelope-editor';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { TSetEnvelopeFieldsResponse } from '@hanzo/sign-trpc/server/envelope-router/set-envelope-fields.types';
-import type { TSetEnvelopeRecipientsRequest } from '@hanzo/sign-trpc/server/envelope-router/set-envelope-recipients.types';
-import type { TUpdateEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/update-envelope.types';
+import type { TGetEditorEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-editor-envelope.types';
+import type {
+  TSetEnvelopeFieldsRequest,
+  TSetEnvelopeFieldsResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/set-envelope-fields.types';
+import type {
+  TSetEnvelopeRecipientsRequest,
+  TSetEnvelopeRecipientsResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/set-envelope-recipients.types';
+import type {
+  TUpdateEnvelopeRequest,
+  TUpdateEnvelopeResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/update-envelope.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { TRecipientColor } from '@hanzo/sign-ui/lib/recipient-colors';
 import { AVAILABLE_RECIPIENT_COLORS } from '@hanzo/sign-ui/lib/recipient-colors';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
@@ -144,9 +154,16 @@ export const EnvelopeEditorProvider = ({
     envelope,
   });
 
-  const setRecipientsMutation = trpc.envelope.recipient.set.useMutation();
-  const setFieldsMutation = trpc.envelope.field.set.useMutation();
-  const updateEnvelopeMutation = trpc.envelope.update.useMutation();
+  const setRecipientsMutation = useZapMutation<
+    TSetEnvelopeRecipientsResponse,
+    TSetEnvelopeRecipientsRequest
+  >('envelope.recipient.set');
+  const setFieldsMutation = useZapMutation<TSetEnvelopeFieldsResponse, TSetEnvelopeFieldsRequest>(
+    'envelope.field.set',
+  );
+  const updateEnvelopeMutation = useZapMutation<TUpdateEnvelopeResponse, TUpdateEnvelopeRequest>(
+    'envelope.update',
+  );
 
   /**
    * Handles debouncing the recipients updates to the server.
@@ -358,7 +375,8 @@ export const EnvelopeEditorProvider = ({
     [envelope.recipients],
   );
 
-  const { refetch: reloadEnvelope } = trpc.envelope.editor.get.useQuery(
+  const { refetch: reloadEnvelope } = useZapQuery<TGetEditorEnvelopeResponse>(
+    'envelope.editor.get',
     {
       envelopeId: envelope.id,
     },

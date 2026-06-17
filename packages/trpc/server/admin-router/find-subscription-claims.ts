@@ -5,20 +5,10 @@ import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
 import { prisma } from '@hanzo/sign-prisma';
 import type SubscriptionClaimSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/SubscriptionClaimSchema';
 
-import { adminProcedure } from '../trpc';
 import {
   ZFindSubscriptionClaimsRequestSchema,
   ZFindSubscriptionClaimsResponseSchema,
 } from './find-subscription-claims.types';
-
-export const findSubscriptionClaimsRoute = adminProcedure
-  .input(ZFindSubscriptionClaimsRequestSchema)
-  .output(ZFindSubscriptionClaimsResponseSchema)
-  .query(async ({ input }) => {
-    const { query, page, perPage } = input;
-
-    return await findSubscriptionClaims({ query, page, perPage });
-  });
 
 type FindSubscriptionClaimsOptions = {
   query?: string;

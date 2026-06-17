@@ -1,26 +1,10 @@
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { adminProcedure } from '../trpc';
 import {
   ZResetTwoFactorRequestSchema,
   ZResetTwoFactorResponseSchema,
 } from './reset-two-factor-authentication.types';
-
-export const resetTwoFactorRoute = adminProcedure
-  .input(ZResetTwoFactorRequestSchema)
-  .output(ZResetTwoFactorResponseSchema)
-  .mutation(async ({ input, ctx }) => {
-    const { userId } = input;
-
-    ctx.logger.info({
-      input: {
-        userId,
-      },
-    });
-
-    return await resetTwoFactor({ userId });
-  });
 
 export type ResetTwoFactorOptions = {
   userId: number;

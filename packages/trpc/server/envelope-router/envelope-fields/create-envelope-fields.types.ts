@@ -10,18 +10,6 @@ import {
 } from '@hanzo/sign-lib/types/field';
 import { ZEnvelopeFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
 
-import type { TrpcRouteMeta } from '../../trpc';
-
-export const createEnvelopeFieldsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/field/create-many',
-    summary: 'Create envelope fields',
-    description: 'Create multiple fields for an envelope',
-    tags: ['Envelope Fields'],
-  },
-};
-
 const ZCreateFieldBaseSchema = ZEnvelopeFieldAndMetaSchema.and(
   z.object({
     recipientId: z.number().describe('The ID of the recipient to create the field for'),

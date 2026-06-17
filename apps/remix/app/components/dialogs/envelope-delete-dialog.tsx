@@ -7,7 +7,11 @@ import { DocumentStatus, EnvelopeType } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
 import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type {
+  TDeleteEnvelopeRequest,
+  TDeleteEnvelopeResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/delete-envelope.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -52,7 +56,10 @@ export const EnvelopeDeleteDialog = ({
   const [inputValue, setInputValue] = useState('');
   const [isDeleteEnabled, setIsDeleteEnabled] = useState(status === DocumentStatus.DRAFT);
 
-  const { mutateAsync: deleteEnvelope, isPending } = trpcReact.envelope.delete.useMutation({
+  const { mutateAsync: deleteEnvelope, isPending } = useZapMutation<
+    TDeleteEnvelopeResponse,
+    TDeleteEnvelopeRequest
+  >('envelope.delete', {
     onSuccess: async () => {
       void refreshLimits();
 

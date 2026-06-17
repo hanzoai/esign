@@ -15,9 +15,10 @@ import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/or
 import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { TFindOrganisationGroupsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-groups.types';
 import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
+import type { TUpdateOrganisationGroupRequest } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-group.types';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { DataTable, type DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import {
@@ -53,22 +54,25 @@ export default function OrganisationGroupSettingsPage({ params }: Route.Componen
 
   const groupId = params.id;
 
-  const { data: members, isLoading: isLoadingMembers } = trpc.organisation.member.find.useQuery({
-    organisationId: organisation.id,
-  });
-
-  const { data: groupData, isLoading: isLoadingGroup } = trpc.organisation.group.find.useQuery(
-    {
+  const { data: members, isLoading: isLoadingMembers } =
+    useZapQuery<TFindOrganisationMembersResponse>('organisation.member.find', {
       organisationId: organisation.id,
-      organisationGroupId: groupId,
-      page: 1,
-      perPage: 1,
-      types: [OrganisationGroupType.CUSTOM],
-    },
-    {
-      enabled: !!organisation.id && !!groupId,
-    },
-  );
+    });
+
+  const { data: groupData, isLoading: isLoadingGroup } =
+    useZapQuery<TFindOrganisationGroupsResponse>(
+      'organisation.group.find',
+      {
+        organisationId: organisation.id,
+        organisationGroupId: groupId,
+        page: 1,
+        perPage: 1,
+        types: [OrganisationGroupType.CUSTOM],
+      },
+      {
+        enabled: !!organisation.id && !!groupId,
+      },
+    );
 
   const group = groupData?.data.find((g) => g.id === groupId);
 
@@ -145,7 +149,10 @@ const OrganisationGroupForm = ({ group, organisationMembers }: OrganisationGroup
 
   const organisation = useCurrentOrganisation();
 
-  const { mutateAsync: updateOrganisationGroup } = trpc.organisation.group.update.useMutation();
+  const { mutateAsync: updateOrganisationGroup } = useZapMutation<
+    void,
+    TUpdateOrganisationGroupRequest
+  >('organisation.group.update');
 
   const form = useForm<TUpdateOrganisationGroupFormSchema>({
     resolver: zodResolver(ZUpdateOrganisationGroupFormSchema),

@@ -12,7 +12,8 @@ import {
 import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
 import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetDocumentResponse } from '@hanzo/sign-trpc/server/document-router/get-document.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -51,7 +52,7 @@ export const DocumentCertificateQRView = ({
   completedDate,
   token,
 }: DocumentCertificateQRViewProps) => {
-  const { data: documentViaUser } = trpc.document.get.useQuery({
+  const { data: documentViaUser } = useZapQuery<TGetDocumentResponse>('document.get', {
     documentId,
   });
 

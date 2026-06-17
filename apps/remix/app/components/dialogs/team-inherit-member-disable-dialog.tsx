@@ -1,7 +1,9 @@
 import { Trans, useLingui } from '@lingui/react/macro';
 import type { TeamGroup } from '@prisma/client';
+import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZDeleteTeamGroupRequestSchema } from '@hanzo/sign-trpc/server/team-router/delete-team-group.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -27,22 +29,25 @@ export const TeamMemberInheritDisableDialog = ({ group }: TeamMemberInheritDisab
 
   const team = useCurrentTeam();
 
-  const deleteGroupMutation = trpc.team.group.delete.useMutation({
-    onSuccess: () => {
-      toast({
-        title: t`Access disabled`,
-        duration: 5000,
-      });
+  const deleteGroupMutation = useZapMutation<void, z.infer<typeof ZDeleteTeamGroupRequestSchema>>(
+    'team.group.delete',
+    {
+      onSuccess: () => {
+        toast({
+          title: t`Access disabled`,
+          duration: 5000,
+        });
+      },
+      onError: () => {
+        toast({
+          title: t`Something went wrong`,
+          description: t`We encountered an unknown error while attempting to disable access.`,
+          variant: 'destructive',
+          duration: 5000,
+        });
+      },
     },
-    onError: () => {
-      toast({
-        title: t`Something went wrong`,
-        description: t`We encountered an unknown error while attempting to disable access.`,
-        variant: 'destructive',
-        duration: 5000,
-      });
-    },
-  });
+  );
 
   return (
     <Dialog>

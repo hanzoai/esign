@@ -10,7 +10,8 @@ import { match } from 'ts-pattern';
 
 import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindEmailDomainsResponse } from '@hanzo/sign-trpc/server/admin-router/find-email-domains.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Badge } from '@hanzo/sign-ui/primitives/badge';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
@@ -42,7 +43,8 @@ export default function AdminEmailDomainsPage() {
     statusParam === 'PENDING' || statusParam === 'ACTIVE' ? statusParam : undefined;
 
   const { data: findEmailDomainsData, isPending: isFindEmailDomainsLoading } =
-    trpc.admin.emailDomain.find.useQuery(
+    useZapQuery<TFindEmailDomainsResponse>(
+      'admin.emailDomain.find',
       {
         query: debouncedTerm,
         page: page || 1,

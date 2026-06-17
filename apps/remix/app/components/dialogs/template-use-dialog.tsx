@@ -16,14 +16,16 @@ import {
   TEMPLATE_RECIPIENT_EMAIL_PLACEHOLDER_REGEX,
   TEMPLATE_RECIPIENT_NAME_PLACEHOLDER_REGEX,
 } from '@hanzo/sign-lib/constants/template';
-import {
-  DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-  SKIP_QUERY_BATCH_META,
-} from '@hanzo/sign-lib/constants/trpc';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
 import { ZRecipientEmailSchema } from '@hanzo/sign-lib/types/recipient';
 import { putPdfFile } from '@hanzo/sign-lib/universal/upload/put-file';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZGetEnvelopeItemsResponseSchema } from '@hanzo/sign-trpc/server/envelope-router/get-envelope-items.types';
+import type {
+  ZCreateDocumentFromTemplateRequestSchema,
+  ZCreateDocumentFromTemplateResponseSchema,
+} from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
@@ -101,13 +103,15 @@ export function TemplateUseDialog({
 
   const [open, setOpen] = useState(false);
 
-  const { data: response, isLoading: isLoadingEnvelopeItems } = trpc.envelope.item.getMany.useQuery(
+  const { data: response, isLoading: isLoadingEnvelopeItems } = useZapQuery<
+    z.infer<typeof ZGetEnvelopeItemsResponseSchema>
+  >(
+    'envelope.item.getMany',
     {
       envelopeId,
     },
     {
       placeholderData: (previousData) => previousData,
-      ...SKIP_QUERY_BATCH_META,
       ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
       enabled: open,
     },
@@ -155,8 +159,10 @@ export function TemplateUseDialog({
     name: 'customDocumentData',
   });
 
-  const { mutateAsync: createDocumentFromTemplate } =
-    trpc.template.createDocumentFromTemplate.useMutation();
+  const { mutateAsync: createDocumentFromTemplate } = useZapMutation<
+    z.infer<typeof ZCreateDocumentFromTemplateResponseSchema>,
+    z.infer<typeof ZCreateDocumentFromTemplateRequestSchema>
+  >('template.createDocumentFromTemplate');
 
   const onSubmit = async (data: TAddRecipientsForNewDocumentSchema) => {
     try {

@@ -613,8 +613,8 @@ msgid "<0>{organisationName}</0> has requested to create an account on your beha
 msgstr "<0>{organisationName}</0> ha richiesto di creare un account per tuo conto."
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "<0>{organisationName}</0> has requested to link your current Hanzo Sign account to their organisation."
-msgstr "<0>{organisationName}</0> ha richiesto di collegare il tuo account Hanzo Sign attuale alla loro organizzazione."
+msgid "<0>{organisationName}</0> has requested to link your current Hanzo eSign account to their organisation."
+msgstr ""
 
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
 msgid "<0>{senderName} {senderEmail}</0> has invited you to approve this document"
@@ -653,8 +653,8 @@ msgid "<0>{senderName} {senderEmail}</0> on behalf of \"{0}\" has invited you to
 msgstr "<0>{senderName} {senderEmail}</0>, per conto di \"{0}\", ti ha invitato a visualizzare questo documento"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "<0>{teamName}</0> has requested to use your email address for their team on Hanzo Sign."
-msgstr "<0>{teamName}</0> ha richiesto di utilizzare il tuo indirizzo email per il loro team su Hanzo Sign."
+msgid "<0>{teamName}</0> has requested to use your email address for their team on Hanzo eSign."
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "<0>Account management:</0> Modify your account settings, permissions, and preferences"
@@ -749,14 +749,6 @@ msgstr "<0>Digitata</0> - Una firma digitata usando una tastiera."
 msgid "<0>Uploaded</0> - A signature that is uploaded from a file."
 msgstr "<0>Caricata</0> - Una firma caricata da un file."
 
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "0 Free organisations left"
-msgstr "0 Organizzazioni gratuite rimaste"
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "1 Free organisations left"
-msgstr "1 Organizzazione gratuita rimasta"
-
 #: apps/remix/app/components/forms/token.tsx
 msgid "1 month"
 msgstr "{VAR_PLURAL, select, one {1 mese} other {# mesi}}"
@@ -842,14 +834,6 @@ msgstr "404 Utente non trovato"
 msgid "404 Webhook not found"
 msgstr "404 Webhook non trovato"
 
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "5 documents a month"
-msgstr "5 documenti al mese"
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "5 Documents a month"
-msgstr "5 Documenti al mese"
-
 #: apps/remix/app/components/general/generic-error-layout.tsx
 msgid "500 Internal Server Error"
 msgstr "500 Errore Interno del Server"
@@ -898,8 +882,8 @@ msgid "A means to print or download documents for your records"
 msgstr "Un mezzo per stampare o scaricare documenti per i tuoi archivi"
 
 #: packages/email/templates/organisation-join.tsx
-msgid "A member has joined your organisation on Hanzo Sign"
-msgstr "Un membro si è unito alla tua organizzazione su Hanzo Sign"
+msgid "A member has joined your organisation on Hanzo eSign"
+msgstr ""
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-left-email.handler.ts
 msgid "A member has left your organisation"
@@ -910,8 +894,8 @@ msgid "A member has left your organisation {organisationName}"
 msgstr "Un membro ha lasciato la tua organizzazione {organisationName}"
 
 #: packages/email/templates/organisation-leave.tsx
-msgid "A member has left your organisation on Hanzo Sign"
-msgstr "Un membro ha lasciato la tua organizzazione su Hanzo Sign"
+msgid "A member has left your organisation on Hanzo eSign"
+msgstr ""
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-joined-email.handler.ts
 msgid "A new member has joined your organisation"
@@ -950,18 +934,18 @@ msgid "A request has been made to create an account for you"
 msgstr "È stata effettuata una richiesta per creare un account per te"
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "A request has been made to link your Hanzo Sign account"
-msgstr "È stata effettuata una richiesta per collegare il tuo account Hanzo Sign"
+msgid "A request has been made to link your Hanzo eSign account"
+msgstr ""
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/create-team-email-verification.ts
-msgid "A request to use your email has been initiated by {0} on Hanzo Sign"
-msgstr "Una richiesta per utilizzare la tua email è stata avviata da {0} su Hanzo Sign"
+msgid "A request to use your email has been initiated by {0} on Hanzo eSign"
+msgstr ""
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
-msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo Sign."
-msgstr "Un codice segreto che verrà inviato al tuo URL in modo che tu possa verificare che la richiesta sia stata inviata da Hanzo Sign."
+msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo eSign."
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "A stable internet connection"
@@ -1004,12 +988,12 @@ msgid "Accept & Link Account"
 msgstr "Accetta & Collega Account"
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Accept invitation to join an organisation on Hanzo Sign"
-msgstr "Accetta l'invito a unirti a un'organizzazione su Hanzo Sign"
+msgid "Accept invitation to join an organisation on Hanzo eSign"
+msgstr ""
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "Accept team email request for {teamName} on Hanzo Sign"
-msgstr "Accetta la richiesta di email per il team {teamName} su Hanzo Sign"
+msgid "Accept team email request for {teamName} on Hanzo eSign"
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "Acceptance and Consent"
@@ -1035,6 +1019,7 @@ msgid "Account Authentication"
 msgstr "Autenticazione dell'account"
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
+#: packages/lib/server-only/organisation/send-organisation-account-link-confirmation-email.ts
 msgid "Account creation request"
 msgstr "Richiesta di creazione account"
 
@@ -1062,6 +1047,10 @@ msgstr "Collegamento dell'account rifiutato"
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "Account linked successfully"
 msgstr "Account collegato correttamente"
+
+#: packages/lib/server-only/organisation/send-organisation-account-link-confirmation-email.ts
+msgid "Account linking request"
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "Account Linking Request"
@@ -1108,7 +1097,6 @@ msgstr "Azione"
 #: apps/remix/app/components/tables/team-members-table.tsx
 #: apps/remix/app/components/tables/team-members-table.tsx
 #: apps/remix/app/components/tables/templates-table.tsx
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/unsealed-documents._index.tsx
@@ -1128,7 +1116,6 @@ msgid "Active"
 msgstr "Attivo"
 
 #: apps/remix/app/components/general/admin-license-card.tsx
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 #: packages/lib/constants/billing.ts
 msgctxt "Subscription status"
 msgid "Active"
@@ -1533,10 +1520,6 @@ msgstr "Quasi finito"
 msgid "Already have an account? <0>Sign in instead</0>"
 msgstr "Hai già un account? <0>Accedi al posto</0>"
 
-#: apps/remix/app/components/tables/organisation-billing-invoices-table.tsx
-msgid "Amount"
-msgstr "Importo"
-
 #: packages/email/templates/document-super-delete.tsx
 msgid "An admin has deleted your document \"{documentName}\"."
 msgstr "Un amministratore ha eliminato il tuo documento \"{documentName}\"."
@@ -1740,11 +1723,6 @@ msgstr "Si è verificato un errore durante la firma del documento."
 #: apps/remix/app/components/general/envelope-signing/envelope-signer-page-renderer.tsx
 msgid "An error occurred while signing the field."
 msgstr "Si è verificato un errore durante la firma del campo."
-
-#: apps/remix/app/components/general/billing-plans.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "An error occurred while trying to create a checkout session."
-msgstr "Si è verificato un errore durante il tentativo di creare una sessione di pagamento."
 
 #: apps/remix/app/components/general/document/document-edit-form.tsx
 #: apps/remix/app/components/general/template/template-edit-form.tsx
@@ -2103,7 +2081,6 @@ msgstr "Avatar aggiornato"
 msgid "Awaiting email confirmation"
 msgstr "In attesa della conferma email"
 
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-group-create-dialog.tsx
 #: apps/remix/app/components/dialogs/team-member-create-dialog.tsx
 #: apps/remix/app/components/embed/authoring/configure-fields-view.tsx
@@ -2142,9 +2119,6 @@ msgstr "Prima di iniziare, conferma il tuo indirizzo email facendo clic sul puls
 
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
 #: apps/remix/app/components/general/settings-nav-mobile.tsx
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
-#: apps/remix/app/routes/_authenticated+/settings+/billing.tsx
 msgid "Billing"
 msgstr "Fatturazione"
 
@@ -2179,7 +2153,6 @@ msgid "Branding Logo"
 msgstr "Logo del Marchio"
 
 #: apps/remix/app/components/general/settings-nav-mobile.tsx
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.branding.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.branding.tsx
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings.branding.tsx
 msgid "Branding Preferences"
@@ -2245,8 +2218,8 @@ msgid "By enabling 2FA, you will be required to enter a code from your authentic
 msgstr "Abilitando la 2FA, ti sarà richiesto di inserire un codice dalla tua app di autenticazione ogni volta che accedi utilizzando email e password."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
-msgid "By proceeding to use the electronic signature service provided by Hanzo Sign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
-msgstr "Procedendo con l'utilizzo del servizio di firma elettronica fornito da Hanzo Sign, affermi di aver letto e compreso questa divulgazione. Accetti tutti i termini e le condizioni relativi all'uso delle firme elettroniche e delle transazioni elettroniche come descritto in questo documento."
+msgid "By proceeding to use the electronic signature service provided by Hanzo eSign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
+msgstr ""
 
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
 msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
@@ -2292,7 +2265,6 @@ msgstr "Non riesci a trovare qualcuno?"
 #: apps/remix/app/components/dialogs/folder-delete-dialog.tsx
 #: apps/remix/app/components/dialogs/folder-move-dialog.tsx
 #: apps/remix/app/components/dialogs/folder-update-dialog.tsx
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/organisation-delete-dialog.tsx
 #: apps/remix/app/components/dialogs/organisation-email-create-dialog.tsx
@@ -2462,12 +2434,6 @@ msgstr "Impostazioni del checkbox"
 msgid "Checkbox values"
 msgstr "Valori della casella di controllo"
 
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Checkout"
-msgstr "Pagamento"
-
 #: packages/lib/constants/i18n.ts
 msgid "Chinese"
 msgstr "Cinese"
@@ -2583,7 +2549,6 @@ msgstr "È richiesto il segreto cliente"
 #: apps/remix/app/components/forms/2fa/enable-authenticator-app-dialog.tsx
 #: apps/remix/app/components/forms/2fa/view-recovery-codes-dialog.tsx
 #: apps/remix/app/components/forms/support-ticket-form.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-2fa.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-passkey.tsx
 #: apps/remix/app/components/general/document/document-recipient-link-copy-dialog.tsx
@@ -2596,10 +2561,6 @@ msgstr "Chiudi"
 #: apps/remix/app/components/embed/authoring/configure-document-advanced-settings.tsx
 msgid "Communication"
 msgstr "Comunicazione"
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "Compare all plans and features in detail"
-msgstr "Confronta tutti i piani e le caratteristiche in dettaglio"
 
 #: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
 #: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
@@ -2769,10 +2730,6 @@ msgstr "Consenso alle transazioni elettroniche"
 msgid "Contact Information"
 msgstr "Informazioni di contatto"
 
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "Contact sales here"
-msgstr "Contatta le vendite qui"
-
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
 msgid "Contact us"
 msgstr "Contattaci"
@@ -2786,11 +2743,9 @@ msgid "Context"
 msgstr "Contesto"
 
 #: apps/remix/app/components/dialogs/assistant-confirmation-dialog.tsx
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/passkey-create-dialog.tsx
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 #: apps/remix/app/components/embed/authoring/configure-document-view.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-form.tsx
 #: apps/remix/app/routes/_unauthenticated+/organisation.invite.$token.tsx
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
@@ -2951,10 +2906,6 @@ msgstr "Crea un nuovo account"
 msgid "Create a new email address for your organisation using the domain <0>{0}</0>."
 msgstr "Crea un nuovo indirizzo email per la tua organizzazione utilizzando il dominio <0>{0}</0>."
 
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Create a new organisation with {planName} plan. Keep your current organisation on it's current plan"
-msgstr "Crea una nuova organizzazione con il piano {planName}. Mantieni la tua organizzazione attuale sul suo piano attuale"
-
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
 msgid "Create a support ticket"
 msgstr "Crea un ticket di supporto"
@@ -3064,21 +3015,9 @@ msgstr "Crea organizzazione"
 msgid "Create Organisation"
 msgstr "Crea Organizzazione"
 
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Create separate organisation"
-msgstr "Crea organizzazione separata"
-
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
 msgid "Create signing links"
 msgstr "Crea link di firma"
-
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
-msgid "Create Stripe customer"
-msgstr "Crea cliente Stripe"
-
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
-msgid "Create subscription"
-msgstr "Crea abbonamento"
 
 #: apps/remix/app/components/dialogs/claim-create-dialog.tsx
 msgid "Create Subscription Claim"
@@ -3198,14 +3137,6 @@ msgstr "Destinatari attuali:"
 #: apps/remix/app/components/general/teams/team-inherit-member-alert.tsx
 msgid "Currently all organisation members can access this team"
 msgstr "Attualmente tutti i membri dell'organizzazione possono accedere a questo team"
-
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.branding.tsx
-msgid "Currently branding can only be configured for Teams and above plans."
-msgstr "Attualmente il marchio può essere configurato solo per i piani Team e superiori."
-
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains._index.tsx
-msgid "Currently email domains can only be configured for Platform and above plans."
-msgstr "Attualmente i domini email possono essere configurati solo per i piani Platform e superiori."
 
 #. placeholder {0}: (field.value.size / (1024 * 1024)).toFixed(2)
 #: apps/remix/app/components/dialogs/template-use-dialog.tsx
@@ -3706,14 +3637,6 @@ msgstr "Vuoi eliminare questo modello?"
 msgid "Do you want to duplicate this template?"
 msgstr "Vuoi duplicare questo modello?"
 
-#: apps/remix/app/components/general/admin-license-card.tsx
-msgid "Hanzo Sign License"
-msgstr "Licenza Hanzo Sign"
-
-#: apps/remix/app/components/dialogs/account-delete-dialog.tsx
-msgid "Hanzo Sign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
-msgstr "Hanzo Sign eliminerà <0>tutti i tuoi documenti</0>, insieme a tutti i tuoi documenti completati, firme e tutte le altre risorse appartenenti al tuo account."
-
 #: apps/remix/app/components/general/settings-nav-desktop.tsx
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
@@ -4156,7 +4079,6 @@ msgstr "Non trasferire (elimina tutti i documenti)"
 #: apps/remix/app/components/tables/documents-table-action-button.tsx
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
-#: apps/remix/app/components/tables/organisation-billing-invoices-table.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/complete.tsx
 #: packages/email/template-components/template-document-completed.tsx
 msgid "Download"
@@ -4422,7 +4344,6 @@ msgstr "Impostazioni Dominio Email"
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings._layout.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains._index.tsx
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains._index.tsx
 msgid "Email Domains"
 msgstr "Domini Email"
 
@@ -4520,10 +4441,6 @@ msgstr "Verifica email rinviata"
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains.$id.tsx
 msgid "Emails"
 msgstr "Email"
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "Embedding, 5 members included and more"
-msgstr "Incorporamento, 5 membri inclusi e altro"
 
 #: packages/ui/primitives/document-flow/add-fields.tsx
 msgid "Empty field"
@@ -4723,10 +4640,6 @@ msgstr "Inserisci la tua password"
 msgid "Enter your text here"
 msgstr "Inserisci il tuo testo qui"
 
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "Enterprise"
-msgstr "Impresa"
-
 #: apps/remix/app/components/dialogs/envelope-distribute-dialog.tsx
 msgid "Envelope distributed"
 msgstr "Busta distribuita"
@@ -4834,7 +4747,6 @@ msgstr "Busta aggiornata"
 #: apps/remix/app/components/general/verify-email-banner.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/documents.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains.$id.tsx
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/users.$id.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.sessions.tsx
@@ -5206,13 +5118,7 @@ msgstr "Password dimenticata?"
 msgid "Forgot your password?"
 msgstr "Hai dimenticato la tua password?"
 
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgctxt "Plan price"
-msgid "Free"
-msgstr "Gratuito"
-
 #: apps/remix/app/components/tables/admin-organisations-table.tsx
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 msgctxt "Subscription status"
 msgid "Free"
 msgstr "Gratuito"
@@ -5372,6 +5278,14 @@ msgstr "Nome del gruppo"
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/settings._layout.tsx
 msgid "Groups"
 msgstr "Gruppi"
+
+#: apps/remix/app/components/general/admin-license-card.tsx
+msgid "Hanzo eSign License"
+msgstr ""
+
+#: apps/remix/app/components/dialogs/account-delete-dialog.tsx
+msgid "Hanzo eSign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
+msgstr ""
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-recipient-form.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-recipient-form.tsx
@@ -5549,13 +5463,9 @@ msgstr "Identificazione dei campi di input in corso"
 msgid "Identifying recipients"
 msgstr "Identificazione dei destinatari in corso"
 
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "If there is any issue with your subscription, please contact us at <0>{SUPPORT_EMAIL}</0>."
-msgstr "Se ci sono problemi con il tuo abbonamento, contattaci a <0>{SUPPORT_EMAIL}</0>."
-
 #: apps/remix/app/routes/embed+/v2+/authoring+/_layout.tsx
-msgid "If you are using staging, ensure that you have set the host prop on the embedding component to the staging domain (https://stg-app.sign.hanzo.ai)"
-msgstr "Se stai utilizzando l’ambiente di staging, assicurati di aver impostato la proprietà host del componente di embedding sul dominio di staging (https:\\/\\/stg-app.sign.hanzo.ai)"
+msgid "If you are using staging, ensure that you have set the host prop on the embedding component to the staging domain (https://stg-app.esign.hanzo.ai)"
+msgstr ""
 
 #: packages/email/template-components/template-access-auth-2fa.tsx
 msgid "If you didn't request this verification code, you can safely ignore this email."
@@ -5577,7 +5487,6 @@ msgstr "Se la tua app autenticatrice non supporta i codici QR, puoi usare il seg
 msgid "Important: What This Means"
 msgstr "Importante: Cosa Significa"
 
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 #: packages/lib/constants/billing.ts
 msgctxt "Subscription status"
 msgid "Inactive"
@@ -5600,10 +5509,6 @@ msgstr "Includi i Registri di Audit nel Documento"
 #: apps/remix/app/components/forms/document-preferences-form.tsx
 msgid "Include the Signing Certificate in the Document"
 msgstr "Includi il certificato di firma nel documento"
-
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Includes:"
-msgstr "Include:"
 
 #: apps/remix/app/components/general/document/document-page-view-information.tsx
 #: apps/remix/app/components/general/template/template-page-view-information.tsx
@@ -5695,8 +5600,8 @@ msgid "Invalid License Key"
 msgstr "Chiave di licenza non valida"
 
 #: apps/remix/app/components/general/admin-license-status-banner.tsx
-msgid "Invalid License Type - Your Hanzo Sign instance is using features that are not part of your license."
-msgstr "Tipo di licenza non valido - La tua istanza Hanzo Sign sta utilizzando funzionalità che non fanno parte della tua licenza."
+msgid "Invalid License Type - Your Hanzo eSign instance is using features that are not part of your license."
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Invalid link"
@@ -5765,10 +5670,6 @@ msgstr "Invitali prima all’organizzazione"
 msgid "Invited At"
 msgstr "Invitato il"
 
-#: apps/remix/app/components/tables/organisation-billing-invoices-table.tsx
-msgid "Invoice"
-msgstr "Fattura"
-
 #: apps/remix/app/components/tables/admin-document-logs-table.tsx
 #: apps/remix/app/components/tables/document-logs-table.tsx
 #: apps/remix/app/components/tables/internal-audit-log-table.tsx
@@ -5822,8 +5723,8 @@ msgid "Japanese"
 msgstr "Giapponese"
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Join {organisationName} on Hanzo Sign"
-msgstr "Unisciti a {organisationName} su Hanzo Sign"
+msgid "Join {organisationName} on Hanzo eSign"
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
 msgid "Join our community on <0>Discord</0> for community support and discussion."
@@ -6016,8 +5917,8 @@ msgid "Link template"
 msgstr "Collega modello"
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "Link your Hanzo Sign account"
-msgstr "Collega il tuo account Hanzo Sign"
+msgid "Link your Hanzo eSign account"
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
@@ -6116,19 +6017,6 @@ msgstr "Gestisci tutte le rivendicazioni di abbonamento"
 msgid "Manage and view template"
 msgstr "Gestisci e visualizza il modello"
 
-#: apps/remix/app/components/general/organisations/organisation-billing-portal-button.tsx
-msgid "Manage billing"
-msgstr "Gestisci la fatturazione"
-
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
-msgid "Manage Billing"
-msgstr "Gestisci la Fatturazione"
-
-#: apps/remix/app/routes/_authenticated+/settings+/billing.tsx
-msgid "Manage billing and subscriptions for organisations where you have billing management permissions."
-msgstr "Gestisci la fatturazione e gli abbonamenti per le organizzazioni per cui hai i permessi di gestione della fatturazione."
-
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 msgid "Manage details for this public template"
 msgstr "Gestisci i dettagli per questo modello pubblico"
@@ -6170,20 +6058,10 @@ msgstr "Gestisci le autorizzazioni e i controlli di accesso"
 msgid "Manage sessions"
 msgstr "Gestisci le sessioni"
 
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
-msgid "Manage subscription"
-msgstr "Gestisci abbonamento"
-
 #. placeholder {0}: organisation.name
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 msgid "Manage the {0} organisation"
 msgstr "Gestisci l'organizzazione {0}"
-
-#. placeholder {0}: organisation.name
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
-msgid "Manage the {0} organisation subscription"
-msgstr "Gestisci l'abbonamento dell'organizzazione {0}"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.groups._index.tsx
 msgid "Manage the custom groups of members for your organisation."
@@ -6340,8 +6218,8 @@ msgid "Min"
 msgstr ""
 
 #: apps/remix/app/components/general/admin-license-status-banner.tsx
-msgid "Missing License - Your Hanzo Sign instance is using features that require a license."
-msgstr "Licenza mancante - La tua istanza Hanzo Sign sta utilizzando funzionalità che richiedono una licenza."
+msgid "Missing License - Your Hanzo eSign instance is using features that require a license."
+msgstr ""
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 msgid "Missing Recipients"
@@ -6355,11 +6233,6 @@ msgstr "Modifica destinatari"
 #: apps/remix/app/components/dialogs/claim-update-dialog.tsx
 msgid "Modify the details of the subscription claim."
 msgstr "Modifica i dettagli della rivendicazione di abbonamento."
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Monthly"
-msgstr "Mensile"
 
 #: apps/remix/app/routes/_authenticated+/admin+/stats.tsx
 msgid "Monthly Active Users: Users that created at least one Document"
@@ -6677,10 +6550,6 @@ msgstr "Nessun campo di firma trovato"
 msgid "No Stripe customer attached"
 msgstr "Nessun cliente Stripe collegato"
 
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
-msgid "No subscription found"
-msgstr "Nessun abbonamento trovato"
-
 #: packages/ui/components/recipient/recipient-autocomplete-input.tsx
 msgid "No suggestions found"
 msgstr "Nessun suggerimento trovato"
@@ -6873,7 +6742,6 @@ msgstr "O"
 
 #: apps/remix/app/components/tables/admin-organisations-table.tsx
 #: apps/remix/app/components/tables/admin-user-teams-table.tsx
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 #: apps/remix/app/components/tables/user-organisations-table.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains.$id.tsx
@@ -6937,7 +6805,6 @@ msgstr "Membri dell'organizzazione"
 #: apps/remix/app/components/dialogs/admin-organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/forms/organisation-update-form.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 msgid "Organisation Name"
 msgstr "Nome dell'organizzazione"
@@ -7130,16 +6997,10 @@ msgid "Password updated!"
 msgstr "Password aggiornata!"
 
 #: apps/remix/app/components/general/admin-license-card.tsx
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
 #: packages/lib/constants/billing.ts
 msgctxt "Subscription status"
 msgid "Past Due"
 msgstr "In ritardo"
-
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "Payment overdue"
-msgstr "Pagamento scaduto"
 
 #: apps/remix/app/components/dialogs/envelope-download-dialog.tsx
 msgid "PDF Document"
@@ -7184,16 +7045,6 @@ msgstr "Inviti in sospeso"
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains.$id.tsx
 msgid "Pending since"
 msgstr "In sospeso dal"
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "per month"
-msgstr "al mese"
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "per year"
-msgstr "all'anno"
 
 #: apps/remix/app/components/tables/user-organisations-table.tsx
 msgctxt "Personal organisation (adjective)"
@@ -7641,8 +7492,8 @@ msgid "Read Only"
 msgstr "Solo lettura"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
-msgid "Read our documentation to get started with Hanzo Sign."
-msgstr "Leggi la nostra documentazione per iniziare con Hanzo Sign."
+msgid "Read our documentation to get started with Hanzo eSign."
+msgstr ""
 
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
 msgid "Read the full <0>signature disclosure</0>."
@@ -8088,14 +7939,6 @@ msgstr "Reimposta autenticazione a due fattori"
 msgid "Resetting Password..."
 msgstr "Reimpostazione della password..."
 
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "Resolve"
-msgstr "Risolvi"
-
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "Resolve payment"
-msgstr "Risolvere il pagamento"
-
 #: apps/remix/app/components/general/webhook-logs-sheet.tsx
 msgid "Response"
 msgstr "Risposta"
@@ -8111,10 +7954,6 @@ msgstr "Header di risposta"
 #: packages/ui/components/document/document-share-button.tsx
 msgid "Rest assured, your document is strictly confidential and will never be shared. Only your signing experience will be highlighted. Share your personalized signing card to showcase your signature!"
 msgstr "Stai tranquillo, il tuo documento è strettamente confidenziale e non sarà mai condiviso. Solo la tua esperienza di firma sarà evidenziata. Condividi la tua carta di firma personalizzata per mostrare la tua firma!"
-
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "Restricted Access"
-msgstr "Accesso limitato"
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "Retention of Documents"
@@ -8142,13 +7981,13 @@ msgstr "Ritorna"
 msgid "Return Home"
 msgstr "Torna alla home"
 
-#: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
-msgid "Return to Hanzo Sign sign in page here"
-msgstr "Torna alla pagina di accesso a Hanzo Sign qui"
-
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
 msgid "Return to documents"
 msgstr "Torna ai documenti"
+
+#: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
+msgid "Return to Hanzo eSign sign in page here"
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.decline.$token.tsx
 msgid "Return to Home"
@@ -8335,14 +8174,6 @@ msgstr "Seleziona una destinazione per questa cartella."
 #: apps/remix/app/components/dialogs/document-move-to-folder-dialog.tsx
 msgid "Select a folder to move this document to."
 msgstr "Seleziona una cartella in cui spostare questo documento."
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "Select a plan"
-msgstr "Seleziona un piano"
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "Select a plan to continue"
-msgstr "Seleziona un piano per continuare"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page-renderer.tsx
 msgid "Select a recipient"
@@ -8752,10 +8583,6 @@ msgstr "Accedi"
 msgid "Sign in to your account"
 msgstr "Accedi al tuo account"
 
-#: apps/remix/app/components/forms/signin.tsx
-msgid "Sign in with Hanzo"
-msgstr ""
-
 #: apps/remix/app/components/general/app-nav-mobile.tsx
 #: apps/remix/app/components/general/menu-switcher.tsx
 #: apps/remix/app/components/general/org-menu-switcher.tsx
@@ -8968,8 +8795,6 @@ msgstr "Alcuni firmatari non hanno un campo firma assegnato. Assegna almeno 1 ca
 #: apps/remix/app/components/dialogs/template-direct-link-dialog.tsx
 #: apps/remix/app/components/embed/embed-direct-template-client-page.tsx
 #: apps/remix/app/components/embed/embed-document-signing-page-v1.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
 #: apps/remix/app/components/general/direct-template/direct-template-page.tsx
 #: apps/remix/app/components/general/direct-template/direct-template-signing-auth-page.tsx
 #: apps/remix/app/components/general/document-signing/document-signing-auth-account.tsx
@@ -8978,8 +8803,6 @@ msgstr "Alcuni firmatari non hanno un campo firma assegnato. Assegna almeno 1 ca
 #: apps/remix/app/components/general/document/document-certificate-download-button.tsx
 #: apps/remix/app/components/general/envelope-signing/envelope-signing-complete-dialog.tsx
 #: apps/remix/app/components/general/envelope-signing/envelope-signing-complete-dialog.tsx
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-#: apps/remix/app/components/general/organisations/organisation-billing-portal-button.tsx
 #: apps/remix/app/components/general/organisations/organisation-invitations.tsx
 #: apps/remix/app/components/general/organisations/organisation-invitations.tsx
 #: apps/remix/app/components/general/teams/team-email-dropdown.tsx
@@ -9095,7 +8918,6 @@ msgstr "Statistiche"
 #: apps/remix/app/components/tables/admin-organisations-table.tsx
 #: apps/remix/app/components/tables/documents-table.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
-#: apps/remix/app/components/tables/organisation-billing-invoices-table.tsx
 #: apps/remix/app/components/tables/organisation-email-domains-table.tsx
 #: apps/remix/app/components/tables/organisation-insights-table.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/documents._index.tsx
@@ -9121,10 +8943,6 @@ msgstr "Passo <0>{step} di {maxStep}</0>"
 #: apps/remix/app/components/tables/admin-organisations-table.tsx
 msgid "Stripe"
 msgstr "Stripe"
-
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
-msgid "Stripe customer created successfully"
-msgstr "Cliente Stripe creato con successo"
 
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 msgid "Stripe Customer ID"
@@ -9154,14 +8972,7 @@ msgstr "Invia"
 msgid "Submitted"
 msgstr "Inviato"
 
-#: apps/remix/app/components/general/billing-plans.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Subscribe"
-msgstr "Iscriviti"
-
 #: apps/remix/app/components/tables/admin-organisations-table.tsx
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 msgid "Subscription"
 msgstr "Abbonamento"
 
@@ -9181,17 +8992,9 @@ msgstr "Reclamo di sottoscrizione aggiornato con successo."
 msgid "Subscription Claims"
 msgstr "Rivendicazioni di abbonamento"
 
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "Subscription invalid"
-msgstr "Abbonamento non valido"
-
 #: apps/remix/app/components/dialogs/admin-swap-subscription-dialog.tsx
 msgid "Subscription moved successfully"
 msgstr "Abbonamento spostato correttamente"
-
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
-msgid "Subscription Status"
-msgstr "Stato dell’abbonamento"
 
 #: apps/remix/app/components/dialogs/admin-organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/admin-organisation-member-update-dialog.tsx
@@ -9243,7 +9046,6 @@ msgstr "Stato dell’abbonamento"
 #: apps/remix/app/components/tables/organisation-member-invites-table.tsx
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.groups.$id.tsx
@@ -9326,8 +9128,8 @@ msgstr "Squadra"
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/delete-team.ts
-msgid "Team \"{0}\" has been deleted on Hanzo Sign"
-msgstr "Il team \"{0}\" è stato eliminato su Hanzo Sign"
+msgid "Team \"{0}\" has been deleted on Hanzo eSign"
+msgstr ""
 
 #: packages/lib/constants/teams-translations.ts
 msgid "Team Admin"
@@ -9369,8 +9171,8 @@ msgid "Team email removed"
 msgstr "Email del team rimosso"
 
 #: packages/email/templates/team-email-removed.tsx
-msgid "Team email removed for {teamName} on Hanzo Sign"
-msgstr "Email del team rimosso per {teamName} su Hanzo Sign"
+msgid "Team email removed for {teamName} on Hanzo eSign"
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Team email verification"
@@ -9625,8 +9427,8 @@ msgid "Thank you for completing the signing process."
 msgstr "Grazie per aver completato il processo di firma."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
-msgid "Thank you for using Hanzo Sign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
-msgstr "Grazie per aver utilizzato Hanzo Sign per eseguire la firma elettronica dei tuoi documenti. Lo scopo di questa divulgazione è informarti sul processo, la legalità e i tuoi diritti riguardanti l'uso delle firme elettroniche sulla nostra piattaforma. Optando per l'utilizzo di una firma elettronica, accetti i termini e le condizioni delineati di seguito."
+msgid "Thank you for using Hanzo eSign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
+msgstr ""
 
 #: packages/email/template-components/template-forgot-password.tsx
 msgid "That's okay, it happens! Click the button below to reset your password."
@@ -9976,8 +9778,8 @@ msgstr "I tipi di firma che i destinatari possono utilizzare quando firmano il d
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
-msgid "The URL for Hanzo Sign to send webhook events to."
-msgstr "L'URL per Hanzo Sign per inviare eventi webhook."
+msgid "The URL for Hanzo eSign to send webhook events to."
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/admin+/users.$id.tsx
 msgid "The user you are looking for may have been removed, renamed or may have never existed."
@@ -10107,8 +9909,8 @@ msgid "This document has been signed by all recipients"
 msgstr "Questo documento è stato firmato da tutti i destinatari"
 
 #: apps/remix/app/components/general/document/document-certificate-qr-view.tsx
-msgid "This document is available in your Hanzo Sign account. You can view more details, recipients, and audit logs there."
-msgstr "Questo documento è disponibile nel tuo account Hanzo Sign. Puoi visualizzare più dettagli, destinatari e log di controllo lì."
+msgid "This document is available in your Hanzo eSign account. You can view more details, recipients, and audit logs there."
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
 msgid "This document is currently a draft and has not been sent"
@@ -10127,8 +9929,8 @@ msgid "This document was created using a direct link."
 msgstr "Questo documento è stato creato utilizzando un link diretto."
 
 #: packages/email/template-components/template-footer.tsx
-msgid "This document was sent using <0>Hanzo Sign</0>."
-msgstr "Questo documento è stato inviato tramite <0>Hanzo Sign</0>."
+msgid "This document was sent using <0>Hanzo eSign</0>."
+msgstr ""
 
 #: apps/remix/app/components/dialogs/envelope-duplicate-dialog.tsx
 msgid "This document will be duplicated."
@@ -10736,10 +10538,6 @@ msgstr "Nome sconosciuto"
 msgid "Unlimited"
 msgstr "Illimitato"
 
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "Unlimited documents, API and more"
-msgstr "Documenti illimitati, API e altro"
-
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 msgid "Unlink"
@@ -10789,18 +10587,9 @@ msgstr "Aggiorna"
 msgid "Update Banner"
 msgstr "Aggiorna banner"
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.branding.tsx
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.email-domains._index.tsx
-msgid "Update Billing"
-msgstr "Aggiorna fatturazione"
-
 #: apps/remix/app/components/dialogs/claim-update-dialog.tsx
 msgid "Update Claim"
 msgstr "Aggiorna reclamo"
-
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Update current organisation"
-msgstr "Aggiorna l'organizzazione attuale"
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-header.tsx
 msgid "Update Document"
@@ -10908,11 +10697,6 @@ msgstr "Aggiornamento delle tue informazioni"
 #: packages/ui/primitives/document-upload-button.tsx
 msgid "Upgrade"
 msgstr "Aggiorna"
-
-#. placeholder {0}: organisation.name
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Upgrade <0>{0}</0> to {planName}"
-msgstr "Aggiorna <0>{0}</0> al {planName}"
 
 #: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
 msgid "Upgrade your plan to upload more documents"
@@ -11168,7 +10952,6 @@ msgstr "Allineamento verticale"
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
-#: apps/remix/app/components/tables/organisation-billing-invoices-table.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains._index.tsx
 msgid "View"
 msgstr "Visualizza"
@@ -11351,8 +11134,8 @@ msgstr "In attesa del tuo turno"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
-msgid "Want to send slick signing links like this one? <0>Check out Hanzo Sign</0>."
-msgstr "Vuoi inviare link per la firma eleganti come questo? <0>Dai un'occhiata a Hanzo Sign</0>."
+msgid "Want to send slick signing links like this one? <0>Check out Hanzo eSign</0>."
+msgstr ""
 
 #: apps/remix/app/routes/_profile+/_layout.tsx
 msgid "Want your own public profile?"
@@ -11370,11 +11153,6 @@ msgstr "Vuoi il tuo profilo pubblico?"
 msgid "Warning: Assistant as last signer"
 msgstr "Avvertenza: Assistente come ultimo firmatario"
 
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-#: apps/remix/app/components/general/organisations/organisation-billing-portal-button.tsx
-msgid "We are unable to proceed to the billing portal at this time. Please try again, or contact support."
-msgstr "Non siamo in grado di procedere al portale di fatturazione in questo momento. Per favore riprova, o contatta l'assistenza."
-
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
 msgid "We are unable to remove this passkey at the moment. Please try again later."
 msgstr "Non siamo in grado di rimuovere questa chiave d'accesso al momento. Per favore riprova più tardi."
@@ -11382,10 +11160,6 @@ msgstr "Non siamo in grado di rimuovere questa chiave d'accesso al momento. Per 
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
 msgid "We are unable to update this passkey at the moment. Please try again later."
 msgstr "Non siamo in grado di aggiornare questa chiave d'accesso al momento. Per favore riprova più tardi."
-
-#: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
-msgid "We couldn't create a Stripe customer. Please try again."
-msgstr "Non siamo riusciti a creare un cliente di Stripe. Si prega di riprovare."
 
 #: apps/remix/app/components/dialogs/ai-features-enable-dialog.tsx
 msgid "We couldn't enable AI features right now. Please try again."
@@ -11766,8 +11540,8 @@ msgid "Welcome to {organisationName}"
 msgstr "Benvenuto a {organisationName}"
 
 #: packages/email/template-components/template-confirmation-email.tsx
-msgid "Welcome to Hanzo Sign!"
-msgstr "Benvenuto su Hanzo Sign!"
+msgid "Welcome to Hanzo eSign!"
+msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Well-known URL is required"
@@ -11805,12 +11579,8 @@ msgid "Whether to enable the SSO portal for your organisation"
 msgstr "Se abilitare il portale SSO per la tua organizzazione"
 
 #: apps/remix/app/routes/_profile+/p.$url.tsx
-msgid "While waiting for them to do so you can create your own Hanzo Sign account and get started with document signing right away."
-msgstr "Mentre aspetti che lo facciano, puoi creare il tuo account Hanzo Sign e iniziare a firmare documenti subito."
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-msgid "Whitelabeling, unlimited members and more"
-msgstr "White label, membri illimitati e altro"
+msgid "While waiting for them to do so you can create your own Hanzo eSign account and get started with document signing right away."
+msgstr ""
 
 #: apps/remix/app/components/dialogs/document-resend-dialog.tsx
 msgid "Who do you want to remind?"
@@ -11828,11 +11598,6 @@ msgstr "Ritiro del consenso"
 #: apps/remix/app/components/forms/public-profile-form.tsx
 msgid "Write a description to display on your public profile"
 msgstr "Scrivi una descrizione da mostrare sul tuo profilo pubblico"
-
-#: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "Yearly"
-msgstr "Annuale"
 
 #: apps/remix/app/components/forms/branding-preferences-form.tsx
 #: apps/remix/app/components/forms/document-preferences-form.tsx
@@ -11962,14 +11727,6 @@ msgstr "Stai per revocare l'accesso per il team <0>{0}</0> ({1}) per utilizzare 
 msgid "You are about to send this document to the recipients. Are you sure you want to continue?"
 msgstr "Stai per inviare questo documento ai destinatari. Sei sicuro di voler continuare?"
 
-#: apps/remix/app/components/general/billing-plans.tsx
-msgid "You are about to subscribe to the {planName}"
-msgstr "Stai per sottoscrivere il {planName}"
-
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
-msgid "You are currently on the <0>Free Plan</0>."
-msgstr "Attualmente sei sul <0>Piano Gratuito</0>."
-
 #. placeholder {0}: organisationEmail.email
 #: apps/remix/app/components/dialogs/organisation-email-update-dialog.tsx
 msgid "You are currently updating <0>{0}</0>"
@@ -12055,8 +11812,8 @@ msgid "You can only detect fields in draft envelopes"
 msgstr "Puoi rilevare i campi solo nelle buste in bozza"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "You can revoke access at any time in your team settings on Hanzo Sign <0>here</0>."
-msgstr "Puoi revocare l'accesso in qualsiasi momento dalle impostazioni del team su Hanzo Sign <0>qui</0>."
+msgid "You can revoke access at any time in your team settings on Hanzo eSign <0>here</0>."
+msgstr ""
 
 #: apps/remix/app/components/forms/public-profile-form.tsx
 msgid "You can update the profile URL by updating the team URL in the general settings page."
@@ -12136,10 +11893,6 @@ msgstr "Hai creato un elemento della busta con titolo {0}"
 msgid "You created the document"
 msgstr "Hai creato il documento"
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
-msgid "You currently have an inactive <0>{currentProductName}</0> subscription"
-msgstr "Attualmente hai un'abbonamento <0>{currentProductName}</0> inattivo"
-
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl._index.tsx
 msgid "You currently have no access to any teams within this organisation. Please contact your organisation to request access."
 msgstr "Attualmente non hai accesso a nessun team all'interno di questa organizzazione. Si prega di contattare la tua organizzazione per richiedere l'accesso."
@@ -12156,10 +11909,6 @@ msgstr "Hai eliminato il documento"
 #: apps/remix/app/components/forms/token.tsx
 msgid "You do not have permission to create a token for this team."
 msgstr "Non hai l'autorizzazione per creare un token per questo team."
-
-#: apps/remix/app/components/tables/user-billing-organisations-table.tsx
-msgid "You don't manage billing for any organisations."
-msgstr "Non gestisci la fatturazione per nessuna organizzazione."
 
 #: packages/email/template-components/template-document-cancel.tsx
 msgid "You don't need to sign it anymore."
@@ -12186,8 +11935,8 @@ msgstr "Sei stato invitato da <0>{0}</0> a unirti alla loro organizzazione."
 
 #. placeholder {0}: organisation.name
 #: packages/lib/server-only/organisation/create-organisation-member-invites.ts
-msgid "You have been invited to join {0} on Hanzo Sign"
-msgstr "Sei stato invitato a unirti a {0} su Hanzo Sign"
+msgid "You have been invited to join {0} on Hanzo eSign"
+msgstr ""
 
 #: packages/email/templates/organisation-invite.tsx
 msgid "You have been invited to join the following organisation"
@@ -12628,10 +12377,6 @@ msgstr "Il tuo invio massivo è stato avviato. Riceverai una notifica via email 
 msgid "Your bulk send operation for template \"{templateName}\" has completed."
 msgstr "La tua operazione di invio massivo per il modello \"{templateName}\" è stata completata."
 
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
-msgid "Your current {currentProductName} plan is past due. Please update your payment information."
-msgstr "Il tuo attuale piano {currentProductName} è scaduto. Si prega di aggiornare le informazioni di pagamento."
-
 #: apps/remix/app/components/forms/subscription-claim-form.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/organisations.$id.tsx
 msgid "Your current license does not include these features."
@@ -12640,14 +12385,6 @@ msgstr "La tua licenza attuale non include queste funzionalità."
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
 msgid "Your current plan includes the following support channels:"
 msgstr "Il tuo piano attuale include i seguenti canali di supporto:"
-
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
-msgid "Your current plan is inactive."
-msgstr "Il tuo attuale piano è inattivo."
-
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.billing.tsx
-msgid "Your current plan is past due."
-msgstr "Il tuo attuale piano è scaduto."
 
 #: apps/remix/app/components/dialogs/public-profile-template-manage-dialog.tsx
 msgid "Your direct signing templates"
@@ -12720,12 +12457,12 @@ msgid "Your Email"
 msgstr "La tua email"
 
 #: apps/remix/app/routes/_unauthenticated+/verify-email.$token.tsx
-msgid "Your email has already been confirmed. You can now use all features of Hanzo Sign."
-msgstr "La tua email è già stata confermata. Ora puoi utilizzare tutte le funzionalità di Hanzo Sign."
+msgid "Your email has already been confirmed. You can now use all features of Hanzo eSign."
+msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/verify-email.$token.tsx
-msgid "Your email has been successfully confirmed! You can now use all features of Hanzo Sign."
-msgstr "La tua email è stata confermata con successo! Ora puoi utilizzare tutte le funzionalità di Hanzo Sign."
+msgid "Your email has been successfully confirmed! You can now use all features of Hanzo eSign."
+msgstr ""
 
 #. placeholder {0}: teamEmail.team.name
 #. placeholder {1}: teamEmail.team.url
@@ -12784,10 +12521,6 @@ msgstr "La tua password è stata aggiornata con successo."
 msgid "Your password has been updated."
 msgstr "La tua password è stata aggiornata."
 
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "Your payment is overdue. Please settle the payment to avoid any service disruptions."
-msgstr "Il tuo pagamento è in ritardo. Si prega di effettuare il pagamento per evitare interruzioni del servizio."
-
 #: apps/remix/app/components/tables/user-organisations-table.tsx
 msgid "Your personal organisation"
 msgstr "Organizzazione personale"
@@ -12795,10 +12528,6 @@ msgstr "Organizzazione personale"
 #: apps/remix/app/components/dialogs/organisation-member-invite-dialog.tsx
 msgid "Your plan does not support inviting members. Please upgrade or your plan or contact sales at <0>{SUPPORT_EMAIL}</0> if you would like to discuss your options."
 msgstr "Il tuo piano non supporta l'invito ai membri. Per favore, aggiorna il tuo piano o contatta le vendite <0>{SUPPORT_EMAIL}</0> se desideri discutere le tue opzioni."
-
-#: apps/remix/app/components/general/organisations/organisation-billing-banner.tsx
-msgid "Your plan is no longer valid. Please subscribe to a new plan to continue using Hanzo Sign."
-msgstr "Il tuo piano non è più valido. Per favore, abbonati a un nuovo piano per continuare a utilizzare Hanzo Sign."
 
 #: apps/remix/app/components/forms/profile.tsx
 msgid "Your profile has been updated successfully."

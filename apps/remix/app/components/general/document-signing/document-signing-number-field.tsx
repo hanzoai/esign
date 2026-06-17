@@ -11,7 +11,7 @@ import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
 import { ZNumberFieldMeta } from '@hanzo/sign-lib/types/field-meta';
 import type { FieldWithSignature } from '@hanzo/sign-prisma/types/field-with-signature';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
@@ -79,12 +79,18 @@ export const DocumentSigningNumberField = ({
   const { executeActionAuthProcedure } = useRequiredDocumentSigningAuthContext();
 
   const { mutateAsync: signFieldWithToken, isPending: isSignFieldWithTokenLoading } =
-    trpc.field.signFieldWithToken.useMutation(DO_NOT_INVALIDATE_QUERY_ON_MUTATION);
+    useZapMutation<unknown, TSignFieldWithTokenMutationSchema>(
+      'field.signFieldWithToken',
+      DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+    );
 
   const {
     mutateAsync: removeSignedFieldWithToken,
     isPending: isRemoveSignedFieldWithTokenLoading,
-  } = trpc.field.removeSignedFieldWithToken.useMutation(DO_NOT_INVALIDATE_QUERY_ON_MUTATION);
+  } = useZapMutation<unknown, TRemovedSignedFieldWithTokenMutationSchema>(
+    'field.removeSignedFieldWithToken',
+    DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+  );
 
   const isLoading = isSignFieldWithTokenLoading || isRemoveSignedFieldWithTokenLoading;
 

@@ -13,7 +13,8 @@ import { z } from 'zod';
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { FolderType } from '@hanzo/sign-lib/types/folder-type';
 import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -71,7 +72,10 @@ export const DocumentMoveToFolderDialog = ({
     },
   });
 
-  const { data: folders, isLoading: isFoldersLoading } = trpc.folder.findFoldersInternal.useQuery(
+  const { data: folders, isLoading: isFoldersLoading } = useZapQuery<{
+    data: TFolderWithSubfolders[];
+  }>(
+    'folder.findFoldersInternal',
     {
       parentId: currentFolderId,
       type: FolderType.DOCUMENT,
@@ -81,7 +85,10 @@ export const DocumentMoveToFolderDialog = ({
     },
   );
 
-  const { mutateAsync: updateDocument } = trpc.document.update.useMutation();
+  const { mutateAsync: updateDocument } = useZapMutation<
+    unknown,
+    { documentId: number; data: { folderId: string | null } }
+  >('document.update');
 
   useEffect(() => {
     if (!open) {

@@ -3,7 +3,8 @@ import { Trans } from '@lingui/react/macro';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
 import { useIsMounted } from '@hanzo/sign-lib/client-only/hooks/use-is-mounted';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetTeamMembersResponse } from '@hanzo/sign-trpc/server/team-router/get-team-members.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
 
 type DocumentsTableSenderFilterProps = {
@@ -21,7 +22,7 @@ export const DocumentsTableSenderFilter = ({ teamId }: DocumentsTableSenderFilte
     .split(',')
     .filter((value) => value !== '');
 
-  const { data, isLoading } = trpc.team.member.getMany.useQuery({
+  const { data, isLoading } = useZapQuery<TGetTeamMembersResponse>('team.member.getMany', {
     teamId,
   });
 

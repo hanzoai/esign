@@ -6,7 +6,11 @@ import { EnvelopeType } from '@prisma/client';
 import { useNavigate } from 'react-router';
 
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TDuplicateEnvelopeRequest,
+  TDuplicateEnvelopeResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/duplicate-envelope.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -41,24 +45,26 @@ export const EnvelopeDuplicateDialog = ({
 
   const team = useCurrentTeam();
 
-  const { mutateAsync: duplicateEnvelope, isPending: isDuplicating } =
-    trpc.envelope.duplicate.useMutation({
-      onSuccess: async ({ id }) => {
-        toast({
-          title: t`Envelope Duplicated`,
-          description: t`Your envelope has been successfully duplicated.`,
-          duration: 5000,
-        });
+  const { mutateAsync: duplicateEnvelope, isPending: isDuplicating } = useZapMutation<
+    TDuplicateEnvelopeResponse,
+    TDuplicateEnvelopeRequest
+  >('envelope.duplicate', {
+    onSuccess: async ({ id }) => {
+      toast({
+        title: t`Envelope Duplicated`,
+        description: t`Your envelope has been successfully duplicated.`,
+        duration: 5000,
+      });
 
-        const path =
-          envelopeType === EnvelopeType.DOCUMENT
-            ? formatDocumentsPath(team.url)
-            : formatTemplatesPath(team.url);
+      const path =
+        envelopeType === EnvelopeType.DOCUMENT
+          ? formatDocumentsPath(team.url)
+          : formatTemplatesPath(team.url);
 
-        await navigate(`${path}/${id}/edit`);
-        setOpen(false);
-      },
-    });
+      await navigate(`${path}/${id}/edit`);
+      setOpen(false);
+    },
+  });
 
   const onDuplicate = async () => {
     try {

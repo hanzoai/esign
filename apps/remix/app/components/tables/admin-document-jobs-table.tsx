@@ -6,7 +6,8 @@ import { useSearchParams } from 'react-router';
 
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindDocumentJobsResponse } from '@hanzo/sign-trpc/server/admin-router/find-document-jobs.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -23,7 +24,7 @@ export const AdminDocumentJobsTable = ({ envelopeId }: { envelopeId: string }) =
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
   const { data, isLoading, isLoadingError, refetch, isFetching } =
-    trpc.admin.document.findJobs.useQuery({
+    useZapQuery<TFindDocumentJobsResponse>('admin.document.findJobs', {
       envelopeId: envelopeId,
       page: parsedSearchParams.page,
       perPage: parsedSearchParams.perPage,

@@ -1,0 +1,919 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Team",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/team/find": {
+      "post": {
+        "operationId": "team.find",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/get": {
+      "post": {
+        "operationId": "team.get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/create": {
+      "post": {
+        "operationId": "team.create",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/update": {
+      "post": {
+        "operationId": "team.update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/delete": {
+      "post": {
+        "operationId": "team.delete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/member-find": {
+      "post": {
+        "operationId": "team.memberFind",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/member-get-many": {
+      "post": {
+        "operationId": "team.memberGetMany",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/member-create-many": {
+      "post": {
+        "operationId": "team.memberCreateMany",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/member-update": {
+      "post": {
+        "operationId": "team.memberUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/member-delete": {
+      "post": {
+        "operationId": "team.memberDelete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/group-find": {
+      "post": {
+        "operationId": "team.groupFind",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/group-create-many": {
+      "post": {
+        "operationId": "team.groupCreateMany",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/group-update": {
+      "post": {
+        "operationId": "team.groupUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/group-delete": {
+      "post": {
+        "operationId": "team.groupDelete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/settings-update": {
+      "post": {
+        "operationId": "team.settingsUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/email-get": {
+      "post": {
+        "operationId": "team.emailGet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/email-update": {
+      "post": {
+        "operationId": "team.emailUpdate",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/email-delete": {
+      "post": {
+        "operationId": "team.emailDelete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/email-verification-send": {
+      "post": {
+        "operationId": "team.emailVerificationSend",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/email-verification-resend": {
+      "post": {
+        "operationId": "team.emailVerificationResend",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/team/email-verification-delete": {
+      "post": {
+        "operationId": "team.emailVerificationDelete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Req"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Req": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "additionalProperties": false
+      },
+      "Resp": {
+        "type": "object",
+        "properties": {
+          "body": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

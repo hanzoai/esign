@@ -2,18 +2,6 @@ import { z } from 'zod';
 
 import { ZEnvelopeSchema } from '@hanzo/sign-lib/types/envelope';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const getEnvelopesByIdsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/get-many',
-    summary: 'Get multiple envelopes',
-    description: 'Retrieve multiple envelopes by their IDs',
-    tags: ['Envelope'],
-  },
-};
-
 export const ZEnvelopeIdsSchema = z.discriminatedUnion('type', [
   z.object({
     type: z.literal('envelopeId'),
