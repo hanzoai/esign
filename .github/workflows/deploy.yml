@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: hanzo-deploy-linux-amd64
 
     steps:
       - name: Checkout code

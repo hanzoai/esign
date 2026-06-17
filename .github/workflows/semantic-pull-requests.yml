@@ -14,7 +14,7 @@ permissions:
 jobs:
   validate-pr:
     name: Validate PR title
-    runs-on: ubuntu-latest
+    runs-on: hanzo-build-linux-amd64
     steps:
       - name: Check PR creator's previous activity
         id: check_activity
