@@ -21,7 +21,7 @@ concurrency:
 jobs:
   pull_translations:
     name: Pull translations
-    runs-on: ubuntu-latest
+    runs-on: hanzo-build-linux-amd64
     environment: Translations
     permissions:
       contents: write
