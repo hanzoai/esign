@@ -8,46 +8,10 @@ import {
 } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZFindOrganisationMembersRequestSchema,
   ZFindOrganisationMembersResponseSchema,
 } from './find-organisation-members.types';
-
-export const findOrganisationMembersRoute = authenticatedProcedure
-  //   .meta(getOrganisationMembersMeta)
-  .input(ZFindOrganisationMembersRequestSchema)
-  .output(ZFindOrganisationMembersResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { organisationId } = input;
-    const { id } = ctx.user;
-
-    const organisationMembers = await findOrganisationMembers({
-      userId: id,
-      organisationId,
-      query: input.query,
-      page: input.page,
-      perPage: input.perPage,
-    });
-
-    return {
-      ...organisationMembers,
-      data: organisationMembers.data.map((organisationMember) => {
-        const groups = organisationMember.organisationGroupMembers.map((group) => group.group);
-
-        return {
-          id: organisationMember.id,
-          userId: organisationMember.user.id,
-          email: organisationMember.user.email,
-          name: organisationMember.user.name || '',
-          createdAt: organisationMember.createdAt,
-          currentOrganisationRole: getHighestOrganisationRoleInGroup(groups),
-          avatarImageId: organisationMember.user.avatarImageId,
-          groups,
-        };
-      }),
-    };
-  });
 
 type FindOrganisationMembersOptions = {
   userId: number;

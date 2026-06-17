@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { generateEmailDomainRecords } from '@hanzo/sign-lib/utils/email-domains';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { TGetOrganisationEmailDomainResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-email-domain.types';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -40,7 +40,8 @@ export default function OrganisationEmailDomainSettingsPage({ params }: Route.Co
   const emailDomainId = params.id;
 
   const { data: emailDomain, isLoading: isLoadingEmailDomain } =
-    trpc.organisation.emailDomain.get.useQuery(
+    useZapQuery<TGetOrganisationEmailDomainResponse>(
+      'organisation.emailDomain.get',
       {
         emailDomainId,
       },

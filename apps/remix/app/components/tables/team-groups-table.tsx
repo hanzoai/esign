@@ -10,7 +10,8 @@ import { useSearchParams } from 'react-router';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindTeamGroupsResponse } from '@hanzo/sign-trpc/server/team-router/find-team-groups.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
@@ -38,7 +39,8 @@ export const TeamGroupsTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const { data, isLoading, isLoadingError } = trpc.team.group.find.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindTeamGroupsResponse>(
+    'team.group.find',
     {
       teamId: team.id,
       query: parsedSearchParams.query,

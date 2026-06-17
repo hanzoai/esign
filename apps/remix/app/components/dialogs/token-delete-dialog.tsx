@@ -8,7 +8,7 @@ import type { ApiToken } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -56,7 +56,10 @@ export default function TokenDeleteDialog({ token, onDelete, children }: TokenDe
 
   type TDeleteTokenByIdMutationSchema = z.infer<typeof ZTokenDeleteDialogSchema>;
 
-  const { mutateAsync: deleteTokenMutation } = trpc.apiToken.delete.useMutation({
+  const { mutateAsync: deleteTokenMutation } = useZapMutation<
+    void,
+    { id: number; teamId: number }
+  >('apiToken.delete', {
     onSuccess() {
       onDelete?.();
     },
@@ -73,7 +76,7 @@ export default function TokenDeleteDialog({ token, onDelete, children }: TokenDe
     try {
       await deleteTokenMutation({
         id: token.id,
-        teamId: team?.id,
+        teamId: team.id,
       });
 
       toast({

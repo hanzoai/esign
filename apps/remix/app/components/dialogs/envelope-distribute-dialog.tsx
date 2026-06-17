@@ -16,7 +16,9 @@ import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/or
 import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
 import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
 import { getRecipientsWithMissingFields } from '@hanzo/sign-lib/utils/recipients';
-import { trpc, trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type { TDistributeEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/distribute-envelope.types';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
@@ -93,7 +95,9 @@ export const EnvelopeDistributeDialog = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
 
-  const { mutateAsync: distributeEnvelope } = trpcReact.envelope.distribute.useMutation();
+  const { mutateAsync: distributeEnvelope } = useZapMutation<unknown, TDistributeEnvelopeRequest>(
+    'envelope.distribute',
+  );
 
   const form = useForm<TEnvelopeDistributeFormSchema>({
     defaultValues: {
@@ -117,7 +121,8 @@ export const EnvelopeDistributeDialog = ({
   } = form;
 
   const { data: emailData, isLoading: isLoadingEmails } =
-    trpc.organisation.email.find.useQuery(
+    useZapQuery<TFindOrganisationEmailsResponse>(
+      'organisation.email.find',
       {
         organisationId: organisation.id,
         perPage: 100,

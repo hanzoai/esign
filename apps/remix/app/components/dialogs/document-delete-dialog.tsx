@@ -7,7 +7,11 @@ import { DocumentStatus } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
 import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type {
+  TDeleteDocumentRequest,
+  TDeleteDocumentResponse,
+} from '@hanzo/sign-trpc/server/document-router/delete-document.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -49,7 +53,10 @@ export const DocumentDeleteDialog = ({
   const [inputValue, setInputValue] = useState('');
   const [isDeleteEnabled, setIsDeleteEnabled] = useState(status === DocumentStatus.DRAFT);
 
-  const { mutateAsync: deleteDocument, isPending } = trpcReact.document.delete.useMutation({
+  const { mutateAsync: deleteDocument, isPending } = useZapMutation<
+    TDeleteDocumentResponse,
+    TDeleteDocumentRequest
+  >('document.delete', {
     onSuccess: async () => {
       void refreshLimits();
 

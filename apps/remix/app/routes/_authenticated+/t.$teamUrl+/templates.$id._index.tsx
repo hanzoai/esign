@@ -10,7 +10,8 @@ import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-
 import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-envelope.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { DocumentReadOnlyFields } from '@hanzo/sign-ui/components/document/document-read-only-fields';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -47,7 +48,7 @@ export default function TemplatePage({ params }: Route.ComponentProps) {
     data: envelope,
     isLoading: isLoadingEnvelope,
     isError: isErrorEnvelope,
-  } = trpc.envelope.get.useQuery({
+  } = useZapQuery<TGetEnvelopeResponse>('envelope.get', {
     envelopeId: params.id,
   });
 

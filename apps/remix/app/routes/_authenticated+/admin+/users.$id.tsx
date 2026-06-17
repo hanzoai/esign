@@ -7,8 +7,12 @@ import { useRevalidator } from 'react-router';
 import { Link } from 'react-router';
 import type { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { TGetUserResponse } from '@hanzo/sign-trpc/server/admin-router/get-user.types';
+import type {
+  TUpdateUserRequest,
+  TUpdateUserResponse,
+} from '@hanzo/sign-trpc/server/admin-router/update-user.types';
 import { ZUpdateUserRequestSchema } from '@hanzo/sign-trpc/server/admin-router/update-user.types';
 import {
   Accordion,
@@ -45,7 +49,8 @@ const ZUserFormSchema = ZUpdateUserRequestSchema.omit({ id: true });
 type TUserFormSchema = z.infer<typeof ZUserFormSchema>;
 
 export default function UserPage({ params }: { params: { id: number } }) {
-  const { data: user, isLoading: isLoadingUser } = trpc.admin.user.get.useQuery(
+  const { data: user, isLoading: isLoadingUser } = useZapQuery<TGetUserResponse>(
+    'admin.user.get',
     {
       id: Number(params.id),
     },
@@ -91,7 +96,10 @@ const AdminUserPage = ({ user }: { user: TGetUserResponse }) => {
 
   const roles = user.roles ?? [];
 
-  const { mutateAsync: updateUserMutation } = trpc.admin.user.update.useMutation();
+  const { mutateAsync: updateUserMutation } = useZapMutation<
+    TUpdateUserResponse,
+    TUpdateUserRequest
+  >('admin.user.update');
 
   const form = useForm<TUserFormSchema>({
     resolver: zodResolver(ZUserFormSchema),

@@ -11,7 +11,11 @@ import {
   SITE_SETTINGS_BANNER_ID,
   ZSiteSettingsBannerSchema,
 } from '@hanzo/sign-lib/server-only/site-settings/schemas/banner';
-import { trpc as trpcReact } from '@hanzo/sign-trpc/react';
+import type {
+  TUpdateSiteSettingRequest,
+  TUpdateSiteSettingResponse,
+} from '@hanzo/sign-trpc/server/admin-router/update-site-setting.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { ColorPicker } from '@hanzo/sign-ui/primitives/color-picker';
 import {
@@ -65,8 +69,10 @@ export default function AdminBannerPage({ loaderData }: Route.ComponentProps) {
 
   const enabled = form.watch('enabled');
 
-  const { mutateAsync: updateSiteSetting, isPending: isUpdateSiteSettingLoading } =
-    trpcReact.admin.updateSiteSetting.useMutation();
+  const { mutateAsync: updateSiteSetting, isPending: isUpdateSiteSettingLoading } = useZapMutation<
+    TUpdateSiteSettingResponse,
+    TUpdateSiteSettingRequest
+  >('admin.updateSiteSetting');
 
   const onBannerUpdate = async ({ id, enabled, data }: TBannerFormSchema) => {
     try {

@@ -2,18 +2,6 @@ import { z } from 'zod';
 
 import { ZTemplateManySchema } from '@hanzo/sign-lib/types/template';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const getTemplatesByIdsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/template/get-many',
-    summary: 'Get multiple templates',
-    description: 'Retrieve multiple templates by their IDs',
-    tags: ['Template'],
-  },
-};
-
 export const ZGetTemplatesByIdsRequestSchema = z.object({
   templateIds: z.array(z.number()).min(1),
 });

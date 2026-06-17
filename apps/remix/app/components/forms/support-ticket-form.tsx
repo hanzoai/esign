@@ -3,7 +3,8 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { TSupportTicketRequest } from '@hanzo/sign-trpc/server/profile-router/schema';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Form,
@@ -40,8 +41,10 @@ export const SupportTicketForm = ({
   const { t } = useLingui();
   const { toast } = useToast();
 
-  const { mutateAsync: submitSupportTicket, isPending } =
-    trpc.profile.submitSupportTicket.useMutation();
+  const { mutateAsync: submitSupportTicket, isPending } = useZapMutation<
+    void,
+    TSupportTicketRequest
+  >('profile.submitSupportTicket');
 
   const form = useForm<TSupportTicket>({
     resolver: zodResolver(ZSupportTicketSchema),

@@ -10,7 +10,10 @@ import { z } from 'zod';
 
 import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
+import type { TCreateAttachmentRequest, TCreateAttachmentResponse } from '@hanzo/sign-trpc/server/envelope-router/attachment/create-attachment.types';
+import type { TDeleteAttachmentRequest, TDeleteAttachmentResponse } from '@hanzo/sign-trpc/server/envelope-router/attachment/delete-attachment.types';
+import type { TFindAttachmentsResponse } from '@hanzo/sign-trpc/server/envelope-router/attachment/find-attachments.types';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -49,9 +52,10 @@ export const DocumentAttachmentsPopover = ({
   const [isOpen, setIsOpen] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
 
-  const utils = trpc.useUtils();
+  const utils = useZapUtils();
 
-  const { data: attachments } = trpc.envelope.attachment.find.useQuery(
+  const { data: attachments } = useZapQuery<TFindAttachmentsResponse>(
+    'envelope.attachment.find',
     {
       envelopeId,
     },
@@ -62,16 +66,21 @@ export const DocumentAttachmentsPopover = ({
     },
   );
 
-  const { mutateAsync: createAttachment, isPending: isCreating } =
-    trpc.envelope.attachment.create.useMutation({
-      onSuccess: () => {
-        void utils.envelope.attachment.find.invalidate({ envelopeId });
-      },
-    });
-
-  const { mutateAsync: deleteAttachment } = trpc.envelope.attachment.delete.useMutation({
+  const { mutateAsync: createAttachment, isPending: isCreating } = useZapMutation<
+    TCreateAttachmentResponse,
+    TCreateAttachmentRequest
+  >('envelope.attachment.create', {
     onSuccess: () => {
-      void utils.envelope.attachment.find.invalidate({ envelopeId });
+      void utils.invalidate('envelope.attachment.find', { envelopeId });
+    },
+  });
+
+  const { mutateAsync: deleteAttachment } = useZapMutation<
+    TDeleteAttachmentResponse,
+    TDeleteAttachmentRequest
+  >('envelope.attachment.delete', {
+    onSuccess: () => {
+      void utils.invalidate('envelope.attachment.find', { envelopeId });
     },
   });
 

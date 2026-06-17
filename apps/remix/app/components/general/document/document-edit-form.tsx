@@ -8,14 +8,28 @@ import { z } from 'zod';
 
 import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
 import { isValidLanguageCode } from '@hanzo/sign-lib/constants/i18n';
-import {
-  DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-  SKIP_QUERY_BATCH_META,
-} from '@hanzo/sign-lib/constants/trpc';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
 import type { TDocument } from '@hanzo/sign-lib/types/document';
 import { ZDocumentAccessAuthTypesSchema } from '@hanzo/sign-lib/types/document-auth';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TDistributeDocumentRequest,
+  TDistributeDocumentResponse,
+} from '@hanzo/sign-trpc/server/document-router/distribute-document.types';
+import type { TGetDocumentResponse } from '@hanzo/sign-trpc/server/document-router/get-document.types';
+import {
+  ZUpdateDocumentRequestSchema,
+  ZUpdateDocumentResponseSchema,
+} from '@hanzo/sign-trpc/server/document-router/update-document.types';
+import {
+  ZSetDocumentFieldsRequestSchema,
+  ZSetDocumentFieldsResponseSchema,
+} from '@hanzo/sign-trpc/server/field-router/schema';
+import {
+  ZSetDocumentRecipientsRequestSchema,
+  ZSetDocumentRecipientsResponseSchema,
+} from '@hanzo/sign-trpc/server/recipient-router/schema';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
 import { AddFieldsFormPartial } from '@hanzo/sign-ui/primitives/document-flow/add-fields';
@@ -58,67 +72,101 @@ export const DocumentEditForm = ({
 
   const [isDocumentPdfLoaded, setIsDocumentPdfLoaded] = useState(false);
 
-  const utils = trpc.useUtils();
+  const utils = useZapUtils();
 
-  const { data: document, refetch: refetchDocument } = trpc.document.get.useQuery(
+  const { data, refetch: refetchDocument } = useZapQuery<TGetDocumentResponse>(
+    'document.get',
     {
       documentId: initialDocument.id,
     },
     {
       initialData: initialDocument,
-      ...SKIP_QUERY_BATCH_META,
     },
   );
 
+  // `initialData` guarantees a value at runtime; the fallback mirrors the
+  // optimistic-update default and keeps `document` non-undefined for the type
+  // checker (the ZAP query result is `T | undefined`, unlike tRPC's narrowed
+  // `initialData` overload).
+  const document = data ?? initialDocument;
+
   const { recipients, fields } = document;
 
-  const { mutateAsync: updateDocument } = trpc.document.update.useMutation({
-    ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-    onSuccess: (newData) => {
-      utils.document.get.setData(
-        {
-          documentId: initialDocument.id,
-        },
-        (oldData) => ({ ...(oldData || initialDocument), ...newData }),
-      );
+  const { mutateAsync: updateDocument } = useZapMutation<
+    z.infer<typeof ZUpdateDocumentResponseSchema>,
+    z.infer<typeof ZUpdateDocumentRequestSchema>
+  >(
+    'document.update',
+    {
+      ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+      onSuccess: (newData) => {
+        utils.setData<TGetDocumentResponse>(
+          'document.get',
+          {
+            documentId: initialDocument.id,
+          },
+          (oldData) => ({ ...(oldData || initialDocument), ...newData }),
+        );
+      },
     },
-  });
+  );
 
-  const { mutateAsync: addFields } = trpc.field.setFieldsForDocument.useMutation({
-    ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-    onSuccess: ({ fields: newFields }) => {
-      utils.document.get.setData(
-        {
-          documentId: initialDocument.id,
-        },
-        (oldData) => ({ ...(oldData || initialDocument), fields: newFields }),
-      );
+  const { mutateAsync: addFields } = useZapMutation<
+    z.infer<typeof ZSetDocumentFieldsResponseSchema>,
+    z.infer<typeof ZSetDocumentFieldsRequestSchema>
+  >(
+    'field.setFieldsForDocument',
+    {
+      ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+      onSuccess: ({ fields: newFields }) => {
+        utils.setData<TGetDocumentResponse>(
+          'document.get',
+          {
+            documentId: initialDocument.id,
+          },
+          (oldData) => ({ ...(oldData || initialDocument), fields: newFields }),
+        );
+      },
     },
-  });
+  );
 
-  const { mutateAsync: setRecipients } = trpc.recipient.setDocumentRecipients.useMutation({
-    ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-    onSuccess: ({ recipients: newRecipients }) => {
-      utils.document.get.setData(
-        {
-          documentId: initialDocument.id,
-        },
-        (oldData) => ({ ...(oldData || initialDocument), recipients: newRecipients }),
-      );
+  const { mutateAsync: setRecipients } = useZapMutation<
+    z.infer<typeof ZSetDocumentRecipientsResponseSchema>,
+    z.infer<typeof ZSetDocumentRecipientsRequestSchema>
+  >(
+    'recipient.setDocumentRecipients',
+    {
+      ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+      onSuccess: ({ recipients: newRecipients }) => {
+        utils.setData<TGetDocumentResponse>(
+          'document.get',
+          {
+            documentId: initialDocument.id,
+          },
+          (oldData) => ({ ...(oldData || initialDocument), recipients: newRecipients }),
+        );
+      },
     },
-  });
+  );
 
-  const { mutateAsync: sendDocument } = trpc.document.distribute.useMutation({
-    ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-    onSuccess: (newData) => {
-      utils.document.get.setData(
-        {
-          documentId: initialDocument.id,
-        },
-        (oldData) => ({ ...(oldData || initialDocument), ...newData }),
-      );
+  const { mutateAsync: sendDocument } = useZapMutation<
+    TDistributeDocumentResponse,
+    TDistributeDocumentRequest
+  >(
+    'document.distribute',
+    {
+      ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+      onSuccess: (newData) => {
+        utils.setData<TGetDocumentResponse>(
+          'document.get',
+          {
+            documentId: initialDocument.id,
+          },
+          (oldData) => ({ ...(oldData || initialDocument), ...newData }),
+        );
+      },
     },
-  });
+  );
 
   const documentFlow: Record<EditDocumentStep, DocumentFlowStep> = {
     settings: {

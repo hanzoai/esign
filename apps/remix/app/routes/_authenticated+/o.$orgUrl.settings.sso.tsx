@@ -12,9 +12,10 @@ import {
   formatOrganisationCallbackUrl,
   formatOrganisationLoginUrl,
 } from '@hanzo/sign-lib/utils/organisation-authentication-portal';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { domainRegex } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-email-domain.types';
 import type { TGetOrganisationAuthenticationPortalResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-authentication-portal.types';
+import type { TUpdateOrganisationAuthenticationPortalRequest } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-authentication-portal.types';
 import { ZUpdateOrganisationAuthenticationPortalRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-authentication-portal.types';
 import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
@@ -77,9 +78,12 @@ export default function OrganisationSettingSSOLoginPage() {
   const organisation = useCurrentOrganisation();
 
   const { data: authenticationPortal, isLoading: isLoadingAuthenticationPortal } =
-    trpc.organisation.authenticationPortal.get.useQuery({
-      organisationId: organisation.id,
-    });
+    useZapQuery<TGetOrganisationAuthenticationPortalResponse>(
+      'organisation.authenticationPortal.get',
+      {
+        organisationId: organisation.id,
+      },
+    );
 
   if (isLoadingAuthenticationPortal || !authenticationPortal) {
     return <SpinnerBox className="py-32" />;
@@ -107,8 +111,10 @@ const SSOProviderForm = ({ authenticationPortal }: SSOProviderFormProps) => {
 
   const organisation = useCurrentOrganisation();
 
-  const { mutateAsync: updateOrganisationAuthenticationPortal } =
-    trpc.organisation.authenticationPortal.update.useMutation();
+  const { mutateAsync: updateOrganisationAuthenticationPortal } = useZapMutation<
+    void,
+    TUpdateOrganisationAuthenticationPortalRequest
+  >('organisation.authenticationPortal.update');
 
   const form = useForm<TProviderFormSchema>({
     resolver: zodResolver(ZProviderFormSchema),

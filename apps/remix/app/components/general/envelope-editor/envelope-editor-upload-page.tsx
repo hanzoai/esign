@@ -18,8 +18,15 @@ import type { TEditorEnvelope } from '@hanzo/sign-lib/types/envelope-editor';
 import { nanoid } from '@hanzo/sign-lib/universal/id';
 import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@hanzo/sign-lib/utils/embed-config';
 import { canEnvelopeItemsBeModified } from '@hanzo/sign-lib/utils/envelope';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { TCreateEnvelopeItemsPayload } from '@hanzo/sign-trpc/server/envelope-router/create-envelope-items.types';
+import type {
+  TCreateEnvelopeItemsPayload,
+  TCreateEnvelopeItemsResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/create-envelope-items.types';
+import type {
+  TUpdateEnvelopeItemsRequest,
+  TUpdateEnvelopeItemsResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/update-envelope-items.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Card,
@@ -76,8 +83,10 @@ export const EnvelopeEditorUploadPage = () => {
       })),
   );
 
-  const { mutateAsync: createEnvelopeItems, isPending: isCreatingEnvelopeItems } =
-    trpc.envelope.item.createMany.useMutation({
+  const { mutateAsync: createEnvelopeItems, isPending: isCreatingEnvelopeItems } = useZapMutation<
+    TCreateEnvelopeItemsResponse,
+    FormData
+  >('envelope.item.createMany', {
       onSuccess: ({ data }) => {
         const createdEnvelopes = data.filter(
           (item) => !envelope.envelopeItems.find((envelopeItem) => envelopeItem.id === item.id),
@@ -89,7 +98,10 @@ export const EnvelopeEditorUploadPage = () => {
       },
     });
 
-  const { mutateAsync: updateEnvelopeItems } = trpc.envelope.item.updateMany.useMutation({
+  const { mutateAsync: updateEnvelopeItems } = useZapMutation<
+    TUpdateEnvelopeItemsResponse,
+    TUpdateEnvelopeItemsRequest
+  >('envelope.item.updateMany', {
     onSuccess: ({ data }) => {
       setLocalEnvelope({
         envelopeItems: envelope.envelopeItems.map((originalItem) => {

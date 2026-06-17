@@ -37,6 +37,7 @@
     "trigger:dev": "npm run with:env -- npx trigger-cli dev --handler-path=\"/api/jobs\"",
     "inngest:dev": "inngest dev -u http://localhost:3000/api/jobs",
     "make:version": "npm version --workspace @hanzo/sign-remix --include-workspace-root --no-git-tag-version -m \"v%s\"",
+    "openapi:merge": "tsx scripts/merge-openapi.ts",
     "translate": "npm run translate:extract && npm run translate:compile",
     "translate:extract": "lingui extract --clean",
     "translate:compile": "lingui compile"
@@ -51,9 +52,6 @@
     "@commitlint/config-conventional": "^20.0.0",
     "@lingui/cli": "^5.6.0",
     "@prisma/client": "^6.19.0",
-    "@trpc/client": "11.8.1",
-    "@trpc/react-query": "11.8.1",
-    "@trpc/server": "11.8.1",
     "@ts-rest/core": "^3.52.1",
     "@ts-rest/open-api": "^3.52.1",
     "@ts-rest/serverless": "^3.52.1",

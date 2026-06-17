@@ -7,8 +7,12 @@ import { useRevalidator } from 'react-router';
 import { match } from 'ts-pattern';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TGetUserResponse } from '@hanzo/sign-trpc/server/admin-router/get-user.types';
+import type {
+  TResetTwoFactorRequest,
+  TResetTwoFactorResponse,
+} from '@hanzo/sign-trpc/server/admin-router/reset-two-factor-authentication.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -38,8 +42,10 @@ export const AdminUserResetTwoFactorDialog = ({
   const [email, setEmail] = useState('');
   const [open, setOpen] = useState(false);
 
-  const { mutateAsync: resetTwoFactor, isPending: isResettingTwoFactor } =
-    trpc.admin.user.resetTwoFactor.useMutation();
+  const { mutateAsync: resetTwoFactor, isPending: isResettingTwoFactor } = useZapMutation<
+    TResetTwoFactorResponse,
+    TResetTwoFactorRequest
+  >('admin.user.resetTwoFactor');
 
   const onResetTwoFactor = async () => {
     try {

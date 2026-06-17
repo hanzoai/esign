@@ -8,8 +8,11 @@ import { EditIcon, FileIcon, LinkIcon, MoreHorizontalIcon, Trash2Icon } from 'lu
 
 import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
 import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { FindTemplateRow } from '@hanzo/sign-trpc/server/template-router/schema';
+import type {
+  FindTemplateRow,
+  TFindTemplatesResponse,
+} from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,7 +40,8 @@ export const SettingsPublicProfileTemplatesTable = () => {
     templateId: number;
   } | null>(null);
 
-  const { data, isLoading, isLoadingError, refetch } = trpc.template.findTemplates.useQuery(
+  const { data, isLoading, isLoadingError, refetch } = useZapQuery<TFindTemplatesResponse>(
+    'template.findTemplates',
     {},
     {
       placeholderData: (previousData) => previousData,

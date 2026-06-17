@@ -10,7 +10,11 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { useCopyShareLink } from '@hanzo/sign-lib/client-only/hooks/use-copy-share-link';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
 import { generateTwitterIntent } from '@hanzo/sign-lib/universal/generate-twitter-intent';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TShareDocumentRequest,
+  TShareDocumentResponse,
+} from '@hanzo/sign-trpc/server/document-router/share-document.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 
 import { cn } from '../../lib/utils';
 import { Button } from '../../primitives/button';
@@ -60,7 +64,7 @@ export const DocumentShareButton = ({
     mutateAsync: createOrGetShareLink,
     data: shareLink,
     isPending: isCreatingOrGettingShareLink,
-  } = trpc.document.share.useMutation();
+  } = useZapMutation<TShareDocumentResponse, TShareDocumentRequest>('document.share');
 
   const isLoading = isCreatingOrGettingShareLink || isCopyingShareLink;
 

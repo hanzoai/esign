@@ -6,7 +6,7 @@ import { Trans } from '@lingui/react/macro';
 
 import { authClient } from '@hanzo/sign-auth/client';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -37,7 +37,7 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
   const [enteredEmail, setEnteredEmail] = useState<string>('');
 
   const { mutateAsync: deleteAccount, isPending: isDeletingAccount } =
-    trpc.profile.deleteAccount.useMutation();
+    useZapMutation<void, void>('profile.deleteAccount');
 
   const onDeleteAccount = async () => {
     try {

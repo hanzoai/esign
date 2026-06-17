@@ -6,9 +6,12 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TGetOrganisationEmailDomainResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-email-domain.types';
-import { ZUpdateOrganisationEmailRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-email.types';
+import {
+  type TUpdateOrganisationEmailRequest,
+  ZUpdateOrganisationEmailRequestSchema,
+} from '@hanzo/sign-trpc/server/organisation-router/update-organisation-email.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -61,8 +64,10 @@ export const OrganisationEmailUpdateDialog = ({
     },
   });
 
-  const { mutateAsync: updateOrganisationEmail, isPending } =
-    trpc.organisation.email.update.useMutation();
+  const { mutateAsync: updateOrganisationEmail, isPending } = useZapMutation<
+    void,
+    TUpdateOrganisationEmailRequest
+  >('organisation.email.update');
 
   const onFormSubmit = async ({ emailName }: ZUpdateOrganisationEmailSchema) => {
     try {

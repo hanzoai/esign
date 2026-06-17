@@ -8,7 +8,8 @@ import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TUpdateTeamEmailMutationSchema } from '@hanzo/sign-trpc/server/team-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -59,7 +60,9 @@ export const TeamEmailUpdateDialog = ({
     },
   });
 
-  const { mutateAsync: updateTeamEmail } = trpc.team.email.update.useMutation();
+  const { mutateAsync: updateTeamEmail } = useZapMutation<unknown, TUpdateTeamEmailMutationSchema>(
+    'team.email.update',
+  );
 
   const onFormSubmit = async ({ name }: TUpdateTeamEmailFormSchema) => {
     try {

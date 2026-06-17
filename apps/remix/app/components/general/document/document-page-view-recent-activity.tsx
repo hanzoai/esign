@@ -9,7 +9,8 @@ import { match } from 'ts-pattern';
 
 import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
 import { formatDocumentAuditLogAction } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindDocumentAuditLogsResponse } from '@hanzo/sign-trpc/server/document-router/find-document-audit-logs.types';
+import { useZapInfiniteQuery } from '@hanzo/sign-trpc/zap/react';
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 
@@ -32,7 +33,8 @@ export const DocumentPageViewRecentActivity = ({
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
-  } = trpc.document.auditLog.find.useInfiniteQuery(
+  } = useZapInfiniteQuery<TFindDocumentAuditLogsResponse, string | undefined>(
+    'document.auditLog.find',
     {
       documentId,
       filterForRecentActivity: true,
@@ -41,7 +43,7 @@ export const DocumentPageViewRecentActivity = ({
       perPage: 10,
     },
     {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
+      getNextPageParam: (lastPage: TFindDocumentAuditLogsResponse) => lastPage.nextCursor,
     },
   );
 

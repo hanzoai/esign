@@ -1,5 +1,8 @@
-import { trpc } from '@hanzo/sign-trpc/react';
-import type { TShareDocumentRequest } from '@hanzo/sign-trpc/server/document-router/share-document.types';
+import type {
+  TShareDocumentRequest,
+  TShareDocumentResponse,
+} from '@hanzo/sign-trpc/server/document-router/share-document.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 
 import { useCopyToClipboard } from './use-copy-to-clipboard';
 
@@ -11,8 +14,10 @@ export type UseCopyShareLinkOptions = {
 export function useCopyShareLink({ onSuccess, onError }: UseCopyShareLinkOptions) {
   const [, copyToClipboard] = useCopyToClipboard();
 
-  const { mutateAsync: createOrGetShareLink, isPending: isCreatingShareLink } =
-    trpc.document.share.useMutation();
+  const { mutateAsync: createOrGetShareLink, isPending: isCreatingShareLink } = useZapMutation<
+    TShareDocumentResponse,
+    TShareDocumentRequest
+  >('document.share');
 
   /**
    * Copy a newly created, or pre-existing share link to the user's clipboard.

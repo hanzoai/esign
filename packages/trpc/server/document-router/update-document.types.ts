@@ -1,4 +1,3 @@
-// import type { OpenApiMeta } from 'trpc-to-openapi';
 import { z } from 'zod';
 
 import { ZDocumentLiteSchema } from '@hanzo/sign-lib/types/document';
@@ -8,21 +7,11 @@ import {
 } from '@hanzo/sign-lib/types/document-auth';
 import { ZDocumentMetaUpdateSchema } from '@hanzo/sign-lib/types/document-meta';
 
-import type { TrpcRouteMeta } from '../trpc';
 import {
   ZDocumentExternalIdSchema,
   ZDocumentTitleSchema,
   ZDocumentVisibilitySchema,
 } from './schema';
-
-export const updateDocumentMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/document/update',
-    summary: 'Update document',
-    tags: ['Document'],
-  },
-};
 
 export const ZUpdateDocumentRequestSchema = z.object({
   documentId: z.number(),

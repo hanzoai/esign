@@ -6,8 +6,12 @@ import { RotateCwIcon } from 'lucide-react';
 import { createCallable } from 'react-call';
 
 import { toFriendlyWebhookEventName } from '@hanzo/sign-lib/universal/webhook/to-friendly-webhook-event-name';
-import { trpc } from '@hanzo/sign-trpc/react';
 import type { TFindWebhookCallsResponse } from '@hanzo/sign-trpc/server/webhook-router/find-webhook-calls.types';
+import type {
+  TResendWebhookRequest,
+  TResendWebhookResponse,
+} from '@hanzo/sign-trpc/server/webhook-router/resend-webhook-call.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -27,8 +31,10 @@ export const WebhookLogsSheet = createCallable<WebhookLogsSheetProps, string | n
 
     const [activeTab, setActiveTab] = useState<'request' | 'response'>('request');
 
-    const { mutateAsync: resendWebhookCall, isPending: isResending } =
-      trpc.webhook.calls.resend.useMutation({
+    const { mutateAsync: resendWebhookCall, isPending: isResending } = useZapMutation<
+      TResendWebhookResponse,
+      TResendWebhookRequest
+    >('webhook.calls.resend', {
         onSuccess: (result) => {
           toast({ title: t`Webhook successfully sent` });
 

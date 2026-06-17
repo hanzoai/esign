@@ -13,7 +13,9 @@ import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-t
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
 import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
 import { isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindTeamGroupsResponse } from '@hanzo/sign-trpc/server/team-router/find-team-groups.types';
+import type { TFindTeamMembersResponse } from '@hanzo/sign-trpc/server/team-router/find-team-members.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
@@ -46,14 +48,15 @@ export const TeamMembersTable = () => {
 
   const parsedSearchParams = ZUrlSearchParamsSchema.parse(Object.fromEntries(searchParams ?? []));
 
-  const groupQuery = trpc.team.group.find.useQuery({
+  const groupQuery = useZapQuery<TFindTeamGroupsResponse>('team.group.find', {
     teamId: team.id,
     types: [OrganisationGroupType.INTERNAL_ORGANISATION, OrganisationGroupType.INTERNAL_TEAM],
     organisationRoles: [OrganisationMemberRole.MEMBER],
     perPage: 100, // Lets hope this is enough.
   });
 
-  const { data, isLoading, isLoadingError } = trpc.team.member.find.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindTeamMembersResponse>(
+    'team.member.find',
     {
       teamId: team.id,
       query: parsedSearchParams.query,

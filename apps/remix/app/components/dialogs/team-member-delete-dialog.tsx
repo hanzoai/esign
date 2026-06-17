@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
+import { z } from 'zod';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { ZDeleteTeamMemberRequestSchema } from '@hanzo/sign-trpc/server/team-router/delete-team-member.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -43,8 +45,10 @@ export const TeamMemberDeleteDialog = ({
   const { _ } = useLingui();
   const { toast } = useToast();
 
-  const { mutateAsync: deleteTeamMember, isPending: isDeletingTeamMember } =
-    trpc.team.member.delete.useMutation({
+  const { mutateAsync: deleteTeamMember, isPending: isDeletingTeamMember } = useZapMutation<
+    void,
+    z.infer<typeof ZDeleteTeamMemberRequestSchema>
+  >('team.member.delete', {
       onSuccess: () => {
         toast({
           title: _(msg`Success`),

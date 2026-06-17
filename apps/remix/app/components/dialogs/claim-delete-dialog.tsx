@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 import { Trans, useLingui } from '@lingui/react/macro';
 
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TDeleteSubscriptionClaimRequest } from '@hanzo/sign-trpc/server/admin-router/delete-subscription-claim.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -34,7 +35,10 @@ export const ClaimDeleteDialog = ({
 
   const [open, setOpen] = useState(false);
 
-  const { mutateAsync: deleteClaim, isPending } = trpc.admin.claims.delete.useMutation({
+  const { mutateAsync: deleteClaim, isPending } = useZapMutation<
+    void,
+    TDeleteSubscriptionClaimRequest
+  >('admin.claims.delete', {
     onSuccess: () => {
       toast({
         title: t`Subscription claim deleted successfully.`,

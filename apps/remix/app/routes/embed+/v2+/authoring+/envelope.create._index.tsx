@@ -10,6 +10,7 @@ import {
   SigningStatus,
 } from '@prisma/client';
 import { CheckCircle2Icon } from 'lucide-react';
+import type { z } from 'zod';
 
 import { EnvelopeEditorProvider } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
 import type { SupportedLanguageCodes } from '@hanzo/sign-lib/constants/i18n';
@@ -27,8 +28,9 @@ import { extractDerivedDocumentMeta } from '@hanzo/sign-lib/utils/document';
 import { buildEmbeddedFeatures } from '@hanzo/sign-lib/utils/embed-config';
 import { buildEmbeddedEditorOptions } from '@hanzo/sign-lib/utils/embed-config';
 import { prisma } from '@hanzo/sign-prisma';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { ZCreateEmbeddingEnvelopeResponseSchema } from '@hanzo/sign-trpc/server/embedding-router/create-embedding-envelope.types';
 import type { TCreateEnvelopePayload } from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
 import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
 
@@ -154,8 +156,10 @@ const EnvelopeCreatePage = ({ embedAuthoringOptions }: EnvelopeCreatePageProps) 
   const [isCreatingEnvelope, setIsCreatingEnvelope] = useState(false);
   const [createdEnvelope, setCreatedEnvelope] = useState<{ id: string } | null>(null);
 
-  const { mutateAsync: createEmbeddingEnvelope } =
-    trpc.embeddingPresign.createEmbeddingEnvelope.useMutation();
+  const { mutateAsync: createEmbeddingEnvelope } = useZapMutation<
+    z.infer<typeof ZCreateEmbeddingEnvelopeResponseSchema>,
+    FormData
+  >('embeddingPresign.createEmbeddingEnvelope');
 
   const buildCreateEnvelopeRequest = (
     envelope: Omit<TEditorEnvelope, 'id'>,

@@ -16,7 +16,8 @@ import { getRecipientSignatures } from '@hanzo/sign-lib/server-only/recipient/ge
 import { getUserByEmail } from '@hanzo/sign-lib/server-only/user/get-user-by-email';
 import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
 import { env } from '@hanzo/sign-lib/utils/env';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TSigningStatusEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/signing-status-envelope.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { DocumentShareButton } from '@hanzo/sign-ui/components/document/document-share-button';
 import { SigningCard3D } from '@hanzo/sign-ui/components/signing-card';
 import { cn } from '@hanzo/sign-ui/lib/utils';
@@ -119,7 +120,8 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
   } = loaderData;
 
   // Poll signing status every few seconds
-  const { data: signingStatusData } = trpc.envelope.signingStatus.useQuery(
+  const { data: signingStatusData } = useZapQuery<TSigningStatusEnvelopeResponse>(
+    'envelope.signingStatus',
     {
       token: recipient?.token || '',
     },

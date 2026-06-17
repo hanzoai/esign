@@ -6,8 +6,12 @@ import { Trans } from '@lingui/react/macro';
 import { match } from 'ts-pattern';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TEnableUserRequest,
+  TEnableUserResponse,
+} from '@hanzo/sign-trpc/server/admin-router/enable-user.types';
 import type { TGetUserResponse } from '@hanzo/sign-trpc/server/admin-router/get-user.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -33,8 +37,10 @@ export const AdminUserEnableDialog = ({ className, userToEnable }: AdminUserEnab
 
   const [email, setEmail] = useState('');
 
-  const { mutateAsync: enableUser, isPending: isEnablingUser } =
-    trpc.admin.user.enable.useMutation();
+  const { mutateAsync: enableUser, isPending: isEnablingUser } = useZapMutation<
+    TEnableUserResponse,
+    TEnableUserRequest
+  >('admin.user.enable');
 
   const onEnableAccount = async () => {
     try {

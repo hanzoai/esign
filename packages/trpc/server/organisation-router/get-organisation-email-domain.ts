@@ -3,29 +3,10 @@ import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
 import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
 import { prisma } from '@hanzo/sign-prisma';
 
-import { authenticatedProcedure } from '../trpc';
 import {
   ZGetOrganisationEmailDomainRequestSchema,
   ZGetOrganisationEmailDomainResponseSchema,
 } from './get-organisation-email-domain.types';
-
-export const getOrganisationEmailDomainRoute = authenticatedProcedure
-  .input(ZGetOrganisationEmailDomainRequestSchema)
-  .output(ZGetOrganisationEmailDomainResponseSchema)
-  .query(async ({ input, ctx }) => {
-    const { emailDomainId } = input;
-
-    ctx.logger.info({
-      input: {
-        emailDomainId,
-      },
-    });
-
-    return await getOrganisationEmailDomain({
-      userId: ctx.user.id,
-      emailDomainId,
-    });
-  });
 
 type GetOrganisationEmailDomainOptions = {
   userId: number;

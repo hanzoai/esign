@@ -4,7 +4,7 @@ import { Trans } from '@lingui/react/macro';
 import { Edit, Loader, Mail, MoreHorizontal, X } from 'lucide-react';
 
 import type { getTeamWithEmail } from '@hanzo/sign-lib/server-only/team/get-team-email-by-email';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,7 +25,7 @@ export const TeamEmailDropdown = ({ team }: TeamEmailDropdownProps) => {
   const { toast } = useToast();
 
   const { mutateAsync: resendEmailVerification, isPending: isResendingEmailVerification } =
-    trpc.team.email.verification.resend.useMutation({
+    useZapMutation<unknown, { teamId: number }>('team.email.verification.resend', {
       onSuccess: () => {
         toast({
           title: _(msg`Success`),

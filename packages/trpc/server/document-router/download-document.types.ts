@@ -1,19 +1,5 @@
 import { z } from 'zod';
 
-import type { TrpcRouteMeta } from '../trpc';
-
-export const downloadDocumentMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'GET',
-    path: '/document/{documentId}/download',
-    summary: 'Download document',
-    tags: ['Document'],
-    responseHeaders: z.object({
-      'Content-Type': z.literal('application/pdf'),
-    }),
-  },
-};
-
 export const ZDownloadDocumentRequestSchema = z.object({
   documentId: z.number().describe('The ID of the document to download.'),
   version: z

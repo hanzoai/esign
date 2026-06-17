@@ -12,7 +12,9 @@ import { z } from 'zod';
 
 import { MAXIMUM_PASSKEYS } from '@hanzo/sign-lib/constants/auth';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TCreatePasskeyRequest } from '@hanzo/sign-trpc/server/auth-router/create-passkey.types';
+import type { TCreatePasskeyRegistrationOptionsResponse } from '@hanzo/sign-trpc/server/auth-router/create-passkey-registration-options.types';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -62,10 +64,14 @@ export const PasskeyCreateDialog = ({ trigger, onSuccess, ...props }: PasskeyCre
     },
   });
 
-  const { mutateAsync: createPasskeyRegistrationOptions, isPending } =
-    trpc.auth.passkey.createRegistrationOptions.useMutation();
+  const { mutateAsync: createPasskeyRegistrationOptions, isPending } = useZapMutation<
+    TCreatePasskeyRegistrationOptionsResponse,
+    void
+  >('auth.passkey.createRegistrationOptions');
 
-  const { mutateAsync: createPasskey } = trpc.auth.passkey.create.useMutation();
+  const { mutateAsync: createPasskey } = useZapMutation<void, TCreatePasskeyRequest>(
+    'auth.passkey.create',
+  );
 
   const onFormSubmit = async ({ passkeyName }: TCreatePasskeyFormSchema) => {
     setFormError(null);

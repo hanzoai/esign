@@ -7,18 +7,6 @@ import {
 } from '@hanzo/sign-lib/types/document-auth';
 import { ZRecipientEmailSchema, ZRecipientLiteSchema } from '@hanzo/sign-lib/types/recipient';
 
-import type { TrpcRouteMeta } from '../../trpc';
-
-export const updateEnvelopeRecipientsMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/recipient/update-many',
-    summary: 'Update envelope recipients',
-    description: 'Update multiple recipients for an envelope',
-    tags: ['Envelope Recipients'],
-  },
-};
-
 export const ZUpdateEnvelopeRecipientSchema = z.object({
   id: z.number().describe('The ID of the recipient to update.'),
   email: ZRecipientEmailSchema.optional(),

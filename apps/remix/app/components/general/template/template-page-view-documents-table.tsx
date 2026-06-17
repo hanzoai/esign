@@ -12,7 +12,8 @@ import { z } from 'zod';
 
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindDocumentsResponse } from '@hanzo/sign-trpc/server/document-router/find-documents.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
@@ -67,7 +68,8 @@ export const TemplatePageViewDocumentsTable = ({
     Object.fromEntries(searchParams ?? []),
   );
 
-  const { data, isLoading, isLoadingError } = trpc.document.find.useQuery(
+  const { data, isLoading, isLoadingError } = useZapQuery<TFindDocumentsResponse>(
+    'document.find',
     {
       templateId,
       page: parsedSearchParams.page,

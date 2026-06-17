@@ -11,7 +11,12 @@ import { match } from 'ts-pattern';
 import { z } from 'zod';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type {
+  TBulkMoveEnvelopesRequest,
+  TBulkMoveEnvelopesResponse,
+} from '@hanzo/sign-trpc/server/envelope-router/bulk-move-envelopes.types';
+import type { TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -70,7 +75,10 @@ export const EnvelopesBulkMoveDialog = ({
 
   const isDocument = envelopeType === EnvelopeType.DOCUMENT;
 
-  const { data: folders, isLoading: isFoldersLoading } = trpc.folder.findFoldersInternal.useQuery(
+  const { data: folders, isLoading: isFoldersLoading } = useZapQuery<{
+    data: TFolderWithSubfolders[];
+  }>(
+    'folder.findFoldersInternal',
     {
       parentId: currentFolderId,
       type: envelopeType,
@@ -80,9 +88,12 @@ export const EnvelopesBulkMoveDialog = ({
     },
   );
 
-  const { mutateAsync: bulkMoveEnvelopes } = trpc.envelope.bulk.move.useMutation();
+  const { mutateAsync: bulkMoveEnvelopes } = useZapMutation<
+    TBulkMoveEnvelopesResponse,
+    TBulkMoveEnvelopesRequest
+  >('envelope.bulk.move');
 
-  const trpcUtils = trpc.useUtils();
+  const zapUtils = useZapUtils();
 
   useEffect(() => {
     if (open) {
@@ -104,9 +115,9 @@ export const EnvelopesBulkMoveDialog = ({
 
       // Invalidate the appropriate query based on envelope type.
       if (isDocument) {
-        await trpcUtils.document.findDocumentsInternal.invalidate();
+        await zapUtils.invalidate('document.findDocumentsInternal');
       } else {
-        await trpcUtils.template.findTemplates.invalidate();
+        await zapUtils.invalidate('template.findTemplates');
       }
 
       toast({

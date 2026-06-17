@@ -12,8 +12,9 @@ import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/or
 import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
 import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
 import { ZCreateOrganisationGroupRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-group.types';
+import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -75,10 +76,12 @@ export const OrganisationGroupCreateDialog = ({
     },
   });
 
-  const { mutateAsync: createOrganisationGroup } = trpc.organisation.group.create.useMutation();
+  const { mutateAsync: createOrganisationGroup } = useZapMutation<void, unknown>(
+    'organisation.group.create',
+  );
 
   const { data: membersFindResult, isLoading: isLoadingMembers } =
-    trpc.organisation.member.find.useQuery({
+    useZapQuery<TFindOrganisationMembersResponse>('organisation.member.find', {
       organisationId: organisation.id,
     });
 

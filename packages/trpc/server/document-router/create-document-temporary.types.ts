@@ -18,7 +18,6 @@ import {
 import { ZFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
 
 import { ZCreateRecipientSchema } from '../recipient-router/schema';
-import type { TrpcRouteMeta } from '../trpc';
 import {
   ZDocumentExternalIdSchema,
   ZDocumentTitleSchema,
@@ -29,17 +28,6 @@ import {
  * Temporariy endpoint for V2 Beta until we allow passthrough documents on create.
  * @deprecated
  */
-export const createDocumentTemporaryMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/document/create/beta',
-    summary: 'Create document',
-    description:
-      'You will need to upload the PDF to the provided URL returned. Note: Once V2 API is released, this will be removed since we will allow direct uploads, instead of using an upload URL.',
-    tags: ['Document'],
-    deprecated: true,
-  },
-};
 
 export const ZCreateDocumentTemporaryRequestSchema = z.object({
   title: ZDocumentTitleSchema,

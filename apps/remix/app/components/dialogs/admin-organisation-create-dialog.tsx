@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router';
 import type { z } from 'zod';
 
 import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { TCreateAdminOrganisationRequest } from '@hanzo/sign-trpc/server/admin-router/create-admin-organisation.types';
 import { ZCreateAdminOrganisationRequestSchema } from '@hanzo/sign-trpc/server/admin-router/create-admin-organisation.types';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
@@ -63,7 +64,10 @@ export const AdminOrganisationCreateDialog = ({
     },
   });
 
-  const { mutateAsync: createOrganisation } = trpc.admin.organisation.create.useMutation();
+  const { mutateAsync: createOrganisation } = useZapMutation<
+    { organisationId: string },
+    TCreateAdminOrganisationRequest
+  >('admin.organisation.create');
 
   const onFormSubmit = async ({ name }: TCreateOrganisationFormSchema) => {
     try {

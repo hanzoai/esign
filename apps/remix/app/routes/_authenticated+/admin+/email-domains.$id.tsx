@@ -10,7 +10,12 @@ import { Link, redirect } from 'react-router';
 import { match } from 'ts-pattern';
 
 import { generateEmailDomainRecords } from '@hanzo/sign-lib/utils/email-domains';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetEmailDomainResponse } from '@hanzo/sign-trpc/server/admin-router/get-email-domain.types';
+import type {
+  TReregisterEmailDomainRequest,
+  TReregisterEmailDomainResponse,
+} from '@hanzo/sign-trpc/server/admin-router/reregister-email-domain.types';
+import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -50,28 +55,31 @@ export default function AdminEmailDomainDetailPage({ loaderData }: Route.Compone
     data: emailDomain,
     isPending: isLoading,
     refetch,
-  } = trpc.admin.emailDomain.get.useQuery({ emailDomainId });
+  } = useZapQuery<TGetEmailDomainResponse>('admin.emailDomain.get', { emailDomainId });
 
   const { mutate: reregisterDomain, isPending: isReregistering } =
-    trpc.admin.emailDomain.reregister.useMutation({
-      onSuccess: () => {
-        toast({
-          title: _(msg`Domain re-registered`),
-          description: _(
-            msg`The SES identity has been deleted and recreated with the same keys. DNS records remain unchanged.`,
-          ),
-        });
+    useZapMutation<TReregisterEmailDomainResponse, TReregisterEmailDomainRequest>(
+      'admin.emailDomain.reregister',
+      {
+        onSuccess: () => {
+          toast({
+            title: _(msg`Domain re-registered`),
+            description: _(
+              msg`The SES identity has been deleted and recreated with the same keys. DNS records remain unchanged.`,
+            ),
+          });
 
-        void refetch();
+          void refetch();
+        },
+        onError: () => {
+          toast({
+            title: _(msg`Error`),
+            description: _(msg`Failed to re-register email domain`),
+            variant: 'destructive',
+          });
+        },
       },
-      onError: () => {
-        toast({
-          title: _(msg`Error`),
-          description: _(msg`Failed to re-register email domain`),
-          variant: 'destructive',
-        });
-      },
-    });
+    );
 
   const dnsRecords = useMemo(() => {
     if (!emailDomain) {

@@ -6,8 +6,11 @@ import { useNavigate } from 'react-router';
 
 import { FolderType } from '@hanzo/sign-lib/types/folder-type';
 import { formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import { trpc } from '@hanzo/sign-trpc/react';
-import { type TFolderWithSubfolders } from '@hanzo/sign-trpc/server/folder-router/schema';
+import {
+  type TFolderWithSubfolders,
+  type TGetFoldersResponse,
+} from '@hanzo/sign-trpc/server/folder-router/schema';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import { Input } from '@hanzo/sign-ui/primitives/input';
 
@@ -37,10 +40,13 @@ export default function TemplatesFoldersPage() {
   const [folderToSettings, setFolderToSettings] = useState<TFolderWithSubfolders | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const { data: foldersData, isLoading: isFoldersLoading } = trpc.folder.getFolders.useQuery({
-    type: FolderType.TEMPLATE,
-    parentId: null,
-  });
+  const { data: foldersData, isLoading: isFoldersLoading } = useZapQuery<TGetFoldersResponse>(
+    'folder.getFolders',
+    {
+      type: FolderType.TEMPLATE,
+      parentId: null,
+    },
+  );
 
   const navigateToFolder = (folderId?: string | null) => {
     const templatesPath = formatTemplatesPath(team.url);

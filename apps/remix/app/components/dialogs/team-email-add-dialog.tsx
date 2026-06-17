@@ -9,8 +9,11 @@ import { useRevalidator } from 'react-router';
 import type { z } from 'zod';
 
 import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { trpc } from '@hanzo/sign-trpc/react';
-import { ZCreateTeamEmailVerificationMutationSchema } from '@hanzo/sign-trpc/server/team-router/schema';
+import {
+  type TCreateTeamEmailVerificationMutationSchema,
+  ZCreateTeamEmailVerificationMutationSchema,
+} from '@hanzo/sign-trpc/server/team-router/schema';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
   Dialog,
@@ -59,8 +62,10 @@ export const TeamEmailAddDialog = ({ teamId, trigger, ...props }: TeamEmailAddDi
     },
   });
 
-  const { mutateAsync: sendTeamEmailVerification, isPending } =
-    trpc.team.email.verification.send.useMutation();
+  const { mutateAsync: sendTeamEmailVerification, isPending } = useZapMutation<
+    unknown,
+    TCreateTeamEmailVerificationMutationSchema
+  >('team.email.verification.send');
 
   const onFormSubmit = async ({ name, email }: TCreateTeamEmailFormSchema) => {
     try {

@@ -9,7 +9,8 @@ import { Link, useSearchParams } from 'react-router';
 import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
 import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
 import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TFindDocumentsResponse } from '@hanzo/sign-trpc/server/admin-router/find-documents.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { Avatar, AvatarFallback } from '@hanzo/sign-ui/primitives/avatar';
 import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
@@ -33,7 +34,8 @@ export default function AdminDocumentsPage() {
   const perPage = searchParams?.get?.('perPage') ? Number(searchParams.get('perPage')) : undefined;
 
   const { data: findDocumentsData, isPending: isFindDocumentsLoading } =
-    trpc.admin.document.find.useQuery(
+    useZapQuery<TFindDocumentsResponse>(
+      'admin.document.find',
       {
         query: debouncedTerm,
         page: page || 1,

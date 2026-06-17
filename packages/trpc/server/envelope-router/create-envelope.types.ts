@@ -24,19 +24,7 @@ import {
   ZDocumentTitleSchema,
   ZDocumentVisibilitySchema,
 } from '../document-router/schema';
-import type { TrpcRouteMeta } from '../trpc';
 import { ZCreateEnvelopeRecipientSchema } from './envelope-recipients/create-envelope-recipients.types';
-
-export const createEnvelopeMeta: TrpcRouteMeta = {
-  openapi: {
-    method: 'POST',
-    path: '/envelope/create',
-    contentTypes: ['multipart/form-data'],
-    summary: 'Create envelope',
-    description: 'Create an envelope using form data.',
-    tags: ['Envelope'],
-  },
-};
 
 export const ZCreateEnvelopePayloadSchema = z.object({
   title: ZDocumentTitleSchema,

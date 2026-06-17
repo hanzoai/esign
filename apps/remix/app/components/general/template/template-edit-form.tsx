@@ -7,14 +7,17 @@ import { z } from 'zod';
 
 import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
 import { isValidLanguageCode } from '@hanzo/sign-lib/constants/i18n';
-import {
-  DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-  SKIP_QUERY_BATCH_META,
-} from '@hanzo/sign-lib/constants/trpc';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
 import { ZDocumentAccessAuthTypesSchema } from '@hanzo/sign-lib/types/document-auth';
 import type { TTemplate } from '@hanzo/sign-lib/types/template';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { ZSetFieldsForTemplateRequestSchema } from '@hanzo/sign-trpc/server/field-router/schema';
+import {
+  ZSetTemplateRecipientsRequestSchema,
+  ZSetTemplateRecipientsResponseSchema,
+} from '@hanzo/sign-trpc/server/recipient-router/schema';
+import { ZUpdateTemplateRequestSchema } from '@hanzo/sign-trpc/server/template-router/schema';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
 import { cn } from '@hanzo/sign-ui/lib/utils';
 import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
 import { DocumentFlowFormContainer } from '@hanzo/sign-ui/primitives/document-flow/document-flow-root';
@@ -55,17 +58,23 @@ export const TemplateEditForm = ({
 
   const [isDocumentPdfLoaded, setIsDocumentPdfLoaded] = useState(false);
 
-  const utils = trpc.useUtils();
+  const utils = useZapUtils();
 
-  const { data: template, refetch: refetchTemplate } = trpc.template.getTemplateById.useQuery(
+  const { data, refetch: refetchTemplate } = useZapQuery<TTemplate>(
+    'template.getTemplateById',
     {
       templateId: initialTemplate.id,
     },
     {
       initialData: initialTemplate,
-      ...SKIP_QUERY_BATCH_META,
     },
   );
+
+  // `initialData` guarantees a value at runtime; the fallback mirrors the
+  // optimistic-update default and keeps `template` non-undefined for the type
+  // checker (the ZAP query result is `T | undefined`, unlike tRPC's narrowed
+  // `initialData` overload).
+  const template = data ?? initialTemplate;
 
   const { recipients, fields, templateDocumentData } = template;
 
@@ -89,41 +98,56 @@ export const TemplateEditForm = ({
 
   const currentDocumentFlow = documentFlow[step];
 
-  const { mutateAsync: updateTemplateSettings } = trpc.template.updateTemplate.useMutation({
-    ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-    onSuccess: (newData) => {
-      utils.template.getTemplateById.setData(
-        {
-          templateId: initialTemplate.id,
-        },
-        (oldData) => ({ ...(oldData || initialTemplate), ...newData }),
-      );
+  const { mutateAsync: updateTemplateSettings } = useZapMutation<Partial<TTemplate>, z.infer<typeof ZUpdateTemplateRequestSchema>>(
+    'template.updateTemplate',
+    {
+      ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+      onSuccess: (newData) => {
+        utils.setData<TTemplate>(
+          'template.getTemplateById',
+          {
+            templateId: initialTemplate.id,
+          },
+          (oldData) => ({ ...(oldData || initialTemplate), ...newData }),
+        );
+      },
     },
-  });
+  );
 
-  const { mutateAsync: addTemplateFields } = trpc.field.setFieldsForTemplate.useMutation({
-    ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-    onSuccess: (newData) => {
-      utils.template.getTemplateById.setData(
-        {
-          templateId: initialTemplate.id,
-        },
-        (oldData) => ({ ...(oldData || initialTemplate), ...newData }),
-      );
+  const { mutateAsync: addTemplateFields } = useZapMutation<Partial<TTemplate>, z.infer<typeof ZSetFieldsForTemplateRequestSchema>>(
+    'field.setFieldsForTemplate',
+    {
+      ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+      onSuccess: (newData) => {
+        utils.setData<TTemplate>(
+          'template.getTemplateById',
+          {
+            templateId: initialTemplate.id,
+          },
+          (oldData) => ({ ...(oldData || initialTemplate), ...newData }),
+        );
+      },
     },
-  });
+  );
 
-  const { mutateAsync: setRecipients } = trpc.recipient.setTemplateRecipients.useMutation({
-    ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
-    onSuccess: (newData) => {
-      utils.template.getTemplateById.setData(
-        {
-          templateId: initialTemplate.id,
-        },
-        (oldData) => ({ ...(oldData || initialTemplate), ...newData }),
-      );
+  const { mutateAsync: setRecipients } = useZapMutation<
+    z.infer<typeof ZSetTemplateRecipientsResponseSchema>,
+    z.infer<typeof ZSetTemplateRecipientsRequestSchema>
+  >(
+    'recipient.setTemplateRecipients',
+    {
+      ...DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
+      onSuccess: (newData) => {
+        utils.setData<TTemplate>(
+          'template.getTemplateById',
+          {
+            templateId: initialTemplate.id,
+          },
+          (oldData) => ({ ...(oldData || initialTemplate), ...newData }),
+        );
+      },
     },
-  });
+  );
 
   const saveSettingsData = async (data: TAddTemplateSettingsFormSchema) => {
     const { signatureTypes } = data.meta;

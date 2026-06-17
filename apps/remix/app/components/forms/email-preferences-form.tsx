@@ -10,7 +10,8 @@ import {
   DEFAULT_DOCUMENT_EMAIL_SETTINGS,
   ZDocumentEmailSettingsSchema,
 } from '@hanzo/sign-lib/types/document-email';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
 import { DocumentEmailCheckboxes } from '@hanzo/sign-ui/components/document/document-email-checkboxes';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -69,7 +70,7 @@ export const EmailPreferencesForm = ({
   });
 
   const { data: emailData, isLoading: isLoadingEmails } =
-    trpc.organisation.email.find.useQuery({
+    useZapQuery<TFindOrganisationEmailsResponse>('organisation.email.find', {
       organisationId: organisation.id,
       perPage: 100,
     });

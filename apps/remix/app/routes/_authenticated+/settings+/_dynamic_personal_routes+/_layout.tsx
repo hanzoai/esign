@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from 'react-router';
 import { OrganisationProvider } from '@hanzo/sign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { TrpcProvider } from '@hanzo/sign-trpc/react';
+import { ZapProvider } from '@hanzo/sign-trpc/zap/react';
 
 import { TeamProvider } from '~/providers/team';
 
@@ -40,17 +40,13 @@ export default function Layout() {
     return null;
   }
 
-  const trpcHeaders = {
-    'x-team-Id': team.id.toString(),
-  };
-
   return (
-    <TrpcProvider headers={trpcHeaders}>
+    <ZapProvider>
       <OrganisationProvider organisation={currentOrganisation}>
         <TeamProvider team={team}>
           <Outlet />
         </TeamProvider>
       </OrganisationProvider>
-    </TrpcProvider>
+    </ZapProvider>
   );
 }

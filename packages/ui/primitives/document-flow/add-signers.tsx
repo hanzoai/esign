@@ -21,7 +21,8 @@ import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
 import { ZRecipientAuthOptionsSchema } from '@hanzo/sign-lib/types/document-auth';
 import { nanoid } from '@hanzo/sign-lib/universal/id';
 import { canRecipientBeModified as utilCanRecipientBeModified } from '@hanzo/sign-lib/utils/recipients';
-import { trpc } from '@hanzo/sign-trpc/react';
+import type { TGetRecipientSuggestionsResponseSchema } from '@hanzo/sign-trpc/server/recipient-router/find-recipient-suggestions.types';
+import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
 import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
 import { RecipientActionAuthSelect } from '@hanzo/sign-ui/components/recipient/recipient-action-auth-select';
 import { RecipientRoleSelect } from '@hanzo/sign-ui/components/recipient/recipient-role-select';
@@ -94,14 +95,16 @@ export const AddSignersFormPartial = ({
 
   const organisation = useCurrentOrganisation();
 
-  const { data: recipientSuggestionsData, isLoading } = trpc.recipient.suggestions.find.useQuery(
-    {
-      query: debouncedRecipientSearchQuery,
-    },
-    {
-      enabled: debouncedRecipientSearchQuery.length > 1,
-    },
-  );
+  const { data: recipientSuggestionsData, isLoading } =
+    useZapQuery<TGetRecipientSuggestionsResponseSchema>(
+      'recipient.suggestions.find',
+      {
+        query: debouncedRecipientSearchQuery,
+      },
+      {
+        enabled: debouncedRecipientSearchQuery.length > 1,
+      },
+    );
 
   const recipientSuggestions = recipientSuggestionsData?.results || [];
 

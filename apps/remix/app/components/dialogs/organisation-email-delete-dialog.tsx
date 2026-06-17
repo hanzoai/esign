@@ -4,7 +4,7 @@ import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 
 import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { trpc } from '@hanzo/sign-trpc/react';
+import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
 import { Button } from '@hanzo/sign-ui/primitives/button';
 import {
@@ -36,8 +36,9 @@ export const OrganisationEmailDeleteDialog = ({
 
   const organisation = useCurrentOrganisation();
 
-  const { mutateAsync: deleteEmail, isPending: isDeleting } =
-    trpc.organisation.email.delete.useMutation({
+  const { mutateAsync: deleteEmail, isPending: isDeleting } = useZapMutation<void, unknown>(
+    'organisation.email.delete',
+    {
       onSuccess: () => {
         toast({
           title: t`Success`,
@@ -55,7 +56,8 @@ export const OrganisationEmailDeleteDialog = ({
           duration: 10000,
         });
       },
-    });
+    },
+  );
 
   return (
     <Dialog open={open} onOpenChange={(value) => !isDeleting && setOpen(value)}>
