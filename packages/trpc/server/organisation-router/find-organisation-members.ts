@@ -46,13 +46,11 @@ export const findOrganisationMembers = async ({
         {
           email: {
             contains: query,
-            mode: Prisma.QueryMode.insensitive,
           },
         },
         {
           name: {
             contains: query,
-            mode: Prisma.QueryMode.insensitive,
           },
         },
       ],

@@ -19,9 +19,11 @@ generator zod {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("NEXT_PRIVATE_DATABASE_URL")
-  directUrl = env("NEXT_PRIVATE_DIRECT_DATABASE_URL")
+  // Per-tenant SQLite via Hanzo Base. Each org owns its own `sign.db` file;
+  // the connection URL is constructed at runtime from BASE_PATH + orgId
+  // (see ./helper.ts). DATABASE_URL points at one tenant file per client.
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 // Todo: (RR7) Remove after RR7 migration.
@@ -36,6 +38,7 @@ enum Role {
   USER
 }
 
+/// @zod.import(["import { RoleSchema } from '../inputTypeSchemas/RoleSchema';"])
 model User {
   id               Int              @id @default(autoincrement())
   name             String?
@@ -47,7 +50,10 @@ model User {
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @default(now()) @updatedAt
   lastSignedIn     DateTime         @default(now())
-  roles            Role[]           @default([USER])
+  // SQLite has no array type — stored as a JSON-encoded list of Role values.
+  // Decode/encode through @hanzo/sign-prisma/json-array at the boundary; the
+  // `/// [RoleList]` annotation retypes the column to `Role[]` in the client.
+  roles            String           @default("[\"USER\"]") /// [RoleList] @zod.custom.use(z.array(RoleSchema))
   identityProvider IdentityProvider @default(DOCUMENSO) // Todo: (RR7) Remove after RR7 migration.
   avatarImageId    String?
   disabled         Boolean          @default(false)
@@ -139,7 +145,8 @@ model Passkey {
   counter              BigInt
   credentialDeviceType String
   credentialBackedUp   Boolean
-  transports           String[]
+  // SQLite has no array type — JSON-encoded list of WebAuthn transport strings.
+  transports           String  @default("[]") /// [StringList] @zod.custom.use(z.array(z.string()))
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -175,10 +182,12 @@ enum WebhookTriggerEvents {
   RECIPIENT_EXPIRED
 }
 
+/// @zod.import(["import { WebhookTriggerEventsSchema } from '../inputTypeSchemas/WebhookTriggerEventsSchema';"])
 model Webhook {
   id            String                 @id @default(cuid())
   webhookUrl    String
-  eventTriggers WebhookTriggerEvents[]
+  // SQLite has no array type — JSON-encoded list of WebhookTriggerEvents.
+  eventTriggers String                 @default("[]") /// [WebhookTriggerEventList] @zod.custom.use(z.array(WebhookTriggerEventsSchema))
   secret        String?
   enabled       Boolean                @default(true)
   createdAt     DateTime               @default(now())
@@ -290,8 +299,8 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?  @db.Text
-  access_token      String?  @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   // Some providers return created_at so we need to make it optional
   created_at        Int?
@@ -299,7 +308,7 @@ model Account {
   ext_expires_in    Int?
   token_type        String?
   scope             String?
-  id_token          String?  @db.Text
+  id_token          String?
   session_state     String?
   password          String?
 
@@ -506,8 +515,8 @@ model DocumentMeta {
   id                     String               @id @default(cuid())
   subject                String?
   message                String?
-  timezone               String?              @default("Etc/UTC") @db.Text
-  dateFormat             String?              @default("yyyy-MM-dd hh:mm a") @db.Text
+  timezone               String?              @default("Etc/UTC")
+  dateFormat             String?              @default("yyyy-MM-dd hh:mm a")
   redirectUrl            String?
   signingOrder           DocumentSigningOrder @default(PARALLEL)
   allowDictateNextSigner Boolean              @default(false)
@@ -574,8 +583,8 @@ enum RecipientRole {
 model Recipient {
   id                   Int           @id @default(autoincrement())
   envelopeId           String
-  email                String        @db.VarChar(255)
-  name                 String        @default("") @db.VarChar(255)
+  email                String
+  name                 String        @default("")
   token                String
   documentDeletedAt    DateTime?
   expired              DateTime? // deprecated Not in use. To be removed in a future migration.
@@ -601,8 +610,10 @@ model Recipient {
   @@index([email, documentDeletedAt, envelopeId], map: "Recipient_email_documentDeletedAt_envelopeId_idx")
   @@index([email, envelopeId], map: "Recipient_email_envelopeId_idx")
   @@index([email, signingStatus, envelopeId, role], map: "Recipient_email_signingStatus_envelopeId_role_idx")
-  @@index([email(ops: raw("gin_trgm_ops"))], map: "Recipient_email_trgm_idx", type: Gin)
-  @@index([name(ops: raw("gin_trgm_ops"))], map: "Recipient_name_trgm_idx", type: Gin)
+  // Trigram GIN indexes dropped — SQLite has no trigram index. Fuzzy recipient
+  // lookup degrades to case-insensitive `contains` (LIKE); an explicit btree
+  // index on name accelerates prefix/equality lookups.
+  @@index([name])
 }
 
 enum FieldType {
@@ -1085,7 +1096,8 @@ model OrganisationAuthenticationPortal {
 
   defaultOrganisationRole OrganisationMemberRole @default(MEMBER)
   autoProvisionUsers      Boolean                @default(true)
-  allowedDomains          String[]               @default([])
+  // SQLite has no array type — JSON-encoded list of allowed email domains.
+  allowedDomains          String                 @default("[]") /// [StringList] @zod.custom.use(z.array(z.string()))
 }
 
 model Counter {

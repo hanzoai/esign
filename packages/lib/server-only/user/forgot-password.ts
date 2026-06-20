@@ -8,10 +8,9 @@ import { sendForgotPassword } from '../auth/send-forgot-password';
 export const forgotPassword = async ({ email }: { email: string }) => {
   const user = await prisma.user.findFirst({
     where: {
-      email: {
-        equals: email,
-        mode: 'insensitive',
-      },
+      // Emails are stored lowercased (see create-user.ts); normalise the lookup
+      // to match. SQLite has no case-insensitive filter `mode`.
+      email: email.toLowerCase(),
     },
   });
 

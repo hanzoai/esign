@@ -36,7 +36,6 @@ export const searchDocumentsWithKeyword = async ({
         {
           title: {
             contains: query,
-            mode: 'insensitive',
           },
           userId: userId,
           deletedAt: null,
@@ -44,7 +43,6 @@ export const searchDocumentsWithKeyword = async ({
         {
           externalId: {
             contains: query,
-            mode: 'insensitive',
           },
           userId: userId,
           deletedAt: null,
@@ -54,7 +52,6 @@ export const searchDocumentsWithKeyword = async ({
             some: {
               email: {
                 contains: query,
-                mode: 'insensitive',
               },
             },
           },
@@ -70,7 +67,6 @@ export const searchDocumentsWithKeyword = async ({
           },
           title: {
             contains: query,
-            mode: 'insensitive',
           },
         },
         {
@@ -82,14 +78,12 @@ export const searchDocumentsWithKeyword = async ({
           },
           title: {
             contains: query,
-            mode: 'insensitive',
           },
           deletedAt: null,
         },
         {
           title: {
             contains: query,
-            mode: 'insensitive',
           },
           team: buildTeamWhereQuery({ teamId: undefined, userId }),
           deletedAt: null,
@@ -97,7 +91,6 @@ export const searchDocumentsWithKeyword = async ({
         {
           externalId: {
             contains: query,
-            mode: 'insensitive',
           },
           team: buildTeamWhereQuery({ teamId: undefined, userId }),
           deletedAt: null,

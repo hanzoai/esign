@@ -29,13 +29,11 @@ export const findSubscriptionClaims = async ({
         {
           id: {
             contains: query,
-            mode: 'insensitive',
           },
         },
         {
           name: {
             contains: query,
-            mode: 'insensitive',
           },
         },
       ],

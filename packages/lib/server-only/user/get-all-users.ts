@@ -15,18 +15,18 @@ export const findUsers = async ({
   page = 1,
   perPage = 10,
 }: GetAllUsersProps) => {
+  // SQLite `LIKE` (Prisma `contains`) is case-insensitive for ASCII, so the
+  // Postgres `mode: 'insensitive'` is unnecessary and unsupported here.
   const whereClause = Prisma.validator<Prisma.UserWhereInput>()({
     OR: [
       {
         name: {
           contains: username,
-          mode: 'insensitive',
         },
       },
       {
         email: {
           contains: email,
-          mode: 'insensitive',
         },
       },
     ],

@@ -23,6 +23,9 @@ export const findAdminOrganisations = async ({
   ownerUserId,
   memberUserId,
 }: FindAdminOrganisationsOptions) => {
+  // SQLite `LIKE` (Prisma `contains`) is case-insensitive for ASCII, and org
+  // ids/urls are case-stable cuids, so no `mode: 'insensitive'` is needed (it
+  // is unsupported by the SQLite connector).
   let whereClause: Prisma.OrganisationWhereInput = {};
 
   if (query) {
@@ -31,27 +34,23 @@ export const findAdminOrganisations = async ({
         {
           id: {
             contains: query,
-            mode: Prisma.QueryMode.insensitive,
           },
         },
         {
           owner: {
             email: {
               contains: query,
-              mode: Prisma.QueryMode.insensitive,
             },
           },
         },
         {
           customerId: {
             contains: query,
-            mode: Prisma.QueryMode.insensitive,
           },
         },
         {
           name: {
             contains: query,
-            mode: Prisma.QueryMode.insensitive,
           },
         },
       ],
@@ -63,7 +62,6 @@ export const findAdminOrganisations = async ({
       organisationClaim: {
         originalSubscriptionClaimId: {
           contains: query.slice(6),
-          mode: Prisma.QueryMode.insensitive,
         },
       },
     };
@@ -75,13 +73,11 @@ export const findAdminOrganisations = async ({
         {
           id: {
             equals: query,
-            mode: Prisma.QueryMode.insensitive,
           },
         },
         {
           url: {
             equals: query,
-            mode: Prisma.QueryMode.insensitive,
           },
         },
       ],

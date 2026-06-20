@@ -1,4 +1,4 @@
-import { EnvelopeType, Prisma } from '@prisma/client';
+import { EnvelopeType } from '@prisma/client';
 
 import { buildTeamWhereQuery } from '@hanzo/sign-lib/utils/teams';
 import { prisma } from '@hanzo/sign-prisma';
@@ -22,13 +22,11 @@ export const getRecipientSuggestions = async ({
           {
             name: {
               contains: trimmedQuery,
-              mode: Prisma.QueryMode.insensitive,
             },
           },
           {
             email: {
               contains: trimmedQuery,
-              mode: Prisma.QueryMode.insensitive,
             },
           },
         ],
