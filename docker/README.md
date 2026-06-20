@@ -114,13 +114,14 @@ docker run -d \
   -e NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="<your-next-private-encryption-secondary-key>" \
   -e NEXT_PUBLIC_WEBAPP_URL="<your-next-public-webapp-url>" \
   -e NEXT_PRIVATE_INTERNAL_WEBAPP_URL="http://localhost:3000" \
-  -e NEXT_PRIVATE_DATABASE_URL="<your-next-private-database-url>" \
-  -e NEXT_PRIVATE_DIRECT_DATABASE_URL="<your-next-private-database-url>" \
+  -e BASE_PATH="/opt/hanzo-sign/base/data" \
+  -e DATABASE_URL="file:/opt/hanzo-sign/base/data/_dev/sign.db" \
   -e NEXT_PRIVATE_SMTP_TRANSPORT="<your-next-private-smtp-transport>" \
   -e NEXT_PRIVATE_SMTP_FROM_NAME="<your-next-private-smtp-from-name>" \
   -e NEXT_PRIVATE_SMTP_FROM_ADDRESS="<your-next-private-smtp-from-address>" \
   -e NEXT_PRIVATE_SIGNING_PASSPHRASE="<your-certificate-password>" \
   -v /path/to/your/cert.p12:/opt/hanzo-sign/cert.p12:ro \
+  -v hanzo-sign_base:/opt/hanzo-sign/base/data \
   hanzo-sign/hanzo-sign
 ```
 
@@ -211,8 +212,8 @@ Here's a markdown table documenting all the provided environment variables:
 | `NEXT_PRIVATE_GOOGLE_CLIENT_ID`                                | The Google client ID for Google authentication (optional).                                          |
 | `NEXT_PRIVATE_GOOGLE_CLIENT_SECRET`                            | The Google client secret for Google authentication (optional).                                      |
 | `NEXT_PUBLIC_WEBAPP_URL`                                       | The URL for the web application.                                                                    |
-| `NEXT_PRIVATE_DATABASE_URL`                                    | The URL for the primary database connection (with connection pooling).                              |
-| `NEXT_PRIVATE_DIRECT_DATABASE_URL`                             | The URL for the direct database connection (without connection pooling).                            |
+| `BASE_PATH`                                                    | Root directory for per-tenant SQLite (Hanzo Base). Each org gets `${BASE_PATH}/${orgId}/sign.db`.   |
+| `DATABASE_URL`                                                 | SQLite file URL for the default (CLI / migration) database, e.g. `file:${BASE_PATH}/_dev/sign.db`.  |
 | `NEXT_PRIVATE_SIGNING_TRANSPORT`                               | The signing transport to use. Available options: local (default), gcloud-hsm                        |
 | `NEXT_PRIVATE_SIGNING_PASSPHRASE`                              | The passphrase for the key file.                                                                    |
 | `NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS`                     | The base64-encoded contents of the key file, will be used instead of file path.                     |

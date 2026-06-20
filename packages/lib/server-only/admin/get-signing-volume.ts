@@ -7,7 +7,9 @@ export type OrganisationInsights = {
   id: number;
   name: string;
   signingVolume: number;
-  createdAt: Date;
+  // Kysely surfaces the epoch-ms `createdAt` DateTime column as a string for
+  // SQLite; consumers wrap it in `new Date(...)` before formatting.
+  createdAt: string;
   customerId: string | null;
   subscriptionStatus?: string;
   teamCount?: number;
@@ -31,16 +33,18 @@ export async function getSigningVolume({
 }: GetSigningVolumeOptions) {
   const offset = Math.max(page - 1, 0) * perPage;
 
+  // SQLite `LIKE` is case-insensitive for ASCII by default, so it stands in for
+  // Postgres `ILIKE` here (SQLite has no `ILIKE` operator).
   let findQuery = kyselyPrisma.$kysely
     .selectFrom('Organisation as o')
     .where((eb) =>
       eb.or([
-        eb('o.name', 'ilike', `%${search}%`),
+        eb('o.name', 'like', `%${search}%`),
         eb.exists(
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where('t.name', 'ilike', `%${search}%`),
+            .where('t.name', 'like', `%${search}%`),
         ),
       ]),
     )
@@ -80,12 +84,12 @@ export async function getSigningVolume({
     .selectFrom('Organisation as o')
     .where((eb) =>
       eb.or([
-        eb('o.name', 'ilike', `%${search}%`),
+        eb('o.name', 'like', `%${search}%`),
         eb.exists(
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where('t.name', 'ilike', `%${search}%`),
+            .where('t.name', 'like', `%${search}%`),
         ),
       ]),
     )
@@ -151,12 +155,12 @@ export async function getOrganisationInsights({
     .leftJoin('Subscription as s', 'o.id', 's.organisationId')
     .where((eb) =>
       eb.or([
-        eb('o.name', 'ilike', `%${search}%`),
+        eb('o.name', 'like', `%${search}%`),
         eb.exists(
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where('t.name', 'ilike', `%${search}%`),
+            .where('t.name', 'like', `%${search}%`),
         ),
       ]),
     )
@@ -210,12 +214,12 @@ export async function getOrganisationInsights({
     .selectFrom('Organisation as o')
     .where((eb) =>
       eb.or([
-        eb('o.name', 'ilike', `%${search}%`),
+        eb('o.name', 'like', `%${search}%`),
         eb.exists(
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where('t.name', 'ilike', `%${search}%`),
+            .where('t.name', 'like', `%${search}%`),
         ),
       ]),
     )

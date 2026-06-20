@@ -40,10 +40,9 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 
   const user = await prisma.user.findFirst({
     where: {
-      email: {
-        equals: organisationMemberInvite.email,
-        mode: 'insensitive',
-      },
+      // Emails are stored lowercased (see create-user.ts); SQLite has no
+      // case-insensitive filter `mode`, so normalise the invite email instead.
+      email: organisationMemberInvite.email.toLowerCase(),
     },
     select: {
       id: true,

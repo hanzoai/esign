@@ -13,7 +13,10 @@ declare namespace NodeJS {
     NEXT_PRIVATE_OIDC_PROVIDER_LABEL?: string;
     NEXT_PRIVATE_OIDC_SKIP_VERIFY?: string;
 
-    NEXT_PRIVATE_DATABASE_URL: string;
+    // Per-tenant SQLite (Hanzo Base): BASE_PATH is the root for `${orgId}/sign.db`
+    // files; DATABASE_URL is the default single-file target for CLI / migrations.
+    BASE_PATH: string;
+    DATABASE_URL: string;
     NEXT_PRIVATE_ENCRYPTION_KEY: string;
     NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: string;
 
@@ -88,11 +91,6 @@ declare namespace NodeJS {
     INNGEST_SIGNING_KEY?: string;
     NEXT_PRIVATE_INNGEST_APP_ID?: string;
     NEXT_PRIVATE_INNGEST_EVENT_KEY?: string;
-
-    POSTGRES_URL?: string;
-    DATABASE_URL?: string;
-    POSTGRES_PRISMA_URL?: string;
-    POSTGRES_URL_NON_POOLING?: string;
 
     /**
      * Google Vertex AI environment variables

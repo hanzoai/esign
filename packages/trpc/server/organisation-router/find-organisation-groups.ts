@@ -60,7 +60,6 @@ export const findOrganisationGroups = async ({
   if (query) {
     whereClause.name = {
       contains: query,
-      mode: Prisma.QueryMode.insensitive,
     };
   }
 
