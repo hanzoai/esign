@@ -13,7 +13,7 @@ concurrency:
 jobs:
   extract_translations:
     name: Extract and upload translations
-    runs-on: ubuntu-latest
+    runs-on: hanzo-build-linux-amd64
     environment: Translations
     permissions:
       contents: write
