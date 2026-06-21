@@ -9,7 +9,7 @@ import type { Expression, ExpressionBuilder, SelectQueryBuilder, SqlBool } from 
 import { DateTime } from 'luxon';
 
 import type { PeriodSelectorValue } from '@hanzo/sign-lib/server-only/document/find-documents';
-import { kyselyPrisma, prisma, sql } from '@hanzo/sign-prisma';
+import { epochMs, kyselyPrisma, prisma, sql } from '@hanzo/sign-prisma';
 import type { DB } from '@hanzo/sign-prisma/generated/types';
 import { ExtendedDocumentStatus } from '@hanzo/sign-prisma/types/extended-document-status';
 
@@ -131,7 +131,7 @@ export const getStats = async ({
       const daysAgo = parseInt(period.replace(/d$/, ''), 10);
       const startOfPeriod = DateTime.now().minus({ days: daysAgo }).startOf('day');
 
-      qb = qb.where('Envelope.createdAt', '>=', startOfPeriod.toJSDate());
+      qb = qb.where('Envelope.createdAt', '>=', epochMs(startOfPeriod.toJSDate()));
     }
 
     // Sender filter
@@ -143,8 +143,8 @@ export const getStats = async ({
     if (hasSearch) {
       qb = qb.where(({ or, eb }) =>
         or([
-          eb('Envelope.title', 'ilike', searchPattern),
-          eb('Envelope.externalId', 'ilike', searchPattern),
+          eb('Envelope.title', 'like', searchPattern),
+          eb('Envelope.externalId', 'like', searchPattern),
           eb(
             'Envelope.id',
             'in',
@@ -153,8 +153,8 @@ export const getStats = async ({
               .select('Recipient.envelopeId')
               .where(({ or: innerOr, eb: innerEb }) =>
                 innerOr([
-                  innerEb('Recipient.email', 'ilike', searchPattern),
-                  innerEb('Recipient.name', 'ilike', searchPattern),
+                  innerEb('Recipient.email', 'like', searchPattern),
+                  innerEb('Recipient.name', 'like', searchPattern),
                 ]),
               )
               .distinct()

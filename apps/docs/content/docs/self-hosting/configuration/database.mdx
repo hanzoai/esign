@@ -1,188 +1,67 @@
 ---
 title: Database Configuration
-description: Configure PostgreSQL connection strings, pooling, SSL, migrations, and performance tuning for your Hanzo eSign deployment.
+description: Hanzo eSign stores all data in an embedded Base SQLite database — no external database server to provision, connect, or tune.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Callout } from 'fumadocs-ui/components/callout';
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
-## Supported Databases
+## Storage Model
 
-Hanzo eSign requires **PostgreSQL 14 or later**. No other databases are supported.
+Hanzo eSign stores all of its data in an **embedded SQLite database (Hanzo
+Base)** that lives on the application's persistent disk. There is **no external
+database server** to install, secure, pool, or back up over the network — the
+database is a single file under `BASE_PATH`, created automatically on first
+start.
 
-PostgreSQL provides the reliability, performance, and feature set required for document signing workflows, including:
-
-- ACID compliance for transaction integrity
-- JSON support for flexible metadata storage
-- Full-text search capabilities
-- Robust backup and replication options
-
-## Connection String Format
-
-PostgreSQL connection strings follow this format:
-
-```
-postgresql://[user]:[password]@[host]:[port]/[database]?[parameters]
-```
-
-### Components
-
-| Component    | Description                     | Example           |
-| ------------ | ------------------------------- | ----------------- |
-| `user`       | Database username               | `hanzo-sign`       |
-| `password`   | Database password (URL-encoded) | `secretpass`      |
-| `host`       | Database server hostname or IP  | `localhost`       |
-| `port`       | Database port                   | `5432`            |
-| `database`   | Database name                   | `hanzo-sign`       |
-| `parameters` | Additional connection options   | `sslmode=require` |
-
-### Examples
-
-**Local development:**
-
-```
-postgresql://hanzo-sign:password@localhost:5432/hanzo-sign
-```
-
-**Remote server with SSL:**
-
-```
-postgresql://hanzo-sign:password@db.example.com:5432/hanzo-sign?sslmode=require
-```
-
-**With special characters in password:**
-
-URL-encode special characters in passwords. For example, `p@ss#word` becomes `p%40ss%23word`:
-
-```
-postgresql://hanzo-sign:p%40ss%23word@localhost:5432/hanzo-sign
-```
-
-## Environment Variables
-
-Hanzo eSign uses two database connection variables:
-
-| Variable                           | Purpose                                             |
-| ---------------------------------- | --------------------------------------------------- |
-| `NEXT_PRIVATE_DATABASE_URL`        | Primary connection for application queries          |
-| `NEXT_PRIVATE_DIRECT_DATABASE_URL` | Direct connection for migrations and schema changes |
-
-### Basic Configuration
-
-When not using a connection pooler, set both variables to the same value:
-
-```bash
-NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@host:5432/hanzo-sign
-NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@host:5432/hanzo-sign
-```
-
-### Automatic Detection
-
-Hanzo eSign automatically detects common database environment variable formats used by hosting providers:
-
-| Provider Variable          | Maps To                            |
-| -------------------------- | ---------------------------------- |
-| `DATABASE_URL`             | `NEXT_PRIVATE_DATABASE_URL`        |
-| `POSTGRES_URL`             | `NEXT_PRIVATE_DATABASE_URL`        |
-| `POSTGRES_PRISMA_URL`      | `NEXT_PRIVATE_DATABASE_URL`        |
-| `DATABASE_URL_UNPOOLED`    | `NEXT_PRIVATE_DIRECT_DATABASE_URL` |
-| `POSTGRES_URL_NON_POOLING` | `NEXT_PRIVATE_DIRECT_DATABASE_URL` |
-
-If your hosting provider sets these variables, Hanzo eSign will use them automatically.
-
-## Connection Pooling
-
-Connection pooling improves performance by reusing database connections instead of creating new ones for each request.
-
-### When to Use Pooling
-
-Use connection pooling when:
-
-- Running multiple application instances
-- Deploying to serverless environments
-- Handling high concurrent request volumes
-- Your database has connection limits
-
-### PgBouncer Configuration
-
-When using PgBouncer or similar poolers, configure two connection strings:
-
-1. **Pooled connection** for application queries
-2. **Direct connection** for migrations (bypasses the pooler)
-
-```bash
-# Pooled connection (through PgBouncer)
-NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@pooler-host:6432/hanzo-sign?pgbouncer=true
-
-# Direct connection (bypasses PgBouncer)
-NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@db-host:5432/hanzo-sign
-```
-
-<Callout type="warn">
-  Migrations must use a direct connection. Running migrations through a connection pooler will fail.
+<Callout type="info">
+  Earlier releases required PostgreSQL. From this release onward, Hanzo eSign
+  ships with Base SQLite built in. If you are migrating an existing PostgreSQL
+  deployment, see [Migrating from PostgreSQL](#migrating-from-postgresql) below.
 </Callout>
 
-### Prisma Connection Pool
+This removes an entire tier from the self-hosting footprint:
 
-Hanzo eSign uses Prisma, which maintains its own connection pool. Configure pool size with connection string parameters:
+- No `docker-compose` database service, no managed-database bill.
+- No connection strings, poolers, or SSL certificates to manage.
+- Backups are ordinary file snapshots (see [Backups](#backups)).
+- Reads and writes are local — no network round-trip to a database host.
 
-```
-postgresql://user:password@host:5432/hanzo-sign?connection_limit=10&pool_timeout=30
-```
+## Configuration
 
-| Parameter          | Description                              | Default |
-| ------------------ | ---------------------------------------- | ------- |
-| `connection_limit` | Maximum connections in the pool          | 10      |
-| `pool_timeout`     | Seconds to wait for available connection | 10      |
+Two environment variables control where the database lives:
 
-## SSL/TLS Connections
+| Variable       | Purpose                                                       | Example                              |
+| -------------- | ------------------------------------------------------------- | ------------------------------------ |
+| `BASE_PATH`    | Directory root for Base data on the persistent disk.         | `/opt/hanzo-sign/base/data`          |
+| `DATABASE_URL` | The SQLite file URL. Defaults to a file under `BASE_PATH`.    | `file:/opt/hanzo-sign/base/data/_dev/sign.db` |
 
-### Enabling SSL
-
-Add SSL parameters to your connection string:
-
-```
-postgresql://user:password@host:5432/hanzo-sign?sslmode=require
-```
-
-### SSL Modes
-
-| Mode          | Description                                         |
-| ------------- | --------------------------------------------------- |
-| `disable`     | No SSL (not recommended for production)             |
-| `allow`       | Try non-SSL first, fall back to SSL                 |
-| `prefer`      | Try SSL first, fall back to non-SSL                 |
-| `require`     | Require SSL, but don't verify certificate           |
-| `verify-ca`   | Require SSL and verify server certificate           |
-| `verify-full` | Require SSL, verify certificate, and check hostname |
-
-For production, use `require` at minimum. Use `verify-full` when your CA certificate is available.
-
-### Custom Certificates
-
-When connecting to databases with self-signed or private CA certificates:
-
-```
-postgresql://user:password@host:5432/hanzo-sign?sslmode=verify-full&sslrootcert=/path/to/ca.crt
-```
-
-For Docker deployments, mount the certificate file:
+A typical configuration:
 
 ```bash
-docker run -d \
-  -v /path/to/ca.crt:/etc/ssl/certs/db-ca.crt:ro \
-  -e NEXT_PRIVATE_DATABASE_URL="postgresql://user:password@host:5432/hanzo-sign?sslmode=verify-full&sslrootcert=/etc/ssl/certs/db-ca.crt" \
-  hanzo-sign/hanzo-sign:latest
+BASE_PATH=/opt/hanzo-sign/base/data
+DATABASE_URL=file:/opt/hanzo-sign/base/data/_dev/sign.db
 ```
+
+The `file:` URL is the only form SQLite accepts. The application appends
+`connection_limit=1` automatically — SQLite serialises writes, so a single
+writer is correct and a larger pool only produces `SQLITE_BUSY`.
+
+<Callout type="warn">
+  `DATABASE_URL` must be an absolute `file:` path on a **persistent** volume.
+  Pointing it at ephemeral container storage loses all data on restart. In
+  Docker, mount a named volume at `BASE_PATH`.
+</Callout>
 
 ## Running Migrations
 
-Database migrations update your schema when upgrading Hanzo eSign.
+The schema is created and updated by migrations bundled with the application.
 
 ### Automatic Migrations
 
-When running Hanzo eSign via Docker, migrations run automatically on container startup. No manual intervention is required.
+When running Hanzo eSign via Docker, migrations run automatically on container
+startup against the SQLite file. No manual step is required — on a fresh disk
+the database is created and migrated before the app accepts traffic.
 
 ### Manual Migrations
 
@@ -196,287 +75,108 @@ npm run prisma:migrate-deploy
 npx prisma migrate deploy
 ```
 
-<Callout type="info">
-  Always back up your database before running migrations, especially for major version upgrades.
-</Callout>
-
-### Migration Commands
-
 | Command                 | Purpose                                   |
 | ----------------------- | ----------------------------------------- |
 | `prisma:migrate-deploy` | Apply pending migrations (production)     |
 | `prisma:migrate-dev`    | Create and apply migrations (development) |
-| `prisma:migrate-reset`  | Reset database and apply all migrations   |
+| `prisma:migrate-reset`  | Reset the database and apply all migrations |
 
-### Troubleshooting Migrations
-
-<Accordions type="multiple">
-  <Accordion title="Migration failed midway">
-    Check the `_prisma_migrations` table:
-    
-    ```sql
-    SELECT * FROM _prisma_migrations WHERE finished_at IS NULL;
-    ```
-
-    To retry, fix the underlying issue (disk space, permissions, etc.), mark as rolled back:
-
-    ```sql
-    UPDATE _prisma_migrations SET rolled_back_at = NOW() WHERE migration_name = 'failed_migration_name';
-    ```
-
-    Run migrations again.
-
-  </Accordion>
-  <Accordion title="Connection timeout during migration">
-    Use the direct database URL and increase timeout:
-    
-    ```bash
-    NEXT_PRIVATE_DIRECT_DATABASE_URL="postgresql://user:password@host:5432/hanzo-sign?connect_timeout=60"
-    ```
-  </Accordion>
-</Accordions>
-
-## Managed Database Services
-
-<Accordions type="multiple">
-  <Accordion title="Supabase">
-    Supabase provides PostgreSQL with built-in connection pooling via Supavisor.
-
-    **Configuration:**
-
-    ```bash
-    # Pooled connection (Session mode - port 5432)
-    NEXT_PRIVATE_DATABASE_URL=postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:5432/postgres
-
-    # Direct connection for migrations (port 5432, direct host)
-    NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://postgres:[password]@db.[project-ref].supabase.co:5432/postgres
-    ```
-
-    Find your connection strings in the Supabase dashboard under **Settings > Database > Connection string**.
-
-  </Accordion>
-  <Accordion title="Neon">
-    Neon provides serverless PostgreSQL with automatic scaling.
-
-    **Configuration:**
-
-    ```bash
-    # Pooled connection
-    NEXT_PRIVATE_DATABASE_URL=postgresql://[user]:[password]@[endpoint]-pooler.region.aws.neon.tech/hanzo-sign?sslmode=require
-
-    # Direct connection for migrations
-    NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://[user]:[password]@[endpoint].region.aws.neon.tech/hanzo-sign?sslmode=require
-    ```
-
-    The pooler endpoint includes `-pooler` in the hostname.
-
-  </Accordion>
-  <Accordion title="AWS RDS">
-    **Configuration:**
-
-    ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign:[password]@your-instance.region.rds.amazonaws.com:5432/hanzo-sign?sslmode=require
-    NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://hanzo-sign:[password]@your-instance.region.rds.amazonaws.com:5432/hanzo-sign?sslmode=require
-    ```
-
-    **Recommended settings:**
-
-    - Instance class: `db.t3.medium` or larger for production
-    - Storage: General Purpose SSD (gp3), minimum 20GB
-    - Enable automated backups with 7+ day retention
-    - Enable Multi-AZ for high availability
-
-  </Accordion>
-  <Accordion title="Google Cloud SQL">
-    **Configuration:**
-
-    ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign:[password]@/hanzo-sign?host=/cloudsql/[project]:[region]:[instance]
-    ```
-
-    When connecting via Cloud SQL Proxy, use Unix socket connections.
-
-    For public IP connections:
-
-    ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign:[password]@[public-ip]:5432/hanzo-sign?sslmode=require
-    ```
-
-  </Accordion>
-  <Accordion title="Azure Database for PostgreSQL">
-    **Configuration:**
-
-    ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign@[server-name]:[password]@[server-name].postgres.database.azure.com:5432/hanzo-sign?sslmode=require
-    ```
-
-    Note: Azure requires the username format `user@servername`.
-
-  </Accordion>
-  <Accordion title="DigitalOcean Managed Databases">
-    **Configuration:**
-
-    ```bash
-    NEXT_PRIVATE_DATABASE_URL=postgresql://doadmin:[password]@[cluster-host]:25060/hanzo-sign?sslmode=require
-    ```
-
-    DigitalOcean uses port 25060 by default and requires SSL.
-
-  </Accordion>
-</Accordions>
-
-## Backup Recommendations
-
-### Backup Strategies
-
-| Strategy               | Frequency    | Retention   | Use Case               |
-| ---------------------- | ------------ | ----------- | ---------------------- |
-| Automated snapshots    | Daily        | 7-30 days   | Point-in-time recovery |
-| Logical backups        | Daily/Weekly | 30-90 days  | Long-term retention    |
-| Continuous replication | Real-time    | 24-72 hours | Disaster recovery      |
-
-### PostgreSQL Backup Commands
-
-**Create a logical backup:**
-
-```bash
-pg_dump -h host -U user -d hanzo-sign -F c -f hanzo-sign_backup.dump
-```
-
-**Restore from backup:**
-
-```bash
-pg_restore -h host -U user -d hanzo-sign -c hanzo-sign_backup.dump
-```
-
-### Managed Service Backups
-
-Most managed database services provide automated backups:
-
-<Tabs items={['Supabase', 'Neon', 'AWS RDS', 'Google Cloud SQL', 'Azure']}>
-  <Tab value="Supabase">Daily backups with point-in-time recovery (Pro plan)</Tab>
-  <Tab value="Neon">Automatic branching for instant recovery</Tab>
-  <Tab value="AWS RDS">Automated backups with configurable retention</Tab>
-  <Tab value="Google Cloud SQL">Automated and on-demand backups</Tab>
-  <Tab value="Azure">Automatic backups with geo-redundancy options</Tab>
-</Tabs>
-
-<Callout type="warn">
-  Always test your backup restoration process. Untested backups may not work when needed.
+<Callout type="info">
+  Snapshot the SQLite file before running migrations for a major version
+  upgrade — a file copy is your rollback.
 </Callout>
 
-## Performance Tuning
+## Backups
 
-### PostgreSQL Configuration
+Because the database is a single file, backups are file snapshots — no
+`pg_dump`, no replication topology.
 
-Key parameters for Hanzo eSign workloads:
+### File Snapshot
 
-| Parameter              | Recommended Value | Description                           |
-| ---------------------- | ----------------- | ------------------------------------- |
-| `shared_buffers`       | 25% of RAM        | Memory for caching data               |
-| `effective_cache_size` | 75% of RAM        | Planner's estimate of available cache |
-| `work_mem`             | 64MB-256MB        | Memory per sort/hash operation        |
-| `maintenance_work_mem` | 512MB-1GB         | Memory for maintenance operations     |
-| `max_connections`      | 100-200           | Maximum concurrent connections        |
+Stop writes (or accept a crash-consistent copy under WAL) and copy the file:
 
-### Connection Limits
-
-Calculate your connection limit:
-
-```
-max_connections = (application_instances × connection_pool_size) + admin_overhead
+```bash
+# Crash-consistent online copy (includes the WAL):
+sqlite3 /opt/hanzo-sign/base/data/_dev/sign.db ".backup '/backups/sign-$(date +%F).db'"
 ```
 
-Example: 3 app instances with pool size 10 = `(3 × 10) + 10 = 40` connections minimum.
+The `.backup` command produces a consistent copy even while the app is running.
+A plain `cp` is safe only when the app is stopped.
 
-### Indexing
+### Restore
 
-Hanzo eSign includes necessary indexes by default. Additional indexes may help for:
+Stop the app, replace the file, restart:
 
-- Custom reporting queries
-- High-volume document searches
-- Audit log analysis
-
-Check for slow queries:
-
-```sql
-SELECT query, calls, mean_time, total_time
-FROM pg_stat_statements
-ORDER BY total_time DESC
-LIMIT 10;
+```bash
+cp /backups/sign-2026-06-21.db /opt/hanzo-sign/base/data/_dev/sign.db
 ```
 
-### Monitoring
+### Volume Snapshots
 
-Monitor these metrics:
+If `BASE_PATH` is on a managed volume (e.g. a cloud block device), the
+provider's volume snapshots back up the database along with uploaded documents.
+This is the simplest strategy for production: schedule daily volume snapshots
+with 7–30 day retention.
 
-| Metric               | Warning Threshold | Action                          |
-| -------------------- | ----------------- | ------------------------------- |
-| Connection usage     | > 80%             | Increase limits or add pooling  |
-| Disk usage           | > 80%             | Add storage or archive old data |
-| Cache hit ratio      | < 95%             | Increase `shared_buffers`       |
-| Long-running queries | > 30 seconds      | Optimize query or add indexes   |
+<Callout type="warn">
+  Always test restoration. An untested backup is not a backup.
+</Callout>
+
+## Migrating from PostgreSQL
+
+If you are upgrading a deployment that previously used PostgreSQL, copy your
+data into the new SQLite store **before** cutting over — a fresh deploy starts
+on an empty `sign.db`.
+
+A backfill script ships with the source tree:
+
+```bash
+PG_URL=postgresql://user:password@host:5432/sign \
+SQLITE_PATH=/opt/hanzo-sign/base/data/_dev/sign.db \
+MIGRATION_SQL=packages/prisma/migrations/0_init/migration.sql \
+npx tsx scripts/backfill-pg-to-sqlite.ts --fresh
+```
+
+The script is idempotent and resumable: it records per-table progress in a
+`_backfill_progress` control table, so an interrupted run continues where it
+left off. It JSON-encodes the array columns to match the SQLite storage format
+and preserves all ids and foreign keys.
+
+**Recommended cutover (maintenance window):**
+
+1. Stop the eSign app (drain in-flight requests).
+2. Run the backfill against the live PostgreSQL database.
+3. Set `DATABASE_URL` to the new `file:` path.
+4. Restart the app on SQLite and verify (sign in, list documents).
+5. Once verified, decommission PostgreSQL.
+
+For zero-downtime, run a blue/green cutover: stand up a SQLite-backed instance
+in parallel, backfill, flip the load balancer, then retire the PostgreSQL
+instance.
 
 ## Troubleshooting
 
 <Accordions type="multiple">
-  <Accordion title="Connection refused">
-    Causes:
-    - PostgreSQL not running
-    - Incorrect host or port
-    - Firewall blocking
-    
-    Solutions:
-    - Verify PostgreSQL is running with `pg_isready -h host -p 5432`
-    - Check the connection string
-    - Verify firewall rules
-    with `pg_isready -h host -p 5432`, check the connection string, verify firewall rules.
+  <Accordion title="SQLITE_BUSY / database is locked">
+    SQLite allows one writer at a time. This is expected under brief contention
+    and resolves on retry. Persistent locking usually means two processes are
+    writing the same file — ensure only ONE app instance owns a given
+    `DATABASE_URL`. Do not point multiple replicas at the same file over a
+    network share.
   </Accordion>
-  <Accordion title="Authentication failed">
-    Causes: 
-    - Incorrect password
-    - User doesn't exist
-    - Password contains special characters
-    
-    Solutions:
-    - Reset password with `ALTER USER hanzo-sign WITH PASSWORD 'newpassword';`
-    - Verify credentials in `pg_hba.conf`
-    - Verify URL-encoded special characters
+  <Accordion title="unable to open database file">
+    The directory in `DATABASE_URL` does not exist or is not writable. Ensure
+    `BASE_PATH` is mounted and writable by the app user, and that the path is
+    absolute. The app creates the file but not missing parent directories on
+    some platforms.
   </Accordion>
-  <Accordion title="SSL connection required">
-    Add SSL mode to your connection string:
-
-    ```bash
-    postgresql://user:password@host:5432/hanzo-sign?sslmode=require
-    ```
-
+  <Accordion title="Data disappeared after restart">
+    `DATABASE_URL` pointed at ephemeral storage. Move it onto a persistent
+    volume mounted at `BASE_PATH` and restore from your last snapshot.
   </Accordion>
-  <Accordion title="Too many connections">
-    Causes: 
-    - Connection pool exhausted
-    - Connections not released
-    - Multiple instances exceeding limits
-    
-    Solutions:
-    - Reduce `connection_limit`
-    - Increase `max_connections`
-    - Implement PgBouncer
-  </Accordion>
-  <Accordion title="Database does not exist">
-    Create the database:
-    
-    ```sql
-    CREATE DATABASE hanzo-sign;
-    GRANT ALL PRIVILEGES ON DATABASE hanzo-sign TO hanzo-sign;
-    ```
-  </Accordion>
-  <Accordion title="Permission denied">
-    Grant permissions:
-    
-    ```sql
-    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO hanzo-sign;
-    GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO hanzo-sign;
-    ```
+  <Accordion title="disk I/O error">
+    The persistent volume is full or failing. Check free space on `BASE_PATH`
+    and the volume's health.
   </Accordion>
 </Accordions>
 

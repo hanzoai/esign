@@ -46,7 +46,6 @@ export const findTeamGroups = async ({
       ...(query && {
         name: {
           contains: query,
-          mode: Prisma.QueryMode.insensitive,
         },
       }),
     },

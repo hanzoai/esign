@@ -895,7 +895,6 @@ export const adminRoutes: ZapRouteMap = {
     if (query && query.length > 0) {
       whereClause.name = {
         contains: query,
-        mode: Prisma.QueryMode.insensitive,
       };
     }
 
@@ -1044,7 +1043,9 @@ export const adminRoutes: ZapRouteMap = {
         where: {
           jobId: 'internal.seal-document',
           payload: {
-            path: ['documentId'],
+            // SQLite Json filter uses a JSONPath string (`$.documentId`),
+            // not Postgres' array form (`['documentId']`).
+            path: '$.documentId',
             equals: mapSecondaryIdToDocumentId(envelope.secondaryId),
           },
         },
@@ -1058,7 +1059,9 @@ export const adminRoutes: ZapRouteMap = {
         where: {
           jobId: 'internal.seal-document',
           payload: {
-            path: ['documentId'],
+            // SQLite Json filter uses a JSONPath string (`$.documentId`),
+            // not Postgres' array form (`['documentId']`).
+            path: '$.documentId',
             equals: mapSecondaryIdToDocumentId(envelope.secondaryId),
           },
         },
@@ -1149,14 +1152,12 @@ export const adminRoutes: ZapRouteMap = {
         {
           domain: {
             contains: query,
-            mode: Prisma.QueryMode.insensitive,
           },
         },
         {
           organisation: {
             name: {
               contains: query,
-              mode: Prisma.QueryMode.insensitive,
             },
           },
         },

@@ -1,25 +1,11 @@
 name: hanzo-sign-production
 
+# Embedded Base SQLite — one database file under BASE_PATH, persisted on the
+# `base` volume. There is no external database service. Tenant isolation is
+# row-level org/team scoping in the app, not a per-file split.
 services:
-  database:
-    image: postgres:15
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER:?err}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?err}
-      - POSTGRES_DB=${POSTGRES_DB:?err}
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER}']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - database:/var/lib/postgresql/data
-
   hanzo-sign:
     image: hanzo-sign/hanzo-sign:latest
-    depends_on:
-      database:
-        condition: service_healthy
     environment:
       - PORT=${PORT:-3000}
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET:?err}
@@ -29,8 +15,8 @@ services:
       - NEXT_PRIVATE_GOOGLE_CLIENT_SECRET=${NEXT_PRIVATE_GOOGLE_CLIENT_SECRET}
       - NEXT_PUBLIC_WEBAPP_URL=${NEXT_PUBLIC_WEBAPP_URL:?err}
       - NEXT_PRIVATE_INTERNAL_WEBAPP_URL=${NEXT_PRIVATE_INTERNAL_WEBAPP_URL:-http://localhost:$PORT}
-      - NEXT_PRIVATE_DATABASE_URL=${NEXT_PRIVATE_DATABASE_URL:?err}
-      - NEXT_PRIVATE_DIRECT_DATABASE_URL=${NEXT_PRIVATE_DIRECT_DATABASE_URL:-${NEXT_PRIVATE_DATABASE_URL}}
+      - BASE_PATH=${BASE_PATH:-/opt/hanzo-sign/base/data}
+      - DATABASE_URL=${DATABASE_URL:-file:/opt/hanzo-sign/base/data/sign.db}
       - NEXT_PUBLIC_UPLOAD_TRANSPORT=${NEXT_PUBLIC_UPLOAD_TRANSPORT:-database}
       - NEXT_PRIVATE_UPLOAD_ENDPOINT=${NEXT_PRIVATE_UPLOAD_ENDPOINT}
       - NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE=${NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE}
@@ -66,6 +52,7 @@ services:
       - ${PORT:-3000}:${PORT:-3000}
     volumes:
       - /opt/hanzo-sign/cert.p12:/opt/hanzo-sign/cert.p12:ro
+      - base:${BASE_PATH:-/opt/hanzo-sign/base/data}
 
 volumes:
-  database:
+  base:

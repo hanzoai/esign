@@ -70,3 +70,10 @@ scripts/output*
 
 # tmp
 tmp/
+
+# per-tenant SQLite (Hanzo Base) — runtime data, never committed
+base/data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm

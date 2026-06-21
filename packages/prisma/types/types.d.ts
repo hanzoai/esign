@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-namespace */
+import type { Role, WebhookTriggerEvents } from '@prisma/client';
+
 import type { TDefaultRecipient } from '@hanzo/sign-lib/types/default-recipients';
 import type {
   TDocumentAuthOptions,
@@ -29,6 +31,13 @@ declare global {
     type EnvelopeAttachmentType = TEnvelopeAttachmentType;
 
     type DefaultRecipient = TDefaultRecipient;
+
+    // List columns: SQLite has no array type, so these are stored as JSON
+    // `TEXT` and retyped to their element arrays in the client. The runtime
+    // JSON encode/decode lives in `../json-array.ts`.
+    type RoleList = Role[];
+    type WebhookTriggerEventList = WebhookTriggerEvents[];
+    type StringList = string[];
   }
 }
 
