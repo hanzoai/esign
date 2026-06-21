@@ -84,7 +84,7 @@ CREATE TABLE "VerificationToken" (
     "completed" BOOLEAN NOT NULL DEFAULT false,
     "expires" DATETIME NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "metadata" JSONB,
+    "metadata" TEXT,
     "userId" INTEGER NOT NULL,
     CONSTRAINT "VerificationToken_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -110,10 +110,10 @@ CREATE TABLE "WebhookCall" (
     "status" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "event" TEXT NOT NULL,
-    "requestBody" JSONB NOT NULL,
+    "requestBody" TEXT NOT NULL,
     "responseCode" INTEGER NOT NULL,
-    "responseHeaders" JSONB,
-    "responseBody" JSONB,
+    "responseHeaders" TEXT,
+    "responseBody" TEXT,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "webhookId" TEXT NOT NULL,
     CONSTRAINT "WebhookCall_webhookId_fkey" FOREIGN KEY ("webhookId") REFERENCES "Webhook" ("id") ON DELETE CASCADE ON UPDATE CASCADE
@@ -158,7 +158,7 @@ CREATE TABLE "SubscriptionClaim" (
     "teamCount" INTEGER NOT NULL,
     "memberCount" INTEGER NOT NULL,
     "envelopeItemCount" INTEGER NOT NULL,
-    "flags" JSONB NOT NULL
+    "flags" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -170,7 +170,7 @@ CREATE TABLE "OrganisationClaim" (
     "teamCount" INTEGER NOT NULL,
     "memberCount" INTEGER NOT NULL,
     "envelopeItemCount" INTEGER NOT NULL,
-    "flags" JSONB NOT NULL
+    "flags" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -240,8 +240,8 @@ CREATE TABLE "Envelope" (
     "qrToken" TEXT,
     "internalVersion" INTEGER NOT NULL,
     "useLegacyFieldInsertion" BOOLEAN NOT NULL DEFAULT false,
-    "authOptions" JSONB,
-    "formValues" JSONB,
+    "authOptions" TEXT,
+    "formValues" TEXT,
     "visibility" TEXT NOT NULL DEFAULT 'EVERYONE',
     "templateType" TEXT NOT NULL DEFAULT 'PRIVATE',
     "publicTitle" TEXT NOT NULL DEFAULT '',
@@ -274,7 +274,7 @@ CREATE TABLE "DocumentAuditLog" (
     "envelopeId" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "type" TEXT NOT NULL,
-    "data" JSONB NOT NULL,
+    "data" TEXT NOT NULL,
     "name" TEXT,
     "email" TEXT,
     "userId" INTEGER,
@@ -306,10 +306,10 @@ CREATE TABLE "DocumentMeta" (
     "drawSignatureEnabled" BOOLEAN NOT NULL DEFAULT true,
     "language" TEXT NOT NULL DEFAULT 'en',
     "distributionMethod" TEXT NOT NULL DEFAULT 'EMAIL',
-    "emailSettings" JSONB,
+    "emailSettings" TEXT,
     "emailReplyTo" TEXT,
     "emailId" TEXT,
-    "envelopeExpirationPeriod" JSONB
+    "envelopeExpirationPeriod" TEXT
 );
 
 -- CreateTable
@@ -336,7 +336,7 @@ CREATE TABLE "Recipient" (
     "expiresAt" DATETIME,
     "expirationNotifiedAt" DATETIME,
     "signedAt" DATETIME,
-    "authOptions" JSONB,
+    "authOptions" TEXT,
     "signingOrder" INTEGER,
     "rejectionReason" TEXT,
     "role" TEXT NOT NULL DEFAULT 'SIGNER',
@@ -361,7 +361,7 @@ CREATE TABLE "Field" (
     "height" DECIMAL NOT NULL DEFAULT -1,
     "customText" TEXT NOT NULL,
     "inserted" BOOLEAN NOT NULL,
-    "fieldMeta" JSONB,
+    "fieldMeta" TEXT,
     CONSTRAINT "Field_envelopeItemId_fkey" FOREIGN KEY ("envelopeItemId") REFERENCES "EnvelopeItem" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "Field_envelopeId_fkey" FOREIGN KEY ("envelopeId") REFERENCES "Envelope" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "Field_recipientId_fkey" FOREIGN KEY ("recipientId") REFERENCES "Recipient" ("id") ON DELETE CASCADE ON UPDATE CASCADE
@@ -477,15 +477,15 @@ CREATE TABLE "OrganisationGlobalSettings" (
     "typedSignatureEnabled" BOOLEAN NOT NULL DEFAULT true,
     "uploadSignatureEnabled" BOOLEAN NOT NULL DEFAULT true,
     "drawSignatureEnabled" BOOLEAN NOT NULL DEFAULT true,
-    "defaultRecipients" JSONB,
+    "defaultRecipients" TEXT,
     "emailId" TEXT,
     "emailReplyTo" TEXT,
-    "emailDocumentSettings" JSONB NOT NULL,
+    "emailDocumentSettings" TEXT NOT NULL,
     "brandingEnabled" BOOLEAN NOT NULL DEFAULT false,
     "brandingLogo" TEXT NOT NULL DEFAULT '',
     "brandingUrl" TEXT NOT NULL DEFAULT '',
     "brandingCompanyDetails" TEXT NOT NULL DEFAULT '',
-    "envelopeExpirationPeriod" JSONB,
+    "envelopeExpirationPeriod" TEXT,
     "aiFeaturesEnabled" BOOLEAN NOT NULL DEFAULT false,
     CONSTRAINT "OrganisationGlobalSettings_emailId_fkey" FOREIGN KEY ("emailId") REFERENCES "OrganisationEmail" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -504,15 +504,15 @@ CREATE TABLE "TeamGlobalSettings" (
     "typedSignatureEnabled" BOOLEAN,
     "uploadSignatureEnabled" BOOLEAN,
     "drawSignatureEnabled" BOOLEAN,
-    "defaultRecipients" JSONB,
+    "defaultRecipients" TEXT,
     "emailId" TEXT,
     "emailReplyTo" TEXT,
-    "emailDocumentSettings" JSONB,
+    "emailDocumentSettings" TEXT,
     "brandingEnabled" BOOLEAN,
     "brandingLogo" TEXT,
     "brandingUrl" TEXT,
     "brandingCompanyDetails" TEXT,
-    "envelopeExpirationPeriod" JSONB,
+    "envelopeExpirationPeriod" TEXT,
     "aiFeaturesEnabled" BOOLEAN,
     CONSTRAINT "TeamGlobalSettings_emailId_fkey" FOREIGN KEY ("emailId") REFERENCES "OrganisationEmail" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -567,7 +567,7 @@ CREATE TABLE "TemplateDirectLink" (
 CREATE TABLE "SiteSettings" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "enabled" BOOLEAN NOT NULL DEFAULT false,
-    "data" JSONB NOT NULL,
+    "data" TEXT NOT NULL,
     "lastModifiedByUserId" INTEGER,
     "lastModifiedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT "SiteSettings_lastModifiedByUserId_fkey" FOREIGN KEY ("lastModifiedByUserId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE
@@ -577,7 +577,7 @@ CREATE TABLE "SiteSettings" (
 CREATE TABLE "BackgroundJob" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "status" TEXT NOT NULL DEFAULT 'PENDING',
-    "payload" JSONB,
+    "payload" TEXT,
     "retried" INTEGER NOT NULL DEFAULT 0,
     "maxRetries" INTEGER NOT NULL DEFAULT 3,
     "jobId" TEXT NOT NULL,
@@ -594,7 +594,7 @@ CREATE TABLE "BackgroundJobTask" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'PENDING',
-    "result" JSONB,
+    "result" TEXT,
     "retried" INTEGER NOT NULL DEFAULT 0,
     "maxRetries" INTEGER NOT NULL DEFAULT 3,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -910,3 +910,434 @@ CREATE UNIQUE INDEX "OrganisationEmail_email_key" ON "OrganisationEmail"("email"
 -- CreateIndex
 CREATE INDEX "RateLimit_createdAt_idx" ON "RateLimit"("createdAt");
 
+
+-- enum domain enforcement (CHECK-equivalent) for SQLite.
+--
+-- Prisma 6 maps every enum to a bare `TEXT` column on the `sqlite` provider
+-- and emits NO CHECK constraint, so the 33 enum-typed columns below would
+-- otherwise accept arbitrary text — the same domain Postgres enforced with a
+-- native enum type is reconstructed here with BEFORE INSERT/UPDATE triggers.
+-- SQLite cannot ALTER TABLE ADD CONSTRAINT CHECK, so triggers are the one
+-- portable way to bolt a domain onto an existing table. Each trigger fails
+-- closed: a non-NULL value outside the enum set aborts the write.
+--
+-- Generated from schema.prisma enums by scripts/gen-enum-check-triggers.mjs.
+-- Re-run that script and replace this block if the enum set changes.
+
+DROP TRIGGER IF EXISTS "enum_User_identityProvider_insert";
+CREATE TRIGGER "enum_User_identityProvider_insert"
+  BEFORE INSERT ON "User"
+  FOR EACH ROW WHEN NEW."identityProvider" IS NOT NULL AND NEW."identityProvider" NOT IN ('DOCUMENSO', 'GOOGLE', 'OIDC')
+  BEGIN SELECT RAISE(ABORT, 'invalid IdentityProvider for User.identityProvider'); END;
+
+DROP TRIGGER IF EXISTS "enum_User_identityProvider_update";
+CREATE TRIGGER "enum_User_identityProvider_update"
+  BEFORE UPDATE ON "User"
+  FOR EACH ROW WHEN NEW."identityProvider" IS NOT NULL AND NEW."identityProvider" NOT IN ('DOCUMENSO', 'GOOGLE', 'OIDC')
+  BEGIN SELECT RAISE(ABORT, 'invalid IdentityProvider for User.identityProvider'); END;
+
+DROP TRIGGER IF EXISTS "enum_UserSecurityAuditLog_type_insert";
+CREATE TRIGGER "enum_UserSecurityAuditLog_type_insert"
+  BEFORE INSERT ON "UserSecurityAuditLog"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('ACCOUNT_PROFILE_UPDATE', 'ACCOUNT_SSO_LINK', 'ACCOUNT_SSO_UNLINK', 'ORGANISATION_SSO_LINK', 'ORGANISATION_SSO_UNLINK', 'AUTH_2FA_DISABLE', 'AUTH_2FA_ENABLE', 'PASSKEY_CREATED', 'PASSKEY_DELETED', 'PASSKEY_UPDATED', 'PASSWORD_RESET', 'PASSWORD_UPDATE', 'SESSION_REVOKED', 'SIGN_OUT', 'SIGN_IN', 'SIGN_IN_FAIL', 'SIGN_IN_2FA_FAIL', 'SIGN_IN_PASSKEY_FAIL')
+  BEGIN SELECT RAISE(ABORT, 'invalid UserSecurityAuditLogType for UserSecurityAuditLog.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_UserSecurityAuditLog_type_update";
+CREATE TRIGGER "enum_UserSecurityAuditLog_type_update"
+  BEFORE UPDATE ON "UserSecurityAuditLog"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('ACCOUNT_PROFILE_UPDATE', 'ACCOUNT_SSO_LINK', 'ACCOUNT_SSO_UNLINK', 'ORGANISATION_SSO_LINK', 'ORGANISATION_SSO_UNLINK', 'AUTH_2FA_DISABLE', 'AUTH_2FA_ENABLE', 'PASSKEY_CREATED', 'PASSKEY_DELETED', 'PASSKEY_UPDATED', 'PASSWORD_RESET', 'PASSWORD_UPDATE', 'SESSION_REVOKED', 'SIGN_OUT', 'SIGN_IN', 'SIGN_IN_FAIL', 'SIGN_IN_2FA_FAIL', 'SIGN_IN_PASSKEY_FAIL')
+  BEGIN SELECT RAISE(ABORT, 'invalid UserSecurityAuditLogType for UserSecurityAuditLog.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_WebhookCall_status_insert";
+CREATE TRIGGER "enum_WebhookCall_status_insert"
+  BEFORE INSERT ON "WebhookCall"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('SUCCESS', 'FAILED')
+  BEGIN SELECT RAISE(ABORT, 'invalid WebhookCallStatus for WebhookCall.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_WebhookCall_status_update";
+CREATE TRIGGER "enum_WebhookCall_status_update"
+  BEFORE UPDATE ON "WebhookCall"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('SUCCESS', 'FAILED')
+  BEGIN SELECT RAISE(ABORT, 'invalid WebhookCallStatus for WebhookCall.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_WebhookCall_event_insert";
+CREATE TRIGGER "enum_WebhookCall_event_insert"
+  BEFORE INSERT ON "WebhookCall"
+  FOR EACH ROW WHEN NEW."event" IS NOT NULL AND NEW."event" NOT IN ('DOCUMENT_CREATED', 'DOCUMENT_SENT', 'DOCUMENT_OPENED', 'DOCUMENT_SIGNED', 'DOCUMENT_COMPLETED', 'DOCUMENT_REJECTED', 'DOCUMENT_CANCELLED', 'RECIPIENT_EXPIRED')
+  BEGIN SELECT RAISE(ABORT, 'invalid WebhookTriggerEvents for WebhookCall.event'); END;
+
+DROP TRIGGER IF EXISTS "enum_WebhookCall_event_update";
+CREATE TRIGGER "enum_WebhookCall_event_update"
+  BEFORE UPDATE ON "WebhookCall"
+  FOR EACH ROW WHEN NEW."event" IS NOT NULL AND NEW."event" NOT IN ('DOCUMENT_CREATED', 'DOCUMENT_SENT', 'DOCUMENT_OPENED', 'DOCUMENT_SIGNED', 'DOCUMENT_COMPLETED', 'DOCUMENT_REJECTED', 'DOCUMENT_CANCELLED', 'RECIPIENT_EXPIRED')
+  BEGIN SELECT RAISE(ABORT, 'invalid WebhookTriggerEvents for WebhookCall.event'); END;
+
+DROP TRIGGER IF EXISTS "enum_ApiToken_algorithm_insert";
+CREATE TRIGGER "enum_ApiToken_algorithm_insert"
+  BEFORE INSERT ON "ApiToken"
+  FOR EACH ROW WHEN NEW."algorithm" IS NOT NULL AND NEW."algorithm" NOT IN ('SHA512')
+  BEGIN SELECT RAISE(ABORT, 'invalid ApiTokenAlgorithm for ApiToken.algorithm'); END;
+
+DROP TRIGGER IF EXISTS "enum_ApiToken_algorithm_update";
+CREATE TRIGGER "enum_ApiToken_algorithm_update"
+  BEFORE UPDATE ON "ApiToken"
+  FOR EACH ROW WHEN NEW."algorithm" IS NOT NULL AND NEW."algorithm" NOT IN ('SHA512')
+  BEGIN SELECT RAISE(ABORT, 'invalid ApiTokenAlgorithm for ApiToken.algorithm'); END;
+
+DROP TRIGGER IF EXISTS "enum_Subscription_status_insert";
+CREATE TRIGGER "enum_Subscription_status_insert"
+  BEFORE INSERT ON "Subscription"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('ACTIVE', 'PAST_DUE', 'INACTIVE')
+  BEGIN SELECT RAISE(ABORT, 'invalid SubscriptionStatus for Subscription.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_Subscription_status_update";
+CREATE TRIGGER "enum_Subscription_status_update"
+  BEFORE UPDATE ON "Subscription"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('ACTIVE', 'PAST_DUE', 'INACTIVE')
+  BEGIN SELECT RAISE(ABORT, 'invalid SubscriptionStatus for Subscription.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_Folder_visibility_insert";
+CREATE TRIGGER "enum_Folder_visibility_insert"
+  BEFORE INSERT ON "Folder"
+  FOR EACH ROW WHEN NEW."visibility" IS NOT NULL AND NEW."visibility" NOT IN ('EVERYONE', 'MANAGER_AND_ABOVE', 'ADMIN')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentVisibility for Folder.visibility'); END;
+
+DROP TRIGGER IF EXISTS "enum_Folder_visibility_update";
+CREATE TRIGGER "enum_Folder_visibility_update"
+  BEFORE UPDATE ON "Folder"
+  FOR EACH ROW WHEN NEW."visibility" IS NOT NULL AND NEW."visibility" NOT IN ('EVERYONE', 'MANAGER_AND_ABOVE', 'ADMIN')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentVisibility for Folder.visibility'); END;
+
+DROP TRIGGER IF EXISTS "enum_Folder_type_insert";
+CREATE TRIGGER "enum_Folder_type_insert"
+  BEFORE INSERT ON "Folder"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('DOCUMENT', 'TEMPLATE')
+  BEGIN SELECT RAISE(ABORT, 'invalid FolderType for Folder.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_Folder_type_update";
+CREATE TRIGGER "enum_Folder_type_update"
+  BEFORE UPDATE ON "Folder"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('DOCUMENT', 'TEMPLATE')
+  BEGIN SELECT RAISE(ABORT, 'invalid FolderType for Folder.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_type_insert";
+CREATE TRIGGER "enum_Envelope_type_insert"
+  BEFORE INSERT ON "Envelope"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('DOCUMENT', 'TEMPLATE')
+  BEGIN SELECT RAISE(ABORT, 'invalid EnvelopeType for Envelope.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_type_update";
+CREATE TRIGGER "enum_Envelope_type_update"
+  BEFORE UPDATE ON "Envelope"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('DOCUMENT', 'TEMPLATE')
+  BEGIN SELECT RAISE(ABORT, 'invalid EnvelopeType for Envelope.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_status_insert";
+CREATE TRIGGER "enum_Envelope_status_insert"
+  BEFORE INSERT ON "Envelope"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('DRAFT', 'PENDING', 'COMPLETED', 'REJECTED')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentStatus for Envelope.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_status_update";
+CREATE TRIGGER "enum_Envelope_status_update"
+  BEFORE UPDATE ON "Envelope"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('DRAFT', 'PENDING', 'COMPLETED', 'REJECTED')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentStatus for Envelope.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_source_insert";
+CREATE TRIGGER "enum_Envelope_source_insert"
+  BEFORE INSERT ON "Envelope"
+  FOR EACH ROW WHEN NEW."source" IS NOT NULL AND NEW."source" NOT IN ('DOCUMENT', 'TEMPLATE', 'TEMPLATE_DIRECT_LINK')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentSource for Envelope.source'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_source_update";
+CREATE TRIGGER "enum_Envelope_source_update"
+  BEFORE UPDATE ON "Envelope"
+  FOR EACH ROW WHEN NEW."source" IS NOT NULL AND NEW."source" NOT IN ('DOCUMENT', 'TEMPLATE', 'TEMPLATE_DIRECT_LINK')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentSource for Envelope.source'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_visibility_insert";
+CREATE TRIGGER "enum_Envelope_visibility_insert"
+  BEFORE INSERT ON "Envelope"
+  FOR EACH ROW WHEN NEW."visibility" IS NOT NULL AND NEW."visibility" NOT IN ('EVERYONE', 'MANAGER_AND_ABOVE', 'ADMIN')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentVisibility for Envelope.visibility'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_visibility_update";
+CREATE TRIGGER "enum_Envelope_visibility_update"
+  BEFORE UPDATE ON "Envelope"
+  FOR EACH ROW WHEN NEW."visibility" IS NOT NULL AND NEW."visibility" NOT IN ('EVERYONE', 'MANAGER_AND_ABOVE', 'ADMIN')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentVisibility for Envelope.visibility'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_templateType_insert";
+CREATE TRIGGER "enum_Envelope_templateType_insert"
+  BEFORE INSERT ON "Envelope"
+  FOR EACH ROW WHEN NEW."templateType" IS NOT NULL AND NEW."templateType" NOT IN ('PUBLIC', 'PRIVATE')
+  BEGIN SELECT RAISE(ABORT, 'invalid TemplateType for Envelope.templateType'); END;
+
+DROP TRIGGER IF EXISTS "enum_Envelope_templateType_update";
+CREATE TRIGGER "enum_Envelope_templateType_update"
+  BEFORE UPDATE ON "Envelope"
+  FOR EACH ROW WHEN NEW."templateType" IS NOT NULL AND NEW."templateType" NOT IN ('PUBLIC', 'PRIVATE')
+  BEGIN SELECT RAISE(ABORT, 'invalid TemplateType for Envelope.templateType'); END;
+
+DROP TRIGGER IF EXISTS "enum_DocumentData_type_insert";
+CREATE TRIGGER "enum_DocumentData_type_insert"
+  BEFORE INSERT ON "DocumentData"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('S3_PATH', 'BYTES', 'BYTES_64')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentDataType for DocumentData.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_DocumentData_type_update";
+CREATE TRIGGER "enum_DocumentData_type_update"
+  BEFORE UPDATE ON "DocumentData"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('S3_PATH', 'BYTES', 'BYTES_64')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentDataType for DocumentData.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_DocumentMeta_signingOrder_insert";
+CREATE TRIGGER "enum_DocumentMeta_signingOrder_insert"
+  BEFORE INSERT ON "DocumentMeta"
+  FOR EACH ROW WHEN NEW."signingOrder" IS NOT NULL AND NEW."signingOrder" NOT IN ('PARALLEL', 'SEQUENTIAL')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentSigningOrder for DocumentMeta.signingOrder'); END;
+
+DROP TRIGGER IF EXISTS "enum_DocumentMeta_signingOrder_update";
+CREATE TRIGGER "enum_DocumentMeta_signingOrder_update"
+  BEFORE UPDATE ON "DocumentMeta"
+  FOR EACH ROW WHEN NEW."signingOrder" IS NOT NULL AND NEW."signingOrder" NOT IN ('PARALLEL', 'SEQUENTIAL')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentSigningOrder for DocumentMeta.signingOrder'); END;
+
+DROP TRIGGER IF EXISTS "enum_DocumentMeta_distributionMethod_insert";
+CREATE TRIGGER "enum_DocumentMeta_distributionMethod_insert"
+  BEFORE INSERT ON "DocumentMeta"
+  FOR EACH ROW WHEN NEW."distributionMethod" IS NOT NULL AND NEW."distributionMethod" NOT IN ('EMAIL', 'NONE')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentDistributionMethod for DocumentMeta.distributionMethod'); END;
+
+DROP TRIGGER IF EXISTS "enum_DocumentMeta_distributionMethod_update";
+CREATE TRIGGER "enum_DocumentMeta_distributionMethod_update"
+  BEFORE UPDATE ON "DocumentMeta"
+  FOR EACH ROW WHEN NEW."distributionMethod" IS NOT NULL AND NEW."distributionMethod" NOT IN ('EMAIL', 'NONE')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentDistributionMethod for DocumentMeta.distributionMethod'); END;
+
+DROP TRIGGER IF EXISTS "enum_Recipient_role_insert";
+CREATE TRIGGER "enum_Recipient_role_insert"
+  BEFORE INSERT ON "Recipient"
+  FOR EACH ROW WHEN NEW."role" IS NOT NULL AND NEW."role" NOT IN ('CC', 'SIGNER', 'VIEWER', 'APPROVER', 'ASSISTANT')
+  BEGIN SELECT RAISE(ABORT, 'invalid RecipientRole for Recipient.role'); END;
+
+DROP TRIGGER IF EXISTS "enum_Recipient_role_update";
+CREATE TRIGGER "enum_Recipient_role_update"
+  BEFORE UPDATE ON "Recipient"
+  FOR EACH ROW WHEN NEW."role" IS NOT NULL AND NEW."role" NOT IN ('CC', 'SIGNER', 'VIEWER', 'APPROVER', 'ASSISTANT')
+  BEGIN SELECT RAISE(ABORT, 'invalid RecipientRole for Recipient.role'); END;
+
+DROP TRIGGER IF EXISTS "enum_Recipient_readStatus_insert";
+CREATE TRIGGER "enum_Recipient_readStatus_insert"
+  BEFORE INSERT ON "Recipient"
+  FOR EACH ROW WHEN NEW."readStatus" IS NOT NULL AND NEW."readStatus" NOT IN ('NOT_OPENED', 'OPENED')
+  BEGIN SELECT RAISE(ABORT, 'invalid ReadStatus for Recipient.readStatus'); END;
+
+DROP TRIGGER IF EXISTS "enum_Recipient_readStatus_update";
+CREATE TRIGGER "enum_Recipient_readStatus_update"
+  BEFORE UPDATE ON "Recipient"
+  FOR EACH ROW WHEN NEW."readStatus" IS NOT NULL AND NEW."readStatus" NOT IN ('NOT_OPENED', 'OPENED')
+  BEGIN SELECT RAISE(ABORT, 'invalid ReadStatus for Recipient.readStatus'); END;
+
+DROP TRIGGER IF EXISTS "enum_Recipient_signingStatus_insert";
+CREATE TRIGGER "enum_Recipient_signingStatus_insert"
+  BEFORE INSERT ON "Recipient"
+  FOR EACH ROW WHEN NEW."signingStatus" IS NOT NULL AND NEW."signingStatus" NOT IN ('NOT_SIGNED', 'SIGNED', 'REJECTED')
+  BEGIN SELECT RAISE(ABORT, 'invalid SigningStatus for Recipient.signingStatus'); END;
+
+DROP TRIGGER IF EXISTS "enum_Recipient_signingStatus_update";
+CREATE TRIGGER "enum_Recipient_signingStatus_update"
+  BEFORE UPDATE ON "Recipient"
+  FOR EACH ROW WHEN NEW."signingStatus" IS NOT NULL AND NEW."signingStatus" NOT IN ('NOT_SIGNED', 'SIGNED', 'REJECTED')
+  BEGIN SELECT RAISE(ABORT, 'invalid SigningStatus for Recipient.signingStatus'); END;
+
+DROP TRIGGER IF EXISTS "enum_Recipient_sendStatus_insert";
+CREATE TRIGGER "enum_Recipient_sendStatus_insert"
+  BEFORE INSERT ON "Recipient"
+  FOR EACH ROW WHEN NEW."sendStatus" IS NOT NULL AND NEW."sendStatus" NOT IN ('NOT_SENT', 'SENT')
+  BEGIN SELECT RAISE(ABORT, 'invalid SendStatus for Recipient.sendStatus'); END;
+
+DROP TRIGGER IF EXISTS "enum_Recipient_sendStatus_update";
+CREATE TRIGGER "enum_Recipient_sendStatus_update"
+  BEFORE UPDATE ON "Recipient"
+  FOR EACH ROW WHEN NEW."sendStatus" IS NOT NULL AND NEW."sendStatus" NOT IN ('NOT_SENT', 'SENT')
+  BEGIN SELECT RAISE(ABORT, 'invalid SendStatus for Recipient.sendStatus'); END;
+
+DROP TRIGGER IF EXISTS "enum_Field_type_insert";
+CREATE TRIGGER "enum_Field_type_insert"
+  BEFORE INSERT ON "Field"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('SIGNATURE', 'FREE_SIGNATURE', 'INITIALS', 'NAME', 'EMAIL', 'DATE', 'TEXT', 'NUMBER', 'RADIO', 'CHECKBOX', 'DROPDOWN')
+  BEGIN SELECT RAISE(ABORT, 'invalid FieldType for Field.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_Field_type_update";
+CREATE TRIGGER "enum_Field_type_update"
+  BEFORE UPDATE ON "Field"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('SIGNATURE', 'FREE_SIGNATURE', 'INITIALS', 'NAME', 'EMAIL', 'DATE', 'TEXT', 'NUMBER', 'RADIO', 'CHECKBOX', 'DROPDOWN')
+  BEGIN SELECT RAISE(ABORT, 'invalid FieldType for Field.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_Organisation_type_insert";
+CREATE TRIGGER "enum_Organisation_type_insert"
+  BEFORE INSERT ON "Organisation"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('PERSONAL', 'ORGANISATION')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationType for Organisation.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_Organisation_type_update";
+CREATE TRIGGER "enum_Organisation_type_update"
+  BEFORE UPDATE ON "Organisation"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('PERSONAL', 'ORGANISATION')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationType for Organisation.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationMemberInvite_status_insert";
+CREATE TRIGGER "enum_OrganisationMemberInvite_status_insert"
+  BEFORE INSERT ON "OrganisationMemberInvite"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('ACCEPTED', 'PENDING', 'DECLINED')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberInviteStatus for OrganisationMemberInvite.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationMemberInvite_status_update";
+CREATE TRIGGER "enum_OrganisationMemberInvite_status_update"
+  BEFORE UPDATE ON "OrganisationMemberInvite"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('ACCEPTED', 'PENDING', 'DECLINED')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberInviteStatus for OrganisationMemberInvite.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationMemberInvite_organisationRole_insert";
+CREATE TRIGGER "enum_OrganisationMemberInvite_organisationRole_insert"
+  BEFORE INSERT ON "OrganisationMemberInvite"
+  FOR EACH ROW WHEN NEW."organisationRole" IS NOT NULL AND NEW."organisationRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberRole for OrganisationMemberInvite.organisationRole'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationMemberInvite_organisationRole_update";
+CREATE TRIGGER "enum_OrganisationMemberInvite_organisationRole_update"
+  BEFORE UPDATE ON "OrganisationMemberInvite"
+  FOR EACH ROW WHEN NEW."organisationRole" IS NOT NULL AND NEW."organisationRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberRole for OrganisationMemberInvite.organisationRole'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationGroup_type_insert";
+CREATE TRIGGER "enum_OrganisationGroup_type_insert"
+  BEFORE INSERT ON "OrganisationGroup"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('INTERNAL_ORGANISATION', 'INTERNAL_TEAM', 'CUSTOM')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationGroupType for OrganisationGroup.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationGroup_type_update";
+CREATE TRIGGER "enum_OrganisationGroup_type_update"
+  BEFORE UPDATE ON "OrganisationGroup"
+  FOR EACH ROW WHEN NEW."type" IS NOT NULL AND NEW."type" NOT IN ('INTERNAL_ORGANISATION', 'INTERNAL_TEAM', 'CUSTOM')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationGroupType for OrganisationGroup.type'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationGroup_organisationRole_insert";
+CREATE TRIGGER "enum_OrganisationGroup_organisationRole_insert"
+  BEFORE INSERT ON "OrganisationGroup"
+  FOR EACH ROW WHEN NEW."organisationRole" IS NOT NULL AND NEW."organisationRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberRole for OrganisationGroup.organisationRole'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationGroup_organisationRole_update";
+CREATE TRIGGER "enum_OrganisationGroup_organisationRole_update"
+  BEFORE UPDATE ON "OrganisationGroup"
+  FOR EACH ROW WHEN NEW."organisationRole" IS NOT NULL AND NEW."organisationRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberRole for OrganisationGroup.organisationRole'); END;
+
+DROP TRIGGER IF EXISTS "enum_TeamGroup_teamRole_insert";
+CREATE TRIGGER "enum_TeamGroup_teamRole_insert"
+  BEFORE INSERT ON "TeamGroup"
+  FOR EACH ROW WHEN NEW."teamRole" IS NOT NULL AND NEW."teamRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
+  BEGIN SELECT RAISE(ABORT, 'invalid TeamMemberRole for TeamGroup.teamRole'); END;
+
+DROP TRIGGER IF EXISTS "enum_TeamGroup_teamRole_update";
+CREATE TRIGGER "enum_TeamGroup_teamRole_update"
+  BEFORE UPDATE ON "TeamGroup"
+  FOR EACH ROW WHEN NEW."teamRole" IS NOT NULL AND NEW."teamRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
+  BEGIN SELECT RAISE(ABORT, 'invalid TeamMemberRole for TeamGroup.teamRole'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationGlobalSettings_documentVisibility_insert";
+CREATE TRIGGER "enum_OrganisationGlobalSettings_documentVisibility_insert"
+  BEFORE INSERT ON "OrganisationGlobalSettings"
+  FOR EACH ROW WHEN NEW."documentVisibility" IS NOT NULL AND NEW."documentVisibility" NOT IN ('EVERYONE', 'MANAGER_AND_ABOVE', 'ADMIN')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentVisibility for OrganisationGlobalSettings.documentVisibility'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationGlobalSettings_documentVisibility_update";
+CREATE TRIGGER "enum_OrganisationGlobalSettings_documentVisibility_update"
+  BEFORE UPDATE ON "OrganisationGlobalSettings"
+  FOR EACH ROW WHEN NEW."documentVisibility" IS NOT NULL AND NEW."documentVisibility" NOT IN ('EVERYONE', 'MANAGER_AND_ABOVE', 'ADMIN')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentVisibility for OrganisationGlobalSettings.documentVisibility'); END;
+
+DROP TRIGGER IF EXISTS "enum_TeamGlobalSettings_documentVisibility_insert";
+CREATE TRIGGER "enum_TeamGlobalSettings_documentVisibility_insert"
+  BEFORE INSERT ON "TeamGlobalSettings"
+  FOR EACH ROW WHEN NEW."documentVisibility" IS NOT NULL AND NEW."documentVisibility" NOT IN ('EVERYONE', 'MANAGER_AND_ABOVE', 'ADMIN')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentVisibility for TeamGlobalSettings.documentVisibility'); END;
+
+DROP TRIGGER IF EXISTS "enum_TeamGlobalSettings_documentVisibility_update";
+CREATE TRIGGER "enum_TeamGlobalSettings_documentVisibility_update"
+  BEFORE UPDATE ON "TeamGlobalSettings"
+  FOR EACH ROW WHEN NEW."documentVisibility" IS NOT NULL AND NEW."documentVisibility" NOT IN ('EVERYONE', 'MANAGER_AND_ABOVE', 'ADMIN')
+  BEGIN SELECT RAISE(ABORT, 'invalid DocumentVisibility for TeamGlobalSettings.documentVisibility'); END;
+
+DROP TRIGGER IF EXISTS "enum_BackgroundJob_status_insert";
+CREATE TRIGGER "enum_BackgroundJob_status_insert"
+  BEFORE INSERT ON "BackgroundJob"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED')
+  BEGIN SELECT RAISE(ABORT, 'invalid BackgroundJobStatus for BackgroundJob.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_BackgroundJob_status_update";
+CREATE TRIGGER "enum_BackgroundJob_status_update"
+  BEFORE UPDATE ON "BackgroundJob"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED')
+  BEGIN SELECT RAISE(ABORT, 'invalid BackgroundJobStatus for BackgroundJob.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_BackgroundJobTask_status_insert";
+CREATE TRIGGER "enum_BackgroundJobTask_status_insert"
+  BEFORE INSERT ON "BackgroundJobTask"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('PENDING', 'COMPLETED', 'FAILED')
+  BEGIN SELECT RAISE(ABORT, 'invalid BackgroundJobTaskStatus for BackgroundJobTask.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_BackgroundJobTask_status_update";
+CREATE TRIGGER "enum_BackgroundJobTask_status_update"
+  BEFORE UPDATE ON "BackgroundJobTask"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('PENDING', 'COMPLETED', 'FAILED')
+  BEGIN SELECT RAISE(ABORT, 'invalid BackgroundJobTaskStatus for BackgroundJobTask.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_EmailDomain_status_insert";
+CREATE TRIGGER "enum_EmailDomain_status_insert"
+  BEFORE INSERT ON "EmailDomain"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('PENDING', 'ACTIVE')
+  BEGIN SELECT RAISE(ABORT, 'invalid EmailDomainStatus for EmailDomain.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_EmailDomain_status_update";
+CREATE TRIGGER "enum_EmailDomain_status_update"
+  BEFORE UPDATE ON "EmailDomain"
+  FOR EACH ROW WHEN NEW."status" IS NOT NULL AND NEW."status" NOT IN ('PENDING', 'ACTIVE')
+  BEGIN SELECT RAISE(ABORT, 'invalid EmailDomainStatus for EmailDomain.status'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationAuthenticationPortal_defaultOrganisationRole_insert";
+CREATE TRIGGER "enum_OrganisationAuthenticationPortal_defaultOrganisationRole_insert"
+  BEFORE INSERT ON "OrganisationAuthenticationPortal"
+  FOR EACH ROW WHEN NEW."defaultOrganisationRole" IS NOT NULL AND NEW."defaultOrganisationRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberRole for OrganisationAuthenticationPortal.defaultOrganisationRole'); END;
+
+DROP TRIGGER IF EXISTS "enum_OrganisationAuthenticationPortal_defaultOrganisationRole_update";
+CREATE TRIGGER "enum_OrganisationAuthenticationPortal_defaultOrganisationRole_update"
+  BEFORE UPDATE ON "OrganisationAuthenticationPortal"
+  FOR EACH ROW WHEN NEW."defaultOrganisationRole" IS NOT NULL AND NEW."defaultOrganisationRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
+  BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberRole for OrganisationAuthenticationPortal.defaultOrganisationRole'); END;
+
+-- User.roles is a JSON-encoded Role[] (SQLite has no array type). Enforce that
+-- every element is a known Role: json_each expands the array, and the guard
+-- aborts if any element is outside the Role domain. Auth-relevant: a fabricated
+-- role can never be persisted. (Role values are mirrored from schema.prisma's enum Role.)
+DROP TRIGGER IF EXISTS "enum_User_roles_insert";
+CREATE TRIGGER "enum_User_roles_insert"
+  BEFORE INSERT ON "User"
+  FOR EACH ROW
+  WHEN NEW."roles" IS NOT NULL AND EXISTS (
+    SELECT 1 FROM json_each(NEW."roles") WHERE value NOT IN ('ADMIN', 'USER')
+  )
+  BEGIN SELECT RAISE(ABORT, 'invalid Role in User.roles'); END;
+
+DROP TRIGGER IF EXISTS "enum_User_roles_update";
+CREATE TRIGGER "enum_User_roles_update"
+  BEFORE UPDATE ON "User"
+  FOR EACH ROW
+  WHEN NEW."roles" IS NOT NULL AND EXISTS (
+    SELECT 1 FROM json_each(NEW."roles") WHERE value NOT IN ('ADMIN', 'USER')
+  )
+  BEGIN SELECT RAISE(ABORT, 'invalid Role in User.roles'); END;

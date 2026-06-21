@@ -7,8 +7,8 @@ services:
     startCommand: npx prisma migrate deploy --schema packages/prisma/schema.prisma && npx turbo run start --filter=@hanzo/sign-remix
     healthCheckPath: /api/health
 
-    # Per-tenant SQLite via Hanzo Base lives on a persistent disk; each org's
-    # `sign.db` is created on demand under BASE_PATH.
+    # The embedded Base SQLite database lives on a persistent disk; `sign.db`
+    # is created on demand under BASE_PATH on first start.
     disk:
       name: hanzo-sign-base
       mountPath: /opt/hanzo-sign/base/data
@@ -31,11 +31,11 @@ services:
       - key: NEXTAUTH_SECRET
         generateValue: true
 
-      # Database — per-tenant SQLite under the persistent disk's BASE_PATH.
+      # Database — embedded Base SQLite under the persistent disk's BASE_PATH.
       - key: BASE_PATH
         value: /opt/hanzo-sign/base/data
       - key: DATABASE_URL
-        value: file:/opt/hanzo-sign/base/data/_dev/sign.db
+        value: file:/opt/hanzo-sign/base/data/sign.db
 
       # URLs
       - key: NEXT_PUBLIC_WEBAPP_URL

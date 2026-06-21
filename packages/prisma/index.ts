@@ -6,14 +6,14 @@ import kyselyExtension from 'prisma-extension-kysely';
 
 import type { DB } from './generated/types';
 import { decodeList, encodeListFields } from './json-array';
-import { tenantCacheKey, tenantDatabaseUrl } from './tenant';
+import { databaseUrl } from './tenant';
 import { remember } from './utils/remember';
 
 /**
- * Per-tenant SQLite (Hanzo Base). One client per org, cached by the active
- * tenant context. See `./tenant.ts` for how the org → file URL is resolved.
- * The default (`__default__`) client is bound to `DATABASE_URL` and serves
- * CLI / job / dev access that runs without a tenant context.
+ * Base SQLite store. One process-wide Prisma client bound to `DATABASE_URL`
+ * (see `./tenant.ts`). Tenant isolation is row-level org/team scoping in the
+ * `server-only/*` handlers, not a per-connection database — identity is global
+ * here (a user spans many orgs), so the database cannot be chosen per request.
  */
 
 // --- list-field codec extension -------------------------------------------
@@ -64,41 +64,40 @@ const listFieldExtension = Prisma.defineExtension({
     },
     organisationAuthenticationPortal: {
       $allOperations: ({ args, query }) => (
-        encodeListFields('OrganisationAuthenticationPortal', args), query(args)
+        encodeListFields('OrganisationAuthenticationPortal', args),
+        query(args)
       ),
     },
   },
 });
 
 const buildClient = () =>
-  new PrismaClient({ datasourceUrl: tenantDatabaseUrl() }).$extends(listFieldExtension);
+  new PrismaClient({ datasourceUrl: databaseUrl() }).$extends(listFieldExtension);
 
-/** The org-bound client type, carrying the list-field array result types. */
+/** The extended client type, carrying the list-field array result types. */
 export type ExtendedPrismaClient = ReturnType<typeof buildClient>;
 
-/** Resolve the client for the active tenant, lazily creating + caching. */
-const tenantClient = (): ExtendedPrismaClient =>
-  remember(`prisma:${tenantCacheKey()}`, buildClient);
+/** The single process-wide client, built + memoised on first use. */
+const client = (): ExtendedPrismaClient => remember('prisma', buildClient);
 
-// Stable accessor proxy: every property access routes to the current tenant's
-// client, so the 300+ `prisma.foo.bar()` call sites need no changes and yet
-// each request reads/writes only its own org's SQLite file.
+// Accessor proxy so importing this module does NOT open a DB connection — the
+// client is constructed lazily on the first property access. This keeps `import
+// { prisma }` side-effect-free for tooling/tests and lets DATABASE_URL be set
+// before the first query. The 300+ `prisma.foo.bar()` call sites are unchanged.
 export const prisma: ExtendedPrismaClient = new Proxy({} as ExtendedPrismaClient, {
-  get(_target, prop, receiver) {
-    const client = tenantClient();
-    const value = Reflect.get(client as object, prop, receiver);
-
-    return typeof value === 'function' ? value.bind(client) : value;
+  get(_t, prop, receiver) {
+    const c = client();
+    const value = Reflect.get(c as object, prop, receiver);
+    return typeof value === 'function' ? value.bind(c) : value;
   },
-  has(_target, prop) {
-    return Reflect.has(tenantClient() as object, prop);
+  has(_t, prop) {
+    return Reflect.has(client() as object, prop);
   },
 }) as ExtendedPrismaClient;
 
-// Kysely over the same per-tenant client, with the SQLite dialect. Cached
-// per tenant alongside its `PrismaClient`.
+// Kysely over the same client, with the SQLite dialect. Also lazy.
 const buildKysely = () =>
-  tenantClient().$extends(
+  client().$extends(
     kyselyExtension({
       kysely: (driver) =>
         new Kysely<DB>({
@@ -115,14 +114,13 @@ const buildKysely = () =>
 type KyselyClient = ReturnType<typeof buildKysely>;
 
 export const kyselyPrisma: KyselyClient = new Proxy({} as KyselyClient, {
-  get(_target, prop, receiver) {
-    const client = remember(`kyselyPrisma:${tenantCacheKey()}`, buildKysely);
-    const value = Reflect.get(client as object, prop, receiver);
-
-    return typeof value === 'function' ? value.bind(client) : value;
+  get(_t, prop, receiver) {
+    const c = remember('kyselyPrisma', buildKysely);
+    const value = Reflect.get(c as object, prop, receiver);
+    return typeof value === 'function' ? value.bind(c) : value;
   },
 }) as KyselyClient;
 
 export { sql } from 'kysely';
 export { monthTrunc, epochMs } from './sqlite-sql';
-export { runWithTenant, getTenantOrgId, tenantDbFile } from './tenant';
+export { assertValidOrgId } from './tenant';
