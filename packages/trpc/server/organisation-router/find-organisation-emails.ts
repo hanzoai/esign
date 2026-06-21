@@ -43,7 +43,6 @@ export const findOrganisationEmails = async ({
   if (query) {
     whereClause.email = {
       contains: query,
-      mode: Prisma.QueryMode.insensitive,
     };
   }
 

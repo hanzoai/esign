@@ -35,7 +35,6 @@ export const findPasskeys = async ({
   if (query.length > 0) {
     whereClause.name = {
       contains: query,
-      mode: Prisma.QueryMode.insensitive,
     };
   }
 

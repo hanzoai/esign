@@ -2,7 +2,7 @@ import type { DocumentStatus } from '@prisma/client';
 import { EnvelopeType } from '@prisma/client';
 
 import type { DateRange } from '@hanzo/sign-lib/types/search-params';
-import { kyselyPrisma, sql } from '@hanzo/sign-prisma';
+import { epochMs, kyselyPrisma, sql } from '@hanzo/sign-prisma';
 
 export type OrganisationSummary = {
   totalTeams: number;
@@ -22,21 +22,24 @@ export type OrganisationDetailedInsights = {
   summary?: OrganisationSummary;
 };
 
+// `createdAt` / `completedAt` are the epoch-ms `DateTime` columns as Kysely
+// surfaces them for SQLite (string); the client tables wrap each in `new Date(...)`
+// before formatting, so the wire type is the queried string.
 export type TeamInsights = {
   id: number;
   name: string;
-  memberCount: number;
-  documentCount: number;
-  createdAt: Date;
+  memberCount: number | null;
+  documentCount: number | null;
+  createdAt: string;
 };
 
 export type UserInsights = {
   id: number;
   name: string;
   email: string;
-  documentCount: number;
-  signedDocumentCount: number;
-  createdAt: Date;
+  documentCount: number | null;
+  signedDocumentCount: number | null;
+  createdAt: string;
 };
 
 export type DocumentInsights = {
@@ -44,8 +47,8 @@ export type DocumentInsights = {
   title: string;
   status: DocumentStatus;
   teamName: string;
-  createdAt: Date;
-  completedAt: Date | null;
+  createdAt: string;
+  completedAt: string | null;
 };
 
 export type GetOrganisationDetailedInsightsOptions = {
@@ -134,7 +137,7 @@ async function getTeamInsights(
         .whereRef('e.teamId', '=', 't.id')
         .where('e.deletedAt', 'is', null)
         .where('e.type', '=', sql.lit(EnvelopeType.DOCUMENT))
-        .$if(!!createdAtFrom, (qb) => qb.where('e.createdAt', '>=', createdAtFrom!))
+        .$if(!!createdAtFrom, (qb) => qb.where('e.createdAt', '>=', epochMs(createdAtFrom!)))
         .select(sql<number>`count(e.id)`.as('count'))
         .as('documentCount'),
     ])
@@ -180,7 +183,7 @@ async function getUserInsights(
         .where('t.organisationId', '=', organisationId)
         .where('e.deletedAt', 'is', null)
         .where('e.type', '=', sql.lit(EnvelopeType.DOCUMENT))
-        .$if(!!createdAtFrom, (qb) => qb.where('e.createdAt', '>=', createdAtFrom!))
+        .$if(!!createdAtFrom, (qb) => qb.where('e.createdAt', '>=', epochMs(createdAtFrom!)))
         .select(sql<number>`count(e.id)`.as('count'))
         .as('documentCount'),
       eb
@@ -192,7 +195,7 @@ async function getUserInsights(
         .where('t.organisationId', '=', organisationId)
         .where('e.deletedAt', 'is', null)
         .where('e.type', '=', sql.lit(EnvelopeType.DOCUMENT))
-        .$if(!!createdAtFrom, (qb) => qb.where('e.createdAt', '>=', createdAtFrom!))
+        .$if(!!createdAtFrom, (qb) => qb.where('e.createdAt', '>=', epochMs(createdAtFrom!)))
         .select(sql<number>`count(e.id)`.as('count'))
         .as('signedDocumentCount'),
     ])
@@ -228,10 +231,10 @@ async function getDocumentInsights(
     .innerJoin('Team as t', 'e.teamId', 't.id')
     .where('t.organisationId', '=', organisationId)
     .where('e.deletedAt', 'is', null)
-    .where(() => sql`e.type = ${EnvelopeType.DOCUMENT}::"EnvelopeType"`);
+    .where('e.type', '=', sql.lit(EnvelopeType.DOCUMENT));
 
   if (createdAtFrom) {
-    documentsQuery = documentsQuery.where('e.createdAt', '>=', createdAtFrom);
+    documentsQuery = documentsQuery.where('e.createdAt', '>=', epochMs(createdAtFrom));
   }
 
   documentsQuery = documentsQuery
@@ -252,10 +255,10 @@ async function getDocumentInsights(
     .innerJoin('Team as t', 'e.teamId', 't.id')
     .where('t.organisationId', '=', organisationId)
     .where('e.deletedAt', 'is', null)
-    .where(() => sql`e.type = ${EnvelopeType.DOCUMENT}::"EnvelopeType"`);
+    .where('e.type', '=', sql.lit(EnvelopeType.DOCUMENT));
 
   if (createdAtFrom) {
-    countQuery = countQuery.where('e.createdAt', '>=', createdAtFrom);
+    countQuery = countQuery.where('e.createdAt', '>=', epochMs(createdAtFrom));
   }
 
   countQuery = countQuery.select(({ fn }) => [fn.countAll().as('count')]);

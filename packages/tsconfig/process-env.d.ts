@@ -13,7 +13,12 @@ declare namespace NodeJS {
     NEXT_PRIVATE_OIDC_PROVIDER_LABEL?: string;
     NEXT_PRIVATE_OIDC_SKIP_VERIFY?: string;
 
-    NEXT_PRIVATE_DATABASE_URL: string;
+    // Base SQLite (single shared file). BASE_PATH is the directory that contains
+    // the one `sign.db` file; DATABASE_URL is the `file:` URL Prisma / the CLI /
+    // migrations open. Tenancy is enforced in-query via buildTeamWhereQuery, not
+    // by a per-org file — see packages/prisma/tenant.ts and HIP-0305.
+    BASE_PATH: string;
+    DATABASE_URL: string;
     NEXT_PRIVATE_ENCRYPTION_KEY: string;
     NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: string;
 
@@ -88,11 +93,6 @@ declare namespace NodeJS {
     INNGEST_SIGNING_KEY?: string;
     NEXT_PRIVATE_INNGEST_APP_ID?: string;
     NEXT_PRIVATE_INNGEST_EVENT_KEY?: string;
-
-    POSTGRES_URL?: string;
-    DATABASE_URL?: string;
-    POSTGRES_PRISMA_URL?: string;
-    POSTGRES_URL_NON_POOLING?: string;
 
     /**
      * Google Vertex AI environment variables

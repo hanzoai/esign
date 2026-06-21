@@ -5,12 +5,15 @@
   "types": "./index.ts",
   "license": "MIT",
   "scripts": {
-    "build": "prisma generate",
-    "prebuild": "prisma generate",
+    "_generate": "rimraf ./generated/zod && prisma generate",
+    "build": "npm run _generate",
+    "prebuild": "npm run _generate",
+    "test": "tsx --test __tests__/*.test.ts",
+    "test:integration": "tsx --test __tests__/*.itest.ts",
     "format": "prisma format",
     "clean": "rimraf node_modules",
-    "post-install": "prisma generate",
-    "prisma:generate": "prisma generate",
+    "post-install": "npm run _generate",
+    "prisma:generate": "npm run _generate",
     "prisma:migrate-dev": "prisma migrate dev --skip-seed",
     "prisma:migrate-deploy": "prisma migrate deploy",
     "prisma:migrate-reset": "prisma migrate reset",
@@ -33,8 +36,10 @@
     "zod-prisma-types": "3.3.5"
   },
   "devDependencies": {
+    "@types/pg": "^8.20.0",
     "dotenv": "^17.2.3",
     "dotenv-cli": "^11.0.0",
+    "pg": "^8.22.0",
     "tsx": "^4.20.6",
     "typescript": "5.9.3"
   }

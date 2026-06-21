@@ -48,7 +48,6 @@
     "nanoid": "^5.1.6",
     "oslo": "^0.17.0",
     "p-map": "^7.0.4",
-    "pg": "^8.16.3",
     "pino": "^9.14.0",
     "pino-pretty": "^13.1.2",
     "playwright": "1.56.1",
@@ -64,7 +63,6 @@
   },
   "devDependencies": {
     "@playwright/browser-chromium": "1.56.1",
-    "@types/luxon": "^3.7.1",
-    "@types/pg": "^8.15.6"
+    "@types/luxon": "^3.7.1"
   }
 }

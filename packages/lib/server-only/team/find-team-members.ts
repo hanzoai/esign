@@ -61,13 +61,11 @@ export const findTeamMembers = async ({
           {
             name: {
               contains: query,
-              mode: Prisma.QueryMode.insensitive,
             },
           },
           {
             email: {
               contains: query,
-              mode: Prisma.QueryMode.insensitive,
             },
           },
         ],

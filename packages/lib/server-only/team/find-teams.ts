@@ -51,7 +51,6 @@ export const findTeams = async ({
   if (query && query.length > 0) {
     whereClause.name = {
       contains: query,
-      mode: Prisma.QueryMode.insensitive,
     };
   }
 

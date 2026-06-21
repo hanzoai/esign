@@ -59,6 +59,18 @@ export const findDocumentAuditLogs = async ({
 
   // Filter events down to what we consider recent activity.
   if (filterForRecentActivity) {
+    // SQLite has no Prisma JSON `path` filter, so the "EMAIL_SENT where
+    // data.isResending === true" branch is resolved with a `json_extract`
+    // raw query (the one JSON predicate SQLite supports) into a set of ids,
+    // which then folds back into the structured query — keeping pagination,
+    // cursor and count fully Prisma-native.
+    const resendingRows = await prisma.$queryRaw<{ id: string }[]>`
+      SELECT "id" FROM "DocumentAuditLog"
+      WHERE "envelopeId" = ${envelope.id}
+        AND "type" = ${DOCUMENT_AUDIT_LOG_TYPE.EMAIL_SENT}
+        AND json_extract("data", '$.isResending') = 1
+    `;
+
     whereClause.OR = [
       {
         type: {
@@ -75,11 +87,7 @@ export const findDocumentAuditLogs = async ({
         },
       },
       {
-        type: DOCUMENT_AUDIT_LOG_TYPE.EMAIL_SENT,
-        data: {
-          path: ['isResending'],
-          equals: true,
-        },
+        id: { in: resendingRows.map((row) => row.id) },
       },
     ];
   }

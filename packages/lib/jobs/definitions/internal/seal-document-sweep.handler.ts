@@ -1,7 +1,7 @@
 import { DocumentStatus, EnvelopeType, RecipientRole, SigningStatus } from '@prisma/client';
 import { DateTime } from 'luxon';
 
-import { kyselyPrisma, sql } from '@hanzo/sign-prisma';
+import { epochMs, kyselyPrisma, sql } from '@hanzo/sign-prisma';
 
 import { mapSecondaryIdToDocumentId } from '../../../utils/envelope';
 import { jobs } from '../../client';
@@ -63,7 +63,7 @@ export const run = async ({ io }: { payload: TSealDocumentSweepJobDefinition; io
           eb
             .selectFrom('Recipient')
             .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
-            .where('Recipient.signedAt', '>', fifteenMinutesAgo),
+            .where('Recipient.signedAt', '>', epochMs(fifteenMinutesAgo)),
         ),
       ),
     )
@@ -74,7 +74,7 @@ export const run = async ({ io }: { payload: TSealDocumentSweepJobDefinition; io
         eb
           .selectFrom('Recipient')
           .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
-          .where('Recipient.signedAt', '>', sixHoursAgo),
+          .where('Recipient.signedAt', '>', epochMs(sixHoursAgo)),
       ),
     )
     .limit(100)

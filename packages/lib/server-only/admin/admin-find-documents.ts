@@ -20,7 +20,6 @@ export const adminFindDocuments = async ({
     : {
         title: {
           contains: query,
-          mode: 'insensitive',
         },
       };
 

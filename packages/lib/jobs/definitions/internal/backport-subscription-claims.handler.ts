@@ -26,9 +26,12 @@ export const run = async ({
   await io.runTask('backport-claims', async () => {
     const newFlagsJson = JSON.stringify(flags);
 
+    // SQLite: `json_patch(a, b)` does an RFC-7396 shallow merge of `flags`
+    // (new keys added, existing keys overwritten). `flags` is stored as JSON
+    // text, so the patch operand is the stringified new flags.
     await prisma.$executeRaw`
       UPDATE "OrganisationClaim"
-      SET "flags" = "flags" || ${newFlagsJson}::jsonb
+      SET "flags" = json_patch("flags", ${newFlagsJson})
       WHERE "originalSubscriptionClaimId" = ${subscriptionClaimId}
     `;
   });

@@ -15,16 +15,19 @@ export const getAllWebhooksByEventTrigger = async ({
   userId,
   teamId,
 }: GetAllWebhooksByEventTriggerOptions) => {
-  return prisma.webhook.findMany({
+  // `eventTriggers` is a JSON-encoded list in SQLite, so it can't be filtered
+  // with a Postgres `has` array predicate. The enabled-webhook set for a team
+  // is small; fetch it and filter on the decoded array (the client extension
+  // hands `eventTriggers` back as a real list). See @hanzo/sign-prisma/json-array.
+  const webhooks = await prisma.webhook.findMany({
     where: {
       enabled: true,
-      eventTriggers: {
-        has: event,
-      },
       team: buildTeamWhereQuery({
         teamId,
         userId,
       }),
     },
   });
+
+  return webhooks.filter((webhook) => webhook.eventTriggers.includes(event));
 };
