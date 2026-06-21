@@ -9,6 +9,7 @@
     "build": "npm run _generate",
     "prebuild": "npm run _generate",
     "test": "tsx --test __tests__/*.test.ts",
+    "test:integration": "tsx --test __tests__/*.itest.ts",
     "format": "prisma format",
     "clean": "rimraf node_modules",
     "post-install": "npm run _generate",

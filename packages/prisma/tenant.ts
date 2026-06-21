@@ -9,7 +9,7 @@
  * carry no `organisationId`. Auth is resolved BEFORE any org is known —
  * `validateSessionToken` reads `Session` to discover the user — so a database
  * cannot be selected per-org at request entry (the chicken-and-egg the prior
- * file-per-org design could never satisfy). Only 6 of 47 tables even carry an
+ * file-per-org design could never satisfy). Only 8 of 47 tables even carry an
  * `organisationId`; the rest scope through relations (`Envelope → Team →
  * Organisation`) that a per-file split would make un-joinable.
  *
@@ -25,22 +25,6 @@
  * This module owns the ONE place a SQLite connection URL is constructed, and
  * fails closed if it cannot be resolved unambiguously.
  */
-
-// Org ids are slugs derived from the IAM `owner` claim. Even though routing is
-// no longer per-file, this validator is the canonical org-id guard reused by
-// the backfill (which DOES write one file per org) and any code that derives a
-// filesystem path from an org id — it rejects anything that could escape a
-// directory root (path traversal / absolute paths) so a hostile claim can never
-// address another tenant's file or the filesystem.
-const ORG_ID_PATTERN = /^[a-z0-9][a-z0-9_-]{0,63}$/i;
-
-export const assertValidOrgId = (orgId: string): string => {
-  if (!ORG_ID_PATTERN.test(orgId)) {
-    throw new Error(`Invalid tenant org id: ${JSON.stringify(orgId)}`);
-  }
-
-  return orgId;
-};
 
 /**
  * The Prisma datasource URL for the Base SQLite store.

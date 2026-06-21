@@ -1320,10 +1320,34 @@ CREATE TRIGGER "enum_OrganisationAuthenticationPortal_defaultOrganisationRole_up
   FOR EACH ROW WHEN NEW."defaultOrganisationRole" IS NOT NULL AND NEW."defaultOrganisationRole" NOT IN ('ADMIN', 'MANAGER', 'MEMBER')
   BEGIN SELECT RAISE(ABORT, 'invalid OrganisationMemberRole for OrganisationAuthenticationPortal.defaultOrganisationRole'); END;
 
--- User.roles is a JSON-encoded Role[] (SQLite has no array type). Enforce that
--- every element is a known Role: json_each expands the array, and the guard
--- aborts if any element is outside the Role domain. Auth-relevant: a fabricated
--- role can never be persisted. (Role values are mirrored from schema.prisma's enum Role.)
+-- User.roles is a JSON-encoded Role[] (SQLite has no array type). Two guards,
+-- in order, reconstruct what the Postgres `Role[]` column enforced natively:
+--
+--   1. SHAPE — roles must be a JSON *array*. Without this, a JSON object such as
+--      '{"role":"ADMIN"}' would slip past guard 2 because json_each() iterates an
+--      object's VALUES, and "ADMIN" is in-domain — a privilege string would
+--      persist in the wrong shape and the read codec (json-array.ts) would then
+--      throw on every load, bricking the row. The shape guard fails the WRITE
+--      closed instead. Mirrors decodeList()'s "expected a JSON array" rejection.
+--   2. DOMAIN — every element is a known Role. json_each expands the array and
+--      the guard aborts if any element is outside the Role domain.
+--
+-- Auth-relevant: a fabricated role, or a non-array masquerading as roles, can
+-- never be persisted. (Role values are mirrored from schema.prisma's enum Role.)
+DROP TRIGGER IF EXISTS "roles_must_be_array_User_insert";
+CREATE TRIGGER "roles_must_be_array_User_insert"
+  BEFORE INSERT ON "User"
+  FOR EACH ROW
+  WHEN NEW."roles" IS NOT NULL AND (json_valid(NEW."roles") = 0 OR json_type(NEW."roles") != 'array')
+  BEGIN SELECT RAISE(ABORT, 'User.roles must be a JSON array'); END;
+
+DROP TRIGGER IF EXISTS "roles_must_be_array_User_update";
+CREATE TRIGGER "roles_must_be_array_User_update"
+  BEFORE UPDATE ON "User"
+  FOR EACH ROW
+  WHEN NEW."roles" IS NOT NULL AND (json_valid(NEW."roles") = 0 OR json_type(NEW."roles") != 'array')
+  BEGIN SELECT RAISE(ABORT, 'User.roles must be a JSON array'); END;
+
 DROP TRIGGER IF EXISTS "enum_User_roles_insert";
 CREATE TRIGGER "enum_User_roles_insert"
   BEFORE INSERT ON "User"
