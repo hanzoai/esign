@@ -19,9 +19,13 @@ generator zod {
 }
 
 datasource db {
-  // Per-tenant SQLite via Hanzo Base. Each org owns its own `sign.db` file;
-  // the connection URL is constructed at runtime from BASE_PATH + orgId
-  // (see ./helper.ts). DATABASE_URL points at one tenant file per client.
+  // Single shared SQLite file via Hanzo Base. Tenancy is enforced at the
+  // query layer via buildTeamWhereQuery keyed on the authenticated user
+  // (see ./tenant.ts). DATABASE_URL points at one sign.db file shared
+  // across all orgs. See HIP-0305 for the architectural deviation from
+  // CTO Decision #7 (file = tenant boundary) and why esign's data shape
+  // (global User/Session, 8 of 47 tables org-rooted) makes file-per-tenant
+  // unimplementable without re-architecting global identity.
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
