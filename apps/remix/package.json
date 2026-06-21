@@ -23,7 +23,7 @@
     "@hanzo/sign-tailwind-config": "*",
     "@hanzo/sign-trpc": "*",
     "@hanzo/sign-ui": "*",
-    "@zap-proto/zap": "^1.3.0",
+    "@zap-proto/zap": "^1.4.2",
     "@zap-proto/web": "^0.2.0",
     "ws": "^8.18.0",
     "@epic-web/remember": "^1.1.0",
