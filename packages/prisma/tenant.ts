@@ -1,42 +1,37 @@
 /// <reference types="@hanzo/sign-tsconfig/process-env.d.ts" />
-import { AsyncLocalStorage } from 'node:async_hooks';
-import path from 'node:path';
 
 /**
- * Per-tenant SQLite via Hanzo Base.
+ * Database resolution for the Base SQLite store.
  *
- * Each organisation owns its own `sign.db` SQLite file under `BASE_PATH`:
+ * esign is a single-binary multi-tenant app. Identity is global: a `User` owns
+ * and belongs to MANY organisations (`User.ownedOrganisations[]` /
+ * `organisationMember[]`), and `Session` / `Account` / `Passkey` / `ApiToken`
+ * carry no `organisationId`. Auth is resolved BEFORE any org is known —
+ * `validateSessionToken` reads `Session` to discover the user — so a database
+ * cannot be selected per-org at request entry (the chicken-and-egg the prior
+ * file-per-org design could never satisfy). Only 6 of 47 tables even carry an
+ * `organisationId`; the rest scope through relations (`Envelope → Team →
+ * Organisation`) that a per-file split would make un-joinable.
  *
- *   ${BASE_PATH}/${orgId}/sign.db
+ * Therefore there is ONE Base SQLite database. Tenant isolation is enforced
+ * where it has always lived in this schema: row-level org/team scoping in the
+ * `packages/lib/server-only/*` handlers — every cross-org read funnels through
+ * the single `buildTeamWhereQuery({ teamId, userId })` predicate keyed on the
+ * authenticated user, never on a client-supplied value. That predicate, not a
+ * filesystem boundary, is the isolation boundary. See
+ * `packages/prisma/__tests__/tenant-isolation.test.ts` for the proof that a
+ * forged team/org id returns zero rows.
  *
- * Tenant routing is request-scoped through {@link tenantStorage} (an
- * `AsyncLocalStorage`). The `prisma` / `kyselyPrisma` exports resolve, per
- * access, to the client bound to the org in the active context. Out-of-band
- * callers (CLI migrations, background jobs, dev) run without a context and
- * fall through to the single-file `DATABASE_URL` (the Prisma CLI target).
- *
- * This is the one place that maps (org → SQLite file). Nothing else in the
- * codebase constructs a connection URL, so isolation is enforced at a single
- * boundary rather than smeared across call sites.
+ * This module owns the ONE place a SQLite connection URL is constructed, and
+ * fails closed if it cannot be resolved unambiguously.
  */
 
-export type TenantContext = {
-  /** Organisation id — taken from the JWT `owner` claim. */
-  orgId: string;
-};
-
-const tenantStorage = new AsyncLocalStorage<TenantContext>();
-
-/** Run `fn` with `orgId` bound as the active tenant for all DB access within. */
-export const runWithTenant = <T>(orgId: string, fn: () => T): T =>
-  tenantStorage.run({ orgId }, fn);
-
-/** The org bound in the current async context, or `undefined` out-of-band. */
-export const getTenantOrgId = (): string | undefined => tenantStorage.getStore()?.orgId;
-
-// Org ids are slugs derived from the IAM `owner` claim. Reject anything that
-// could escape the BASE_PATH root (path traversal / absolute paths) so a
-// hostile claim can never address another tenant's file or the filesystem.
+// Org ids are slugs derived from the IAM `owner` claim. Even though routing is
+// no longer per-file, this validator is the canonical org-id guard reused by
+// the backfill (which DOES write one file per org) and any code that derives a
+// filesystem path from an org id — it rejects anything that could escape a
+// directory root (path traversal / absolute paths) so a hostile claim can never
+// address another tenant's file or the filesystem.
 const ORG_ID_PATTERN = /^[a-z0-9][a-z0-9_-]{0,63}$/i;
 
 export const assertValidOrgId = (orgId: string): string => {
@@ -47,48 +42,26 @@ export const assertValidOrgId = (orgId: string): string => {
   return orgId;
 };
 
-const baseRoot = (): string => {
-  const root = process.env.BASE_PATH;
-
-  if (!root) {
-    throw new Error('BASE_PATH is not set — cannot resolve per-tenant SQLite root.');
-  }
-
-  // Always absolute: a relative `file:` URL resolves against the schema dir for
-  // the Prisma CLI but against cwd at runtime — resolving here makes both agree.
-  return path.resolve(root);
-};
-
-/** Absolute SQLite file path for an org's database. */
-export const tenantDbFile = (orgId: string): string =>
-  path.join(baseRoot(), assertValidOrgId(orgId), 'sign.db');
-
 /**
- * Prisma datasource URL for the active context.
+ * The Prisma datasource URL for the Base SQLite store.
  *
- * - In a tenant context → `file:${BASE_PATH}/${orgId}/sign.db`.
- * - Out-of-band → `DATABASE_URL` (the CLI / dev single-file target).
- *
- * `?connection_limit=1` keeps one writer per file; SQLite serialises writes
- * and a larger pool only produces `SQLITE_BUSY`.
+ * Single source of truth: `DATABASE_URL`. Fails closed when unset — there is no
+ * implicit fallback path that could silently point production at the wrong
+ * file. `?connection_limit=1` keeps one writer; SQLite serialises writes and a
+ * larger pool only produces `SQLITE_BUSY`.
  */
-export const tenantDatabaseUrl = (): string => {
-  const orgId = getTenantOrgId();
+export const databaseUrl = (): string => {
+  const url = process.env.DATABASE_URL;
 
-  if (orgId) {
-    return `file:${tenantDbFile(orgId)}?connection_limit=1`;
+  if (!url) {
+    throw new Error('DATABASE_URL is not set — cannot resolve the SQLite database.');
   }
 
-  const fallback = process.env.DATABASE_URL;
-
-  if (!fallback) {
-    throw new Error(
-      'No tenant context and DATABASE_URL is unset — cannot resolve a SQLite database.',
-    );
+  // A bare `file:` SQLite URL takes Prisma connection params as query string.
+  // Append the single-writer limit unless the caller already specified one.
+  if (url.startsWith('file:') && !url.includes('connection_limit')) {
+    return `${url}${url.includes('?') ? '&' : '?'}connection_limit=1`;
   }
 
-  return fallback;
+  return url;
 };
-
-/** Cache key for the per-tenant client pool. */
-export const tenantCacheKey = (): string => getTenantOrgId() ?? '__default__';

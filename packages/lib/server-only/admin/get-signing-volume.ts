@@ -33,18 +33,30 @@ export async function getSigningVolume({
 }: GetSigningVolumeOptions) {
   const offset = Math.max(page - 1, 0) * perPage;
 
-  // SQLite `LIKE` is case-insensitive for ASCII by default, so it stands in for
-  // Postgres `ILIKE` here (SQLite has no `ILIKE` operator).
+  // Case-insensitive name search. SQLite has no `ILIKE`; `LIKE` is
+  // case-insensitive only for ASCII and that fold is asymmetric on mixed-case
+  // data, so we fold BOTH sides explicitly with `LOWER(...)` and a lowered
+  // needle. This reproduces Postgres `ILIKE` for ASCII names exactly.
+  //
+  // LIMITATION (honest): SQLite's built-in `LOWER`/`LIKE`/`COLLATE NOCASE` are
+  // ASCII-only — `LOWER('JOSÉ')` is `josÉ`, not `josé`. Non-ASCII names
+  // (José, Müller) match case-SENSITIVELY here. True Unicode case-folding needs
+  // the ICU extension, which better-sqlite3 does not bundle; enabling it is a
+  // separate build/runtime decision, not a one-line change. Org/team name
+  // search is admin-only and best-effort, so ASCII folding is the chosen
+  // trade-off rather than a silent regression.
+  const needle = `%${search.toLowerCase()}%`;
+
   let findQuery = kyselyPrisma.$kysely
     .selectFrom('Organisation as o')
     .where((eb) =>
       eb.or([
-        eb('o.name', 'like', `%${search}%`),
+        eb(sql`lower(o.name)`, 'like', needle),
         eb.exists(
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where('t.name', 'like', `%${search}%`),
+            .where(sql`lower(t.name)`, 'like', needle),
         ),
       ]),
     )
@@ -84,12 +96,12 @@ export async function getSigningVolume({
     .selectFrom('Organisation as o')
     .where((eb) =>
       eb.or([
-        eb('o.name', 'like', `%${search}%`),
+        eb(sql`lower(o.name)`, 'like', needle),
         eb.exists(
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where('t.name', 'like', `%${search}%`),
+            .where(sql`lower(t.name)`, 'like', needle),
         ),
       ]),
     )
@@ -150,17 +162,21 @@ export async function getOrganisationInsights({
     }
   }
 
+  // Case-insensitive name search — see `getSigningVolume` above for the
+  // ASCII-fold rationale and the Unicode limitation.
+  const needle = `%${search.toLowerCase()}%`;
+
   let findQuery = kyselyPrisma.$kysely
     .selectFrom('Organisation as o')
     .leftJoin('Subscription as s', 'o.id', 's.organisationId')
     .where((eb) =>
       eb.or([
-        eb('o.name', 'like', `%${search}%`),
+        eb(sql`lower(o.name)`, 'like', needle),
         eb.exists(
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where('t.name', 'like', `%${search}%`),
+            .where(sql`lower(t.name)`, 'like', needle),
         ),
       ]),
     )
@@ -214,12 +230,12 @@ export async function getOrganisationInsights({
     .selectFrom('Organisation as o')
     .where((eb) =>
       eb.or([
-        eb('o.name', 'like', `%${search}%`),
+        eb(sql`lower(o.name)`, 'like', needle),
         eb.exists(
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where('t.name', 'like', `%${search}%`),
+            .where(sql`lower(t.name)`, 'like', needle),
         ),
       ]),
     )

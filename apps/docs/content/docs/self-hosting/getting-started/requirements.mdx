@@ -11,20 +11,23 @@ Hanzo eSign requires the following external services:
 
 | Service       | Purpose                      | Minimum Version |
 | ------------- | ---------------------------- | --------------- |
-| PostgreSQL    | Primary database             | 14+             |
 | SMTP server   | Sending emails to recipients | Any             |
 | Reverse proxy | SSL termination, routing     | Any             |
 
-### PostgreSQL Database
+The database is **embedded** — there is no external database server to run.
 
-Hanzo eSign uses PostgreSQL for all data storage including documents, users, and audit logs. You cannot use MySQL, SQLite, or other databases.
+### Database (embedded Base SQLite)
 
-Hanzo eSign requires two connection strings:
+Hanzo eSign stores all data — documents, users, audit logs — in an embedded
+SQLite database (Hanzo Base) on its persistent disk. There is no PostgreSQL,
+MySQL, or other database server to provision. The only configuration is where
+the file lives:
 
-- **Pooled connection** (`NEXT_PRIVATE_DATABASE_URL`) - For general application queries
-- **Direct connection** (`NEXT_PRIVATE_DIRECT_DATABASE_URL`) - For migrations and operations that require a direct connection
+- `BASE_PATH` — directory root on the persistent disk (e.g. `/opt/hanzo-sign/base/data`).
+- `DATABASE_URL` — the `file:` URL, defaulting to a file under `BASE_PATH`.
 
-If you're not using a connection pooler (like PgBouncer), both can point to the same database URL.
+See [Database Configuration](/docs/self-hosting/configuration/database) for
+details and for migrating an existing PostgreSQL deployment.
 
 ### Email Server
 
@@ -73,7 +76,7 @@ These services are not required but improve functionality or scalability:
 
 ### Document Storage
 
-By default, Hanzo eSign stores documents in the PostgreSQL database. For production deployments with significant document volume, use S3-compatible storage:
+By default, Hanzo eSign stores documents in the embedded Base SQLite database. For production deployments with significant document volume, use S3-compatible storage:
 
 - Amazon S3
 - MinIO
@@ -85,7 +88,7 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage) for setup 
 
 ### Background Jobs
 
-Hanzo eSign processes background jobs (email delivery, document processing) using a PostgreSQL-based queue. No additional services like Redis are required: the job queue is built into the application and uses your existing database.
+Hanzo eSign processes background jobs (email delivery, document processing) using a database-backed queue. No additional services like Redis are required: the job queue is built into the application and uses the embedded Base SQLite database.
 
 For high-throughput deployments, Hanzo eSign optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider. Set `NEXT_PRIVATE_JOBS_PROVIDER=inngest` and configure `INNGEST_EVENT_KEY` and `INNGEST_SIGNING_KEY`. Most self-hosted instances do not need this.
 

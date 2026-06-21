@@ -1,7 +1,8 @@
 name: hanzo-sign-production
 
-# Per-tenant SQLite via Hanzo Base — each org's database is an embedded file
-# under BASE_PATH, persisted on the `base` volume. There is no database service.
+# Embedded Base SQLite — one database file under BASE_PATH, persisted on the
+# `base` volume. There is no external database service. Tenant isolation is
+# row-level org/team scoping in the app, not a per-file split.
 services:
   hanzo-sign:
     image: hanzo-sign/hanzo-sign:latest
@@ -15,7 +16,7 @@ services:
       - NEXT_PUBLIC_WEBAPP_URL=${NEXT_PUBLIC_WEBAPP_URL:?err}
       - NEXT_PRIVATE_INTERNAL_WEBAPP_URL=${NEXT_PRIVATE_INTERNAL_WEBAPP_URL:-http://localhost:$PORT}
       - BASE_PATH=${BASE_PATH:-/opt/hanzo-sign/base/data}
-      - DATABASE_URL=${DATABASE_URL:-file:/opt/hanzo-sign/base/data/_dev/sign.db}
+      - DATABASE_URL=${DATABASE_URL:-file:/opt/hanzo-sign/base/data/sign.db}
       - NEXT_PUBLIC_UPLOAD_TRANSPORT=${NEXT_PUBLIC_UPLOAD_TRANSPORT:-database}
       - NEXT_PRIVATE_UPLOAD_ENDPOINT=${NEXT_PRIVATE_UPLOAD_ENDPOINT}
       - NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE=${NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE}
