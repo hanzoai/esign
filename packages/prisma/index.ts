@@ -123,4 +123,3 @@ export const kyselyPrisma: KyselyClient = new Proxy({} as KyselyClient, {
 
 export { sql } from 'kysely';
 export { monthTrunc, epochMs } from './sqlite-sql';
-export { assertValidOrgId } from './tenant';

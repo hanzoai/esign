@@ -13,8 +13,10 @@ declare namespace NodeJS {
     NEXT_PRIVATE_OIDC_PROVIDER_LABEL?: string;
     NEXT_PRIVATE_OIDC_SKIP_VERIFY?: string;
 
-    // Per-tenant SQLite (Hanzo Base): BASE_PATH is the root for `${orgId}/sign.db`
-    // files; DATABASE_URL is the default single-file target for CLI / migrations.
+    // Base SQLite (single shared file). BASE_PATH is the directory that contains
+    // the one `sign.db` file; DATABASE_URL is the `file:` URL Prisma / the CLI /
+    // migrations open. Tenancy is enforced in-query via buildTeamWhereQuery, not
+    // by a per-org file — see packages/prisma/tenant.ts and HIP-0305.
     BASE_PATH: string;
     DATABASE_URL: string;
     NEXT_PRIVATE_ENCRYPTION_KEY: string;

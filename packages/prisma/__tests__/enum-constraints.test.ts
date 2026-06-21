@@ -99,3 +99,83 @@ describe('User.roles JSON list — Role domain fails closed', () => {
     );
   });
 });
+
+describe('User.roles SHAPE guard — non-array JSON fails closed', () => {
+  // RED proved the domain trigger alone is insufficient: json_each() iterates a
+  // JSON OBJECT's values, so '{"role":"ADMIN"}' passed the domain check ("ADMIN"
+  // is in-domain) and a privilege string persisted in the wrong shape. The shape
+  // guard (json_type != 'array') closes this. Cases that trip ONLY the shape
+  // guard assert its exact message; cases that also violate the domain may abort
+  // via either trigger (SQLite does not order same-event triggers), so those
+  // assert only that the write aborts — both outcomes fail closed.
+
+  test('a JSON OBJECT with an in-domain value is ABORTED (the RED hole)', () => {
+    // Pre-fix: succeeded, because json_each iterates object VALUES and "ADMIN"
+    // is a valid Role. Now the shape guard rejects it deterministically.
+    assert.throws(
+      () =>
+        db
+          .prepare('INSERT INTO "User" (email, roles) VALUES (?, ?)')
+          .run('shape-obj@test', '{"role":"ADMIN"}'),
+      /User\.roles must be a JSON array/,
+    );
+  });
+
+  test('a JSON string scalar is ABORTED', () => {
+    assert.throws(
+      () =>
+        db.prepare('INSERT INTO "User" (email, roles) VALUES (?, ?)').run('shape-str@test', '"ADMIN"'),
+      /User\.roles must be a JSON array/,
+    );
+  });
+
+  test('malformed JSON is ABORTED (fails closed)', () => {
+    // `json_type('not json')` raises SQLite's own "malformed JSON" while the
+    // trigger condition is evaluated — so the abort message is SQLite's, not
+    // ours. Either way the write is rejected: a non-JSON roles value can never
+    // persist. Assert the fail-closed outcome, not a specific message.
+    assert.throws(() =>
+      db.prepare('INSERT INTO "User" (email, roles) VALUES (?, ?)').run('shape-bad@test', 'not json'),
+    );
+  });
+
+  test('a JSON array is ACCEPTED (positive control)', () => {
+    db.prepare('INSERT INTO "User" (email, roles) VALUES (?, ?)').run('shape-arr@test', '["ADMIN"]');
+    const row = db.prepare('SELECT roles FROM "User" WHERE email = ?').get('shape-arr@test') as {
+      roles: string;
+    };
+    assert.equal(row.roles, '["ADMIN"]');
+  });
+
+  test('omitting roles uses the NOT NULL default (shape guard short-circuits on NULL)', () => {
+    // `roles` is `NOT NULL DEFAULT '["USER"]'`; when the column is omitted the
+    // WHEN `NEW.roles IS NOT NULL` clause is false and the default applies.
+    db.prepare('INSERT INTO "User" (email) VALUES (?)').run('shape-default@test');
+    const row = db.prepare('SELECT roles FROM "User" WHERE email = ?').get('shape-default@test') as {
+      roles: string;
+    };
+    assert.equal(row.roles, '["USER"]');
+  });
+
+  test('a JSON object with an out-of-domain value also aborts (either trigger)', () => {
+    // Shape AND domain both violated → SQLite may fire either BEFORE trigger
+    // first; both RAISE(ABORT). Only the fail-closed outcome is asserted.
+    assert.throws(
+      () =>
+        db
+          .prepare('INSERT INTO "User" (email, roles) VALUES (?, ?)')
+          .run('shape-obj-bad@test', '{"role":"SUPERADMIN"}'),
+    );
+  });
+
+  test('UPDATE to a non-array roles is ABORTED (not just INSERT)', () => {
+    db.prepare('INSERT INTO "User" (email, roles) VALUES (?, ?)').run('shape-upd@test', '["USER"]');
+    assert.throws(
+      () =>
+        db
+          .prepare('UPDATE "User" SET roles = ? WHERE email = ?')
+          .run('{"role":"ADMIN"}', 'shape-upd@test'),
+      /User\.roles must be a JSON array/,
+    );
+  });
+});
