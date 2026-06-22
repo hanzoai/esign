@@ -118,7 +118,7 @@ COPY --from=builder --chown=nodejs:nodejs /app/out/full/packages/tailwind-config
 # Copy the patches across
 COPY --from=builder --chown=nodejs:nodejs /app/patches ./patches
 
-COPY --from=builder /app/package-lock.json ./package-lock.json
+COPY --from=builder --chown=nodejs:nodejs /app/package-lock.json ./package-lock.json
 RUN npm install --omit=dev --no-audit --no-fund
 
 # Automatically leverage output traces to reduce image size
