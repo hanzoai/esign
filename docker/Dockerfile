@@ -72,7 +72,10 @@ COPY --from=builder /app/out/package-lock.json ./package-lock.json
 COPY --from=builder /app/lingui.config.ts ./lingui.config.ts
 COPY --from=builder /app/patches ./patches
 
-RUN npm ci
+# `npm install` (not `npm ci`): turbo@1.x `prune --docker` emits a pruned
+# package-lock.json that `npm ci` rejects (lockfileVersion error). Install
+# resolves from the pruned workspace package.json files instead.
+RUN npm install --no-audit --no-fund
 
 # Then copy all the source code (as it changes more often)
 COPY --from=builder /app/out/full/ .
@@ -112,7 +115,7 @@ COPY --from=builder --chown=nodejs:nodejs /app/out/full/packages/tailwind-config
 # Copy the patches across
 COPY --from=builder --chown=nodejs:nodejs /app/patches ./patches
 
-RUN npm ci --only=production
+RUN npm install --omit=dev --no-audit --no-fund
 
 # Automatically leverage output traces to reduce image size
 # https://nodejs.org/docs/advanced-features/output-file-tracing
