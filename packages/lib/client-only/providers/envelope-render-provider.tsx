@@ -3,10 +3,10 @@ import React from 'react';
 
 import { type Field, type Recipient } from '@prisma/client';
 
-import type { DocumentDataVersion } from '@hanzo/sign-lib/types/document';
-import { getDocumentDataUrl } from '@hanzo/sign-lib/utils/envelope-download';
-import type { TRecipientColor } from '@hanzo/sign-ui/lib/recipient-colors';
-import { AVAILABLE_RECIPIENT_COLORS } from '@hanzo/sign-ui/lib/recipient-colors';
+import type { DocumentDataVersion } from '@hanzo/esign-lib/types/document';
+import { getDocumentDataUrl } from '@hanzo/esign-lib/utils/envelope-download';
+import type { TRecipientColor } from '@hanzo/esign-ui/lib/recipient-colors';
+import { AVAILABLE_RECIPIENT_COLORS } from '@hanzo/esign-ui/lib/recipient-colors';
 
 import type { TEnvelope } from '../../types/envelope';
 import type { FieldRenderMode } from '../../universal/field-renderer/render-field';

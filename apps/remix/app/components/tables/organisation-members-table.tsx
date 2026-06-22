@@ -7,27 +7,27 @@ import { OrganisationGroupType } from '@prisma/client';
 import { Edit, MoreHorizontal, Trash2 } from 'lucide-react';
 import { useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/organisations';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/esign-lib/utils/organisations';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import type { TFindOrganisationMembersResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-members.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
 
 import { OrganisationMemberDeleteDialog } from '~/components/dialogs/organisation-member-delete-dialog';
 import { OrganisationMemberUpdateDialog } from '~/components/dialogs/organisation-member-update-dialog';

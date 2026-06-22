@@ -1,7 +1,7 @@
 import type { JWTPayload } from 'jose';
 import { decodeJwt, jwtVerify } from 'jose';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 

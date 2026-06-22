@@ -4,19 +4,19 @@ import { useLingui } from '@lingui/react';
 import { useNavigate } from 'react-router';
 import type { z } from 'zod';
 
-import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
+import { DocumentSignatureType } from '@hanzo/esign-lib/constants/document';
 import {
   type TBaseEmbedAuthoringSchema,
   ZBaseEmbedAuthoringSchema,
-} from '@hanzo/sign-lib/types/embed-authoring-base-schema';
-import { putPdfFile } from '@hanzo/sign-lib/universal/upload/put-file';
+} from '@hanzo/esign-lib/types/embed-authoring-base-schema';
+import { putPdfFile } from '@hanzo/esign-lib/universal/upload/put-file';
 import {
   type TCreateEmbeddingDocumentRequestSchema,
   ZCreateEmbeddingDocumentResponseSchema,
-} from '@hanzo/sign-trpc/server/embedding-router/create-embedding-document.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/embedding-router/create-embedding-document.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Stepper } from '@hanzo/esign-ui/primitives/stepper';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { ConfigureDocumentProvider } from '~/components/embed/authoring/configure-document-context';
 import { ConfigureDocumentView } from '~/components/embed/authoring/configure-document-view';

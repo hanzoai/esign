@@ -1,8 +1,8 @@
 import { createElement } from 'react';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { ResetPasswordTemplate } from '@hanzo/sign-email/templates/reset-password';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { ResetPasswordTemplate } from '@hanzo/esign-email/templates/reset-password';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';
 import { env } from '../../utils/env';

@@ -7,19 +7,19 @@ import { AlertTriangleIcon, Loader } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { Link, useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TFindUnsealedDocumentsResponse } from '@hanzo/sign-trpc/server/admin-router/find-unsealed-documents.types';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TFindUnsealedDocumentsResponse } from '@hanzo/esign-trpc/server/admin-router/find-unsealed-documents.types';
 import type {
   TResealDocumentRequest,
   TResealDocumentResponse,
-} from '@hanzo/sign-trpc/server/admin-router/reseal-document.types';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/admin-router/reseal-document.types';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 const SIX_HOURS_MS = 6 * 60 * 60 * 1000;
 

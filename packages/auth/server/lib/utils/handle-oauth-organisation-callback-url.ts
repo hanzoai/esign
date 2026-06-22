@@ -1,10 +1,10 @@
 import type { Context } from 'hono';
 
-import { sendOrganisationAccountLinkConfirmationEmail } from '@hanzo/sign-lib/server-only/organisation/send-organisation-account-link-confirmation-email';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { onCreateUserHook } from '@hanzo/sign-lib/server-only/user/create-user';
-import { formatOrganisationLoginUrl } from '@hanzo/sign-lib/utils/organisation-authentication-portal';
-import { prisma } from '@hanzo/sign-prisma';
+import { sendOrganisationAccountLinkConfirmationEmail } from '@hanzo/esign-lib/server-only/organisation/send-organisation-account-link-confirmation-email';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { onCreateUserHook } from '@hanzo/esign-lib/server-only/user/create-user';
+import { formatOrganisationLoginUrl } from '@hanzo/esign-lib/utils/organisation-authentication-portal';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AuthenticationErrorCode } from '../errors/error-codes';
 import { onAuthorize } from './authorizer';

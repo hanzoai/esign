@@ -5,20 +5,20 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { ChevronDown, ChevronUp, Trash } from 'lucide-react';
 
-import { validateCheckboxField } from '@hanzo/sign-lib/advanced-fields-validation/validate-checkbox';
-import { type TCheckboxFieldMeta as CheckboxFieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
+import { validateCheckboxField } from '@hanzo/esign-lib/advanced-fields-validation/validate-checkbox';
+import { type TCheckboxFieldMeta as CheckboxFieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
+} from '@hanzo/esign-ui/primitives/select';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
 
 import { checkboxValidationLength, checkboxValidationRules } from './constants';
 

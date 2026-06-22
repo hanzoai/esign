@@ -5,16 +5,16 @@ import { Building2Icon, InboxIcon, SettingsIcon, UsersIcon } from 'lucide-react'
 import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
 
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
-import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { canExecuteOrganisationAction } from '@hanzo/sign-lib/utils/organisations';
-import { canExecuteTeamAction } from '@hanzo/sign-lib/utils/teams';
-import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
-import { ScrollArea, ScrollBar } from '@hanzo/sign-ui/primitives/scroll-area';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
+import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import { canExecuteOrganisationAction } from '@hanzo/esign-lib/utils/organisations';
+import { canExecuteTeamAction } from '@hanzo/esign-lib/utils/teams';
+import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
+import { ScrollArea, ScrollBar } from '@hanzo/esign-ui/primitives/scroll-area';
 
 import { OrganisationInvitations } from '~/components/general/organisations/organisation-invitations';
 import { InboxTable } from '~/components/tables/inbox-table';

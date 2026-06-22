@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { ZDocumentManySchema } from '@hanzo/sign-lib/types/document';
-import { ZFindResultResponse } from '@hanzo/sign-lib/types/search-params';
-import { ExtendedDocumentStatus } from '@hanzo/sign-prisma/types/extended-document-status';
+import { ZDocumentManySchema } from '@hanzo/esign-lib/types/document';
+import { ZFindResultResponse } from '@hanzo/esign-lib/types/search-params';
+import { ExtendedDocumentStatus } from '@hanzo/esign-prisma/types/extended-document-status';
 
 import { ZFindDocumentsRequestSchema } from './find-documents.types';
 

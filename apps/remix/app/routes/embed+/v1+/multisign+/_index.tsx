@@ -4,11 +4,11 @@ import { Trans } from '@lingui/react/macro';
 import { SigningStatus } from '@prisma/client';
 import { useRevalidator } from 'react-router';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { getDocumentAndSenderByToken } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
-import { getOrganisationClaimByTeamId } from '@hanzo/sign-lib/server-only/organisation/get-organisation-claims';
-import { getRecipientByToken } from '@hanzo/sign-lib/server-only/recipient/get-recipient-by-token';
-import { ZSignDocumentEmbedDataSchema } from '@hanzo/sign-lib/types/embed-document-sign-schema';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { getDocumentAndSenderByToken } from '@hanzo/esign-lib/server-only/document/get-document-by-token';
+import { getOrganisationClaimByTeamId } from '@hanzo/esign-lib/server-only/organisation/get-organisation-claims';
+import { getRecipientByToken } from '@hanzo/esign-lib/server-only/recipient/get-recipient-by-token';
+import { ZSignDocumentEmbedDataSchema } from '@hanzo/esign-lib/types/embed-document-sign-schema';
 
 import { BrandingLogo } from '~/components/general/branding-logo';
 import { DocumentSigningAuthProvider } from '~/components/general/document-signing/document-signing-auth-provider';

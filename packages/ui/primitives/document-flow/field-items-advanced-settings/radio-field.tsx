@@ -5,13 +5,13 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { ChevronDown, ChevronUp, Trash } from 'lucide-react';
 
-import { validateRadioField } from '@hanzo/sign-lib/advanced-fields-validation/validate-radio';
-import { type TRadioFieldMeta as RadioFieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
+import { validateRadioField } from '@hanzo/esign-lib/advanced-fields-validation/validate-radio';
+import { type TRadioFieldMeta as RadioFieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
 
 export type RadioFieldAdvancedSettingsProps = {
   fieldState: RadioFieldMeta;

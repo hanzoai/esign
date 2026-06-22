@@ -1,8 +1,8 @@
 import { UserSecurityAuditLogType } from '@prisma/client';
 import type { Context } from 'hono';
 
-import { ORGANISATION_USER_ACCOUNT_TYPE } from '@hanzo/sign-lib/constants/organisations';
-import { prisma } from '@hanzo/sign-prisma';
+import { ORGANISATION_USER_ACCOUNT_TYPE } from '@hanzo/esign-lib/constants/organisations';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getSession } from './get-session';
 

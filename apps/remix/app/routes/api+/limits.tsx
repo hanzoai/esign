@@ -1,4 +1,4 @@
-import { limitsHandler } from '@hanzo/sign-lib/server-only/limits/handler';
+import { limitsHandler } from '@hanzo/esign-lib/server-only/limits/handler';
 
 import type { Route } from './+types/limits';
 

@@ -7,11 +7,11 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import type { z } from 'zod';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { ZUpdateTeamRequestSchema } from '@hanzo/sign-trpc/server/team-router/update-team.types';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { ZUpdateTeamRequestSchema } from '@hanzo/esign-trpc/server/team-router/update-team.types';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -19,9 +19,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type UpdateTeamDialogProps = {
   teamId: number;

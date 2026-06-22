@@ -11,14 +11,14 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"],
-      "@hanzo/sign-api": ["../../packages/api"],
-      "@hanzo/sign-assets": ["../../packages/assets"],
-      "@hanzo/sign-auth": ["../../packages/auth"],
-      "@hanzo/sign-lib": ["../../packages/lib"],
-      "@hanzo/sign-prisma": ["../../packages/prisma"],
-      "@hanzo/sign-trpc": ["../../packages/trpc"],
-      "@hanzo/sign-ui": ["../../packages/ui"],
-      "@hanzo/sign-tailwind-config": ["../../packages/tailwind-config"]
+      "@hanzo/esign-api": ["../../packages/api"],
+      "@hanzo/esign-assets": ["../../packages/assets"],
+      "@hanzo/esign-auth": ["../../packages/auth"],
+      "@hanzo/esign-lib": ["../../packages/lib"],
+      "@hanzo/esign-prisma": ["../../packages/prisma"],
+      "@hanzo/esign-trpc": ["../../packages/trpc"],
+      "@hanzo/esign-ui": ["../../packages/ui"],
+      "@hanzo/esign-tailwind-config": ["../../packages/tailwind-config"]
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,

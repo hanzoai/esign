@@ -10,13 +10,13 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import type { z } from 'zod';
 
-import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { ZCreateApiTokenRequestSchema } from '@hanzo/sign-trpc/server/api-token-router/create-api-token.types';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+import { useCopyToClipboard } from '@hanzo/esign-lib/client-only/hooks/use-copy-to-clipboard';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { ZCreateApiTokenRequestSchema } from '@hanzo/esign-trpc/server/api-token-router/create-api-token.types';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
 import {
   Form,
   FormControl,
@@ -25,17 +25,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

@@ -1,10 +1,10 @@
 import { redirect } from 'react-router';
 
-import { extractCookieFromHeaders } from '@hanzo/sign-auth/server/lib/utils/cookies';
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { getTeams } from '@hanzo/sign-lib/server-only/team/get-teams';
-import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import { ZTeamUrlSchema } from '@hanzo/sign-trpc/server/team-router/schema';
+import { extractCookieFromHeaders } from '@hanzo/esign-auth/server/lib/utils/cookies';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { getTeams } from '@hanzo/esign-lib/server-only/team/get-teams';
+import { formatDocumentsPath } from '@hanzo/esign-lib/utils/teams';
+import { ZTeamUrlSchema } from '@hanzo/esign-trpc/server/team-router/schema';
 
 import type { Route } from './+types/_index';
 

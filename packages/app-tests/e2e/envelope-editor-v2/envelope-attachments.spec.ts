@@ -1,7 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { prisma } from '@hanzo/sign-prisma';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { prisma } from '@hanzo/esign-prisma';
 
 import {
   type TEnvelopeEditorSurface,

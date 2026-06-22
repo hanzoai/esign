@@ -11,11 +11,11 @@ import {
 } from 'lucide-react';
 import { Link, NavLink, Outlet, redirect } from 'react-router';
 
-import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
-import { canExecuteTeamAction } from '@hanzo/sign-lib/utils/teams';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { getSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { getTeamByUrl } from '@hanzo/esign-lib/server-only/team/get-team';
+import { canExecuteTeamAction } from '@hanzo/esign-lib/utils/teams';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
 import { useCurrentTeam } from '~/providers/team';

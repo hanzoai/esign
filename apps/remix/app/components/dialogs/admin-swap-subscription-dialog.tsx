@@ -3,15 +3,15 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
-import type { TFindAdminOrganisationsResponse } from '@hanzo/sign-trpc/server/admin-router/find-admin-organisations.types';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/esign-trpc/zap/react';
+import type { TFindAdminOrganisationsResponse } from '@hanzo/esign-trpc/server/admin-router/find-admin-organisations.types';
 import type {
   TSwapOrganisationSubscriptionRequest,
   TSwapOrganisationSubscriptionResponse,
-} from '@hanzo/sign-trpc/server/admin-router/swap-organisation-subscription.types';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/admin-router/swap-organisation-subscription.types';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -19,15 +19,15 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type AdminSwapSubscriptionDialogProps = {
   open: boolean;

@@ -4,12 +4,12 @@ import { msg } from '@lingui/macro';
 import { parse } from 'csv-parse/sync';
 import { z } from 'zod';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { BulkSendCompleteEmail } from '@hanzo/sign-email/templates/bulk-send-complete';
-import { sendDocument } from '@hanzo/sign-lib/server-only/document/send-document';
-import { createDocumentFromTemplate } from '@hanzo/sign-lib/server-only/template/create-document-from-template';
-import { getTemplateById } from '@hanzo/sign-lib/server-only/template/get-template-by-id';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { BulkSendCompleteEmail } from '@hanzo/esign-email/templates/bulk-send-complete';
+import { sendDocument } from '@hanzo/esign-lib/server-only/document/send-document';
+import { createDocumentFromTemplate } from '@hanzo/esign-lib/server-only/template/create-document-from-template';
+import { getTemplateById } from '@hanzo/esign-lib/server-only/template/get-template-by-id';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';

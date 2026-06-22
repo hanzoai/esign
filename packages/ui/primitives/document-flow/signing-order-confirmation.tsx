@@ -7,7 +7,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@hanzo/sign-ui/primitives/alert-dialog';
+} from '@hanzo/esign-ui/primitives/alert-dialog';
 
 export type SigningOrderConfirmationProps = {
   open: boolean;

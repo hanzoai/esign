@@ -2,9 +2,9 @@ import { createElement } from 'react';
 
 import { msg } from '@lingui/core/macro';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { RecipientExpiredTemplate } from '@hanzo/sign-email/templates/recipient-expired';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { RecipientExpiredTemplate } from '@hanzo/esign-email/templates/recipient-expired';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';

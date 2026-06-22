@@ -6,16 +6,16 @@ import type { Field } from '@prisma/client';
 import { type Recipient } from '@prisma/client';
 import { useNavigate, useSearchParams } from 'react-router';
 
-import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient-roles';
-import type { TTemplate } from '@hanzo/sign-lib/types/template';
-import { isRequiredField } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
-import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
-import { DocumentFlowFormContainer } from '@hanzo/sign-ui/primitives/document-flow/document-flow-root';
-import type { DocumentFlowStep } from '@hanzo/sign-ui/primitives/document-flow/types';
-import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/esign-lib/constants/recipient-roles';
+import type { TTemplate } from '@hanzo/esign-lib/types/template';
+import { isRequiredField } from '@hanzo/esign-lib/utils/advanced-fields-helpers';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/esign-lib/utils/envelope-download';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
+import { DocumentFlowFormContainer } from '@hanzo/esign-ui/primitives/document-flow/document-flow-root';
+import type { DocumentFlowStep } from '@hanzo/esign-ui/primitives/document-flow/types';
+import { Stepper } from '@hanzo/esign-ui/primitives/stepper';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useRequiredDocumentSigningAuthContext } from '~/components/general/document-signing/document-signing-auth-provider';
 import { useRequiredDocumentSigningContext } from '~/components/general/document-signing/document-signing-provider';

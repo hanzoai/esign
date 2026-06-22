@@ -6,20 +6,20 @@ import { Trans } from '@lingui/react/macro';
 import { useSearchParams } from 'react-router';
 import { Link } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import type { TFindTeamsResponse } from '@hanzo/sign-trpc/server/team-router/find-teams.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import type { TFindTeamsResponse } from '@hanzo/esign-trpc/server/team-router/find-teams.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
 
 import { TeamDeleteDialog } from '../dialogs/team-delete-dialog';
 

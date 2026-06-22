@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 
-import { isBase64Image } from '@hanzo/sign-lib/constants/signatures';
+import { isBase64Image } from '@hanzo/esign-lib/constants/signatures';
 
 export type DocumentSigningContextValue = {
   fullName: string;

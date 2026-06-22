@@ -1,10 +1,10 @@
 import type { Context, Next } from 'hono';
 
-import { extractSessionCookieFromHeaders } from '@hanzo/sign-auth/server/lib/session/session-cookies';
+import { extractSessionCookieFromHeaders } from '@hanzo/esign-auth/server/lib/session/session-cookies';
 import {
   type RequestMetadata,
   extractRequestMetadata,
-} from '@hanzo/sign-lib/universal/extract-request-metadata';
+} from '@hanzo/esign-lib/universal/extract-request-metadata';
 
 export type AppContext = {
   requestMetadata: RequestMetadata;

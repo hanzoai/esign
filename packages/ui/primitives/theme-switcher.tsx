@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Monitor, MoonStar, Sun } from 'lucide-react';
 import { Theme, useTheme } from 'remix-themes';
 
-import { useIsMounted } from '@hanzo/sign-lib/client-only/hooks/use-is-mounted';
+import { useIsMounted } from '@hanzo/esign-lib/client-only/hooks/use-is-mounted';
 
 export const ThemeSwitcher = () => {
   const [theme, setTheme] = useTheme();

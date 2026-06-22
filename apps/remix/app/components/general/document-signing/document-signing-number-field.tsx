@@ -5,22 +5,22 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useRevalidator } from 'react-router';
 
-import { validateNumberField } from '@hanzo/sign-lib/advanced-fields-validation/validate-number';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import { ZNumberFieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import type { FieldWithSignature } from '@hanzo/sign-prisma/types/field-with-signature';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import { validateNumberField } from '@hanzo/esign-lib/advanced-fields-validation/validate-number';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
+import { ZNumberFieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import type { FieldWithSignature } from '@hanzo/esign-prisma/types/field-with-signature';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@hanzo/sign-trpc/server/field-router/schema';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from '@hanzo/sign-ui/primitives/dialog';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/field-router/schema';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from '@hanzo/esign-ui/primitives/dialog';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useRequiredDocumentSigningAuthContext } from './document-signing-auth-provider';
 import { DocumentSigningFieldContainer } from './document-signing-field-container';

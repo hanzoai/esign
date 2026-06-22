@@ -3,12 +3,12 @@ import { ReadStatus, RecipientRole, SigningStatus } from '@prisma/client';
 import { ArrowRight, EyeIcon, XCircle } from 'lucide-react';
 import { match } from 'ts-pattern';
 
-import type { DocumentAndSender } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
-import type { getRecipientByToken } from '@hanzo/sign-lib/server-only/recipient/get-recipient-by-token';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Progress } from '@hanzo/sign-ui/primitives/progress';
+import type { DocumentAndSender } from '@hanzo/esign-lib/server-only/document/get-document-by-token';
+import type { getRecipientByToken } from '@hanzo/esign-lib/server-only/recipient/get-recipient-by-token';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Progress } from '@hanzo/esign-ui/primitives/progress';
 
 // Get the return type from getRecipientByToken
 type RecipientWithFields = Awaited<ReturnType<typeof getRecipientByToken>>;

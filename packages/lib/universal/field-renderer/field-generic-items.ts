@@ -3,7 +3,7 @@ import Konva from 'konva';
 import {
   DEFAULT_RECT_BACKGROUND,
   RECIPIENT_COLOR_STYLES,
-} from '@hanzo/sign-ui/lib/recipient-colors';
+} from '@hanzo/esign-ui/lib/recipient-colors';
 
 import type { FieldToRender, RenderFieldElementOptions } from './field-renderer';
 import { calculateFieldPosition } from './field-renderer';

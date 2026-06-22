@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 
-import { kyselyPrisma, monthTrunc, prisma, sql } from '@hanzo/sign-prisma';
-import { SubscriptionStatus, UserSecurityAuditLogType } from '@hanzo/sign-prisma/client';
+import { kyselyPrisma, monthTrunc, prisma, sql } from '@hanzo/esign-prisma';
+import { SubscriptionStatus, UserSecurityAuditLogType } from '@hanzo/esign-prisma/client';
 
 export const getUsersCount = async () => {
   return await prisma.user.count();

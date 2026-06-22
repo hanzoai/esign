@@ -1,5 +1,5 @@
 {
-  "name": "@hanzo/sign-prettier-config",
+  "name": "@hanzo/esign-prettier-config",
   "version": "0.0.0",
   "main": "./index.cjs",
   "license": "MIT",

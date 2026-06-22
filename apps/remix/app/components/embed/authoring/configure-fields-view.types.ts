@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { ZFieldMetaSchema } from '@hanzo/sign-lib/types/field-meta';
-import { FieldType } from '@hanzo/sign-prisma/client';
+import { ZFieldMetaSchema } from '@hanzo/esign-lib/types/field-meta';
+import { FieldType } from '@hanzo/esign-prisma/client';
 
 export const ZConfigureFieldsFormSchema = z.object({
   fields: z.array(

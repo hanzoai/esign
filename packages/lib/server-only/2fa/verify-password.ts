@@ -1,6 +1,6 @@
 import { compare } from '@node-rs/bcrypt';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 type VerifyPasswordOptions = {
   userId: number;

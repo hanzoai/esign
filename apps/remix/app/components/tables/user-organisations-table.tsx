@@ -6,19 +6,19 @@ import { Trans } from '@lingui/react/macro';
 import type { OrganisationType } from '@prisma/client';
 import { Link } from 'react-router';
 
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { canExecuteOrganisationAction, isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import type { TGetOrganisationsResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisations.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import { canExecuteOrganisationAction, isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import type { TGetOrganisationsResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisations.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
 
 import { OrganisationLeaveDialog } from '../dialogs/organisation-leave-dialog';
 

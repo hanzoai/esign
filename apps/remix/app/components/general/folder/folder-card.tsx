@@ -11,21 +11,21 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
+import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
 import {
   type TFolderWithSubfolders,
   type TUpdateFolderRequestSchema,
-} from '@hanzo/sign-trpc/server/folder-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+} from '@hanzo/esign-trpc/server/folder-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
 
 import { useCurrentTeam } from '~/providers/team';
 

@@ -1,6 +1,6 @@
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { deletedAccountServiceAccount } from '../user/service-accounts/deleted-account';
 

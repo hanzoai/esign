@@ -12,11 +12,11 @@ import {
 } from 'lucide-react';
 import { Link, Outlet, redirect, useLocation } from 'react-router';
 
-import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
-import { isAdmin } from '@hanzo/sign-lib/utils/is-admin';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { getSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { LicenseClient } from '@hanzo/esign-lib/server-only/license/license-client';
+import { isAdmin } from '@hanzo/esign-lib/utils/is-admin';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { AdminLicenseStatusBanner } from '~/components/general/admin-license-status-banner';
 

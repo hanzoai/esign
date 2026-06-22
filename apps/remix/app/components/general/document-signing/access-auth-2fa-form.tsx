@@ -9,18 +9,18 @@ import { DateTime } from 'luxon';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import type { TRecipientAccessAuth } from '@hanzo/sign-lib/types/document-auth';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { TRecipientAccessAuth } from '@hanzo/esign-lib/types/document-auth';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TAccessAuthRequest2FAEmailRequest,
   TAccessAuthRequest2FAEmailResponse,
-} from '@hanzo/sign-trpc/server/document-router/access-auth-request-2fa-email.types';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Alert } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Form, FormField, FormItem } from '@hanzo/sign-ui/primitives/form/form';
-import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/sign-ui/primitives/pin-input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/document-router/access-auth-request-2fa-email.types';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Alert } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Form, FormField, FormItem } from '@hanzo/esign-ui/primitives/form/form';
+import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/esign-ui/primitives/pin-input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useRequiredDocumentSigningAuthContext } from './document-signing-auth-provider';
 

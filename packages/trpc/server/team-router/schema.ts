@@ -1,7 +1,7 @@
 import { TeamMemberRole } from '@prisma/client';
 import { z } from 'zod';
 
-import { PROTECTED_TEAM_URLS } from '@hanzo/sign-lib/constants/teams';
+import { PROTECTED_TEAM_URLS } from '@hanzo/esign-lib/constants/teams';
 
 /**
  * Restrict team URLs schema.

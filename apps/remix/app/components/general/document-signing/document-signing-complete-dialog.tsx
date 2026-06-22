@@ -8,13 +8,13 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import {
   type TRecipientAccessAuth,
   ZDocumentAccessAuthSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import { fieldsContainUnsignedRequiredField } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-lib/types/document-auth';
+import { fieldsContainUnsignedRequiredField } from '@hanzo/esign-lib/utils/advanced-fields-helpers';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -31,8 +31,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 
 import { useEmbedSigningContext } from '~/components/embed/embed-signing-context';
 import { AccessAuth2FAForm } from '~/components/general/document-signing/access-auth-2fa-form';

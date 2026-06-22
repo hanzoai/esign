@@ -4,9 +4,9 @@ import path from 'node:path';
 import {
   DIRECT_TEMPLATE_RECIPIENT_EMAIL,
   DIRECT_TEMPLATE_RECIPIENT_NAME,
-} from '@hanzo/sign-lib/constants/direct-templates';
-import { incrementTemplateId } from '@hanzo/sign-lib/server-only/envelope/increment-id';
-import { prefixedId } from '@hanzo/sign-lib/universal/id';
+} from '@hanzo/esign-lib/constants/direct-templates';
+import { incrementTemplateId } from '@hanzo/esign-lib/server-only/envelope/increment-id';
+import { prefixedId } from '@hanzo/esign-lib/universal/id';
 
 import { prisma } from '..';
 import type { Prisma, User } from '../client';

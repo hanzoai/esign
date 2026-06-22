@@ -18,15 +18,15 @@
 //   recipient.completeDocumentWithToken / rejectDocumentWithToken
 import { EnvelopeType } from '@prisma/client';
 
-import { completeDocumentWithToken } from '@hanzo/sign-lib/server-only/document/complete-document-with-token';
-import { rejectDocumentWithToken } from '@hanzo/sign-lib/server-only/document/reject-document-with-token';
-import { createEnvelopeRecipients } from '@hanzo/sign-lib/server-only/recipient/create-envelope-recipients';
-import { deleteEnvelopeRecipient } from '@hanzo/sign-lib/server-only/recipient/delete-envelope-recipient';
-import { getRecipientById } from '@hanzo/sign-lib/server-only/recipient/get-recipient-by-id';
-import { getRecipientSuggestions } from '@hanzo/sign-lib/server-only/recipient/get-recipient-suggestions';
-import { setDocumentRecipients } from '@hanzo/sign-lib/server-only/recipient/set-document-recipients';
-import { setTemplateRecipients } from '@hanzo/sign-lib/server-only/recipient/set-template-recipients';
-import { updateEnvelopeRecipients } from '@hanzo/sign-lib/server-only/recipient/update-envelope-recipients';
+import { completeDocumentWithToken } from '@hanzo/esign-lib/server-only/document/complete-document-with-token';
+import { rejectDocumentWithToken } from '@hanzo/esign-lib/server-only/document/reject-document-with-token';
+import { createEnvelopeRecipients } from '@hanzo/esign-lib/server-only/recipient/create-envelope-recipients';
+import { deleteEnvelopeRecipient } from '@hanzo/esign-lib/server-only/recipient/delete-envelope-recipient';
+import { getRecipientById } from '@hanzo/esign-lib/server-only/recipient/get-recipient-by-id';
+import { getRecipientSuggestions } from '@hanzo/esign-lib/server-only/recipient/get-recipient-suggestions';
+import { setDocumentRecipients } from '@hanzo/esign-lib/server-only/recipient/set-document-recipients';
+import { setTemplateRecipients } from '@hanzo/esign-lib/server-only/recipient/set-template-recipients';
+import { updateEnvelopeRecipients } from '@hanzo/esign-lib/server-only/recipient/update-envelope-recipients';
 
 import { ZGetRecipientSuggestionsRequestSchema } from '../../../server/recipient-router/find-recipient-suggestions.types';
 import {

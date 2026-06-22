@@ -10,13 +10,13 @@ import { match } from 'ts-pattern';
 import { UAParser } from 'ua-parser-js';
 import { z } from 'zod';
 
-import { MAXIMUM_PASSKEYS } from '@hanzo/sign-lib/constants/auth';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import type { TCreatePasskeyRequest } from '@hanzo/sign-trpc/server/auth-router/create-passkey.types';
-import type { TCreatePasskeyRegistrationOptionsResponse } from '@hanzo/sign-trpc/server/auth-router/create-passkey-registration-options.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { MAXIMUM_PASSKEYS } from '@hanzo/esign-lib/constants/auth';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import type { TCreatePasskeyRequest } from '@hanzo/esign-trpc/server/auth-router/create-passkey.types';
+import type { TCreatePasskeyRegistrationOptionsResponse } from '@hanzo/esign-trpc/server/auth-router/create-passkey-registration-options.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -25,7 +25,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -33,9 +33,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type PasskeyCreateDialogProps = {
   trigger?: React.ReactNode;

@@ -4,25 +4,25 @@ import { DateTime } from 'luxon';
 import { P, match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { validateCheckboxLength } from '@hanzo/sign-lib/advanced-fields-validation/validate-checkbox';
-import { validateDropdownField } from '@hanzo/sign-lib/advanced-fields-validation/validate-dropdown';
-import { validateNumberField } from '@hanzo/sign-lib/advanced-fields-validation/validate-number';
-import { validateTextField } from '@hanzo/sign-lib/advanced-fields-validation/validate-text';
-import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
-import { isBase64Image } from '@hanzo/sign-lib/constants/signatures';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { TDocumentMeta } from '@hanzo/sign-lib/types/document-meta';
+import { validateCheckboxLength } from '@hanzo/esign-lib/advanced-fields-validation/validate-checkbox';
+import { validateDropdownField } from '@hanzo/esign-lib/advanced-fields-validation/validate-dropdown';
+import { validateNumberField } from '@hanzo/esign-lib/advanced-fields-validation/validate-number';
+import { validateTextField } from '@hanzo/esign-lib/advanced-fields-validation/validate-text';
+import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
+import { isBase64Image } from '@hanzo/esign-lib/constants/signatures';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/esign-lib/constants/time-zones';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { TDocumentMeta } from '@hanzo/esign-lib/types/document-meta';
 import {
   ZCheckboxFieldMeta,
   ZDropdownFieldMeta,
   ZNumberFieldMeta,
   ZRadioFieldMeta,
   ZTextFieldMeta,
-} from '@hanzo/sign-lib/types/field-meta';
-import { toCheckboxCustomText, toRadioCustomText } from '@hanzo/sign-lib/utils/fields';
-import type { TSignEnvelopeFieldValue } from '@hanzo/sign-trpc/server/envelope-router/sign-envelope-field.types';
-import { checkboxValidationSigns } from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
+} from '@hanzo/esign-lib/types/field-meta';
+import { toCheckboxCustomText, toRadioCustomText } from '@hanzo/esign-lib/utils/fields';
+import type { TSignEnvelopeFieldValue } from '@hanzo/esign-trpc/server/envelope-router/sign-envelope-field.types';
+import { checkboxValidationSigns } from '@hanzo/esign-ui/primitives/document-flow/field-items-advanced-settings/constants';
 
 export type ExtractFieldInsertionValuesOptions = {
   fieldValue: TSignEnvelopeFieldValue;

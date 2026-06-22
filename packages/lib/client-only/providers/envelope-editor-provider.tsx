@@ -4,29 +4,29 @@ import { useLingui } from '@lingui/react/macro';
 import { EnvelopeType, Prisma, ReadStatus, SendStatus, SigningStatus } from '@prisma/client';
 import { useSearchParams } from 'react-router';
 
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
 import {
   DEFAULT_EDITOR_CONFIG,
   type EnvelopeEditorConfig,
   type TEditorEnvelope,
-} from '@hanzo/sign-lib/types/envelope-editor';
-import type { TGetEditorEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-editor-envelope.types';
+} from '@hanzo/esign-lib/types/envelope-editor';
+import type { TGetEditorEnvelopeResponse } from '@hanzo/esign-trpc/server/envelope-router/get-editor-envelope.types';
 import type {
   TSetEnvelopeFieldsRequest,
   TSetEnvelopeFieldsResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/set-envelope-fields.types';
+} from '@hanzo/esign-trpc/server/envelope-router/set-envelope-fields.types';
 import type {
   TSetEnvelopeRecipientsRequest,
   TSetEnvelopeRecipientsResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/set-envelope-recipients.types';
+} from '@hanzo/esign-trpc/server/envelope-router/set-envelope-recipients.types';
 import type {
   TUpdateEnvelopeRequest,
   TUpdateEnvelopeResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/update-envelope.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TRecipientColor } from '@hanzo/sign-ui/lib/recipient-colors';
-import { AVAILABLE_RECIPIENT_COLORS } from '@hanzo/sign-ui/lib/recipient-colors';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/envelope-router/update-envelope.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TRecipientColor } from '@hanzo/esign-ui/lib/recipient-colors';
+import { AVAILABLE_RECIPIENT_COLORS } from '@hanzo/esign-ui/lib/recipient-colors';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import type { TDocumentEmailSettings } from '../../types/document-email';
 import { formatDocumentsPath, formatTemplatesPath } from '../../utils/teams';

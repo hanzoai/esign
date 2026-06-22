@@ -2,12 +2,12 @@ import { Plural, Trans } from '@lingui/react/macro';
 import { ChevronLeft, Users2 } from 'lucide-react';
 import { Link, redirect } from 'react-router';
 
-import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { getDocumentWithDetailsById } from '@hanzo/sign-lib/server-only/document/get-document-with-details-by-id';
-import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
-import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
-import { logDocumentAccess } from '@hanzo/sign-lib/utils/logger';
-import { canAccessTeamDocument, formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
+import { getSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { getDocumentWithDetailsById } from '@hanzo/esign-lib/server-only/document/get-document-with-details-by-id';
+import { getTeamByUrl } from '@hanzo/esign-lib/server-only/team/get-team';
+import { isDocumentCompleted } from '@hanzo/esign-lib/utils/document';
+import { logDocumentAccess } from '@hanzo/esign-lib/utils/logger';
+import { canAccessTeamDocument, formatDocumentsPath } from '@hanzo/esign-lib/utils/teams';
 
 import { DocumentAttachmentsPopover } from '~/components/general/document/document-attachments-popover';
 import { DocumentEditForm } from '~/components/general/document/document-edit-form';

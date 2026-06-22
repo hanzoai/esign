@@ -5,21 +5,21 @@ import { OrganisationMemberRole } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/organisations';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
 import {
   formatOrganisationCallbackUrl,
   formatOrganisationLoginUrl,
-} from '@hanzo/sign-lib/utils/organisation-authentication-portal';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { domainRegex } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-email-domain.types';
-import type { TGetOrganisationAuthenticationPortalResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-authentication-portal.types';
-import type { TUpdateOrganisationAuthenticationPortalRequest } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-authentication-portal.types';
-import { ZUpdateOrganisationAuthenticationPortalRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-authentication-portal.types';
-import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-lib/utils/organisation-authentication-portal';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { domainRegex } from '@hanzo/esign-trpc/server/organisation-router/create-organisation-email-domain.types';
+import type { TGetOrganisationAuthenticationPortalResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation-authentication-portal.types';
+import type { TUpdateOrganisationAuthenticationPortalRequest } from '@hanzo/esign-trpc/server/organisation-router/update-organisation-authentication-portal.types';
+import { ZUpdateOrganisationAuthenticationPortalRequestSchema } from '@hanzo/esign-trpc/server/organisation-router/update-organisation-authentication-portal.types';
+import { CopyTextButton } from '@hanzo/esign-ui/components/common/copy-text-button';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -27,20 +27,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { SpinnerBox } from '@hanzo/esign-ui/primitives/spinner';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { SettingsHeader } from '~/components/general/settings-header';
 import { appMetaTags } from '~/utils/meta';

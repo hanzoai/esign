@@ -3,14 +3,14 @@ import { FieldType } from '@prisma/client';
 import { XCircle } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { getDocumentAndSenderByToken } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
-import { isRecipientAuthorized } from '@hanzo/sign-lib/server-only/document/is-recipient-authorized';
-import { getFieldsForToken } from '@hanzo/sign-lib/server-only/field/get-fields-for-token';
-import { getRecipientByToken } from '@hanzo/sign-lib/server-only/recipient/get-recipient-by-token';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { useOptionalSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { getDocumentAndSenderByToken } from '@hanzo/esign-lib/server-only/document/get-document-by-token';
+import { isRecipientAuthorized } from '@hanzo/esign-lib/server-only/document/is-recipient-authorized';
+import { getFieldsForToken } from '@hanzo/esign-lib/server-only/field/get-fields-for-token';
+import { getRecipientByToken } from '@hanzo/esign-lib/server-only/recipient/get-recipient-by-token';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { DocumentSigningAuthPageView } from '~/components/general/document-signing/document-signing-auth-page';
 import { truncateTitle } from '~/utils/truncate-title';

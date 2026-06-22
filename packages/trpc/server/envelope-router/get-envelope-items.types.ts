@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import DocumentDataSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/DocumentDataSchema';
-import EnvelopeItemSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
+import DocumentDataSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/DocumentDataSchema';
+import EnvelopeItemSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
 
 export const ZGetEnvelopeItemsRequestSchema = z.object({
   envelopeId: z.string(),

@@ -1,4 +1,4 @@
-import type { RequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import type { RequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
 
 export type HonoAuthContext = {
   Variables: {

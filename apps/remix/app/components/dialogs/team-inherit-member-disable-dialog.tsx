@@ -2,9 +2,9 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import type { TeamGroup } from '@prisma/client';
 import { z } from 'zod';
 
-import type { ZDeleteTeamGroupRequestSchema } from '@hanzo/sign-trpc/server/team-router/delete-team-group.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { ZDeleteTeamGroupRequestSchema } from '@hanzo/esign-trpc/server/team-router/delete-team-group.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -14,8 +14,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

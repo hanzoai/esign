@@ -4,9 +4,9 @@ import { msg } from '@lingui/core/macro';
 import crypto from 'crypto';
 import { DateTime } from 'luxon';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { OrganisationAccountLinkConfirmationTemplate } from '@hanzo/sign-email/templates/organisation-account-link-confirmation';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { OrganisationAccountLinkConfirmationTemplate } from '@hanzo/esign-email/templates/organisation-account-link-confirmation';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';

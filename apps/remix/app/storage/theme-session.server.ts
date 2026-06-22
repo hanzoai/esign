@@ -1,7 +1,7 @@
 import { createCookieSessionStorage } from 'react-router';
 import { createThemeSessionResolver } from 'remix-themes';
 
-import { getCookieDomain, useSecureCookies } from '@hanzo/sign-lib/constants/auth';
+import { getCookieDomain, useSecureCookies } from '@hanzo/esign-lib/constants/auth';
 
 const themeSessionStorage = createCookieSessionStorage({
   cookie: {

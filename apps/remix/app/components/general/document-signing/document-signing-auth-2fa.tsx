@@ -7,11 +7,11 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { DocumentAuth, type TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { DialogFooter } from '@hanzo/sign-ui/primitives/dialog';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { DocumentAuth, type TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { DialogFooter } from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -19,8 +19,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/sign-ui/primitives/pin-input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/esign-ui/primitives/pin-input';
 
 import { EnableAuthenticatorAppDialog } from '~/components/forms/2fa/enable-authenticator-app-dialog';
 

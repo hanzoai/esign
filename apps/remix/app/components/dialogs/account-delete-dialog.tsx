@@ -4,11 +4,11 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { authClient } from '@hanzo/esign-auth/client';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -17,10 +17,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type AccountDeleteDialogProps = {
   className?: string;

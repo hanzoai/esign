@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-import { kyselyPrisma, monthTrunc } from '@hanzo/sign-prisma';
+import { kyselyPrisma, monthTrunc } from '@hanzo/esign-prisma';
 
 export const getSignerConversionMonthly = async () => {
   // SQLite month truncation (epoch-ms DateTime → YYYY-MM-01 via strftime).

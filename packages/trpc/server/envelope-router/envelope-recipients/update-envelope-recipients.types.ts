@@ -4,8 +4,8 @@ import { z } from 'zod';
 import {
   ZRecipientAccessAuthTypesSchema,
   ZRecipientActionAuthTypesSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import { ZRecipientEmailSchema, ZRecipientLiteSchema } from '@hanzo/sign-lib/types/recipient';
+} from '@hanzo/esign-lib/types/document-auth';
+import { ZRecipientEmailSchema, ZRecipientLiteSchema } from '@hanzo/esign-lib/types/recipient';
 
 export const ZUpdateEnvelopeRecipientSchema = z.object({
   id: z.number().describe('The ID of the recipient to update.'),

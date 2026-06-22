@@ -1,17 +1,17 @@
 import { expect, test } from '@playwright/test';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import type { TCheckboxFieldMeta, TRadioFieldMeta } from '@hanzo/sign-lib/types/field-meta';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import type { TCheckboxFieldMeta, TRadioFieldMeta } from '@hanzo/esign-lib/types/field-meta';
 import {
   mapDocumentIdToSecondaryId,
   mapSecondaryIdToDocumentId,
   mapSecondaryIdToTemplateId,
-} from '@hanzo/sign-lib/utils/envelope';
-import { prisma } from '@hanzo/sign-prisma';
-import { FieldType, RecipientRole } from '@hanzo/sign-prisma/client';
-import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+} from '@hanzo/esign-lib/utils/envelope';
+import { prisma } from '@hanzo/esign-prisma';
+import { FieldType, RecipientRole } from '@hanzo/esign-prisma/client';
+import { seedBlankTemplate } from '@hanzo/esign-prisma/seed/templates';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../../fixtures/authentication';
 

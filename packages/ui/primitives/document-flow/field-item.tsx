@@ -9,11 +9,11 @@ import { createPortal } from 'react-dom';
 import { Rnd } from 'react-rnd';
 import { useSearchParams } from 'react-router';
 
-import { useElementBounds } from '@hanzo/sign-lib/client-only/hooks/use-element-bounds';
-import { useIsPageInDom } from '@hanzo/sign-lib/client-only/hooks/use-is-page-in-dom';
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import type { TFieldMetaSchema } from '@hanzo/sign-lib/types/field-meta';
-import { ZCheckboxFieldMeta, ZRadioFieldMeta } from '@hanzo/sign-lib/types/field-meta';
+import { useElementBounds } from '@hanzo/esign-lib/client-only/hooks/use-element-bounds';
+import { useIsPageInDom } from '@hanzo/esign-lib/client-only/hooks/use-is-page-in-dom';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import type { TFieldMetaSchema } from '@hanzo/esign-lib/types/field-meta';
+import { ZCheckboxFieldMeta, ZRadioFieldMeta } from '@hanzo/esign-lib/types/field-meta';
 
 import { useRecipientColors } from '../../lib/recipient-colors';
 import { cn } from '../../lib/utils';

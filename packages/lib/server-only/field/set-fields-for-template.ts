@@ -1,10 +1,10 @@
 import { EnvelopeType, FieldType } from '@prisma/client';
 
-import { validateCheckboxField } from '@hanzo/sign-lib/advanced-fields-validation/validate-checkbox';
-import { validateDropdownField } from '@hanzo/sign-lib/advanced-fields-validation/validate-dropdown';
-import { validateNumberField } from '@hanzo/sign-lib/advanced-fields-validation/validate-number';
-import { validateRadioField } from '@hanzo/sign-lib/advanced-fields-validation/validate-radio';
-import { validateTextField } from '@hanzo/sign-lib/advanced-fields-validation/validate-text';
+import { validateCheckboxField } from '@hanzo/esign-lib/advanced-fields-validation/validate-checkbox';
+import { validateDropdownField } from '@hanzo/esign-lib/advanced-fields-validation/validate-dropdown';
+import { validateNumberField } from '@hanzo/esign-lib/advanced-fields-validation/validate-number';
+import { validateRadioField } from '@hanzo/esign-lib/advanced-fields-validation/validate-radio';
+import { validateTextField } from '@hanzo/esign-lib/advanced-fields-validation/validate-text';
 import {
   FIELD_META_DEFAULT_VALUES,
   type TFieldMetaSchema as FieldMeta,
@@ -14,8 +14,8 @@ import {
   ZNumberFieldMeta,
   ZRadioFieldMeta,
   ZTextFieldMeta,
-} from '@hanzo/sign-lib/types/field-meta';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/types/field-meta';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import type { EnvelopeIdOptions } from '../../utils/envelope';

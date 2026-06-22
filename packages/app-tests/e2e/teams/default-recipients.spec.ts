@@ -2,16 +2,16 @@ import { expect, test } from '@playwright/test';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import { prisma } from '@hanzo/sign-prisma';
-import { EnvelopeType, RecipientRole } from '@hanzo/sign-prisma/client';
-import { seedTeam } from '@hanzo/sign-prisma/seed/teams';
-import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/esign-prisma';
+import { EnvelopeType, RecipientRole } from '@hanzo/esign-prisma/client';
+import { seedTeam } from '@hanzo/esign-prisma/seed/teams';
+import { seedBlankTemplate } from '@hanzo/esign-prisma/seed/templates';
 import type {
   TCreateEnvelopePayload,
   TCreateEnvelopeResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
+} from '@hanzo/esign-trpc/server/envelope-router/create-envelope.types';
 
 import { apiSignin } from '../fixtures/authentication';
 

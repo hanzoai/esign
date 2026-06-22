@@ -1,6 +1,6 @@
-import { SIGN_ENCRYPTION_SECONDARY_KEY } from '@hanzo/sign-lib/constants/crypto';
-import { ZEncryptedDataSchema } from '@hanzo/sign-lib/server-only/crypto/encrypt';
-import { symmetricDecrypt } from '@hanzo/sign-lib/universal/crypto';
+import { SIGN_ENCRYPTION_SECONDARY_KEY } from '@hanzo/esign-lib/constants/crypto';
+import { ZEncryptedDataSchema } from '@hanzo/esign-lib/server-only/crypto/encrypt';
+import { symmetricDecrypt } from '@hanzo/esign-lib/universal/crypto';
 
 /**
  * Decrypt the passed in data. This uses the secondary encrypt key for miscellaneous data.

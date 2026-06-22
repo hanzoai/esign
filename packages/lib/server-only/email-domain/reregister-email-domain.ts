@@ -1,7 +1,7 @@
 import { DeleteEmailIdentityCommand } from '@aws-sdk/client-sesv2';
 import { EmailDomainStatus } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { SIGN_ENCRYPTION_KEY } from '../../constants/crypto';
 import { AppError, AppErrorCode } from '../../errors/app-error';

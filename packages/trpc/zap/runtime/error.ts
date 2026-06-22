@@ -16,7 +16,7 @@ import {
   AppError,
   AppErrorCode,
   genericErrorCodeToTrpcErrorCodeMap,
-} from '@hanzo/sign-lib/errors/app-error';
+} from '@hanzo/esign-lib/errors/app-error';
 
 /** Map an AppError code to the wire status (mirrors the tRPC code→status map). */
 export function statusForCode(code: string): number {

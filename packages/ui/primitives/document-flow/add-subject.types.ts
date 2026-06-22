@@ -1,7 +1,7 @@
 import { DocumentDistributionMethod } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/esign-lib/types/document-email';
 
 export const ZAddSubjectFormSchema = z.object({
   meta: z.object({

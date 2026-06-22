@@ -9,12 +9,12 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
-import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/organisations';
-import type { ZUpdateOrganisationMemberRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-members.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/organisations';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
+import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/esign-lib/utils/organisations';
+import type { ZUpdateOrganisationMemberRequestSchema } from '@hanzo/esign-trpc/server/organisation-router/update-organisation-members.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -31,15 +31,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
+} from '@hanzo/esign-ui/primitives/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type OrganisationMemberUpdateDialogProps = {
   currentUserOrganisationRole: OrganisationMemberRole;

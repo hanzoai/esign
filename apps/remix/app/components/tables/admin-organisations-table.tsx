@@ -12,24 +12,24 @@ import {
 } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { SUBSCRIPTION_STATUS_MAP } from '@hanzo/sign-lib/constants/billing';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import type { TFindAdminOrganisationsResponse } from '@hanzo/sign-trpc/server/admin-router/find-admin-organisations.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { SUBSCRIPTION_STATUS_MAP } from '@hanzo/esign-lib/constants/billing';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import type { TFindAdminOrganisationsResponse } from '@hanzo/esign-trpc/server/admin-router/find-admin-organisations.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
 
 import { AdminSwapSubscriptionDialog } from '~/components/dialogs/admin-swap-subscription-dialog';
 

@@ -9,7 +9,7 @@
 // NEXT_PUBLIC_APP_NAME so tenants can drop in their own brand without
 // forking the component.
 
-import { cn } from '@hanzo/sign-ui/lib/utils';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 import type { SVGProps } from 'react';
 
 export type HanzoMarkProps = SVGProps<SVGSVGElement> & {

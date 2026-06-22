@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZRegistrationResponseJSONSchema } from '@hanzo/sign-lib/types/webauthn';
+import { ZRegistrationResponseJSONSchema } from '@hanzo/esign-lib/types/webauthn';
 
 export const ZCreatePasskeyRequestSchema = z.object({
   passkeyName: z.string().trim().min(1),

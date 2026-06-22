@@ -5,9 +5,9 @@ import {
   seedBlankDocument,
   seedDocuments,
   seedTeamDocuments,
-} from '@hanzo/sign-prisma/seed/documents';
-import { seedTeam, seedTeamEmail, seedTeamMember } from '@hanzo/sign-prisma/seed/teams';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+} from '@hanzo/esign-prisma/seed/documents';
+import { seedTeam, seedTeamEmail, seedTeamMember } from '@hanzo/esign-prisma/seed/teams';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin, apiSignout } from '../fixtures/authentication';
 import { checkDocumentTabCount } from '../fixtures/documents';

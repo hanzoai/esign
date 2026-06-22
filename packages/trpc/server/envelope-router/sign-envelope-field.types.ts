@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { ZRecipientActionAuthSchema } from '@hanzo/sign-lib/types/document-auth';
-import { ZFieldSchema } from '@hanzo/sign-lib/types/field';
-import { FieldType } from '@hanzo/sign-prisma/client';
-import SignatureSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/SignatureSchema';
+import { ZRecipientActionAuthSchema } from '@hanzo/esign-lib/types/document-auth';
+import { ZFieldSchema } from '@hanzo/esign-lib/types/field';
+import { FieldType } from '@hanzo/esign-prisma/client';
+import SignatureSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/SignatureSchema';
 
 export const ZSignEnvelopeFieldValue = z.discriminatedUnion('type', [
   z.object({

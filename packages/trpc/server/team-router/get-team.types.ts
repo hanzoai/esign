@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { TeamMemberRole } from '@hanzo/sign-prisma/generated/types';
-import OrganisationGlobalSettingsSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationGlobalSettingsSchema';
-import TeamGlobalSettingsSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/TeamGlobalSettingsSchema';
-import TeamSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/TeamSchema';
+import { TeamMemberRole } from '@hanzo/esign-prisma/generated/types';
+import OrganisationGlobalSettingsSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationGlobalSettingsSchema';
+import TeamGlobalSettingsSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/TeamGlobalSettingsSchema';
+import TeamSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/TeamSchema';
 
 // export const getTeamMeta: TrpcOpenApiMeta = {
 //   openapi: {

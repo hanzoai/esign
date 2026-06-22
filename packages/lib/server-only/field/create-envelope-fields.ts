@@ -1,13 +1,13 @@
 import { PDF } from '@libpdf/core';
 import { EnvelopeType } from '@prisma/client';
 
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import type { TFieldAndMeta } from '@hanzo/sign-lib/types/field-meta';
-import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
-import { getFileServerSide } from '@hanzo/sign-lib/universal/upload/get-file.server';
-import { putPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
-import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { prisma } from '@hanzo/sign-prisma';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import type { TFieldAndMeta } from '@hanzo/esign-lib/types/field-meta';
+import type { ApiRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { getFileServerSide } from '@hanzo/esign-lib/universal/upload/get-file.server';
+import { putPdfFileServerSide } from '@hanzo/esign-lib/universal/upload/put-file.server';
+import { createDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import type { EnvelopeIdOptions } from '../../utils/envelope';

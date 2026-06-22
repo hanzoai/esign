@@ -1,6 +1,6 @@
 import type { EnvelopeType } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { mapFieldToLegacyField } from '../../utils/fields';

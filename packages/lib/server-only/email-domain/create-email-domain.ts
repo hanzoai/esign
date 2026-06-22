@@ -3,7 +3,7 @@ import { EmailDomainStatus } from '@prisma/client';
 import { generateKeyPair } from 'crypto';
 import { promisify } from 'util';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { SIGN_ENCRYPTION_KEY } from '../../constants/crypto';
 import { AppError, AppErrorCode } from '../../errors/app-error';

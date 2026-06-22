@@ -1,9 +1,9 @@
 import { useLingui } from '@lingui/react/macro';
 
-import type { TGetTeamResponse } from '@hanzo/sign-trpc/server/team-router/get-team.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import type { TGetTeamResponse } from '@hanzo/esign-trpc/server/team-router/get-team.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { SpinnerBox } from '@hanzo/esign-ui/primitives/spinner';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import {
   EmailPreferencesForm,

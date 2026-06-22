@@ -1,7 +1,7 @@
 import { EmailDomainStatus } from '@prisma/client';
 import { z } from 'zod';
 
-import { OrganisationEmailSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationEmailSchema';
+import { OrganisationEmailSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationEmailSchema';
 
 export const ZOrganisationEmailSchema = OrganisationEmailSchema.pick({
   id: true,

@@ -1,5 +1,5 @@
 {
-  "extends": "@hanzo/sign-tsconfig/base.json",
+  "extends": "@hanzo/esign-tsconfig/base.json",
   "compilerOptions": {
     "allowJs": true,
     "noEmit": true,

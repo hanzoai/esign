@@ -4,15 +4,15 @@ import { useLingui } from '@lingui/react/macro';
 import { DocumentStatus, type Recipient, SigningStatus } from '@prisma/client';
 import type Konva from 'konva';
 
-import { usePageRenderer } from '@hanzo/sign-lib/client-only/hooks/use-page-renderer';
+import { usePageRenderer } from '@hanzo/esign-lib/client-only/hooks/use-page-renderer';
 import {
   type PageRenderData,
   useCurrentEnvelopeRender,
-} from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
-import type { TEnvelope } from '@hanzo/sign-lib/types/envelope';
-import { renderField } from '@hanzo/sign-lib/universal/field-renderer/render-field';
-import { getClientSideFieldTranslations } from '@hanzo/sign-lib/utils/fields';
-import { EnvelopeRecipientFieldTooltip } from '@hanzo/sign-ui/components/document/envelope-recipient-field-tooltip';
+} from '@hanzo/esign-lib/client-only/providers/envelope-render-provider';
+import type { TEnvelope } from '@hanzo/esign-lib/types/envelope';
+import { renderField } from '@hanzo/esign-lib/universal/field-renderer/render-field';
+import { getClientSideFieldTranslations } from '@hanzo/esign-lib/utils/fields';
+import { EnvelopeRecipientFieldTooltip } from '@hanzo/esign-ui/components/document/envelope-recipient-field-tooltip';
 
 type GenericLocalField = TEnvelope['fields'][number] & {
   recipient: Pick<Recipient, 'id' | 'name' | 'email' | 'signingStatus'>;

@@ -6,10 +6,10 @@ import { Trans } from '@lingui/react/macro';
 import type {
   TDeleteEnvelopeItemRequest,
   TDeleteEnvelopeItemResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/delete-envelope-item.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/envelope-router/delete-envelope-item.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -18,8 +18,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type EnvelopeItemDeleteDialogProps = {
   canItemBeDeleted: boolean;

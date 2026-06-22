@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
 import { WebhookCallStatus, WebhookTriggerEvents } from '@prisma/client';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { alphaid } from '@hanzo/sign-lib/universal/id';
-import { prisma } from '@hanzo/sign-prisma';
-import { seedBlankDocument } from '@hanzo/sign-prisma/seed/documents';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { alphaid } from '@hanzo/esign-lib/universal/id';
+import { prisma } from '@hanzo/esign-prisma';
+import { seedBlankDocument } from '@hanzo/esign-prisma/seed/documents';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin, apiSignout } from '../fixtures/authentication';
 import { expectTextToBeVisible, openDropdownMenu } from '../fixtures/generic';

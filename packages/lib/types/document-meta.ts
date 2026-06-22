@@ -2,11 +2,11 @@ import { msg } from '@lingui/core/macro';
 import { DocumentDistributionMethod, DocumentSigningOrder } from '@prisma/client';
 import { z } from 'zod';
 
-import { VALID_DATE_FORMAT_VALUES } from '@hanzo/sign-lib/constants/date-formats';
-import { ZEnvelopeExpirationPeriod } from '@hanzo/sign-lib/constants/envelope-expiration';
-import { SUPPORTED_LANGUAGE_CODES } from '@hanzo/sign-lib/constants/i18n';
-import { isValidRedirectUrl } from '@hanzo/sign-lib/utils/is-valid-redirect-url';
-import { DocumentMetaSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/DocumentMetaSchema';
+import { VALID_DATE_FORMAT_VALUES } from '@hanzo/esign-lib/constants/date-formats';
+import { ZEnvelopeExpirationPeriod } from '@hanzo/esign-lib/constants/envelope-expiration';
+import { SUPPORTED_LANGUAGE_CODES } from '@hanzo/esign-lib/constants/i18n';
+import { isValidRedirectUrl } from '@hanzo/esign-lib/utils/is-valid-redirect-url';
+import { DocumentMetaSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/DocumentMetaSchema';
 
 import { ZDocumentEmailSettingsSchema } from './document-email';
 

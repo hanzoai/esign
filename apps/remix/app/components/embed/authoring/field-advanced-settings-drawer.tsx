@@ -1,11 +1,11 @@
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
-import { type TFieldMetaSchema as FieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import { parseMessageDescriptor } from '@hanzo/sign-lib/utils/i18n';
-import { FieldAdvancedSettings } from '@hanzo/sign-ui/primitives/document-flow/field-item-advanced-settings';
-import { FRIENDLY_FIELD_TYPE } from '@hanzo/sign-ui/primitives/document-flow/types';
-import { Sheet, SheetContent, SheetTitle } from '@hanzo/sign-ui/primitives/sheet';
+import { type TFieldMetaSchema as FieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import { parseMessageDescriptor } from '@hanzo/esign-lib/utils/i18n';
+import { FieldAdvancedSettings } from '@hanzo/esign-ui/primitives/document-flow/field-item-advanced-settings';
+import { FRIENDLY_FIELD_TYPE } from '@hanzo/esign-ui/primitives/document-flow/types';
+import { Sheet, SheetContent, SheetTitle } from '@hanzo/esign-ui/primitives/sheet';
 
 import type { TConfigureFieldsFormSchemaField } from './configure-fields-view.types';
 

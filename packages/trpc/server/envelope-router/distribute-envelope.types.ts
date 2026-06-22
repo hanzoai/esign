@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZDocumentMetaUpdateSchema } from '@hanzo/sign-lib/types/document-meta';
+import { ZDocumentMetaUpdateSchema } from '@hanzo/esign-lib/types/document-meta';
 
 import { ZSuccessResponseSchema } from '../schema';
 import { ZRecipientWithSigningUrlSchema } from './schema';

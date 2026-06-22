@@ -2,11 +2,11 @@ import { expect, test } from '@playwright/test';
 import { DocumentDataType, TeamMemberRole } from '@prisma/client';
 import path from 'path';
 
-import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { prisma } from '@hanzo/sign-prisma';
-import { seedTeam, seedTeamMember } from '@hanzo/sign-prisma/seed/teams';
-import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { extractDocumentAuthMethods } from '@hanzo/esign-lib/utils/document-auth';
+import { prisma } from '@hanzo/esign-prisma';
+import { seedTeam, seedTeamMember } from '@hanzo/esign-prisma/seed/teams';
+import { seedBlankTemplate } from '@hanzo/esign-prisma/seed/templates';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

@@ -1,10 +1,10 @@
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { acceptOrganisationInvitation } from '@hanzo/sign-lib/server-only/organisation/accept-organisation-invitation';
-import { prisma } from '@hanzo/sign-prisma';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { acceptOrganisationInvitation } from '@hanzo/esign-lib/server-only/organisation/accept-organisation-invitation';
+import { prisma } from '@hanzo/esign-prisma';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import type { Route } from './+types/organisation.invite.$token';
 

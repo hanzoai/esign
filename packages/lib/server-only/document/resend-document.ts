@@ -9,18 +9,18 @@ import {
   SigningStatus,
 } from '@prisma/client';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { DocumentInviteEmailTemplate } from '@hanzo/sign-email/templates/document-invite';
-import { resolveExpiresAt } from '@hanzo/sign-lib/constants/envelope-expiration';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { DocumentInviteEmailTemplate } from '@hanzo/esign-email/templates/document-invite';
+import { resolveExpiresAt } from '@hanzo/esign-lib/constants/envelope-expiration';
 import {
   RECIPIENT_ROLES_DESCRIPTION,
   RECIPIENT_ROLE_TO_EMAIL_TYPE,
-} from '@hanzo/sign-lib/constants/recipient-roles';
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
-import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { renderCustomEmailTemplate } from '@hanzo/sign-lib/utils/render-custom-email-template';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/constants/recipient-roles';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import type { ApiRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { createDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
+import { renderCustomEmailTemplate } from '@hanzo/esign-lib/utils/render-custom-email-template';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';

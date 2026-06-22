@@ -3,15 +3,15 @@ import { UsersIcon } from 'lucide-react';
 import { redirect } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { EnvelopeRenderProvider } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
-import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { getEnvelopeForDirectTemplateSigning } from '@hanzo/sign-lib/server-only/envelope/get-envelope-for-direct-template-signing';
-import { getTemplateByDirectLinkToken } from '@hanzo/sign-lib/server-only/template/get-template-by-direct-link-token';
-import { DocumentAccessAuth } from '@hanzo/sign-lib/types/document-auth';
-import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { prisma } from '@hanzo/sign-prisma';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { EnvelopeRenderProvider } from '@hanzo/esign-lib/client-only/providers/envelope-render-provider';
+import { useOptionalSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { getEnvelopeForDirectTemplateSigning } from '@hanzo/esign-lib/server-only/envelope/get-envelope-for-direct-template-signing';
+import { getTemplateByDirectLinkToken } from '@hanzo/esign-lib/server-only/template/get-template-by-direct-link-token';
+import { DocumentAccessAuth } from '@hanzo/esign-lib/types/document-auth';
+import { extractDocumentAuthMethods } from '@hanzo/esign-lib/utils/document-auth';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { Header as AuthenticatedHeader } from '~/components/general/app-header';
 import { DirectTemplatePageView } from '~/components/general/direct-template/direct-template-page';

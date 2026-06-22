@@ -9,23 +9,23 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router';
 import { Theme, useTheme } from 'remix-themes';
 
-import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { SUPPORTED_LANGUAGES } from '@hanzo/sign-lib/constants/i18n';
+import { useDebouncedValue } from '@hanzo/esign-lib/client-only/hooks/use-debounced-value';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { SUPPORTED_LANGUAGES } from '@hanzo/esign-lib/constants/i18n';
 import {
   DOCUMENTS_PAGE_SHORTCUT,
   SETTINGS_PAGE_SHORTCUT,
   TEMPLATES_PAGE_SHORTCUT,
-} from '@hanzo/sign-lib/constants/keyboard-shortcuts';
+} from '@hanzo/esign-lib/constants/keyboard-shortcuts';
 import {
   DO_NOT_INVALIDATE_QUERY_ON_MUTATION,
   SKIP_QUERY_BATCH_META,
-} from '@hanzo/sign-lib/constants/trpc';
-import { dynamicActivate } from '@hanzo/sign-lib/utils/i18n';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import type { TSearchDocumentResponse } from '@hanzo/sign-trpc/server/document-router/search-document.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { cn } from '@hanzo/sign-ui/lib/utils';
+} from '@hanzo/esign-lib/constants/trpc';
+import { dynamicActivate } from '@hanzo/esign-lib/utils/i18n';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import type { TSearchDocumentResponse } from '@hanzo/esign-trpc/server/document-router/search-document.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 import {
   CommandDialog,
   CommandEmpty,
@@ -34,8 +34,8 @@ import {
   CommandItem,
   CommandList,
   CommandShortcut,
-} from '@hanzo/sign-ui/primitives/command';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/command';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useOptionalCurrentTeam } from '~/providers/team';
 

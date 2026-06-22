@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/esign-lib/types/document-email';
 import {
   ZDocumentMetaDateFormatSchema,
   ZDocumentMetaDistributionMethodSchema,
@@ -12,16 +12,16 @@ import {
   ZDocumentMetaTimezoneSchema,
   ZDocumentMetaTypedSignatureEnabledSchema,
   ZDocumentMetaUploadSignatureEnabledSchema,
-} from '@hanzo/sign-lib/types/document-meta';
+} from '@hanzo/esign-lib/types/document-meta';
 import {
   ZFieldHeightSchema,
   ZFieldPageNumberSchema,
   ZFieldPageXSchema,
   ZFieldPageYSchema,
   ZFieldWidthSchema,
-} from '@hanzo/sign-lib/types/field';
-import { ZFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
-import { DocumentSigningOrder, RecipientRole } from '@hanzo/sign-prisma/generated/types';
+} from '@hanzo/esign-lib/types/field';
+import { ZFieldAndMetaSchema } from '@hanzo/esign-lib/types/field-meta';
+import { DocumentSigningOrder, RecipientRole } from '@hanzo/esign-prisma/generated/types';
 
 import { ZDocumentExternalIdSchema, ZDocumentTitleSchema } from '../document-router/schema';
 

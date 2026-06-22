@@ -1,10 +1,10 @@
-import { getHighestOrganisationRoleInGroup } from '@hanzo/sign-lib/utils/organisations';
+import { getHighestOrganisationRoleInGroup } from '@hanzo/esign-lib/utils/organisations';
 import {
   buildTeamWhereQuery,
   extractDerivedTeamSettings,
   getHighestTeamRoleInGroup,
-} from '@hanzo/sign-lib/utils/teams';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type { TGetOrganisationSessionResponse } from './get-organisation-session.types';
 

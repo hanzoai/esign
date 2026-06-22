@@ -5,13 +5,13 @@ import type { Team } from '@prisma/client';
 import { Prisma } from '@prisma/client';
 import { z } from 'zod';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { ConfirmTeamEmailTemplate } from '@hanzo/sign-email/templates/confirm-team-email';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { createTokenVerification } from '@hanzo/sign-lib/utils/token-verification';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { ConfirmTeamEmailTemplate } from '@hanzo/esign-email/templates/confirm-team-email';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/teams';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { createTokenVerification } from '@hanzo/esign-lib/utils/token-verification';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { env } from '../../utils/env';

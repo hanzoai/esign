@@ -4,20 +4,20 @@ import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import { type TemplateDirectLink, TemplateType } from '@prisma/client';
 
-import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
-import { getTeamPublicProfile } from '@hanzo/sign-lib/server-only/team/get-team-public-profile';
+import { getSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { getTeamByUrl } from '@hanzo/esign-lib/server-only/team/get-team';
+import { getTeamPublicProfile } from '@hanzo/esign-lib/server-only/team/get-team-public-profile';
 import type {
   FindTemplateRow,
   TFindTemplatesResponse,
-} from '@hanzo/sign-trpc/server/template-router/schema';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/template-router/schema';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { ManagePublicTemplateDialog } from '~/components/dialogs/public-profile-template-manage-dialog';
 import type { TPublicProfileFormSchema } from '~/components/forms/public-profile-form';

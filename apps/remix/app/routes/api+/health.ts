@@ -1,5 +1,5 @@
-import { getCertificateStatus } from '@hanzo/sign-lib/server-only/cert/cert-status';
-import { prisma } from '@hanzo/sign-prisma';
+import { getCertificateStatus } from '@hanzo/esign-lib/server-only/cert/cert-status';
+import { prisma } from '@hanzo/esign-prisma';
 
 type CheckStatus = 'ok' | 'warning' | 'error';
 

@@ -3,15 +3,15 @@ import { Plural, Trans } from '@lingui/react/macro';
 import type {
   TEnvelopeExpirationDurationPeriod,
   TEnvelopeExpirationPeriod,
-} from '@hanzo/sign-lib/constants/envelope-expiration';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-lib/constants/envelope-expiration';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
+} from '@hanzo/esign-ui/primitives/select';
 
 type ExpirationMode = 'duration' | 'disabled' | 'inherit';
 

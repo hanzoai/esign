@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { SIGN_ENCRYPTION_SECONDARY_KEY } from '@hanzo/sign-lib/constants/crypto';
-import { symmetricEncrypt } from '@hanzo/sign-lib/universal/crypto';
+import { SIGN_ENCRYPTION_SECONDARY_KEY } from '@hanzo/esign-lib/constants/crypto';
+import { symmetricEncrypt } from '@hanzo/esign-lib/universal/crypto';
 
 export const ZEncryptedDataSchema = z.object({
   data: z.string(),

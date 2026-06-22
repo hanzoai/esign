@@ -1,9 +1,9 @@
 import { Trans } from '@lingui/react/macro';
 import { redirect } from 'react-router';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { env } from '@hanzo/sign-lib/utils/env';
-import { isValidReturnTo, normalizeReturnTo } from '@hanzo/sign-lib/utils/is-valid-return-to';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { env } from '@hanzo/esign-lib/utils/env';
+import { isValidReturnTo, normalizeReturnTo } from '@hanzo/esign-lib/utils/is-valid-return-to';
 
 import { HanzoMark } from '~/components/branding/hanzo-mark';
 import { SignInForm } from '~/components/forms/signin';

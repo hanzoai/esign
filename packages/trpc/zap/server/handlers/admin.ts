@@ -23,40 +23,40 @@ import {
   SubscriptionStatus,
 } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { jobs, jobsClient } from '@hanzo/sign-lib/jobs/client';
-import { adminFindDocuments } from '@hanzo/sign-lib/server-only/admin/admin-find-documents';
-import { adminFindUnsealedDocuments } from '@hanzo/sign-lib/server-only/admin/admin-find-unsealed-documents';
-import { adminSuperDeleteDocument } from '@hanzo/sign-lib/server-only/admin/admin-super-delete-document';
-import { unsafeGetEntireEnvelope } from '@hanzo/sign-lib/server-only/admin/get-entire-document';
-import { updateRecipient } from '@hanzo/sign-lib/server-only/admin/update-recipient';
-import { updateUser } from '@hanzo/sign-lib/server-only/admin/update-user';
-import { sendDeleteEmail } from '@hanzo/sign-lib/server-only/document/send-delete-email';
-import { reregisterEmailDomain } from '@hanzo/sign-lib/server-only/email-domain/reregister-email-domain';
-import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { jobs, jobsClient } from '@hanzo/esign-lib/jobs/client';
+import { adminFindDocuments } from '@hanzo/esign-lib/server-only/admin/admin-find-documents';
+import { adminFindUnsealedDocuments } from '@hanzo/esign-lib/server-only/admin/admin-find-unsealed-documents';
+import { adminSuperDeleteDocument } from '@hanzo/esign-lib/server-only/admin/admin-super-delete-document';
+import { unsafeGetEntireEnvelope } from '@hanzo/esign-lib/server-only/admin/get-entire-document';
+import { updateRecipient } from '@hanzo/esign-lib/server-only/admin/update-recipient';
+import { updateUser } from '@hanzo/esign-lib/server-only/admin/update-user';
+import { sendDeleteEmail } from '@hanzo/esign-lib/server-only/document/send-delete-email';
+import { reregisterEmailDomain } from '@hanzo/esign-lib/server-only/email-domain/reregister-email-domain';
+import { LicenseClient } from '@hanzo/esign-lib/server-only/license/license-client';
 import {
   createOrganisation,
   createOrganisationClaimUpsertData,
-} from '@hanzo/sign-lib/server-only/organisation/create-organisation';
-import { upsertSiteSetting } from '@hanzo/sign-lib/server-only/site-settings/upsert-site-setting';
-import { deleteUser } from '@hanzo/sign-lib/server-only/user/delete-user';
-import { disableUser } from '@hanzo/sign-lib/server-only/user/disable-user';
-import { enableUser } from '@hanzo/sign-lib/server-only/user/enable-user';
-import { getUserById } from '@hanzo/sign-lib/server-only/user/get-user-by-id';
-import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
-import { INTERNAL_CLAIM_ID, internalClaims } from '@hanzo/sign-lib/types/subscription';
-import type { TClaimFlags } from '@hanzo/sign-lib/types/subscription';
-import { generateDatabaseId } from '@hanzo/sign-lib/universal/id';
-import { isDocumentCompleted, mapEnvelopesToDocumentMany } from '@hanzo/sign-lib/utils/document';
-import { parseDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
+} from '@hanzo/esign-lib/server-only/organisation/create-organisation';
+import { upsertSiteSetting } from '@hanzo/esign-lib/server-only/site-settings/upsert-site-setting';
+import { deleteUser } from '@hanzo/esign-lib/server-only/user/delete-user';
+import { disableUser } from '@hanzo/esign-lib/server-only/user/disable-user';
+import { enableUser } from '@hanzo/esign-lib/server-only/user/enable-user';
+import { getUserById } from '@hanzo/esign-lib/server-only/user/get-user-by-id';
+import type { FindResultResponse } from '@hanzo/esign-lib/types/search-params';
+import { INTERNAL_CLAIM_ID, internalClaims } from '@hanzo/esign-lib/types/subscription';
+import type { TClaimFlags } from '@hanzo/esign-lib/types/subscription';
+import { generateDatabaseId } from '@hanzo/esign-lib/universal/id';
+import { isDocumentCompleted, mapEnvelopesToDocumentMany } from '@hanzo/esign-lib/utils/document';
+import { parseDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
 import {
   mapSecondaryIdToDocumentId,
   unsafeBuildEnvelopeIdQuery,
-} from '@hanzo/sign-lib/utils/envelope';
-import { isAdmin } from '@hanzo/sign-lib/utils/is-admin';
-import { getHighestOrganisationRoleInGroup } from '@hanzo/sign-lib/utils/organisations';
-import { getHighestTeamRoleInGroup } from '@hanzo/sign-lib/utils/teams';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/envelope';
+import { isAdmin } from '@hanzo/esign-lib/utils/is-admin';
+import { getHighestOrganisationRoleInGroup } from '@hanzo/esign-lib/utils/organisations';
+import { getHighestTeamRoleInGroup } from '@hanzo/esign-lib/utils/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { ZCreateAdminOrganisationRequestSchema } from '../../../server/admin-router/create-admin-organisation.types';
 import { ZCreateSubscriptionClaimRequestSchema } from '../../../server/admin-router/create-subscription-claim.types';

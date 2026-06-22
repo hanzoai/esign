@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
 
 type LoginOptions = {
   page: Page;

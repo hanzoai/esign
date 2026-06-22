@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { TeamMemberRoleSchema } from '@hanzo/sign-prisma/generated/zod/inputTypeSchemas/TeamMemberRoleSchema';
-import OrganisationSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationSchema';
-import TeamSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/TeamSchema';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import { TeamMemberRoleSchema } from '@hanzo/esign-prisma/generated/zod/inputTypeSchemas/TeamMemberRoleSchema';
+import OrganisationSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationSchema';
+import TeamSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/TeamSchema';
 
 export const ZFindUserTeamsRequestSchema = ZFindSearchParamsSchema.extend({
   userId: z.number(),

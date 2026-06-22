@@ -4,10 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pick } from 'remeda';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import { DocumentAccessAuth } from '@hanzo/sign-lib/types/document-auth';
-import { prisma } from '@hanzo/sign-prisma';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import { DocumentAccessAuth } from '@hanzo/esign-lib/types/document-auth';
+import { prisma } from '@hanzo/esign-prisma';
 import {
   DocumentDistributionMethod,
   DocumentSigningOrder,
@@ -17,19 +17,19 @@ import {
   FieldType,
   FolderType,
   RecipientRole,
-} from '@hanzo/sign-prisma/client';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
-import type { TCreateEnvelopeItemsPayload } from '@hanzo/sign-trpc/server/envelope-router/create-envelope-items.types';
+} from '@hanzo/esign-prisma/client';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
+import type { TCreateEnvelopeItemsPayload } from '@hanzo/esign-trpc/server/envelope-router/create-envelope-items.types';
 import type {
   TCreateEnvelopePayload,
   TCreateEnvelopeResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
-import type { TDistributeEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/distribute-envelope.types';
-import type { TCreateEnvelopeRecipientsRequest } from '@hanzo/sign-trpc/server/envelope-router/envelope-recipients/create-envelope-recipients.types';
-import type { TUpdateEnvelopeRecipientsRequest } from '@hanzo/sign-trpc/server/envelope-router/envelope-recipients/update-envelope-recipients.types';
-import type { TFindEnvelopesResponse } from '@hanzo/sign-trpc/server/envelope-router/find-envelopes.types';
-import type { TGetEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-envelope.types';
-import type { TUpdateEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/update-envelope.types';
+} from '@hanzo/esign-trpc/server/envelope-router/create-envelope.types';
+import type { TDistributeEnvelopeRequest } from '@hanzo/esign-trpc/server/envelope-router/distribute-envelope.types';
+import type { TCreateEnvelopeRecipientsRequest } from '@hanzo/esign-trpc/server/envelope-router/envelope-recipients/create-envelope-recipients.types';
+import type { TUpdateEnvelopeRecipientsRequest } from '@hanzo/esign-trpc/server/envelope-router/envelope-recipients/update-envelope-recipients.types';
+import type { TFindEnvelopesResponse } from '@hanzo/esign-trpc/server/envelope-router/find-envelopes.types';
+import type { TGetEnvelopeResponse } from '@hanzo/esign-trpc/server/envelope-router/get-envelope.types';
+import type { TUpdateEnvelopeRequest } from '@hanzo/esign-trpc/server/envelope-router/update-envelope.types';
 
 import { ALIGNMENT_TEST_FIELDS } from '../../../constants/field-alignment-pdf';
 import { FIELD_META_TEST_FIELDS } from '../../../constants/field-meta-pdf';

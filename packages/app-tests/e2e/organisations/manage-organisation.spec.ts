@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-import { createTeam } from '@hanzo/sign-lib/server-only/team/create-team';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { seedOrganisationMembers } from '@hanzo/sign-prisma/seed/organisations';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { createTeam } from '@hanzo/esign-lib/server-only/team/create-team';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { seedOrganisationMembers } from '@hanzo/esign-prisma/seed/organisations';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin, apiSignout } from '../fixtures/authentication';
 import {

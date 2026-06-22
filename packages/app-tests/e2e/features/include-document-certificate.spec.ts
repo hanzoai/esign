@@ -2,12 +2,12 @@ import { PDF } from '@libpdf/core';
 import { expect, test } from '@playwright/test';
 import { DocumentStatus, FieldType } from '@prisma/client';
 
-import { getDocumentByToken } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
-import { getEnvelopeItemPdfUrl } from '@hanzo/sign-lib/utils/envelope-download';
-import { prisma } from '@hanzo/sign-prisma';
-import { seedPendingDocumentWithFullFields } from '@hanzo/sign-prisma/seed/documents';
-import { seedTeam } from '@hanzo/sign-prisma/seed/teams';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { getDocumentByToken } from '@hanzo/esign-lib/server-only/document/get-document-by-token';
+import { getEnvelopeItemPdfUrl } from '@hanzo/esign-lib/utils/envelope-download';
+import { prisma } from '@hanzo/esign-prisma';
+import { seedPendingDocumentWithFullFields } from '@hanzo/esign-prisma/seed/documents';
+import { seedTeam } from '@hanzo/esign-prisma/seed/teams';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 import { signSignaturePad } from '../fixtures/signature';

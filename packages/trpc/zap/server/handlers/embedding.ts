@@ -39,35 +39,35 @@ import pMap from 'p-map';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { getDocumentAndSenderByToken } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
-import { viewedDocument } from '@hanzo/sign-lib/server-only/document/viewed-document';
-import { createEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/create-embedding-presign-token';
-import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { UNSAFE_createEnvelopeItems } from '@hanzo/sign-lib/server-only/envelope-item/create-envelope-items';
-import { UNSAFE_deleteEnvelopeItem } from '@hanzo/sign-lib/server-only/envelope-item/delete-envelope-item';
-import { UNSAFE_updateEnvelopeItems } from '@hanzo/sign-lib/server-only/envelope-item/update-envelope-items';
-import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
-import { getEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
-import { updateEnvelope } from '@hanzo/sign-lib/server-only/envelope/update-envelope';
-import { getCompletedFieldsForToken } from '@hanzo/sign-lib/server-only/field/get-completed-fields-for-token';
-import { getFieldsForToken } from '@hanzo/sign-lib/server-only/field/get-fields-for-token';
-import { setFieldsForDocument } from '@hanzo/sign-lib/server-only/field/set-fields-for-document';
-import { setFieldsForTemplate } from '@hanzo/sign-lib/server-only/field/set-fields-for-template';
-import { getOrganisationClaimByTeamId } from '@hanzo/sign-lib/server-only/organisation/get-organisation-claims';
-import { getApiTokenByToken } from '@hanzo/sign-lib/server-only/public-api/get-api-token-by-token';
-import { getRecipientByToken } from '@hanzo/sign-lib/server-only/recipient/get-recipient-by-token';
-import { setDocumentRecipients } from '@hanzo/sign-lib/server-only/recipient/set-document-recipients';
-import { setTemplateRecipients } from '@hanzo/sign-lib/server-only/recipient/set-template-recipients';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@hanzo/sign-lib/utils/embed-config';
+import { IS_BILLING_ENABLED } from '@hanzo/esign-lib/constants/app';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { getDocumentAndSenderByToken } from '@hanzo/esign-lib/server-only/document/get-document-by-token';
+import { viewedDocument } from '@hanzo/esign-lib/server-only/document/viewed-document';
+import { createEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/create-embedding-presign-token';
+import { verifyEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { UNSAFE_createEnvelopeItems } from '@hanzo/esign-lib/server-only/envelope-item/create-envelope-items';
+import { UNSAFE_deleteEnvelopeItem } from '@hanzo/esign-lib/server-only/envelope-item/delete-envelope-item';
+import { UNSAFE_updateEnvelopeItems } from '@hanzo/esign-lib/server-only/envelope-item/update-envelope-items';
+import { createEnvelope } from '@hanzo/esign-lib/server-only/envelope/create-envelope';
+import { getEnvelopeWhereInput } from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
+import { updateEnvelope } from '@hanzo/esign-lib/server-only/envelope/update-envelope';
+import { getCompletedFieldsForToken } from '@hanzo/esign-lib/server-only/field/get-completed-fields-for-token';
+import { getFieldsForToken } from '@hanzo/esign-lib/server-only/field/get-fields-for-token';
+import { setFieldsForDocument } from '@hanzo/esign-lib/server-only/field/set-fields-for-document';
+import { setFieldsForTemplate } from '@hanzo/esign-lib/server-only/field/set-fields-for-template';
+import { getOrganisationClaimByTeamId } from '@hanzo/esign-lib/server-only/organisation/get-organisation-claims';
+import { getApiTokenByToken } from '@hanzo/esign-lib/server-only/public-api/get-api-token-by-token';
+import { getRecipientByToken } from '@hanzo/esign-lib/server-only/recipient/get-recipient-by-token';
+import { setDocumentRecipients } from '@hanzo/esign-lib/server-only/recipient/set-document-recipients';
+import { setTemplateRecipients } from '@hanzo/esign-lib/server-only/recipient/set-template-recipients';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@hanzo/esign-lib/utils/embed-config';
 import {
   canEnvelopeItemsBeModified,
   mapSecondaryIdToDocumentId,
   mapSecondaryIdToTemplateId,
-} from '@hanzo/sign-lib/utils/envelope';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/envelope';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { ZCreateEmbeddingDocumentRequestSchema } from '../../../server/embedding-router/create-embedding-document.types';
 import { ZCreateEmbeddingEnvelopeRequestSchema } from '../../../server/embedding-router/create-embedding-envelope.types';

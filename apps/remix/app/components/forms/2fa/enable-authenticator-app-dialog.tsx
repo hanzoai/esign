@@ -8,10 +8,10 @@ import { useForm } from 'react-hook-form';
 import { renderSVG } from 'uqr';
 import { z } from 'zod';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { authClient } from '@hanzo/esign-auth/client';
+import { downloadFile } from '@hanzo/esign-lib/client-only/download-file';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -21,7 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -29,9 +29,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/sign-ui/primitives/pin-input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/esign-ui/primitives/pin-input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { RecoveryCodeList } from './recovery-code-list';
 

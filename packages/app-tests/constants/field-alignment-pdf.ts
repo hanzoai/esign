@@ -2,8 +2,8 @@ import { FieldType } from '@prisma/client';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import type { TFieldAndMeta } from '@hanzo/sign-lib/types/field-meta';
-import { toCheckboxCustomText } from '@hanzo/sign-lib/utils/fields';
+import type { TFieldAndMeta } from '@hanzo/esign-lib/types/field-meta';
+import { toCheckboxCustomText } from '@hanzo/esign-lib/utils/fields';
 
 export type FieldTestData = TFieldAndMeta & {
   page: number;

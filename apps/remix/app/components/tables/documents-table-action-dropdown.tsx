@@ -19,18 +19,18 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import type { TDocumentMany as TDocumentRow } from '@hanzo/sign-lib/types/document';
-import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
-import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import { DocumentShareButton } from '@hanzo/sign-ui/components/document/document-share-button';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import type { TDocumentMany as TDocumentRow } from '@hanzo/esign-lib/types/document';
+import { isDocumentCompleted } from '@hanzo/esign-lib/utils/document';
+import { formatDocumentsPath } from '@hanzo/esign-lib/utils/teams';
+import { DocumentShareButton } from '@hanzo/esign-ui/components/document/document-share-button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
 
 import { DocumentDeleteDialog } from '~/components/dialogs/document-delete-dialog';
 import { DocumentDuplicateDialog } from '~/components/dialogs/document-duplicate-dialog';

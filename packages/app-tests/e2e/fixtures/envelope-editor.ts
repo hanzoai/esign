@@ -3,12 +3,12 @@ import { expect } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import { DEFAULT_EMBEDDED_EDITOR_CONFIG } from '@hanzo/sign-lib/types/envelope-editor';
-import { seedBlankDocument } from '@hanzo/sign-prisma/seed/documents';
-import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import { DEFAULT_EMBEDDED_EDITOR_CONFIG } from '@hanzo/esign-lib/types/envelope-editor';
+import { seedBlankDocument } from '@hanzo/esign-prisma/seed/documents';
+import { seedBlankTemplate } from '@hanzo/esign-prisma/seed/templates';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from './authentication';
 

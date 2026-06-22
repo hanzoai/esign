@@ -7,23 +7,23 @@ import type { KonvaEventObject } from 'konva/lib/Node';
 import type { Transformer } from 'konva/lib/shapes/Transformer';
 import { CopyPlusIcon, SquareStackIcon, TrashIcon, UserCircleIcon } from 'lucide-react';
 
-import type { TLocalField } from '@hanzo/sign-lib/client-only/hooks/use-editor-fields';
-import { usePageRenderer } from '@hanzo/sign-lib/client-only/hooks/use-page-renderer';
-import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
+import type { TLocalField } from '@hanzo/esign-lib/client-only/hooks/use-editor-fields';
+import { usePageRenderer } from '@hanzo/esign-lib/client-only/hooks/use-page-renderer';
+import { useCurrentEnvelopeEditor } from '@hanzo/esign-lib/client-only/providers/envelope-editor-provider';
 import {
   type PageRenderData,
   useCurrentEnvelopeRender,
-} from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
-import { FIELD_META_DEFAULT_VALUES } from '@hanzo/sign-lib/types/field-meta';
+} from '@hanzo/esign-lib/client-only/providers/envelope-render-provider';
+import { FIELD_META_DEFAULT_VALUES } from '@hanzo/esign-lib/types/field-meta';
 import {
   MIN_FIELD_HEIGHT_PX,
   MIN_FIELD_WIDTH_PX,
   convertPixelToPercentage,
-} from '@hanzo/sign-lib/universal/field-renderer/field-renderer';
-import { renderField } from '@hanzo/sign-lib/universal/field-renderer/render-field';
-import { getClientSideFieldTranslations } from '@hanzo/sign-lib/utils/fields';
-import { canRecipientFieldsBeModified } from '@hanzo/sign-lib/utils/recipients';
-import { CommandDialog } from '@hanzo/sign-ui/primitives/command';
+} from '@hanzo/esign-lib/universal/field-renderer/field-renderer';
+import { renderField } from '@hanzo/esign-lib/universal/field-renderer/render-field';
+import { getClientSideFieldTranslations } from '@hanzo/esign-lib/utils/fields';
+import { canRecipientFieldsBeModified } from '@hanzo/esign-lib/utils/recipients';
+import { CommandDialog } from '@hanzo/esign-ui/primitives/command';
 
 import { fieldButtonList } from './envelope-editor-fields-drag-drop';
 import { EnvelopeRecipientSelectorCommand } from './envelope-recipient-selector';

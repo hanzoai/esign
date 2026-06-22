@@ -2,14 +2,14 @@ import { expect, test } from '@playwright/test';
 import { DocumentSigningOrder, RecipientRole } from '@prisma/client';
 import { customAlphabet } from 'nanoid';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createDocumentAuthOptions } from '@hanzo/sign-lib/utils/document-auth';
-import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
-import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
-import { prisma } from '@hanzo/sign-prisma';
-import { seedTeam } from '@hanzo/sign-prisma/seed/teams';
-import { seedDirectTemplate, seedTemplate } from '@hanzo/sign-prisma/seed/templates';
-import { seedTestEmail, seedUser } from '@hanzo/sign-prisma/seed/users';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createDocumentAuthOptions } from '@hanzo/esign-lib/utils/document-auth';
+import { mapSecondaryIdToTemplateId } from '@hanzo/esign-lib/utils/envelope';
+import { formatDirectTemplatePath } from '@hanzo/esign-lib/utils/templates';
+import { prisma } from '@hanzo/esign-prisma';
+import { seedTeam } from '@hanzo/esign-prisma/seed/teams';
+import { seedDirectTemplate, seedTemplate } from '@hanzo/esign-prisma/seed/templates';
+import { seedTestEmail, seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

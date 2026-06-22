@@ -3,7 +3,7 @@ import type { Prisma } from '@prisma/client';
 import { Hono } from 'hono';
 import { z } from 'zod';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type { HonoEnv } from '../../../router';
 import { handleEnvelopeItemPdfRequest } from './get-envelope-item-pdf';

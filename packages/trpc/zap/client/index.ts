@@ -11,7 +11,7 @@ import SuperJSON from 'superjson';
 import { connect, type Connection } from '@zap-proto/web/client';
 import type { Conn } from '@zap-proto/web';
 
-import { getBaseUrl } from '@hanzo/sign-lib/universal/get-base-url';
+import { getBaseUrl } from '@hanzo/esign-lib/universal/get-base-url';
 
 import { fromWireError } from '../runtime/error';
 import { METHOD_RPC } from '../runtime/method';

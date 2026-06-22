@@ -1,19 +1,19 @@
 import { P, match } from 'ts-pattern';
 
-import type { BrandingSettings } from '@hanzo/sign-email/providers/branding';
-import { prisma } from '@hanzo/sign-prisma';
+import type { BrandingSettings } from '@hanzo/esign-email/providers/branding';
+import { prisma } from '@hanzo/esign-prisma';
 import type {
   DocumentMeta,
   EmailDomain,
   Organisation,
   OrganisationEmail,
   OrganisationType,
-} from '@hanzo/sign-prisma/client';
+} from '@hanzo/esign-prisma/client';
 import {
   EmailDomainStatus,
   type OrganisationClaim,
   type OrganisationGlobalSettings,
-} from '@hanzo/sign-prisma/client';
+} from '@hanzo/esign-prisma/client';
 
 import { SIGN_INTERNAL_EMAIL } from '../../constants/email';
 import { AppError, AppErrorCode } from '../../errors/app-error';

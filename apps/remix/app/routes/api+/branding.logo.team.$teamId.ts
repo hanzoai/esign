@@ -1,6 +1,6 @@
-import { getTeamSettings } from '@hanzo/sign-lib/server-only/team/get-team-settings';
-import { getFileServerSide } from '@hanzo/sign-lib/universal/upload/get-file.server';
-import { loadLogo } from '@hanzo/sign-lib/utils/images/logo';
+import { getTeamSettings } from '@hanzo/esign-lib/server-only/team/get-team-settings';
+import { getFileServerSide } from '@hanzo/esign-lib/universal/upload/get-file.server';
+import { loadLogo } from '@hanzo/esign-lib/utils/images/logo';
 
 import type { Route } from './+types/branding.logo.team.$teamId';
 

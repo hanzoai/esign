@@ -7,36 +7,36 @@ import { DocumentVisibility, OrganisationType, type RecipientRole } from '@prism
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { DATE_FORMATS } from '@hanzo/sign-lib/constants/date-formats';
-import { DOCUMENT_SIGNATURE_TYPES, DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { DATE_FORMATS } from '@hanzo/esign-lib/constants/date-formats';
+import { DOCUMENT_SIGNATURE_TYPES, DocumentSignatureType } from '@hanzo/esign-lib/constants/document';
 import {
   type TEnvelopeExpirationPeriod,
   ZEnvelopeExpirationPeriod,
-} from '@hanzo/sign-lib/constants/envelope-expiration';
+} from '@hanzo/esign-lib/constants/envelope-expiration';
 import {
   SUPPORTED_LANGUAGES,
   SUPPORTED_LANGUAGE_CODES,
   isValidLanguageCode,
-} from '@hanzo/sign-lib/constants/i18n';
-import { TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
-import type { TDefaultRecipients } from '@hanzo/sign-lib/types/default-recipients';
-import { ZDefaultRecipientsSchema } from '@hanzo/sign-lib/types/default-recipients';
+} from '@hanzo/esign-lib/constants/i18n';
+import { TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
+import type { TDefaultRecipients } from '@hanzo/esign-lib/types/default-recipients';
+import { ZDefaultRecipientsSchema } from '@hanzo/esign-lib/types/default-recipients';
 import {
   type TDocumentMetaDateFormat,
   ZDocumentMetaTimezoneSchema,
-} from '@hanzo/sign-lib/types/document-meta';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { recipientAbbreviation } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { extractTeamSignatureSettings } from '@hanzo/sign-lib/utils/teams';
-import { DocumentSignatureSettingsTooltip } from '@hanzo/sign-ui/components/document/document-signature-settings-tooltip';
-import { ExpirationPeriodPicker } from '@hanzo/sign-ui/components/document/expiration-period-picker';
-import { RecipientRoleSelect } from '@hanzo/sign-ui/components/recipient/recipient-role-select';
-import { Alert } from '@hanzo/sign-ui/primitives/alert';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Combobox } from '@hanzo/sign-ui/primitives/combobox';
+} from '@hanzo/esign-lib/types/document-meta';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import { recipientAbbreviation } from '@hanzo/esign-lib/utils/recipient-formatter';
+import { extractTeamSignatureSettings } from '@hanzo/esign-lib/utils/teams';
+import { DocumentSignatureSettingsTooltip } from '@hanzo/esign-ui/components/document/document-signature-settings-tooltip';
+import { ExpirationPeriodPicker } from '@hanzo/esign-ui/components/document/expiration-period-picker';
+import { RecipientRoleSelect } from '@hanzo/esign-ui/components/recipient/recipient-role-select';
+import { Alert } from '@hanzo/esign-ui/primitives/alert';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Combobox } from '@hanzo/esign-ui/primitives/combobox';
 import {
   Form,
   FormControl,
@@ -45,15 +45,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { MultiSelectCombobox } from '@hanzo/esign-ui/primitives/multi-select-combobox';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
+} from '@hanzo/esign-ui/primitives/select';
 
 import { useOptionalCurrentTeam } from '~/providers/team';
 

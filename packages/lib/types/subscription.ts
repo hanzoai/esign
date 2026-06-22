@@ -1,7 +1,7 @@
 import type { SubscriptionClaim } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZOrganisationNameSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation.types';
+import { ZOrganisationNameSchema } from '@hanzo/esign-trpc/server/organisation-router/create-organisation.types';
 
 /**
  * README:

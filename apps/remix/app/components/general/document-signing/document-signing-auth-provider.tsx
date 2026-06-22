@@ -2,18 +2,18 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import { type Envelope, FieldType, type Passkey, type Recipient } from '@prisma/client';
 
-import type { SessionUser } from '@hanzo/sign-auth/server/lib/session/session';
-import { MAXIMUM_PASSKEYS } from '@hanzo/sign-lib/constants/auth';
+import type { SessionUser } from '@hanzo/esign-auth/server/lib/session/session';
+import { MAXIMUM_PASSKEYS } from '@hanzo/esign-lib/constants/auth';
 import type {
   TDocumentAuthOptions,
   TRecipientAccessAuthTypes,
   TRecipientActionAuthTypes,
   TRecipientAuthOptions,
-} from '@hanzo/sign-lib/types/document-auth';
-import { DocumentAuth } from '@hanzo/sign-lib/types/document-auth';
-import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TFindPasskeysResponse } from '@hanzo/sign-trpc/server/auth-router/find-passkeys.types';
+} from '@hanzo/esign-lib/types/document-auth';
+import { DocumentAuth } from '@hanzo/esign-lib/types/document-auth';
+import { extractDocumentAuthMethods } from '@hanzo/esign-lib/utils/document-auth';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TFindPasskeysResponse } from '@hanzo/esign-trpc/server/auth-router/find-passkeys.types';
 
 import type { DocumentSigningAuthDialogProps } from './document-signing-auth-dialog';
 import { DocumentSigningAuthDialog } from './document-signing-auth-dialog';

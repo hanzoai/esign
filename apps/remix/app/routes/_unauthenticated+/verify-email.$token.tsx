@@ -7,11 +7,11 @@ import { AlertTriangle, CheckCircle2, Loader, XCircle } from 'lucide-react';
 import { Link, redirect, useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { EMAIL_VERIFICATION_STATE } from '@hanzo/sign-lib/constants/email';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { authClient } from '@hanzo/esign-auth/client';
+import { useOptionalSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { EMAIL_VERIFICATION_STATE } from '@hanzo/esign-lib/constants/email';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import type { Route } from './+types/verify-email.$token';
 

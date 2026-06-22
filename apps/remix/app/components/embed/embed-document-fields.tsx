@@ -2,22 +2,22 @@ import type { DocumentMeta } from '@prisma/client';
 import { type Field, FieldType } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
+import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/esign-lib/constants/time-zones';
 import {
   ZCheckboxFieldMeta,
   ZDropdownFieldMeta,
   ZNumberFieldMeta,
   ZRadioFieldMeta,
   ZTextFieldMeta,
-} from '@hanzo/sign-lib/types/field-meta';
-import type { FieldWithSignatureAndFieldMeta } from '@hanzo/sign-prisma/types/field-with-signature-and-fieldmeta';
+} from '@hanzo/esign-lib/types/field-meta';
+import type { FieldWithSignatureAndFieldMeta } from '@hanzo/esign-prisma/types/field-with-signature-and-fieldmeta';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@hanzo/sign-trpc/server/field-router/schema';
-import { ElementVisible } from '@hanzo/sign-ui/primitives/element-visible';
+} from '@hanzo/esign-trpc/server/field-router/schema';
+import { ElementVisible } from '@hanzo/esign-ui/primitives/element-visible';
 
 import { DocumentSigningCheckboxField } from '~/components/general/document-signing/document-signing-checkbox-field';
 import { DocumentSigningDateField } from '~/components/general/document-signing/document-signing-date-field';

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const baseConfig = require('@hanzo/sign-tailwind-config');
+const baseConfig = require('@hanzo/esign-tailwind-config');
 
 module.exports = {
   ...baseConfig,

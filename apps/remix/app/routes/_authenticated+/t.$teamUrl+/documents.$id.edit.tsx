@@ -5,13 +5,13 @@ import { Trans } from '@lingui/react/macro';
 import { EnvelopeType } from '@prisma/client';
 import { Link, useNavigate } from 'react-router';
 
-import { EnvelopeEditorProvider } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
-import type { TGetEditorEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-editor-envelope.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
+import { EnvelopeEditorProvider } from '@hanzo/esign-lib/client-only/providers/envelope-editor-provider';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
+import type { TGetEditorEnvelopeResponse } from '@hanzo/esign-trpc/server/envelope-router/get-editor-envelope.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Spinner } from '@hanzo/esign-ui/primitives/spinner';
 
 import { EnvelopeEditor } from '~/components/general/envelope-editor/envelope-editor';
 import { EnvelopeEditorRenderProviderWrapper } from '~/components/general/envelope-editor/envelope-editor-renderer-provider-wrapper';

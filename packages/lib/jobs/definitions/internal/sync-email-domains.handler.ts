@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 
-import { reregisterEmailDomain } from '@hanzo/sign-lib/server-only/email-domain/reregister-email-domain';
-import { verifyEmailDomain } from '@hanzo/sign-lib/server-only/email-domain/verify-email-domain';
-import { prisma } from '@hanzo/sign-prisma';
+import { reregisterEmailDomain } from '@hanzo/esign-lib/server-only/email-domain/reregister-email-domain';
+import { verifyEmailDomain } from '@hanzo/esign-lib/server-only/email-domain/verify-email-domain';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type { JobRunIO } from '../../client/_internal/job';
 import type { TSyncEmailDomainsJobDefinition } from './sync-email-domains';

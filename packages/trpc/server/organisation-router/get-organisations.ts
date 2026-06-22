@@ -1,5 +1,5 @@
-import { getHighestOrganisationRoleInGroup } from '@hanzo/sign-lib/utils/organisations';
-import { prisma } from '@hanzo/sign-prisma';
+import { getHighestOrganisationRoleInGroup } from '@hanzo/esign-lib/utils/organisations';
+import { prisma } from '@hanzo/esign-prisma';
 
 import {
   ZGetOrganisationsRequestSchema,

@@ -1,11 +1,11 @@
 import { Trans } from '@lingui/react/macro';
 import { File } from 'lucide-react';
 
-import timurImage from '@hanzo/sign-assets/images/timur.png';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { VerifiedIcon } from '@hanzo/sign-ui/icons/verified';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import timurImage from '@hanzo/esign-assets/images/timur.png';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { VerifiedIcon } from '@hanzo/esign-ui/icons/verified';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 export type UserProfileTimurProps = {
   className?: string;

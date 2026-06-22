@@ -5,8 +5,8 @@ import { SigningStatus } from '@prisma/client';
 import type { Field, Recipient } from '@prisma/client';
 import { ClockIcon, EyeOffIcon, LockIcon } from 'lucide-react';
 
-import { getBoundingClientRect } from '@hanzo/sign-lib/client-only/get-bounding-client-rect';
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
+import { getBoundingClientRect } from '@hanzo/esign-lib/client-only/get-bounding-client-rect';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
 
 import { isTemplateRecipientEmailPlaceholder } from '../../../lib/constants/template';
 import { extractInitials } from '../../../lib/utils/recipient-formatter';

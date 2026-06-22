@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { Plural, Trans } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 
-import { isSignatureFieldType } from '@hanzo/sign-prisma/guards/is-signature-field';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { RadioGroup, RadioGroupItem } from '@hanzo/sign-ui/primitives/radio-group';
-import { SignaturePadDialog } from '@hanzo/sign-ui/primitives/signature-pad/signature-pad-dialog';
+import { isSignatureFieldType } from '@hanzo/esign-prisma/guards/is-signature-field';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { RadioGroup, RadioGroupItem } from '@hanzo/esign-ui/primitives/radio-group';
+import { SignaturePadDialog } from '@hanzo/esign-ui/primitives/signature-pad/signature-pad-dialog';
 
 import { useEmbedSigningContext } from '~/components/embed/embed-signing-context';
 

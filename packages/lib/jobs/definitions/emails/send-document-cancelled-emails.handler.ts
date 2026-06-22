@@ -3,10 +3,10 @@ import { createElement } from 'react';
 import { msg } from '@lingui/core/macro';
 import { EnvelopeType, ReadStatus, SendStatus, SigningStatus } from '@prisma/client';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import DocumentCancelTemplate from '@hanzo/sign-email/templates/document-cancel';
-import { isRecipientEmailValidForSending } from '@hanzo/sign-lib/utils/recipients';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import DocumentCancelTemplate from '@hanzo/esign-email/templates/document-cancel';
+import { isRecipientEmailValidForSending } from '@hanzo/esign-lib/utils/recipients';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';

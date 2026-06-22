@@ -1,10 +1,10 @@
 import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 
-import { putFile } from '@hanzo/sign-lib/universal/upload/put-file';
-import type { TGetTeamResponse } from '@hanzo/sign-trpc/server/team-router/get-team.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { putFile } from '@hanzo/esign-lib/universal/upload/put-file';
+import type { TGetTeamResponse } from '@hanzo/esign-trpc/server/team-router/get-team.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import {
   BrandingPreferencesForm,

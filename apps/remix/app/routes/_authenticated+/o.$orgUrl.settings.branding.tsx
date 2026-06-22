@@ -2,14 +2,14 @@ import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import type { z } from 'zod';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { putFile } from '@hanzo/sign-lib/universal/upload/put-file';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TGetOrganisationResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation.types';
-import type { ZUpdateOrganisationSettingsRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-settings.types';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { putFile } from '@hanzo/esign-lib/universal/upload/put-file';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TGetOrganisationResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation.types';
+import type { ZUpdateOrganisationSettingsRequestSchema } from '@hanzo/esign-trpc/server/organisation-router/update-organisation-settings.types';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import {
   BrandingPreferencesForm,

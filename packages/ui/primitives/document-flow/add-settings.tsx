@@ -14,37 +14,37 @@ import { InfoIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 
-import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
-import { DOCUMENT_SIGNATURE_TYPES } from '@hanzo/sign-lib/constants/document';
-import { SUPPORTED_LANGUAGES } from '@hanzo/sign-lib/constants/i18n';
-import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
-import type { TDocument } from '@hanzo/sign-lib/types/document';
-import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { extractTeamSignatureSettings } from '@hanzo/sign-lib/utils/teams';
+import { useAutoSave } from '@hanzo/esign-lib/client-only/hooks/use-autosave';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
+import { DOCUMENT_SIGNATURE_TYPES } from '@hanzo/esign-lib/constants/document';
+import { SUPPORTED_LANGUAGES } from '@hanzo/esign-lib/constants/i18n';
+import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
+import type { TDocument } from '@hanzo/esign-lib/types/document';
+import { extractDocumentAuthMethods } from '@hanzo/esign-lib/utils/document-auth';
+import { extractTeamSignatureSettings } from '@hanzo/esign-lib/utils/teams';
 import {
   DocumentGlobalAuthAccessSelect,
   DocumentGlobalAuthAccessTooltip,
-} from '@hanzo/sign-ui/components/document/document-global-auth-access-select';
+} from '@hanzo/esign-ui/components/document/document-global-auth-access-select';
 import {
   DocumentGlobalAuthActionSelect,
   DocumentGlobalAuthActionTooltip,
-} from '@hanzo/sign-ui/components/document/document-global-auth-action-select';
+} from '@hanzo/esign-ui/components/document/document-global-auth-action-select';
 import {
   DocumentReadOnlyFields,
   mapFieldsWithRecipients,
-} from '@hanzo/sign-ui/components/document/document-read-only-fields';
+} from '@hanzo/esign-ui/components/document/document-read-only-fields';
 import {
   DocumentVisibilitySelect,
   DocumentVisibilityTooltip,
-} from '@hanzo/sign-ui/components/document/document-visibility-select';
+} from '@hanzo/esign-ui/components/document/document-visibility-select';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@hanzo/sign-ui/primitives/accordion';
+} from '@hanzo/esign-ui/primitives/accordion';
 import {
   Form,
   FormControl,
@@ -52,8 +52,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { MultiSelectCombobox } from '@hanzo/esign-ui/primitives/multi-select-combobox';
 
 import { DocumentSignatureSettingsTooltip } from '../../components/document/document-signature-settings-tooltip';
 import { Combobox } from '../combobox';

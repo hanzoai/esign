@@ -12,11 +12,11 @@ import {
 import {
   DOCUMENT_AUDIT_LOG_TYPE,
   RECIPIENT_DIFF_TYPE,
-} from '@hanzo/sign-lib/types/document-audit-logs';
-import type { RequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
-import { fieldsContainUnsignedRequiredField } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
-import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/types/document-audit-logs';
+import type { RequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { fieldsContainUnsignedRequiredField } from '@hanzo/esign-lib/utils/advanced-fields-helpers';
+import { createDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { jobs } from '../../jobs/client';

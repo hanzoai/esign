@@ -10,21 +10,21 @@ import {
 } from '@prisma/client';
 import { prop, sortBy } from 'remeda';
 
-import { isBase64Image } from '@hanzo/sign-lib/constants/signatures';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import type { EnvelopeForSigningResponse } from '@hanzo/sign-lib/server-only/envelope/get-envelope-for-recipient-signing';
-import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
+import { isBase64Image } from '@hanzo/esign-lib/constants/signatures';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import type { EnvelopeForSigningResponse } from '@hanzo/esign-lib/server-only/envelope/get-envelope-for-recipient-signing';
+import type { TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
 import {
   isFieldUnsignedAndRequired,
   isRequiredField,
-} from '@hanzo/sign-lib/utils/advanced-fields-helpers';
-import { extractFieldInsertionValues } from '@hanzo/sign-lib/utils/envelope-signing';
+} from '@hanzo/esign-lib/utils/advanced-fields-helpers';
+import { extractFieldInsertionValues } from '@hanzo/esign-lib/utils/envelope-signing';
 import type {
   TSignEnvelopeFieldRequest,
   TSignEnvelopeFieldResponse,
   TSignEnvelopeFieldValue,
-} from '@hanzo/sign-trpc/server/envelope-router/sign-envelope-field.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+} from '@hanzo/esign-trpc/server/envelope-router/sign-envelope-field.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 
 export type EnvelopeSigningContextValue = {
   isDirectTemplate: boolean;

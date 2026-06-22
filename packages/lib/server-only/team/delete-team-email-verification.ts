@@ -1,5 +1,5 @@
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
-import { prisma } from '@hanzo/sign-prisma';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { buildTeamWhereQuery } from '../../utils/teams';
 

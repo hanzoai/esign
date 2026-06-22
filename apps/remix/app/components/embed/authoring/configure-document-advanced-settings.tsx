@@ -6,13 +6,13 @@ import { InfoIcon } from 'lucide-react';
 import type { Control } from 'react-hook-form';
 import { useFormContext } from 'react-hook-form';
 
-import { DATE_FORMATS } from '@hanzo/sign-lib/constants/date-formats';
-import { DOCUMENT_SIGNATURE_TYPES } from '@hanzo/sign-lib/constants/document';
-import { SUPPORTED_LANGUAGES } from '@hanzo/sign-lib/constants/i18n';
-import { TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
-import { DocumentEmailCheckboxes } from '@hanzo/sign-ui/components/document/document-email-checkboxes';
-import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
-import { Combobox } from '@hanzo/sign-ui/primitives/combobox';
+import { DATE_FORMATS } from '@hanzo/esign-lib/constants/date-formats';
+import { DOCUMENT_SIGNATURE_TYPES } from '@hanzo/esign-lib/constants/document';
+import { SUPPORTED_LANGUAGES } from '@hanzo/esign-lib/constants/i18n';
+import { TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
+import { DocumentEmailCheckboxes } from '@hanzo/esign-ui/components/document/document-email-checkboxes';
+import { DocumentSendEmailMessageHelper } from '@hanzo/esign-ui/components/document/document-send-email-message-helper';
+import { Combobox } from '@hanzo/esign-ui/primitives/combobox';
 import {
   FormControl,
   FormDescription,
@@ -20,19 +20,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { MultiSelectCombobox } from '@hanzo/esign-ui/primitives/multi-select-combobox';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@hanzo/sign-ui/primitives/tabs';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+} from '@hanzo/esign-ui/primitives/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@hanzo/esign-ui/primitives/tabs';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
 
 import { useConfigureDocument } from './configure-document-context';
 import type { TConfigureEmbedFormSchema } from './configure-document-view.types';

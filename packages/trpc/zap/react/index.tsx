@@ -37,7 +37,7 @@ import {
   type UseQueryResult,
 } from '@tanstack/react-query';
 
-import type { AppError } from '@hanzo/sign-lib/errors/app-error';
+import type { AppError } from '@hanzo/esign-lib/errors/app-error';
 
 import { zapCall, type ZapCallOptions } from '../client/index';
 

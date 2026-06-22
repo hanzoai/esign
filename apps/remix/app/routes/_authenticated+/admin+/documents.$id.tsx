@@ -5,28 +5,28 @@ import { EnvelopeType, RecipientRole, SigningStatus } from '@prisma/client';
 import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
 
-import { unsafeGetEntireEnvelope } from '@hanzo/sign-lib/server-only/admin/get-entire-document';
-import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { unsafeGetEntireEnvelope } from '@hanzo/esign-lib/server-only/admin/get-entire-document';
+import { mapSecondaryIdToDocumentId } from '@hanzo/esign-lib/utils/envelope';
 import type {
   TResealDocumentRequest,
   TResealDocumentResponse,
-} from '@hanzo/sign-trpc/server/admin-router/reseal-document.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+} from '@hanzo/esign-trpc/server/admin-router/reseal-document.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@hanzo/sign-ui/primitives/accordion';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-ui/primitives/accordion';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@hanzo/sign-ui/primitives/tooltip';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { AdminDocumentDeleteDialog } from '~/components/dialogs/admin-document-delete-dialog';
 import { DocumentStatus } from '~/components/general/document/document-status';

@@ -1,7 +1,7 @@
 import { redirect, useLoaderData } from 'react-router';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { getDocumentByAccessToken } from '@hanzo/sign-lib/server-only/document/get-document-by-access-token';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { getDocumentByAccessToken } from '@hanzo/esign-lib/server-only/document/get-document-by-access-token';
 
 import { DocumentCertificateQRView } from '~/components/general/document/document-certificate-qr-view';
 

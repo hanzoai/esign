@@ -1,1 +1,1 @@
-module.exports = require('@hanzo/sign-prettier-config');
+module.exports = require('@hanzo/esign-prettier-config');

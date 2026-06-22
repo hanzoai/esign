@@ -1,7 +1,7 @@
 import type { Transporter } from 'nodemailer';
 import { createTransport } from 'nodemailer';
 
-import { env } from '@hanzo/sign-lib/utils/env';
+import { env } from '@hanzo/esign-lib/utils/env';
 import { ResendTransport } from '@hanzo/nodemailer-resend';
 
 import { MailChannelsTransport } from './transports/mailchannels';

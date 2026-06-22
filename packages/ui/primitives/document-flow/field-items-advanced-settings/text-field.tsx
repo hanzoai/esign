@@ -1,18 +1,18 @@
 import { Trans, useLingui } from '@lingui/react/macro';
 
-import { validateTextField } from '@hanzo/sign-lib/advanced-fields-validation/validate-text';
-import { type TTextFieldMeta as TextFieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
+import { validateTextField } from '@hanzo/esign-lib/advanced-fields-validation/validate-text';
+import { type TTextFieldMeta as TextFieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
+} from '@hanzo/esign-ui/primitives/select';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
 
 type TextFieldAdvancedSettingsProps = {
   fieldState: TextFieldMeta;

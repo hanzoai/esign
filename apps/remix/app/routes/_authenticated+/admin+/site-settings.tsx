@@ -6,18 +6,18 @@ import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
 import type { z } from 'zod';
 
-import { getSiteSettings } from '@hanzo/sign-lib/server-only/site-settings/get-site-settings';
+import { getSiteSettings } from '@hanzo/esign-lib/server-only/site-settings/get-site-settings';
 import {
   SITE_SETTINGS_BANNER_ID,
   ZSiteSettingsBannerSchema,
-} from '@hanzo/sign-lib/server-only/site-settings/schemas/banner';
+} from '@hanzo/esign-lib/server-only/site-settings/schemas/banner';
 import type {
   TUpdateSiteSettingRequest,
   TUpdateSiteSettingResponse,
-} from '@hanzo/sign-trpc/server/admin-router/update-site-setting.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { ColorPicker } from '@hanzo/sign-ui/primitives/color-picker';
+} from '@hanzo/esign-trpc/server/admin-router/update-site-setting.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { ColorPicker } from '@hanzo/esign-ui/primitives/color-picker';
 import {
   Form,
   FormControl,
@@ -26,10 +26,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { SettingsHeader } from '~/components/general/settings-header';
 

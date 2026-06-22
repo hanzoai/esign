@@ -1,4 +1,4 @@
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 const LEGACY_SERVICE_ACCOUNT_EMAIL = 'serviceaccount@esign.hanzo.ai';
 

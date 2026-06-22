@@ -5,13 +5,13 @@ import { FieldType } from '@prisma/client';
 import { TooltipArrow } from '@radix-ui/react-tooltip';
 import { X } from 'lucide-react';
 
-import { type TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import { ZFieldMetaSchema } from '@hanzo/sign-lib/types/field-meta';
-import type { FieldWithSignature } from '@hanzo/sign-prisma/types/field-with-signature';
-import { FieldRootContainer } from '@hanzo/sign-ui/components/field/field';
-import { RECIPIENT_COLOR_STYLES } from '@hanzo/sign-ui/lib/recipient-colors';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+import { type TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
+import { ZFieldMetaSchema } from '@hanzo/esign-lib/types/field-meta';
+import type { FieldWithSignature } from '@hanzo/esign-prisma/types/field-with-signature';
+import { FieldRootContainer } from '@hanzo/esign-ui/components/field/field';
+import { RECIPIENT_COLOR_STYLES } from '@hanzo/esign-ui/lib/recipient-colors';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
 
 import { useRequiredDocumentSigningAuthContext } from './document-signing-auth-provider';
 

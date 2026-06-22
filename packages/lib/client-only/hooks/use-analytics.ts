@@ -1,6 +1,6 @@
 import { posthog as insights } from '@hanzo/insights';
 
-import { extractInsightsConfig } from '@hanzo/sign-lib/constants/feature-flags';
+import { extractInsightsConfig } from '@hanzo/esign-lib/constants/feature-flags';
 
 export function useAnalytics() {
   // const featureFlags = useFeatureFlags();

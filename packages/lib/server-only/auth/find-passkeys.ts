@@ -1,7 +1,7 @@
 import type { Passkey } from '@prisma/client';
 import { Prisma } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type { FindResultResponse } from '../../types/search-params';
 

@@ -5,15 +5,15 @@ import { OrganisationMemberRole, OrganisationType, TeamMemberRole } from '@prism
 import { Outlet, isRouteErrorResponse, useLoaderData } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { PAID_PLAN_LIMITS } from '@hanzo/sign-lib/server-only/limits/constants';
-import { LimitsProvider } from '@hanzo/sign-lib/server-only/limits/provider/client';
-import { OrganisationProvider } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { getOrganisationClaimByTeamId } from '@hanzo/sign-lib/server-only/organisation/get-organisation-claims';
-import { getTeamSettings } from '@hanzo/sign-lib/server-only/team/get-team-settings';
-import { ZBaseEmbedDataSchema } from '@hanzo/sign-lib/types/embed-base-schemas';
-import { ZapProvider } from '@hanzo/sign-trpc/zap/react';
-import type { OrganisationSession } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-session.types';
+import { PAID_PLAN_LIMITS } from '@hanzo/esign-lib/server-only/limits/constants';
+import { LimitsProvider } from '@hanzo/esign-lib/server-only/limits/provider/client';
+import { OrganisationProvider } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { verifyEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { getOrganisationClaimByTeamId } from '@hanzo/esign-lib/server-only/organisation/get-organisation-claims';
+import { getTeamSettings } from '@hanzo/esign-lib/server-only/team/get-team-settings';
+import { ZBaseEmbedDataSchema } from '@hanzo/esign-lib/types/embed-base-schemas';
+import { ZapProvider } from '@hanzo/esign-trpc/zap/react';
+import type { OrganisationSession } from '@hanzo/esign-trpc/server/organisation-router/get-organisation-session.types';
 
 import { TeamProvider } from '~/providers/team';
 import { injectCss } from '~/utils/css-vars';

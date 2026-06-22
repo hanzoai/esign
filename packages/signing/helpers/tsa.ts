@@ -1,7 +1,7 @@
 import { HttpTimestampAuthority } from '@libpdf/core';
 import { once } from 'remeda';
 
-import { NEXT_PRIVATE_SIGNING_TIMESTAMP_AUTHORITY } from '@hanzo/sign-lib/constants/app';
+import { NEXT_PRIVATE_SIGNING_TIMESTAMP_AUTHORITY } from '@hanzo/esign-lib/constants/app';
 
 const setupTimestampAuthorities = once(() => {
   const timestampAuthority = NEXT_PRIVATE_SIGNING_TIMESTAMP_AUTHORITY();

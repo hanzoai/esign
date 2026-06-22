@@ -7,14 +7,14 @@
 //   createRegistrationOptions / createSigninOptions / delete / find / update.
 import type { RegistrationResponseJSON } from '@simplewebauthn/server';
 
-import { createPasskey } from '@hanzo/sign-lib/server-only/auth/create-passkey';
-import { createPasskeyAuthenticationOptions } from '@hanzo/sign-lib/server-only/auth/create-passkey-authentication-options';
-import { createPasskeyRegistrationOptions } from '@hanzo/sign-lib/server-only/auth/create-passkey-registration-options';
-import { createPasskeySigninOptions } from '@hanzo/sign-lib/server-only/auth/create-passkey-signin-options';
-import { deletePasskey } from '@hanzo/sign-lib/server-only/auth/delete-passkey';
-import { findPasskeys } from '@hanzo/sign-lib/server-only/auth/find-passkeys';
-import { updatePasskey } from '@hanzo/sign-lib/server-only/auth/update-passkey';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
+import { createPasskey } from '@hanzo/esign-lib/server-only/auth/create-passkey';
+import { createPasskeyAuthenticationOptions } from '@hanzo/esign-lib/server-only/auth/create-passkey-authentication-options';
+import { createPasskeyRegistrationOptions } from '@hanzo/esign-lib/server-only/auth/create-passkey-registration-options';
+import { createPasskeySigninOptions } from '@hanzo/esign-lib/server-only/auth/create-passkey-signin-options';
+import { deletePasskey } from '@hanzo/esign-lib/server-only/auth/delete-passkey';
+import { findPasskeys } from '@hanzo/esign-lib/server-only/auth/find-passkeys';
+import { updatePasskey } from '@hanzo/esign-lib/server-only/auth/update-passkey';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
 
 import { ZCreatePasskeyAuthenticationOptionsRequestSchema } from '../../../server/auth-router/create-passkey-authentication-options.types';
 import { ZCreatePasskeyRegistrationOptionsRequestSchema } from '../../../server/auth-router/create-passkey-registration-options.types';

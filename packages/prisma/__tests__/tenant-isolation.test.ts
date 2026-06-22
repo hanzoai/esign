@@ -29,8 +29,8 @@ import { DatabaseSync } from 'node:sqlite';
 import assert from 'node:assert/strict';
 import { after, before, describe, test } from 'node:test';
 
-import { DEFAULT_DOCUMENT_EMAIL_SETTINGS } from '@hanzo/sign-lib/types/document-email';
-import { buildTeamWhereQuery } from '@hanzo/sign-lib/utils/teams';
+import { DEFAULT_DOCUMENT_EMAIL_SETTINGS } from '@hanzo/esign-lib/types/document-email';
+import { buildTeamWhereQuery } from '@hanzo/esign-lib/utils/teams';
 
 // The app's extended client + its codec are bound lazily to DATABASE_URL on
 // first access (via `remember`), so `before()` sets DATABASE_URL to the temp DB

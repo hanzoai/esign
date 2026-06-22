@@ -4,11 +4,11 @@ import { msg } from '@lingui/core/macro';
 import { OrganisationGroupType, type Team } from '@prisma/client';
 import { uniqueBy } from 'remeda';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { TeamDeleteEmailTemplate } from '@hanzo/sign-email/templates/team-delete';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { TeamDeleteEmailTemplate } from '@hanzo/esign-email/templates/team-delete';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '../../constants/teams';

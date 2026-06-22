@@ -54,7 +54,7 @@ export default defineConfig({
       '@napi-rs/canvas',
       '@node-rs/bcrypt',
       '@prisma/client',
-      '@hanzo/sign-tailwind-config',
+      '@hanzo/esign-tailwind-config',
       'playwright',
       'playwright-core',
       '@playwright/browser-chromium',

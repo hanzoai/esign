@@ -5,10 +5,10 @@ import { DateTime } from 'luxon';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import type { TFindDocumentsResponse } from '@hanzo/sign-trpc/server/document-router/find-documents.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { TFindDocumentsResponse } from '@hanzo/esign-trpc/server/document-router/find-documents.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 export type TemplatePageViewRecentActivityProps = {
   templateId: number;

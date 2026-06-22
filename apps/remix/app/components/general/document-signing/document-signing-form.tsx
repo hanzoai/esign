@@ -7,19 +7,19 @@ import { type Field, type Recipient, RecipientRole } from '@prisma/client';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
-import type { DocumentAndSender } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
-import type { TRecipientAccessAuth } from '@hanzo/sign-lib/types/document-auth';
-import { isFieldUnsignedAndRequired } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
-import { sortFieldsByPosition } from '@hanzo/sign-lib/utils/fields';
-import { isSignatureFieldType } from '@hanzo/sign-prisma/guards/is-signature-field';
-import type { RecipientWithFields } from '@hanzo/sign-prisma/types/recipient-with-fields';
-import { FieldToolTip } from '@hanzo/sign-ui/components/field/field-tooltip';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { RadioGroup, RadioGroupItem } from '@hanzo/sign-ui/primitives/radio-group';
-import { SignaturePadDialog } from '@hanzo/sign-ui/primitives/signature-pad/signature-pad-dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import type { DocumentAndSender } from '@hanzo/esign-lib/server-only/document/get-document-by-token';
+import type { TRecipientAccessAuth } from '@hanzo/esign-lib/types/document-auth';
+import { isFieldUnsignedAndRequired } from '@hanzo/esign-lib/utils/advanced-fields-helpers';
+import { sortFieldsByPosition } from '@hanzo/esign-lib/utils/fields';
+import { isSignatureFieldType } from '@hanzo/esign-prisma/guards/is-signature-field';
+import type { RecipientWithFields } from '@hanzo/esign-prisma/types/recipient-with-fields';
+import { FieldToolTip } from '@hanzo/esign-ui/components/field/field-tooltip';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { RadioGroup, RadioGroupItem } from '@hanzo/esign-ui/primitives/radio-group';
+import { SignaturePadDialog } from '@hanzo/esign-ui/primitives/signature-pad/signature-pad-dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import {
   AssistantConfirmationDialog,

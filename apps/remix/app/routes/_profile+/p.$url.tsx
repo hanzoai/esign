@@ -3,13 +3,13 @@ import { FileIcon } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
 
-import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { getPublicProfileByUrl } from '@hanzo/sign-lib/server-only/profile/get-public-profile-by-url';
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
-import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useOptionalSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { getPublicProfileByUrl } from '@hanzo/esign-lib/server-only/profile/get-public-profile-by-url';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import { formatDirectTemplatePath } from '@hanzo/esign-lib/utils/templates';
+import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Table,
   TableBody,
@@ -17,8 +17,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@hanzo/sign-ui/primitives/table';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+} from '@hanzo/esign-ui/primitives/table';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
 
 import type { Route } from './+types/p.$url';
 

@@ -2,7 +2,7 @@ import type { OrganisationMember } from '@prisma/client';
 import { Prisma } from '@prisma/client';
 import { P, match } from 'ts-pattern';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import type { FindResultResponse } from '../../types/search-params';

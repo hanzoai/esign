@@ -6,22 +6,22 @@ import { Trans } from '@lingui/react/macro';
 import { type TemplateDirectLink, TemplateType } from '@prisma/client';
 import { EditIcon, FileIcon, LinkIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 
-import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
-import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
+import { useCopyToClipboard } from '@hanzo/esign-lib/client-only/hooks/use-copy-to-clipboard';
+import { formatDirectTemplatePath } from '@hanzo/esign-lib/utils/templates';
 import type {
   FindTemplateRow,
   TFindTemplatesResponse,
-} from '@hanzo/sign-trpc/server/template-router/schema';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+} from '@hanzo/esign-trpc/server/template-router/schema';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { ManagePublicTemplateDialog } from '~/components/dialogs/public-profile-template-manage-dialog';
 

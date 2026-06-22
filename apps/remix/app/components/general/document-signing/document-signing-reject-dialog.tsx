@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router';
 import { z } from 'zod';
 
-import type { TRejectDocumentWithTokenMutationSchema } from '@hanzo/sign-trpc/server/recipient-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { TRejectDocumentWithTokenMutationSchema } from '@hanzo/esign-trpc/server/recipient-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -19,16 +19,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 const ZRejectDocumentFormSchema = z.object({
   reason: z.string().max(500, msg`Reason must be less than 500 characters`),

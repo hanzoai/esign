@@ -1,14 +1,14 @@
 import { RecipientRole } from '@prisma/client';
 import { z } from 'zod';
 
-import { isTemplateRecipientEmailPlaceholder } from '@hanzo/sign-lib/constants/template';
+import { isTemplateRecipientEmailPlaceholder } from '@hanzo/esign-lib/constants/template';
 import {
   ZRecipientAccessAuthSchema,
   ZRecipientAccessAuthTypesSchema,
   ZRecipientActionAuthSchema,
   ZRecipientActionAuthTypesSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import { ZRecipientLiteSchema, ZRecipientSchema } from '@hanzo/sign-lib/types/recipient';
+} from '@hanzo/esign-lib/types/document-auth';
+import { ZRecipientLiteSchema, ZRecipientSchema } from '@hanzo/esign-lib/types/recipient';
 
 export const ZGetRecipientRequestSchema = z.object({
   recipientId: z.number(),

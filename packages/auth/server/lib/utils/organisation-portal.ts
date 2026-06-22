@@ -1,8 +1,8 @@
-import { SIGN_ENCRYPTION_KEY } from '@hanzo/sign-lib/constants/crypto';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { symmetricDecrypt } from '@hanzo/sign-lib/universal/crypto';
-import { formatOrganisationCallbackUrl } from '@hanzo/sign-lib/utils/organisation-authentication-portal';
-import { prisma } from '@hanzo/sign-prisma';
+import { SIGN_ENCRYPTION_KEY } from '@hanzo/esign-lib/constants/crypto';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { symmetricDecrypt } from '@hanzo/esign-lib/universal/crypto';
+import { formatOrganisationCallbackUrl } from '@hanzo/esign-lib/utils/organisation-authentication-portal';
+import { prisma } from '@hanzo/esign-prisma';
 
 type GetOrganisationAuthenticationPortalOptions =
   | {

@@ -25,39 +25,39 @@ import {
 } from '@prisma/client';
 import { unique } from 'remeda';
 
-import { SIGN_ENCRYPTION_KEY } from '@hanzo/sign-lib/constants/crypto';
+import { SIGN_ENCRYPTION_KEY } from '@hanzo/esign-lib/constants/crypto';
 import {
   ORGANISATION_ACCOUNT_LINK_VERIFICATION_TOKEN_IDENTIFIER,
   ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP,
   ORGANISATION_USER_ACCOUNT_TYPE,
-} from '@hanzo/sign-lib/constants/organisations';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { jobs } from '@hanzo/sign-lib/jobs/client';
-import { createEmailDomain } from '@hanzo/sign-lib/server-only/email-domain/create-email-domain';
-import { deleteEmailDomain } from '@hanzo/sign-lib/server-only/email-domain/delete-email-domain';
-import { verifyEmailDomain } from '@hanzo/sign-lib/server-only/email-domain/verify-email-domain';
-import { orphanEnvelopes } from '@hanzo/sign-lib/server-only/envelope/orphan-envelopes';
-import { acceptOrganisationInvitation } from '@hanzo/sign-lib/server-only/organisation/accept-organisation-invitation';
-import { createOrganisation } from '@hanzo/sign-lib/server-only/organisation/create-organisation';
-import { createOrganisationMemberInvites } from '@hanzo/sign-lib/server-only/organisation/create-organisation-member-invites';
-import { linkOrganisationAccount } from '@hanzo/sign-lib/server-only/organisation/link-organisation-account';
-import { assertRateLimit } from '@hanzo/sign-lib/server-only/rate-limit/rate-limit-middleware';
-import { linkOrgAccountRateLimit } from '@hanzo/sign-lib/server-only/rate-limit/rate-limits';
-import { getMemberOrganisationRole } from '@hanzo/sign-lib/server-only/team/get-member-roles';
-import { INTERNAL_CLAIM_ID, internalClaims } from '@hanzo/sign-lib/types/subscription';
-import { symmetricEncrypt } from '@hanzo/sign-lib/universal/crypto';
-import { generateDatabaseId } from '@hanzo/sign-lib/universal/id';
+} from '@hanzo/esign-lib/constants/organisations';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { jobs } from '@hanzo/esign-lib/jobs/client';
+import { createEmailDomain } from '@hanzo/esign-lib/server-only/email-domain/create-email-domain';
+import { deleteEmailDomain } from '@hanzo/esign-lib/server-only/email-domain/delete-email-domain';
+import { verifyEmailDomain } from '@hanzo/esign-lib/server-only/email-domain/verify-email-domain';
+import { orphanEnvelopes } from '@hanzo/esign-lib/server-only/envelope/orphan-envelopes';
+import { acceptOrganisationInvitation } from '@hanzo/esign-lib/server-only/organisation/accept-organisation-invitation';
+import { createOrganisation } from '@hanzo/esign-lib/server-only/organisation/create-organisation';
+import { createOrganisationMemberInvites } from '@hanzo/esign-lib/server-only/organisation/create-organisation-member-invites';
+import { linkOrganisationAccount } from '@hanzo/esign-lib/server-only/organisation/link-organisation-account';
+import { assertRateLimit } from '@hanzo/esign-lib/server-only/rate-limit/rate-limit-middleware';
+import { linkOrgAccountRateLimit } from '@hanzo/esign-lib/server-only/rate-limit/rate-limits';
+import { getMemberOrganisationRole } from '@hanzo/esign-lib/server-only/team/get-member-roles';
+import { INTERNAL_CLAIM_ID, internalClaims } from '@hanzo/esign-lib/types/subscription';
+import { symmetricEncrypt } from '@hanzo/esign-lib/universal/crypto';
+import { generateDatabaseId } from '@hanzo/esign-lib/universal/id';
 import {
   buildOrganisationWhereQuery,
   getHighestOrganisationRoleInGroup,
   isOrganisationRoleWithinUserHierarchy,
-} from '@hanzo/sign-lib/utils/organisations';
+} from '@hanzo/esign-lib/utils/organisations';
 import {
   buildTeamWhereQuery,
   extractDerivedTeamSettings,
   getHighestTeamRoleInGroup,
-} from '@hanzo/sign-lib/utils/teams';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { ZAcceptOrganisationMemberInviteRequestSchema } from '../../../server/organisation-router/accept-organisation-member-invite.types';
 import { ZCreateOrganisationEmailDomainRequestSchema } from '../../../server/organisation-router/create-organisation-email-domain.types';

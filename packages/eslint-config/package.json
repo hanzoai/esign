@@ -1,5 +1,5 @@
 {
-  "name": "@hanzo/sign-eslint-config",
+  "name": "@hanzo/esign-eslint-config",
   "version": "0.0.0",
   "main": "./index.cjs",
   "license": "MIT",

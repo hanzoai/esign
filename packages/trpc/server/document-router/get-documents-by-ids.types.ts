@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZDocumentManySchema } from '@hanzo/sign-lib/types/document';
+import { ZDocumentManySchema } from '@hanzo/esign-lib/types/document';
 
 export const ZGetDocumentsByIdsRequestSchema = z.object({
   documentIds: z.array(z.number()).min(1),

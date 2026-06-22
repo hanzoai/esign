@@ -1,10 +1,10 @@
 import { Trans } from '@lingui/react/macro';
 import { ExternalLink, PaperclipIcon } from 'lucide-react';
 
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TFindAttachmentsResponse } from '@hanzo/sign-trpc/server/envelope-router/attachment/find-attachments.types';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/sign-ui/primitives/popover';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TFindAttachmentsResponse } from '@hanzo/esign-trpc/server/envelope-router/attachment/find-attachments.types';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/esign-ui/primitives/popover';
 
 export type DocumentSigningAttachmentsPopoverProps = {
   envelopeId: string;

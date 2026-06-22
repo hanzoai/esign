@@ -1,7 +1,7 @@
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
-import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { prisma } from '@hanzo/sign-prisma';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import type { ApiRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { createDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
+import { prisma } from '@hanzo/esign-prisma';
 
 type UnsafeDeleteEnvelopeItemOptions = {
   envelopeId: string;

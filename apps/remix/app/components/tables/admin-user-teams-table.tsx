@@ -4,19 +4,19 @@ import { useLingui } from '@lingui/react';
 import { useLingui as useLinguiMacro } from '@lingui/react/macro';
 import { Link, useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import type { TeamMemberRole } from '@hanzo/sign-prisma/generated/types';
-import type { TFindUserTeamsResponse } from '@hanzo/sign-trpc/server/admin-router/find-user-teams.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@hanzo/sign-ui/primitives/hover-card';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import type { TeamMemberRole } from '@hanzo/esign-prisma/generated/types';
+import type { TFindUserTeamsResponse } from '@hanzo/esign-trpc/server/admin-router/find-user-teams.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@hanzo/esign-ui/primitives/hover-card';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
 
 type AdminUserTeamsTableProps = {
   userId: number;

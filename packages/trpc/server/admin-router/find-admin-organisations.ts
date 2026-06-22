@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 
-import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
-import { prisma } from '@hanzo/sign-prisma';
+import type { FindResultResponse } from '@hanzo/esign-lib/types/search-params';
+import { prisma } from '@hanzo/esign-prisma';
 
 import {
   ZFindAdminOrganisationsRequestSchema,

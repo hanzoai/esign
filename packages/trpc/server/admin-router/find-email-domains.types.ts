@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import EmailDomainStatusSchema from '@hanzo/sign-prisma/generated/zod/inputTypeSchemas/EmailDomainStatusSchema';
-import EmailDomainSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/EmailDomainSchema';
-import OrganisationSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationSchema';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import EmailDomainStatusSchema from '@hanzo/esign-prisma/generated/zod/inputTypeSchemas/EmailDomainStatusSchema';
+import EmailDomainSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/EmailDomainSchema';
+import OrganisationSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationSchema';
 
 export const ZFindEmailDomainsRequestSchema = ZFindSearchParamsSchema.extend({
   status: EmailDomainStatusSchema.optional(),

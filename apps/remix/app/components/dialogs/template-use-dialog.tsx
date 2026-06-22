@@ -11,24 +11,24 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import * as z from 'zod';
 
-import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/sign-lib/constants/app';
+import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/esign-lib/constants/app';
 import {
   TEMPLATE_RECIPIENT_EMAIL_PLACEHOLDER_REGEX,
   TEMPLATE_RECIPIENT_NAME_PLACEHOLDER_REGEX,
-} from '@hanzo/sign-lib/constants/template';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { ZRecipientEmailSchema } from '@hanzo/sign-lib/types/recipient';
-import { putPdfFile } from '@hanzo/sign-lib/universal/upload/put-file';
-import type { ZGetEnvelopeItemsResponseSchema } from '@hanzo/sign-trpc/server/envelope-router/get-envelope-items.types';
+} from '@hanzo/esign-lib/constants/template';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { ZRecipientEmailSchema } from '@hanzo/esign-lib/types/recipient';
+import { putPdfFile } from '@hanzo/esign-lib/universal/upload/put-file';
+import type { ZGetEnvelopeItemsResponseSchema } from '@hanzo/esign-trpc/server/envelope-router/get-envelope-items.types';
 import type {
   ZCreateDocumentFromTemplateRequestSchema,
   ZCreateDocumentFromTemplateResponseSchema,
-} from '@hanzo/sign-trpc/server/template-router/schema';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+} from '@hanzo/esign-trpc/server/template-router/schema';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
 import {
   Dialog,
   DialogClose,
@@ -38,7 +38,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -46,12 +46,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
-import type { Toast } from '@hanzo/sign-ui/primitives/use-toast';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { SpinnerBox } from '@hanzo/esign-ui/primitives/spinner';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
+import type { Toast } from '@hanzo/esign-ui/primitives/use-toast';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 const ZAddRecipientsForNewDocumentSchema = z.object({
   distributeDocument: z.boolean(),

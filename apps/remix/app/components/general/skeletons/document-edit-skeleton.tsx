@@ -2,7 +2,7 @@ import { Trans } from '@lingui/react/macro';
 import { ChevronLeft, Loader } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
 
 export default function DocumentEditSkeleton() {
   return (

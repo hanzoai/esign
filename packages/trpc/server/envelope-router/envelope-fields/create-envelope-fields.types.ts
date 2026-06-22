@@ -7,8 +7,8 @@ import {
   ZClampedFieldWidthSchema,
   ZFieldPageNumberSchema,
   ZFieldSchema,
-} from '@hanzo/sign-lib/types/field';
-import { ZEnvelopeFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
+} from '@hanzo/esign-lib/types/field';
+import { ZEnvelopeFieldAndMetaSchema } from '@hanzo/esign-lib/types/field-meta';
 
 const ZCreateFieldBaseSchema = ZEnvelopeFieldAndMetaSchema.and(
   z.object({

@@ -5,9 +5,9 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { DateTime } from 'luxon';
 
-import { useIsMounted } from '@hanzo/sign-lib/client-only/hooks/use-is-mounted';
-import type { TEnvelope } from '@hanzo/sign-lib/types/envelope';
-import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
+import { useIsMounted } from '@hanzo/esign-lib/client-only/hooks/use-is-mounted';
+import type { TEnvelope } from '@hanzo/esign-lib/types/envelope';
+import { mapSecondaryIdToDocumentId } from '@hanzo/esign-lib/utils/envelope';
 
 export type DocumentPageViewInformationProps = {
   userId: number;

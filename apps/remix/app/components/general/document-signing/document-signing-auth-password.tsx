@@ -5,11 +5,11 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { DocumentAuth, type TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { DialogFooter } from '@hanzo/sign-ui/primitives/dialog';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { DocumentAuth, type TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { DialogFooter } from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -17,8 +17,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 
 import { useRequiredDocumentSigningAuthContext } from './document-signing-auth-provider';
 

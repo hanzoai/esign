@@ -9,13 +9,13 @@ import {
 import { DateTime } from 'luxon';
 import path from 'node:path';
 
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { prisma } from '@hanzo/sign-prisma';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { prisma } from '@hanzo/esign-prisma';
 import {
   seedBlankDocument,
   seedPendingDocumentWithFullFields,
-} from '@hanzo/sign-prisma/seed/documents';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+} from '@hanzo/esign-prisma/seed/documents';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 import { signSignaturePad } from '../fixtures/signature';

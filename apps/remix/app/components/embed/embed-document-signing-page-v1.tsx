@@ -7,28 +7,28 @@ import type { DocumentMeta, EnvelopeItem } from '@prisma/client';
 import { type Field, RecipientRole, SigningStatus } from '@prisma/client';
 import { LucideChevronDown, LucideChevronUp } from 'lucide-react';
 
-import { useThrottleFn } from '@hanzo/sign-lib/client-only/hooks/use-throttle-fn';
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { ZSignDocumentEmbedDataSchema } from '@hanzo/sign-lib/types/embed-document-sign-schema';
-import { isFieldUnsignedAndRequired } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
-import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { sortFieldsByPosition, validateFieldsInserted } from '@hanzo/sign-lib/utils/fields';
-import { isSignatureFieldType } from '@hanzo/sign-prisma/guards/is-signature-field';
-import type { RecipientWithFields } from '@hanzo/sign-prisma/types/recipient-with-fields';
-import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/sign-trpc/server/recipient-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import { useThrottleFn } from '@hanzo/esign-lib/client-only/hooks/use-throttle-fn';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { ZSignDocumentEmbedDataSchema } from '@hanzo/esign-lib/types/embed-document-sign-schema';
+import { isFieldUnsignedAndRequired } from '@hanzo/esign-lib/utils/advanced-fields-helpers';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/esign-lib/utils/envelope-download';
+import { sortFieldsByPosition, validateFieldsInserted } from '@hanzo/esign-lib/utils/fields';
+import { isSignatureFieldType } from '@hanzo/esign-prisma/guards/is-signature-field';
+import type { RecipientWithFields } from '@hanzo/esign-prisma/types/recipient-with-fields';
+import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/esign-trpc/server/recipient-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import {
   type DocumentField,
   DocumentReadOnlyFields,
-} from '@hanzo/sign-ui/components/document/document-read-only-fields';
-import { FieldToolTip } from '@hanzo/sign-ui/components/field/field-tooltip';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { ElementVisible } from '@hanzo/sign-ui/primitives/element-visible';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { RadioGroup, RadioGroupItem } from '@hanzo/sign-ui/primitives/radio-group';
-import { SignaturePadDialog } from '@hanzo/sign-ui/primitives/signature-pad/signature-pad-dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/components/document/document-read-only-fields';
+import { FieldToolTip } from '@hanzo/esign-ui/components/field/field-tooltip';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { ElementVisible } from '@hanzo/esign-ui/primitives/element-visible';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { RadioGroup, RadioGroupItem } from '@hanzo/esign-ui/primitives/radio-group';
+import { SignaturePadDialog } from '@hanzo/esign-ui/primitives/signature-pad/signature-pad-dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { BrandingLogo } from '~/components/general/branding-logo';
 import { PDFViewer } from '~/components/general/pdf-viewer/pdf-viewer';

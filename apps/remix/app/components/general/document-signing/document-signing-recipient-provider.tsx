@@ -2,7 +2,7 @@ import { type PropsWithChildren, createContext, useContext } from 'react';
 
 import type { Recipient } from '@prisma/client';
 
-import type { RecipientWithFields } from '@hanzo/sign-prisma/types/recipient-with-fields';
+import type { RecipientWithFields } from '@hanzo/esign-prisma/types/recipient-with-fields';
 
 export interface DocumentSigningRecipientContextValue {
   /**

@@ -2,17 +2,17 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import { prisma } from '@hanzo/sign-prisma';
-import { EnvelopeType, RecipientRole } from '@hanzo/sign-prisma/client';
-import { seedPendingDocument } from '@hanzo/sign-prisma/seed/documents';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/esign-prisma';
+import { EnvelopeType, RecipientRole } from '@hanzo/esign-prisma/client';
+import { seedPendingDocument } from '@hanzo/esign-prisma/seed/documents';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 import type {
   TCreateEnvelopePayload,
   TCreateEnvelopeResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
-import type { TDistributeEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/distribute-envelope.types';
+} from '@hanzo/esign-trpc/server/envelope-router/create-envelope.types';
+import type { TDistributeEnvelopeRequest } from '@hanzo/esign-trpc/server/envelope-router/distribute-envelope.types';
 
 import { apiSignin } from '../fixtures/authentication';
 import { openDropdownMenu } from '../fixtures/generic';

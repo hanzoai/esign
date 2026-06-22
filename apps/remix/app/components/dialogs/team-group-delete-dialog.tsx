@@ -6,11 +6,11 @@ import { Trans } from '@lingui/react/macro';
 import type { TeamMemberRole } from '@prisma/client';
 import { z } from 'zod';
 
-import { isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
-import type { ZDeleteTeamGroupRequestSchema } from '@hanzo/sign-trpc/server/team-router/delete-team-group.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { isTeamRoleWithinUserHierarchy } from '@hanzo/esign-lib/utils/teams';
+import type { ZDeleteTeamGroupRequestSchema } from '@hanzo/esign-trpc/server/team-router/delete-team-group.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -19,8 +19,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

@@ -8,11 +8,11 @@ import type { DropEvent, FileRejection } from 'react-dropzone';
 import { useDropzone } from 'react-dropzone';
 import { Link } from 'react-router';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT, IS_BILLING_ENABLED } from '@hanzo/sign-lib/constants/app';
-import { megabytesToBytes } from '@hanzo/sign-lib/universal/unit-convertions';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT, IS_BILLING_ENABLED } from '@hanzo/esign-lib/constants/app';
+import { megabytesToBytes } from '@hanzo/esign-lib/universal/unit-convertions';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
 
 import { Button } from './button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip';

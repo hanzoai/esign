@@ -4,10 +4,10 @@ import React from 'react';
 import type { Session } from '@prisma/client';
 import { useLocation } from 'react-router';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import type { SessionUser } from '@hanzo/sign-auth/server/lib/session/session';
-import type { TGetOrganisationSessionResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-session.types';
-import { zapCall } from '@hanzo/sign-trpc/zap/client';
+import { authClient } from '@hanzo/esign-auth/client';
+import type { SessionUser } from '@hanzo/esign-auth/server/lib/session/session';
+import type { TGetOrganisationSessionResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation-session.types';
+import { zapCall } from '@hanzo/esign-trpc/zap/client';
 
 export type AppSession = {
   session: Session;

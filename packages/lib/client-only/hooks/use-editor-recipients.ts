@@ -10,9 +10,9 @@ import { z } from 'zod';
 import {
   ZRecipientActionAuthTypesSchema,
   ZRecipientAuthOptionsSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import type { TEditorEnvelope } from '@hanzo/sign-lib/types/envelope-editor';
-import { ZRecipientEmailSchema } from '@hanzo/sign-lib/types/recipient';
+} from '@hanzo/esign-lib/types/document-auth';
+import type { TEditorEnvelope } from '@hanzo/esign-lib/types/envelope-editor';
+import { ZRecipientEmailSchema } from '@hanzo/esign-lib/types/recipient';
 
 const LocalRecipientSchema = z.object({
   formId: z.string().min(1),

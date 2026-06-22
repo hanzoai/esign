@@ -5,16 +5,16 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { AlertTriangle } from 'lucide-react';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { ONE_DAY, ONE_SECOND } from '@hanzo/sign-lib/constants/time';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { authClient } from '@hanzo/esign-auth/client';
+import { ONE_DAY, ONE_SECOND } from '@hanzo/esign-lib/constants/time';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type VerifyEmailBannerProps = {
   email: string;

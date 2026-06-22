@@ -1,9 +1,9 @@
 import { type Page, expect, test } from '@playwright/test';
 import path from 'path';
 
-import { prisma } from '@hanzo/sign-prisma';
-import { RecipientRole } from '@hanzo/sign-prisma/client';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { prisma } from '@hanzo/esign-prisma';
+import { RecipientRole } from '@hanzo/esign-prisma/client';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

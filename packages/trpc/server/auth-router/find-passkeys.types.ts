@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import PasskeySchema from '@hanzo/sign-prisma/generated/zod/modelSchema/PasskeySchema';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import PasskeySchema from '@hanzo/esign-prisma/generated/zod/modelSchema/PasskeySchema';
 
 export const ZFindPasskeysRequestSchema = ZFindSearchParamsSchema.extend({
   orderBy: z

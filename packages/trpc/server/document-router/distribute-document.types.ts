@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { ZDocumentLiteSchema } from '@hanzo/sign-lib/types/document';
-import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+import { ZDocumentLiteSchema } from '@hanzo/esign-lib/types/document';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/esign-lib/types/document-email';
 import {
   ZDocumentMetaDateFormatSchema,
   ZDocumentMetaDistributionMethodSchema,
@@ -10,7 +10,7 @@ import {
   ZDocumentMetaRedirectUrlSchema,
   ZDocumentMetaSubjectSchema,
   ZDocumentMetaTimezoneSchema,
-} from '@hanzo/sign-lib/types/document-meta';
+} from '@hanzo/esign-lib/types/document-meta';
 
 export const ZDistributeDocumentRequestSchema = z.object({
   documentId: z.number().describe('The ID of the document to send.'),

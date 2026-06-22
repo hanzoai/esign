@@ -40,7 +40,7 @@ Direct templates are evergreen - each time a user completes signing, a new docum
 Use the `EmbedDirectTemplate` component with a template token:
 
 ```jsx
-import { EmbedDirectTemplate } from '@hanzo/sign-embed-react';
+import { EmbedDirectTemplate } from '@hanzo/esign-embed-react';
 
 <EmbedDirectTemplate
   token="your-template-token"
@@ -57,7 +57,7 @@ For advanced integrations where you create documents via the API, you can embed 
 Use the `EmbedSignDocument` component with the recipient's token:
 
 ```jsx
-import { EmbedSignDocument } from '@hanzo/sign-embed-react';
+import { EmbedSignDocument } from '@hanzo/esign-embed-react';
 
 <EmbedSignDocument
   token="recipient-signing-token"
@@ -113,33 +113,33 @@ Pick your framework to get started:
 <Cards>
   <Card
     title="React"
-    description="@hanzo/sign-embed-react"
+    description="@hanzo/esign-embed-react"
     href="/docs/developers/embedding/sdks/react"
   />
-  <Card title="Vue" description="@hanzo/sign-embed-vue" href="/docs/developers/embedding/sdks/vue" />
+  <Card title="Vue" description="@hanzo/esign-embed-vue" href="/docs/developers/embedding/sdks/vue" />
   <Card
     title="Svelte"
-    description="@hanzo/sign-embed-svelte"
+    description="@hanzo/esign-embed-svelte"
     href="/docs/developers/embedding/sdks/svelte"
   />
   <Card
     title="Angular"
-    description="@hanzo/sign-embed-angular"
+    description="@hanzo/esign-embed-angular"
     href="/docs/developers/embedding/sdks/angular"
   />
   <Card
     title="Solid"
-    description="@hanzo/sign-embed-solid"
+    description="@hanzo/esign-embed-solid"
     href="/docs/developers/embedding/sdks/solid"
   />
   <Card
     title="Preact"
-    description="@hanzo/sign-embed-preact"
+    description="@hanzo/esign-embed-preact"
     href="/docs/developers/embedding/sdks/preact"
   />
 </Cards>
 
-A [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) SDK (`@hanzo/sign-embed-webcomponent`) is also available for use outside of JavaScript frameworks. It works in any environment that supports custom elements.
+A [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) SDK (`@hanzo/esign-embed-webcomponent`) is also available for use outside of JavaScript frameworks. It works in any environment that supports custom elements.
 
 If you prefer not to use any SDK, you can embed signing using [Direct Links](/docs/developers/embedding/direct-links) with a plain iframe or redirect.
 

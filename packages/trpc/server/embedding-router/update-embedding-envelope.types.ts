@@ -4,18 +4,18 @@ import { zfd } from 'zod-form-data';
 import {
   ZDocumentAccessAuthTypesSchema,
   ZDocumentActionAuthTypesSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import { ZDocumentMetaUpdateSchema } from '@hanzo/sign-lib/types/document-meta';
+} from '@hanzo/esign-lib/types/document-auth';
+import { ZDocumentMetaUpdateSchema } from '@hanzo/esign-lib/types/document-meta';
 import {
   ZClampedFieldHeightSchema,
   ZClampedFieldPositionXSchema,
   ZClampedFieldPositionYSchema,
   ZClampedFieldWidthSchema,
   ZFieldPageNumberSchema,
-} from '@hanzo/sign-lib/types/field';
-import { ZEnvelopeFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
-import { EnvelopeAttachmentSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeAttachmentSchema';
-import { ZSetEnvelopeRecipientSchema } from '@hanzo/sign-trpc/server/envelope-router/set-envelope-recipients.types';
+} from '@hanzo/esign-lib/types/field';
+import { ZEnvelopeFieldAndMetaSchema } from '@hanzo/esign-lib/types/field-meta';
+import { EnvelopeAttachmentSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/EnvelopeAttachmentSchema';
+import { ZSetEnvelopeRecipientSchema } from '@hanzo/esign-trpc/server/envelope-router/set-envelope-recipients.types';
 
 import { zodFormData } from '../../utils/zod-form-data';
 import {

@@ -6,9 +6,9 @@ import { useLingui } from '@lingui/react';
 import { CheckCircle2, Clock, File, XCircle } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react/dist/lucide-react';
 
-import type { ExtendedDocumentStatus } from '@hanzo/sign-prisma/types/extended-document-status';
-import { SignatureIcon } from '@hanzo/sign-ui/icons/signature';
-import { cn } from '@hanzo/sign-ui/lib/utils';
+import type { ExtendedDocumentStatus } from '@hanzo/esign-prisma/types/extended-document-status';
+import { SignatureIcon } from '@hanzo/esign-ui/icons/signature';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 
 type FriendlyStatus = {
   label: MessageDescriptor;

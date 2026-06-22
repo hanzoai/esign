@@ -1,6 +1,6 @@
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { prisma } from '@hanzo/sign-prisma';
-import type { DocumentVisibility } from '@hanzo/sign-prisma/generated/types';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { prisma } from '@hanzo/esign-prisma';
+import type { DocumentVisibility } from '@hanzo/esign-prisma/generated/types';
 
 import { TEAM_DOCUMENT_VISIBILITY_MAP } from '../../constants/teams';
 import { buildTeamWhereQuery } from '../../utils/teams';

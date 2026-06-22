@@ -1,8 +1,8 @@
 import { OrganisationType, Role } from '@prisma/client';
 import { customAlphabet } from 'nanoid';
 
-import { hashSync } from '@hanzo/sign-lib/server-only/auth/hash';
-import { createPersonalOrganisation } from '@hanzo/sign-lib/server-only/organisation/create-organisation';
+import { hashSync } from '@hanzo/esign-lib/server-only/auth/hash';
+import { createPersonalOrganisation } from '@hanzo/esign-lib/server-only/organisation/create-organisation';
 
 import { prisma } from '..';
 import { setOrganisationType } from './organisations';

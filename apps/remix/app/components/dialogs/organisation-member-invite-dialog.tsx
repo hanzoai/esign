@@ -11,22 +11,22 @@ import Papa, { type ParseResult } from 'papaparse';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { IS_BILLING_ENABLED, SUPPORT_EMAIL } from '@hanzo/sign-lib/constants/app';
-import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
-import { INTERNAL_CLAIM_ID } from '@hanzo/sign-lib/types/subscription';
+import { downloadFile } from '@hanzo/esign-lib/client-only/download-file';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { IS_BILLING_ENABLED, SUPPORT_EMAIL } from '@hanzo/esign-lib/constants/app';
+import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/organisations';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
+import { INTERNAL_CLAIM_ID } from '@hanzo/esign-lib/types/subscription';
 import {
   type TCreateOrganisationMemberInvitesRequestSchema,
   ZCreateOrganisationMemberInvitesRequestSchema,
-} from '@hanzo/sign-trpc/server/organisation-router/create-organisation-member-invites.types';
-import type { TGetOrganisationResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+} from '@hanzo/esign-trpc/server/organisation-router/create-organisation-member-invites.types';
+import type { TGetOrganisationResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
 import {
   Dialog,
   DialogContent,
@@ -35,7 +35,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -43,18 +43,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@hanzo/sign-ui/primitives/tabs';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { SpinnerBox } from '@hanzo/esign-ui/primitives/spinner';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@hanzo/esign-ui/primitives/tabs';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type OrganisationMemberInviteDialogProps = {
   trigger?: React.ReactNode;

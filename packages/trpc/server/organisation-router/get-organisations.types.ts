@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { ZOrganisationManySchema } from '@hanzo/sign-lib/types/organisation';
-import OrganisationMemberRoleSchema from '@hanzo/sign-prisma/generated/zod/inputTypeSchemas/OrganisationMemberRoleSchema';
+import { ZOrganisationManySchema } from '@hanzo/esign-lib/types/organisation';
+import OrganisationMemberRoleSchema from '@hanzo/esign-prisma/generated/zod/inputTypeSchemas/OrganisationMemberRoleSchema';
 
 // export const getOrganisationsMeta: TrpcOpenApiMeta = {
 //   openapi: {

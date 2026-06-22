@@ -3,17 +3,17 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { useRevalidator } from 'react-router';
 
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import { ZEmailFieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import type { FieldWithSignature } from '@hanzo/sign-prisma/types/field-with-signature';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
+import { ZEmailFieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import type { FieldWithSignature } from '@hanzo/esign-prisma/types/field-with-signature';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@hanzo/sign-trpc/server/field-router/schema';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/field-router/schema';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { DocumentSigningFieldContainer } from './document-signing-field-container';
 import {

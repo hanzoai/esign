@@ -1,10 +1,10 @@
 import { FieldType } from '@prisma/client';
 
-import { toCheckboxCustomText } from '@hanzo/sign-lib/utils/fields';
+import { toCheckboxCustomText } from '@hanzo/esign-lib/utils/fields';
 import {
   CheckboxValidationRules,
   numberFormatValues,
-} from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
+} from '@hanzo/esign-ui/primitives/document-flow/field-items-advanced-settings/constants';
 
 import type { FieldTestData } from './field-alignment-pdf';
 import { signatureBase64Demo } from './field-alignment-pdf';

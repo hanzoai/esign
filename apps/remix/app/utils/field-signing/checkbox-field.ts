@@ -1,11 +1,11 @@
 import { FieldType } from '@prisma/client';
 
-import { validateCheckboxLength } from '@hanzo/sign-lib/advanced-fields-validation/validate-checkbox';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { TFieldCheckbox } from '@hanzo/sign-lib/types/field';
-import { parseCheckboxCustomText } from '@hanzo/sign-lib/utils/fields';
-import type { TSignEnvelopeFieldValue } from '@hanzo/sign-trpc/server/envelope-router/sign-envelope-field.types';
-import { checkboxValidationSigns } from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
+import { validateCheckboxLength } from '@hanzo/esign-lib/advanced-fields-validation/validate-checkbox';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { TFieldCheckbox } from '@hanzo/esign-lib/types/field';
+import { parseCheckboxCustomText } from '@hanzo/esign-lib/utils/fields';
+import type { TSignEnvelopeFieldValue } from '@hanzo/esign-trpc/server/envelope-router/sign-envelope-field.types';
+import { checkboxValidationSigns } from '@hanzo/esign-ui/primitives/document-flow/field-items-advanced-settings/constants';
 
 import { SignFieldCheckboxDialog } from '~/components/dialogs/sign-field-checkbox-dialog';
 

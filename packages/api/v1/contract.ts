@@ -3,7 +3,7 @@ import { initContract } from '@ts-rest/core';
 import {
   ZCreateTemplateV2RequestSchema,
   ZCreateTemplateV2ResponseSchema,
-} from '@hanzo/sign-trpc/server/template-router/schema';
+} from '@hanzo/esign-trpc/server/template-router/schema';
 
 import {
   ZAuthorizationHeadersSchema,

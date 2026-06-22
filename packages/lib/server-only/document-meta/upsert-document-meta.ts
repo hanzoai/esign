@@ -4,13 +4,13 @@ import {
   EnvelopeType,
 } from '@prisma/client';
 
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import type { ApiRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
 import {
   createDocumentAuditLogData,
   diffDocumentMetaChanges,
-} from '@hanzo/sign-lib/utils/document-audit-logs';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/document-audit-logs';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type { SupportedLanguageCodes } from '../../constants/i18n';
 import { AppError, AppErrorCode } from '../../errors/app-error';

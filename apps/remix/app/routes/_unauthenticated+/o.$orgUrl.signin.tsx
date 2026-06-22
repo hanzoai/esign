@@ -5,13 +5,13 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { MailsIcon } from 'lucide-react';
 import { Link, redirect, useSearchParams } from 'react-router';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { prisma } from '@hanzo/sign-prisma';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { authClient } from '@hanzo/esign-auth/client';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { prisma } from '@hanzo/esign-prisma';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
 import { appMetaTags } from '~/utils/meta';

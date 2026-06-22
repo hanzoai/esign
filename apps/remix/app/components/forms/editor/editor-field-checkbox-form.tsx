@@ -7,19 +7,19 @@ import { PlusIcon, Trash } from 'lucide-react';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 
-import { validateCheckboxLength } from '@hanzo/sign-lib/advanced-fields-validation/validate-checkbox';
+import { validateCheckboxLength } from '@hanzo/esign-lib/advanced-fields-validation/validate-checkbox';
 import {
   type TCheckboxFieldMeta as CheckboxFieldMeta,
   DEFAULT_FIELD_FONT_SIZE,
   ZCheckboxFieldMeta,
-} from '@hanzo/sign-lib/types/field-meta';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+} from '@hanzo/esign-lib/types/field-meta';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
 import {
   checkboxValidationLength,
   checkboxValidationRules,
   checkboxValidationSigns,
-} from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
+} from '@hanzo/esign-ui/primitives/document-flow/field-items-advanced-settings/constants';
 import {
   Form,
   FormControl,
@@ -27,16 +27,16 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Separator } from '@hanzo/sign-ui/primitives/separator';
+} from '@hanzo/esign-ui/primitives/select';
+import { Separator } from '@hanzo/esign-ui/primitives/separator';
 
 import {
   EditorGenericFontSizeField,

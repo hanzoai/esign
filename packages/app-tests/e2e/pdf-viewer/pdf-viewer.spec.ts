@@ -2,23 +2,23 @@ import { expect, test } from '@playwright/test';
 import { FieldType } from '@prisma/client';
 import path from 'node:path';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/create-embedding-presign-token';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import { prefixedId } from '@hanzo/sign-lib/universal/id';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/create-embedding-presign-token';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import { prefixedId } from '@hanzo/esign-lib/universal/id';
 import {
   mapSecondaryIdToDocumentId,
   mapSecondaryIdToTemplateId,
-} from '@hanzo/sign-lib/utils/envelope';
-import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/envelope';
+import { formatDirectTemplatePath } from '@hanzo/esign-lib/utils/templates';
+import { prisma } from '@hanzo/esign-prisma';
 import {
   seedBlankDocument,
   seedCompletedDocument,
   seedPendingDocumentWithFullFields,
-} from '@hanzo/sign-prisma/seed/documents';
-import { seedBlankTemplate, seedDirectTemplate } from '@hanzo/sign-prisma/seed/templates';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+} from '@hanzo/esign-prisma/seed/documents';
+import { seedBlankTemplate, seedDirectTemplate } from '@hanzo/esign-prisma/seed/templates';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

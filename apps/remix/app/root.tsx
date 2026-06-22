@@ -10,15 +10,15 @@ import {
 } from 'react-router';
 import { PreventFlashOnWrongTheme, ThemeProvider, useTheme } from 'remix-themes';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { SessionProvider } from '@hanzo/sign-lib/client-only/providers/session';
-import { APP_I18N_OPTIONS, type SupportedLanguageCodes } from '@hanzo/sign-lib/constants/i18n';
-import { createPublicEnv } from '@hanzo/sign-lib/utils/env';
-import { extractLocaleData } from '@hanzo/sign-lib/utils/i18n';
-import { ZapProvider } from '@hanzo/sign-trpc/zap/react';
-import { getOrganisationSession } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-session';
-import { Toaster } from '@hanzo/sign-ui/primitives/toaster';
-import { TooltipProvider } from '@hanzo/sign-ui/primitives/tooltip';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { SessionProvider } from '@hanzo/esign-lib/client-only/providers/session';
+import { APP_I18N_OPTIONS, type SupportedLanguageCodes } from '@hanzo/esign-lib/constants/i18n';
+import { createPublicEnv } from '@hanzo/esign-lib/utils/env';
+import { extractLocaleData } from '@hanzo/esign-lib/utils/i18n';
+import { ZapProvider } from '@hanzo/esign-trpc/zap/react';
+import { getOrganisationSession } from '@hanzo/esign-trpc/server/organisation-router/get-organisation-session';
+import { Toaster } from '@hanzo/esign-ui/primitives/toaster';
+import { TooltipProvider } from '@hanzo/esign-ui/primitives/tooltip';
 
 import type { Route } from './+types/root';
 import stylesheet from './app.css?url';

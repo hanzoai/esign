@@ -12,7 +12,7 @@ module.exports = {
     '^react$',
     '^next(/.*)?$',
     '<THIRD_PARTY_MODULES>',
-    '^@hanzo/sign-(.*)$',
+    '^@hanzo/esign-(.*)$',
     '^~/(.*)$',
     '^[./]',
   ],

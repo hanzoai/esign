@@ -5,14 +5,14 @@ import type { Organisation, Prisma } from '@prisma/client';
 import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { nanoid } from 'nanoid';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { OrganisationInviteEmailTemplate } from '@hanzo/sign-email/templates/organisation-invite';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/organisations';
-import { prisma } from '@hanzo/sign-prisma';
-import type { TCreateOrganisationMemberInvitesRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-member-invites.types';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { OrganisationInviteEmailTemplate } from '@hanzo/esign-email/templates/organisation-invite';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/organisations';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { isOrganisationRoleWithinUserHierarchy } from '@hanzo/esign-lib/utils/organisations';
+import { prisma } from '@hanzo/esign-prisma';
+import type { TCreateOrganisationMemberInvitesRequestSchema } from '@hanzo/esign-trpc/server/organisation-router/create-organisation-member-invites.types';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { generateDatabaseId } from '../../universal/id';

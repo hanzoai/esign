@@ -3,12 +3,12 @@ import type { DocumentData, EnvelopeItem } from '@prisma/client';
 import { type Context, Hono } from 'hono';
 import { z } from 'zod';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { getTeamById } from '@hanzo/sign-lib/server-only/team/get-team';
-import type { DocumentDataVersion } from '@hanzo/sign-lib/types/document';
-import { getFileServerSide } from '@hanzo/sign-lib/universal/upload/get-file.server';
-import { prisma } from '@hanzo/sign-prisma';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { verifyEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { getTeamById } from '@hanzo/esign-lib/server-only/team/get-team';
+import type { DocumentDataVersion } from '@hanzo/esign-lib/types/document';
+import { getFileServerSide } from '@hanzo/esign-lib/universal/upload/get-file.server';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type { HonoEnv } from '../../../router';
 

@@ -1,10 +1,10 @@
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
-import { getOrganisationDetailedInsights } from '@hanzo/sign-lib/server-only/admin/get-organisation-detailed-insights';
-import type { DateRange } from '@hanzo/sign-lib/types/search-params';
-import { getAdminOrganisation } from '@hanzo/sign-trpc/server/admin-router/get-admin-organisation';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { getOrganisationDetailedInsights } from '@hanzo/esign-lib/server-only/admin/get-organisation-detailed-insights';
+import type { DateRange } from '@hanzo/esign-lib/types/search-params';
+import { getAdminOrganisation } from '@hanzo/esign-trpc/server/admin-router/get-admin-organisation';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { OrganisationInsightsTable } from '~/components/tables/organisation-insights-table';
 

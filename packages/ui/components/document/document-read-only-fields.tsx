@@ -6,17 +6,17 @@ import type { DocumentMeta, Field, Recipient } from '@prisma/client';
 import { SigningStatus } from '@prisma/client';
 import { Clock, EyeOffIcon } from 'lucide-react';
 
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { isTemplateRecipientEmailPlaceholder } from '@hanzo/sign-lib/constants/template';
-import { parseMessageDescriptor } from '@hanzo/sign-lib/utils/i18n';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { FieldRootContainer } from '@hanzo/sign-ui/components/field/field';
-import { SignatureIcon } from '@hanzo/sign-ui/icons/signature';
-import { Avatar, AvatarFallback } from '@hanzo/sign-ui/primitives/avatar';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { FRIENDLY_FIELD_TYPE } from '@hanzo/sign-ui/primitives/document-flow/types';
-import { ElementVisible } from '@hanzo/sign-ui/primitives/element-visible';
-import { PopoverHover } from '@hanzo/sign-ui/primitives/popover';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { isTemplateRecipientEmailPlaceholder } from '@hanzo/esign-lib/constants/template';
+import { parseMessageDescriptor } from '@hanzo/esign-lib/utils/i18n';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import { FieldRootContainer } from '@hanzo/esign-ui/components/field/field';
+import { SignatureIcon } from '@hanzo/esign-ui/icons/signature';
+import { Avatar, AvatarFallback } from '@hanzo/esign-ui/primitives/avatar';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { FRIENDLY_FIELD_TYPE } from '@hanzo/esign-ui/primitives/document-flow/types';
+import { ElementVisible } from '@hanzo/esign-ui/primitives/element-visible';
+import { PopoverHover } from '@hanzo/esign-ui/primitives/popover';
 
 import { getRecipientColorStyles } from '../../lib/recipient-colors';
 import { FieldContent } from '../../primitives/document-flow/field-content';

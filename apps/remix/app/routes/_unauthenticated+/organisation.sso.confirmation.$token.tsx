@@ -8,19 +8,19 @@ import { data, isRouteErrorResponse } from 'react-router';
 import { useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { ORGANISATION_ACCOUNT_LINK_VERIFICATION_TOKEN_IDENTIFIER } from '@hanzo/sign-lib/constants/organisations';
-import { ZOrganisationAccountLinkMetadataSchema } from '@hanzo/sign-lib/types/organisation';
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { formatOrganisationLoginPath } from '@hanzo/sign-lib/utils/organisation-authentication-portal';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { prisma } from '@hanzo/sign-prisma';
-import type { TDeclineLinkOrganisationAccountRequest } from '@hanzo/sign-trpc/server/organisation-router/decline-link-organisation-account.types';
-import type { TLinkOrganisationAccountRequest } from '@hanzo/sign-trpc/server/organisation-router/link-organisation-account.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { ORGANISATION_ACCOUNT_LINK_VERIFICATION_TOKEN_IDENTIFIER } from '@hanzo/esign-lib/constants/organisations';
+import { ZOrganisationAccountLinkMetadataSchema } from '@hanzo/esign-lib/types/organisation';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import { formatOrganisationLoginPath } from '@hanzo/esign-lib/utils/organisation-authentication-portal';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import { prisma } from '@hanzo/esign-prisma';
+import type { TDeclineLinkOrganisationAccountRequest } from '@hanzo/esign-trpc/server/organisation-router/decline-link-organisation-account.types';
+import type { TLinkOrganisationAccountRequest } from '@hanzo/esign-trpc/server/organisation-router/link-organisation-account.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Card,
   CardContent,
@@ -28,10 +28,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@hanzo/sign-ui/primitives/card';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
-import { Separator } from '@hanzo/sign-ui/primitives/separator';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/card';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
+import { Separator } from '@hanzo/esign-ui/primitives/separator';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { GenericErrorLayout, defaultErrorCodeMap } from '~/components/general/generic-error-layout';
 

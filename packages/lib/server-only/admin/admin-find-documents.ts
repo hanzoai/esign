@@ -1,6 +1,6 @@
 import { EnvelopeType, type Prisma } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type { FindResultResponse } from '../../types/search-params';
 

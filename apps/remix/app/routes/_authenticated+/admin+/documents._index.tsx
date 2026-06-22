@@ -6,17 +6,17 @@ import { Trans } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 
-import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import type { TFindDocumentsResponse } from '@hanzo/sign-trpc/server/admin-router/find-documents.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Avatar, AvatarFallback } from '@hanzo/sign-ui/primitives/avatar';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+import { useDebouncedValue } from '@hanzo/esign-lib/client-only/hooks/use-debounced-value';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import type { TFindDocumentsResponse } from '@hanzo/esign-trpc/server/admin-router/find-documents.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Avatar, AvatarFallback } from '@hanzo/esign-ui/primitives/avatar';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
 
 import { DocumentStatus } from '~/components/general/document/document-status';
 

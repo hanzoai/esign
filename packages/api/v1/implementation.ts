@@ -2,36 +2,36 @@ import { DocumentDataType, EnvelopeType, SigningStatus } from '@prisma/client';
 import { tsr } from '@ts-rest/serverless/fetch';
 import { match } from 'ts-pattern';
 
-import { getServerLimits } from '@hanzo/sign-lib/server-only/limits/server';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
-import '@hanzo/sign-lib/constants/time-zones';
-import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { createDocumentData } from '@hanzo/sign-lib/server-only/document-data/create-document-data';
-import { updateDocumentMeta } from '@hanzo/sign-lib/server-only/document-meta/upsert-document-meta';
-import { deleteDocument } from '@hanzo/sign-lib/server-only/document/delete-document';
-import { findDocuments } from '@hanzo/sign-lib/server-only/document/find-documents';
-import { resendDocument } from '@hanzo/sign-lib/server-only/document/resend-document';
-import { sendDocument } from '@hanzo/sign-lib/server-only/document/send-document';
-import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
+import { getServerLimits } from '@hanzo/esign-lib/server-only/limits/server';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
+import '@hanzo/esign-lib/constants/time-zones';
+import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { createDocumentData } from '@hanzo/esign-lib/server-only/document-data/create-document-data';
+import { updateDocumentMeta } from '@hanzo/esign-lib/server-only/document-meta/upsert-document-meta';
+import { deleteDocument } from '@hanzo/esign-lib/server-only/document/delete-document';
+import { findDocuments } from '@hanzo/esign-lib/server-only/document/find-documents';
+import { resendDocument } from '@hanzo/esign-lib/server-only/document/resend-document';
+import { sendDocument } from '@hanzo/esign-lib/server-only/document/send-document';
+import { createEnvelope } from '@hanzo/esign-lib/server-only/envelope/create-envelope';
 import {
   getEnvelopeById,
   getEnvelopeWhereInput,
-} from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
-import { deleteDocumentField } from '@hanzo/sign-lib/server-only/field/delete-document-field';
-import { updateEnvelopeFields } from '@hanzo/sign-lib/server-only/field/update-envelope-fields';
-import { insertFormValuesInPdf } from '@hanzo/sign-lib/server-only/pdf/insert-form-values-in-pdf';
-import { deleteEnvelopeRecipient } from '@hanzo/sign-lib/server-only/recipient/delete-envelope-recipient';
-import { getRecipientsForDocument } from '@hanzo/sign-lib/server-only/recipient/get-recipients-for-document';
-import { setDocumentRecipients } from '@hanzo/sign-lib/server-only/recipient/set-document-recipients';
-import { updateEnvelopeRecipients } from '@hanzo/sign-lib/server-only/recipient/update-envelope-recipients';
-import { createDocumentFromTemplate } from '@hanzo/sign-lib/server-only/template/create-document-from-template';
-import { deleteTemplate } from '@hanzo/sign-lib/server-only/template/delete-template';
-import { findTemplates } from '@hanzo/sign-lib/server-only/template/find-templates';
-import { getTemplateById } from '@hanzo/sign-lib/server-only/template/get-template-by-id';
-import { ZRecipientAuthOptionsSchema } from '@hanzo/sign-lib/types/document-auth';
-import { extractDerivedDocumentEmailSettings } from '@hanzo/sign-lib/types/document-email';
+} from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
+import { deleteDocumentField } from '@hanzo/esign-lib/server-only/field/delete-document-field';
+import { updateEnvelopeFields } from '@hanzo/esign-lib/server-only/field/update-envelope-fields';
+import { insertFormValuesInPdf } from '@hanzo/esign-lib/server-only/pdf/insert-form-values-in-pdf';
+import { deleteEnvelopeRecipient } from '@hanzo/esign-lib/server-only/recipient/delete-envelope-recipient';
+import { getRecipientsForDocument } from '@hanzo/esign-lib/server-only/recipient/get-recipients-for-document';
+import { setDocumentRecipients } from '@hanzo/esign-lib/server-only/recipient/set-document-recipients';
+import { updateEnvelopeRecipients } from '@hanzo/esign-lib/server-only/recipient/update-envelope-recipients';
+import { createDocumentFromTemplate } from '@hanzo/esign-lib/server-only/template/create-document-from-template';
+import { deleteTemplate } from '@hanzo/esign-lib/server-only/template/delete-template';
+import { findTemplates } from '@hanzo/esign-lib/server-only/template/find-templates';
+import { getTemplateById } from '@hanzo/esign-lib/server-only/template/get-template-by-id';
+import { ZRecipientAuthOptionsSchema } from '@hanzo/esign-lib/types/document-auth';
+import { extractDerivedDocumentEmailSettings } from '@hanzo/esign-lib/types/document-email';
 import {
   ZCheckboxFieldMeta,
   ZDropdownFieldMeta,
@@ -39,20 +39,20 @@ import {
   ZNumberFieldMeta,
   ZRadioFieldMeta,
   ZTextFieldMeta,
-} from '@hanzo/sign-lib/types/field-meta';
-import { getFileServerSide } from '@hanzo/sign-lib/universal/upload/get-file.server';
-import { putNormalizedPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
+} from '@hanzo/esign-lib/types/field-meta';
+import { getFileServerSide } from '@hanzo/esign-lib/universal/upload/get-file.server';
+import { putNormalizedPdfFileServerSide } from '@hanzo/esign-lib/universal/upload/put-file.server';
 import {
   getPresignGetUrl,
   getPresignPostUrl,
-} from '@hanzo/sign-lib/universal/upload/server-actions';
-import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
-import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
+} from '@hanzo/esign-lib/universal/upload/server-actions';
+import { isDocumentCompleted } from '@hanzo/esign-lib/utils/document';
+import { createDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
 import {
   mapSecondaryIdToDocumentId,
   mapSecondaryIdToTemplateId,
-} from '@hanzo/sign-lib/utils/envelope';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/envelope';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { ApiContractV1 } from './contract';
 import { authenticatedMiddleware } from './middleware/authenticated';

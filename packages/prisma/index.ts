@@ -1,4 +1,4 @@
-/// <reference types="@hanzo/sign-prisma/types/types.d.ts" />
+/// <reference types="@hanzo/esign-prisma/types/types.d.ts" />
 import { Prisma, PrismaClient } from '@prisma/client';
 import type { Role, WebhookTriggerEvents } from '@prisma/client';
 import { Kysely, SqliteAdapter, SqliteIntrospector, SqliteQueryCompiler } from 'kysely';

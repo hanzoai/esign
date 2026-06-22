@@ -1,7 +1,7 @@
 import { type Page, expect, test } from '@playwright/test';
 
-import { prisma } from '@hanzo/sign-prisma';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { prisma } from '@hanzo/esign-prisma';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin, apiSignout, checkSessionValid } from '../fixtures/authentication';
 

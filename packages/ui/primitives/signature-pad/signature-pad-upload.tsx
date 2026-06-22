@@ -4,8 +4,8 @@ import { Trans } from '@lingui/react/macro';
 import { motion } from 'framer-motion';
 import { UploadCloudIcon } from 'lucide-react';
 
-import { unsafe_useEffectOnce } from '@hanzo/sign-lib/client-only/hooks/use-effect-once';
-import { SIGNATURE_CANVAS_DPI } from '@hanzo/sign-lib/constants/signatures';
+import { unsafe_useEffectOnce } from '@hanzo/esign-lib/client-only/hooks/use-effect-once';
+import { SIGNATURE_CANVAS_DPI } from '@hanzo/esign-lib/constants/signatures';
 
 import { cn } from '../../lib/utils';
 

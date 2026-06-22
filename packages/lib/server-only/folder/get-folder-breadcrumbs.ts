@@ -1,7 +1,7 @@
 import { TeamMemberRole } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { DocumentVisibility } from '../../types/document-visibility';
 import type { TFolderType } from '../../types/folder-type';

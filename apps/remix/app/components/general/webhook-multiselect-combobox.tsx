@@ -3,8 +3,8 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { WebhookTriggerEvents } from '@prisma/client';
 
-import { toFriendlyWebhookEventName } from '@hanzo/sign-lib/universal/webhook/to-friendly-webhook-event-name';
-import { MultiSelect, type Option } from '@hanzo/sign-ui/primitives/multiselect';
+import { toFriendlyWebhookEventName } from '@hanzo/esign-lib/universal/webhook/to-friendly-webhook-event-name';
+import { MultiSelect, type Option } from '@hanzo/esign-ui/primitives/multiselect';
 
 type WebhookMultiSelectComboboxProps = {
   listValues: string[];

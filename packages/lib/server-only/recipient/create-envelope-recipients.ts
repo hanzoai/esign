@@ -1,14 +1,14 @@
 import { EnvelopeType, RecipientRole } from '@prisma/client';
 import { SendStatus, SigningStatus } from '@prisma/client';
 
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import type { TRecipientAccessAuthTypes } from '@hanzo/sign-lib/types/document-auth';
-import { type TRecipientActionAuthTypes } from '@hanzo/sign-lib/types/document-auth';
-import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { createRecipientAuthOptions } from '@hanzo/sign-lib/utils/document-auth';
-import { prisma } from '@hanzo/sign-prisma';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import type { TRecipientAccessAuthTypes } from '@hanzo/esign-lib/types/document-auth';
+import { type TRecipientActionAuthTypes } from '@hanzo/esign-lib/types/document-auth';
+import type { ApiRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { createDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
+import { createRecipientAuthOptions } from '@hanzo/esign-lib/utils/document-auth';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import type { EnvelopeIdOptions } from '../../utils/envelope';
