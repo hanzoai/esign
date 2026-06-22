@@ -1,6 +1,6 @@
 import type { Role } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 export type UpdateUserOptions = {
   id: number;

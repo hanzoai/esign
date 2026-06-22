@@ -3,17 +3,17 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import { getFileServerSide } from '@hanzo/sign-lib/universal/upload/get-file.server';
-import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
-import { prisma } from '@hanzo/sign-prisma';
-import { EnvelopeType, RecipientRole } from '@hanzo/sign-prisma/client';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import { getFileServerSide } from '@hanzo/esign-lib/universal/upload/get-file.server';
+import { mapSecondaryIdToTemplateId } from '@hanzo/esign-lib/utils/envelope';
+import { prisma } from '@hanzo/esign-prisma';
+import { EnvelopeType, RecipientRole } from '@hanzo/esign-prisma/client';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 import type {
   TCreateEnvelopePayload,
   TCreateEnvelopeResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/create-envelope.types';
+} from '@hanzo/esign-trpc/server/envelope-router/create-envelope.types';
 
 const WEBAPP_BASE_URL = NEXT_PUBLIC_WEBAPP_URL();
 const baseUrl = `${WEBAPP_BASE_URL}/api/v2-beta`;

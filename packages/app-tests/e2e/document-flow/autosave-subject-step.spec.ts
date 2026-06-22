@@ -2,10 +2,10 @@ import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { EnvelopeType } from '@prisma/client';
 
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
-import { seedBlankDocument } from '@hanzo/sign-prisma/seed/documents';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { getEnvelopeById } from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
+import { seedBlankDocument } from '@hanzo/esign-prisma/seed/documents';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

@@ -10,14 +10,14 @@ import { useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { getHighestOrganisationRoleInGroup } from '@hanzo/sign-lib/utils/organisations';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import type { TGetAdminOrganisationResponse } from '@hanzo/sign-trpc/server/admin-router/get-admin-organisation.types';
+import { getHighestOrganisationRoleInGroup } from '@hanzo/esign-lib/utils/organisations';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import type { TGetAdminOrganisationResponse } from '@hanzo/esign-trpc/server/admin-router/get-admin-organisation.types';
 import type {
   TUpdateOrganisationMemberRoleRequest,
   TUpdateOrganisationMemberRoleResponse,
-} from '@hanzo/sign-trpc/server/admin-router/update-organisation-member-role.types';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/admin-router/update-organisation-member-role.types';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -26,7 +26,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -34,15 +34,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
+} from '@hanzo/esign-ui/primitives/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type AdminOrganisationMemberUpdateDialogProps = {
   trigger?: React.ReactNode;

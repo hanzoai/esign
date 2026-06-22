@@ -3,9 +3,9 @@ import { createElement } from 'react';
 import { msg } from '@lingui/core/macro';
 import { DocumentSource, EnvelopeType } from '@prisma/client';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import { DocumentCompletedEmailTemplate } from '@hanzo/sign-email/templates/document-completed';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import { DocumentCompletedEmailTemplate } from '@hanzo/esign-email/templates/document-completed';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';

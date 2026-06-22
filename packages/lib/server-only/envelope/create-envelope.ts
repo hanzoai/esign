@@ -9,17 +9,17 @@ import {
   WebhookTriggerEvents,
 } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { PlaceholderInfo } from '@hanzo/sign-lib/server-only/pdf/auto-place-fields';
-import { convertPlaceholdersToFieldInputs } from '@hanzo/sign-lib/server-only/pdf/auto-place-fields';
-import { findRecipientByPlaceholder } from '@hanzo/sign-lib/server-only/pdf/helpers';
-import { normalizePdf as makeNormalizedPdf } from '@hanzo/sign-lib/server-only/pdf/normalize-pdf';
-import { ZDefaultRecipientsSchema } from '@hanzo/sign-lib/types/default-recipients';
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
-import { nanoid, prefixedId } from '@hanzo/sign-lib/universal/id';
-import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { prisma } from '@hanzo/sign-prisma';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { PlaceholderInfo } from '@hanzo/esign-lib/server-only/pdf/auto-place-fields';
+import { convertPlaceholdersToFieldInputs } from '@hanzo/esign-lib/server-only/pdf/auto-place-fields';
+import { findRecipientByPlaceholder } from '@hanzo/esign-lib/server-only/pdf/helpers';
+import { normalizePdf as makeNormalizedPdf } from '@hanzo/esign-lib/server-only/pdf/normalize-pdf';
+import { ZDefaultRecipientsSchema } from '@hanzo/esign-lib/types/default-recipients';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import type { ApiRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { nanoid, prefixedId } from '@hanzo/esign-lib/universal/id';
+import { createDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type {
   TDocumentAccessAuthTypes,

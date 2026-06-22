@@ -9,25 +9,25 @@ import type { z } from 'zod';
 import {
   DEFAULT_DOCUMENT_DATE_FORMAT,
   isValidDateFormat,
-} from '@hanzo/sign-lib/constants/date-formats';
-import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
-import { isValidLanguageCode } from '@hanzo/sign-lib/constants/i18n';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
-import { getDocumentWithDetailsById } from '@hanzo/sign-lib/server-only/document/get-document-with-details-by-id';
-import { verifyEmbeddingPresignToken } from '@hanzo/sign-lib/server-only/embedding-presign/verify-embedding-presign-token';
-import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+} from '@hanzo/esign-lib/constants/date-formats';
+import { DocumentSignatureType } from '@hanzo/esign-lib/constants/document';
+import { isValidLanguageCode } from '@hanzo/esign-lib/constants/i18n';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/esign-lib/constants/time-zones';
+import { getDocumentWithDetailsById } from '@hanzo/esign-lib/server-only/document/get-document-with-details-by-id';
+import { verifyEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/esign-lib/types/document-email';
 import {
   type TBaseEmbedAuthoringSchema,
   ZBaseEmbedAuthoringEditSchema,
-} from '@hanzo/sign-lib/types/embed-authoring-base-schema';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
+} from '@hanzo/esign-lib/types/embed-authoring-base-schema';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
 import {
   type TUpdateEmbeddingDocumentRequestSchema,
   ZUpdateEmbeddingDocumentResponseSchema,
-} from '@hanzo/sign-trpc/server/embedding-router/update-embedding-document.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/embedding-router/update-embedding-document.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Stepper } from '@hanzo/esign-ui/primitives/stepper';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { ConfigureDocumentProvider } from '~/components/embed/authoring/configure-document-context';
 import { ConfigureDocumentView } from '~/components/embed/authoring/configure-document-view';

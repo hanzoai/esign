@@ -2,13 +2,13 @@ import { msg } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { Link, Outlet, redirect } from 'react-router';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { OrganisationProvider } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { getSiteSettings } from '@hanzo/sign-lib/server-only/site-settings/get-site-settings';
-import { SITE_SETTINGS_BANNER_ID } from '@hanzo/sign-lib/server-only/site-settings/schemas/banner';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { OrganisationProvider } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { getSiteSettings } from '@hanzo/esign-lib/server-only/site-settings/get-site-settings';
+import { SITE_SETTINGS_BANNER_ID } from '@hanzo/esign-lib/server-only/site-settings/schemas/banner';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { AppBanner } from '~/components/general/app-banner';
 import { Header } from '~/components/general/app-header';

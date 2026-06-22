@@ -6,10 +6,10 @@ import { File as FileIcon, Upload, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import type { TBulkSendTemplateMutationSchema } from '@hanzo/sign-trpc/server/template-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+import type { TBulkSendTemplateMutationSchema } from '@hanzo/esign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
 import {
   Dialog,
   DialogContent,
@@ -18,9 +18,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { Form, FormControl, FormField, FormItem } from '@hanzo/sign-ui/primitives/form/form';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { Form, FormControl, FormField, FormItem } from '@hanzo/esign-ui/primitives/form/form';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

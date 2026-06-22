@@ -4,11 +4,11 @@ import { z } from 'zod';
 import {
   ZRecipientAccessAuthTypesSchema,
   ZRecipientActionAuthTypesSchema,
-} from '@hanzo/sign-lib/types/document-auth';
+} from '@hanzo/esign-lib/types/document-auth';
 import {
   ZEnvelopeRecipientLiteSchema,
   ZRecipientEmailSchema,
-} from '@hanzo/sign-lib/types/recipient';
+} from '@hanzo/esign-lib/types/recipient';
 
 export const ZCreateEnvelopeRecipientSchema = z.object({
   email: ZRecipientEmailSchema,

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { TeamMemberRole } from '@hanzo/sign-prisma/generated/types';
+import { TeamMemberRole } from '@hanzo/esign-prisma/generated/types';
 
 export const ZCreateTeamMembersRequestSchema = z.object({
   teamId: z.number(),

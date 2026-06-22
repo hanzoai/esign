@@ -13,20 +13,20 @@ import { GripVerticalIcon, HelpCircle, Plus, Trash } from 'lucide-react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { prop, sortBy } from 'remeda';
 
-import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
-import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
-import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { ZRecipientAuthOptionsSchema } from '@hanzo/sign-lib/types/document-auth';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { canRecipientBeModified as utilCanRecipientBeModified } from '@hanzo/sign-lib/utils/recipients';
-import type { TGetRecipientSuggestionsResponseSchema } from '@hanzo/sign-trpc/server/recipient-router/find-recipient-suggestions.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
-import { RecipientActionAuthSelect } from '@hanzo/sign-ui/components/recipient/recipient-action-auth-select';
-import { RecipientRoleSelect } from '@hanzo/sign-ui/components/recipient/recipient-role-select';
-import { cn } from '@hanzo/sign-ui/lib/utils';
+import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
+import { useAutoSave } from '@hanzo/esign-lib/client-only/hooks/use-autosave';
+import { useDebouncedValue } from '@hanzo/esign-lib/client-only/hooks/use-debounced-value';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { ZRecipientAuthOptionsSchema } from '@hanzo/esign-lib/types/document-auth';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { canRecipientBeModified as utilCanRecipientBeModified } from '@hanzo/esign-lib/utils/recipients';
+import type { TGetRecipientSuggestionsResponseSchema } from '@hanzo/esign-trpc/server/recipient-router/find-recipient-suggestions.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
+import { RecipientActionAuthSelect } from '@hanzo/esign-ui/components/recipient/recipient-action-auth-select';
+import { RecipientRoleSelect } from '@hanzo/esign-ui/components/recipient/recipient-role-select';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 
 import {
   DocumentReadOnlyFields,

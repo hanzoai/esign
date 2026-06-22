@@ -5,24 +5,24 @@ import { ChevronLeft, Users2 } from 'lucide-react';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { EnvelopeRenderProvider } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
-import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import type { TGetEnvelopeResponse } from '@hanzo/sign-trpc/server/envelope-router/get-envelope.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+import { EnvelopeRenderProvider } from '@hanzo/esign-lib/client-only/providers/envelope-render-provider';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/esign-lib/constants/pdf-viewer-i18n';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { mapSecondaryIdToDocumentId } from '@hanzo/esign-lib/utils/envelope';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/esign-lib/utils/envelope-download';
+import { formatDocumentsPath } from '@hanzo/esign-lib/utils/teams';
+import type { TGetEnvelopeResponse } from '@hanzo/esign-trpc/server/envelope-router/get-envelope.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import {
   DocumentReadOnlyFields,
   mapFieldsWithRecipients,
-} from '@hanzo/sign-ui/components/document/document-read-only-fields';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
-import { Spinner } from '@hanzo/sign-ui/primitives/spinner';
+} from '@hanzo/esign-ui/components/document/document-read-only-fields';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
+import { Spinner } from '@hanzo/esign-ui/primitives/spinner';
 
 import { DocumentPageViewButton } from '~/components/general/document/document-page-view-button';
 import { DocumentPageViewDropdown } from '~/components/general/document/document-page-view-dropdown';

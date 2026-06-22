@@ -2,9 +2,9 @@ import { Trans } from '@lingui/react/macro';
 import { ChevronLeft } from 'lucide-react';
 import { Link, Outlet, isRouteErrorResponse } from 'react-router';
 
-import { useOptionalSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useOptionalSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { Header as AuthenticatedHeader } from '~/components/general/app-header';
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';

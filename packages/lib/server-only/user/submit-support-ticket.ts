@@ -1,5 +1,5 @@
-import { plainClient } from '@hanzo/sign-lib/plain/client';
-import { prisma } from '@hanzo/sign-prisma';
+import { plainClient } from '@hanzo/esign-lib/plain/client';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { buildOrganisationWhereQuery } from '../../utils/organisations';

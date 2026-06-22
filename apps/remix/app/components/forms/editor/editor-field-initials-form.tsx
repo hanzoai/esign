@@ -9,8 +9,8 @@ import {
   FIELD_DEFAULT_GENERIC_ALIGN,
   type TInitialsFieldMeta as InitialsFieldMeta,
   ZInitialsFieldMeta,
-} from '@hanzo/sign-lib/types/field-meta';
-import { Form } from '@hanzo/sign-ui/primitives/form/form';
+} from '@hanzo/esign-lib/types/field-meta';
+import { Form } from '@hanzo/esign-ui/primitives/form/form';
 
 import {
   EditorGenericFontSizeField,

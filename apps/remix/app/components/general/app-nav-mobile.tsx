@@ -5,14 +5,14 @@ import { Trans } from '@lingui/react/macro';
 import { ReadStatus } from '@prisma/client';
 import { Link } from 'react-router';
 
-import LogoImage from '@hanzo/sign-assets/logo.png';
-import { authClient } from '@hanzo/sign-auth/client';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TGetInboxCountResponse } from '@hanzo/sign-trpc/server/document-router/get-inbox-count.types';
-import { Sheet, SheetContent } from '@hanzo/sign-ui/primitives/sheet';
-import { ThemeSwitcher } from '@hanzo/sign-ui/primitives/theme-switcher';
+import LogoImage from '@hanzo/esign-assets/logo.png';
+import { authClient } from '@hanzo/esign-auth/client';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TGetInboxCountResponse } from '@hanzo/esign-trpc/server/document-router/get-inbox-count.types';
+import { Sheet, SheetContent } from '@hanzo/esign-ui/primitives/sheet';
+import { ThemeSwitcher } from '@hanzo/esign-ui/primitives/theme-switcher';
 
 import { useOptionalCurrentTeam } from '~/providers/team';
 

@@ -8,23 +8,23 @@ import { CheckCircle2Icon, ClockIcon, Loader } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import type { TFindEmailDomainsResponse } from '@hanzo/sign-trpc/server/admin-router/find-email-domains.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+import { useDebouncedValue } from '@hanzo/esign-lib/client-only/hooks/use-debounced-value';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import type { TFindEmailDomainsResponse } from '@hanzo/esign-trpc/server/admin-router/find-email-domains.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
+} from '@hanzo/esign-ui/primitives/select';
 
 export default function AdminEmailDomainsPage() {
   const { _, i18n } = useLingui();

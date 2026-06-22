@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { seedOrganisationMembers } from '@hanzo/sign-prisma/seed/organisations';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { seedOrganisationMembers } from '@hanzo/esign-prisma/seed/organisations';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../../fixtures/authentication';
 

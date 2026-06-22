@@ -10,15 +10,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { InfoIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 
-import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient-roles';
-import type { TDocument } from '@hanzo/sign-lib/types/document';
-import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
-import { formatSigningLink } from '@hanzo/sign-lib/utils/recipients';
-import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
+import { useAutoSave } from '@hanzo/esign-lib/client-only/hooks/use-autosave';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/esign-lib/constants/recipient-roles';
+import type { TDocument } from '@hanzo/esign-lib/types/document';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/esign-lib/types/document-email';
+import { formatSigningLink } from '@hanzo/esign-lib/utils/recipients';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-emails.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { DocumentSendEmailMessageHelper } from '@hanzo/esign-ui/components/document/document-send-email-message-helper';
 import {
   Form,
   FormControl,
@@ -26,15 +26,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
+} from '@hanzo/esign-ui/primitives/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Tabs, TabsList, TabsTrigger } from '@hanzo/sign-ui/primitives/tabs';
+} from '@hanzo/esign-ui/primitives/select';
+import { Tabs, TabsList, TabsTrigger } from '@hanzo/esign-ui/primitives/tabs';
 
 import { CopyTextButton } from '../../components/common/copy-text-button';
 import { DocumentEmailCheckboxes } from '../../components/document/document-email-checkboxes';

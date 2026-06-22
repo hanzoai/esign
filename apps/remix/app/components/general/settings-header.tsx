@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { cn } from '@hanzo/sign-ui/lib/utils';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 
 export type SettingsHeaderProps = {
   title: string | React.ReactNode;

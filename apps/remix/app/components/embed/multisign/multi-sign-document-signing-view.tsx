@@ -7,26 +7,26 @@ import { DocumentStatus, SigningStatus } from '@prisma/client';
 import { Loader, LucideChevronDown, LucideChevronUp, X } from 'lucide-react';
 import { P, match } from 'ts-pattern';
 
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { sortFieldsByPosition } from '@hanzo/sign-lib/utils/fields';
-import { isSignatureFieldType } from '@hanzo/sign-prisma/guards/is-signature-field';
-import type { TGetMultiSignDocumentResponseSchema } from '@hanzo/sign-trpc/server/embedding-router/get-multi-sign-document.types';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/esign-lib/utils/envelope-download';
+import { sortFieldsByPosition } from '@hanzo/esign-lib/utils/fields';
+import { isSignatureFieldType } from '@hanzo/esign-prisma/guards/is-signature-field';
+import type { TGetMultiSignDocumentResponseSchema } from '@hanzo/esign-trpc/server/embedding-router/get-multi-sign-document.types';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@hanzo/sign-trpc/server/field-router/schema';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { DocumentReadOnlyFields } from '@hanzo/sign-ui/components/document/document-read-only-fields';
-import { FieldToolTip } from '@hanzo/sign-ui/components/field/field-tooltip';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { ElementVisible } from '@hanzo/sign-ui/primitives/element-visible';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { SignaturePadDialog } from '@hanzo/sign-ui/primitives/signature-pad/signature-pad-dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/field-router/schema';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { DocumentReadOnlyFields } from '@hanzo/esign-ui/components/document/document-read-only-fields';
+import { FieldToolTip } from '@hanzo/esign-ui/components/field/field-tooltip';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { ElementVisible } from '@hanzo/esign-ui/primitives/element-visible';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { SignaturePadDialog } from '@hanzo/esign-ui/primitives/signature-pad/signature-pad-dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { PDFViewer } from '~/components/general/pdf-viewer/pdf-viewer';
 

@@ -9,18 +9,18 @@ import { History } from 'lucide-react';
 import { useForm, useWatch } from 'react-hook-form';
 import * as z from 'zod';
 
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { getRecipientType } from '@hanzo/sign-lib/client-only/recipient-type';
-import { recipientAbbreviation } from '@hanzo/sign-lib/utils/recipient-formatter';
-import type { Document } from '@hanzo/sign-prisma/types/document-legacy-schema';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { getRecipientType } from '@hanzo/esign-lib/client-only/recipient-type';
+import { recipientAbbreviation } from '@hanzo/esign-lib/utils/recipient-formatter';
+import type { Document } from '@hanzo/esign-prisma/types/document-legacy-schema';
 import type {
   TRedistributeDocumentRequest,
   TRedistributeDocumentResponse,
-} from '@hanzo/sign-trpc/server/document-router/redistribute-document.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+} from '@hanzo/esign-trpc/server/document-router/redistribute-document.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
 import {
   Dialog,
   DialogClose,
@@ -29,16 +29,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { DropdownMenuItem } from '@hanzo/sign-ui/primitives/dropdown-menu';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { DropdownMenuItem } from '@hanzo/esign-ui/primitives/dropdown-menu';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

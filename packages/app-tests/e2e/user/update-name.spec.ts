@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-import { getUserByEmail } from '@hanzo/sign-lib/server-only/user/get-user-by-email';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { getUserByEmail } from '@hanzo/esign-lib/server-only/user/get-user-by-email';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 import { signSignaturePad } from '../fixtures/signature';

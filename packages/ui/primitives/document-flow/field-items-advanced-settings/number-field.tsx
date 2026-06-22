@@ -3,19 +3,19 @@ import { useState } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-import { validateNumberField } from '@hanzo/sign-lib/advanced-fields-validation/validate-number';
-import { type TNumberFieldMeta as NumberFieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
+import { validateNumberField } from '@hanzo/esign-lib/advanced-fields-validation/validate-number';
+import { type TNumberFieldMeta as NumberFieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
+} from '@hanzo/esign-ui/primitives/select';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
 
 import { numberFormatValues } from './constants';
 

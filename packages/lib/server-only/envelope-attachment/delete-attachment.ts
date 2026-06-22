@@ -1,7 +1,7 @@
 import { DocumentStatus } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { prisma } from '@hanzo/sign-prisma';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { buildTeamWhereQuery } from '../../utils/teams';
 

@@ -7,13 +7,13 @@ import { ChevronLeft } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { Link } from 'react-router';
 
-import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
-import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
-import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
-import { logDocumentAccess } from '@hanzo/sign-lib/utils/logger';
-import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import { Card } from '@hanzo/sign-ui/primitives/card';
+import { getSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { getEnvelopeById } from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
+import { getTeamByUrl } from '@hanzo/esign-lib/server-only/team/get-team';
+import { mapSecondaryIdToDocumentId } from '@hanzo/esign-lib/utils/envelope';
+import { logDocumentAccess } from '@hanzo/esign-lib/utils/logger';
+import { formatDocumentsPath } from '@hanzo/esign-lib/utils/teams';
+import { Card } from '@hanzo/esign-ui/primitives/card';
 
 import { DocumentAuditLogDownloadButton } from '~/components/general/document/document-audit-log-download-button';
 import { DocumentCertificateDownloadButton } from '~/components/general/document/document-certificate-download-button';

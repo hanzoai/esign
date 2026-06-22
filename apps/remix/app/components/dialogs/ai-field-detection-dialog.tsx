@@ -6,18 +6,18 @@ import { useLingui } from '@lingui/react';
 import { Plural, Trans } from '@lingui/react/macro';
 import { CheckIcon, FormInputIcon, ShieldCheckIcon } from 'lucide-react';
 
-import type { NormalizedFieldWithContext } from '@hanzo/sign-lib/server-only/ai/envelope/detect-fields/types';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { NormalizedFieldWithContext } from '@hanzo/esign-lib/server-only/ai/envelope/detect-fields/types';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
 
 import {
   AiApiError,

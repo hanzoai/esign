@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
+} from '@hanzo/esign-ui/primitives/select';
 
 import { cn } from '../../lib/utils';
 

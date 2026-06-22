@@ -1,8 +1,8 @@
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
-import { SUPPORT_EMAIL } from '@hanzo/sign-lib/constants/app';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { SUPPORT_EMAIL } from '@hanzo/esign-lib/constants/app';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 export default function SignatureDisclosure() {
   return (

@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import { Trans, useLingui } from '@lingui/react/macro';
 
-import type { TLicenseClaim } from '@hanzo/sign-lib/types/license';
-import type { TFindSubscriptionClaimsResponse } from '@hanzo/sign-trpc/server/admin-router/find-subscription-claims.types';
-import type { TUpdateSubscriptionClaimRequest } from '@hanzo/sign-trpc/server/admin-router/update-subscription-claim.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { TLicenseClaim } from '@hanzo/esign-lib/types/license';
+import type { TFindSubscriptionClaimsResponse } from '@hanzo/esign-trpc/server/admin-router/find-subscription-claims.types';
+import type { TUpdateSubscriptionClaimRequest } from '@hanzo/esign-trpc/server/admin-router/update-subscription-claim.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -15,8 +15,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { SubscriptionClaimForm } from '../forms/subscription-claim-form';
 

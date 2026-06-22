@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import OrganisationSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationSchema';
-import SubscriptionSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/SubscriptionSchema';
-import UserSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/UserSchema';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import OrganisationSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationSchema';
+import SubscriptionSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/SubscriptionSchema';
+import UserSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/UserSchema';
 
 export const ZFindAdminOrganisationsRequestSchema = ZFindSearchParamsSchema.extend({
   ownerUserId: z.number().optional(),

@@ -5,23 +5,23 @@ import type { RequestIdVariables } from 'hono/request-id';
 import { requestId } from 'hono/request-id';
 import type { Logger } from 'pino';
 
-import { tsRestHonoApp } from '@hanzo/sign-api/hono';
-import { auth } from '@hanzo/sign-auth/server';
-import { jobsClient } from '@hanzo/sign-lib/jobs/client';
-import { LicenseClient } from '@hanzo/sign-lib/server-only/license/license-client';
-import { createRateLimitMiddleware } from '@hanzo/sign-lib/server-only/rate-limit/rate-limit-middleware';
+import { tsRestHonoApp } from '@hanzo/esign-api/hono';
+import { auth } from '@hanzo/esign-auth/server';
+import { jobsClient } from '@hanzo/esign-lib/jobs/client';
+import { LicenseClient } from '@hanzo/esign-lib/server-only/license/license-client';
+import { createRateLimitMiddleware } from '@hanzo/esign-lib/server-only/rate-limit/rate-limit-middleware';
 import {
   aiRateLimit,
   apiV1RateLimit,
   apiV2RateLimit,
   fileUploadRateLimit,
-} from '@hanzo/sign-lib/server-only/rate-limit/rate-limits';
-import { TelemetryClient } from '@hanzo/sign-lib/server-only/telemetry/telemetry-client';
-import { migrateDeletedAccountServiceAccount } from '@hanzo/sign-lib/server-only/user/service-accounts/deleted-account';
-import { migrateLegacyServiceAccount } from '@hanzo/sign-lib/server-only/user/service-accounts/legacy-service-account';
-import { env } from '@hanzo/sign-lib/utils/env';
-import { logger } from '@hanzo/sign-lib/utils/logger';
-import openApiDocument from '@hanzo/sign-trpc/zap/gen/openapi.json';
+} from '@hanzo/esign-lib/server-only/rate-limit/rate-limits';
+import { TelemetryClient } from '@hanzo/esign-lib/server-only/telemetry/telemetry-client';
+import { migrateDeletedAccountServiceAccount } from '@hanzo/esign-lib/server-only/user/service-accounts/deleted-account';
+import { migrateLegacyServiceAccount } from '@hanzo/esign-lib/server-only/user/service-accounts/legacy-service-account';
+import { env } from '@hanzo/esign-lib/utils/env';
+import { logger } from '@hanzo/esign-lib/utils/logger';
+import openApiDocument from '@hanzo/esign-trpc/zap/gen/openapi.json';
 
 import { aiRoute } from './api/ai/route';
 import { downloadRoute } from './api/download/download';

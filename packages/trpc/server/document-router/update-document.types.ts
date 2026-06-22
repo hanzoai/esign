@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
-import { ZDocumentLiteSchema } from '@hanzo/sign-lib/types/document';
+import { ZDocumentLiteSchema } from '@hanzo/esign-lib/types/document';
 import {
   ZDocumentAccessAuthTypesSchema,
   ZDocumentActionAuthTypesSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import { ZDocumentMetaUpdateSchema } from '@hanzo/sign-lib/types/document-meta';
+} from '@hanzo/esign-lib/types/document-auth';
+import { ZDocumentMetaUpdateSchema } from '@hanzo/esign-lib/types/document-meta';
 
 import {
   ZDocumentExternalIdSchema,

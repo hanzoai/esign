@@ -9,16 +9,16 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { base64 } from '@hanzo/sign-lib/universal/base64';
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import type { TSetProfileImageMutationSchema } from '@hanzo/sign-trpc/server/profile-router/schema';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { base64 } from '@hanzo/esign-lib/universal/base64';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import type { TSetProfileImageMutationSchema } from '@hanzo/esign-trpc/server/profile-router/schema';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -26,8 +26,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export const ZAvatarImageFormSchema = z.object({
   bytes: z.string().nullish(),

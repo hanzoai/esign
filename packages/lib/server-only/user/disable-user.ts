@@ -1,5 +1,5 @@
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { prisma } from '@hanzo/sign-prisma';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { prisma } from '@hanzo/esign-prisma';
 
 export type DisableUserOptions = {
   id: number;

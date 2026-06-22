@@ -1,6 +1,6 @@
 import { DocumentStatus, EnvelopeType, RecipientRole, SigningStatus } from '@prisma/client';
 
-import { kyselyPrisma, sql } from '@hanzo/sign-prisma';
+import { kyselyPrisma, sql } from '@hanzo/esign-prisma';
 
 import type { FindResultResponse } from '../../types/search-params';
 

@@ -12,12 +12,12 @@ import { nanoid } from 'nanoid';
 import path from 'node:path';
 import { groupBy } from 'remeda';
 
-import { addRejectionStampToPdf } from '@hanzo/sign-lib/server-only/pdf/add-rejection-stamp-to-pdf';
-import { generateAuditLogPdf } from '@hanzo/sign-lib/server-only/pdf/generate-audit-log-pdf';
-import { generateCertificatePdf } from '@hanzo/sign-lib/server-only/pdf/generate-certificate-pdf';
-import { getLastPageDimensions } from '@hanzo/sign-lib/server-only/pdf/get-page-size';
-import { prisma } from '@hanzo/sign-prisma';
-import { signPdf } from '@hanzo/sign-signing';
+import { addRejectionStampToPdf } from '@hanzo/esign-lib/server-only/pdf/add-rejection-stamp-to-pdf';
+import { generateAuditLogPdf } from '@hanzo/esign-lib/server-only/pdf/generate-audit-log-pdf';
+import { generateCertificatePdf } from '@hanzo/esign-lib/server-only/pdf/generate-certificate-pdf';
+import { getLastPageDimensions } from '@hanzo/esign-lib/server-only/pdf/get-page-size';
+import { prisma } from '@hanzo/esign-prisma';
+import { signPdf } from '@hanzo/esign-signing';
 
 import { NEXT_PRIVATE_USE_PLAYWRIGHT_PDF } from '../../../constants/app';
 import { AppError, AppErrorCode } from '../../../errors/app-error';

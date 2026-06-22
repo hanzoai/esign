@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { ZOrganisationSchema } from '@hanzo/sign-lib/types/organisation';
-import { OrganisationMemberRole, TeamMemberRole } from '@hanzo/sign-prisma/generated/types';
-import SubscriptionSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/SubscriptionSchema';
-import TeamSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/TeamSchema';
+import { ZOrganisationSchema } from '@hanzo/esign-lib/types/organisation';
+import { OrganisationMemberRole, TeamMemberRole } from '@hanzo/esign-prisma/generated/types';
+import SubscriptionSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/SubscriptionSchema';
+import TeamSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/TeamSchema';
 
 export const ZGetOrganisationSessionResponseSchema = ZOrganisationSchema.extend({
   teams: z.array(

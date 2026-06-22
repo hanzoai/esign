@@ -4,10 +4,10 @@ import { Trans } from '@lingui/react/macro';
 import { AlertCircle } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { PopoverHover } from '@hanzo/sign-ui/primitives/popover';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { PopoverHover } from '@hanzo/esign-ui/primitives/popover';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type LegacyFieldWarningPopoverProps = {
   type?: 'document' | 'template';

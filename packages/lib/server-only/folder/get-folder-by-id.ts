@@ -1,5 +1,5 @@
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { prisma } from '@hanzo/sign-prisma';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { TEAM_DOCUMENT_VISIBILITY_MAP } from '../../constants/teams';
 import type { TFolderType } from '../../types/folder-type';

@@ -90,10 +90,10 @@ import type { Document, Recipient } from '@prisma/client';
 import { DocumentStatus, RecipientRole } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-// 3. Internal package imports (from @hanzo/sign-*)
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { prisma } from '@hanzo/sign-prisma';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+// 3. Internal package imports (from @hanzo/esign-*)
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { prisma } from '@hanzo/esign-prisma';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 // 4. Relative imports
 import { getTeamById } from '../team/get-team';
@@ -107,8 +107,8 @@ import type { FindResultResponse } from './types';
 // ✅ Use type imports for types
 import type { Document } from '@prisma/client';
 
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 ```
 
 ---
@@ -340,7 +340,7 @@ onClick={() => void onFormSubmit()}
 
 ```typescript
 // ✅ Blank line after imports
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 export const findDocuments = async () => {
   // ...

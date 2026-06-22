@@ -23,7 +23,7 @@ RUN npm install -g "turbo@^1.9.3"
 
 # Outputs to the /out folder
 # source: https://turbo.build/repo/docs/reference/command-line-reference/prune#--docker
-RUN turbo prune --scope=@hanzo/sign-remix --docker
+RUN turbo prune --scope=@hanzo/esign --docker
 
 ###########################
 #   INSTALLER CONTAINER   #
@@ -81,7 +81,7 @@ COPY turbo.json turbo.json
 
 RUN npm install -g "turbo@^1.9.3"
 
-RUN turbo run build --filter=@hanzo/sign-remix...
+RUN turbo run build --filter=@hanzo/esign...
 
 ###########################
 #     RUNNER CONTAINER    #

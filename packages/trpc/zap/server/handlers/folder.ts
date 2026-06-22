@@ -5,14 +5,14 @@
 // procedure used (type-level validation preserved); the server-only functions
 // are reused unchanged. Routes: folder.getFolders / findFolders /
 // findFoldersInternal / createFolder / updateFolder / deleteFolder.
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { createFolder } from '@hanzo/sign-lib/server-only/folder/create-folder';
-import { deleteFolder } from '@hanzo/sign-lib/server-only/folder/delete-folder';
-import { findFolders } from '@hanzo/sign-lib/server-only/folder/find-folders';
-import { findFoldersInternal } from '@hanzo/sign-lib/server-only/folder/find-folders-internal';
-import { getFolderBreadcrumbs } from '@hanzo/sign-lib/server-only/folder/get-folder-breadcrumbs';
-import { getFolderById } from '@hanzo/sign-lib/server-only/folder/get-folder-by-id';
-import { updateFolder } from '@hanzo/sign-lib/server-only/folder/update-folder';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { createFolder } from '@hanzo/esign-lib/server-only/folder/create-folder';
+import { deleteFolder } from '@hanzo/esign-lib/server-only/folder/delete-folder';
+import { findFolders } from '@hanzo/esign-lib/server-only/folder/find-folders';
+import { findFoldersInternal } from '@hanzo/esign-lib/server-only/folder/find-folders-internal';
+import { getFolderBreadcrumbs } from '@hanzo/esign-lib/server-only/folder/get-folder-breadcrumbs';
+import { getFolderById } from '@hanzo/esign-lib/server-only/folder/get-folder-by-id';
+import { updateFolder } from '@hanzo/esign-lib/server-only/folder/update-folder';
 
 import {
   ZCreateFolderRequestSchema,

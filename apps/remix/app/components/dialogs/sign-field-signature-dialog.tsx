@@ -3,15 +3,15 @@ import { useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { createCallable } from 'react-call';
 
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { SignaturePad } from '@hanzo/sign-ui/primitives/signature-pad';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { SignaturePad } from '@hanzo/esign-ui/primitives/signature-pad';
 
 import { DocumentSigningDisclosure } from '../general/document-signing/document-signing-disclosure';
 

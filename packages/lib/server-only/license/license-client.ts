@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { IS_BILLING_ENABLED } from '../../constants/app';
 import type { TLicenseClaim } from '../../types/license';

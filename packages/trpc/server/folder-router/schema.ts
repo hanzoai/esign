@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { ZFolderTypeSchema } from '@hanzo/sign-lib/types/folder-type';
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { DocumentVisibility } from '@hanzo/sign-prisma/generated/types';
-import FolderSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/FolderSchema';
+import { ZFolderTypeSchema } from '@hanzo/esign-lib/types/folder-type';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import { DocumentVisibility } from '@hanzo/esign-prisma/generated/types';
+import FolderSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/FolderSchema';
 
 export const ZFolderSchema = FolderSchema.pick({
   id: true,

@@ -2,7 +2,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 
-import { formatTeamUrl } from '@hanzo/sign-lib/utils/teams';
+import { formatTeamUrl } from '@hanzo/esign-lib/utils/teams';
 
 import {
   Body,

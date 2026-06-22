@@ -1,8 +1,8 @@
 import { PDF } from '@libpdf/core';
 import { i18n } from '@lingui/core';
 
-import { type TDocumentAuditLog } from '@hanzo/sign-lib/types/document-audit-logs';
-import { prisma } from '@hanzo/sign-prisma';
+import { type TDocumentAuditLog } from '@hanzo/esign-lib/types/document-audit-logs';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { ZSupportedLanguageCodeSchema } from '../../constants/i18n';
 import { parseDocumentAuditLogData } from '../../utils/document-audit-logs';

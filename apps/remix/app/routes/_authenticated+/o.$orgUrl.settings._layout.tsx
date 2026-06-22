@@ -11,10 +11,10 @@ import {
 import { FaUsers } from 'react-icons/fa6';
 import { Link, NavLink, Outlet } from 'react-router';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { canExecuteOrganisationAction } from '@hanzo/sign-lib/utils/organisations';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { canExecuteOrganisationAction } from '@hanzo/esign-lib/utils/organisations';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
 import { appMetaTags } from '~/utils/meta';

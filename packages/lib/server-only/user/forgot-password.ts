@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { ONE_DAY } from '../../constants/time';
 import { sendForgotPassword } from '../auth/send-forgot-password';

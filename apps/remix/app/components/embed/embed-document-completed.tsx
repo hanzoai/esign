@@ -1,8 +1,8 @@
 import { Trans } from '@lingui/react/macro';
 import type { Signature } from '@prisma/client';
 
-import signingCelebration from '@hanzo/sign-assets/images/signing-celebration.png';
-import { SigningCard3D } from '@hanzo/sign-ui/components/signing-card';
+import signingCelebration from '@hanzo/esign-assets/images/signing-celebration.png';
+import { SigningCard3D } from '@hanzo/esign-ui/components/signing-card';
 
 export type EmbedDocumentCompletedPageProps = {
   name?: string;

@@ -6,11 +6,11 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { downloadFile } from '@hanzo/sign-lib/client-only/download-file';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { authClient } from '@hanzo/esign-auth/client';
+import { downloadFile } from '@hanzo/esign-lib/client-only/download-file';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -20,15 +20,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/sign-ui/primitives/pin-input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { PinInput, PinInputGroup, PinInputSlot } from '@hanzo/esign-ui/primitives/pin-input';
 
 import { RecoveryCodeList } from './recovery-code-list';
 

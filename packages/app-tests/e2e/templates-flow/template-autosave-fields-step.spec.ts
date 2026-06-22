@@ -1,11 +1,11 @@
 import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { getTemplateById } from '@hanzo/sign-lib/server-only/template/get-template-by-id';
-import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
-import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { getTemplateById } from '@hanzo/esign-lib/server-only/template/get-template-by-id';
+import { mapSecondaryIdToTemplateId } from '@hanzo/esign-lib/utils/envelope';
+import { seedBlankTemplate } from '@hanzo/esign-prisma/seed/templates';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

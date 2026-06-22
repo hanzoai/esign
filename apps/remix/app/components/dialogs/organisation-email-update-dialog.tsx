@@ -6,13 +6,13 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import type { TGetOrganisationEmailDomainResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-email-domain.types';
+import type { TGetOrganisationEmailDomainResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation-email-domain.types';
 import {
   type TUpdateOrganisationEmailRequest,
   ZUpdateOrganisationEmailRequestSchema,
-} from '@hanzo/sign-trpc/server/organisation-router/update-organisation-email.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/organisation-router/update-organisation-email.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -30,9 +30,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type OrganisationEmailUpdateDialogProps = {
   trigger: React.ReactNode;

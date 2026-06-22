@@ -14,11 +14,11 @@
 import type { MintCap } from '@zap-proto/web/server';
 import type { IncomingMessage } from 'node:http';
 
-import { getOptionalSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { getApiTokenByToken } from '@hanzo/sign-lib/server-only/public-api/get-api-token-by-token';
-import { extractRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
-import { alphaid } from '@hanzo/sign-lib/universal/id';
-import { logger } from '@hanzo/sign-lib/utils/logger';
+import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { getApiTokenByToken } from '@hanzo/esign-lib/server-only/public-api/get-api-token-by-token';
+import { extractRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { alphaid } from '@hanzo/esign-lib/universal/id';
+import { logger } from '@hanzo/esign-lib/utils/logger';
 
 import type { ZapContext } from './context';
 

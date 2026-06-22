@@ -3,15 +3,15 @@ import { Loader } from 'lucide-react';
 import { useLoaderData } from 'react-router';
 import type { z } from 'zod';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { IS_AI_FEATURES_CONFIGURED } from '@hanzo/sign-lib/constants/app';
-import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TGetOrganisationResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation.types';
-import type { ZUpdateOrganisationSettingsRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-settings.types';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { IS_AI_FEATURES_CONFIGURED } from '@hanzo/esign-lib/constants/app';
+import { DocumentSignatureType } from '@hanzo/esign-lib/constants/document';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TGetOrganisationResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation.types';
+import type { ZUpdateOrganisationSettingsRequestSchema } from '@hanzo/esign-trpc/server/organisation-router/update-organisation-settings.types';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import {
   DocumentPreferencesForm,

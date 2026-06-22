@@ -8,9 +8,9 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 ## Installation
 
 <Tabs items={['npm', 'yarn', 'pnpm']}>
-  <Tab value="npm">``` npm install @hanzo/sign-embed-vue ```</Tab>
-  <Tab value="yarn">``` yarn add @hanzo/sign-embed-vue ```</Tab>
-  <Tab value="pnpm">``` pnpm add @hanzo/sign-embed-vue ```</Tab>
+  <Tab value="npm">``` npm install @hanzo/esign-embed-vue ```</Tab>
+  <Tab value="yarn">``` yarn add @hanzo/esign-embed-vue ```</Tab>
+  <Tab value="pnpm">``` pnpm add @hanzo/esign-embed-vue ```</Tab>
 </Tabs>
 
 ---
@@ -19,7 +19,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ```html
 <script setup lang="ts">
-  import { EmbedDirectTemplate } from '@hanzo/sign-embed-vue';
+  import { EmbedDirectTemplate } from '@hanzo/esign-embed-vue';
 
   const token = 'your-template-token';
 
@@ -48,7 +48,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ```html
 <script setup lang="ts">
-  import { EmbedSignDocument } from '@hanzo/sign-embed-vue';
+  import { EmbedSignDocument } from '@hanzo/esign-embed-vue';
 
   const props = defineProps<{ token: string }>();
 
@@ -68,7 +68,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ```html
 <script setup lang="ts">
-  import { EmbedDirectTemplate } from '@hanzo/sign-embed-vue';
+  import { EmbedDirectTemplate } from '@hanzo/esign-embed-vue';
 
   const token = 'your-token';
 

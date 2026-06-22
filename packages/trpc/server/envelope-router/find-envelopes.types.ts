@@ -1,8 +1,8 @@
 import { DocumentSource, DocumentStatus, EnvelopeType } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZEnvelopeManySchema } from '@hanzo/sign-lib/types/envelope';
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
+import { ZEnvelopeManySchema } from '@hanzo/esign-lib/types/envelope';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
 
 export const ZFindEnvelopesRequestSchema = ZFindSearchParamsSchema.extend({
   type: z

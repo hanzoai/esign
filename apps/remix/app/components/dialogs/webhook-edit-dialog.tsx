@@ -11,9 +11,9 @@ import type { z } from 'zod';
 import {
   type TEditWebhookRequestSchema,
   ZEditWebhookRequestSchema,
-} from '@hanzo/sign-trpc/server/webhook-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/webhook-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -32,11 +32,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { PasswordInput } from '@hanzo/sign-ui/primitives/password-input';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { PasswordInput } from '@hanzo/esign-ui/primitives/password-input';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { WebhookMultiSelectCombobox } from '../general/webhook-multiselect-combobox';
 

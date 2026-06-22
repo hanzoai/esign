@@ -3,9 +3,9 @@ import { AlertTriangleIcon, KeyRoundIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import type { TCachedLicense } from '@hanzo/sign-lib/types/license';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { TCachedLicense } from '@hanzo/esign-lib/types/license';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 export type AdminLicenseStatusBannerProps = {
   license: TCachedLicense | null;

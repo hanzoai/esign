@@ -2,10 +2,10 @@ import { Trans } from '@lingui/react/macro';
 import { ChevronLeft } from 'lucide-react';
 import { Link, redirect } from 'react-router';
 
-import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { getTeamByUrl } from '@hanzo/sign-lib/server-only/team/get-team';
-import { getTemplateById } from '@hanzo/sign-lib/server-only/template/get-template-by-id';
-import { formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
+import { getSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { getTeamByUrl } from '@hanzo/esign-lib/server-only/team/get-team';
+import { getTemplateById } from '@hanzo/esign-lib/server-only/template/get-template-by-id';
+import { formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
 
 import { TemplateDirectLinkDialog } from '~/components/dialogs/template-direct-link-dialog';
 import { DocumentAttachmentsPopover } from '~/components/general/document/document-attachments-popover';

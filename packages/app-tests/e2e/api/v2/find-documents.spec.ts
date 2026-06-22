@@ -1,20 +1,20 @@
 import { expect, test } from '@playwright/test';
 import type { Team, User } from '@prisma/client';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import { prisma } from '@hanzo/sign-prisma';
-import { DocumentStatus, DocumentVisibility, TeamMemberRole } from '@hanzo/sign-prisma/client';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/esign-prisma';
+import { DocumentStatus, DocumentVisibility, TeamMemberRole } from '@hanzo/esign-prisma/client';
 import {
   seedBlankDocument,
   seedCompletedDocument,
   seedDocuments,
   seedDraftDocument,
   seedPendingDocument,
-} from '@hanzo/sign-prisma/seed/documents';
-import { seedTeam, seedTeamEmail, seedTeamMember } from '@hanzo/sign-prisma/seed/teams';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
-import type { TFindDocumentsResponse } from '@hanzo/sign-trpc/server/document-router/find-documents.types';
+} from '@hanzo/esign-prisma/seed/documents';
+import { seedTeam, seedTeamEmail, seedTeamMember } from '@hanzo/esign-prisma/seed/teams';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
+import type { TFindDocumentsResponse } from '@hanzo/esign-trpc/server/document-router/find-documents.types';
 
 import { apiSignin } from '../../fixtures/authentication';
 

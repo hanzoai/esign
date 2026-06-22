@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useLingui } from '@lingui/react/macro';
 import { useLocation, useSearchParams } from 'react-router';
 
-import { useDebouncedValue } from '@hanzo/sign-lib/client-only/hooks/use-debounced-value';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+import { useDebouncedValue } from '@hanzo/esign-lib/client-only/hooks/use-debounced-value';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 
 import { SettingsHeader } from '~/components/general/settings-header';
 import { AdminOrganisationsTable } from '~/components/tables/admin-organisations-table';

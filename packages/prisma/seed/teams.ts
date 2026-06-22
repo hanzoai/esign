@@ -1,6 +1,6 @@
 import { customAlphabet } from 'nanoid';
 
-import { createTeamMembers } from '@hanzo/sign-trpc/server/team-router/create-team-members';
+import { createTeamMembers } from '@hanzo/esign-trpc/server/team-router/create-team-members';
 
 import { prisma } from '..';
 import type { Prisma } from '../client';

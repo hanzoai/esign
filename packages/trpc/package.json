@@ -1,5 +1,5 @@
 {
-  "name": "@hanzo/sign-trpc",
+  "name": "@hanzo/esign-trpc",
   "version": "0.0.0",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -10,8 +10,8 @@
     "clean": "rimraf node_modules"
   },
   "dependencies": {
-    "@hanzo/sign-lib": "*",
-    "@hanzo/sign-prisma": "*",
+    "@hanzo/esign-lib": "*",
+    "@hanzo/esign-prisma": "*",
     "@zap-proto/zap": "^1.4.2",
     "@zap-proto/web": "^0.2.0",
     "@simplewebauthn/server": "^13.2.2",

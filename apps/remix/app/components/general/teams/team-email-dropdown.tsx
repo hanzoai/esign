@@ -3,15 +3,15 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Edit, Loader, Mail, MoreHorizontal, X } from 'lucide-react';
 
-import type { getTeamWithEmail } from '@hanzo/sign-lib/server-only/team/get-team-email-by-email';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { getTeamWithEmail } from '@hanzo/esign-lib/server-only/team/get-team-email-by-email';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { TeamEmailDeleteDialog } from '~/components/dialogs/team-email-delete-dialog';
 import { TeamEmailUpdateDialog } from '~/components/dialogs/team-email-update-dialog';

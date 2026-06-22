@@ -1,8 +1,8 @@
 import type { Session } from '@prisma/client';
 import type { Context } from 'hono';
 
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { prisma } from '@hanzo/sign-prisma';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AuthenticationErrorCode } from '../errors/error-codes';
 import type { SessionValidationResult } from '../session/session';

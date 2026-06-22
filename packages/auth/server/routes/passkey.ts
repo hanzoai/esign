@@ -5,15 +5,15 @@ import { isoBase64URL } from '@simplewebauthn/server/helpers';
 import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { rateLimitResponse } from '@hanzo/sign-lib/server-only/rate-limit/rate-limit-middleware';
-import { passkeyRateLimit } from '@hanzo/sign-lib/server-only/rate-limit/rate-limits';
-import { deletedServiceAccountEmail } from '@hanzo/sign-lib/server-only/user/service-accounts/deleted-account';
-import { legacyServiceAccountEmail } from '@hanzo/sign-lib/server-only/user/service-accounts/legacy-service-account';
-import type { TAuthenticationResponseJSONSchema } from '@hanzo/sign-lib/types/webauthn';
-import { ZAuthenticationResponseJSONSchema } from '@hanzo/sign-lib/types/webauthn';
-import { getAuthenticatorOptions } from '@hanzo/sign-lib/utils/authenticator';
-import { prisma } from '@hanzo/sign-prisma';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { rateLimitResponse } from '@hanzo/esign-lib/server-only/rate-limit/rate-limit-middleware';
+import { passkeyRateLimit } from '@hanzo/esign-lib/server-only/rate-limit/rate-limits';
+import { deletedServiceAccountEmail } from '@hanzo/esign-lib/server-only/user/service-accounts/deleted-account';
+import { legacyServiceAccountEmail } from '@hanzo/esign-lib/server-only/user/service-accounts/legacy-service-account';
+import type { TAuthenticationResponseJSONSchema } from '@hanzo/esign-lib/types/webauthn';
+import { ZAuthenticationResponseJSONSchema } from '@hanzo/esign-lib/types/webauthn';
+import { getAuthenticatorOptions } from '@hanzo/esign-lib/utils/authenticator';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { onAuthorize } from '../lib/utils/authorizer';
 import type { HonoAuthContext } from '../types/context';

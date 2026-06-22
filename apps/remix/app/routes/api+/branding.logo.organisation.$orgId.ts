@@ -1,6 +1,6 @@
-import { getFileServerSide } from '@hanzo/sign-lib/universal/upload/get-file.server';
-import { loadLogo } from '@hanzo/sign-lib/utils/images/logo';
-import { prisma } from '@hanzo/sign-prisma';
+import { getFileServerSide } from '@hanzo/esign-lib/universal/upload/get-file.server';
+import { loadLogo } from '@hanzo/esign-lib/utils/images/logo';
+import { prisma } from '@hanzo/esign-prisma';
 
 import type { Route } from './+types/branding.logo.organisation.$orgId';
 

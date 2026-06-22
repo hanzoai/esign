@@ -6,8 +6,8 @@ import {
   NEXT_PRIVATE_USE_LEGACY_SIGNING_SUBFILTER,
   NEXT_PUBLIC_SIGNING_CONTACT_INFO,
   NEXT_PUBLIC_WEBAPP_URL,
-} from '@hanzo/sign-lib/constants/app';
-import { env } from '@hanzo/sign-lib/utils/env';
+} from '@hanzo/esign-lib/constants/app';
+import { env } from '@hanzo/esign-lib/utils/env';
 
 import { getTimestampAuthority } from './helpers/tsa';
 import { createGoogleCloudSigner } from './transports/google-cloud';

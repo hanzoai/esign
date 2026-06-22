@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react/dist/lucide-react';
 
-import { cn } from '@hanzo/sign-ui/lib/utils';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 
 export type CardMetricProps = {
   icon?: LucideIcon;

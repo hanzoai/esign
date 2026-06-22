@@ -1,7 +1,7 @@
 import { Trans } from '@lingui/react/macro';
 
-import { getOrganisationInsights } from '@hanzo/sign-lib/server-only/admin/get-signing-volume';
-import type { DateRange } from '@hanzo/sign-lib/types/search-params';
+import { getOrganisationInsights } from '@hanzo/esign-lib/server-only/admin/get-signing-volume';
+import type { DateRange } from '@hanzo/esign-lib/types/search-params';
 
 import { DateRangeFilter } from '~/components/filters/date-range-filter';
 import {

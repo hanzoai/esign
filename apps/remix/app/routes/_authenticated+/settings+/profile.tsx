@@ -2,10 +2,10 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { AnimatePresence } from 'framer-motion';
 
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
 
 import { AccountDeleteDialog } from '~/components/dialogs/account-delete-dialog';
 import { AvatarImageForm } from '~/components/forms/avatar-image';

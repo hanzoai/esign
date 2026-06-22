@@ -9,13 +9,13 @@ import { DateTime } from 'luxon';
 import { Link, redirect } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { generateEmailDomainRecords } from '@hanzo/sign-lib/utils/email-domains';
-import type { TGetEmailDomainResponse } from '@hanzo/sign-trpc/server/admin-router/get-email-domain.types';
+import { generateEmailDomainRecords } from '@hanzo/esign-lib/utils/email-domains';
+import type { TGetEmailDomainResponse } from '@hanzo/esign-trpc/server/admin-router/get-email-domain.types';
 import type {
   TReregisterEmailDomainRequest,
   TReregisterEmailDomainResponse,
-} from '@hanzo/sign-trpc/server/admin-router/reregister-email-domain.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
+} from '@hanzo/esign-trpc/server/admin-router/reregister-email-domain.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,12 +26,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@hanzo/sign-ui/primitives/alert-dialog';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/alert-dialog';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import type { Route } from './+types/email-domains.$id';
 

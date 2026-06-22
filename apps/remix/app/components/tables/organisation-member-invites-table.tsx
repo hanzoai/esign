@@ -7,26 +7,26 @@ import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { History, MoreHorizontal, Trash2 } from 'lucide-react';
 import { useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import type { TFindOrganisationMemberInvitesResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-member-invites.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import type { TFindOrganisationMemberInvitesResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-member-invites.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export const OrganisationMemberInvitesTable = () => {
   const [searchParams] = useSearchParams();

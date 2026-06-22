@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { seedBlankTemplate } from '@hanzo/esign-prisma/seed/templates';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

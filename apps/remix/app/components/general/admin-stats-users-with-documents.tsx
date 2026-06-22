@@ -3,7 +3,7 @@ import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recha
 import type { TooltipProps } from 'recharts';
 import type { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
-import type { GetUserWithDocumentMonthlyGrowth } from '@hanzo/sign-lib/server-only/admin/get-users-stats';
+import type { GetUserWithDocumentMonthlyGrowth } from '@hanzo/esign-lib/server-only/admin/get-users-stats';
 
 export type AdminStatsUsersWithDocumentsChartProps = {
   className?: string;

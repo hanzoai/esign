@@ -1,16 +1,16 @@
 import { expect, test } from '@playwright/test';
 import { FieldType } from '@prisma/client';
 
-import { ZRecipientAuthOptionsSchema } from '@hanzo/sign-lib/types/document-auth';
+import { ZRecipientAuthOptionsSchema } from '@hanzo/esign-lib/types/document-auth';
 import {
   createDocumentAuthOptions,
   createRecipientAuthOptions,
-} from '@hanzo/sign-lib/utils/document-auth';
+} from '@hanzo/esign-lib/utils/document-auth';
 import {
   seedPendingDocumentNoFields,
   seedPendingDocumentWithFullFields,
-} from '@hanzo/sign-prisma/seed/documents';
-import { seedTestEmail, seedUser } from '@hanzo/sign-prisma/seed/users';
+} from '@hanzo/esign-prisma/seed/documents';
+import { seedTestEmail, seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin, apiSignout } from '../fixtures/authentication';
 import { signSignaturePad } from '../fixtures/signature';

@@ -5,26 +5,26 @@ import { Trans } from '@lingui/react/macro';
 import { EditIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import type { TLicenseClaim } from '@hanzo/sign-lib/types/license';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/sign-lib/types/subscription';
-import type { TFindSubscriptionClaimsResponse } from '@hanzo/sign-trpc/server/admin-router/find-subscription-claims.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { CopyTextButton } from '@hanzo/sign-ui/components/common/copy-text-button';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import type { TLicenseClaim } from '@hanzo/esign-lib/types/license';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/esign-lib/types/subscription';
+import type { TFindSubscriptionClaimsResponse } from '@hanzo/esign-trpc/server/admin-router/find-subscription-claims.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { CopyTextButton } from '@hanzo/esign-ui/components/common/copy-text-button';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { ClaimDeleteDialog } from '../dialogs/claim-delete-dialog';
 import { ClaimUpdateDialog } from '../dialogs/claim-update-dialog';

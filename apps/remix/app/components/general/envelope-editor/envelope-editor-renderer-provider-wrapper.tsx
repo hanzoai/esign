@@ -1,5 +1,5 @@
-import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
-import { EnvelopeRenderProvider } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
+import { useCurrentEnvelopeEditor } from '@hanzo/esign-lib/client-only/providers/envelope-editor-provider';
+import { EnvelopeRenderProvider } from '@hanzo/esign-lib/client-only/providers/envelope-render-provider';
 
 export const EnvelopeEditorRenderProviderWrapper = ({
   children,

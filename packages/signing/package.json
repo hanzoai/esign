@@ -1,5 +1,5 @@
 {
-  "name": "@hanzo/sign-signing",
+  "name": "@hanzo/esign-signing",
   "version": "0.0.0",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -17,6 +17,6 @@
     "ts-pattern": "^5.9.0"
   },
   "devDependencies": {
-    "@hanzo/sign-tsconfig": "*"
+    "@hanzo/esign-tsconfig": "*"
   }
 }

@@ -5,31 +5,31 @@ import { useLingui } from '@lingui/react';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
 
-import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
-import { isValidLanguageCode } from '@hanzo/sign-lib/constants/i18n';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { ZDocumentAccessAuthTypesSchema } from '@hanzo/sign-lib/types/document-auth';
-import type { TTemplate } from '@hanzo/sign-lib/types/template';
-import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { ZSetFieldsForTemplateRequestSchema } from '@hanzo/sign-trpc/server/field-router/schema';
+import { DocumentSignatureType } from '@hanzo/esign-lib/constants/document';
+import { isValidLanguageCode } from '@hanzo/esign-lib/constants/i18n';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { ZDocumentAccessAuthTypesSchema } from '@hanzo/esign-lib/types/document-auth';
+import type { TTemplate } from '@hanzo/esign-lib/types/template';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/esign-lib/utils/envelope-download';
+import { ZSetFieldsForTemplateRequestSchema } from '@hanzo/esign-trpc/server/field-router/schema';
 import {
   ZSetTemplateRecipientsRequestSchema,
   ZSetTemplateRecipientsResponseSchema,
-} from '@hanzo/sign-trpc/server/recipient-router/schema';
-import { ZUpdateTemplateRequestSchema } from '@hanzo/sign-trpc/server/template-router/schema';
-import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
-import { DocumentFlowFormContainer } from '@hanzo/sign-ui/primitives/document-flow/document-flow-root';
-import type { DocumentFlowStep } from '@hanzo/sign-ui/primitives/document-flow/types';
-import { Stepper } from '@hanzo/sign-ui/primitives/stepper';
-import { AddTemplateFieldsFormPartial } from '@hanzo/sign-ui/primitives/template-flow/add-template-fields';
-import type { TAddTemplateFieldsFormSchema } from '@hanzo/sign-ui/primitives/template-flow/add-template-fields.types';
-import { AddTemplatePlaceholderRecipientsFormPartial } from '@hanzo/sign-ui/primitives/template-flow/add-template-placeholder-recipients';
-import type { TAddTemplatePlacholderRecipientsFormSchema } from '@hanzo/sign-ui/primitives/template-flow/add-template-placeholder-recipients.types';
-import { AddTemplateSettingsFormPartial } from '@hanzo/sign-ui/primitives/template-flow/add-template-settings';
-import type { TAddTemplateSettingsFormSchema } from '@hanzo/sign-ui/primitives/template-flow/add-template-settings.types';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/recipient-router/schema';
+import { ZUpdateTemplateRequestSchema } from '@hanzo/esign-trpc/server/template-router/schema';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/esign-trpc/zap/react';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
+import { DocumentFlowFormContainer } from '@hanzo/esign-ui/primitives/document-flow/document-flow-root';
+import type { DocumentFlowStep } from '@hanzo/esign-ui/primitives/document-flow/types';
+import { Stepper } from '@hanzo/esign-ui/primitives/stepper';
+import { AddTemplateFieldsFormPartial } from '@hanzo/esign-ui/primitives/template-flow/add-template-fields';
+import type { TAddTemplateFieldsFormSchema } from '@hanzo/esign-ui/primitives/template-flow/add-template-fields.types';
+import { AddTemplatePlaceholderRecipientsFormPartial } from '@hanzo/esign-ui/primitives/template-flow/add-template-placeholder-recipients';
+import type { TAddTemplatePlacholderRecipientsFormSchema } from '@hanzo/esign-ui/primitives/template-flow/add-template-placeholder-recipients.types';
+import { AddTemplateSettingsFormPartial } from '@hanzo/esign-ui/primitives/template-flow/add-template-settings';
+import type { TAddTemplateSettingsFormSchema } from '@hanzo/esign-ui/primitives/template-flow/add-template-settings.types';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { PDFViewer } from '~/components/general/pdf-viewer/pdf-viewer';
 import { useCurrentTeam } from '~/providers/team';

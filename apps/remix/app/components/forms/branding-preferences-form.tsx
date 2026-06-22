@@ -7,10 +7,10 @@ import { Loader } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -18,16 +18,16 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
+} from '@hanzo/esign-ui/primitives/select';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
 
 import { useOptionalCurrentTeam } from '~/providers/team';
 

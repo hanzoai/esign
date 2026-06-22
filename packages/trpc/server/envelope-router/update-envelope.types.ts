@@ -3,9 +3,9 @@ import { z } from 'zod';
 import {
   ZDocumentAccessAuthTypesSchema,
   ZDocumentActionAuthTypesSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import { ZDocumentMetaUpdateSchema } from '@hanzo/sign-lib/types/document-meta';
-import { ZEnvelopeLiteSchema } from '@hanzo/sign-lib/types/envelope';
+} from '@hanzo/esign-lib/types/document-auth';
+import { ZDocumentMetaUpdateSchema } from '@hanzo/esign-lib/types/document-meta';
+import { ZEnvelopeLiteSchema } from '@hanzo/esign-lib/types/envelope';
 
 import {
   ZDocumentExternalIdSchema,

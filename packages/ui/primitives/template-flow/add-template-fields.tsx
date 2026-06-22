@@ -21,41 +21,41 @@ import {
 import { useFieldArray, useForm } from 'react-hook-form';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-import { getBoundingClientRect } from '@hanzo/sign-lib/client-only/get-bounding-client-rect';
-import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
-import { useDocumentElement } from '@hanzo/sign-lib/client-only/hooks/use-document-element';
-import { PDF_VIEWER_PAGE_SELECTOR, getPdfPagesCount } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient-roles';
-import { isTemplateRecipientEmailPlaceholder } from '@hanzo/sign-lib/constants/template';
+import { getBoundingClientRect } from '@hanzo/esign-lib/client-only/get-bounding-client-rect';
+import { useAutoSave } from '@hanzo/esign-lib/client-only/hooks/use-autosave';
+import { useDocumentElement } from '@hanzo/esign-lib/client-only/hooks/use-document-element';
+import { PDF_VIEWER_PAGE_SELECTOR, getPdfPagesCount } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/esign-lib/constants/recipient-roles';
+import { isTemplateRecipientEmailPlaceholder } from '@hanzo/esign-lib/constants/template';
 import {
   type TFieldMetaSchema as FieldMeta,
   ZFieldMetaSchema,
-} from '@hanzo/sign-lib/types/field-meta';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { ADVANCED_FIELD_TYPES_WITH_OPTIONAL_SETTING } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
-import { parseMessageDescriptor } from '@hanzo/sign-lib/utils/i18n';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+} from '@hanzo/esign-lib/types/field-meta';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { ADVANCED_FIELD_TYPES_WITH_OPTIONAL_SETTING } from '@hanzo/esign-lib/utils/advanced-fields-helpers';
+import { parseMessageDescriptor } from '@hanzo/esign-lib/utils/i18n';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@hanzo/sign-ui/primitives/command';
+} from '@hanzo/esign-ui/primitives/command';
 import {
   DocumentFlowFormContainerActions,
   DocumentFlowFormContainerContent,
   DocumentFlowFormContainerFooter,
   DocumentFlowFormContainerHeader,
   DocumentFlowFormContainerStep,
-} from '@hanzo/sign-ui/primitives/document-flow/document-flow-root';
-import { FieldItem } from '@hanzo/sign-ui/primitives/document-flow/field-item';
-import type { DocumentFlowStep } from '@hanzo/sign-ui/primitives/document-flow/types';
-import { FRIENDLY_FIELD_TYPE } from '@hanzo/sign-ui/primitives/document-flow/types';
-import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/sign-ui/primitives/popover';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/document-flow/document-flow-root';
+import { FieldItem } from '@hanzo/esign-ui/primitives/document-flow/field-item';
+import type { DocumentFlowStep } from '@hanzo/esign-ui/primitives/document-flow/types';
+import { FRIENDLY_FIELD_TYPE } from '@hanzo/esign-ui/primitives/document-flow/types';
+import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/esign-ui/primitives/popover';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { getRecipientColorStyles, useRecipientColors } from '../../lib/recipient-colors';
 import type { FieldFormType } from '../document-flow/add-fields';

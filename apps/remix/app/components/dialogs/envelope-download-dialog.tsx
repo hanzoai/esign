@@ -5,9 +5,9 @@ import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, type EnvelopeItem } from '@prisma/client';
 import { DownloadIcon, FileTextIcon } from 'lucide-react';
 
-import { downloadPDF } from '@hanzo/sign-lib/client-only/download-pdf';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { downloadPDF } from '@hanzo/esign-lib/client-only/download-pdf';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -15,9 +15,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 type EnvelopeItemToDownload = Pick<EnvelopeItem, 'id' | 'envelopeId' | 'title' | 'order'>;
 

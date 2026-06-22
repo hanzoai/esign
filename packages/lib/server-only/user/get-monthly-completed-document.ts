@@ -1,7 +1,7 @@
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
 import { DateTime } from 'luxon';
 
-import { kyselyPrisma, monthTrunc, sql } from '@hanzo/sign-prisma';
+import { kyselyPrisma, monthTrunc, sql } from '@hanzo/esign-prisma';
 
 export const getCompletedDocumentsMonthly = async () => {
   // SQLite: truncate to month via strftime; enum columns are TEXT so values

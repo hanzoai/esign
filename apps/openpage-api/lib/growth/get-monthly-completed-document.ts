@@ -1,7 +1,7 @@
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
 import { DateTime } from 'luxon';
 
-import { kyselyPrisma, monthTrunc, sql } from '@hanzo/sign-prisma';
+import { kyselyPrisma, monthTrunc, sql } from '@hanzo/esign-prisma';
 
 import { addZeroMonth } from '../add-zero-month';
 

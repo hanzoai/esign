@@ -1,14 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { ALIGNMENT_TEST_FIELDS } from '@hanzo/sign-app-tests/constants/field-alignment-pdf';
-import { FIELD_META_TEST_FIELDS } from '@hanzo/sign-app-tests/constants/field-meta-pdf';
-import { isBase64Image } from '@hanzo/sign-lib/constants/signatures';
+import { ALIGNMENT_TEST_FIELDS } from '@hanzo/esign-app-tests/constants/field-alignment-pdf';
+import { FIELD_META_TEST_FIELDS } from '@hanzo/esign-app-tests/constants/field-meta-pdf';
+import { isBase64Image } from '@hanzo/esign-lib/constants/signatures';
 import {
   incrementDocumentId,
   incrementTemplateId,
-} from '@hanzo/sign-lib/server-only/envelope/increment-id';
-import { nanoid, prefixedId } from '@hanzo/sign-lib/universal/id';
+} from '@hanzo/esign-lib/server-only/envelope/increment-id';
+import { nanoid, prefixedId } from '@hanzo/esign-lib/universal/id';
 
 import { prisma } from '..';
 import {

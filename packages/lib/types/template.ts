@@ -1,15 +1,15 @@
 import { z } from 'zod';
 
-import { DocumentDataSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/DocumentDataSchema';
-import { DocumentMetaSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/DocumentMetaSchema';
-import EnvelopeItemSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
-import { FolderSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/FolderSchema';
-import TeamSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/TeamSchema';
-import { UserSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/UserSchema';
+import { DocumentDataSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/DocumentDataSchema';
+import { DocumentMetaSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/DocumentMetaSchema';
+import EnvelopeItemSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
+import { FolderSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/FolderSchema';
+import TeamSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/TeamSchema';
+import { UserSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/UserSchema';
 import {
   LegacyTemplateDirectLinkSchema,
   TemplateSchema,
-} from '@hanzo/sign-prisma/types/template-legacy-schema';
+} from '@hanzo/esign-prisma/types/template-legacy-schema';
 
 import { ZFieldSchema } from './field';
 import { ZRecipientLiteSchema } from './recipient';

@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import OrganisationMemberRoleSchema from '@hanzo/sign-prisma/generated/zod/inputTypeSchemas/OrganisationMemberRoleSchema';
-import OrganisationGroupSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationGroupSchema';
-import { OrganisationMemberSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationMemberSchema';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import OrganisationMemberRoleSchema from '@hanzo/esign-prisma/generated/zod/inputTypeSchemas/OrganisationMemberRoleSchema';
+import OrganisationGroupSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationGroupSchema';
+import { OrganisationMemberSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationMemberSchema';
 
 // export const getOrganisationMembersMeta: TrpcOpenApiMeta = {
 //   openapi: {

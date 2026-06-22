@@ -1,5 +1,5 @@
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { env } from '@hanzo/sign-lib/utils/env';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { env } from '@hanzo/esign-lib/utils/env';
 
 /**
  * How long a session should live for in milliseconds.

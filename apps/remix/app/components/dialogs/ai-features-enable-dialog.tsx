@@ -4,17 +4,17 @@ import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberRole, TeamMemberRole } from '@prisma/client';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 
 import { useCurrentTeam } from '~/providers/team';
 

@@ -36,7 +36,7 @@
  *   --fresh : drop + recreate the SQLite file from the migration before loading
  *             (otherwise an existing file is reused and the backfill resumes).
  *
- * `pg` is required at runtime (declared as a devDependency of @hanzo/sign-prisma).
+ * `pg` is required at runtime (declared as a devDependency of @hanzo/esign-prisma).
  */
 import { existsSync, readFileSync, unlinkSync } from 'node:fs';
 import process from 'node:process';

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { zfd } from 'zod-form-data';
 
-import EnvelopeItemSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
+import EnvelopeItemSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
 
 import { zodFormData } from '../../utils/zod-form-data';
 

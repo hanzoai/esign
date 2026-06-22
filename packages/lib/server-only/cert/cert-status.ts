@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 
-import { env } from '@hanzo/sign-lib/utils/env';
+import { env } from '@hanzo/esign-lib/utils/env';
 
 export const getCertificateStatus = () => {
   if (env('NEXT_PRIVATE_SIGNING_TRANSPORT') !== 'local') {

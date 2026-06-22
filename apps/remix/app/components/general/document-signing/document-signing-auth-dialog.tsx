@@ -9,15 +9,15 @@ import {
   DocumentAuth,
   type TRecipientActionAuth,
   type TRecipientActionAuthTypes,
-} from '@hanzo/sign-lib/types/document-auth';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-lib/types/document-auth';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 
 import { DocumentSigningAuth2FA } from './document-signing-auth-2fa';
 import { DocumentSigningAuthAccount } from './document-signing-auth-account';

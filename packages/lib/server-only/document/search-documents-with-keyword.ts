@@ -7,8 +7,8 @@ import {
   buildTeamWhereQuery,
   formatDocumentsPath,
   getHighestTeamRoleInGroup,
-} from '@hanzo/sign-lib/utils/teams';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { mapSecondaryIdToDocumentId } from '../../utils/envelope';
 

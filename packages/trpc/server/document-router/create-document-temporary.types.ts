@@ -1,21 +1,21 @@
 import { z } from 'zod';
 
-import { ZDocumentSchema } from '@hanzo/sign-lib/types/document';
+import { ZDocumentSchema } from '@hanzo/esign-lib/types/document';
 import {
   ZDocumentAccessAuthTypesSchema,
   ZDocumentActionAuthTypesSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import { ZDocumentFormValuesSchema } from '@hanzo/sign-lib/types/document-form-values';
-import { ZDocumentMetaCreateSchema } from '@hanzo/sign-lib/types/document-meta';
-import { ZEnvelopeAttachmentTypeSchema } from '@hanzo/sign-lib/types/envelope-attachment';
+} from '@hanzo/esign-lib/types/document-auth';
+import { ZDocumentFormValuesSchema } from '@hanzo/esign-lib/types/document-form-values';
+import { ZDocumentMetaCreateSchema } from '@hanzo/esign-lib/types/document-meta';
+import { ZEnvelopeAttachmentTypeSchema } from '@hanzo/esign-lib/types/envelope-attachment';
 import {
   ZFieldHeightSchema,
   ZFieldPageNumberSchema,
   ZFieldPageXSchema,
   ZFieldPageYSchema,
   ZFieldWidthSchema,
-} from '@hanzo/sign-lib/types/field';
-import { ZFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
+} from '@hanzo/esign-lib/types/field';
+import { ZFieldAndMetaSchema } from '@hanzo/esign-lib/types/field-meta';
 
 import { ZCreateRecipientSchema } from '../recipient-router/schema';
 import {

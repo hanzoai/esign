@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-import { kyselyPrisma, monthTrunc } from '@hanzo/sign-prisma';
+import { kyselyPrisma, monthTrunc } from '@hanzo/esign-prisma';
 
 import { addZeroMonth } from '../add-zero-month';
 

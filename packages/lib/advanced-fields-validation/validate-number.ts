@@ -1,4 +1,4 @@
-import { numberFormatValues } from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
+import { numberFormatValues } from '@hanzo/esign-ui/primitives/document-flow/field-items-advanced-settings/constants';
 
 import type { TNumberFieldMeta as NumberFieldMeta } from '../types/field-meta';
 

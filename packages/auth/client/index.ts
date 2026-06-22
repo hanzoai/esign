@@ -2,8 +2,8 @@ import type { ClientResponse, InferRequestType } from 'hono/client';
 import { hc } from 'hono/client';
 import superjson from 'superjson';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
 
 import type { AuthAppType } from '../server';
 import type { SessionValidationResult } from '../server/lib/session/session';

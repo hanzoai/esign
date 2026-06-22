@@ -86,7 +86,7 @@ Contact us if you are interested in our Enterprise plan for large organizations 
 - [shadcn/ui](https://ui.shadcn.com/) - Component Library
 - [react-email](https://react.email/) - Email Templates
 - [tRPC](https://trpc.io/) - API
-- [@hanzo/sign-pdf-sign](https://www.npmjs.com/package/@hanzo/sign-pdf-sign) - PDF Signatures (launching soon)
+- [@hanzo/esign-pdf-sign](https://www.npmjs.com/package/@hanzo/esign-pdf-sign) - PDF Signatures (launching soon)
 - [React-PDF](https://github.com/wojtekmaj/react-pdf) - Viewing PDFs
 - [PDF-Lib](https://github.com/Hopding/pdf-lib) - PDF manipulation
 - [Stripe](https://stripe.com/) - Payments
@@ -179,7 +179,7 @@ git clone https://github.com/<your-username>/hanzo-sign
 
 ---
 
-- Optional: Seed the database using `npm run prisma:seed -w @hanzo/sign-prisma` to create a test user and document.
+- Optional: Seed the database using `npm run prisma:seed -w @hanzo/esign-prisma` to create a test user and document.
 - Optional: Create your own signing certificate.
   - To generate your own using these steps and a Linux Terminal or Windows Subsystem for Linux (WSL), see **[Create your own signing certificate](./SIGNING.md)**.
 

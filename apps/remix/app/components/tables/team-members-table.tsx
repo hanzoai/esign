@@ -7,29 +7,29 @@ import { OrganisationGroupType, OrganisationMemberRole } from '@prisma/client';
 import { EditIcon, MoreHorizontal, Trash2Icon } from 'lucide-react';
 import { useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
-import type { TFindTeamGroupsResponse } from '@hanzo/sign-trpc/server/team-router/find-team-groups.types';
-import type { TFindTeamMembersResponse } from '@hanzo/sign-trpc/server/team-router/find-team-members.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import { isTeamRoleWithinUserHierarchy } from '@hanzo/esign-lib/utils/teams';
+import type { TFindTeamGroupsResponse } from '@hanzo/esign-trpc/server/team-router/find-team-groups.types';
+import type { TFindTeamMembersResponse } from '@hanzo/esign-trpc/server/team-router/find-team-members.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
 
 import { useCurrentTeam } from '~/providers/team';
 

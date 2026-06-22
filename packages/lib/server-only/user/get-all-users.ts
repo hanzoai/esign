@@ -1,6 +1,6 @@
 import { EnvelopeType, Prisma } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 type GetAllUsersProps = {
   username: string;

@@ -9,21 +9,21 @@ import { match } from 'ts-pattern';
 import { UAParser } from 'ua-parser-js';
 import { renderSVG } from 'uqr';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { APP_I18N_OPTIONS, ZSupportedLanguageCodeSchema } from '@hanzo/sign-lib/constants/i18n';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { APP_I18N_OPTIONS, ZSupportedLanguageCodeSchema } from '@hanzo/esign-lib/constants/i18n';
 import {
   RECIPIENT_ROLES_DESCRIPTION,
   RECIPIENT_ROLE_SIGNING_REASONS,
-} from '@hanzo/sign-lib/constants/recipient-roles';
-import { unsafeGetEntireEnvelope } from '@hanzo/sign-lib/server-only/admin/get-entire-document';
-import { decryptSecondaryData } from '@hanzo/sign-lib/server-only/crypto/decrypt';
-import { getDocumentCertificateAuditLogs } from '@hanzo/sign-lib/server-only/document/get-document-certificate-audit-logs';
-import { getOrganisationClaimByTeamId } from '@hanzo/sign-lib/server-only/organisation/get-organisation-claims';
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
-import { getTranslations } from '@hanzo/sign-lib/utils/i18n';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+} from '@hanzo/esign-lib/constants/recipient-roles';
+import { unsafeGetEntireEnvelope } from '@hanzo/esign-lib/server-only/admin/get-entire-document';
+import { decryptSecondaryData } from '@hanzo/esign-lib/server-only/crypto/decrypt';
+import { getDocumentCertificateAuditLogs } from '@hanzo/esign-lib/server-only/document/get-document-certificate-audit-logs';
+import { getOrganisationClaimByTeamId } from '@hanzo/esign-lib/server-only/organisation/get-organisation-claims';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import { extractDocumentAuthMethods } from '@hanzo/esign-lib/utils/document-auth';
+import { mapSecondaryIdToDocumentId } from '@hanzo/esign-lib/utils/envelope';
+import { getTranslations } from '@hanzo/esign-lib/utils/i18n';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
 import {
   Table,
   TableBody,
@@ -31,7 +31,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@hanzo/sign-ui/primitives/table';
+} from '@hanzo/esign-ui/primitives/table';
 
 import { BrandingLogo } from '~/components/general/branding-logo';
 

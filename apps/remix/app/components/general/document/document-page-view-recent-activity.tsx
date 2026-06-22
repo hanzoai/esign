@@ -7,12 +7,12 @@ import { AlertTriangle, CheckCheckIcon, CheckIcon, Loader, MailOpen } from 'luci
 import { DateTime } from 'luxon';
 import { match } from 'ts-pattern';
 
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import { formatDocumentAuditLogAction } from '@hanzo/sign-lib/utils/document-audit-logs';
-import type { TFindDocumentAuditLogsResponse } from '@hanzo/sign-trpc/server/document-router/find-document-audit-logs.types';
-import { useZapInfiniteQuery } from '@hanzo/sign-trpc/zap/react';
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
-import { cn } from '@hanzo/sign-ui/lib/utils';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import { formatDocumentAuditLogAction } from '@hanzo/esign-lib/utils/document-audit-logs';
+import type { TFindDocumentAuditLogsResponse } from '@hanzo/esign-trpc/server/document-router/find-document-audit-logs.types';
+import { useZapInfiniteQuery } from '@hanzo/esign-trpc/zap/react';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 
 export type DocumentPageViewRecentActivityProps = {
   documentId: number;

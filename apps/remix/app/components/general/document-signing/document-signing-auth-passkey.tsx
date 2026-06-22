@@ -11,16 +11,16 @@ import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { DocumentAuth, type TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { DocumentAuth, type TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TCreatePasskeyAuthenticationOptionsRequest,
   TCreatePasskeyAuthenticationOptionsResponse,
-} from '@hanzo/sign-trpc/server/auth-router/create-passkey-authentication-options.types';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { DialogFooter } from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-trpc/server/auth-router/create-passkey-authentication-options.types';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { DialogFooter } from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -28,14 +28,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
+} from '@hanzo/esign-ui/primitives/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
+} from '@hanzo/esign-ui/primitives/select';
 
 import { PasskeyCreateDialog } from '~/components/dialogs/passkey-create-dialog';
 

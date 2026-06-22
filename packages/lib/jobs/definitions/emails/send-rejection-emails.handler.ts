@@ -3,11 +3,11 @@ import { createElement } from 'react';
 import { msg } from '@lingui/core/macro';
 import { EnvelopeType, SendStatus, SigningStatus } from '@prisma/client';
 
-import { mailer } from '@hanzo/sign-email/mailer';
-import DocumentRejectedEmail from '@hanzo/sign-email/templates/document-rejected';
-import DocumentRejectionConfirmedEmail from '@hanzo/sign-email/templates/document-rejection-confirmed';
-import { isRecipientEmailValidForSending } from '@hanzo/sign-lib/utils/recipients';
-import { prisma } from '@hanzo/sign-prisma';
+import { mailer } from '@hanzo/esign-email/mailer';
+import DocumentRejectedEmail from '@hanzo/esign-email/templates/document-rejected';
+import DocumentRejectionConfirmedEmail from '@hanzo/esign-email/templates/document-rejection-confirmed';
+import { isRecipientEmailValidForSending } from '@hanzo/esign-lib/utils/recipients';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { getI18nInstance } from '../../../client-only/providers/i18n-server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../../constants/app';

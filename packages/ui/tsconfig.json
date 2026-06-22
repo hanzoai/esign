@@ -1,5 +1,5 @@
 {
-  "extends": "@hanzo/sign-tsconfig/react-library.json",
+  "extends": "@hanzo/esign-tsconfig/react-library.json",
   "include": [
     "."
   ],

@@ -12,53 +12,53 @@ import type { DocumentData } from '@prisma/client';
 import { DocumentDataType, DocumentStatus, EnvelopeType, RecipientRole } from '@prisma/client';
 import { DateTime } from 'luxon';
 
-import { PDF_SIZE_A4_72PPI } from '@hanzo/sign-lib/constants/pdf';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { TWO_FACTOR_EMAIL_EXPIRATION_MINUTES } from '@hanzo/sign-lib/server-only/2fa/email/constants';
-import { send2FATokenEmail } from '@hanzo/sign-lib/server-only/2fa/email/send-2fa-token-email';
-import { createDocumentData } from '@hanzo/sign-lib/server-only/document-data/create-document-data';
-import { updateDocumentMeta } from '@hanzo/sign-lib/server-only/document-meta/upsert-document-meta';
-import { deleteDocument } from '@hanzo/sign-lib/server-only/document/delete-document';
-import { findDocumentAuditLogs } from '@hanzo/sign-lib/server-only/document/find-document-audit-logs';
-import { findDocuments } from '@hanzo/sign-lib/server-only/document/find-documents';
-import { getDocumentWithDetailsById } from '@hanzo/sign-lib/server-only/document/get-document-with-details-by-id';
-import { getStats } from '@hanzo/sign-lib/server-only/document/get-stats';
-import { resendDocument } from '@hanzo/sign-lib/server-only/document/resend-document';
-import { searchDocumentsWithKeyword } from '@hanzo/sign-lib/server-only/document/search-documents-with-keyword';
-import { sendDocument } from '@hanzo/sign-lib/server-only/document/send-document';
-import { createAttachment } from '@hanzo/sign-lib/server-only/envelope-attachment/create-attachment';
-import { deleteAttachment } from '@hanzo/sign-lib/server-only/envelope-attachment/delete-attachment';
-import { findAttachmentsByEnvelopeId } from '@hanzo/sign-lib/server-only/envelope-attachment/find-attachments-by-envelope-id';
-import { updateAttachment } from '@hanzo/sign-lib/server-only/envelope-attachment/update-attachment';
-import { createEnvelope } from '@hanzo/sign-lib/server-only/envelope/create-envelope';
-import { duplicateEnvelope } from '@hanzo/sign-lib/server-only/envelope/duplicate-envelope';
+import { PDF_SIZE_A4_72PPI } from '@hanzo/esign-lib/constants/pdf';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { TWO_FACTOR_EMAIL_EXPIRATION_MINUTES } from '@hanzo/esign-lib/server-only/2fa/email/constants';
+import { send2FATokenEmail } from '@hanzo/esign-lib/server-only/2fa/email/send-2fa-token-email';
+import { createDocumentData } from '@hanzo/esign-lib/server-only/document-data/create-document-data';
+import { updateDocumentMeta } from '@hanzo/esign-lib/server-only/document-meta/upsert-document-meta';
+import { deleteDocument } from '@hanzo/esign-lib/server-only/document/delete-document';
+import { findDocumentAuditLogs } from '@hanzo/esign-lib/server-only/document/find-document-audit-logs';
+import { findDocuments } from '@hanzo/esign-lib/server-only/document/find-documents';
+import { getDocumentWithDetailsById } from '@hanzo/esign-lib/server-only/document/get-document-with-details-by-id';
+import { getStats } from '@hanzo/esign-lib/server-only/document/get-stats';
+import { resendDocument } from '@hanzo/esign-lib/server-only/document/resend-document';
+import { searchDocumentsWithKeyword } from '@hanzo/esign-lib/server-only/document/search-documents-with-keyword';
+import { sendDocument } from '@hanzo/esign-lib/server-only/document/send-document';
+import { createAttachment } from '@hanzo/esign-lib/server-only/envelope-attachment/create-attachment';
+import { deleteAttachment } from '@hanzo/esign-lib/server-only/envelope-attachment/delete-attachment';
+import { findAttachmentsByEnvelopeId } from '@hanzo/esign-lib/server-only/envelope-attachment/find-attachments-by-envelope-id';
+import { updateAttachment } from '@hanzo/esign-lib/server-only/envelope-attachment/update-attachment';
+import { createEnvelope } from '@hanzo/esign-lib/server-only/envelope/create-envelope';
+import { duplicateEnvelope } from '@hanzo/esign-lib/server-only/envelope/duplicate-envelope';
 import {
   getEnvelopeById,
   getEnvelopeWhereInput,
-} from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
-import { getMultipleEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelopes-by-ids';
-import { updateEnvelope } from '@hanzo/sign-lib/server-only/envelope/update-envelope';
-import { getServerLimits } from '@hanzo/sign-lib/server-only/limits/server';
-import { generateAuditLogPdf } from '@hanzo/sign-lib/server-only/pdf/generate-audit-log-pdf';
-import { generateCertificatePdf } from '@hanzo/sign-lib/server-only/pdf/generate-certificate-pdf';
-import { insertFormValuesInPdf } from '@hanzo/sign-lib/server-only/pdf/insert-form-values-in-pdf';
-import { assertRateLimit } from '@hanzo/sign-lib/server-only/rate-limit/rate-limit-middleware';
-import { request2FAEmailRateLimit } from '@hanzo/sign-lib/server-only/rate-limit/rate-limits';
-import { createOrGetShareLink } from '@hanzo/sign-lib/server-only/share/create-or-get-share-link';
-import { DocumentAuth } from '@hanzo/sign-lib/types/document-auth';
-import { putNormalizedPdfFileServerSide } from '@hanzo/sign-lib/universal/upload/put-file.server';
+} from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
+import { getMultipleEnvelopeWhereInput } from '@hanzo/esign-lib/server-only/envelope/get-envelopes-by-ids';
+import { updateEnvelope } from '@hanzo/esign-lib/server-only/envelope/update-envelope';
+import { getServerLimits } from '@hanzo/esign-lib/server-only/limits/server';
+import { generateAuditLogPdf } from '@hanzo/esign-lib/server-only/pdf/generate-audit-log-pdf';
+import { generateCertificatePdf } from '@hanzo/esign-lib/server-only/pdf/generate-certificate-pdf';
+import { insertFormValuesInPdf } from '@hanzo/esign-lib/server-only/pdf/insert-form-values-in-pdf';
+import { assertRateLimit } from '@hanzo/esign-lib/server-only/rate-limit/rate-limit-middleware';
+import { request2FAEmailRateLimit } from '@hanzo/esign-lib/server-only/rate-limit/rate-limits';
+import { createOrGetShareLink } from '@hanzo/esign-lib/server-only/share/create-or-get-share-link';
+import { DocumentAuth } from '@hanzo/esign-lib/types/document-auth';
+import { putNormalizedPdfFileServerSide } from '@hanzo/esign-lib/universal/upload/put-file.server';
 import {
   getPresignGetUrl,
   getPresignPostUrl,
-} from '@hanzo/sign-lib/universal/upload/server-actions';
+} from '@hanzo/esign-lib/universal/upload/server-actions';
 import {
   mapEnvelopeToDocumentLite,
   mapEnvelopesToDocumentMany,
-} from '@hanzo/sign-lib/utils/document';
-import { isDocumentCompleted } from '@hanzo/sign-lib/utils/document';
-import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/utils/document';
+import { isDocumentCompleted } from '@hanzo/esign-lib/utils/document';
+import { extractDocumentAuthMethods } from '@hanzo/esign-lib/utils/document-auth';
+import { mapSecondaryIdToDocumentId } from '@hanzo/esign-lib/utils/envelope';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { ZAccessAuthRequest2FAEmailRequestSchema } from '../../../server/document-router/access-auth-request-2fa-email.types';
 import { ZCreateAttachmentRequestSchema } from '../../../server/document-router/attachment/create-attachment.types';

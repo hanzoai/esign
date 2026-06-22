@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-import { createDocumentAuthOptions } from '@hanzo/sign-lib/utils/document-auth';
-import { prisma } from '@hanzo/sign-prisma';
-import { seedPendingDocument } from '@hanzo/sign-prisma/seed/documents';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { createDocumentAuthOptions } from '@hanzo/esign-lib/utils/document-auth';
+import { prisma } from '@hanzo/esign-prisma';
+import { seedPendingDocument } from '@hanzo/esign-prisma/seed/documents';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

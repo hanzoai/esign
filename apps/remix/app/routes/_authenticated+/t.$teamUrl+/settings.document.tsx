@@ -2,11 +2,11 @@ import { useLingui } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { useLoaderData } from 'react-router';
 
-import { IS_AI_FEATURES_CONFIGURED } from '@hanzo/sign-lib/constants/app';
-import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
-import type { TGetTeamResponse } from '@hanzo/sign-trpc/server/team-router/get-team.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { IS_AI_FEATURES_CONFIGURED } from '@hanzo/esign-lib/constants/app';
+import { DocumentSignatureType } from '@hanzo/esign-lib/constants/document';
+import type { TGetTeamResponse } from '@hanzo/esign-trpc/server/team-router/get-team.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import {
   DocumentPreferencesForm,

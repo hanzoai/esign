@@ -8,41 +8,41 @@ import { InfoIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 
-import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
+import { useAutoSave } from '@hanzo/esign-lib/client-only/hooks/use-autosave';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
 import {
   DOCUMENT_DISTRIBUTION_METHODS,
   DOCUMENT_SIGNATURE_TYPES,
-} from '@hanzo/sign-lib/constants/document';
-import { SUPPORTED_LANGUAGES } from '@hanzo/sign-lib/constants/i18n';
-import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/sign-lib/constants/time-zones';
-import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
-import type { TDocumentMetaDateFormat } from '@hanzo/sign-lib/types/document-meta';
-import type { TTemplate } from '@hanzo/sign-lib/types/template';
-import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { extractTeamSignatureSettings } from '@hanzo/sign-lib/utils/teams';
-import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
+} from '@hanzo/esign-lib/constants/document';
+import { SUPPORTED_LANGUAGES } from '@hanzo/esign-lib/constants/i18n';
+import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/esign-lib/types/document-email';
+import type { TDocumentMetaDateFormat } from '@hanzo/esign-lib/types/document-meta';
+import type { TTemplate } from '@hanzo/esign-lib/types/template';
+import { extractDocumentAuthMethods } from '@hanzo/esign-lib/utils/document-auth';
+import { extractTeamSignatureSettings } from '@hanzo/esign-lib/utils/teams';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-emails.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import {
   DocumentGlobalAuthAccessSelect,
   DocumentGlobalAuthAccessTooltip,
-} from '@hanzo/sign-ui/components/document/document-global-auth-access-select';
+} from '@hanzo/esign-ui/components/document/document-global-auth-access-select';
 import {
   DocumentGlobalAuthActionSelect,
   DocumentGlobalAuthActionTooltip,
-} from '@hanzo/sign-ui/components/document/document-global-auth-action-select';
-import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
+} from '@hanzo/esign-ui/components/document/document-global-auth-action-select';
+import { DocumentSendEmailMessageHelper } from '@hanzo/esign-ui/components/document/document-send-email-message-helper';
 import {
   DocumentVisibilitySelect,
   DocumentVisibilityTooltip,
-} from '@hanzo/sign-ui/components/document/document-visibility-select';
+} from '@hanzo/esign-ui/components/document/document-visibility-select';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@hanzo/sign-ui/primitives/accordion';
+} from '@hanzo/esign-ui/primitives/accordion';
 import {
   Form,
   FormControl,
@@ -50,7 +50,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
+} from '@hanzo/esign-ui/primitives/form/form';
 
 import { DocumentEmailCheckboxes } from '../../components/document/document-email-checkboxes';
 import {

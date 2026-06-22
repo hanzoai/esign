@@ -1,12 +1,12 @@
 import { OrganisationGroupType, TeamMemberRole } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { getMemberRoles } from '@hanzo/sign-lib/server-only/team/get-member-roles';
-import { generateDatabaseId } from '@hanzo/sign-lib/universal/id';
-import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
-import { prisma } from '@hanzo/sign-prisma';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/teams';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { getMemberRoles } from '@hanzo/esign-lib/server-only/team/get-member-roles';
+import { generateDatabaseId } from '@hanzo/esign-lib/universal/id';
+import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@hanzo/esign-lib/utils/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 type CreateTeamMembersOptions = {
   userId: number;

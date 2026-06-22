@@ -8,14 +8,14 @@ import { DocumentStatus, EnvelopeType, type Recipient, SigningStatus } from '@pr
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { getRecipientType } from '@hanzo/sign-lib/client-only/recipient-type';
-import type { TEnvelope } from '@hanzo/sign-lib/types/envelope';
-import { recipientAbbreviation } from '@hanzo/sign-lib/utils/recipient-formatter';
-import type { TRedistributeEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/redistribute-envelope.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+import { getRecipientType } from '@hanzo/esign-lib/client-only/recipient-type';
+import type { TEnvelope } from '@hanzo/esign-lib/types/envelope';
+import { recipientAbbreviation } from '@hanzo/esign-lib/utils/recipient-formatter';
+import type { TRedistributeEnvelopeRequest } from '@hanzo/esign-trpc/server/envelope-router/redistribute-envelope.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
 import {
   Dialog,
   DialogClose,
@@ -25,15 +25,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { StackAvatar } from '../general/stack-avatar';
 

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZDocumentSchema } from '@hanzo/sign-lib/types/document';
+import { ZDocumentSchema } from '@hanzo/esign-lib/types/document';
 
 export const ZGetDocumentRequestSchema = z.object({
   documentId: z.number(),

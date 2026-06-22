@@ -1,4 +1,4 @@
-/// <reference types="@hanzo/sign-tsconfig/process-env.d.ts" />
+/// <reference types="@hanzo/esign-tsconfig/process-env.d.ts" />
 
 // Database URL resolution lives in `./tenant.ts` (the single Base SQLite store).
 // Kept as a thin re-export so the historical `getDatabaseUrl` name resolves to

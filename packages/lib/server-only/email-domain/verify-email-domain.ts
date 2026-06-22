@@ -1,7 +1,7 @@
 import { GetEmailIdentityCommand } from '@aws-sdk/client-sesv2';
 import { EmailDomainStatus } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { getSesClient } from './create-email-domain';

@@ -3,13 +3,13 @@ import { useLingui } from '@lingui/react';
 import { Trans, useLingui as useLinguiMacro } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 
-import type { TDefaultRecipient } from '@hanzo/sign-lib/types/default-recipients';
-import { isRecipientEmailValidForSending } from '@hanzo/sign-lib/utils/recipients';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
-import type { TFindTeamMembersResponse } from '@hanzo/sign-trpc/server/team-router/find-team-members.types';
-import { MultiSelect, type Option } from '@hanzo/sign-ui/primitives/multiselect';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import type { TDefaultRecipient } from '@hanzo/esign-lib/types/default-recipients';
+import { isRecipientEmailValidForSending } from '@hanzo/esign-lib/utils/recipients';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TFindOrganisationMembersResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-members.types';
+import type { TFindTeamMembersResponse } from '@hanzo/esign-trpc/server/team-router/find-team-members.types';
+import { MultiSelect, type Option } from '@hanzo/esign-ui/primitives/multiselect';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 type DefaultRecipientsMultiSelectComboboxProps = {
   listValues: TDefaultRecipient[];

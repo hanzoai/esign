@@ -11,16 +11,16 @@ import { useForm } from 'react-hook-form';
 import { P, match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { type Template } from '@hanzo/sign-prisma/types/template-legacy-schema';
+import { type Template } from '@hanzo/esign-prisma/types/template-legacy-schema';
 import {
   MAX_TEMPLATE_PUBLIC_DESCRIPTION_LENGTH,
   MAX_TEMPLATE_PUBLIC_TITLE_LENGTH,
   type ZUpdateTemplateRequestSchema,
   type ZUpdateTemplateResponseSchema,
-} from '@hanzo/sign-trpc/server/template-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -30,7 +30,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -38,8 +38,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Table,
   TableBody,
@@ -47,9 +47,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@hanzo/sign-ui/primitives/table';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/table';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 

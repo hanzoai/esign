@@ -1,9 +1,9 @@
 import { expect, test } from '@playwright/test';
 
-import { prisma } from '@hanzo/sign-prisma';
-import { FieldType } from '@hanzo/sign-prisma/client';
-import { seedPendingDocumentWithFullFields } from '@hanzo/sign-prisma/seed/documents';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { prisma } from '@hanzo/esign-prisma';
+import { FieldType } from '@hanzo/esign-prisma/client';
+import { seedPendingDocumentWithFullFields } from '@hanzo/esign-prisma/seed/documents';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 import { signSignaturePad } from '../fixtures/signature';

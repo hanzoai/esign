@@ -1,10 +1,10 @@
 import { DocumentStatus, RecipientRole, SigningStatus } from '@prisma/client';
 
-import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/sign-lib/types/document-audit-logs';
-import type { RequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
-import { createDocumentAuditLogData } from '@hanzo/sign-lib/utils/document-audit-logs';
-import { assertRecipientNotExpired } from '@hanzo/sign-lib/utils/recipients';
-import { prisma } from '@hanzo/sign-prisma';
+import { DOCUMENT_AUDIT_LOG_TYPE } from '@hanzo/esign-lib/types/document-audit-logs';
+import type { RequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { createDocumentAuditLogData } from '@hanzo/esign-lib/utils/document-audit-logs';
+import { assertRecipientNotExpired } from '@hanzo/esign-lib/utils/recipients';
+import { prisma } from '@hanzo/esign-prisma';
 
 export type RemovedSignedFieldWithTokenOptions = {
   token: string;

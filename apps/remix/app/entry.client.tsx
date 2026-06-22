@@ -7,8 +7,8 @@ import insights from '@hanzo/insights';
 import { hydrateRoot } from 'react-dom/client';
 import { HydratedRouter } from 'react-router/dom';
 
-import { extractInsightsConfig } from '@hanzo/sign-lib/constants/feature-flags';
-import { dynamicActivate } from '@hanzo/sign-lib/utils/i18n';
+import { extractInsightsConfig } from '@hanzo/esign-lib/constants/feature-flags';
+import { dynamicActivate } from '@hanzo/esign-lib/utils/i18n';
 
 import './utils/polyfills/promise-with-resolvers';
 

@@ -4,11 +4,11 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { RecipientRole } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { DialogFooter } from '@hanzo/sign-ui/primitives/dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { authClient } from '@hanzo/esign-auth/client';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { DialogFooter } from '@hanzo/esign-ui/primitives/dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useRequiredDocumentSigningAuthContext } from './document-signing-auth-provider';
 

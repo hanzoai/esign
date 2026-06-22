@@ -1,8 +1,8 @@
-import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { jobs } from '@hanzo/sign-lib/jobs/client';
-import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
-import { prisma } from '@hanzo/sign-prisma';
+import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/organisations';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { jobs } from '@hanzo/esign-lib/jobs/client';
+import { buildOrganisationWhereQuery } from '@hanzo/esign-lib/utils/organisations';
+import { prisma } from '@hanzo/esign-prisma';
 
 import {
   ZDeleteOrganisationMembersRequestSchema,

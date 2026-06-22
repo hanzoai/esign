@@ -1,9 +1,9 @@
 import { Trans } from '@lingui/react/macro';
 import { InfoIcon } from 'lucide-react';
 
-import type { TDocumentEmailSettings } from '@hanzo/sign-lib/types/document-email';
-import { DocumentEmailEvents } from '@hanzo/sign-lib/types/document-email';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
+import type { TDocumentEmailSettings } from '@hanzo/esign-lib/types/document-email';
+import { DocumentEmailEvents } from '@hanzo/esign-lib/types/document-email';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
 
 import { cn } from '../../lib/utils';
 import { Checkbox } from '../../primitives/checkbox';

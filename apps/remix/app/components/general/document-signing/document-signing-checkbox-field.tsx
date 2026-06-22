@@ -5,23 +5,23 @@ import { useLingui } from '@lingui/react';
 import { Loader } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import { ZCheckboxFieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import { fromCheckboxValue, toCheckboxValue } from '@hanzo/sign-lib/universal/field-checkbox';
-import type { FieldWithSignatureAndFieldMeta } from '@hanzo/sign-prisma/types/field-with-signature-and-fieldmeta';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
+import { ZCheckboxFieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import { fromCheckboxValue, toCheckboxValue } from '@hanzo/esign-lib/universal/field-checkbox';
+import type { FieldWithSignatureAndFieldMeta } from '@hanzo/esign-prisma/types/field-with-signature-and-fieldmeta';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@hanzo/sign-trpc/server/field-router/schema';
-import { FieldToolTip } from '@hanzo/sign-ui/components/field/field-tooltip';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
-import { checkboxValidationSigns } from '@hanzo/sign-ui/primitives/document-flow/field-items-advanced-settings/constants';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/field-router/schema';
+import { FieldToolTip } from '@hanzo/esign-ui/components/field/field-tooltip';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
+import { checkboxValidationSigns } from '@hanzo/esign-ui/primitives/document-flow/field-items-advanced-settings/constants';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useRequiredDocumentSigningAuthContext } from './document-signing-auth-provider';
 import { DocumentSigningFieldContainer } from './document-signing-field-container';

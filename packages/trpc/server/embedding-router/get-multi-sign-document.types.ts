@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
-import { ZDocumentLiteSchema } from '@hanzo/sign-lib/types/document';
-import { ZRecipientLiteSchema } from '@hanzo/sign-lib/types/recipient';
-import DocumentDataSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/DocumentDataSchema';
-import DocumentMetaSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/DocumentMetaSchema';
-import EnvelopeItemSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
-import FieldSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/FieldSchema';
-import SignatureSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/SignatureSchema';
+import { ZDocumentLiteSchema } from '@hanzo/esign-lib/types/document';
+import { ZRecipientLiteSchema } from '@hanzo/esign-lib/types/recipient';
+import DocumentDataSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/DocumentDataSchema';
+import DocumentMetaSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/DocumentMetaSchema';
+import EnvelopeItemSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/EnvelopeItemSchema';
+import FieldSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/FieldSchema';
+import SignatureSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/SignatureSchema';
 
 export const ZGetMultiSignDocumentRequestSchema = z.object({
   token: z.string().min(1, { message: 'Token is required' }),

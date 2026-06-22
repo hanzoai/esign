@@ -5,15 +5,15 @@ import { useLingui } from '@lingui/react';
 import { DateTime } from 'luxon';
 import { useLocation, useNavigate, useSearchParams } from 'react-router';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import type { TFindPasskeysResponse } from '@hanzo/sign-trpc/server/auth-router/find-passkeys.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import type { TFindPasskeysResponse } from '@hanzo/esign-trpc/server/auth-router/find-passkeys.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
 
 import { SettingsSecurityPasskeyTableActions } from './settings-security-passkey-table-actions';
 

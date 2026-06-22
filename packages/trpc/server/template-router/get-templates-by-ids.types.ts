@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZTemplateManySchema } from '@hanzo/sign-lib/types/template';
+import { ZTemplateManySchema } from '@hanzo/esign-lib/types/template';
 
 export const ZGetTemplatesByIdsRequestSchema = z.object({
   templateIds: z.array(z.number()).min(1),

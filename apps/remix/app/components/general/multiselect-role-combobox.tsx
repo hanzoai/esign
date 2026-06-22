@@ -4,16 +4,16 @@ import { Trans } from '@lingui/react/macro';
 import { Role } from '@prisma/client';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@hanzo/sign-ui/primitives/command';
-import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/sign-ui/primitives/popover';
+} from '@hanzo/esign-ui/primitives/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/esign-ui/primitives/popover';
 
 type ComboboxProps = {
   listValues: string[];

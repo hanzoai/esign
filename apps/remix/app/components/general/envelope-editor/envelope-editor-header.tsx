@@ -11,11 +11,11 @@ import {
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
-import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Separator } from '@hanzo/sign-ui/primitives/separator';
+import { useCurrentEnvelopeEditor } from '@hanzo/esign-lib/client-only/providers/envelope-editor-provider';
+import { mapSecondaryIdToTemplateId } from '@hanzo/esign-lib/utils/envelope';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Separator } from '@hanzo/esign-ui/primitives/separator';
 
 import { EnvelopeDistributeDialog } from '~/components/dialogs/envelope-distribute-dialog';
 import { EnvelopeRedistributeDialog } from '~/components/dialogs/envelope-redistribute-dialog';

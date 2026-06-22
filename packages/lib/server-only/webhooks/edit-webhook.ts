@@ -1,6 +1,6 @@
 import type { Prisma } from '@prisma/client';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '../../constants/teams';
 import { buildTeamWhereQuery } from '../../utils/teams';

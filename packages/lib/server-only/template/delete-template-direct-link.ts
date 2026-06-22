@@ -1,7 +1,7 @@
 import { EnvelopeType } from '@prisma/client';
 
-import { generateAvaliableRecipientPlaceholder } from '@hanzo/sign-lib/utils/templates';
-import { prisma } from '@hanzo/sign-prisma';
+import { generateAvaliableRecipientPlaceholder } from '@hanzo/esign-lib/utils/templates';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { getEnvelopeWhereInput } from '../envelope/get-envelope-by-id';

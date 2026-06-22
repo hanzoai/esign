@@ -1,4 +1,4 @@
-/// <reference types="@hanzo/sign-tsconfig/process-env.d.ts" />
+/// <reference types="@hanzo/esign-tsconfig/process-env.d.ts" />
 
 declare global {
   interface Window {

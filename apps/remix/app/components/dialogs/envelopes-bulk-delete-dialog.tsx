@@ -7,10 +7,10 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import type {
   TBulkDeleteEnvelopesRequest,
   TBulkDeleteEnvelopesResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/bulk-delete-envelopes.types';
-import { useZapMutation, useZapUtils } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/envelope-router/bulk-delete-envelopes.types';
+import { useZapMutation, useZapUtils } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -18,8 +18,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type EnvelopesBulkDeleteDialogProps = {
   envelopeIds: string[];

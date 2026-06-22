@@ -4,16 +4,16 @@ import { useLingui } from '@lingui/react/macro';
 import { FieldType } from '@prisma/client';
 import { useNavigate, useRevalidator, useSearchParams } from 'react-router';
 
-import { useAnalytics } from '@hanzo/sign-lib/client-only/hooks/use-analytics';
-import { useCurrentEnvelopeRender } from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
-import { PDF_VIEWER_CONTENT_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { isBase64Image } from '@hanzo/sign-lib/constants/signatures';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { TRecipientAccessAuth } from '@hanzo/sign-lib/types/document-auth';
-import { mapSecondaryIdToDocumentId } from '@hanzo/sign-lib/utils/envelope';
-import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/sign-trpc/server/recipient-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useAnalytics } from '@hanzo/esign-lib/client-only/hooks/use-analytics';
+import { useCurrentEnvelopeRender } from '@hanzo/esign-lib/client-only/providers/envelope-render-provider';
+import { PDF_VIEWER_CONTENT_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { isBase64Image } from '@hanzo/esign-lib/constants/signatures';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { TRecipientAccessAuth } from '@hanzo/esign-lib/types/document-auth';
+import { mapSecondaryIdToDocumentId } from '@hanzo/esign-lib/utils/envelope';
+import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/esign-trpc/server/recipient-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useEmbedSigningContext } from '~/components/embed/embed-signing-context';
 

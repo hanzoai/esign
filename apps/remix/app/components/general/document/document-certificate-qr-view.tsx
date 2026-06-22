@@ -8,13 +8,13 @@ import { DateTime } from 'luxon';
 import {
   EnvelopeRenderProvider,
   useCurrentEnvelopeRender,
-} from '@hanzo/sign-lib/client-only/providers/envelope-render-provider';
-import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/sign-lib/constants/pdf-viewer-i18n';
-import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { formatDocumentsPath } from '@hanzo/sign-lib/utils/teams';
-import type { TGetDocumentResponse } from '@hanzo/sign-trpc/server/document-router/get-document.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-lib/client-only/providers/envelope-render-provider';
+import { PDF_VIEWER_ERROR_MESSAGES } from '@hanzo/esign-lib/constants/pdf-viewer-i18n';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/esign-lib/utils/envelope-download';
+import { formatDocumentsPath } from '@hanzo/esign-lib/utils/teams';
+import type { TGetDocumentResponse } from '@hanzo/esign-trpc/server/document-router/get-document.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 
 import { EnvelopeDownloadDialog } from '~/components/dialogs/envelope-download-dialog';
 import { EnvelopePdfViewer } from '~/components/general/pdf-viewer/envelope-pdf-viewer';

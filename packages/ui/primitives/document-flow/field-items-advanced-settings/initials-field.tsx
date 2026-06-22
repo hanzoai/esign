@@ -1,9 +1,9 @@
 import { Trans, useLingui } from '@lingui/react/macro';
 
-import { validateFields as validateInitialsFields } from '@hanzo/sign-lib/advanced-fields-validation/validate-fields';
-import { type TInitialsFieldMeta as InitialsFieldMeta } from '@hanzo/sign-lib/types/field-meta';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
+import { validateFields as validateInitialsFields } from '@hanzo/esign-lib/advanced-fields-validation/validate-fields';
+import { type TInitialsFieldMeta as InitialsFieldMeta } from '@hanzo/esign-lib/types/field-meta';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../select';
 

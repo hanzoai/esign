@@ -21,14 +21,14 @@ import type { Server as HttpServer } from 'node:http';
 import { type HttpRoute, type HttpServeHandle, httpServe } from '@zap-proto/web/server';
 import SuperJSON from 'superjson';
 
-import { makeDispatcher } from '@hanzo/sign-trpc/zap/server/dispatch';
-import { fromWireError } from '@hanzo/sign-trpc/zap/runtime/error';
-import { METHOD_RPC } from '@hanzo/sign-trpc/zap/runtime/method';
-import { makeMintCap } from '@hanzo/sign-trpc/zap/server/mint';
-import { zapRoutes } from '@hanzo/sign-trpc/zap/server/routes';
-import { ZapReply, newZapRequest } from '@hanzo/sign-trpc/zap/gen/transport_zap';
+import { makeDispatcher } from '@hanzo/esign-trpc/zap/server/dispatch';
+import { fromWireError } from '@hanzo/esign-trpc/zap/runtime/error';
+import { METHOD_RPC } from '@hanzo/esign-trpc/zap/runtime/method';
+import { makeMintCap } from '@hanzo/esign-trpc/zap/server/mint';
+import { zapRoutes } from '@hanzo/esign-trpc/zap/server/routes';
+import { ZapReply, newZapRequest } from '@hanzo/esign-trpc/zap/gen/transport_zap';
 
-import openapi from '@hanzo/sign-trpc/zap/gen/openapi.json';
+import openapi from '@hanzo/esign-trpc/zap/gen/openapi.json';
 
 interface OpenApiPaths {
   paths: Record<string, { post?: { operationId?: string } }>;

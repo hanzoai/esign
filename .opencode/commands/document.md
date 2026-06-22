@@ -66,14 +66,14 @@ Brief description of what this module/feature does and when to use it.
 If there are specific packages or imports needed:
 
 ```bash
-npm install @hanzo/sign-package-name
+npm install @hanzo/esign-package-name
 ```
 
 ## Quick Start
 
 ```jsx
 // Minimal working example
-import { Component } from '@hanzo/sign-package';
+import { Component } from '@hanzo/esign-package';
 
 const Example = () => {
   return <Component />;
@@ -96,7 +96,7 @@ Description of what it does.
 #### Example
 
 ```jsx
-import { Component } from '@hanzo/sign-package';
+import { Component } from '@hanzo/esign-package';
 
 <Component prop="value" optional={true} />;
 ```

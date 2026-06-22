@@ -6,19 +6,19 @@ import { Trans } from '@lingui/react/macro';
 import { Loader } from 'lucide-react';
 import { useRevalidator } from 'react-router';
 
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { TRecipientActionAuth } from '@hanzo/sign-lib/types/document-auth';
-import type { FieldWithSignature } from '@hanzo/sign-prisma/types/field-with-signature';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
+import type { FieldWithSignature } from '@hanzo/esign-prisma/types/field-with-signature';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
-} from '@hanzo/sign-trpc/server/field-router/schema';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from '@hanzo/sign-ui/primitives/dialog';
-import { SignaturePad } from '@hanzo/sign-ui/primitives/signature-pad';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-trpc/server/field-router/schema';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from '@hanzo/esign-ui/primitives/dialog';
+import { SignaturePad } from '@hanzo/esign-ui/primitives/signature-pad';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { DocumentSigningDisclosure } from '~/components/general/document-signing/document-signing-disclosure';
 

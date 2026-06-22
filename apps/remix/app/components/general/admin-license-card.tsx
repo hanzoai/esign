@@ -11,22 +11,22 @@ import { DateTime } from 'luxon';
 import { Link, useRevalidator } from 'react-router';
 import { match } from 'ts-pattern';
 
-import type { TCachedLicense } from '@hanzo/sign-lib/types/license';
-import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/sign-lib/types/subscription';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import type { TCachedLicense } from '@hanzo/esign-lib/types/license';
+import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/esign-lib/types/subscription';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TResyncLicenseRequest,
   TResyncLicenseResponse,
-} from '@hanzo/sign-trpc/server/admin-router/resync-license.types';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/admin-router/resync-license.types';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@hanzo/sign-ui/primitives/tooltip';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { CardMetric } from './metric-card';
 

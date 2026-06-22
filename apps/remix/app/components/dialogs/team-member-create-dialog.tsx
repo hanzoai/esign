@@ -10,14 +10,14 @@ import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
-import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/teams';
-import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import type { TCreateTeamMembersRequestSchema } from '@hanzo/sign-trpc/server/team-router/create-team-members.types';
-import type { TFindTeamMembersResponse } from '@hanzo/sign-trpc/server/team-router/find-team-members.types';
-import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
-import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/teams';
+import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import type { TCreateTeamMembersRequestSchema } from '@hanzo/esign-trpc/server/team-router/create-team-members.types';
+import type { TFindTeamMembersResponse } from '@hanzo/esign-trpc/server/team-router/find-team-members.types';
+import type { TFindOrganisationMembersResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-members.types';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -26,7 +26,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -35,18 +35,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { MultiSelectCombobox } from '@hanzo/esign-ui/primitives/multi-select-combobox';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { OrganisationMemberInviteDialog } from '~/components/dialogs/organisation-member-invite-dialog';
 import { useCurrentTeam } from '~/providers/team';

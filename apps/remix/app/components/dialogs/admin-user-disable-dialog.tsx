@@ -5,15 +5,15 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { match } from 'ts-pattern';
 
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TDisableUserRequest,
   TDisableUserResponse,
-} from '@hanzo/sign-trpc/server/admin-router/disable-user.types';
-import type { TGetUserResponse } from '@hanzo/sign-trpc/server/admin-router/get-user.types';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/admin-router/disable-user.types';
+import type { TGetUserResponse } from '@hanzo/esign-trpc/server/admin-router/get-user.types';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -22,9 +22,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type AdminUserDisableDialogProps = {
   className?: string;

@@ -1,4 +1,4 @@
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { SELFHOSTED_PLAN_LIMITS } from './constants';
 import { ERROR_CODES } from './errors';

@@ -10,33 +10,33 @@ import { OrganisationGroupType, OrganisationMemberRole, TeamMemberRole } from '@
 import { OrganisationType, Prisma } from '@prisma/client';
 import { match } from 'ts-pattern';
 
-import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/organisations';
+import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/organisations';
 import {
   ALLOWED_TEAM_GROUP_TYPES,
   TEAM_MEMBER_ROLE_PERMISSIONS_MAP,
-} from '@hanzo/sign-lib/constants/teams';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { orphanEnvelopes } from '@hanzo/sign-lib/server-only/envelope/orphan-envelopes';
-import { transferTeamEnvelopes } from '@hanzo/sign-lib/server-only/envelope/transfer-team-envelopes';
-import { createTeam } from '@hanzo/sign-lib/server-only/team/create-team';
-import { createTeamEmailVerification } from '@hanzo/sign-lib/server-only/team/create-team-email-verification';
-import { deleteTeam } from '@hanzo/sign-lib/server-only/team/delete-team';
-import { deleteTeamEmail } from '@hanzo/sign-lib/server-only/team/delete-team-email';
-import { deleteTeamEmailVerification } from '@hanzo/sign-lib/server-only/team/delete-team-email-verification';
-import { findTeamMembers } from '@hanzo/sign-lib/server-only/team/find-team-members';
-import { findTeams } from '@hanzo/sign-lib/server-only/team/find-teams';
-import { getMemberRoles } from '@hanzo/sign-lib/server-only/team/get-member-roles';
-import { getTeam, getTeamById } from '@hanzo/sign-lib/server-only/team/get-team';
-import { getTeamEmailByEmail } from '@hanzo/sign-lib/server-only/team/get-team-email-by-email';
-import { getTeamMembers } from '@hanzo/sign-lib/server-only/team/get-team-members';
-import { resendTeamEmailVerification } from '@hanzo/sign-lib/server-only/team/resend-team-email-verification';
-import { updateTeam } from '@hanzo/sign-lib/server-only/team/update-team';
-import { updateTeamEmail } from '@hanzo/sign-lib/server-only/team/update-team-email';
-import { updateTeamPublicProfile } from '@hanzo/sign-lib/server-only/team/update-team-public-profile';
-import { generateDatabaseId } from '@hanzo/sign-lib/universal/id';
-import { buildOrganisationWhereQuery } from '@hanzo/sign-lib/utils/organisations';
-import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/constants/teams';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { orphanEnvelopes } from '@hanzo/esign-lib/server-only/envelope/orphan-envelopes';
+import { transferTeamEnvelopes } from '@hanzo/esign-lib/server-only/envelope/transfer-team-envelopes';
+import { createTeam } from '@hanzo/esign-lib/server-only/team/create-team';
+import { createTeamEmailVerification } from '@hanzo/esign-lib/server-only/team/create-team-email-verification';
+import { deleteTeam } from '@hanzo/esign-lib/server-only/team/delete-team';
+import { deleteTeamEmail } from '@hanzo/esign-lib/server-only/team/delete-team-email';
+import { deleteTeamEmailVerification } from '@hanzo/esign-lib/server-only/team/delete-team-email-verification';
+import { findTeamMembers } from '@hanzo/esign-lib/server-only/team/find-team-members';
+import { findTeams } from '@hanzo/esign-lib/server-only/team/find-teams';
+import { getMemberRoles } from '@hanzo/esign-lib/server-only/team/get-member-roles';
+import { getTeam, getTeamById } from '@hanzo/esign-lib/server-only/team/get-team';
+import { getTeamEmailByEmail } from '@hanzo/esign-lib/server-only/team/get-team-email-by-email';
+import { getTeamMembers } from '@hanzo/esign-lib/server-only/team/get-team-members';
+import { resendTeamEmailVerification } from '@hanzo/esign-lib/server-only/team/resend-team-email-verification';
+import { updateTeam } from '@hanzo/esign-lib/server-only/team/update-team';
+import { updateTeamEmail } from '@hanzo/esign-lib/server-only/team/update-team-email';
+import { updateTeamPublicProfile } from '@hanzo/esign-lib/server-only/team/update-team-public-profile';
+import { generateDatabaseId } from '@hanzo/esign-lib/universal/id';
+import { buildOrganisationWhereQuery } from '@hanzo/esign-lib/utils/organisations';
+import { buildTeamWhereQuery, isTeamRoleWithinUserHierarchy } from '@hanzo/esign-lib/utils/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { ZCreateTeamGroupsRequestSchema } from '../../../server/team-router/create-team-groups.types';
 import { createTeamMembers } from '../../../server/team-router/create-team-members';

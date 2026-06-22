@@ -1,14 +1,14 @@
 import { z } from 'zod';
 
-import { ZEnvelopeExpirationPeriod } from '@hanzo/sign-lib/constants/envelope-expiration';
-import { SUPPORTED_LANGUAGE_CODES } from '@hanzo/sign-lib/constants/i18n';
-import { ZDefaultRecipientsSchema } from '@hanzo/sign-lib/types/default-recipients';
-import { ZDocumentEmailSettingsSchema } from '@hanzo/sign-lib/types/document-email';
+import { ZEnvelopeExpirationPeriod } from '@hanzo/esign-lib/constants/envelope-expiration';
+import { SUPPORTED_LANGUAGE_CODES } from '@hanzo/esign-lib/constants/i18n';
+import { ZDefaultRecipientsSchema } from '@hanzo/esign-lib/types/default-recipients';
+import { ZDocumentEmailSettingsSchema } from '@hanzo/esign-lib/types/document-email';
 import {
   ZDocumentMetaDateFormatSchema,
   ZDocumentMetaTimezoneSchema,
-} from '@hanzo/sign-lib/types/document-meta';
-import { DocumentVisibility } from '@hanzo/sign-lib/types/document-visibility';
+} from '@hanzo/esign-lib/types/document-meta';
+import { DocumentVisibility } from '@hanzo/esign-lib/types/document-visibility';
 
 export const ZUpdateOrganisationSettingsRequestSchema = z.object({
   organisationId: z.string(),

@@ -9,23 +9,23 @@ import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
 import { P, match } from 'ts-pattern';
 
-import { unsafe_useEffectOnce } from '@hanzo/sign-lib/client-only/hooks/use-effect-once';
-import { AUTO_SIGNABLE_FIELD_TYPES } from '@hanzo/sign-lib/constants/autosign';
-import { DocumentAuth } from '@hanzo/sign-lib/types/document-auth';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import type { TSignFieldWithTokenMutationSchema } from '@hanzo/sign-trpc/server/field-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { unsafe_useEffectOnce } from '@hanzo/esign-lib/client-only/hooks/use-effect-once';
+import { AUTO_SIGNABLE_FIELD_TYPES } from '@hanzo/esign-lib/constants/autosign';
+import { DocumentAuth } from '@hanzo/esign-lib/types/document-auth';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import type { TSignFieldWithTokenMutationSchema } from '@hanzo/esign-trpc/server/field-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { FRIENDLY_FIELD_TYPE } from '@hanzo/sign-ui/primitives/document-flow/types';
-import { Form } from '@hanzo/sign-ui/primitives/form/form';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { FRIENDLY_FIELD_TYPE } from '@hanzo/esign-ui/primitives/document-flow/types';
+import { Form } from '@hanzo/esign-ui/primitives/form/form';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { DocumentSigningDisclosure } from '~/components/general/document-signing/document-signing-disclosure';
 

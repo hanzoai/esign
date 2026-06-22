@@ -15,26 +15,26 @@ import {
 import { Link, useRevalidator } from 'react-router';
 import { P, match } from 'ts-pattern';
 
-import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
-import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { DIRECT_TEMPLATE_RECIPIENT_EMAIL } from '@hanzo/sign-lib/constants/direct-templates';
-import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient-roles';
-import { DIRECT_TEMPLATE_DOCUMENTATION } from '@hanzo/sign-lib/constants/template';
-import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
+import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
+import { useCopyToClipboard } from '@hanzo/esign-lib/client-only/hooks/use-copy-to-clipboard';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { DIRECT_TEMPLATE_RECIPIENT_EMAIL } from '@hanzo/esign-lib/constants/direct-templates';
+import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/esign-lib/constants/recipient-roles';
+import { DIRECT_TEMPLATE_DOCUMENTATION } from '@hanzo/esign-lib/constants/template';
+import { formatDirectTemplatePath } from '@hanzo/esign-lib/utils/templates';
 import {
   ZCreateTemplateDirectLinkRequestSchema,
   ZCreateTemplateDirectLinkResponseSchema,
   ZDeleteTemplateDirectLinkRequestSchema,
   ZToggleTemplateDirectLinkRequestSchema,
   ZToggleTemplateDirectLinkResponseSchema,
-} from '@hanzo/sign-trpc/server/template-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+} from '@hanzo/esign-trpc/server/template-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type { z } from 'zod';
 
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -43,10 +43,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Label } from '@hanzo/sign-ui/primitives/label';
-import { Switch } from '@hanzo/sign-ui/primitives/switch';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Label } from '@hanzo/esign-ui/primitives/label';
+import { Switch } from '@hanzo/esign-ui/primitives/switch';
 import {
   Table,
   TableBody,
@@ -54,9 +54,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@hanzo/sign-ui/primitives/table';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/table';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 type TemplateDirectLinkDialogProps = {
   templateId: number;

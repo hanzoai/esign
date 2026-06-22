@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { SearchIcon } from 'lucide-react';
 
-import { cn } from '@hanzo/sign-ui/lib/utils';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 
 export type AnimatedDocumentScannerProps = {
   className?: string;

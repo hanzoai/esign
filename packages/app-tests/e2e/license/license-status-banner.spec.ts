@@ -2,8 +2,8 @@ import { expect, test } from '@playwright/test';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import type { TCachedLicense } from '@hanzo/sign-lib/types/license';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import type { TCachedLicense } from '@hanzo/esign-lib/types/license';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

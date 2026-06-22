@@ -41,33 +41,33 @@ Hanzo eSign is an open-source document signing platform built as a **monorepo** 
 
 | Package                    | Description                                              | Port |
 | -------------------------- | -------------------------------------------------------- | ---- |
-| `@hanzo/sign-remix`         | Main application - React Router (Remix) with Hono server | 3000 |
-| `@hanzo/sign-documentation` | Documentation site (Next.js + Nextra)                    | 3002 |
-| `@hanzo/sign-openpage-api`  | Public analytics API                                     | 3003 |
+| `@hanzo/esign-remix`         | Main application - React Router (Remix) with Hono server | 3000 |
+| `@hanzo/esign-documentation` | Documentation site (Next.js + Nextra)                    | 3002 |
+| `@hanzo/esign-openpage-api`  | Public analytics API                                     | 3003 |
 
 ### Core Packages (`packages/`)
 
 | Package              | Description                                               |
 | -------------------- | --------------------------------------------------------- |
-| `@hanzo/sign-lib`     | Core business logic (server-only, client-only, universal) |
-| `@hanzo/sign-trpc`    | tRPC API layer with OpenAPI support (API V2)              |
-| `@hanzo/sign-api`     | REST API layer using ts-rest (API V1)                     |
-| `@hanzo/sign-prisma`  | Database layer (Prisma ORM + Kysely)                      |
-| `@hanzo/sign-ui`      | UI component library (Shadcn + Radix + Tailwind)          |
-| `@hanzo/sign-email`   | Email templates and mailer (React Email)                  |
-| `@hanzo/sign-auth`    | Authentication (OAuth via Arctic, WebAuthn/Passkeys)      |
-| `@hanzo/sign-signing` | PDF signing (Local P12, Google Cloud KMS)                 |
-| `@hanzo/sign-assets`  | Static assets                                             |
+| `@hanzo/esign-lib`     | Core business logic (server-only, client-only, universal) |
+| `@hanzo/esign-trpc`    | tRPC API layer with OpenAPI support (API V2)              |
+| `@hanzo/esign-api`     | REST API layer using ts-rest (API V1)                     |
+| `@hanzo/esign-prisma`  | Database layer (Prisma ORM + Kysely)                      |
+| `@hanzo/esign-ui`      | UI component library (Shadcn + Radix + Tailwind)          |
+| `@hanzo/esign-email`   | Email templates and mailer (React Email)                  |
+| `@hanzo/esign-auth`    | Authentication (OAuth via Arctic, WebAuthn/Passkeys)      |
+| `@hanzo/esign-signing` | PDF signing (Local P12, Google Cloud KMS)                 |
+| `@hanzo/esign-assets`  | Static assets                                             |
 
 ### Supporting Packages
 
 | Package                      | Description               |
 | ---------------------------- | ------------------------- |
-| `@hanzo/sign-app-tests`       | E2E tests (Playwright)    |
-| `@hanzo/sign-eslint-config`   | Shared ESLint config      |
-| `@hanzo/sign-prettier-config` | Shared Prettier config    |
-| `@hanzo/sign-tailwind-config` | Shared Tailwind config    |
-| `@hanzo/sign-tsconfig`        | Shared TypeScript configs |
+| `@hanzo/esign-app-tests`       | E2E tests (Playwright)    |
+| `@hanzo/esign-eslint-config`   | Shared ESLint config      |
+| `@hanzo/esign-prettier-config` | Shared Prettier config    |
+| `@hanzo/esign-tailwind-config` | Shared Tailwind config    |
+| `@hanzo/esign-tsconfig`        | Shared TypeScript configs |
 
 ## Tech Stack
 

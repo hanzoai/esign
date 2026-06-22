@@ -1,8 +1,8 @@
 import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { z } from 'zod';
 
-import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import { OrganisationMemberInviteSchema } from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationMemberInviteSchema';
+import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import { OrganisationMemberInviteSchema } from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationMemberInviteSchema';
 
 // export const getOrganisationMemberInvitesMeta: TrpcOpenApiMeta = {
 //   openapi: {

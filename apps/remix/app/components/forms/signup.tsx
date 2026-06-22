@@ -9,13 +9,13 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useSearchParams } from 'react-router';
 import { z } from 'zod';
 
-import communityCardsImage from '@hanzo/sign-assets/images/community-cards.png';
-import { authClient } from '@hanzo/sign-auth/client';
-import { useAnalytics } from '@hanzo/sign-lib/client-only/hooks/use-analytics';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { ZPasswordSchema } from '@hanzo/sign-trpc/server/auth-router/schema';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import communityCardsImage from '@hanzo/esign-assets/images/community-cards.png';
+import { authClient } from '@hanzo/esign-auth/client';
+import { useAnalytics } from '@hanzo/esign-lib/client-only/hooks/use-analytics';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { ZPasswordSchema } from '@hanzo/esign-trpc/server/auth-router/schema';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -23,11 +23,11 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { PasswordInput } from '@hanzo/sign-ui/primitives/password-input';
-import { SignaturePadDialog } from '@hanzo/sign-ui/primitives/signature-pad/signature-pad-dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { PasswordInput } from '@hanzo/esign-ui/primitives/password-input';
+import { SignaturePadDialog } from '@hanzo/esign-ui/primitives/signature-pad/signature-pad-dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { UserProfileTimur } from '~/components/general/user-profile-timur';
 

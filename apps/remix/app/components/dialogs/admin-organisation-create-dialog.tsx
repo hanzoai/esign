@@ -8,12 +8,12 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import type { z } from 'zod';
 
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import type { TCreateAdminOrganisationRequest } from '@hanzo/sign-trpc/server/admin-router/create-admin-organisation.types';
-import { ZCreateAdminOrganisationRequestSchema } from '@hanzo/sign-trpc/server/admin-router/create-admin-organisation.types';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import type { TCreateAdminOrganisationRequest } from '@hanzo/esign-trpc/server/admin-router/create-admin-organisation.types';
+import { ZCreateAdminOrganisationRequestSchema } from '@hanzo/esign-trpc/server/admin-router/create-admin-organisation.types';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -30,9 +30,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type OrganisationCreateDialogProps = {
   trigger?: React.ReactNode;

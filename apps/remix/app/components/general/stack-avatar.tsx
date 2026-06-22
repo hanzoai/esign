@@ -1,5 +1,5 @@
-import { RecipientStatusType } from '@hanzo/sign-lib/client-only/recipient-type';
-import { Avatar, AvatarFallback } from '@hanzo/sign-ui/primitives/avatar';
+import { RecipientStatusType } from '@hanzo/esign-lib/client-only/recipient-type';
+import { Avatar, AvatarFallback } from '@hanzo/esign-ui/primitives/avatar';
 
 const ZIndexes: { [key: string]: string } = {
   '10': 'z-10',

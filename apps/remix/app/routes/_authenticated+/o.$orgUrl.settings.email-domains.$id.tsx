@@ -6,21 +6,21 @@ import { Trans } from '@lingui/react/macro';
 import { EditIcon, MoreHorizontalIcon, Trash2Icon } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { generateEmailDomainRecords } from '@hanzo/sign-lib/utils/email-domains';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TGetOrganisationEmailDomainResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-email-domain.types';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { DataTable, type DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { generateEmailDomainRecords } from '@hanzo/esign-lib/utils/email-domains';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TGetOrganisationEmailDomainResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation-email-domain.types';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { DataTable, type DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
-import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
+import { SpinnerBox } from '@hanzo/esign-ui/primitives/spinner';
 
 import { OrganisationEmailCreateDialog } from '~/components/dialogs/organisation-email-create-dialog';
 import { OrganisationEmailDeleteDialog } from '~/components/dialogs/organisation-email-delete-dialog';

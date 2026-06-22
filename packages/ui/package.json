@@ -1,5 +1,5 @@
 {
-  "name": "@hanzo/sign-ui",
+  "name": "@hanzo/esign-ui",
   "version": "0.0.0",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -17,8 +17,8 @@
     "clean": "rimraf node_modules"
   },
   "devDependencies": {
-    "@hanzo/sign-tailwind-config": "*",
-    "@hanzo/sign-tsconfig": "*",
+    "@hanzo/esign-tailwind-config": "*",
+    "@hanzo/esign-tsconfig": "*",
     "@types/luxon": "^3.7.1",
     "@types/react": "18.3.27",
     "@types/react-dom": "^18",
@@ -26,7 +26,7 @@
     "typescript": "5.9.3"
   },
   "dependencies": {
-    "@hanzo/sign-lib": "*",
+    "@hanzo/esign-lib": "*",
     "@hello-pangea/dnd": "^16.6.0",
     "@hookform/resolvers": "^3",
     "@lingui/macro": "^5.6.0",

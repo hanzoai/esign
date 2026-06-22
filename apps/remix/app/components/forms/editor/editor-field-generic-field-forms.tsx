@@ -3,27 +3,27 @@ import { useEffect } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { type Control, useFormContext } from 'react-hook-form';
 
-import { FIELD_MIN_LINE_HEIGHT } from '@hanzo/sign-lib/types/field-meta';
-import { FIELD_MAX_LINE_HEIGHT } from '@hanzo/sign-lib/types/field-meta';
-import { FIELD_MIN_LETTER_SPACING } from '@hanzo/sign-lib/types/field-meta';
-import { FIELD_MAX_LETTER_SPACING } from '@hanzo/sign-lib/types/field-meta';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+import { FIELD_MIN_LINE_HEIGHT } from '@hanzo/esign-lib/types/field-meta';
+import { FIELD_MAX_LINE_HEIGHT } from '@hanzo/esign-lib/types/field-meta';
+import { FIELD_MIN_LETTER_SPACING } from '@hanzo/esign-lib/types/field-meta';
+import { FIELD_MAX_LETTER_SPACING } from '@hanzo/esign-lib/types/field-meta';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
+} from '@hanzo/esign-ui/primitives/select';
 
 // Can't seem to get the non-any type to work with correct types.
 // Eg Control<{ fontSize?: number } doesn't seem to work when there are required items.

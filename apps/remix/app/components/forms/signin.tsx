@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { env } from '@hanzo/sign-lib/utils/env';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { authClient } from '@hanzo/esign-auth/client';
+import { env } from '@hanzo/esign-lib/utils/env';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 const LOGIN_REDIRECT_PATH = '/';
 

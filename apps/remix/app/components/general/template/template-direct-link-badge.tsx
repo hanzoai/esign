@@ -3,10 +3,10 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Link2Icon } from 'lucide-react';
 
-import { useCopyToClipboard } from '@hanzo/sign-lib/client-only/hooks/use-copy-to-clipboard';
-import { formatDirectTemplatePath } from '@hanzo/sign-lib/utils/templates';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useCopyToClipboard } from '@hanzo/esign-lib/client-only/hooks/use-copy-to-clipboard';
+import { formatDirectTemplatePath } from '@hanzo/esign-lib/utils/templates';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 type TemplateDirectLinkBadgeProps = {
   token: string;

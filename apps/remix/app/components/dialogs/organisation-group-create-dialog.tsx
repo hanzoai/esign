@@ -8,14 +8,14 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/organisations';
-import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { ZCreateOrganisationGroupRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/create-organisation-group.types';
-import type { TFindOrganisationMembersResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-members.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { ORGANISATION_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/organisations';
+import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { ZCreateOrganisationGroupRequestSchema } from '@hanzo/esign-trpc/server/organisation-router/create-organisation-group.types';
+import type { TFindOrganisationMembersResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-members.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -24,7 +24,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -33,17 +33,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { MultiSelectCombobox } from '@hanzo/sign-ui/primitives/multi-select-combobox';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { MultiSelectCombobox } from '@hanzo/esign-ui/primitives/multi-select-combobox';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type OrganisationGroupCreateDialogProps = {
   trigger?: React.ReactNode;

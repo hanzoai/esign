@@ -2,9 +2,9 @@ import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { EnvelopeType } from '@prisma/client';
 
-import { getEnvelopeById } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
-import { seedBlankDocument } from '@hanzo/sign-prisma/seed/documents';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { getEnvelopeById } from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
+import { seedBlankDocument } from '@hanzo/esign-prisma/seed/documents';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

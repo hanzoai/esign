@@ -11,22 +11,22 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { canExecuteOrganisationAction } from '@hanzo/sign-lib/utils/organisations';
-import { canExecuteTeamAction, formatTeamUrl } from '@hanzo/sign-lib/utils/teams';
-import type { TGetOrganisationSessionResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation-session.types';
-import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import { canExecuteOrganisationAction } from '@hanzo/esign-lib/utils/organisations';
+import { canExecuteTeamAction, formatTeamUrl } from '@hanzo/esign-lib/utils/teams';
+import type { TGetOrganisationSessionResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation-session.types';
+import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
 
 import { TeamCreateDialog } from '~/components/dialogs/team-create-dialog';
 import { TeamDeleteDialog } from '~/components/dialogs/team-delete-dialog';

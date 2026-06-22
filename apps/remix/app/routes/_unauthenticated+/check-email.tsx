@@ -1,7 +1,7 @@
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { appMetaTags } from '~/utils/meta';
 

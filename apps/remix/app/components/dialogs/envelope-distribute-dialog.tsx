@@ -11,18 +11,18 @@ import { useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 import * as z from 'zod';
 
-import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { extractDocumentAuthMethods } from '@hanzo/sign-lib/utils/document-auth';
-import { getRecipientsWithMissingFields } from '@hanzo/sign-lib/utils/recipients';
-import type { TDistributeEnvelopeRequest } from '@hanzo/sign-trpc/server/envelope-router/distribute-envelope.types';
-import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { DocumentSendEmailMessageHelper } from '@hanzo/sign-ui/components/document/document-send-email-message-helper';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useCurrentEnvelopeEditor } from '@hanzo/esign-lib/client-only/providers/envelope-editor-provider';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { extractDocumentAuthMethods } from '@hanzo/esign-lib/utils/document-auth';
+import { getRecipientsWithMissingFields } from '@hanzo/esign-lib/utils/recipients';
+import type { TDistributeEnvelopeRequest } from '@hanzo/esign-trpc/server/envelope-router/distribute-envelope.types';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-emails.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { DocumentSendEmailMessageHelper } from '@hanzo/esign-ui/components/document/document-send-email-message-helper';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogClose,
@@ -32,7 +32,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -40,20 +40,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
-import { Tabs, TabsList, TabsTrigger } from '@hanzo/sign-ui/primitives/tabs';
-import { Textarea } from '@hanzo/sign-ui/primitives/textarea';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/sign-ui/primitives/tooltip';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { SpinnerBox } from '@hanzo/esign-ui/primitives/spinner';
+import { Tabs, TabsList, TabsTrigger } from '@hanzo/esign-ui/primitives/tabs';
+import { Textarea } from '@hanzo/esign-ui/primitives/textarea';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@hanzo/esign-ui/primitives/tooltip';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type EnvelopeDistributeDialogProps = {
   onDistribute?: () => Promise<void>;

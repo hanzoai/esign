@@ -1,8 +1,8 @@
 import type {
   TShareDocumentRequest,
   TShareDocumentResponse,
-} from '@hanzo/sign-trpc/server/document-router/share-document.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+} from '@hanzo/esign-trpc/server/document-router/share-document.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 
 import { useCopyToClipboard } from './use-copy-to-clipboard';
 

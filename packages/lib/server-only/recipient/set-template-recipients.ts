@@ -4,8 +4,8 @@ import { EnvelopeType, RecipientRole } from '@prisma/client';
 import {
   DIRECT_TEMPLATE_RECIPIENT_EMAIL,
   DIRECT_TEMPLATE_RECIPIENT_NAME,
-} from '@hanzo/sign-lib/constants/direct-templates';
-import { prisma } from '@hanzo/sign-prisma';
+} from '@hanzo/esign-lib/constants/direct-templates';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import {

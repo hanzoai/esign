@@ -1,12 +1,12 @@
 import { useLingui } from '@lingui/react/macro';
 import type { z } from 'zod';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TGetOrganisationResponse } from '@hanzo/sign-trpc/server/organisation-router/get-organisation.types';
-import type { ZUpdateOrganisationSettingsRequestSchema } from '@hanzo/sign-trpc/server/organisation-router/update-organisation-settings.types';
-import { SpinnerBox } from '@hanzo/sign-ui/primitives/spinner';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TGetOrganisationResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisation.types';
+import type { ZUpdateOrganisationSettingsRequestSchema } from '@hanzo/esign-trpc/server/organisation-router/update-organisation-settings.types';
+import { SpinnerBox } from '@hanzo/esign-ui/primitives/spinner';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import {
   EmailPreferencesForm,

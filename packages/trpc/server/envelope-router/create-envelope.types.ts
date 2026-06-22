@@ -5,18 +5,18 @@ import { zfd } from 'zod-form-data';
 import {
   ZDocumentAccessAuthTypesSchema,
   ZDocumentActionAuthTypesSchema,
-} from '@hanzo/sign-lib/types/document-auth';
-import { ZDocumentFormValuesSchema } from '@hanzo/sign-lib/types/document-form-values';
-import { ZDocumentMetaCreateSchema } from '@hanzo/sign-lib/types/document-meta';
-import { ZEnvelopeAttachmentTypeSchema } from '@hanzo/sign-lib/types/envelope-attachment';
+} from '@hanzo/esign-lib/types/document-auth';
+import { ZDocumentFormValuesSchema } from '@hanzo/esign-lib/types/document-form-values';
+import { ZDocumentMetaCreateSchema } from '@hanzo/esign-lib/types/document-meta';
+import { ZEnvelopeAttachmentTypeSchema } from '@hanzo/esign-lib/types/envelope-attachment';
 import {
   ZClampedFieldHeightSchema,
   ZClampedFieldPositionXSchema,
   ZClampedFieldPositionYSchema,
   ZClampedFieldWidthSchema,
   ZFieldPageNumberSchema,
-} from '@hanzo/sign-lib/types/field';
-import { ZEnvelopeFieldAndMetaSchema } from '@hanzo/sign-lib/types/field-meta';
+} from '@hanzo/esign-lib/types/field';
+import { ZEnvelopeFieldAndMetaSchema } from '@hanzo/esign-lib/types/field-meta';
 
 import { zodFormData } from '../../utils/zod-form-data';
 import {

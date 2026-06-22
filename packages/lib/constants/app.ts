@@ -1,4 +1,4 @@
-import { env } from '@hanzo/sign-lib/utils/env';
+import { env } from '@hanzo/esign-lib/utils/env';
 
 export const APP_DOCUMENT_UPLOAD_SIZE_LIMIT =
   Number(env('NEXT_PUBLIC_DOCUMENT_SIZE_UPLOAD_LIMIT')) || 50;

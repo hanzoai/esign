@@ -1,7 +1,7 @@
 import { UserSecurityAuditLogType } from '@prisma/client';
 
-import { getOrganisationAuthenticationPortalOptions } from '@hanzo/sign-auth/server/lib/utils/organisation-portal';
-import { prisma } from '@hanzo/sign-prisma';
+import { getOrganisationAuthenticationPortalOptions } from '@hanzo/esign-auth/server/lib/utils/organisation-portal';
+import { prisma } from '@hanzo/esign-prisma';
 
 import {
   ORGANISATION_ACCOUNT_LINK_VERIFICATION_TOKEN_IDENTIFIER,

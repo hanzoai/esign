@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZEnvelopeRecipientSchema } from '@hanzo/sign-lib/types/recipient';
+import { ZEnvelopeRecipientSchema } from '@hanzo/esign-lib/types/recipient';
 
 export const ZGetEnvelopeRecipientRequestSchema = z.object({
   recipientId: z.number(),

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZSiteSettingSchema } from '@hanzo/sign-lib/server-only/site-settings/schema';
+import { ZSiteSettingSchema } from '@hanzo/esign-lib/server-only/site-settings/schema';
 
 export const ZUpdateSiteSettingRequestSchema = ZSiteSettingSchema;
 

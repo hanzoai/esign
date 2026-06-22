@@ -2,12 +2,12 @@ import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 import { EnvelopeType } from '@prisma/client';
 
-import { getEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
-import { getTemplateById } from '@hanzo/sign-lib/server-only/template/get-template-by-id';
-import { mapSecondaryIdToTemplateId } from '@hanzo/sign-lib/utils/envelope';
-import { prisma } from '@hanzo/sign-prisma';
-import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { getEnvelopeWhereInput } from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
+import { getTemplateById } from '@hanzo/esign-lib/server-only/template/get-template-by-id';
+import { mapSecondaryIdToTemplateId } from '@hanzo/esign-lib/utils/envelope';
+import { prisma } from '@hanzo/esign-prisma';
+import { seedBlankTemplate } from '@hanzo/esign-prisma/seed/templates';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

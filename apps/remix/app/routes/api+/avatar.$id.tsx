@@ -1,4 +1,4 @@
-import { getAvatarImage } from '@hanzo/sign-lib/server-only/profile/get-avatar-image';
+import { getAvatarImage } from '@hanzo/esign-lib/server-only/profile/get-avatar-image';
 
 import type { Route } from './+types/avatar.$id';
 

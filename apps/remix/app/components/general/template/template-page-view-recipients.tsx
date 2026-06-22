@@ -5,10 +5,10 @@ import type { Recipient } from '@prisma/client';
 import { PenIcon, PlusIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/sign-lib/constants/recipient-roles';
-import { isTemplateRecipientEmailPlaceholder } from '@hanzo/sign-lib/constants/template';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
+import { RECIPIENT_ROLES_DESCRIPTION } from '@hanzo/esign-lib/constants/recipient-roles';
+import { isTemplateRecipientEmailPlaceholder } from '@hanzo/esign-lib/constants/template';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
 
 export type TemplatePageViewRecipientsProps = {
   recipients: Recipient[];

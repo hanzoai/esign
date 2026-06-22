@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 
-import { getTeamSettings } from '@hanzo/sign-lib/server-only/team/get-team-settings';
-import { prisma } from '@hanzo/sign-prisma';
-import { DocumentVisibility } from '@hanzo/sign-prisma/client';
-import { seedTeamDocumentWithMeta } from '@hanzo/sign-prisma/seed/documents';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { getTeamSettings } from '@hanzo/esign-lib/server-only/team/get-team-settings';
+import { prisma } from '@hanzo/esign-prisma';
+import { DocumentVisibility } from '@hanzo/esign-prisma/client';
+import { seedTeamDocumentWithMeta } from '@hanzo/esign-prisma/seed/documents';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 import { apiSignin } from '../fixtures/authentication';
 

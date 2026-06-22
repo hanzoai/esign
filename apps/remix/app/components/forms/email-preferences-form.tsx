@@ -4,16 +4,16 @@ import type { TeamGlobalSettings } from '@prisma/client';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { FROM_ADDRESS } from '@hanzo/sign-lib/constants/email';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { FROM_ADDRESS } from '@hanzo/esign-lib/constants/email';
 import {
   DEFAULT_DOCUMENT_EMAIL_SETTINGS,
   ZDocumentEmailSettingsSchema,
-} from '@hanzo/sign-lib/types/document-email';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TFindOrganisationEmailsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-emails.types';
-import { DocumentEmailCheckboxes } from '@hanzo/sign-ui/components/document/document-email-checkboxes';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-lib/types/document-email';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TFindOrganisationEmailsResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-emails.types';
+import { DocumentEmailCheckboxes } from '@hanzo/esign-ui/components/document/document-email-checkboxes';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Form,
   FormControl,
@@ -22,15 +22,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
+} from '@hanzo/esign-ui/primitives/select';
 
 const ZEmailPreferencesFormSchema = z.object({
   emailId: z.string().nullable(),

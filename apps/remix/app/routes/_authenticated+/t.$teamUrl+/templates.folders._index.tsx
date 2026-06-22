@@ -4,15 +4,15 @@ import { Trans, useLingui } from '@lingui/react/macro';
 import { HomeIcon, Loader2, SearchIcon } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
-import { FolderType } from '@hanzo/sign-lib/types/folder-type';
-import { formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
+import { FolderType } from '@hanzo/esign-lib/types/folder-type';
+import { formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
 import {
   type TFolderWithSubfolders,
   type TGetFoldersResponse,
-} from '@hanzo/sign-trpc/server/folder-router/schema';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-trpc/server/folder-router/schema';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 
 import { FolderCreateDialog } from '~/components/dialogs/folder-create-dialog';
 import { FolderDeleteDialog } from '~/components/dialogs/folder-delete-dialog';

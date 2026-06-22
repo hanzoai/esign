@@ -12,21 +12,21 @@ import { motion } from 'framer-motion';
 import { GripVerticalIcon, HelpCircle, Link2Icon, Plus, Trash } from 'lucide-react';
 import { useFieldArray, useForm } from 'react-hook-form';
 
-import { useAutoSave } from '@hanzo/sign-lib/client-only/hooks/use-autosave';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { isTemplateRecipientEmailPlaceholder } from '@hanzo/sign-lib/constants/template';
-import { ZRecipientAuthOptionsSchema } from '@hanzo/sign-lib/types/document-auth';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { generateRecipientPlaceholder } from '@hanzo/sign-lib/utils/templates';
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
-import { RecipientActionAuthSelect } from '@hanzo/sign-ui/components/recipient/recipient-action-auth-select';
-import { RecipientRoleSelect } from '@hanzo/sign-ui/components/recipient/recipient-role-select';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { FormErrorMessage } from '@hanzo/sign-ui/primitives/form/form-error-message';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { toast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useAutoSave } from '@hanzo/esign-lib/client-only/hooks/use-autosave';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { isTemplateRecipientEmailPlaceholder } from '@hanzo/esign-lib/constants/template';
+import { ZRecipientAuthOptionsSchema } from '@hanzo/esign-lib/types/document-auth';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { generateRecipientPlaceholder } from '@hanzo/esign-lib/utils/templates';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
+import { RecipientActionAuthSelect } from '@hanzo/esign-ui/components/recipient/recipient-action-auth-select';
+import { RecipientRoleSelect } from '@hanzo/esign-ui/components/recipient/recipient-role-select';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { FormErrorMessage } from '@hanzo/esign-ui/primitives/form/form-error-message';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { toast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import {
   DocumentReadOnlyFields,

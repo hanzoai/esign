@@ -1,11 +1,11 @@
 import { type Page, expect, test } from '@playwright/test';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 import {
   extractUserVerificationToken,
   seedTestEmail,
   seedUser,
-} from '@hanzo/sign-prisma/seed/users';
+} from '@hanzo/esign-prisma/seed/users';
 
 import { signSignaturePad } from '../fixtures/signature';
 

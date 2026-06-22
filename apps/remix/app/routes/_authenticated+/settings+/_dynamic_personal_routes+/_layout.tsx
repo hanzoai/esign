@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 import { Outlet, useNavigate } from 'react-router';
 
-import { OrganisationProvider } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { ZapProvider } from '@hanzo/sign-trpc/zap/react';
+import { OrganisationProvider } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import { ZapProvider } from '@hanzo/esign-trpc/zap/react';
 
 import { TeamProvider } from '~/providers/team';
 

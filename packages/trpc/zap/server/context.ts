@@ -11,7 +11,7 @@
 import type { Session } from '@prisma/client';
 import type { Logger } from 'pino';
 
-import type { ApiRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import type { ApiRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
 
 /**
  * The authenticated principal common to both auth paths. Session auth yields a

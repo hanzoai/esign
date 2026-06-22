@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { env } from '@hanzo/sign-lib/utils/env';
+import { env } from '@hanzo/esign-lib/utils/env';
 
 import { Button, Section, Text } from '../components';
 import { TemplateDocumentImage } from './template-document-image';

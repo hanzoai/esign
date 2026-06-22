@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import type { z } from 'zod';
 
-import type { TLicenseClaim } from '@hanzo/sign-lib/types/license';
-import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/sign-lib/types/subscription';
-import { ZCreateSubscriptionClaimRequestSchema } from '@hanzo/sign-trpc/server/admin-router/create-subscription-claim.types';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { Checkbox } from '@hanzo/sign-ui/primitives/checkbox';
+import type { TLicenseClaim } from '@hanzo/esign-lib/types/license';
+import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/esign-lib/types/subscription';
+import { ZCreateSubscriptionClaimRequestSchema } from '@hanzo/esign-trpc/server/admin-router/create-subscription-claim.types';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { Checkbox } from '@hanzo/esign-ui/primitives/checkbox';
 import {
   Form,
   FormControl,
@@ -18,8 +18,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
 
 export type SubscriptionClaimFormValues = z.infer<typeof ZCreateSubscriptionClaimRequestSchema>;
 

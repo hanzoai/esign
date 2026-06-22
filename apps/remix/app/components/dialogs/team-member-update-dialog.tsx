@@ -9,12 +9,12 @@ import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/sign-lib/constants/teams';
-import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import { isTeamRoleWithinUserHierarchy } from '@hanzo/sign-lib/utils/teams';
-import type { ZUpdateTeamMemberRequestSchema } from '@hanzo/sign-trpc/server/team-router/update-team-member.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/teams';
+import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import { isTeamRoleWithinUserHierarchy } from '@hanzo/esign-lib/utils/teams';
+import type { ZUpdateTeamMemberRequestSchema } from '@hanzo/esign-trpc/server/team-router/update-team-member.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -31,15 +31,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
+} from '@hanzo/esign-ui/primitives/form/form';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@hanzo/sign-ui/primitives/select';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/select';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type TeamMemberUpdateDialogProps = {
   currentUserTeamRole: TeamMemberRole;

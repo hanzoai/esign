@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { ZOrganisationEmailLiteSchema } from '@hanzo/sign-lib/types/organisation-email';
-import EmailDomainSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/EmailDomainSchema';
-import OrganisationSchema from '@hanzo/sign-prisma/generated/zod/modelSchema/OrganisationSchema';
+import { ZOrganisationEmailLiteSchema } from '@hanzo/esign-lib/types/organisation-email';
+import EmailDomainSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/EmailDomainSchema';
+import OrganisationSchema from '@hanzo/esign-prisma/generated/zod/modelSchema/OrganisationSchema';
 
 export const ZGetEmailDomainRequestSchema = z.object({
   emailDomainId: z.string(),

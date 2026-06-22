@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { getBoundingClientRect } from '@hanzo/sign-lib/client-only/get-bounding-client-rect';
+import { getBoundingClientRect } from '@hanzo/esign-lib/client-only/get-bounding-client-rect';
 
 export const useDocumentElement = () => {
   /**

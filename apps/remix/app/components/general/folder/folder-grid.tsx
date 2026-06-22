@@ -5,14 +5,14 @@ import { FolderType } from '@prisma/client';
 import { FolderIcon, HomeIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/sign-lib/utils/teams';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
 import {
   type TFolderWithSubfolders,
   type TGetFoldersResponse,
-} from '@hanzo/sign-trpc/server/folder-router/schema';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
+} from '@hanzo/esign-trpc/server/folder-router/schema';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
 
 import { FolderCreateDialog } from '~/components/dialogs/folder-create-dialog';
 import { FolderDeleteDialog } from '~/components/dialogs/folder-delete-dialog';

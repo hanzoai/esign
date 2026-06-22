@@ -3,11 +3,11 @@ import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { Link } from 'react-router';
 
-import { getSession } from '@hanzo/sign-auth/server/lib/utils/get-session';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { prisma } from '@hanzo/sign-prisma';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { getSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { prisma } from '@hanzo/esign-prisma';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { DisableAuthenticatorAppDialog } from '~/components/forms/2fa/disable-authenticator-app-dialog';
 import { EnableAuthenticatorAppDialog } from '~/components/forms/2fa/enable-authenticator-app-dialog';

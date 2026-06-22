@@ -3,11 +3,11 @@ import { Trans } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
 import { DateTime } from 'luxon';
 
-import type { TGetApiTokensResponse } from '@hanzo/sign-trpc/server/api-token-router/get-api-tokens.types';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { Alert, AlertDescription } from '@hanzo/sign-ui/primitives/alert';
-import { AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import type { TGetApiTokensResponse } from '@hanzo/esign-trpc/server/api-token-router/get-api-tokens.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
+import { AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import TokenDeleteDialog from '~/components/dialogs/token-delete-dialog';
 import { ApiTokenForm } from '~/components/forms/token';

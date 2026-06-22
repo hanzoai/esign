@@ -2,9 +2,9 @@ import type { OrganisationGroupType, OrganisationMemberRole } from '@prisma/clie
 import { Prisma } from '@prisma/client';
 import { unique } from 'remeda';
 
-import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
-import { buildTeamWhereQuery } from '@hanzo/sign-lib/utils/teams';
-import { prisma } from '@hanzo/sign-prisma';
+import type { FindResultResponse } from '@hanzo/esign-lib/types/search-params';
+import { buildTeamWhereQuery } from '@hanzo/esign-lib/utils/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 import {
   ZFindTeamGroupsRequestSchema,

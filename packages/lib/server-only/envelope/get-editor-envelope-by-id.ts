@@ -1,7 +1,7 @@
 import type { EnvelopeType } from '@prisma/client';
 
-import { getEnvelopeWhereInput } from '@hanzo/sign-lib/server-only/envelope/get-envelope-by-id';
-import { prisma } from '@hanzo/sign-prisma';
+import { getEnvelopeWhereInput } from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import type { EnvelopeIdOptions } from '../../utils/envelope';

@@ -2,7 +2,7 @@ import { sValidator } from '@hono/standard-validator';
 import { Hono } from 'hono';
 import { z } from 'zod';
 
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { invalidateSessions, validateSessionToken } from '../lib/session/session';
 import { deleteSessionCookie, getSessionCookie } from '../lib/session/session-cookies';

@@ -7,14 +7,14 @@ import { Trans } from '@lingui/react/macro';
 import { Copy, Sparkles } from 'lucide-react';
 import { FaXTwitter } from 'react-icons/fa6';
 
-import { useCopyShareLink } from '@hanzo/sign-lib/client-only/hooks/use-copy-share-link';
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { generateTwitterIntent } from '@hanzo/sign-lib/universal/generate-twitter-intent';
+import { useCopyShareLink } from '@hanzo/esign-lib/client-only/hooks/use-copy-share-link';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { generateTwitterIntent } from '@hanzo/esign-lib/universal/generate-twitter-intent';
 import type {
   TShareDocumentRequest,
   TShareDocumentResponse,
-} from '@hanzo/sign-trpc/server/document-router/share-document.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
+} from '@hanzo/esign-trpc/server/document-router/share-document.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 
 import { cn } from '../../lib/utils';
 import { Button } from '../../primitives/button';

@@ -8,15 +8,15 @@ import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router';
 import type { z } from 'zod';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
 import {
   type TCreateOrganisationResponse,
   ZCreateOrganisationRequestSchema,
-} from '@hanzo/sign-trpc/server/organisation-router/create-organisation.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/organisation-router/create-organisation.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -25,7 +25,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
+} from '@hanzo/esign-ui/primitives/dialog';
 import {
   Form,
   FormControl,
@@ -33,9 +33,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type OrganisationCreateDialogProps = {
   trigger?: React.ReactNode;

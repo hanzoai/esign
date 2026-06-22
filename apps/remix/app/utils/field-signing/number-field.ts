@@ -1,8 +1,8 @@
 import { FieldType } from '@prisma/client';
 
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { TFieldNumber } from '@hanzo/sign-lib/types/field';
-import type { TSignEnvelopeFieldValue } from '@hanzo/sign-trpc/server/envelope-router/sign-envelope-field.types';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { TFieldNumber } from '@hanzo/esign-lib/types/field';
+import type { TSignEnvelopeFieldValue } from '@hanzo/esign-trpc/server/envelope-router/sign-envelope-field.types';
 
 import { SignFieldNumberDialog } from '~/components/dialogs/sign-field-number-dialog';
 

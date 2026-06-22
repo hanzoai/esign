@@ -1,10 +1,10 @@
 import { Prisma, WebhookCallStatus, WebhookTriggerEvents } from '@prisma/client';
 
-import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/sign-lib/constants/teams';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import type { FindResultResponse } from '@hanzo/sign-lib/types/search-params';
-import { buildTeamWhereQuery } from '@hanzo/sign-lib/utils/teams';
-import { prisma } from '@hanzo/sign-prisma';
+import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/teams';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import type { FindResultResponse } from '@hanzo/esign-lib/types/search-params';
+import { buildTeamWhereQuery } from '@hanzo/esign-lib/utils/teams';
+import { prisma } from '@hanzo/esign-prisma';
 
 import {
   ZFindWebhookCallsRequestSchema,

@@ -2,9 +2,9 @@ import { Hono } from 'hono';
 import { HTTPException } from 'hono/http-exception';
 import type { ContentfulStatusCode } from 'hono/utils/http-status';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { AppError, AppErrorCode } from '@hanzo/sign-lib/errors/app-error';
-import { extractRequestMetadata } from '@hanzo/sign-lib/universal/extract-request-metadata';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { extractRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
 
 import { setCsrfCookie } from './lib/session/session-cookies';
 import { accountRoute } from './routes/account';

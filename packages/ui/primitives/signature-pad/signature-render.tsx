@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { SIGNATURE_CANVAS_DPI, isBase64Image } from '@hanzo/sign-lib/constants/signatures';
+import { SIGNATURE_CANVAS_DPI, isBase64Image } from '@hanzo/esign-lib/constants/signatures';
 
 import { cn } from '../../lib/utils';
 

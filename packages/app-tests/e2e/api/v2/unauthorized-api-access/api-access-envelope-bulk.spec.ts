@@ -2,12 +2,12 @@ import { expect, test } from '@playwright/test';
 import type { Team, User } from '@prisma/client';
 import { EnvelopeType, FolderType } from '@prisma/client';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/sign-lib/constants/app';
-import { createApiToken } from '@hanzo/sign-lib/server-only/public-api/create-api-token';
-import { prisma } from '@hanzo/sign-prisma';
-import { seedBlankDocument } from '@hanzo/sign-prisma/seed/documents';
-import { seedBlankFolder } from '@hanzo/sign-prisma/seed/folders';
-import { seedUser } from '@hanzo/sign-prisma/seed/users';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { createApiToken } from '@hanzo/esign-lib/server-only/public-api/create-api-token';
+import { prisma } from '@hanzo/esign-prisma';
+import { seedBlankDocument } from '@hanzo/esign-prisma/seed/documents';
+import { seedBlankFolder } from '@hanzo/esign-prisma/seed/folders';
+import { seedUser } from '@hanzo/esign-prisma/seed/users';
 
 const WEBAPP_BASE_URL = NEXT_PUBLIC_WEBAPP_URL();
 

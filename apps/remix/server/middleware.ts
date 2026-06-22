@@ -1,7 +1,7 @@
 import type { Context, Next } from 'hono';
 import { setCookie } from 'hono/cookie';
 
-import { AppDebugger } from '@hanzo/sign-lib/utils/debugger';
+import { AppDebugger } from '@hanzo/esign-lib/utils/debugger';
 
 import { handleRedirects } from './redirects';
 

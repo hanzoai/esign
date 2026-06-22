@@ -1,12 +1,12 @@
 import { expect, test } from '@playwright/test';
 import path from 'node:path';
 
-import { prisma } from '@hanzo/sign-prisma';
-import { DocumentVisibility, FolderType, TeamMemberRole } from '@hanzo/sign-prisma/client';
-import { seedBlankDocument, seedTeamDocuments } from '@hanzo/sign-prisma/seed/documents';
-import { seedBlankFolder } from '@hanzo/sign-prisma/seed/folders';
-import { seedTeamMember } from '@hanzo/sign-prisma/seed/teams';
-import { seedBlankTemplate } from '@hanzo/sign-prisma/seed/templates';
+import { prisma } from '@hanzo/esign-prisma';
+import { DocumentVisibility, FolderType, TeamMemberRole } from '@hanzo/esign-prisma/client';
+import { seedBlankDocument, seedTeamDocuments } from '@hanzo/esign-prisma/seed/documents';
+import { seedBlankFolder } from '@hanzo/esign-prisma/seed/folders';
+import { seedTeamMember } from '@hanzo/esign-prisma/seed/teams';
+import { seedBlankTemplate } from '@hanzo/esign-prisma/seed/templates';
 
 import { apiSignin } from '../fixtures/authentication';
 import { expectTextToBeVisible, openDropdownMenu } from '../fixtures/generic';

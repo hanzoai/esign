@@ -7,31 +7,31 @@ import { LucideChevronDown, LucideChevronUp } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { P, match } from 'ts-pattern';
 
-import { useAnalytics } from '@hanzo/sign-lib/client-only/hooks/use-analytics';
-import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/sign-lib/constants/date-formats';
-import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/sign-lib/constants/pdf-viewer';
-import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/sign-lib/constants/time-zones';
-import type { DocumentAndSender } from '@hanzo/sign-lib/server-only/document/get-document-by-token';
-import type { TRecipientAccessAuth } from '@hanzo/sign-lib/types/document-auth';
+import { useAnalytics } from '@hanzo/esign-lib/client-only/hooks/use-analytics';
+import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
+import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
+import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/esign-lib/constants/time-zones';
+import type { DocumentAndSender } from '@hanzo/esign-lib/server-only/document/get-document-by-token';
+import type { TRecipientAccessAuth } from '@hanzo/esign-lib/types/document-auth';
 import {
   ZCheckboxFieldMeta,
   ZDropdownFieldMeta,
   ZNumberFieldMeta,
   ZRadioFieldMeta,
   ZTextFieldMeta,
-} from '@hanzo/sign-lib/types/field-meta';
-import type { CompletedField } from '@hanzo/sign-lib/types/fields';
-import { isFieldUnsignedAndRequired } from '@hanzo/sign-lib/utils/advanced-fields-helpers';
-import { getDocumentDataUrlForPdfViewer } from '@hanzo/sign-lib/utils/envelope-download';
-import { validateFieldsInserted } from '@hanzo/sign-lib/utils/fields';
-import type { FieldWithSignatureAndFieldMeta } from '@hanzo/sign-prisma/types/field-with-signature-and-fieldmeta';
-import type { RecipientWithFields } from '@hanzo/sign-prisma/types/recipient-with-fields';
-import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/sign-trpc/server/recipient-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { DocumentReadOnlyFields } from '@hanzo/sign-ui/components/document/document-read-only-fields';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import { Card, CardContent } from '@hanzo/sign-ui/primitives/card';
-import { ElementVisible } from '@hanzo/sign-ui/primitives/element-visible';
+} from '@hanzo/esign-lib/types/field-meta';
+import type { CompletedField } from '@hanzo/esign-lib/types/fields';
+import { isFieldUnsignedAndRequired } from '@hanzo/esign-lib/utils/advanced-fields-helpers';
+import { getDocumentDataUrlForPdfViewer } from '@hanzo/esign-lib/utils/envelope-download';
+import { validateFieldsInserted } from '@hanzo/esign-lib/utils/fields';
+import type { FieldWithSignatureAndFieldMeta } from '@hanzo/esign-prisma/types/field-with-signature-and-fieldmeta';
+import type { RecipientWithFields } from '@hanzo/esign-prisma/types/recipient-with-fields';
+import type { TCompleteDocumentWithTokenMutationSchema } from '@hanzo/esign-trpc/server/recipient-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { DocumentReadOnlyFields } from '@hanzo/esign-ui/components/document/document-read-only-fields';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import { Card, CardContent } from '@hanzo/esign-ui/primitives/card';
+import { ElementVisible } from '@hanzo/esign-ui/primitives/element-visible';
 
 import { DocumentSigningAttachmentsPopover } from '~/components/general/document-signing/document-signing-attachments-popover';
 import { DocumentSigningAutoSign } from '~/components/general/document-signing/document-signing-auto-sign';

@@ -8,24 +8,24 @@ import { Paperclip, Plus, X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/sign-lib/constants/trpc';
-import { AppError } from '@hanzo/sign-lib/errors/app-error';
-import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/sign-trpc/zap/react';
-import type { TCreateAttachmentRequest, TCreateAttachmentResponse } from '@hanzo/sign-trpc/server/envelope-router/attachment/create-attachment.types';
-import type { TDeleteAttachmentRequest, TDeleteAttachmentResponse } from '@hanzo/sign-trpc/server/envelope-router/attachment/delete-attachment.types';
-import type { TFindAttachmentsResponse } from '@hanzo/sign-trpc/server/envelope-router/attachment/find-attachments.types';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/trpc';
+import { AppError } from '@hanzo/esign-lib/errors/app-error';
+import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/esign-trpc/zap/react';
+import type { TCreateAttachmentRequest, TCreateAttachmentResponse } from '@hanzo/esign-trpc/server/envelope-router/attachment/create-attachment.types';
+import type { TDeleteAttachmentRequest, TDeleteAttachmentResponse } from '@hanzo/esign-trpc/server/envelope-router/attachment/delete-attachment.types';
+import type { TFindAttachmentsResponse } from '@hanzo/esign-trpc/server/envelope-router/attachment/find-attachments.types';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from '@hanzo/sign-ui/primitives/form/form';
-import { Input } from '@hanzo/sign-ui/primitives/input';
-import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/sign-ui/primitives/popover';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/form/form';
+import { Input } from '@hanzo/esign-ui/primitives/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@hanzo/esign-ui/primitives/popover';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type DocumentAttachmentsPopoverProps = {
   envelopeId: string;

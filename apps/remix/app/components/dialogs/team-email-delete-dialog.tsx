@@ -7,16 +7,16 @@ import type { Prisma } from '@prisma/client';
 import { useRevalidator } from 'react-router';
 import type { z } from 'zod';
 
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
 import type {
   TDeleteTeamEmailMutationSchema,
   ZDeleteTeamEmailVerificationMutationSchema,
-} from '@hanzo/sign-trpc/server/team-router/schema';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Alert } from '@hanzo/sign-ui/primitives/alert';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/team-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Alert } from '@hanzo/esign-ui/primitives/alert';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
   DialogContent,
@@ -25,8 +25,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@hanzo/sign-ui/primitives/dialog';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/dialog';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type TeamEmailDeleteDialogProps = {
   trigger?: React.ReactNode;

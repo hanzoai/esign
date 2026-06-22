@@ -6,21 +6,21 @@ import { CheckCircle2Icon, ClockIcon } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useUpdateSearchParams } from '@hanzo/sign-lib/client-only/hooks/use-update-search-params';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { ZUrlSearchParamsSchema } from '@hanzo/sign-lib/types/search-params';
-import type { TFindOrganisationEmailDomainsResponse } from '@hanzo/sign-trpc/server/organisation-router/find-organisation-email-domain.types';
-import { useZapMutation, useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
-import { Alert, AlertDescription, AlertTitle } from '@hanzo/sign-ui/primitives/alert';
-import { Badge } from '@hanzo/sign-ui/primitives/badge';
-import { Button } from '@hanzo/sign-ui/primitives/button';
-import type { DataTableColumnDef } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTable } from '@hanzo/sign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/sign-ui/primitives/data-table-pagination';
-import { Skeleton } from '@hanzo/sign-ui/primitives/skeleton';
-import { TableCell } from '@hanzo/sign-ui/primitives/table';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { ZUrlSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
+import type { TFindOrganisationEmailDomainsResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-email-domain.types';
+import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
+import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
+import { Badge } from '@hanzo/esign-ui/primitives/badge';
+import { Button } from '@hanzo/esign-ui/primitives/button';
+import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
+import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
+import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
+import { TableCell } from '@hanzo/esign-ui/primitives/table';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { OrganisationEmailDomainDeleteDialog } from '../dialogs/organisation-email-domain-delete-dialog';
 

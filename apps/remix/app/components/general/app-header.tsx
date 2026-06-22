@@ -4,13 +4,13 @@ import { ReadStatus } from '@prisma/client';
 import { InboxIcon, MenuIcon, SearchIcon } from 'lucide-react';
 import { Link, useParams } from 'react-router';
 
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { isPersonalLayout } from '@hanzo/sign-lib/utils/organisations';
-import { getRootHref } from '@hanzo/sign-lib/utils/params';
-import { useZapQuery } from '@hanzo/sign-trpc/zap/react';
-import type { TGetInboxCountResponse } from '@hanzo/sign-trpc/server/document-router/get-inbox-count.types';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import { getRootHref } from '@hanzo/esign-lib/utils/params';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
+import type { TGetInboxCountResponse } from '@hanzo/esign-trpc/server/document-router/get-inbox-count.types';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { BrandingLogo } from '~/components/general/branding-logo';
 

@@ -13,27 +13,27 @@ import {
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 
-import { authClient } from '@hanzo/sign-auth/client';
-import { useOptionalCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { useSession } from '@hanzo/sign-lib/client-only/providers/session';
-import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/organisations-translations';
-import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/sign-lib/constants/teams-translations';
-import { formatAvatarUrl } from '@hanzo/sign-lib/utils/avatars';
-import { isAdmin } from '@hanzo/sign-lib/utils/is-admin';
-import { canExecuteOrganisationAction } from '@hanzo/sign-lib/utils/organisations';
-import { extractInitials } from '@hanzo/sign-lib/utils/recipient-formatter';
-import { canExecuteTeamAction } from '@hanzo/sign-lib/utils/teams';
-import { AnimateGenericFadeInOut } from '@hanzo/sign-ui/components/animate/animate-generic-fade-in-out';
-import { LanguageSwitcherDialog } from '@hanzo/sign-ui/components/common/language-switcher-dialog';
-import { cn } from '@hanzo/sign-ui/lib/utils';
-import { AvatarWithText } from '@hanzo/sign-ui/primitives/avatar';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+import { authClient } from '@hanzo/esign-auth/client';
+import { useOptionalCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
+import { EXTENDED_ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
+import { EXTENDED_TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
+import { isAdmin } from '@hanzo/esign-lib/utils/is-admin';
+import { canExecuteOrganisationAction } from '@hanzo/esign-lib/utils/organisations';
+import { extractInitials } from '@hanzo/esign-lib/utils/recipient-formatter';
+import { canExecuteTeamAction } from '@hanzo/esign-lib/utils/teams';
+import { AnimateGenericFadeInOut } from '@hanzo/esign-ui/components/animate/animate-generic-fade-in-out';
+import { LanguageSwitcherDialog } from '@hanzo/esign-ui/components/common/language-switcher-dialog';
+import { cn } from '@hanzo/esign-ui/lib/utils';
+import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@hanzo/sign-ui/primitives/dropdown-menu';
+} from '@hanzo/esign-ui/primitives/dropdown-menu';
 
 import { useOptionalCurrentTeam } from '~/providers/team';
 

@@ -4,7 +4,7 @@ services:
     name: hanzo-sign-app
     plan: free
     buildCommand: npm i && npm run build
-    startCommand: npx prisma migrate deploy --schema packages/prisma/schema.prisma && npx turbo run start --filter=@hanzo/sign-remix
+    startCommand: npx prisma migrate deploy --schema packages/prisma/schema.prisma && npx turbo run start --filter=@hanzo/esign-remix
     healthCheckPath: /api/health
 
     # The embedded Base SQLite database lives on a persistent disk; `sign.db`

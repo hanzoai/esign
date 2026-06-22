@@ -5,9 +5,9 @@ import {
   formatSecureCookieName,
   getCookieDomain,
   useSecureCookies,
-} from '@hanzo/sign-lib/constants/auth';
-import { appLog } from '@hanzo/sign-lib/utils/debugger';
-import { env } from '@hanzo/sign-lib/utils/env';
+} from '@hanzo/esign-lib/constants/auth';
+import { appLog } from '@hanzo/esign-lib/utils/debugger';
+import { env } from '@hanzo/esign-lib/utils/env';
 
 import { AUTH_SESSION_LIFETIME } from '../../config';
 import { extractCookieFromHeaders } from '../utils/cookies';

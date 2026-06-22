@@ -5,8 +5,8 @@ import { Trans } from '@lingui/react/macro';
 import { KeyboardIcon, UploadCloudIcon } from 'lucide-react';
 import { match } from 'ts-pattern';
 
-import { DocumentSignatureType } from '@hanzo/sign-lib/constants/document';
-import { isBase64Image } from '@hanzo/sign-lib/constants/signatures';
+import { DocumentSignatureType } from '@hanzo/esign-lib/constants/document';
+import { isBase64Image } from '@hanzo/esign-lib/constants/signatures';
 
 import { SignatureIcon } from '../../icons/signature';
 import { cn } from '../../lib/utils';

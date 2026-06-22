@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { ZEnvelopeFieldSchema } from '@hanzo/sign-lib/types/field';
+import { ZEnvelopeFieldSchema } from '@hanzo/esign-lib/types/field';
 
 export const ZGetEnvelopeFieldRequestSchema = z.object({
   fieldId: z.number(),

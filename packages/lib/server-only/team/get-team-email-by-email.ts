@@ -1,4 +1,4 @@
-import { prisma } from '@hanzo/sign-prisma';
+import { prisma } from '@hanzo/esign-prisma';
 
 import { buildTeamWhereQuery } from '../../utils/teams';
 

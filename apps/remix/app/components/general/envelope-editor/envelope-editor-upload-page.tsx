@@ -9,34 +9,34 @@ import { FileWarningIcon, GripVerticalIcon, Loader2 } from 'lucide-react';
 import { X } from 'lucide-react';
 import { ErrorCode as DropzoneErrorCode, type FileRejection } from 'react-dropzone';
 
-import { useLimits } from '@hanzo/sign-lib/server-only/limits/provider/client';
-import { useEnvelopeAutosave } from '@hanzo/sign-lib/client-only/hooks/use-envelope-autosave';
-import { useCurrentEnvelopeEditor } from '@hanzo/sign-lib/client-only/providers/envelope-editor-provider';
-import { useCurrentOrganisation } from '@hanzo/sign-lib/client-only/providers/organisation';
-import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/sign-lib/constants/app';
-import type { TEditorEnvelope } from '@hanzo/sign-lib/types/envelope-editor';
-import { nanoid } from '@hanzo/sign-lib/universal/id';
-import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@hanzo/sign-lib/utils/embed-config';
-import { canEnvelopeItemsBeModified } from '@hanzo/sign-lib/utils/envelope';
+import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
+import { useEnvelopeAutosave } from '@hanzo/esign-lib/client-only/hooks/use-envelope-autosave';
+import { useCurrentEnvelopeEditor } from '@hanzo/esign-lib/client-only/providers/envelope-editor-provider';
+import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/esign-lib/constants/app';
+import type { TEditorEnvelope } from '@hanzo/esign-lib/types/envelope-editor';
+import { nanoid } from '@hanzo/esign-lib/universal/id';
+import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@hanzo/esign-lib/utils/embed-config';
+import { canEnvelopeItemsBeModified } from '@hanzo/esign-lib/utils/envelope';
 import type {
   TCreateEnvelopeItemsPayload,
   TCreateEnvelopeItemsResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/create-envelope-items.types';
+} from '@hanzo/esign-trpc/server/envelope-router/create-envelope-items.types';
 import type {
   TUpdateEnvelopeItemsRequest,
   TUpdateEnvelopeItemsResponse,
-} from '@hanzo/sign-trpc/server/envelope-router/update-envelope-items.types';
-import { useZapMutation } from '@hanzo/sign-trpc/zap/react';
-import { Button } from '@hanzo/sign-ui/primitives/button';
+} from '@hanzo/esign-trpc/server/envelope-router/update-envelope-items.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
+import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@hanzo/sign-ui/primitives/card';
-import { DocumentDropzone } from '@hanzo/sign-ui/primitives/document-dropzone';
-import { useToast } from '@hanzo/sign-ui/primitives/use-toast';
+} from '@hanzo/esign-ui/primitives/card';
+import { DocumentDropzone } from '@hanzo/esign-ui/primitives/document-dropzone';
+import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { EnvelopeItemDeleteDialog } from '~/components/dialogs/envelope-item-delete-dialog';
 
