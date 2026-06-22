@@ -34,7 +34,7 @@ services:
     env_file:
       - ../../.env.example
     environment:
-      - NEXTAUTH_SECRET=secret
+      - NEXT_PRIVATE_AUTH_SECRET=secret
       - NEXT_PRIVATE_ENCRYPTION_KEY=CAFEBABE
       - NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=DEADBEEF
       - NEXT_PRIVATE_DATABASE_URL=postgres://hanzo-sign:password@database:5432/hanzo-sign

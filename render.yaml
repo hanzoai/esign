@@ -16,12 +16,12 @@ services:
         value: 10000
 
       # Auth
-      - key: NEXTAUTH_URL
+      - key: NEXT_PUBLIC_WEBAPP_URL
         fromService:
           name: hanzo-sign-app
           type: web
           envVarKey: RENDER_EXTERNAL_URL
-      - key: NEXTAUTH_SECRET
+      - key: NEXT_PRIVATE_AUTH_SECRET
         generateValue: true
 
       # Database
