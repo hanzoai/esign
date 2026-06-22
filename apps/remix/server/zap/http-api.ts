@@ -30,6 +30,13 @@ import { ZapReply, newZapRequest } from '@hanzo/esign-trpc/zap/gen/transport_zap
 
 import openapi from '@hanzo/esign-trpc/zap/gen/openapi.json';
 
+// Re-export the WebSocket ZAP server (serveZap) through this module so the
+// raw-copied server/main.js imports BOTH serveZap and serveZapHttpApi from the
+// single rollup-bundled ./hono/server/zap/http-api.js — keeping the first-party
+// esign ZAP server layer fully bundled (it can't resolve as a .ts workspace
+// subpath at runtime). @zap-proto/web stays an external registry dep.
+export { serveZap } from '@hanzo/esign-trpc/zap/server';
+
 interface OpenApiPaths {
   paths: Record<string, { post?: { operationId?: string } }>;
 }

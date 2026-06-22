@@ -9,10 +9,19 @@ import path from 'node:path';
 /** @type {import('rollup').RollupOptions} */
 const config = {
   /**
-   * We specifically target the router.ts instead of the entry point so the rollup doesn't go through the
-   * already prebuilt RR7 server files.
+   * We specifically target router.ts (the Hono app) instead of the entry point
+   * so rollup doesn't go through the already-prebuilt RR7 server files.
+   *
+   * zap/http-api.ts is a SECOND input: the raw-copied server/main.js imports
+   * `serveZapHttpApi` (and, via its re-export, `serveZap`) from the bundled
+   * ./hono/server/zap/http-api.js — but router.ts never references http-api, so
+   * without listing it here it never lands in the bundle (the runtime
+   * ERR_MODULE_NOT_FOUND for @hanzo/esign-trpc/zap/server). Listing it makes
+   * rollup bundle the whole esign ZAP server layer (resolveOnly @hanzo/esign-*)
+   * into build/server/hono/server/zap/http-api.js, leaving only real registry
+   * deps (@zap-proto/web, @hono/node-server) external — those resolve at runtime.
    */
-  input: 'server/router.ts',
+  input: ['server/router.ts', 'server/zap/http-api.ts'],
   output: {
     dir: 'build/server/hono',
     format: 'esm',

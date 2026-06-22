@@ -25,7 +25,19 @@ printf "📊 Certificate status: http://localhost:3000/api/certificate-status\n"
 printf "👥 Community: https://github.com/hanzo-sign/hanzo-sign\n\n"
 
 printf "🗄️  Running database migrations...\n"
-npx prisma migrate deploy --schema ../../packages/prisma/schema.prisma
+# The replicate sidecar streams the SQLite WAL concurrently, so the first
+# migrate can hit a transient "database is locked". Retry with backoff — SQLite
+# locks clear in milliseconds once the checkpoint completes.
+migrate_attempt=1
+until npx prisma migrate deploy --schema ../../packages/prisma/schema.prisma; do
+    if [ "$migrate_attempt" -ge 6 ]; then
+        printf "❌ Migrations failed after %d attempts\n" "$migrate_attempt"
+        exit 1
+    fi
+    printf "⏳ Migrate attempt %d hit a lock; retrying in %ds...\n" "$migrate_attempt" "$migrate_attempt"
+    sleep "$migrate_attempt"
+    migrate_attempt=$((migrate_attempt + 1))
+done
 
 printf "🌟 Starting Hanzo eSign server...\n"
 HOSTNAME=0.0.0.0 node build/server/main.js

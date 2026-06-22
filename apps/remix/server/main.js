@@ -10,9 +10,11 @@ import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
 import handle from 'hono-react-router-adapter/node';
 
-import { serveZap } from '@hanzo/esign-trpc/zap/server';
-
-import { serveZapHttpApi } from './hono/server/zap/http-api.js';
+// serveZap (WebSocket) + serveZapHttpApi (JSON-over-HTTP) both come from the
+// rollup-bundled http-api module — the first-party esign ZAP server layer is
+// bundled there (it's .ts workspace source that can't resolve at runtime as a
+// package subpath). See rollup.config.mjs (http-api.ts is a build input).
+import { serveZap, serveZapHttpApi } from './hono/server/zap/http-api.js';
 import server from './hono/server/router.js';
 import * as build from './index.js';
 
