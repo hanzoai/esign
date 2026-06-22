@@ -1,5 +1,5 @@
 {
-  "name": "@hanzo/esign",
+  "name": "@hanzo/esign-remix",
   "private": true,
   "type": "module",
   "scripts": {
