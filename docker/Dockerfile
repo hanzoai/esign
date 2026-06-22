@@ -67,16 +67,18 @@ ENV NEXT_PRIVATE_TELEMETRY_HOST="$NEXT_PRIVATE_TELEMETRY_HOST"
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
-COPY --from=builder /app/out/package-lock.json ./package-lock.json
+# Use the FULL committed lockfile (not turbo's pruned one). turbo@1.x
+# `prune --docker` emits a pruned package-lock.json that npm ci/install
+# reject; dropping it entirely makes npm resolve NEWER deps (e.g. @types/react
+# with Radix's CSSProperties augmentation, react-beautiful-dnd types) that
+# break the typecheck with ~41 TS2322 errors. The full committed lockfile
+# pins the exact compatible versions the tree was verified against.
+COPY --from=builder /app/package-lock.json ./package-lock.json
 
 COPY --from=builder /app/lingui.config.ts ./lingui.config.ts
 COPY --from=builder /app/patches ./patches
 
-# turbo@1.x `prune --docker` emits a pruned package-lock.json that both
-# `npm ci` (lockfileVersion error) and `npm install` (Cannot read
-# 'extraneous') reject. Drop it and resolve fresh from the pruned
-# workspace package.json files.
-RUN rm -f package-lock.json && npm install --no-audit --no-fund
+RUN npm install --no-audit --no-fund
 
 # Then copy all the source code (as it changes more often)
 COPY --from=builder /app/out/full/ .
@@ -116,7 +118,8 @@ COPY --from=builder --chown=nodejs:nodejs /app/out/full/packages/tailwind-config
 # Copy the patches across
 COPY --from=builder --chown=nodejs:nodejs /app/patches ./patches
 
-RUN rm -f package-lock.json && npm install --omit=dev --no-audit --no-fund
+COPY --from=builder /app/package-lock.json ./package-lock.json
+RUN npm install --omit=dev --no-audit --no-fund
 
 # Automatically leverage output traces to reduce image size
 # https://nodejs.org/docs/advanced-features/output-file-tracing
