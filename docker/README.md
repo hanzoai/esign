@@ -19,7 +19,7 @@ This setup includes a PostgreSQL database and the Hanzo eSign application. You w
 
 ```
 # Generate random secrets (you can use: openssl rand -hex 32)
-NEXTAUTH_SECRET="<your-secret>"
+NEXT_PRIVATE_AUTH_SECRET="<your-secret>"
 NEXT_PRIVATE_ENCRYPTION_KEY="<your-key>"
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="<your-secondary-key>"
 
@@ -109,7 +109,7 @@ docker pull ghcr.io/hanzo-sign/hanzo-sign
 ```
 docker run -d \
   -p 3000:3000 \
-  -e NEXTAUTH_SECRET="<your-nextauth-secret>" \
+  -e NEXT_PRIVATE_AUTH_SECRET="<your-nextauth-secret>" \
   -e NEXT_PRIVATE_ENCRYPTION_KEY="<your-next-private-encryption-key>" \
   -e NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="<your-next-private-encryption-secondary-key>" \
   -e NEXT_PUBLIC_WEBAPP_URL="<your-next-public-webapp-url>" \
@@ -206,7 +206,7 @@ Here's a markdown table documenting all the provided environment variables:
 | Variable                                                       | Description                                                                                         |
 | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `PORT`                                                         | The port to run the Hanzo eSign application on, defaults to `3000`.                                   |
-| `NEXTAUTH_SECRET`                                              | The secret key used by NextAuth.js for encryption and signing.                                      |
+| `NEXT_PRIVATE_AUTH_SECRET`                                              | The secret key used by NextAuth.js for encryption and signing.                                      |
 | `NEXT_PRIVATE_ENCRYPTION_KEY`                                  | The primary encryption key for symmetric encryption and decryption (at least 32 characters).        |
 | `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`                        | The secondary encryption key for symmetric encryption and decryption (at least 32 characters).      |
 | `NEXT_PRIVATE_GOOGLE_CLIENT_ID`                                | The Google client ID for Google authentication (optional).                                          |

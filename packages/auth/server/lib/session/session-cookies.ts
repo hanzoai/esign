@@ -17,10 +17,10 @@ export const sessionCookieName = formatSecureCookieName('sessionId');
 export const csrfCookieName = formatSecureCookieName('csrfToken');
 
 const getAuthSecret = () => {
-  const authSecret = env('NEXTAUTH_SECRET');
+  const authSecret = env('NEXT_PRIVATE_AUTH_SECRET');
 
   if (!authSecret) {
-    throw new Error('NEXTAUTH_SECRET is not set');
+    throw new Error('NEXT_PRIVATE_AUTH_SECRET is not set');
   }
 
   return authSecret;

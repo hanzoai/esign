@@ -124,7 +124,7 @@ POSTGRES_PASSWORD=your-secure-database-password
 POSTGRES_DB=hanzo-sign
 
 # Application secrets (generate with: openssl rand -base64 32)
-NEXTAUTH_SECRET=your-nextauth-secret
+NEXT_PRIVATE_AUTH_SECRET=your-nextauth-secret
 NEXT_PRIVATE_ENCRYPTION_KEY=your-encryption-key-min-32-characters
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=your-secondary-key-min-32-characters
 
@@ -167,8 +167,8 @@ For the complete list of environment variables, see [Environment Variables](/doc
 Generate the required secrets:
 
 ```bash
-# Generate NEXTAUTH_SECRET
-echo "NEXTAUTH_SECRET=$(openssl rand -base64 32)"
+# Generate NEXT_PRIVATE_AUTH_SECRET
+echo "NEXT_PRIVATE_AUTH_SECRET=$(openssl rand -base64 32)"
 
 # Generate encryption keys
 echo "NEXT_PRIVATE_ENCRYPTION_KEY=$(openssl rand -base64 32)"

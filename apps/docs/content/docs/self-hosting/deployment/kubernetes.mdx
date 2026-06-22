@@ -68,7 +68,7 @@ Store sensitive configuration in Kubernetes Secrets.
 First, generate the required secret values:
 
 ```bash
-# Generate NEXTAUTH_SECRET
+# Generate NEXT_PRIVATE_AUTH_SECRET
 openssl rand -base64 32
 
 # Generate encryption keys (minimum 32 characters each)
@@ -89,7 +89,7 @@ metadata:
     app.kubernetes.io/name: hanzo-sign
 type: Opaque
 stringData:
-  NEXTAUTH_SECRET: 'your-generated-secret-here'
+  NEXT_PRIVATE_AUTH_SECRET: 'your-generated-secret-here'
   NEXT_PRIVATE_ENCRYPTION_KEY: 'your-encryption-key-min-32-chars'
   NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: 'your-secondary-key-min-32-chars'
   NEXT_PRIVATE_DATABASE_URL: 'postgresql://user:password@postgres-host:5432/hanzo-sign'
@@ -709,7 +709,7 @@ metadata:
   namespace: hanzo-sign
 type: Opaque
 stringData:
-  NEXTAUTH_SECRET: 'REPLACE_WITH_GENERATED_SECRET'
+  NEXT_PRIVATE_AUTH_SECRET: 'REPLACE_WITH_GENERATED_SECRET'
   NEXT_PRIVATE_ENCRYPTION_KEY: 'REPLACE_WITH_32_CHAR_KEY'
   NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: 'REPLACE_WITH_32_CHAR_KEY'
   NEXT_PRIVATE_DATABASE_URL: 'postgresql://user:password@host:5432/hanzo-sign'

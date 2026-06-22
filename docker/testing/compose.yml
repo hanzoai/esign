@@ -21,7 +21,7 @@ services:
     env_file:
       - ../../.env.example
     environment:
-      - NEXTAUTH_SECRET=secret
+      - NEXT_PRIVATE_AUTH_SECRET=secret
       - NEXT_PRIVATE_ENCRYPTION_KEY=CAFEBABE
       - NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=DEADBEEF
       - BASE_PATH=/opt/hanzo-sign/base/data
