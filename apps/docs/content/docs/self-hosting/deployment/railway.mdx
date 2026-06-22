@@ -56,7 +56,7 @@ Railway will prompt you to configure required variables. At minimum, set:
 | `NEXT_PRIVATE_SMTP_FROM_ADDRESS` | Sender email address                                                                                               |
 | `NEXT_PRIVATE_SMTP_FROM_NAME`    | Sender display name                                                                                                |
 
-The template automatically generates secure values for `NEXTAUTH_SECRET`, `NEXT_PRIVATE_ENCRYPTION_KEY`, and `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`.
+The template automatically generates secure values for `NEXT_PRIVATE_AUTH_SECRET`, `NEXT_PRIVATE_ENCRYPTION_KEY`, and `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`.
 
 </Step>
 
@@ -129,7 +129,7 @@ Click on the Hanzo eSign service and go to the "Variables" tab. Add the followin
 **Required variables:**
 
 ```bash
-NEXTAUTH_SECRET=<generate with: openssl rand -base64 32>
+NEXT_PRIVATE_AUTH_SECRET=<generate with: openssl rand -base64 32>
 NEXT_PRIVATE_ENCRYPTION_KEY=<minimum 32 character random string>
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=<minimum 32 character random string>
 NEXT_PUBLIC_WEBAPP_URL=https://<your-railway-url>.up.railway.app

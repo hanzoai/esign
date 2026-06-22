@@ -162,7 +162,7 @@ git clone https://github.com/<your-username>/hanzo-sign
 
 4. Set the following environment variables:
 
-   - NEXTAUTH_SECRET
+   - NEXT_PRIVATE_AUTH_SECRET
    - NEXT_PUBLIC_WEBAPP_URL
    - BASE_PATH
    - DATABASE_URL
@@ -232,7 +232,7 @@ cp .env.example .env
 
 The following environment variables must be set:
 
-- `NEXTAUTH_SECRET`
+- `NEXT_PRIVATE_AUTH_SECRET`
 - `NEXT_PUBLIC_WEBAPP_URL`
 - `BASE_PATH`
 - `DATABASE_URL`

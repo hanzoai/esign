@@ -70,7 +70,7 @@ Self-hosted deployments are responsible for their own infrastructure security. S
     Hanzo eSign encrypts sensitive data at the application level:
 
     - Encryption keys are configured via `NEXT_PRIVATE_ENCRYPTION_KEY` and `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`
-    - Session tokens are signed using `NEXTAUTH_SECRET`
+    - Session tokens are signed using `NEXT_PRIVATE_AUTH_SECRET`
     - Passwords are hashed using bcrypt
 
   </Accordion>
@@ -201,7 +201,7 @@ When self-hosting Hanzo eSign, you are responsible for the security of your depl
     - **Regular updates**: Keep the host OS and dependencies updated
   </Accordion>
   <Accordion title="Configuration">
-    - **Strong secrets**: Generate cryptographically random values for: - `NEXTAUTH_SECRET` -
+    - **Strong secrets**: Generate cryptographically random values for: - `NEXT_PRIVATE_AUTH_SECRET` -
     `NEXT_PRIVATE_ENCRYPTION_KEY` - `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY` - **Database security**:
     Use strong passwords and restrict database access - **Environment variables**: Store secrets
     securely (do not commit to version control)
