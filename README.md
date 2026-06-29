@@ -1,3 +1,5 @@
+<p align="center"><img src=".github/hero.svg" alt="esign" width="880"></p>
+
 <img src="https://github.com/hanzoai/esign/assets/13398220/a643571f-0239-46a6-a73e-6bef38d1228b" alt="Hanzo eSign Logo">
 
 <p align="center" style="margin-top: 20px">
