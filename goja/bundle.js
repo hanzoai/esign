@@ -1,28 +1,30 @@
-// @hanzo/sign — goja bundle.
+// @hanzo/sign — goja bundle (gojabase contract).
 //
-// SELF-CONTAINED, NO ESM, NO node: imports. This is the ESM-free port of the
-// Hanzo Sign (Documenso fork) server-side e-signature domain, authored so it
-// runs verbatim inside the dop251/goja engine embedded in hanzoai/cloud
-// (HIP-0106, task #100). It carries the LOGIC — documents, recipients, fields,
-// the signing flow/state machine, the audit trail and completion — while the
-// two capabilities goja cannot provide are injected by the Go host:
+// SELF-CONTAINED, NO ESM, NO node: imports. The ESM-free port of the Hanzo Sign
+// (Documenso fork) server-side e-signature domain, authored so it runs verbatim
+// inside the dop251/goja engine embedded in hanzoai/cloud (HIP-0106, task #100)
+// via the REUSABLE clients/gojabase read-write-Base host (the same binding the
+// captable pilot #96 established; dataroom #101 reuses it too). It carries the
+// LOGIC — documents, recipients, fields, the signing flow/state machine, the
+// audit trail and completion — while the host injects the two capabilities goja
+// cannot provide:
 //
-//   Host contract (all injected by hanzoai/cloud/clients/sign before dispatch):
-//     globalThis.db  = { query(sql, params) -> rows[],           // Base/SQLite,
-//                        exec(sql, params)  -> {rowsAffected,     // pre-routed to
-//                                               lastInsertId} }   // the tenant DB
-//     globalThis.pdf = { stamp(pdfB64, stampsJSON) -> pdfB64,     // pdfcpu render
-//                        sign(pdfB64)            -> signedPdfB64 } // x509/PKCS7 seal
-//     globalThis.sys = { uuid() -> string, token() -> string,     // crypto/rand
-//                        nowMs() -> number }
-//     globalThis.handle({ route, method, params, query, body, tenant }) -> {status, body}
+//   Host contract (gojabase injects these per dispatch):
+//     globalThis.__db.query(sql, args) -> rows[]                 // per-tenant Base/SQLite
+//     globalThis.__db.exec(sql, args)  -> { changes, lastId }    // (one txn per dispatch;
+//     globalThis.__newId()             -> crypto-random id        //  commits iff status<400)
+//     globalThis.__now()               -> unix milliseconds
+//   Host capability (esign injects via gojabase Config.HostFns):
+//     globalThis.__pdf.stamp(pdfB64, stampsJSON) -> pdfB64        // pdfcpu render
+//     globalThis.__pdf.sign(pdfB64)              -> signedPdfB64  // x509/PKCS#7 seal
+//   Entry:
+//     globalThis.handle({ route, params, query, orgId, body }) -> { status, body }
 //
-// TENANCY: the host binds `db` to the caller's tenant DB (from the validated
+// TENANCY: gojabase binds __db to the caller's tenant DB (from the validated
 // principal for owner routes, or the :org path segment for token routes) BEFORE
-// calling handle. This bundle never chooses a tenant — it only issues SQL — so
-// tenant isolation is a host property, not a WHERE clause here. The physical
-// schema is created by the Go store (clients/sign/store.go) on first open of
-// each tenant DB; this bundle owns the queries and the flow.
+// calling handle, and passes it as orgId. This bundle never chooses a tenant — it
+// only issues SQL — so tenant isolation is a host property. The physical schema
+// is created by clients/sign (schema.go); this bundle owns the queries + flow.
 (function () {
   'use strict';
 
@@ -52,6 +54,7 @@
   var SIGNING_ROLES = { SIGNER: true, APPROVER: true };
 
   // --- errors: HttpError carries a status the dispatcher maps to the wire ----
+  // (a >=400 status also makes gojabase ROLL BACK the request transaction.)
   function HttpError(status, message) { this.status = status; this.message = message; }
   function bad(m) { throw new HttpError(400, m); }
   function notFound(m) { throw new HttpError(404, m); }
@@ -59,9 +62,10 @@
   function unauthorized(m) { throw new HttpError(401, m); }
 
   // --- small helpers --------------------------------------------------------
-  function now() { return sys.nowMs(); }
-  function uuid() { return sys.uuid(); }
-  function tok() { return sys.token(); }
+  function now() { return __now(); }
+  function id() { return __newId(); }
+  function query(sql, args) { return __db.query(sql, args || []); }
+  function exec(sql, args) { return __db.exec(sql, args || []); }
   function firstRow(rows) { return rows && rows.length ? rows[0] : null; }
   function jparse(s) { if (s == null || s === '') return null; try { return JSON.parse(s); } catch (e) { return null; } }
   function jstr(v) { return v == null ? null : JSON.stringify(v); }
@@ -80,35 +84,27 @@
   // --- audit trail ----------------------------------------------------------
   function audit(documentId, type, data, actor) {
     actor = actor || {};
-    db.exec(
+    exec(
       'INSERT INTO audit_logs (id, document_id, type, data, name, email, ip_address, user_agent, created_at) VALUES (?,?,?,?,?,?,?,?,?)',
-      [uuid(), documentId, type, jstr(data || {}), actor.name || null, actor.email || null,
+      [id(), documentId, type, jstr(data || {}), actor.name || null, actor.email || null,
        actor.ip || null, actor.userAgent || null, now()]
     );
   }
 
   // --- data access ----------------------------------------------------------
-  function getDocument(id) {
-    return firstRow(db.query('SELECT * FROM documents WHERE id = ?', [id]));
-  }
-  function getDocumentData(id) {
-    return firstRow(db.query('SELECT * FROM document_data WHERE id = ?', [id]));
-  }
+  function getDocument(docId) { return firstRow(query('SELECT * FROM documents WHERE id = ?', [docId])); }
+  function getDocumentData(ddId) { return firstRow(query('SELECT * FROM document_data WHERE id = ?', [ddId])); }
   function listRecipients(documentId) {
-    return db.query('SELECT * FROM recipients WHERE document_id = ? ORDER BY signing_order ASC, created_at ASC', [documentId]);
+    return query('SELECT * FROM recipients WHERE document_id = ? ORDER BY signing_order ASC, created_at ASC', [documentId]);
   }
   function listFields(documentId) {
-    return db.query('SELECT * FROM fields WHERE document_id = ? ORDER BY page ASC, created_at ASC', [documentId]);
+    return query('SELECT * FROM fields WHERE document_id = ? ORDER BY page ASC, created_at ASC', [documentId]);
   }
-  function recipientByToken(token) {
-    return firstRow(db.query('SELECT * FROM recipients WHERE token = ?', [token]));
-  }
+  function recipientByToken(token) { return firstRow(query('SELECT * FROM recipients WHERE token = ?', [token])); }
   function fieldsForRecipient(documentId, recipientId) {
-    return db.query('SELECT * FROM fields WHERE document_id = ? AND recipient_id = ? ORDER BY page ASC, created_at ASC', [documentId, recipientId]);
+    return query('SELECT * FROM fields WHERE document_id = ? AND recipient_id = ? ORDER BY page ASC, created_at ASC', [documentId, recipientId]);
   }
-  function signatureForField(fieldId) {
-    return firstRow(db.query('SELECT * FROM signatures WHERE field_id = ?', [fieldId]));
-  }
+  function signatureForField(fieldId) { return firstRow(query('SELECT * FROM signatures WHERE field_id = ?', [fieldId])); }
 
   function documentView(doc) {
     var recipients = listRecipients(doc.id).map(function (r) {
@@ -146,24 +142,24 @@
     var pdf = rawBase64(b.pdfBase64);
     var t = now();
 
-    var dataId = uuid();
-    db.exec('INSERT INTO document_data (id, type, data, initial_data) VALUES (?,?,?,?)',
+    var dataId = id();
+    exec('INSERT INTO document_data (id, type, data, initial_data) VALUES (?,?,?,?)',
       [dataId, 'BYTES_64', pdf, pdf]);
 
-    var id = 'envelope_' + uuid();
-    db.exec(
+    var docId = id();
+    exec(
       'INSERT INTO documents (id, title, status, external_id, source, signing_order, subject, message, document_data_id, internal_version, created_at, updated_at, completed_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-      [id, str(b.title), STATUS.DRAFT, b.externalId || null, 'DOCUMENT',
+      [docId, str(b.title), STATUS.DRAFT, b.externalId || null, 'DOCUMENT',
        b.signingOrder === 'SEQUENTIAL' ? 'SEQUENTIAL' : 'PARALLEL',
        b.subject || null, b.message || null, dataId, 2, t, t, null]
     );
-    audit(id, AUDIT.DOCUMENT_CREATED, { title: str(b.title), source: { type: 'DOCUMENT' } }, req.actor);
-    return { status: 201, body: documentView(getDocument(id)) };
+    audit(docId, AUDIT.DOCUMENT_CREATED, { title: str(b.title), source: { type: 'DOCUMENT' } });
+    return { status: 201, body: documentView(getDocument(docId)) };
   }
 
   // GET /v1/sign/documents
-  function documentsList(req) {
-    var rows = db.query('SELECT * FROM documents ORDER BY created_at DESC LIMIT 200', []);
+  function documentsList() {
+    var rows = query('SELECT * FROM documents ORDER BY created_at DESC LIMIT 200', []);
     return { status: 200, body: { documents: rows.map(documentView) } };
   }
 
@@ -182,18 +178,18 @@
     var b = reqBody(req);
     if (!b.email) bad('email required');
     var role = ROLE[b.role] || ROLE.SIGNER;
-    var id = uuid();
-    var token = tok();
+    var recId = id();
+    var token = id();
     var isCC = role === ROLE.CC;
-    db.exec(
+    exec(
       'INSERT INTO recipients (id, document_id, email, name, token, role, signing_order, read_status, signing_status, send_status, signed_at, rejection_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-      [id, doc.id, String(b.email).toLowerCase(), str(b.name), token, role,
+      [recId, doc.id, String(b.email).toLowerCase(), str(b.name), token, role,
        b.signingOrder == null ? null : num(b.signingOrder, null), READ.NOT_OPENED,
        isCC ? SIGNING.SIGNED : SIGNING.NOT_SIGNED, isCC ? SEND.SENT : SEND.NOT_SENT, null, null, now()]
     );
     audit(doc.id, AUDIT.RECIPIENT_CREATED,
-      { recipientId: id, recipientEmail: String(b.email).toLowerCase(), recipientName: str(b.name), recipientRole: role }, req.actor);
-    return { status: 201, body: { id: id, token: token, email: String(b.email).toLowerCase(), name: str(b.name), role: role } };
+      { recipientId: recId, recipientEmail: String(b.email).toLowerCase(), recipientName: str(b.name), recipientRole: role });
+    return { status: 201, body: { id: recId, token: token, email: String(b.email).toLowerCase(), name: str(b.name), role: role } };
   }
 
   // POST /v1/sign/documents/:id/fields  { recipientId, type, page, positionX, positionY, width, height, fieldMeta? }
@@ -204,18 +200,17 @@
     var b = reqBody(req);
     if (!b.recipientId) bad('recipientId required');
     if (!FIELD_TYPES[b.type]) bad('invalid field type: ' + b.type);
-    var recipient = firstRow(db.query('SELECT id FROM recipients WHERE id = ? AND document_id = ?', [b.recipientId, doc.id]));
+    var recipient = firstRow(query('SELECT id FROM recipients WHERE id = ? AND document_id = ?', [b.recipientId, doc.id]));
     if (!recipient) bad('recipientId does not belong to this document');
-    var id = uuid();
-    db.exec(
+    var fieldId = id();
+    exec(
       'INSERT INTO fields (id, document_id, recipient_id, type, page, position_x, position_y, width, height, custom_text, inserted, field_meta, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-      [id, doc.id, b.recipientId, b.type, num(b.page, 1),
+      [fieldId, doc.id, b.recipientId, b.type, num(b.page, 1),
        num(b.positionX, 0), num(b.positionY, 0), num(b.width, -1), num(b.height, -1),
        '', 0, jstr(b.fieldMeta), now()]
     );
-    audit(doc.id, AUDIT.FIELD_CREATED,
-      { fieldId: id, fieldType: b.type, fieldRecipientId: b.recipientId }, req.actor);
-    return { status: 201, body: { id: id, type: b.type, recipientId: b.recipientId, page: num(b.page, 1) } };
+    audit(doc.id, AUDIT.FIELD_CREATED, { fieldId: fieldId, fieldType: b.type, fieldRecipientId: b.recipientId });
+    return { status: 201, body: { id: fieldId, type: b.type, recipientId: b.recipientId, page: num(b.page, 1) } };
   }
 
   // POST /v1/sign/documents/:id/send
@@ -225,20 +220,19 @@
     if (doc.status === STATUS.COMPLETED) conflict('document already completed');
     var recipients = listRecipients(doc.id);
     if (!recipients.length) bad('document has no recipients');
-    // every SIGNER/APPROVER recipient needs at least one field.
     for (var i = 0; i < recipients.length; i++) {
       var r = recipients[i];
       if (SIGNING_ROLES[r.role]) {
-        var n = firstRow(db.query('SELECT COUNT(*) AS c FROM fields WHERE document_id = ? AND recipient_id = ?', [doc.id, r.id]));
+        var n = firstRow(query('SELECT COUNT(*) AS c FROM fields WHERE document_id = ? AND recipient_id = ?', [doc.id, r.id]));
         if (!n || Number(n.c) === 0) bad('recipient ' + r.email + ' has no fields to sign');
       }
     }
     var t = now();
     if (doc.status === STATUS.DRAFT) {
-      db.exec('UPDATE documents SET status = ?, updated_at = ? WHERE id = ?', [STATUS.PENDING, t, doc.id]);
-      audit(doc.id, AUDIT.DOCUMENT_SENT, {}, req.actor);
+      exec('UPDATE documents SET status = ?, updated_at = ? WHERE id = ?', [STATUS.PENDING, t, doc.id]);
+      audit(doc.id, AUDIT.DOCUMENT_SENT, {});
     }
-    db.exec('UPDATE recipients SET send_status = ? WHERE document_id = ? AND role != ?', [SEND.SENT, doc.id, ROLE.CC]);
+    exec('UPDATE recipients SET send_status = ? WHERE document_id = ? AND role != ?', [SEND.SENT, doc.id, ROLE.CC]);
 
     var links = recipients.filter(function (r) { return SIGNING_ROLES[r.role]; }).map(function (r) {
       return { recipientId: r.id, email: r.email, role: r.role, token: r.token, signingPath: 'sign/' + r.token };
@@ -252,14 +246,18 @@
     if (!doc) notFound('document not found');
     var dd = getDocumentData(doc.document_data_id);
     if (!dd) notFound('document data missing');
-    return { status: 200, body: { id: doc.id, status: doc.status, sealed: doc.status === STATUS.COMPLETED, filename: doc.title + (doc.status === STATUS.COMPLETED ? '_signed.pdf' : '.pdf'), pdfBase64: dd.data } };
+    return { status: 200, body: {
+      id: doc.id, status: doc.status, sealed: doc.status === STATUS.COMPLETED,
+      filename: doc.title + (doc.status === STATUS.COMPLETED ? '_signed.pdf' : '.pdf'),
+      pdfBase64: dd.data,
+    } };
   }
 
   // GET /v1/sign/documents/:id/audit
   function documentsAudit(req) {
     var doc = getDocument(req.params.id);
     if (!doc) notFound('document not found');
-    var rows = db.query('SELECT * FROM audit_logs WHERE document_id = ? ORDER BY created_at ASC', [doc.id]);
+    var rows = query('SELECT * FROM audit_logs WHERE document_id = ? ORDER BY created_at ASC', [doc.id]);
     return { status: 200, body: { documentId: doc.id, entries: rows.map(function (a) {
       return { id: a.id, type: a.type, data: jparse(a.data), name: a.name, email: a.email, createdAt: a.created_at };
     }) } };
@@ -282,7 +280,7 @@
     var rd = requireRecipient(req);
     var r = rd.recipient, doc = rd.doc;
     if (r.read_status === READ.NOT_OPENED) {
-      db.exec('UPDATE recipients SET read_status = ? WHERE id = ?', [READ.OPENED, r.id]);
+      exec('UPDATE recipients SET read_status = ? WHERE id = ?', [READ.OPENED, r.id]);
       audit(doc.id, AUDIT.DOCUMENT_OPENED, { recipientId: r.id, recipientEmail: r.email }, { email: r.email });
     }
     var dd = getDocumentData(doc.document_data_id);
@@ -306,7 +304,7 @@
     if (r.signing_status === SIGNING.SIGNED) conflict('recipient already completed');
     if (r.signing_status === SIGNING.REJECTED) conflict('recipient already rejected');
 
-    var field = firstRow(db.query('SELECT * FROM fields WHERE id = ? AND document_id = ?', [req.params.fieldId, doc.id]));
+    var field = firstRow(query('SELECT * FROM fields WHERE id = ? AND document_id = ?', [req.params.fieldId, doc.id]));
     if (!field) notFound('field not found');
     if (field.recipient_id !== r.id) unauthorized('field does not belong to this recipient');
     if (field.inserted) conflict('field already signed');
@@ -319,11 +317,11 @@
     if (isSig) {
       if (value == null || value === '') bad('signature value required');
       if (b.isBase64) {
-        db.exec('INSERT INTO signatures (id, field_id, recipient_id, image_base64, typed_signature, created_at) VALUES (?,?,?,?,?,?)',
-          [uuid(), field.id, r.id, rawBase64(value), null, now()]);
+        exec('INSERT INTO signatures (id, field_id, recipient_id, image_base64, typed_signature, created_at) VALUES (?,?,?,?,?,?)',
+          [id(), field.id, r.id, rawBase64(value), null, now()]);
       } else {
-        db.exec('INSERT INTO signatures (id, field_id, recipient_id, image_base64, typed_signature, created_at) VALUES (?,?,?,?,?,?)',
-          [uuid(), field.id, r.id, null, String(value), now()]);
+        exec('INSERT INTO signatures (id, field_id, recipient_id, image_base64, typed_signature, created_at) VALUES (?,?,?,?,?,?)',
+          [id(), field.id, r.id, null, String(value), now()]);
       }
     } else if (field.type === 'DATE') {
       customText = (value != null && value !== '') ? String(value) : new Date(now()).toISOString().slice(0, 10);
@@ -336,7 +334,7 @@
       customText = String(value);
     }
 
-    db.exec('UPDATE fields SET custom_text = ?, inserted = 1 WHERE id = ?', [customText, field.id]);
+    exec('UPDATE fields SET custom_text = ?, inserted = 1 WHERE id = ?', [customText, field.id]);
     audit(doc.id, AUDIT.DOCUMENT_FIELD_INSERTED,
       { fieldId: field.id, recipientId: r.id, recipientEmail: r.email, field: { type: field.type, data: isSig ? '[signature]' : customText } },
       { email: r.email });
@@ -350,13 +348,12 @@
     if (doc.status !== STATUS.PENDING) conflict('document is not pending signature');
     if (r.signing_status !== SIGNING.NOT_SIGNED) conflict('recipient has already acted');
     var reason = reqBody(req).reason ? String(reqBody(req).reason) : '';
-    db.exec('UPDATE recipients SET signing_status = ?, rejection_reason = ?, signed_at = ? WHERE id = ?',
+    exec('UPDATE recipients SET signing_status = ?, rejection_reason = ?, signed_at = ? WHERE id = ?',
       [SIGNING.REJECTED, reason, now(), r.id]);
     audit(doc.id, AUDIT.DOCUMENT_RECIPIENT_REJECTED,
       { recipientId: r.id, recipientEmail: r.email, recipientName: r.name, recipientRole: r.role, reason: reason }, { email: r.email });
-    // A rejection seals the document as REJECTED.
-    db.exec('UPDATE documents SET status = ?, updated_at = ? WHERE id = ?', [STATUS.REJECTED, now(), doc.id]);
-    audit(doc.id, AUDIT.DOCUMENT_COMPLETED, { transactionId: tok(), isRejected: true, rejectionReason: reason }, { email: r.email });
+    exec('UPDATE documents SET status = ?, updated_at = ? WHERE id = ?', [STATUS.REJECTED, now(), doc.id]);
+    audit(doc.id, AUDIT.DOCUMENT_COMPLETED, { transactionId: id(), isRejected: true, rejectionReason: reason }, { email: r.email });
     return { status: 200, body: { recipientId: r.id, status: STATUS.REJECTED } };
   }
 
@@ -367,23 +364,22 @@
     if (doc.status !== STATUS.PENDING) conflict('document is not pending signature');
     if (r.signing_status === SIGNING.SIGNED) conflict('recipient already completed');
 
-    var pending = firstRow(db.query('SELECT COUNT(*) AS c FROM fields WHERE document_id = ? AND recipient_id = ? AND inserted = 0', [doc.id, r.id]));
+    var pending = firstRow(query('SELECT COUNT(*) AS c FROM fields WHERE document_id = ? AND recipient_id = ? AND inserted = 0', [doc.id, r.id]));
     if (pending && Number(pending.c) > 0) bad('recipient has ' + pending.c + ' unsigned field(s)');
 
-    // derive name/email from NAME/EMAIL fields if the recipient row is blank.
-    var name = r.name, email = r.email;
-    db.exec('UPDATE recipients SET signing_status = ?, signed_at = ?, name = ?, email = ? WHERE id = ?',
-      [SIGNING.SIGNED, now(), name, email, r.id]);
+    exec('UPDATE recipients SET signing_status = ?, signed_at = ? WHERE id = ?', [SIGNING.SIGNED, now(), r.id]);
     audit(doc.id, AUDIT.DOCUMENT_RECIPIENT_COMPLETED, { recipientId: r.id, recipientEmail: r.email }, { email: r.email });
 
-    var sealed = maybeSeal(doc, req.actor || { email: r.email });
+    var sealed = maybeSeal(doc, { email: r.email });
     return { status: 200, body: { recipientId: r.id, documentStatus: sealed ? STATUS.COMPLETED : STATUS.PENDING, sealed: sealed } };
   }
 
   // maybeSeal seals the document when every SIGNER/APPROVER recipient is SIGNED.
-  // Sealing = render the inserted field values onto the PDF (pdf.stamp) then
-  // apply a real x509/PKCS7 digital signature (pdf.sign), persist the sealed
-  // bytes, flip status to COMPLETED, and write the DOCUMENT_COMPLETED audit.
+  // Sealing = render the inserted field values onto the PDF (__pdf.stamp) then
+  // apply a real x509/PKCS#7 digital signature (__pdf.sign), persist the sealed
+  // bytes, flip status to COMPLETED, and write DOCUMENT_COMPLETED. Because the
+  // host runs each dispatch in ONE transaction, the field write + seal + status
+  // flip commit atomically (or roll back together on any error).
   function maybeSeal(doc, actor) {
     var recipients = listRecipients(doc.id);
     for (var i = 0; i < recipients.length; i++) {
@@ -411,13 +407,13 @@
       }
     }
 
-    var stamped = pdf.stamp(dd.data, JSON.stringify(stamps));
-    var signed = pdf.sign(stamped);
+    var stamped = __pdf.stamp(dd.data, JSON.stringify(stamps));
+    var signed = __pdf.sign(stamped);
 
     var t = now();
-    db.exec('UPDATE document_data SET data = ? WHERE id = ?', [signed, dd.id]);
-    db.exec('UPDATE documents SET status = ?, completed_at = ?, updated_at = ? WHERE id = ?', [STATUS.COMPLETED, t, t, doc.id]);
-    audit(doc.id, AUDIT.DOCUMENT_COMPLETED, { transactionId: tok() }, actor);
+    exec('UPDATE document_data SET data = ? WHERE id = ?', [signed, dd.id]);
+    exec('UPDATE documents SET status = ?, completed_at = ?, updated_at = ? WHERE id = ?', [STATUS.COMPLETED, t, t, doc.id]);
+    audit(doc.id, AUDIT.DOCUMENT_COMPLETED, { transactionId: id() }, actor);
     return true;
   }
 
