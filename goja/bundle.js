@@ -106,6 +106,22 @@
   }
   function signatureForField(fieldId) { return firstRow(query('SELECT * FROM signatures WHERE field_id = ?', [fieldId])); }
 
+  // assertTurn enforces SEQUENTIAL signing order: a recipient may only act once
+  // EVERY signer/approver ahead of them (lower signing_order, then created_at — the
+  // listRecipients order) has SIGNED. PARALLEL documents impose no order. Called by
+  // signField and signComplete so a later party cannot sign before earlier ones.
+  function assertTurn(doc, r) {
+    if (doc.signing_order !== 'SEQUENTIAL') return;
+    var recipients = listRecipients(doc.id); // ORDER BY signing_order ASC, created_at ASC
+    for (var i = 0; i < recipients.length; i++) {
+      var o = recipients[i];
+      if (o.id === r.id) return; // reached this recipient — everyone ahead has signed
+      if (SIGNING_ROLES[o.role] && o.signing_status !== SIGNING.SIGNED) {
+        throw new HttpError(403, 'waiting for an earlier signer (sequential signing order)');
+      }
+    }
+  }
+
   function documentView(doc) {
     var recipients = listRecipients(doc.id).map(function (r) {
       return {
@@ -143,8 +159,15 @@
     var t = now();
 
     var dataId = id();
+    // PDF bytes live on the object-storage seam (__blob), NOT inline in the
+    // per-tenant SQLite — a 32 MiB base64 PDF in a TEXT column would bloat the
+    // tenant DB and be re-copied on every read. document_data.data holds the opaque
+    // blob KEY; initial_data keeps the ORIGINAL key so the pre-seal PDF is never
+    // overwritten. __blob is tenant-scoped by the host, so the key is local.
+    var initialKey = 'doc/' + dataId + '/initial';
+    __blob.put(initialKey, pdf);
     exec('INSERT INTO document_data (id, type, data, initial_data) VALUES (?,?,?,?)',
-      [dataId, 'BYTES_64', pdf, pdf]);
+      [dataId, 'BLOB_KEY', initialKey, initialKey]);
 
     var docId = id();
     exec(
@@ -249,7 +272,7 @@
     return { status: 200, body: {
       id: doc.id, status: doc.status, sealed: doc.status === STATUS.COMPLETED,
       filename: doc.title + (doc.status === STATUS.COMPLETED ? '_signed.pdf' : '.pdf'),
-      pdfBase64: dd.data,
+      pdfBase64: __blob.get(dd.data), // dd.data is the blob key; fetch the bytes
     } };
   }
 
@@ -292,7 +315,7 @@
       document: { id: doc.id, title: doc.title, status: doc.status },
       recipient: { id: r.id, email: r.email, name: r.name, role: r.role, signingStatus: r.signing_status },
       fields: myFields,
-      pdfBase64: dd ? dd.data : null,
+      pdfBase64: dd ? __blob.get(dd.data) : null, // dd.data is the blob key
     } };
   }
 
@@ -303,6 +326,7 @@
     if (doc.status !== STATUS.PENDING) conflict('document is not pending signature');
     if (r.signing_status === SIGNING.SIGNED) conflict('recipient already completed');
     if (r.signing_status === SIGNING.REJECTED) conflict('recipient already rejected');
+    assertTurn(doc, r); // SEQUENTIAL: refuse until earlier signers have signed
 
     var field = firstRow(query('SELECT * FROM fields WHERE id = ? AND document_id = ?', [req.params.fieldId, doc.id]));
     if (!field) notFound('field not found');
@@ -363,6 +387,7 @@
     var r = rd.recipient, doc = rd.doc;
     if (doc.status !== STATUS.PENDING) conflict('document is not pending signature');
     if (r.signing_status === SIGNING.SIGNED) conflict('recipient already completed');
+    assertTurn(doc, r); // SEQUENTIAL: refuse until earlier signers have signed
 
     var pending = firstRow(query('SELECT COUNT(*) AS c FROM fields WHERE document_id = ? AND recipient_id = ? AND inserted = 0', [doc.id, r.id]));
     if (pending && Number(pending.c) > 0) bad('recipient has ' + pending.c + ' unsigned field(s)');
@@ -407,11 +432,16 @@
       }
     }
 
-    var stamped = __pdf.stamp(dd.data, JSON.stringify(stamps));
+    var original = __blob.get(dd.data); // dd.data is the (initial) blob key
+    var stamped = __pdf.stamp(original, JSON.stringify(stamps));
     var signed = __pdf.sign(stamped);
 
     var t = now();
-    exec('UPDATE document_data SET data = ? WHERE id = ?', [signed, dd.id]);
+    // Persist the sealed PDF to a NEW blob key and point document_data.data at it;
+    // initial_data still references the original key, so both survive on the seam.
+    var sealedKey = 'doc/' + dd.id + '/sealed';
+    __blob.put(sealedKey, signed);
+    exec('UPDATE document_data SET data = ? WHERE id = ?', [sealedKey, dd.id]);
     exec('UPDATE documents SET status = ?, completed_at = ?, updated_at = ? WHERE id = ?', [STATUS.COMPLETED, t, t, doc.id]);
     audit(doc.id, AUDIT.DOCUMENT_COMPLETED, { transactionId: id() }, actor);
     return true;
