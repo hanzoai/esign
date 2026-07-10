@@ -13,30 +13,36 @@ goja supports ES2020 but **not** ES-module `import`/`export` and **not**
 `node:` builtins, Prisma, or `pdf-lib`. So the tRPC handlers cannot be loaded
 directly. Instead, the **exact domain flow** — create → recipients → fields →
 send → sign → complete → seal → audit — is ported here as one CommonJS IIFE and
-runs in goja. The two things goja cannot do are injected by the Go host:
+runs in goja. It runs on the **reusable `clients/gojabase` read-write-Base host**
+(the same binding the captable pilot established) — the two things goja cannot do
+are injected by that host:
 
-- **Persistence** — `globalThis.db` (Hanzo Base/SQLite), NOT Prisma.
-- **PDF + PKI** — `globalThis.pdf` (real x509/PKCS#7 signing + pdfcpu rendering),
-  NOT `@libpdf/core`/`node:crypto`.
+- **Persistence** — `globalThis.__db` (per-tenant Hanzo Base/SQLite, one
+  transaction per dispatch), NOT Prisma.
+- **PDF + PKI** — `globalThis.__pdf` (real x509/PKCS#7 signing + pdfcpu
+  rendering), injected by `clients/sign` via gojabase `Config.HostFns`, NOT
+  `pdf-lib`/`node:crypto`.
 
 ## Host contract
 
 ```
-globalThis.db  = { query(sql, params) -> rows[],
-                   exec(sql, params)  -> { rowsAffected, lastInsertId } }   // pre-routed to the tenant DB
-globalThis.pdf = { stamp(pdfBase64, stampsJSON) -> pdfBase64,               // render field values (pdfcpu)
-                   sign(pdfBase64)             -> signedPdfBase64 }         // x509/PKCS#7 seal (digitorus/pdfsign)
-globalThis.sys = { uuid() -> string, token() -> string, nowMs() -> number } // crypto/rand + clock
-globalThis.handle({ route, method, params, query, body, tenant }) -> { status, body }
+globalThis.__db.query(sql, args) -> rows[]                 // gojabase, per-tenant Base/SQLite
+globalThis.__db.exec(sql, args)  -> { changes, lastId }    // (one txn per dispatch; commits iff status<400)
+globalThis.__newId()             -> crypto-random id
+globalThis.__now()               -> unix milliseconds
+globalThis.__pdf.stamp(pdfBase64, stampsJSON) -> pdfBase64        // render field values (pdfcpu)
+globalThis.__pdf.sign(pdfBase64)              -> signedPdfBase64  // x509/PKCS#7 seal (digitorus/pdfsign)
+globalThis.handle({ route, params, query, orgId, body }) -> { status, body }
 ```
 
-The Go wrapper (`hanzoai/cloud/clients/sign`) opens/migrates the per-tenant
-`sign.db`, injects `db`/`pdf`/`sys`, maps `/v1/sign/*` HTTP routes to bundle
-route names, and calls `handle()` per request.
+`clients/gojabase` provides `__db`/`__newId`/`__now` + the per-tenant SQLite file
++ the request transaction; `clients/sign` provides the `sign.db` schema and the
+`__pdf` host-functions, maps `/v1/sign/*` HTTP routes to bundle route names, and
+calls `handle()` per request.
 
 ## Tenancy
 
-The host binds `db` to the caller's tenant DB **before** calling `handle` — from
+The host binds `__db` to the caller's tenant DB **before** calling `handle` — from
 the validated principal for owner routes (`/v1/sign/documents/*`), or from the
 `:org` path segment for recipient token routes (`/v1/sign/o/:org/sign/:token`).
 The bundle never chooses a tenant; isolation is a host property.

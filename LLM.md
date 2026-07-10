@@ -47,10 +47,12 @@ Postgres. This replaces the standalone esign pod.
   `globalThis.handle({route,method,params,body,tenant})`. It carries LOGIC only.
 - `embed.go` / `go.mod` — a std-lib-only Go module (`github.com/hanzoai/sign`,
   `Bundle()`) that cloud imports to `go:embed` the bundle.
-- `goja/README.md` — the host contract. Persistence (`globalThis.db`) and the
-  PDF/PKI seal primitives (`globalThis.pdf`: pdfcpu render + x509/PKCS#7 sign)
-  are injected by `hanzoai/cloud/clients/sign` as Go host-functions; only the
-  crypto/PDF primitive is Go, the flow stays here in JS.
+- `goja/README.md` — the host contract. It runs on the reusable
+  `hanzoai/cloud/clients/gojabase` RW-Base host: persistence (`globalThis.__db`,
+  per-tenant SQLite, one txn per dispatch) + `__newId`/`__now` come from gojabase;
+  the PDF/PKI seal primitives (`globalThis.__pdf`: pdfcpu render + x509/PKCS#7
+  sign) are injected by `clients/sign` via gojabase `Config.HostFns`. Only the
+  crypto/PDF primitive is Go; the flow + seal orchestration stay here in JS.
 
 Edit a server-side rule? Mirror it in `goja/bundle.js` (the cloud path) as well
 as the Remix/tRPC handlers.
