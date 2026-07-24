@@ -1,20 +1,8 @@
-name: Docker
+name: Docker (moved to native pipeline)
 on:
   workflow_dispatch:
-  push:
-    branches: [main, dev, test]
-    tags: ['v*']
-permissions:
-  contents: read
-  packages: write
 jobs:
-  docker:
-    uses: hanzoai/.github/.github/workflows/docker-build.yml@main
-    with:
-      image: ghcr.io/hanzoai/esign
-      dockerfile: docker/Dockerfile
-      # arm64 builds run on canonical native arcd labels — matches
-      # spark (self-hosted + linux + arm64). Org isolation comes from
-      # GitHub runner group + arcd's repo allowlist.
-      runner-arm64: self-hosted
-    secrets: inherit
+  notice:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "native pipeline is .hanzo/workflows/deploy.yml; GitHub is a mirror"
