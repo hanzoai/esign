@@ -11,7 +11,7 @@ description: Configure your self-hosted Hanzo eSign instance with environment va
   />
   <Card
     title="Database"
-    description="PostgreSQL setup and configuration."
+    description="Embedded SQLite (Hanzo Base) setup."
     href="/docs/self-hosting/configuration/database"
   />
   <Card
@@ -35,7 +35,7 @@ description: Configure your self-hosted Hanzo eSign instance with environment va
 
 At minimum, you need to configure:
 
-1. **Database** - PostgreSQL connection
+1. **Database** - embedded SQLite file path (`DATABASE_URL` / `BASE_PATH`)
 2. **Email** - SMTP for sending notifications
 3. **Base URL** - Your instance's public URL
 

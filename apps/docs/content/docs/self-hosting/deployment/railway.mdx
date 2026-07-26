@@ -1,6 +1,6 @@
 ---
 title: Railway
-description: Deploy Hanzo eSign on Railway with automatic builds from Git, managed PostgreSQL, and built-in networking. Use the one-click template or manual setup.
+description: Deploy Hanzo eSign on Railway with automatic builds from Git, a persistent volume for the embedded SQLite database, and built-in networking. Use the one-click template or manual setup.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -20,6 +20,13 @@ Before deploying, you need:
 - SMTP credentials for sending emails (required for document signing requests)
 - A custom domain (optional but recommended for production)
 
+<Callout type="error">
+  esign stores all data in an embedded SQLite file under `BASE_PATH`. Railway's
+  container filesystem is **ephemeral** — without a persistent volume mounted at
+  `BASE_PATH`, your database is wiped on every deploy and restart. Attach a
+  Railway volume (shown below) before going to production.
+</Callout>
+
 ## One-Click Deploy
 
 The fastest way to deploy Hanzo eSign on Railway is using the official template:
@@ -29,7 +36,7 @@ The fastest way to deploy Hanzo eSign on Railway is using the official template:
 This template automatically provisions:
 
 - Hanzo eSign application service
-- PostgreSQL database
+- A persistent volume mounted at `BASE_PATH` for the SQLite database
 - Required environment variables with secure defaults
 
 {/* prettier-ignore */}
@@ -112,12 +119,13 @@ No additional build configuration is needed.
 </Step>
 
 <Step>
-### Add PostgreSQL database
+### Add a persistent volume
 
-- In your project, click "New"
-- Select "Database"
-- Choose "PostgreSQL"
-- Railway provisions the database and automatically sets `DATABASE_URL`
+- Select your Hanzo eSign service
+- Go to "Settings" > "Volumes"
+- Click "Add Volume" and set the mount path to `/opt/hanzo-sign/base/data`
+
+This volume holds the SQLite database and survives deploys and restarts.
 
 </Step>
 
@@ -133,8 +141,8 @@ NEXT_PRIVATE_AUTH_SECRET=<generate with: openssl rand -base64 32>
 NEXT_PRIVATE_ENCRYPTION_KEY=<minimum 32 character random string>
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=<minimum 32 character random string>
 NEXT_PUBLIC_WEBAPP_URL=https://<your-railway-url>.up.railway.app
-NEXT_PRIVATE_DATABASE_URL=${{Postgres.DATABASE_URL}}
-NEXT_PRIVATE_DIRECT_DATABASE_URL=${{Postgres.DATABASE_URL}}
+BASE_PATH=/opt/hanzo-sign/base/data
+DATABASE_URL=file:${BASE_PATH}/sign.db
 NEXT_PRIVATE_SMTP_TRANSPORT=smtp-auth
 NEXT_PRIVATE_SMTP_HOST=<your-smtp-host>
 NEXT_PRIVATE_SMTP_PORT=587
@@ -144,8 +152,10 @@ NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo eSign
 NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@yourdomain.com
 ```
 
-<Callout type="info">
-  Use `${{Postgres.DATABASE_URL}}` to reference the Railway-managed PostgreSQL connection string. Railway automatically resolves this reference.
+<Callout type="warn">
+  Point `DATABASE_URL` at a `file:` path **inside** the volume mount
+  (`BASE_PATH`). If it resolves anywhere else, the database lives on the ephemeral
+  container filesystem and is lost on the next deploy.
 </Callout>
 
 **Optional variables:**
@@ -171,57 +181,76 @@ Click "Deploy" or push a commit to trigger a new deployment. Railway builds and 
 
 Railway manages environment variables through its dashboard. The full list of configuration options is documented in [Environment Variables](/docs/self-hosting/configuration/environment).
 
-### Referencing Railway Services
+### Referencing the Volume Mount
 
-Railway allows referencing other services in your project using the `${{ServiceName.VARIABLE}}` syntax:
+Railway exposes a project variable for the volume mount path. You can reference it
+when composing `DATABASE_URL` so the two stay in sync:
 
 ```bash
-NEXT_PRIVATE_DATABASE_URL=${{Postgres.DATABASE_URL}}
+BASE_PATH=${{RAILWAY_VOLUME_MOUNT_PATH}}
+DATABASE_URL=file:${{RAILWAY_VOLUME_MOUNT_PATH}}/sign.db
 ```
 
-This ensures connection strings stay in sync when Railway updates service configurations.
+If you set the mount path explicitly, use the literal path instead:
+
+```bash
+BASE_PATH=/opt/hanzo-sign/base/data
+DATABASE_URL=file:${BASE_PATH}/sign.db
+```
 
 ## Database Setup
 
-Railway's managed PostgreSQL handles database provisioning automatically. The database:
+esign's database is an embedded SQLite file on the Railway volume — there is no
+managed database addon to provision, connect to, or pay for separately. The
+database:
 
-- Runs PostgreSQL 15 by default
-- Includes automatic backups on paid plans
-- Provides connection pooling via the internal network
+- Lives in a single `sign.db` file under `BASE_PATH` on the attached volume
+- Is created and migrated automatically on first start
+- Is backed up by snapshotting the Railway volume
 
 ### Database Connection
 
-For Railway deployments, use the same connection string for both pooled and direct connections:
+Point `DATABASE_URL` at a `file:` path inside the volume mount:
 
 ```bash
-NEXT_PRIVATE_DATABASE_URL=${{Postgres.DATABASE_URL}}
-NEXT_PRIVATE_DIRECT_DATABASE_URL=${{Postgres.DATABASE_URL}}
+BASE_PATH=/opt/hanzo-sign/base/data
+DATABASE_URL=file:${BASE_PATH}/sign.db
 ```
 
 Hanzo eSign runs database migrations automatically on startup.
 
-### Accessing the Database
+### Inspecting the Database
 
-To connect directly to your database for debugging or maintenance:
+To inspect the database for debugging or maintenance, open a shell on the service
+and use the bundled `sqlite3` CLI:
 
 {/* prettier-ignore */}
 <Steps>
 <Step>
-### Open the PostgreSQL service
+### Open a service shell
 
-In your Railway project dashboard, select the PostgreSQL service.
-
-</Step>
-<Step>
-### Open the Connect tab
-
-The "Connect" tab shows the connection string and credentials.
+In the Railway dashboard, select your Hanzo eSign service and open a shell (or use
+the Railway CLI: `railway run bash`).
 
 </Step>
 <Step>
-### Connect with your client
+### Query with sqlite3
 
-Use the provided connection string with your preferred PostgreSQL client.
+The `sqlite3` CLI takes a plain path, not the `file:` URL:
+
+```bash
+sqlite3 "${BASE_PATH}/sign.db" 'SELECT COUNT(*) FROM "User";'
+```
+
+</Step>
+<Step>
+### Snapshot before changes
+
+Make a consistent copy before any manual change:
+
+```bash
+sqlite3 "${BASE_PATH}/sign.db" ".backup '${BASE_PATH}/sign-backup.db'"
+```
 
 </Step>
 </Steps>
@@ -307,44 +336,24 @@ Raise the memory and CPU limits; Railway will scale within these limits based on
 </Step>
 </Steps>
 
-### Horizontal Scaling
-
-Railway supports horizontal scaling through replicas:
-
-{/* prettier-ignore */}
-<Steps>
-<Step>
-### Open service Settings
-
-In the Railway dashboard, select your Hanzo eSign service and open "Settings".
-
-</Step>
-<Step>
-### Enable Horizontal Scaling
-
-Turn on "Horizontal Scaling" so Railway can run multiple instances.
-
-</Step>
-<Step>
-### Set replicas
-
-Choose how many replicas to run; Railway will load-balance traffic across them.
-
-</Step>
-</Steps>
+### Horizontal Scaling Is Not Supported
 
 <Callout type="warn">
-  Hanzo eSign stores sessions in the database, so horizontal scaling works without additional
-  configuration. However, ensure your database can handle the increased connection load.
+  Do not enable Railway "Horizontal Scaling" (multiple replicas) for esign. The
+  database is a single-writer SQLite file on one volume; multiple instances cannot
+  safely write to it. Run a single replica and scale vertically.
 </Callout>
 
-### Database Scaling
+### Volume Scaling
 
-For high-traffic deployments:
+For high-traffic or document-heavy deployments:
 
-- Upgrade to a larger PostgreSQL instance in Railway
-- Consider using connection pooling with PgBouncer
-- Configure read replicas for read-heavy workloads
+- Increase the persistent volume size in the service's "Volumes" settings as the
+  `sign.db` file grows.
+- Set `NEXT_PUBLIC_UPLOAD_TRANSPORT=s3` so document PDFs live in object storage
+  instead of the database file, keeping the volume small. See
+  [Storage Configuration](/docs/self-hosting/configuration/storage).
+- Raise the service's memory and CPU limits (see Vertical Scaling above).
 
 ## Cost Estimate
 
@@ -429,16 +438,26 @@ See [Signing Certificate Configuration](/docs/self-hosting/configuration/signing
     Check the build logs in Railway for specific errors. Common causes: out of memory (increase the build memory limit in service settings), Docker build timeout (Railway has a 20-minute build timeout; ensure your build completes within this limit).
   </Accordion>
   <Accordion title="Application crashes on startup">
-    View the deployment logs: click your service, go to Deployments, click the failed deployment. Common issues: missing environment variables (verify all required variables are set), database connection failed (check `NEXT_PRIVATE_DATABASE_URL` references the correct PostgreSQL service), invalid encryption keys (ensure keys are at least 32 characters).
+    View the deployment logs: click your service, go to Deployments, click the failed deployment. Common issues: missing environment variables (verify all required variables are set), database file unreachable (check `DATABASE_URL` is a `file:` path under the volume mount and `BASE_PATH` matches the volume), invalid encryption keys (ensure keys are at least 32 characters).
   </Accordion>
   <Accordion title="Emails not sending">
     Verify SMTP configuration: check `NEXT_PRIVATE_SMTP_TRANSPORT` is set to `smtp-auth`, verify SMTP credentials are correct, ensure your SMTP provider allows connections from Railway's IP addresses.
   </Accordion>
-  <Accordion title="Database connection errors">
-    Verify PostgreSQL service is running, check the variable reference syntax `${{Postgres.DATABASE_URL}}`, try redeploying the application.
+  <Accordion title="Data disappeared after a deploy">
+    The SQLite file was on the ephemeral container filesystem, not the volume.
+    Confirm a volume is mounted at `BASE_PATH` (Settings > Volumes) and that
+    `DATABASE_URL` points at a `file:` path inside it, then restore from your last
+    volume snapshot.
+  </Accordion>
+  <Accordion title="unable to open database file">
+    The directory in `DATABASE_URL` does not exist or is not on the volume. Open a
+    service shell and verify the mount: `ls -la "$BASE_PATH"`, then probe the file:
+    `sqlite3 "${BASE_PATH}/sign.db" 'SELECT 1'`.
   </Accordion>
   <Accordion title="Slow performance">
-    Increase memory allocation for the service, check database query performance in Railway's metrics, consider upgrading to a larger PostgreSQL instance.
+    Increase memory and CPU allocation for the service, move documents to S3 with
+    `NEXT_PUBLIC_UPLOAD_TRANSPORT=s3` to keep `sign.db` small, and grow the volume
+    if it is near full.
   </Accordion>
 </Accordions>
 

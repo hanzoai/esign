@@ -29,21 +29,21 @@ NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
 
 ## Database Storage
 
-Database storage is the default option and requires no additional configuration. Documents are stored as base64-encoded data directly in PostgreSQL.
+Database storage is the default option and requires no additional configuration. Documents are stored as base64-encoded data directly in the embedded SQLite database (Hanzo Base), in the same `sign.db` file as the rest of your data.
 
 <Tabs items={['Advantages', 'Limitations']}>
 <Tab value="Advantages">
 
 - No external dependencies
 - Simple deployment
-- Automatic backups with database
+- Backed up together with the rest of the database (single file snapshot)
 
 </Tab>
 <Tab value="Limitations">
 
-- Increases database size significantly
+- Grows the `sign.db` file significantly
 - Slower for large files
-- Database backup/restore takes longer
+- File snapshots take longer as the database grows
 - Not recommended for files larger than 10MB
 
 </Tab>
@@ -431,7 +431,8 @@ New uploads use the configured `NEXT_PUBLIC_UPLOAD_TRANSPORT` backend.
 
 ### Database Storage Estimates
 
-When using database storage, plan for significant database growth:
+When using database storage, plan for significant growth of the `sign.db` file
+on your persistent volume:
 
 | Documents/Month | Avg Size | Monthly Growth | Annual Growth |
 | --------------- | -------- | -------------- | ------------- |
@@ -455,12 +456,17 @@ S3 stores files without encoding overhead:
 
 For high-volume deployments, S3 is more cost-effective:
 
-| Aspect        | Database Storage             | S3 Storage              |
-| ------------- | ---------------------------- | ----------------------- |
-| Storage cost  | Database pricing (~$0.10/GB) | S3 pricing (~$0.023/GB) |
-| Transfer cost | Database I/O                 | S3 requests + egress    |
-| Backup cost   | Larger database backups      | Separate S3 backups     |
-| Performance   | Degrades with size           | Consistent              |
+| Aspect        | Database Storage                       | S3 Storage              |
+| ------------- | -------------------------------------- | ----------------------- |
+| Storage cost  | Persistent volume holding `sign.db`    | S3 pricing (~$0.023/GB) |
+| Transfer cost | Local disk I/O                         | S3 requests + egress    |
+| Backup cost   | Larger `sign.db` snapshots             | Separate S3 backups     |
+| Performance   | Degrades as the file grows             | Consistent              |
+
+With database storage there is no managed-database bill: the documents live in
+the same `sign.db` file on the persistent volume you already pay for. The
+tradeoff is that the volume must grow with your document corpus, and snapshots
+take longer.
 
 ---
 
@@ -563,7 +569,7 @@ Default limit is 50MB per request.
 
 ## See Also
 
-- [Database Configuration](/docs/self-hosting/configuration/database) - Configure PostgreSQL
+- [Database Configuration](/docs/self-hosting/configuration/database) - Configure the SQLite database
 - [Environment Variables](/docs/self-hosting/configuration/environment) - Complete configuration reference
 - [Backups](/docs/self-hosting/maintenance/backups) - Backup strategies for both storage backends
 - [Docker Compose](/docs/self-hosting/deployment/docker-compose) - Deploy with MinIO for local storage

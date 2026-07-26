@@ -106,8 +106,8 @@ Check the [GitHub releases](https://github.com/hanzoai/esign/releases) page for 
 
 The Docker container runs `prisma migrate deploy` every time it starts. This means:
 
-- **Upgrades are simple**: pull the new image, restart the container, and migrations apply automatically.
-- **Always back up your database before upgrading**: if a migration fails, you need a way to restore.
+- **Upgrades are simple**: pull the new image, restart the container, and migrations apply automatically against the SQLite file.
+- **Always snapshot the `sign.db` file before upgrading**: if a migration fails, the file copy is your rollback. See [Backups](/docs/self-hosting/maintenance/backups).
 - **First startup takes longer**: the initial migration creates all tables.
 
 ---
@@ -126,9 +126,9 @@ This tells the job system to use the internal address instead of `NEXT_PUBLIC_WE
 
 ## Database Storage vs S3
 
-Documents are stored in PostgreSQL by default (`NEXT_PUBLIC_UPLOAD_TRANSPORT=database`). This works well for small-to-medium deployments and keeps your infrastructure simple.
+Documents are stored in the embedded SQLite database (Hanzo Base) by default (`NEXT_PUBLIC_UPLOAD_TRANSPORT=database`), as base64 in the same `sign.db` file. This works well for small-to-medium deployments and keeps your infrastructure simple.
 
-For high-volume deployments, switch to S3-compatible storage to keep your database lean:
+For high-volume deployments, switch to S3-compatible storage to keep the `sign.db` file lean:
 
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
@@ -146,7 +146,7 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage) for full s
 
 ## Background Jobs Don't Need Redis
 
-Hanzo eSign uses a PostgreSQL-based job queue by default. No Redis, no external message broker. The job system uses your existing database to store and process background tasks like email delivery and document processing.
+Hanzo eSign uses a SQLite-backed job queue by default. No Redis, no external message broker. The job system uses the embedded Base database to store and process background tasks like email delivery and document processing.
 
 For high-throughput deployments, Hanzo eSign optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider:
 

@@ -11,20 +11,20 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 Hanzo eSign stores data in three locations:
 
-| Component             | Location                      | Contains                                           |
-| --------------------- | ----------------------------- | -------------------------------------------------- |
-| PostgreSQL database   | Database server               | Users, documents, signatures, audit logs, settings |
-| Signing certificate   | File system or secret manager | Private key for signing documents                  |
-| Document storage (S3) | S3 bucket or database         | Uploaded PDFs and signed documents                 |
+| Component             | Location                      | Contains                                            |
+| --------------------- | ----------------------------- | --------------------------------------------------- |
+| SQLite database       | `sign.db` file under `BASE_PATH` | Users, documents, signatures, audit logs, settings |
+| Signing certificate   | File system or secret manager | Private key for signing documents                   |
+| Document storage (S3) | S3 bucket or the SQLite database | Uploaded PDFs and signed documents               |
 
 <Callout type="warn">
   The signing certificate is critical. If lost, you cannot sign new documents until a new
   certificate is configured. Back it up securely.
 </Callout>
 
-### Data Stored in PostgreSQL
+### Data Stored in the SQLite Database
 
-The database contains:
+The embedded Base database (`sign.db`) contains:
 
 - User accounts and authentication data
 - Teams and organisation settings
@@ -33,65 +33,67 @@ The database contains:
 - Audit logs and activity records
 - Templates and template settings
 - API tokens and webhook configurations
+- The `BackgroundJob` queue
 
-If using database storage (`NEXT_PUBLIC_UPLOAD_TRANSPORT=database`), the database also contains the actual PDF files.
+If using database storage (`NEXT_PUBLIC_UPLOAD_TRANSPORT=database`), the same file also contains the actual PDF files.
 
 ---
 
 ## Database Backups
 
-### Using pg_dump
+The database is a single SQLite file under `BASE_PATH`, so backups are file
+snapshots — no `pg_dump`, no replication topology. Use the `sqlite3 .backup`
+command, which produces a consistent copy even while the app is running.
 
-Create a logical backup with `pg_dump`:
-
-| Flag   | Description                                           |
-| ------ | ----------------------------------------------------- |
-| `-h`   | Database host                                         |
-| `-U`   | Database user                                         |
-| `-d`   | Database name                                         |
-| `-F c` | Custom format (compressed, supports parallel restore) |
-| `-f`   | Output file                                           |
+### Online Backup with sqlite3 .backup
 
 <Tabs items={['Direct', 'Docker Compose']}>
 <Tab value="Direct">
 
 ```bash
-pg_dump -h localhost -U hanzo-sign -d hanzo-sign -F c -f hanzo-sign_backup.dump
+sqlite3 /opt/hanzo-sign/base/data/_dev/sign.db \
+  ".backup '/backup/hanzo-sign/sign-$(date +%Y%m%d_%H%M%S).db'"
 ```
 
 </Tab>
 <Tab value="Docker Compose">
 
 ```bash
-docker compose exec database pg_dump -U hanzo-sign -F c hanzo-sign > hanzo-sign_backup.dump
+docker compose exec hanzo-sign \
+  sqlite3 /opt/hanzo-sign/base/data/_dev/sign.db \
+  ".backup '/opt/hanzo-sign/base/data/sign-backup.db'"
+docker compose cp \
+  hanzo-sign:/opt/hanzo-sign/base/data/sign-backup.db \
+  "./sign-$(date +%Y%m%d_%H%M%S).db"
 ```
 
 </Tab>
 </Tabs>
 
-### Backup with Timestamp
+The `.backup` command copies the live database (including the WAL) into a new,
+self-contained file. It is safe to run while Hanzo eSign is serving traffic.
 
-Include timestamps in backup filenames for easier management:
+### Plain File Copy (App Stopped)
 
-```bash
-pg_dump -h localhost -U hanzo-sign -d hanzo-sign -F c \
-  -f "hanzo-sign_$(date +%Y%m%d_%H%M%S).dump"
-```
-
-### Plain SQL Backup
-
-For human-readable backups or cross-version compatibility:
+If the app is stopped, an ordinary `cp` is sufficient and fastest:
 
 ```bash
-pg_dump -h localhost -U hanzo-sign -d hanzo-sign -F p -f hanzo-sign_backup.sql
+cp /opt/hanzo-sign/base/data/_dev/sign.db \
+   "/backup/hanzo-sign/sign-$(date +%Y%m%d_%H%M%S).db"
 ```
+
+<Callout type="warn">
+  A plain `cp` of a live database can capture a torn write. Use `sqlite3 .backup`
+  for online copies; reserve `cp` for when the app is stopped.
+</Callout>
 
 ### Compressed Backup
 
-Compress backups to save storage space:
+Compress snapshots to save storage space:
 
 ```bash
-pg_dump -h localhost -U hanzo-sign -d hanzo-sign | gzip > hanzo-sign_backup.sql.gz
+sqlite3 /opt/hanzo-sign/base/data/_dev/sign.db ".backup '/tmp/sign.db'"
+gzip -c /tmp/sign.db > "hanzo-sign_$(date +%Y%m%d_%H%M%S).db.gz" && rm /tmp/sign.db
 ```
 
 ---

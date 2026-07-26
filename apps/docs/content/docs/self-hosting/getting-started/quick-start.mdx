@@ -12,8 +12,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 This quick start setup is for local development and testing only:
 
 - No HTTPS (not suitable for production)
-- No email delivery (emails are logged to console)
-- Uses a local PostgreSQL database
+- No email delivery (emails are captured by a local mail server)
+- Uses an embedded SQLite database (Hanzo Base) on a local volume
 - No signing certificate configured (documents will be signed with a generated certificate)
 - Single-node setup (no high availability)
 
@@ -113,23 +113,24 @@ Log in with your credentials.
 
 ### Granting Admin Access
 
-All accounts created through signup are regular user accounts. To grant admin access, update the user's role directly in the database:
+All accounts created through signup are regular user accounts. To grant admin access, update the user's role directly in the SQLite database. Run `sqlite3` against the `sign.db` file under `BASE_PATH`:
 
 ```bash
-docker compose -f docker/development/compose.yml exec database \
-  psql -U hanzo-sign -d hanzo-sign -c "UPDATE \"User\" SET roles = '{ADMIN}' WHERE email = 'your@email.com';"
+sqlite3 "$BASE_PATH/_dev/sign.db" \
+  "UPDATE \"User\" SET roles = '[\"ADMIN\"]' WHERE email = 'your@email.com';"
 ```
 
 ## What's Included
 
-The quick start setup runs the following containers:
+The quick start setup runs the following containers. The database is **not** one
+of them — it is an embedded SQLite file on a local volume, created automatically
+under `BASE_PATH`:
 
-| Container   | Purpose                          | Port  |
-| ----------- | -------------------------------- | ----- |
-| `hanzo-sign` | Main application                 | 3000  |
-| `database`  | PostgreSQL database              | 54320 |
-| `maildev`   | Local email testing server       | 2500  |
-| `minio`     | S3-compatible storage (optional) | 9000  |
+| Container    | Purpose                            | Port |
+| ------------ | ---------------------------------- | ---- |
+| `hanzo-sign` | Main application                   | 3000 |
+| `inbucket`   | Local email capture (web UI)       | 9000 |
+| `minio`      | S3-compatible storage (optional)   | 9001 |
 
 ## Useful Commands
 
@@ -166,8 +167,8 @@ docker compose -f docker/development/compose.yml up -d --build
   </Accordion>
   <Accordion title="Container fails to start">
     Check the logs: `docker compose -f docker/development/compose.yml logs hanzo-sign`. Common
-    issues: insufficient memory (ensure Docker has at least 2GB RAM allocated), database connection
-    (wait for the database container to be healthy before the app starts).
+    issues: insufficient memory (ensure Docker has at least 2GB RAM allocated), or the SQLite
+    database directory not writable (the `sign.db` file is created under `BASE_PATH` on first start).
   </Accordion>
   <Accordion title="Cannot access localhost:3000">
     Verify containers are running: `docker compose -f docker/development/compose.yml ps`. Check if
@@ -180,7 +181,7 @@ docker compose -f docker/development/compose.yml up -d --build
 
 ## See Also
 
-- [Docker Compose Deployment](/docs/self-hosting/deployment/docker-compose) - Production setup with PostgreSQL and email
+- [Docker Compose Deployment](/docs/self-hosting/deployment/docker-compose) - Production setup with a persistent volume and email
 - [Environment Variables](/docs/self-hosting/configuration/environment) - Configure all available options
 - [Signing Certificate](/docs/self-hosting/configuration/signing-certificate) - Set up document signing
 - [Email Configuration](/docs/self-hosting/configuration/email) - Configure SMTP for production

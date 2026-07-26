@@ -1,6 +1,6 @@
 ---
 title: Docker
-description: Run Hanzo eSign as a standalone Docker container with an external database. Ideal for container platforms like AWS ECS, Google Cloud Run, or Azure Container Instances.
+description: Run Hanzo eSign as a standalone Docker container with an embedded SQLite database on a persistent volume. Ideal for container platforms like AWS ECS, Google Cloud Run, or Azure Container Instances.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -9,12 +9,12 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ## Prerequisites
 
-For a self-contained setup that includes PostgreSQL, see [Docker Compose Deployment](/docs/self-hosting/deployment/docker-compose).
+For a self-contained setup with a named volume managed for you, see [Docker Compose Deployment](/docs/self-hosting/deployment/docker-compose).
 
 Before starting, ensure you have:
 
 - [Docker](https://docs.docker.com/get-docker/) 20.10 or later installed
-- A PostgreSQL 14+ database accessible from your Docker host
+- A persistent volume to mount at `BASE_PATH` for the SQLite database
 - SMTP credentials for sending emails
 - At least 1GB of available RAM
 
@@ -55,27 +55,31 @@ These variables must be set for Hanzo eSign to start:
 | `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY` | Secondary encryption key (minimum 32 characters)                            | -                             |
 | `NEXT_PUBLIC_WEBAPP_URL`                | Public URL where Hanzo eSign is accessible (e.g., `https://sign.example.com`) | -                             |
 | `NEXT_PRIVATE_INTERNAL_WEBAPP_URL`      | Internal URL the app uses to call itself (for background jobs)              | Same as `NEXT_PUBLIC_WEBAPP_URL` |
-| `NEXT_PRIVATE_DATABASE_URL`             | PostgreSQL connection string                                                | -                             |
+| `BASE_PATH`                             | Directory root for Base data on the mounted persistent volume               | -                             |
+| `DATABASE_URL`                          | SQLite file URL (e.g., `file:/opt/hanzo-sign/base/data/_dev/sign.db`)        | -                             |
 | `NEXT_PRIVATE_SMTP_TRANSPORT`           | Email transport: `smtp-auth`, `smtp-api`, `resend`, or `mailchannels`       | `smtp-auth`                   |
 | `NEXT_PRIVATE_SMTP_FROM_NAME`           | Sender name for outgoing emails                                             | -                             |
 | `NEXT_PRIVATE_SMTP_FROM_ADDRESS`        | Sender email address                                                        | -                             |
 
 ### Database Connection
 
-Hanzo eSign requires two database connection strings:
+Hanzo eSign stores all data in an embedded SQLite database (Hanzo Base) on the
+mounted volume. Two variables control where it lives:
 
-| Variable                           | Required     | Default                     | Description                       |
-| ---------------------------------- | ------------ | --------------------------- | --------------------------------- |
-| `NEXT_PRIVATE_DATABASE_URL`        | Yes          | -                           | Pooled connection for app queries |
-| `NEXT_PRIVATE_DIRECT_DATABASE_URL` | When pooling | `NEXT_PRIVATE_DATABASE_URL` | Direct connection for migrations  |
+| Variable       | Required | Default | Description                                         |
+| -------------- | -------- | ------- | --------------------------------------------------- |
+| `BASE_PATH`    | Yes      | -       | Directory root for Base data on the persistent volume |
+| `DATABASE_URL` | Yes      | -       | SQLite `file:` URL, typically under `BASE_PATH`     |
 
 Connection string format:
 
 ```
-postgresql://user:password@host:5432/database
+file:/opt/hanzo-sign/base/data/_dev/sign.db
 ```
 
-If you're not using a connection pooler like PgBouncer, both variables can use the same connection string.
+The `file:` URL is the only form SQLite accepts. The application appends
+`connection_limit=1` automatically — SQLite serialises writes, so a single
+writer is correct.
 
 ### SMTP Configuration
 
@@ -112,13 +116,15 @@ For the complete list, see [Environment Variables](/docs/self-hosting/configurat
 docker run -d \
   --name hanzo-sign \
   -p 3000:3000 \
+  -v hanzo-sign-base:/opt/hanzo-sign/base/data \
   -v /path/to/cert.p12:/opt/hanzo-sign/cert.p12:ro \
   -e NEXT_PRIVATE_AUTH_SECRET="$(openssl rand -base64 32)" \
   -e NEXT_PRIVATE_ENCRYPTION_KEY="your-encryption-key-min-32-chars" \
   -e NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="your-secondary-key-min-32-chars" \
   -e NEXT_PUBLIC_WEBAPP_URL="https://sign.example.com" \
   -e NEXT_PRIVATE_INTERNAL_WEBAPP_URL="http://localhost:3000" \
-  -e NEXT_PRIVATE_DATABASE_URL="postgresql://user:password@db-host:5432/hanzo-sign" \
+  -e BASE_PATH="/opt/hanzo-sign/base/data" \
+  -e DATABASE_URL="file:/opt/hanzo-sign/base/data/_dev/sign.db" \
   -e NEXT_PRIVATE_SIGNING_PASSPHRASE="your-certificate-password" \
   -e NEXT_PRIVATE_SMTP_TRANSPORT="smtp-auth" \
   -e NEXT_PRIVATE_SMTP_HOST="smtp.example.com" \
@@ -129,6 +135,13 @@ docker run -d \
   -e NEXT_PRIVATE_SMTP_FROM_ADDRESS="noreply@example.com" \
   hanzo-sign/hanzo-sign:latest
 ```
+
+<Callout type="warn">
+  The `-v hanzo-sign-base:/opt/hanzo-sign/base/data` mount is required. The SQLite
+  database lives under `BASE_PATH`; without a persistent volume there, all data is
+  lost when the container is recreated. SQLite is single-writer, so run exactly one
+  container that owns this volume.
+</Callout>
 
 ### Signing Certificate
 
@@ -159,8 +172,8 @@ NEXT_PRIVATE_ENCRYPTION_KEY=your-encryption-key-min-32-chars
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=your-secondary-key-min-32-chars
 NEXT_PUBLIC_WEBAPP_URL=https://sign.example.com
 NEXT_PRIVATE_INTERNAL_WEBAPP_URL=http://localhost:3000
-NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@db-host:5432/hanzo-sign
-NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@db-host:5432/hanzo-sign
+BASE_PATH=/opt/hanzo-sign/base/data
+DATABASE_URL=file:/opt/hanzo-sign/base/data/_dev/sign.db
 NEXT_PRIVATE_SIGNING_PASSPHRASE=your-certificate-password
 NEXT_PRIVATE_SMTP_TRANSPORT=smtp-auth
 NEXT_PRIVATE_SMTP_HOST=smtp.example.com
@@ -178,6 +191,7 @@ docker run -d \
   --name hanzo-sign \
   -p 3000:3000 \
   --env-file .env \
+  -v hanzo-sign-base:/opt/hanzo-sign/base/data \
   -v /path/to/cert.p12:/opt/hanzo-sign/cert.p12:ro \
   hanzo-sign/hanzo-sign:latest
 ```
@@ -242,11 +256,15 @@ docker rm hanzo-sign
 
 ### Start a new container with the same configuration
 
+Reattach the same `base-data` volume so the new container uses the existing
+database:
+
 ```bash
 docker run -d \
   --name hanzo-sign \
   -p 3000:3000 \
   --env-file .env \
+  -v hanzo-sign-base:/opt/hanzo-sign/base/data \
   -v /path/to/cert.p12:/opt/hanzo-sign/cert.p12:ro \
   hanzo-sign/hanzo-sign:latest
 ```
@@ -255,29 +273,38 @@ docker run -d \
 </Steps>
 
 <Callout type="info">
-  Database migrations run automatically when the container starts. Back up your database before
-  upgrading.
+  Database migrations run automatically when the container starts. Snapshot your
+  `sign.db` file before upgrading.
 </Callout>
 
 ## Persistence
 
-The Hanzo eSign container is stateless. All persistent data is stored in the PostgreSQL database.
+The Hanzo eSign container's code is stateless, but its data is not — all
+persistent data is stored in the SQLite database file on the volume mounted at
+`BASE_PATH`. That volume is the thing to keep and back up; if it is lost, so is
+your data.
 
-By default, documents are also stored in the database. For high-volume deployments, configure S3-compatible storage instead. See [Storage Configuration](/docs/self-hosting/configuration/storage) for S3 setup.
+By default, documents are also stored in the database (and therefore on the same
+volume). For high-volume deployments, configure S3-compatible storage instead to
+keep the `sign.db` file lean. See [Storage Configuration](/docs/self-hosting/configuration/storage) for S3 setup.
 
 ## Troubleshooting
 
 <Accordions type="multiple">
   <Accordion title="Container fails to start">
     Check the container logs: `docker logs hanzo-sign`. Common causes: missing required environment
-    variables (ensure all required variables are set), database connection failed (verify the
-    database URL and network connectivity), port already in use (change the host port or stop the
-    conflicting service).
+    variables (ensure `BASE_PATH` and `DATABASE_URL` are set), the volume at `BASE_PATH` not mounted
+    or not writable, port already in use (change the host port or stop the conflicting service).
   </Accordion>
-  <Accordion title="Database connection errors">
-    Test connectivity: `docker run --rm postgres:15 psql
-    "postgresql://user:password@host:5432/database" -c "SELECT 1"`. If using Docker networks, ensure
-    the container can reach the database.
+  <Accordion title="unable to open database file">
+    The directory in `DATABASE_URL` does not exist or is not writable by the app user (UID 1001).
+    Verify the volume is mounted and writable, then test the database file:
+    `docker exec hanzo-sign sqlite3 /opt/hanzo-sign/base/data/_dev/sign.db 'SELECT 1'`.
+  </Accordion>
+  <Accordion title="Data disappeared after restart">
+    `BASE_PATH` pointed at ephemeral container storage instead of a persistent volume. Recreate the
+    container with `-v hanzo-sign-base:/opt/hanzo-sign/base/data` and restore from your last
+    snapshot.
   </Accordion>
   <Accordion title="Certificate errors">
     Check certificate status: `curl http://localhost:3000/api/certificate-status`. Common issues:
@@ -300,7 +327,7 @@ By default, documents are also stored in the database. For high-volume deploymen
 
 ## See Also
 
-- [Docker Compose Deployment](/docs/self-hosting/deployment/docker-compose) - Multi-container setup with PostgreSQL included
+- [Docker Compose Deployment](/docs/self-hosting/deployment/docker-compose) - Single-service setup with a managed named volume
 - [Environment Variables](/docs/self-hosting/configuration/environment) - Full configuration reference
 - [Signing Certificate](/docs/self-hosting/configuration/signing-certificate) - Set up document signing
 - [Email Configuration](/docs/self-hosting/configuration/email) - Configure SMTP providers

@@ -12,7 +12,7 @@ Before starting, ensure you have:
 
 - A Kubernetes cluster (1.24+) running and accessible
 - `kubectl` configured to communicate with your cluster
-- A PostgreSQL 14+ database (in-cluster or external)
+- A `ReadWriteOnce` PersistentVolumeClaim for the SQLite database (mounted at `BASE_PATH`)
 - SMTP credentials for sending emails
 - A domain name with DNS configured
 - An Ingress controller installed (nginx-ingress, traefik, etc.)
@@ -26,18 +26,25 @@ kubectl get nodes
 
 ## Architecture Overview
 
-A typical Hanzo eSign Kubernetes deployment consists of:
+esign uses an embedded SQLite database (Hanzo Base) — a single shared `sign.db`
+file with tenancy enforced at the query layer (see HIP-0305), not an external
+database server. The database lives on a `ReadWriteOnce` PersistentVolumeClaim
+owned by a single app Pod. A typical deployment consists of:
 
 ```mermaid
 flowchart TD
   A["Ingress (TLS termination)"] --> B["Service (ClusterIP)"]
-  B --> C1["Pod (app)"]
-  B --> C2["Pod (app)"]
-  B --> C3["Pod (app)"]
-  C1 --> D["PostgreSQL (external or in-cluster)"]
-  C2 --> D
-  C3 --> D
+  B --> C["Pod (app, replicas: 1)"]
+  C --> D[("PersistentVolumeClaim (RWO)<br/>sign.db on persistent volume")]
 ```
+
+<Callout type="warn">
+  SQLite is a **single-writer** database. The app Deployment must run a single
+  replica that owns the `ReadWriteOnce` volume. Do not scale the web tier to
+  multiple replicas or attach an HPA to it — concurrent writers to the same
+  `sign.db` produce `SQLITE_BUSY` and risk corruption. Scale vertically (more CPU
+  and memory) instead, and offload documents to S3 to keep the database small.
+</Callout>
 
 ## Namespace Setup
 
@@ -92,12 +99,13 @@ stringData:
   NEXT_PRIVATE_AUTH_SECRET: 'your-generated-secret-here'
   NEXT_PRIVATE_ENCRYPTION_KEY: 'your-encryption-key-min-32-chars'
   NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: 'your-secondary-key-min-32-chars'
-  NEXT_PRIVATE_DATABASE_URL: 'postgresql://user:password@postgres-host:5432/hanzo-sign'
-  NEXT_PRIVATE_DIRECT_DATABASE_URL: 'postgresql://user:password@postgres-host:5432/hanzo-sign'
   NEXT_PRIVATE_SMTP_USERNAME: 'your-smtp-username'
   NEXT_PRIVATE_SMTP_PASSWORD: 'your-smtp-password'
   NEXT_PRIVATE_SIGNING_PASSPHRASE: 'your-certificate-passphrase'
 ```
+
+The SQLite `DATABASE_URL` and `BASE_PATH` are not secrets — they are file paths,
+not credentials — so they live in the ConfigMap below.
 
 <Callout type="warn">
   Never commit Secret manifests with real values to version control. Use a secrets management tool
@@ -133,6 +141,8 @@ data:
   NEXT_PRIVATE_INTERNAL_WEBAPP_URL: 'http://localhost:3000'
   NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: '/opt/hanzo-sign/cert.p12'
   NEXT_PUBLIC_UPLOAD_TRANSPORT: 'database'
+  BASE_PATH: '/opt/hanzo-sign/base/data'
+  DATABASE_URL: 'file:/opt/hanzo-sign/base/data/_dev/sign.db'
 ```
 
 Apply the ConfigMap:
@@ -140,6 +150,42 @@ Apply the ConfigMap:
 ```bash
 kubectl apply -f configmap.yaml
 ```
+
+## Persistent Volume
+
+The SQLite database lives on a `ReadWriteOnce` PersistentVolumeClaim mounted at
+`BASE_PATH`. Create it before the Deployment so the claim exists when the Pod
+starts:
+
+```yaml
+# pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hanzo-sign-data
+  namespace: hanzo-sign
+  labels:
+    app.kubernetes.io/name: hanzo-sign
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+```
+
+Apply the PVC:
+
+```bash
+kubectl apply -f pvc.yaml
+```
+
+<Callout type="warn">
+  Size the volume for your document corpus if you use database storage — the
+  PDFs live in the same `sign.db` file. Offload to S3 to keep the volume small.
+  Because the claim is `ReadWriteOnce`, it can only be mounted by the single app
+  Pod; this is what enforces the one-writer rule.
+</Callout>
 
 ## Deployment
 
@@ -156,16 +202,16 @@ metadata:
     app.kubernetes.io/name: hanzo-sign
     app.kubernetes.io/component: web
 spec:
-  replicas: 2
+  # SQLite is single-writer: exactly one Pod owns the RWO volume.
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: hanzo-sign
       app.kubernetes.io/component: web
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+    # Recreate (not RollingUpdate): the old Pod must release the RWO volume
+    # before the new Pod can mount it. A rolling surge would deadlock.
+    type: Recreate
   template:
     metadata:
       labels:
@@ -221,11 +267,16 @@ spec:
             timeoutSeconds: 3
             failureThreshold: 30
           volumeMounts:
+            - name: base-data
+              mountPath: /opt/hanzo-sign/base/data
             - name: signing-cert
               mountPath: /opt/hanzo-sign/cert.p12
               subPath: cert.p12
               readOnly: true
       volumes:
+        - name: base-data
+          persistentVolumeClaim:
+            claimName: hanzo-sign-data
         - name: signing-cert
           secret:
             secretName: hanzo-sign-signing-cert
@@ -366,113 +417,25 @@ kubectl apply -f ingress-nginx.yaml
 kubectl apply -f ingress-traefik.yaml
 ```
 
-## Database Options
+## Database
 
-### External Database (Recommended)
+There is no database tier to deploy. esign's database is the embedded SQLite
+`sign.db` file on the [Persistent Volume](#persistent-volume) created above — no
+managed PostgreSQL service (RDS, Cloud SQL, Azure Database) to attach and no
+in-cluster database StatefulSet to operate.
 
-For production, use a managed PostgreSQL service:
+Durability is a property of the volume: use a StorageClass backed by reliable,
+snapshot-capable block storage, and schedule volume snapshots. See
+[Backups](/docs/self-hosting/maintenance/backups).
 
-- AWS RDS for PostgreSQL
-- Google Cloud SQL
-- Azure Database for PostgreSQL
-- DigitalOcean Managed Databases
-
-Update `NEXT_PRIVATE_DATABASE_URL` in your Secret with the connection string from your provider.
-
-### In-Cluster PostgreSQL
-
-For testing or development, deploy PostgreSQL in the cluster:
-
-```yaml
-# postgres.yaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgres-pvc
-  namespace: hanzo-sign
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-secrets
-  namespace: hanzo-sign
-type: Opaque
-stringData:
-  POSTGRES_USER: hanzo-sign
-  POSTGRES_PASSWORD: your-secure-password
-  POSTGRES_DB: hanzo-sign
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: postgres
-  namespace: hanzo-sign
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: postgres
-  template:
-    metadata:
-      labels:
-        app.kubernetes.io/name: postgres
-    spec:
-      containers:
-        - name: postgres
-          image: postgres:15-alpine
-          ports:
-            - containerPort: 5432
-          envFrom:
-            - secretRef:
-                name: postgres-secrets
-          volumeMounts:
-            - name: postgres-data
-              mountPath: /var/lib/postgresql/data
-          resources:
-            requests:
-              cpu: 250m
-              memory: 256Mi
-            limits:
-              cpu: 1000m
-              memory: 1Gi
-      volumes:
-        - name: postgres-data
-          persistentVolumeClaim:
-            claimName: postgres-pvc
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: postgres
-  namespace: hanzo-sign
-spec:
-  type: ClusterIP
-  ports:
-    - port: 5432
-      targetPort: 5432
-  selector:
-    app.kubernetes.io/name: postgres
-```
-
-<Callout type="warn">
-  In-cluster PostgreSQL is not recommended for production. It lacks high availability, automated
-  backups, and point-in-time recovery that managed services provide.
+<Callout type="info">
+  For strict ordering guarantees you may model the app as a single-replica
+  StatefulSet with a `volumeClaimTemplate` instead of a Deployment + standalone
+  PVC. Either way the invariant is the same: one Pod, one `ReadWriteOnce` volume,
+  one writer.
 </Callout>
 
-Update your Hanzo eSign secret to use the in-cluster database:
-
-```yaml
-NEXT_PRIVATE_DATABASE_URL: 'postgresql://hanzo-sign:your-secure-password@postgres.hanzo-sign.svc.cluster.local:5432/hanzo-sign'
-NEXT_PRIVATE_DIRECT_DATABASE_URL: 'postgresql://hanzo-sign:your-secure-password@postgres.hanzo-sign.svc.cluster.local:5432/hanzo-sign'
-```
-
-## Persistent Storage
+## Persistent Storage (Documents)
 
 Hanzo eSign stores documents in the database by default. For high-volume deployments, configure S3-compatible storage.
 
@@ -498,90 +461,48 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage) for detail
 
 ## Scaling
 
-### Horizontal Pod Autoscaler (HPA)
+<Callout type="warn">
+  Do **not** add a HorizontalPodAutoscaler or raise `replicas` above 1 for the web
+  tier. esign's SQLite database is single-writer and the `ReadWriteOnce` volume
+  can only be mounted by one Pod. Scale vertically instead.
+</Callout>
 
-Scale Hanzo eSign based on CPU and memory utilization:
+### Vertical Scaling
 
-```yaml
-# hpa.yaml
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: hanzo-sign
-  namespace: hanzo-sign
-  labels:
-    app.kubernetes.io/name: hanzo-sign
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: hanzo-sign
-  minReplicas: 2
-  maxReplicas: 10
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 70
-    - type: Resource
-      resource:
-        name: memory
-        target:
-          type: Utilization
-          averageUtilization: 80
-  behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 300
-      policies:
-        - type: Percent
-          value: 10
-          periodSeconds: 60
-    scaleUp:
-      stabilizationWindowSeconds: 0
-      policies:
-        - type: Percent
-          value: 100
-          periodSeconds: 15
-        - type: Pods
-          value: 4
-          periodSeconds: 15
-      selectPolicy: Max
-```
-
-Apply the HPA:
-
-```bash
-kubectl apply -f hpa.yaml
-```
-
-### Pod Disruption Budget
-
-Ensure availability during cluster maintenance:
+Give the single Pod more CPU and memory by raising its resource requests and
+limits in the Deployment:
 
 ```yaml
-# pdb.yaml
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: hanzo-sign
-  namespace: hanzo-sign
-  labels:
-    app.kubernetes.io/name: hanzo-sign
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: hanzo-sign
-      app.kubernetes.io/component: web
+resources:
+  requests:
+    cpu: 500m
+    memory: 1Gi
+  limits:
+    cpu: '2'
+    memory: 2Gi
 ```
 
-Apply the PDB:
+Apply the change:
 
 ```bash
-kubectl apply -f pdb.yaml
+kubectl apply -f deployment.yaml
 ```
+
+### Reducing Database Pressure
+
+The most effective way to keep a single replica fast is to keep the `sign.db`
+file small:
+
+- Set `NEXT_PUBLIC_UPLOAD_TRANSPORT=s3` so document PDFs live in object storage
+  rather than the database file. See [Storage Configuration](/docs/self-hosting/configuration/storage).
+- Archive old audit logs and completed documents on a schedule.
+
+<Callout type="info">
+  A PodDisruptionBudget is intentionally omitted. With a single replica owning a
+  `ReadWriteOnce` volume, a `minAvailable: 1` PDB would block voluntary node
+  drains entirely. Rely on the `Recreate` strategy: the Pod is rescheduled onto a
+  new node and re-mounts the volume there.
+</Callout>
 
 ## Troubleshooting
 
@@ -602,12 +523,18 @@ kubectl apply -f pdb.yaml
     - CrashLoopBackOff (check logs for application errors)
     - Pending (check resource requests and node capacity)
   </Accordion>
-  <Accordion title="Database connection errors">
-    Verify the database is accessible from the cluster:
-    
+  <Accordion title="unable to open database file / database is locked">
+    The SQLite database is the file at `DATABASE_URL` on the mounted PVC. Confirm
+    the volume is mounted and the file exists, then probe it from inside the Pod:
+
     ```bash
-    kubectl run postgres-test --rm -it --image=postgres:15-alpine -n hanzo-sign -- psql "postgresql://user:password@host:5432/database" -c "SELECT 1"
+    kubectl exec -it deploy/hanzo-sign -n hanzo-sign -- ls -la /opt/hanzo-sign/base/data/_dev
+    kubectl exec -it deploy/hanzo-sign -n hanzo-sign -- sqlite3 /opt/hanzo-sign/base/data/_dev/sign.db 'SELECT 1'
     ```
+
+    Persistent `database is locked` errors almost always mean more than one Pod is
+    writing the same file — verify `replicas: 1` and that no second Deployment or
+    Job mounts the same PVC.
   </Accordion>
   <Accordion title="Ingress not working">
     Check Ingress status:
@@ -701,6 +628,8 @@ data:
   NEXT_PRIVATE_INTERNAL_WEBAPP_URL: 'http://localhost:3000'
   NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: '/opt/hanzo-sign/cert.p12'
   NEXT_PUBLIC_UPLOAD_TRANSPORT: 'database'
+  BASE_PATH: '/opt/hanzo-sign/base/data'
+  DATABASE_URL: 'file:/opt/hanzo-sign/base/data/_dev/sign.db'
 ---
 apiVersion: v1
 kind: Secret
@@ -712,11 +641,21 @@ stringData:
   NEXT_PRIVATE_AUTH_SECRET: 'REPLACE_WITH_GENERATED_SECRET'
   NEXT_PRIVATE_ENCRYPTION_KEY: 'REPLACE_WITH_32_CHAR_KEY'
   NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: 'REPLACE_WITH_32_CHAR_KEY'
-  NEXT_PRIVATE_DATABASE_URL: 'postgresql://user:password@host:5432/hanzo-sign'
-  NEXT_PRIVATE_DIRECT_DATABASE_URL: 'postgresql://user:password@host:5432/hanzo-sign'
   NEXT_PRIVATE_SMTP_USERNAME: 'smtp-user'
   NEXT_PRIVATE_SMTP_PASSWORD: 'smtp-password'
   NEXT_PRIVATE_SIGNING_PASSPHRASE: 'cert-passphrase'
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hanzo-sign-data
+  namespace: hanzo-sign
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -724,7 +663,10 @@ metadata:
   name: hanzo-sign
   namespace: hanzo-sign
 spec:
-  replicas: 2
+  # SQLite is single-writer: one Pod owns the RWO volume.
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: hanzo-sign
@@ -775,11 +717,16 @@ spec:
             periodSeconds: 5
             failureThreshold: 30
           volumeMounts:
+            - name: base-data
+              mountPath: /opt/hanzo-sign/base/data
             - name: signing-cert
               mountPath: /opt/hanzo-sign/cert.p12
               subPath: cert.p12
               readOnly: true
       volumes:
+        - name: base-data
+          persistentVolumeClaim:
+            claimName: hanzo-sign-data
         - name: signing-cert
           secret:
             secretName: hanzo-sign-signing-cert
@@ -823,37 +770,6 @@ spec:
                 name: hanzo-sign
                 port:
                   name: http
----
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: hanzo-sign
-  namespace: hanzo-sign
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: hanzo-sign
-  minReplicas: 2
-  maxReplicas: 10
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 70
----
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: hanzo-sign
-  namespace: hanzo-sign
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app.kubernetes.io/name: hanzo-sign
 ```
 
 ---

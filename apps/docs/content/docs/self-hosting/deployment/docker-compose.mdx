@@ -1,6 +1,6 @@
 ---
 title: Docker Compose
-description: Deploy Hanzo eSign with Docker Compose, including PostgreSQL. This production-ready setup is suitable for most self-hosted deployments.
+description: Deploy Hanzo eSign with Docker Compose. A single application container with an embedded SQLite database on a named volume — production-ready for most self-hosted deployments.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -68,48 +68,42 @@ Add the required configuration (see [Environment Configuration](#environment-con
 
 ## Docker Compose File Overview
 
-The production `compose.yml` includes two services:
+esign uses an embedded SQLite database (Hanzo Base) — a single shared `sign.db`
+file with tenancy enforced at the query layer (see HIP-0305), not a separate
+database server. The production `compose.yml` is therefore a single service whose
+data lives on a named volume mounted at `BASE_PATH`:
 
 ```yaml
 name: hanzo-sign-production
 
 services:
-  database:
-    image: postgres:15
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER:?err}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:?err}
-      - POSTGRES_DB=${POSTGRES_DB:?err}
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER}']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - database:/var/lib/postgresql/data
-
   hanzo-sign:
     image: hanzo-sign/hanzo-sign:latest
-    depends_on:
-      database:
-        condition: service_healthy
     environment:
+      - BASE_PATH=/opt/hanzo-sign/base/data
+      - DATABASE_URL=file:/opt/hanzo-sign/base/data/_dev/sign.db
       # See environment configuration below
     ports:
       - ${PORT:-3000}:${PORT:-3000}
     volumes:
+      - base-data:/opt/hanzo-sign/base/data
       - /opt/hanzo-sign/cert.p12:/opt/hanzo-sign/cert.p12:ro
 
 volumes:
-  database:
+  base-data:
 ```
 
-| Service     | Purpose                                                      |
-| ----------- | ------------------------------------------------------------ |
-| `database`  | PostgreSQL 15 database with persistent storage               |
-| `hanzo-sign` | Main application container, waits for database to be healthy |
+| Service      | Purpose                                                                 |
+| ------------ | ----------------------------------------------------------------------- |
+| `hanzo-sign` | Main application container; its SQLite database lives on the `base-data` volume |
 
-The Hanzo eSign container waits for the database health check to pass before starting.
+There is no separate database container to wait for — the database is a file on
+the `base-data` volume, created and migrated automatically on first start.
+
+<Callout type="warn">
+  The `base-data` volume must be persistent. If you point `BASE_PATH` at
+  ephemeral container storage, all data is lost when the container is recreated.
+</Callout>
 
 ## Environment Configuration
 
@@ -118,10 +112,9 @@ Create a `.env` file with the following variables:
 ### Required Variables
 
 ```bash
-# Database (used by both database and hanzo-sign services)
-POSTGRES_USER=hanzo-sign
-POSTGRES_PASSWORD=your-secure-database-password
-POSTGRES_DB=hanzo-sign
+# Database (embedded Base SQLite on the base-data volume)
+BASE_PATH=/opt/hanzo-sign/base/data
+DATABASE_URL=file:/opt/hanzo-sign/base/data/_dev/sign.db
 
 # Application secrets (generate with: openssl rand -base64 32)
 NEXT_PRIVATE_AUTH_SECRET=your-nextauth-secret
@@ -131,9 +124,6 @@ NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=your-secondary-key-min-32-characters
 # Public URL where Hanzo eSign is accessible
 NEXT_PUBLIC_WEBAPP_URL=https://sign.example.com
 NEXT_PRIVATE_INTERNAL_WEBAPP_URL=http://localhost:3000
-
-# Database connection (uses Docker service name)
-NEXT_PRIVATE_DATABASE_URL=postgresql://hanzo-sign:your-secure-database-password@database:5432/hanzo-sign
 
 # Email configuration
 NEXT_PRIVATE_SMTP_TRANSPORT=smtp-auth
@@ -173,10 +163,10 @@ echo "NEXT_PRIVATE_AUTH_SECRET=$(openssl rand -base64 32)"
 # Generate encryption keys
 echo "NEXT_PRIVATE_ENCRYPTION_KEY=$(openssl rand -base64 32)"
 echo "NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=$(openssl rand -base64 32)"
-
-# Generate database password
-echo "POSTGRES_PASSWORD=$(openssl rand -base64 24)"
 ```
+
+The embedded SQLite database has no separate user or password to generate — there
+is no database server to authenticate against.
 
 ## Signing Certificate
 
@@ -224,12 +214,11 @@ docker compose ps
 Expected output:
 
 ```
-NAME                             STATUS              PORTS
-hanzo-sign-production-database-1  running (healthy)   5432/tcp
-hanzo-sign-production-hanzo-sign-1 running             0.0.0.0:3000->3000/tcp
+NAME                               STATUS    PORTS
+hanzo-sign-production-hanzo-sign-1  running   0.0.0.0:3000->3000/tcp
 ```
 
-Wait for the database to be healthy and for migrations to complete. Check the logs:
+Wait for the database file to be created and migrations to complete on first start. Check the logs:
 
 ```bash
 docker compose logs -f hanzo-sign
@@ -264,11 +253,10 @@ View all service logs:
 docker compose logs -f
 ```
 
-View logs for a specific service:
+View logs for the application service:
 
 ```bash
 docker compose logs -f hanzo-sign
-docker compose logs -f database
 ```
 
 ### Restart Services
@@ -306,7 +294,8 @@ docker compose down -v
 ```
 
 <Callout type="error">
-  Using `down -v` deletes the database volume. Back up your data first.
+  Using `down -v` deletes the `base-data` volume — and with it the entire
+  `sign.db` database. Back up your data first.
 </Callout>
 
 ### Update Hanzo eSign
@@ -377,14 +366,20 @@ sign.example.com {
 
 ### Database Backups
 
-Set up automated database backups:
+The database is a single SQLite file on the `base-data` volume, so backups are
+file snapshots — no `pg_dump`, no replication topology. Use `sqlite3 .backup`
+for a consistent copy even while the app is running:
 
 ```bash
-# Manual backup
-docker compose exec database pg_dump -U hanzo-sign hanzo-sign > backup.sql
+# Manual backup (consistent online copy, includes the WAL)
+docker compose exec hanzo-sign \
+  sqlite3 /opt/hanzo-sign/base/data/_dev/sign.db ".backup '/opt/hanzo-sign/base/data/sign-backup.db'"
+docker compose cp hanzo-sign:/opt/hanzo-sign/base/data/sign-backup.db ./sign-backup.db
 
-# Restore from backup
-docker compose exec -T database psql -U hanzo-sign hanzo-sign < backup.sql
+# Restore: stop the app, replace the file, restart
+docker compose stop hanzo-sign
+docker compose cp ./sign-backup.db hanzo-sign:/opt/hanzo-sign/base/data/_dev/sign.db
+docker compose start hanzo-sign
 ```
 
 See [Backups](/docs/self-hosting/maintenance/backups) for automated backup strategies.
@@ -406,25 +401,19 @@ services:
           memory: 512M
 ```
 
-### External Database
+### No External Datastore Needed
 
-For production, consider using a managed PostgreSQL service:
+esign's database is embedded — there is no managed PostgreSQL service to attach,
+no connection string to rotate, and no separate datastore to scale. Production
+durability comes from putting `BASE_PATH` (the `base-data` volume) on reliable,
+backed-up block storage and snapshotting it on a schedule. See
+[Backups](/docs/self-hosting/maintenance/backups) for volume-snapshot strategies.
 
-{/* prettier-ignore */}
-<Steps>
-  <Step>
-    Remove the `database` service from `compose.yml`
-  </Step>
-  <Step>
-    Update environment variables:
-
-```bash
-NEXT_PRIVATE_DATABASE_URL=postgresql://user:password@your-db-host:5432/hanzo-sign
-NEXT_PRIVATE_DIRECT_DATABASE_URL=postgresql://user:password@your-db-host:5432/hanzo-sign
-```
-
-  </Step>
-</Steps>
+<Callout type="warn">
+  SQLite is a single-writer database. Run exactly one `hanzo-sign` container that
+  owns the `base-data` volume. Do not scale this service to multiple replicas
+  pointed at the same file.
+</Callout>
 
 ### S3 Storage
 
@@ -445,12 +434,15 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage).
 <Accordions type="multiple">
   <Accordion title="Container fails to start">
     Check logs: `docker compose logs hanzo-sign`. Common causes: missing environment variables
-    (ensure all required variables are in `.env`), database not ready (the container waits for
-    database health check), port conflict (change `PORT` in `.env` if 3000 is in use).
+    (ensure all required variables, including `BASE_PATH` and `DATABASE_URL`, are in `.env`),
+    the `base-data` volume not writable by the app user (UID 1001), port conflict (change `PORT`
+    in `.env` if 3000 is in use).
   </Accordion>
-  <Accordion title="Database connection errors">
-    Verify the database is healthy: `docker compose ps database`. Test: `docker compose exec
-    database psql -U hanzo-sign -d hanzo-sign -c "SELECT 1"`.
+  <Accordion title="unable to open database file">
+    The directory in `DATABASE_URL` does not exist or is not writable. Confirm the `base-data`
+    volume is mounted at `BASE_PATH` and the path is absolute:
+    `docker compose exec hanzo-sign ls -la /opt/hanzo-sign/base/data`. Then verify the database:
+    `docker compose exec hanzo-sign sqlite3 /opt/hanzo-sign/base/data/_dev/sign.db 'SELECT 1'`.
   </Accordion>
   <Accordion title="Certificate errors">
     Check certificate status: `curl http://localhost:3000/api/certificate-status`. Common issues:

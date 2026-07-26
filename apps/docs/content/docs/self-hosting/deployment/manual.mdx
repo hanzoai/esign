@@ -16,7 +16,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 - Node.js 20 or later
 - npm
-- PostgreSQL 14 or later
+- A persistent disk for the embedded SQLite database (no separate database server — set `BASE_PATH` to a directory on durable storage)
 - A Linux server (for systemd service setup)
 
 ## Install and Build
@@ -50,8 +50,8 @@ NEXT_PRIVATE_ENCRYPTION_KEY="your-encryption-key-min-32-chars"
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY="your-secondary-key-min-32-chars"
 NEXT_PUBLIC_WEBAPP_URL="https://your-domain.com"
 NEXT_PRIVATE_INTERNAL_WEBAPP_URL="http://localhost:3000"
-NEXT_PRIVATE_DATABASE_URL="postgresql://user:password@localhost:5432/hanzo-sign"
-NEXT_PRIVATE_DIRECT_DATABASE_URL="postgresql://user:password@localhost:5432/hanzo-sign"
+BASE_PATH="/opt/hanzo-sign/base/data"
+DATABASE_URL="file:/opt/hanzo-sign/base/data/_dev/sign.db"
 NEXT_PRIVATE_SMTP_FROM_NAME="Hanzo eSign"
 NEXT_PRIVATE_SMTP_FROM_ADDRESS="noreply@your-domain.com"
 ```

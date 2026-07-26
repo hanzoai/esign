@@ -147,13 +147,19 @@ Hanzo eSign runs on:
   The following configurations are not supported and may not work correctly.
 </Callout>
 
-| Configuration  | Reason                                |
-| -------------- | ------------------------------------- |
-| Windows native | Use Docker or WSL2 instead            |
-| MySQL/MariaDB  | PostgreSQL-specific features required |
-| SQLite         | Not suitable for production workloads |
-| MongoDB        | Relational database required          |
-| Node.js < 18   | Modern JavaScript features required   |
+| Configuration         | Reason                                                          |
+| --------------------- | -------------------------------------------------------------- |
+| Windows native        | Use Docker or WSL2 instead                                     |
+| External MySQL/MariaDB | The database is the embedded Base SQLite store; not pluggable |
+| External PostgreSQL    | No longer used at runtime; see the migration note below       |
+| MongoDB               | Relational schema required                                     |
+| Node.js < 18          | Modern JavaScript features required                            |
+
+<Callout type="info">
+  PostgreSQL is not a runtime dependency. If you are migrating an older PostgreSQL
+  deployment, see [Database Configuration](/docs/self-hosting/configuration/database)
+  for the one-time backfill into the embedded SQLite store.
+</Callout>
 
 ---
 
@@ -161,7 +167,7 @@ Hanzo eSign runs on:
 
 Before proceeding to deployment, confirm you have:
 
-- [ ] PostgreSQL 14+ database accessible
+- [ ] A persistent disk/volume for the SQLite database (`BASE_PATH`)
 - [ ] SMTP credentials or email provider API key
 - [ ] Signing certificate (`.p12`) for document signing — see [Tips](/docs/self-hosting/getting-started/tips)
 - [ ] Domain name for your Hanzo eSign instance
