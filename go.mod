@@ -12,4 +12,4 @@
 // in cloud (Go host-functions); this module carries only the domain bundle.
 module github.com/hanzoai/sign
 
-go 1.26.4
+go 1.26.5
