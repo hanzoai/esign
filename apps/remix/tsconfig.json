@@ -13,6 +13,19 @@
     ],
     "paths": {
       "~/*": ["./app/*"],
+      // server/* — app code and the server tree both import these as bare
+      // specifiers (e.g. `import { getLoaderSession } from
+      // "server/utils/get-loader-session"`). The files exist at
+      // apps/remix/server/, but a NON-RELATIVE specifier has no root to
+      // resolve against unless it is named here or baseUrl is set, so tsc
+      // reported TS2307 "Cannot find module 'server/context'" for files
+      // sitting right there and failed `turbo run build`.
+      //
+      // A paths entry rather than baseUrl: baseUrl would change resolution for
+      // every bare specifier in the project, letting any top-level directory
+      // shadow a package of the same name. This maps exactly the one prefix
+      // that needs it.
+      "server/*": ["./server/*"],
       "@hanzo/esign-api": ["../../packages/api"],
       "@hanzo/esign-assets": ["../../packages/assets"],
       "@hanzo/esign-auth": ["../../packages/auth"],
