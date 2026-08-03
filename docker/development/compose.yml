@@ -12,19 +12,22 @@ services:
       - 2500:2500
       - 1100:1100
 
-  minio:
-    image: minio/minio
-    container_name: minio
+  # Hanzo S3 (SeaweedFS-derived, Apache-2.0). The `mini` command is the
+  # all-in-one dev server; S3_BUCKET pre-creates the bucket on startup, which
+  # is what the old `mkdir -p /data/hanzo-sign` was doing. The S3 API stays on
+  # 9002 because inbucket already owns 9000. There is no web console.
+  s3:
+    image: ghcr.io/hanzoai/s3:v1.0.14
+    container_name: s3
     ports:
       - 9002:9002
-      - 9001:9001
     volumes:
-      - minio:/data
+      - s3:/data
     environment:
-      MINIO_ROOT_USER: hanzo-sign
-      MINIO_ROOT_PASSWORD: password
-    entrypoint: sh
-    command: -c 'mkdir -p /data/hanzo-sign && minio server /data --console-address ":9001" --address ":9002"'
+      AWS_ACCESS_KEY_ID: hanzo-sign
+      AWS_SECRET_ACCESS_KEY: password
+      S3_BUCKET: hanzo-sign
+    command: mini -dir=/data -s3.port=9002
 
 volumes:
-  minio:
+  s3:

@@ -153,61 +153,54 @@ NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
 ---
 
-## MinIO Setup
+## Hanzo S3 Setup
 
-MinIO is a self-hosted S3-compatible object storage server.
+[Hanzo S3](https://github.com/hanzoai/s3) is our self-hosted S3-compatible
+object storage server (SeaweedFS-derived, Apache-2.0).
 
 {/* prettier-ignore */}
 <Steps>
 <Step>
-### Deploy MinIO
+### Deploy Hanzo S3
+
+The `mini` command is the all-in-one server. `S3_BUCKET` creates the bucket on
+startup, so there is no separate bucket-creation step.
 
 Using Docker:
 
 ```bash
 docker run -d \
-  --name minio \
+  --name s3 \
   -p 9000:9000 \
-  -p 9001:9001 \
-  -e MINIO_ROOT_USER=minioadmin \
-  -e MINIO_ROOT_PASSWORD=minioadmin \
-  -v minio_data:/data \
-  minio/minio server /data --console-address ":9001"
+  -e AWS_ACCESS_KEY_ID=hanzo-sign \
+  -e AWS_SECRET_ACCESS_KEY=change-me \
+  -e S3_BUCKET=hanzo-sign \
+  -v s3_data:/data \
+  ghcr.io/hanzoai/s3:v1.0.14 mini -dir=/data -s3.port=9000
 ```
 
 Using Docker Compose with Hanzo eSign:
 
 ```yaml
 services:
-  minio:
-    image: minio/minio
-    command: server /data --console-address ":9001"
+  s3:
+    image: ghcr.io/hanzoai/s3:v1.0.14
+    command: mini -dir=/data -s3.port=9000
     ports:
       - '9000:9000'
-      - '9001:9001'
     environment:
-      MINIO_ROOT_USER: minioadmin
-      MINIO_ROOT_PASSWORD: minioadmin
+      AWS_ACCESS_KEY_ID: hanzo-sign
+      AWS_SECRET_ACCESS_KEY: change-me
+      S3_BUCKET: hanzo-sign
     volumes:
-      - minio_data:/data
+      - s3_data:/data
 
 volumes:
-  minio_data:
+  s3_data:
 ```
 
-</Step>
-<Step>
-### Create a Bucket
-
-Access the MinIO Console at `http://localhost:9001` and create a bucket, or use the CLI:
-
-```bash
-# Install MinIO client
-mc alias set myminio http://localhost:9000 minioadmin minioadmin
-
-# Create bucket
-mc mb myminio/hanzo-sign
-```
+Hanzo S3 reads `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` and registers them
+as an admin identity. `S3_BUCKET` accepts a comma-separated list.
 
 </Step>
 <Step>
@@ -216,10 +209,10 @@ mc mb myminio/hanzo-sign
 ```bash
 NEXT_PUBLIC_UPLOAD_TRANSPORT=s3
 NEXT_PRIVATE_UPLOAD_BUCKET=hanzo-sign
-NEXT_PRIVATE_UPLOAD_ENDPOINT=http://minio:9000
+NEXT_PRIVATE_UPLOAD_ENDPOINT=http://s3:9000
 NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE=true
-NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=minioadmin
-NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=minioadmin
+NEXT_PRIVATE_UPLOAD_ACCESS_KEY_ID=hanzo-sign
+NEXT_PRIVATE_UPLOAD_SECRET_ACCESS_KEY=change-me
 NEXT_PRIVATE_UPLOAD_REGION=us-east-1
 ```
 
@@ -227,8 +220,8 @@ NEXT_PRIVATE_UPLOAD_REGION=us-east-1
 </Steps>
 
 <Callout type="info">
-  Set `NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE=true` for MinIO and other S3-compatible services that
-  don't support virtual-hosted bucket URLs.
+  Set `NEXT_PRIVATE_UPLOAD_FORCE_PATH_STYLE=true` for Hanzo S3 and other
+  S3-compatible services that don't support virtual-hosted bucket URLs.
 </Callout>
 
 ---
@@ -572,4 +565,4 @@ Default limit is 50MB per request.
 - [Database Configuration](/docs/self-hosting/configuration/database) - Configure the SQLite database
 - [Environment Variables](/docs/self-hosting/configuration/environment) - Complete configuration reference
 - [Backups](/docs/self-hosting/maintenance/backups) - Backup strategies for both storage backends
-- [Docker Compose](/docs/self-hosting/deployment/docker-compose) - Deploy with MinIO for local storage
+- [Docker Compose](/docs/self-hosting/deployment/docker-compose) - Deploy with Hanzo S3 for local storage
