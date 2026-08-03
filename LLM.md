@@ -35,6 +35,28 @@ sign/
 ## Key Files
 - `README.md` -- Project documentation
 - `package.json` -- Dependencies and scripts
+- `LICENSE` -- AGPL-3.0, unmodified from upstream Documenso. Do not edit.
+- `NOTICE` -- upstream attribution + record of Hanzo's modifications.
+
+## Licensing — this is an AGPL fork, treat it as one
+Upstream is **Documenso** (https://github.com/documenso/documenso), AGPL-3.0,
+Copyright (c) 2022-present Documenso, Inc. and contributors. We keep AGPL-3.0
+deliberately — this is one of only two repos in the estate that stays AGPL
+(the other is `hanzoai/dataroom`). Everything original at Hanzo is Apache-2.0
+or BSD-3-Clause instead.
+
+Rules for anyone touching this repo:
+- **Never edit `LICENSE`.** It is byte-for-byte upstream (created 51724a47f,
+  2022-11-14). A rebranding sed pass must not touch it.
+- Record any new modification category in `NOTICE`, not in a new markdown file.
+- The full upstream git history is preserved on purpose — it is our attribution
+  evidence. Never squash or rewrite it.
+
+**AGPL §13 gap (open):** we serve this over the network at sign.hanzo.ai, so
+users interacting with it remotely must be offered the Corresponding Source.
+The running UI currently has **no source link** — `NOTICE` names the source URL
+(github.com/hanzoai/sign) but nothing in the app surfaces it. Adding a visible
+source link in the app footer is the outstanding fix.
 
 ## In-process cloud fold (HIP-0106, task #100)
 The core server-side e-signature flow is ALSO shipped as a self-contained,

@@ -1,0 +1,92 @@
+Hanzo Sign
+Copyright 2026 Hanzo AI, Inc.
+
+This product is a derivative work of Documenso. It is distributed under the
+GNU Affero General Public License, Version 3 — the same license as the
+upstream work.
+
+
+================================================================================
+1. Upstream project
+================================================================================
+
+    Project:  Documenso — the open source DocuSign alternative
+    Source:   https://github.com/documenso/documenso
+    Website:  https://documenso.com
+
+    Copyright (c) 2022-present Documenso, Inc. and the Documenso contributors.
+
+The Documenso codebase was begun on 2022-11-14 by Timur Ercan. Prior to the
+Hanzo fork it had received contributions from 164 individuals; the most
+substantial contributors by commit volume are Timur Ercan, Lucas Smith,
+Mythie, David Nguyen, Catalin Pit, Ephraim Atta-Duncan and Adithya Krishna.
+
+Copyright in the upstream work remains with its respective authors. Nothing
+in this NOTICE, and nothing done by Hanzo AI, Inc., transfers or reassigns
+that copyright.
+
+This repository preserves the complete upstream git history. Upstream
+authorship of every file and line is therefore independently verifiable with
+`git log` and `git blame` — it has not been squashed, rewritten or discarded.
+
+
+================================================================================
+2. License
+================================================================================
+
+Documenso is licensed under the GNU Affero General Public License, Version 3
+(AGPL-3.0). Hanzo Sign is distributed under the same license.
+
+The full license text is in the LICENSE file at the root of this repository.
+That file is byte-for-byte the license as received from upstream: it was
+created in the initial upstream commit (51724a47f, 2022-11-14) and has never
+been modified by Hanzo.
+
+AGPL-3.0 section 13 — remote network interaction
+------------------------------------------------
+
+Hanzo Sign is made available to users over a network at https://sign.hanzo.ai.
+Section 13 of the AGPL therefore applies: users interacting with the software
+remotely must be given an opportunity to receive the Corresponding Source of
+the running version.
+
+The Corresponding Source is published at:
+
+    https://github.com/hanzoai/esign
+
+
+================================================================================
+3. Modifications by Hanzo
+================================================================================
+
+    Copyright 2026 Hanzo AI, Inc.
+
+Hanzo's modifications begin 2026-03-01. They are licensed under AGPL-3.0, on
+the same terms as the upstream work. In summary, Hanzo has:
+
+  * Replaced authentication with Hanzo IAM (hanzo.id) as a dedicated
+    OIDC/OAuth identity provider.
+  * Moved persistence from PostgreSQL to Hanzo Base (SQLite), using a single
+    shared database file with team-scoped tenancy.
+  * Replaced PostHog product analytics with Hanzo Insights.
+  * Removed the commercial billing surface. This distribution has no paywalls
+    and no plan tiers; every team receives the full feature set under AGPL.
+  * Rebranded from Documenso to Hanzo Sign — names, metadata, page titles,
+    Open Graph tags, email templates, legal references and social handles —
+    and added white-label hooks so the brand resolves per deployment.
+  * Restyled the user interface (dark, monochrome, centered IAM sign-in).
+  * Renamed the npm packages from the @documenso/* scope to @hanzo/esign-*.
+  * Upgraded the toolchain to TypeScript 5.9 and React Router 7.13, and
+    migrated the workspace to pnpm.
+  * Replaced the CI/CD pipeline with the native Hanzo pipeline
+    (git.hanzo.ai + cd.hanzo.ai) and containerised the app for Kubernetes.
+
+
+================================================================================
+4. Third-party components
+================================================================================
+
+All third-party components incorporated into this software remain licensed
+under the original license provided by the owner of the applicable component.
+Dependency licenses are recorded in the lockfile and in each package's own
+metadata.
