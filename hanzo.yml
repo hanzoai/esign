@@ -1,0 +1,16 @@
+# Hanzo eSign — a turborepo whose deployable artifact is the remix app.
+#
+# Gate only. The image is already built and pushed by the native builder in this
+# repo (.hanzo/workflows/deploy.yml → ghcr.io/hanzoai/sign:<tag>), so declaring
+# `images:` here would publish a second copy of the same commit.
+#
+# The gate is the real build of the app the cluster runs: npm ci against the
+# committed lockfile (postinstall generates the Prisma client), then turbo's
+# build of @hanzo/esign-remix, which type-checks every workspace package it
+# depends on. A type error anywhere under packages/ fails here.
+test:
+  - name: build
+    run: |
+      set -euo pipefail
+      npm ci --no-audit --no-fund
+      npx turbo run build --filter=@hanzo/esign-remix
