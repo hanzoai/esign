@@ -1,37 +1,21 @@
 import { redirect } from 'react-router';
 
-import { env } from '@hanzo/esign-lib/utils/env';
 import { isValidReturnTo, normalizeReturnTo } from '@hanzo/esign-lib/utils/is-valid-return-to';
-
-import { SignUpForm } from '~/components/forms/signup';
-import { appMetaTags } from '~/utils/meta';
 
 import type { Route } from './+types/signup';
 
-export function meta() {
-  return appMetaTags('Sign Up');
-}
-
+/**
+ * Accounts are created at the identity provider, so /signup leads to the same
+ * door as /signin. The provider offers account creation on that page.
+ *
+ * This used to render a local name/email/password form, which produced an
+ * account /signin could not then authenticate: sign-in offers the provider and
+ * nothing else, so a locally created password had nowhere to be typed.
+ */
 export function loader({ request }: Route.LoaderArgs) {
-  const NEXT_PUBLIC_DISABLE_SIGNUP = env('NEXT_PUBLIC_DISABLE_SIGNUP');
+  const returnTo = new URL(request.url).searchParams.get('returnTo') ?? undefined;
 
-  if (NEXT_PUBLIC_DISABLE_SIGNUP === 'true') {
-    throw redirect('/signin');
-  }
+  const target = isValidReturnTo(returnTo) ? normalizeReturnTo(returnTo) : undefined;
 
-  let returnTo = new URL(request.url).searchParams.get('returnTo') ?? undefined;
-
-  returnTo = isValidReturnTo(returnTo) ? normalizeReturnTo(returnTo) : undefined;
-
-  return {
-    returnTo,
-  };
-}
-
-export default function SignUp({ loaderData }: Route.ComponentProps) {
-  const { returnTo } = loaderData;
-
-  return (
-    <SignUpForm className="w-screen max-w-screen-2xl px-4 md:px-16 lg:-my-16" returnTo={returnTo} />
-  );
+  throw redirect(target ? `/signin?returnTo=${encodeURIComponent(target)}` : '/signin');
 }
