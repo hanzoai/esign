@@ -1,7 +1,7 @@
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
-  extends: ['@hanzo/esign-eslint-config'],
+  extends: [require.resolve('@hanzo/esign-eslint-config')],
   rules: {
     '@next/next/no-img-element': 'off',
     'no-unreachable': 'error',
