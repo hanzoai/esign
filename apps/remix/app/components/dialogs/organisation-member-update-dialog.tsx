@@ -5,7 +5,6 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberRole } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -21,6 +20,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -48,7 +48,7 @@ export type OrganisationMemberUpdateDialogProps = {
   organisationMemberId: string;
   organisationMemberName: string;
   organisationMemberRole: OrganisationMemberRole;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZUpdateOrganisationMemberFormSchema = z.object({
   role: z.nativeEnum(OrganisationMemberRole),

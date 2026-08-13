@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
@@ -18,6 +17,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -37,7 +37,7 @@ import { OrganisationEmailDomainRecordContent } from './organisation-email-domai
 
 export type OrganisationEmailCreateDialogProps = {
   trigger?: React.ReactNode;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZCreateOrganisationEmailDomainFormSchema = ZCreateOrganisationEmailDomainRequestSchema.pick({
   domain: true,

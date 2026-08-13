@@ -4,7 +4,6 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { DocumentStatus, RecipientRole, SigningStatus } from '@prisma/client';
-import { TooltipArrow } from '@radix-ui/react-tooltip';
 import {
   AlertTriangle,
   CheckIcon,
@@ -31,6 +30,7 @@ import { Badge } from '@hanzo/esign-ui/primitives/badge';
 import { PopoverHover } from '@hanzo/esign-ui/primitives/popover';
 import {
   Tooltip,
+  TooltipArrow,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,

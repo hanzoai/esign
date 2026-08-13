@@ -3,7 +3,6 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { InfoIcon, UserPlusIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
@@ -12,9 +11,9 @@ import { z } from 'zod';
 
 import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/teams';
 import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import type { TFindOrganisationMembersResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-members.types';
 import type { TCreateTeamMembersRequestSchema } from '@hanzo/esign-trpc/server/team-router/create-team-members.types';
 import type { TFindTeamMembersResponse } from '@hanzo/esign-trpc/server/team-router/find-team-members.types';
-import type { TFindOrganisationMembersResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-members.types';
 import { useZapMutation, useZapQuery, useZapUtils } from '@hanzo/esign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
 import { Button } from '@hanzo/esign-ui/primitives/button';
@@ -24,6 +23,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -53,7 +53,7 @@ import { useCurrentTeam } from '~/providers/team';
 
 export type TeamMemberCreateDialogProps = {
   trigger?: React.ReactNode;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZAddTeamMembersFormSchema = z.object({
   members: z.array(

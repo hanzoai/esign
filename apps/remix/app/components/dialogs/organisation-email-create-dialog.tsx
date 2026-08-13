@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Trans, useLingui } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
@@ -16,6 +15,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -40,7 +40,7 @@ type EmailDomain = {
 export type OrganisationEmailCreateDialogProps = {
   trigger?: React.ReactNode;
   emailDomain: EmailDomain;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZCreateOrganisationEmailFormSchema = ZCreateOrganisationEmailRequestSchema.pick({
   emailName: true,
@@ -177,14 +177,14 @@ export const OrganisationEmailCreateDialog = ({
                           }}
                           placeholder={t`support`}
                         />
-                        <div className="bg-muted text-muted-foreground absolute bottom-0 right-0 top-0 flex items-center rounded-r-md border px-3 py-2 text-sm">
+                        <div className="absolute bottom-0 right-0 top-0 flex items-center rounded-r-md border bg-muted px-3 py-2 text-sm text-muted-foreground">
                           @{emailDomain.domain}
                         </div>
                       </div>
                     </FormControl>
                     <FormMessage />
                     {!form.formState.errors.email && (
-                      <span className="text-foreground/50 text-xs font-normal">
+                      <span className="text-xs font-normal text-foreground/50">
                         {field.value ? (
                           field.value
                         ) : (

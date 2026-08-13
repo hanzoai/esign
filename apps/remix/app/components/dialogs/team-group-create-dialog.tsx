@@ -3,16 +3,15 @@ import { useEffect, useMemo, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { OrganisationGroupType, TeamMemberRole } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
 import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/teams';
 import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
+import type { TFindOrganisationGroupsResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-groups.types';
 import type { ZCreateTeamGroupsRequestSchema } from '@hanzo/esign-trpc/server/team-router/create-team-groups.types';
 import type { TFindTeamGroupsResponse } from '@hanzo/esign-trpc/server/team-router/find-team-groups.types';
-import type { TFindOrganisationGroupsResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-groups.types';
 import { useZapMutation, useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
@@ -21,6 +20,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -46,7 +46,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 
-export type TeamGroupCreateDialogProps = Omit<DialogPrimitive.DialogProps, 'children'>;
+export type TeamGroupCreateDialogProps = Omit<DialogProps, 'children'>;
 
 const ZAddTeamMembersFormSchema = z.object({
   groups: z.array(
@@ -207,7 +207,7 @@ export const TeamGroupCreateDialog = ({ ...props }: TeamGroupCreateDialogProps) 
                                 })),
                               );
                             }}
-                            className="bg-background w-full"
+                            className="w-full bg-background"
                             emptySelectionPlaceholder={t`Select groups`}
                           />
                         </FormControl>

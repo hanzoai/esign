@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import type { Webhook } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
@@ -21,6 +20,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -47,7 +47,7 @@ type TEditWebhookFormSchema = z.infer<typeof ZEditWebhookFormSchema>;
 export type WebhookEditDialogProps = {
   trigger?: React.ReactNode;
   webhook: Webhook;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 export const WebhookEditDialog = ({ trigger, webhook, ...props }: WebhookEditDialogProps) => {
   const { t } = useLingui();

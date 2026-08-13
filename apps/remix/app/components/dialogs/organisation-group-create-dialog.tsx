@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberRole } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import type { z } from 'zod';
 
@@ -22,6 +21,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -47,7 +47,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type OrganisationGroupCreateDialogProps = {
   trigger?: React.ReactNode;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZCreateOrganisationGroupFormSchema = ZCreateOrganisationGroupRequestSchema.pick({
   name: true,
@@ -181,7 +181,7 @@ export const OrganisationGroupCreateDialog = ({
                     </FormLabel>
                     <FormControl>
                       <Select {...field} onValueChange={field.onChange}>
-                        <SelectTrigger className="text-muted-foreground w-full">
+                        <SelectTrigger className="w-full text-muted-foreground">
                           <SelectValue />
                         </SelectTrigger>
 
@@ -220,7 +220,7 @@ export const OrganisationGroupCreateDialog = ({
                         loading={isLoadingMembers}
                         selectedValues={field.value}
                         onChange={field.onChange}
-                        className="bg-background w-full"
+                        className="w-full bg-background"
                         emptySelectionPlaceholder={t`Select members`}
                       />
                     </FormControl>

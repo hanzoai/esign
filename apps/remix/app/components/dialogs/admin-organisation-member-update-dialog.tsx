@@ -4,19 +4,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberRole } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
 import { getHighestOrganisationRoleInGroup } from '@hanzo/esign-lib/utils/organisations';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type { TGetAdminOrganisationResponse } from '@hanzo/esign-trpc/server/admin-router/get-admin-organisation.types';
 import type {
   TUpdateOrganisationMemberRoleRequest,
   TUpdateOrganisationMemberRoleResponse,
 } from '@hanzo/esign-trpc/server/admin-router/update-organisation-member-role.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
   Dialog,
@@ -24,6 +23,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -49,7 +49,7 @@ export type AdminOrganisationMemberUpdateDialogProps = {
   organisationId: string;
   organisationMember: TGetAdminOrganisationResponse['members'][number];
   isOwner: boolean;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZUpdateOrganisationMemberFormSchema = z.object({
   role: z.enum(['OWNER', 'ADMIN', 'MANAGER', 'MEMBER']),

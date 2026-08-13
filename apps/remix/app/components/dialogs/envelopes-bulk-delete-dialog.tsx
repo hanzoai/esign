@@ -2,7 +2,6 @@ import { plural } from '@lingui/core/macro';
 import { Plural, useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import { EnvelopeType } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 
 import type {
   TBulkDeleteEnvelopesRequest,
@@ -17,6 +16,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
 } from '@hanzo/esign-ui/primitives/dialog';
 import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
@@ -27,7 +27,7 @@ export type EnvelopesBulkDeleteDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSuccess?: () => void;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 export const EnvelopesBulkDeleteDialog = ({
   envelopeIds,

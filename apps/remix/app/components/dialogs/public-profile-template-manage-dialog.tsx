@@ -5,7 +5,6 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Plural, Trans } from '@lingui/react/macro';
 import { type TemplateDirectLink, TemplateType } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { CheckCircle2Icon, CircleIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { P, match } from 'ts-pattern';
@@ -28,6 +27,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -62,7 +62,7 @@ export type ManagePublicTemplateDialogProps = {
   trigger?: React.ReactNode;
   isOpen?: boolean;
   onIsOpenChange?: (value: boolean) => unknown;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZUpdatePublicTemplateFormSchema = z.object({
   publicTitle: z
@@ -295,11 +295,11 @@ export const ManagePublicTemplateDialog = ({
                           key={row.id}
                           onClick={() => setSelectedTemplateId(row.id)}
                         >
-                          <TableCell className="text-muted-foreground max-w-[30ch] text-sm">
+                          <TableCell className="max-w-[30ch] text-sm text-muted-foreground">
                             {row.title}
                           </TableCell>
 
-                          <TableCell className="text-muted-foreground text-sm">
+                          <TableCell className="text-sm text-muted-foreground">
                             {i18n.date(row.createdAt)}
                           </TableCell>
 
@@ -386,7 +386,7 @@ export const ManagePublicTemplateDialog = ({
                             </FormControl>
 
                             {!form.formState.errors.publicDescription && (
-                              <p className="text-muted-foreground text-sm">
+                              <p className="text-sm text-muted-foreground">
                                 {remaningLength >= 0 ? (
                                   <Plural
                                     value={remaningLength}

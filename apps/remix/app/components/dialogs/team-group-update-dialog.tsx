@@ -5,7 +5,6 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -22,6 +21,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -49,7 +49,7 @@ export type TeamGroupUpdateDialogProps = {
   teamGroupId: string;
   teamGroupName: string;
   teamGroupRole: TeamMemberRole;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZUpdateTeamGroupFormSchema = z.object({
   role: z.nativeEnum(TeamMemberRole),

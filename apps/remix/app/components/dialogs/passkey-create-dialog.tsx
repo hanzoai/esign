@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Plural, Trans, useLingui } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { startRegistration } from '@simplewebauthn/browser';
 import { KeyRoundIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -12,8 +11,8 @@ import { z } from 'zod';
 
 import { MAXIMUM_PASSKEYS } from '@hanzo/esign-lib/constants/auth';
 import { AppError } from '@hanzo/esign-lib/errors/app-error';
-import type { TCreatePasskeyRequest } from '@hanzo/esign-trpc/server/auth-router/create-passkey.types';
 import type { TCreatePasskeyRegistrationOptionsResponse } from '@hanzo/esign-trpc/server/auth-router/create-passkey-registration-options.types';
+import type { TCreatePasskeyRequest } from '@hanzo/esign-trpc/server/auth-router/create-passkey.types';
 import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
 import { Button } from '@hanzo/esign-ui/primitives/button';
@@ -23,6 +22,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -40,7 +40,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 export type PasskeyCreateDialogProps = {
   trigger?: React.ReactNode;
   onSuccess?: () => void;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZCreatePasskeyFormSchema = z.object({
   passkeyName: z.string().min(3),

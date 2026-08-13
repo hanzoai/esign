@@ -138,6 +138,13 @@ const DialogDescription = React.forwardRef<
 
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
+/**
+ * The props of the root `Dialog`. Callers spell their own dialog props against
+ * this instead of reaching for the underlying library, so the substrate stays
+ * behind this file.
+ */
+export type DialogProps = DialogPrimitive.DialogProps;
+
 export {
   Dialog,
   DialogTrigger,

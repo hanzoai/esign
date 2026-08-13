@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { FolderIcon, HomeIcon, Loader2, Search } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
@@ -22,6 +21,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
 } from '@hanzo/esign-ui/primitives/dialog';
 import {
@@ -42,7 +42,7 @@ export type DocumentMoveToFolderDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   currentFolderId?: string;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZMoveDocumentFormSchema = z.object({
   folderId: z.string().nullable().optional(),
@@ -172,7 +172,7 @@ export const DocumentMoveToFolderDialog = ({
         </DialogHeader>
 
         <div className="relative">
-          <Search className="text-muted-foreground absolute left-2 top-3 h-4 w-4" />
+          <Search className="absolute left-2 top-3 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder={_(msg`Search folders...`)}
             value={searchTerm}
@@ -226,7 +226,7 @@ export const DocumentMoveToFolderDialog = ({
                           ))}
 
                           {searchTerm && filteredFolders?.length === 0 && (
-                            <div className="text-muted-foreground px-2 py-2 text-center text-sm">
+                            <div className="px-2 py-2 text-center text-sm text-muted-foreground">
                               <Trans>No folders found</Trans>
                             </div>
                           )}

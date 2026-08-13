@@ -1,4 +1,4 @@
-You are an expert in TypeScript, Node.js, Remix, React, Shadcn UI and Tailwind.
+You are an expert in TypeScript, Node.js, Remix, React and @hanzo/gui.
 
 Code Style and Structure:
 
@@ -37,8 +37,15 @@ Error Handling and Validation:
 
 UI and Styling:
 
-- Use Shadcn UI, Radix, and Tailwind Aria for components and styling
-- Implement responsive design with Tailwind CSS; use a mobile-first approach
+- @hanzo/gui is the only UI framework. It compiles to React Native, so the same
+  components run on web, iOS and Android. Do not add Tailwind classes, Radix
+  primitives, shadcn copies or any other UI library — each of those is DOM-only
+  and caps the app at the browser.
+- Express layout and appearance as style props on @hanzo/ui / @hanzo/gui
+  components, never as class strings.
+- packages/ui still carries a shadcn/Radix/Tailwind layer inherited from
+  upstream. It is being replaced, not extended: reuse what is there, add nothing
+  new to it.
 - When using Lucide icons, prefer the longhand names, for example HomeIcon instead of Home
 
 React forms

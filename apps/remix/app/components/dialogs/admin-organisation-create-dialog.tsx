@@ -3,15 +3,14 @@ import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import type { z } from 'zod';
 
 import { AppError } from '@hanzo/esign-lib/errors/app-error';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type { TCreateAdminOrganisationRequest } from '@hanzo/esign-trpc/server/admin-router/create-admin-organisation.types';
 import { ZCreateAdminOrganisationRequestSchema } from '@hanzo/esign-trpc/server/admin-router/create-admin-organisation.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
@@ -20,6 +19,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -37,7 +37,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 export type OrganisationCreateDialogProps = {
   trigger?: React.ReactNode;
   ownerUserId: number;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZCreateAdminOrganisationFormSchema = ZCreateAdminOrganisationRequestSchema.shape.data.pick({
   name: true,

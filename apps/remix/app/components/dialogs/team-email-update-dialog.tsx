@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Trans, useLingui } from '@lingui/react/macro';
 import type { TeamEmail } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
 import { z } from 'zod';
@@ -17,6 +16,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -34,7 +34,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 export type TeamEmailUpdateDialogProps = {
   teamEmail: TeamEmail;
   trigger?: React.ReactNode;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZUpdateTeamEmailFormSchema = z.object({
   name: z.string().trim().min(1, { message: 'Please enter a valid name.' }),

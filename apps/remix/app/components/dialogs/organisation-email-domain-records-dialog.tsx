@@ -1,6 +1,5 @@
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 
 import { CopyTextButton } from '@hanzo/esign-ui/components/common/copy-text-button';
 import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
@@ -12,6 +11,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -22,7 +22,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 export type OrganisationEmailDomainRecordsDialogProps = {
   trigger: React.ReactNode;
   records: DomainRecord[];
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 type DomainRecord = {
   name: string;

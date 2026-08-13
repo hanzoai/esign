@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -18,6 +17,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
 } from '@hanzo/esign-ui/primitives/dialog';
 import {
@@ -35,7 +35,7 @@ export type FolderDeleteDialogProps = {
   folder: TFolderWithSubfolders;
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDeleteDialogProps) => {
   const { t } = useLingui();
@@ -134,7 +134,7 @@ export const FolderDeleteDialog = ({ folder, isOpen, onOpenChange }: FolderDelet
                     <FormLabel>
                       <Trans>
                         Confirm by typing:{' '}
-                        <span className="font-sm text-destructive font-semibold">
+                        <span className="font-sm font-semibold text-destructive">
                           {deleteMessage}
                         </span>
                       </Trans>

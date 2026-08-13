@@ -10,7 +10,6 @@ import {
   EnvelopeType,
   SendStatus,
 } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { InfoIcon, MailIcon, SettingsIcon, ShieldIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
@@ -18,7 +17,10 @@ import { z } from 'zod';
 
 import { useCurrentEnvelopeEditor } from '@hanzo/esign-lib/client-only/providers/envelope-editor-provider';
 import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
-import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
+import {
+  DATE_FORMATS,
+  DEFAULT_DOCUMENT_DATE_FORMAT,
+} from '@hanzo/esign-lib/constants/date-formats';
 import {
   DOCUMENT_DISTRIBUTION_METHODS,
   DOCUMENT_SIGNATURE_TYPES,
@@ -76,6 +78,7 @@ import {
   DialogClose,
   DialogContent,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -171,7 +174,7 @@ type TAddSettingsFormSchema = z.infer<typeof ZAddSettingsFormSchema>;
 
 type EnvelopeEditorSettingsDialogProps = {
   trigger?: React.ReactNode;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 export const EnvelopeEditorSettingsDialog = ({
   trigger,

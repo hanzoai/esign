@@ -5,7 +5,6 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberRole } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Download, Mail, MailIcon, PlusCircle, Trash, Upload, UsersIcon } from 'lucide-react';
 import Papa, { type ParseResult } from 'papaparse';
 import { useFieldArray, useForm } from 'react-hook-form';
@@ -33,6 +32,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -58,7 +58,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type OrganisationMemberInviteDialogProps = {
   trigger?: React.ReactNode;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZInviteOrganisationMembersFormSchema = z
   .object({
@@ -335,12 +335,12 @@ export const OrganisationMemberInviteDialog = ({
             onValueChange={(value) => setInvitationType(value as TabTypes)}
           >
             <TabsList className="w-full">
-              <TabsTrigger value="INDIVIDUAL" className="hover:text-foreground w-full">
+              <TabsTrigger value="INDIVIDUAL" className="w-full hover:text-foreground">
                 <MailIcon size={20} className="mr-2" />
                 <Trans>Invite Members</Trans>
               </TabsTrigger>
 
-              <TabsTrigger value="BULK" className="hover:text-foreground w-full">
+              <TabsTrigger value="BULK" className="w-full hover:text-foreground">
                 <UsersIcon size={20} className="mr-2" /> <Trans>Bulk Import</Trans>
               </TabsTrigger>
             </TabsList>
@@ -388,7 +388,7 @@ export const OrganisationMemberInviteDialog = ({
                                 )}
                                 <FormControl>
                                   <Select {...field} onValueChange={field.onChange}>
-                                    <SelectTrigger className="text-muted-foreground max-w-[200px]">
+                                    <SelectTrigger className="max-w-[200px] text-muted-foreground">
                                       <SelectValue />
                                     </SelectTrigger>
 
@@ -453,7 +453,7 @@ export const OrganisationMemberInviteDialog = ({
               <div className="mt-4 space-y-4">
                 <Card gradient className="h-32">
                   <CardContent
-                    className="text-muted-foreground/80 hover:text-muted-foreground/90 flex h-full cursor-pointer flex-col items-center justify-center rounded-lg p-0 transition-colors"
+                    className="flex h-full cursor-pointer flex-col items-center justify-center rounded-lg p-0 text-muted-foreground/80 transition-colors hover:text-muted-foreground/90"
                     onClick={() => fileInputRef.current?.click()}
                   >
                     <Upload className="h-5 w-5" />

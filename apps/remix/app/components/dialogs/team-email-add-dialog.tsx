@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Trans, useLingui } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Plus } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useRevalidator } from 'react-router';
@@ -21,6 +20,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -38,7 +38,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 export type TeamEmailAddDialogProps = {
   teamId: number;
   trigger?: React.ReactNode;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZCreateTeamEmailFormSchema = ZCreateTeamEmailVerificationMutationSchema.pick({
   name: true,

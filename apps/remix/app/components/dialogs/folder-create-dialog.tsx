@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Trans, useLingui } from '@lingui/react/macro';
 import type { FolderType } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { FolderPlusIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router';
@@ -17,6 +16,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
   DialogTrigger,
 } from '@hanzo/esign-ui/primitives/dialog';
@@ -40,7 +40,7 @@ type TCreateFolderFormSchema = z.infer<typeof ZCreateFolderFormSchema>;
 export type FolderCreateDialogProps = {
   type: FolderType;
   trigger?: React.ReactNode;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 export const FolderCreateDialog = ({ type, trigger, ...props }: FolderCreateDialogProps) => {
   const { t } = useLingui();

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { FolderIcon, HomeIcon, Search } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -18,6 +17,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
 } from '@hanzo/esign-ui/primitives/dialog';
 import {
@@ -35,7 +35,7 @@ export type FolderMoveDialogProps = {
   folder: TFolderWithSubfolders | null;
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZMoveFolderFormSchema = z.object({
   targetFolderId: z.string().nullable(),
@@ -129,7 +129,7 @@ export const FolderMoveDialog = ({
         </DialogHeader>
 
         <div className="relative">
-          <Search className="text-muted-foreground absolute left-2 top-3 h-4 w-4" />
+          <Search className="absolute left-2 top-3 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder={t`Search folders...`}
             value={searchTerm}

@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Plural, useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import { EnvelopeType } from '@prisma/client';
-import type * as DialogPrimitive from '@radix-ui/react-dialog';
 import { FolderIcon, HomeIcon, Loader2, Search } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { match } from 'ts-pattern';
@@ -24,6 +23,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  type DialogProps,
   DialogTitle,
 } from '@hanzo/esign-ui/primitives/dialog';
 import {
@@ -44,7 +44,7 @@ export type EnvelopesBulkMoveDialogProps = {
   onOpenChange: (open: boolean) => void;
   currentFolderId?: string;
   onSuccess?: () => void;
-} & Omit<DialogPrimitive.DialogProps, 'children'>;
+} & Omit<DialogProps, 'children'>;
 
 const ZBulkMoveFormSchema = z.object({
   folderId: z.string().nullable(),
