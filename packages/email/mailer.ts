@@ -5,6 +5,7 @@ import { env } from '@hanzo/esign-lib/utils/env';
 import { ResendTransport } from '@hanzo/nodemailer-resend';
 
 import { MailChannelsTransport } from './transports/mailchannels';
+import { NotifyTransport } from './transports/notify';
 
 /**
  * Creates a Nodemailer transport object for sending emails.
@@ -16,6 +17,11 @@ import { MailChannelsTransport } from './transports/mailchannels';
  * @returns {Transporter} A configured Nodemailer transporter instance.
  *
  * Supported Transports:
+ * - **notify**: Sends through notify, the Hanzo notification service, which holds the
+ *   provider credentials in KMS. This app carries none and names no sender — the from
+ *   address belongs to the credential. Reuses the IAM client that signs users in:
+ *   - `IAM_URL`: IAM issuer (default: 'https://hanzo.id')
+ *   - `IAM_CLIENT_ID` / `IAM_CLIENT_SECRET`: minted as a machine token
  * - **mailchannels**: Uses MailChannelsTransport, requiring:
  *   - `NEXT_PRIVATE_MAILCHANNELS_API_KEY`: API key for MailChannels
  *   - `NEXT_PRIVATE_MAILCHANNELS_ENDPOINT`: Endpoint for MailChannels (optional)
@@ -54,6 +60,10 @@ import { MailChannelsTransport } from './transports/mailchannels';
 const getTransport = (): Transporter => {
   const transport = env('NEXT_PRIVATE_SMTP_TRANSPORT') ?? 'smtp-auth';
 
+  if (transport === 'notify') {
+    return createTransport(NotifyTransport.makeTransport({}));
+  }
+
   if (transport === 'mailchannels') {
     return createTransport(
       MailChannelsTransport.makeTransport({
@@ -90,7 +100,10 @@ const getTransport = (): Transporter => {
   }
 
   return createTransport({
-    host: env('NEXT_PRIVATE_SMTP_HOST') ?? '127.0.0.1:2500',
+    // A host carries no port — the port is its own setting. Spelling it
+    // "127.0.0.1:2500" made DNS reject the name (EBADNAME), so a missing
+    // configuration surfaced as a lookup failure instead of a refused connection.
+    host: env('NEXT_PRIVATE_SMTP_HOST') ?? '127.0.0.1',
     port: Number(env('NEXT_PRIVATE_SMTP_PORT')) || 587,
     secure: env('NEXT_PRIVATE_SMTP_SECURE') === 'true',
     ignoreTLS: env('NEXT_PRIVATE_SMTP_UNSAFE_IGNORE_TLS') === 'true',
