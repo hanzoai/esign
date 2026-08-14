@@ -1,5 +1,11 @@
 module.exports = {
-  extends: ['next', 'turbo', 'eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: [
+    require.resolve('./transaction.cjs'),
+    'next',
+    'turbo',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
 
   plugins: ['unused-imports'],
 

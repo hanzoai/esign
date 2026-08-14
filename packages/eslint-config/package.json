@@ -4,6 +4,7 @@
   "main": "./index.cjs",
   "license": "MIT",
   "scripts": {
+    "test": "node --test __tests__/*.test.cjs",
     "clean": "rimraf node_modules"
   },
   "dependencies": {

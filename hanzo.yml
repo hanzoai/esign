@@ -8,9 +8,16 @@
 # committed lockfile (postinstall generates the Prisma client), then turbo's
 # build of @hanzo/esign-remix, which type-checks every workspace package it
 # depends on. A type error anywhere under packages/ fails here.
+#
+# `lint:tx` runs first because it takes seconds and answers a question the build
+# cannot: whether anything inside a `$transaction` reaches the global Prisma
+# client. Base SQLite serves one write connection, so such a call waits on a
+# lock the transaction holds and the transaction dies (`P2028`) — at runtime,
+# with a green build. See packages/eslint-config/transaction.cjs.
 test:
   - name: build
     run: |
       set -euo pipefail
       npm ci --no-audit --no-fund
+      npm run lint:tx
       npx turbo run build --filter=@hanzo/esign-remix

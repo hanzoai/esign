@@ -36,6 +36,27 @@ sign/
 - `README.md` -- Project documentation
 - `package.json` -- Dependencies and scripts
 
+## Inside a transaction, only `tx`
+Base SQLite serves one write connection. `prisma.$transaction(async (tx) => …)`
+holds it for as long as the callback runs, so a call in the callback that
+reaches the global Prisma client queues behind a lock that call is itself
+blocking. It waits out the busy timeout and the transaction dies with `P2028
+Transaction already closed` — at runtime, on a green build. This is what stopped
+every document creation at 0.1.4.
+
+Jobs, webhooks, notifications and mail are side effects of committed state:
+return what they need from the callback and fire them after the commit.
+
+`packages/eslint-config/transaction.cjs` holds the rule. Two callers read it:
+the shared config, so an editor says it while you type, and `npm run lint:tx`,
+which runs it alone over `packages/{lib,trpc,api}` and `apps/remix` in seconds
+and is the first thing the CI gate does. `npm test -w @hanzo/esign-eslint-config`
+proves the rule still fires, so it cannot rot into a no-op.
+
+It reads the call site, not the call graph: a helper that reaches the global
+client from its own body is invisible to it. Calling something inside a
+transaction that you did not hand `tx` is the shape to distrust.
+
 ## In-process cloud fold (HIP-0106, task #100)
 The core server-side e-signature flow is ALSO shipped as a self-contained,
 ESM-free **goja bundle** so the unified `hanzoai/cloud` binary runs it in-process
