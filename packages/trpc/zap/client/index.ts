@@ -57,8 +57,15 @@ let currentTeam: number | null = null;
  * team rides the per-call envelope instead. The app declares it once where it
  * knows the team (the team provider); handlers still verify membership, so this
  * selects a scope rather than granting one.
+ *
+ * A no-op off the browser. The team provider renders during SSR too, where one
+ * process serves every tenant at once — a module-level team there would be one
+ * request's scope visible to another. There is no browser to hold a socket off
+ * the page, so there is nothing to scope either.
  */
 export function setZapTeam(teamId: number | null): void {
+  if (typeof window === 'undefined') return;
+
   currentTeam = teamId;
 }
 
