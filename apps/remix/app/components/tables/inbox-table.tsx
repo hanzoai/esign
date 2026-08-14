@@ -24,6 +24,7 @@ import { TableCell } from '@hanzo/esign-ui/primitives/table';
 import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { DocumentStatus } from '~/components/general/document/document-status';
+import { Empty } from '~/components/general/empty';
 import { useOptionalCurrentTeam } from '~/providers/team';
 
 import { EnvelopeDownloadDialog } from '../dialogs/envelope-download-dialog';
@@ -133,11 +134,9 @@ export const InboxTable = () => {
           enable: isLoadingError || false,
         }}
         emptyState={
-          <div className="text-muted-foreground/60 flex h-60 flex-col items-center justify-center gap-y-4">
-            <p>
-              <Trans>Documents that require your attention will appear here</Trans>
-            </p>
-          </div>
+          <Empty>
+            <Trans>Documents that require your attention will appear here</Trans>
+          </Empty>
         }
         skeleton={{
           enable: isLoading || false,
@@ -173,8 +172,8 @@ export const InboxTable = () => {
       </DataTable>
 
       {isPending && (
-        <div className="bg-background/50 absolute inset-0 flex items-center justify-center">
-          <Loader className="text-muted-foreground h-8 w-8 animate-spin" />
+        <div className="absolute inset-0 flex items-center justify-center bg-background/50">
+          <Loader className="h-8 w-8 animate-spin text-muted-foreground" />
         </div>
       )}
     </div>

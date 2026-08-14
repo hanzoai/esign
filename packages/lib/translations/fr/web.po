@@ -3965,7 +3965,6 @@ msgstr "Documentation"
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-upload-page.tsx
 #: apps/remix/app/components/general/skeletons/document-edit-skeleton.tsx
 #: apps/remix/app/components/general/user-profile-skeleton.tsx
-#: apps/remix/app/components/general/user-profile-timur.tsx
 #: apps/remix/app/components/tables/admin-dashboard-users-table.tsx
 #: apps/remix/app/components/tables/organisation-insights-table.tsx
 #: apps/remix/app/components/tables/organisation-insights-table.tsx
@@ -5331,10 +5330,6 @@ msgstr "Vous pouvez définir ici vos préférences générales pour les document
 #: apps/remix/app/components/dialogs/template-direct-link-dialog.tsx
 msgid "Here's how it works:"
 msgstr "Voici comment cela fonctionne :"
-
-#: apps/remix/app/components/general/user-profile-timur.tsx
-msgid "Hey I’m Timur"
-msgstr "Salut, je suis Timur"
 
 #: packages/email/templates/bulk-send-complete.tsx
 msgid "Hi {userName},"
@@ -7056,10 +7051,6 @@ msgstr "Boîte de réception personnelle"
 msgid "Pick a number"
 msgstr "Choisissez un numéro"
 
-#: apps/remix/app/components/general/user-profile-timur.tsx
-msgid "Pick any of the following agreements below and start signing to get started"
-msgstr "Choisissez l'un des accords suivants ci-dessous et commencez à signer pour commencer"
-
 #: apps/remix/app/components/general/folder/folder-card.tsx
 msgid "Pin"
 msgstr "Épingler"
@@ -8493,7 +8484,6 @@ msgstr "Afficher des modèles dans votre profil public pour que votre audience p
 #: apps/remix/app/components/general/document-signing/document-signing-signature-field.tsx
 #: apps/remix/app/components/general/document/document-page-view-button.tsx
 #: apps/remix/app/components/general/user-profile-skeleton.tsx
-#: apps/remix/app/components/general/user-profile-timur.tsx
 #: apps/remix/app/components/tables/documents-table-action-button.tsx
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx

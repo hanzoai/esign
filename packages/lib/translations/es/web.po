@@ -3965,7 +3965,6 @@ msgstr "Documentación"
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-upload-page.tsx
 #: apps/remix/app/components/general/skeletons/document-edit-skeleton.tsx
 #: apps/remix/app/components/general/user-profile-skeleton.tsx
-#: apps/remix/app/components/general/user-profile-timur.tsx
 #: apps/remix/app/components/tables/admin-dashboard-users-table.tsx
 #: apps/remix/app/components/tables/organisation-insights-table.tsx
 #: apps/remix/app/components/tables/organisation-insights-table.tsx
@@ -5331,10 +5330,6 @@ msgstr "Aquí puedes configurar tus preferencias generales de documentos."
 #: apps/remix/app/components/dialogs/template-direct-link-dialog.tsx
 msgid "Here's how it works:"
 msgstr "Así es como funciona:"
-
-#: apps/remix/app/components/general/user-profile-timur.tsx
-msgid "Hey I’m Timur"
-msgstr "Hola, soy Timur"
 
 #: packages/email/templates/bulk-send-complete.tsx
 msgid "Hi {userName},"
@@ -7056,10 +7051,6 @@ msgstr "Bandeja de entrada personal"
 msgid "Pick a number"
 msgstr "Seleccione un número"
 
-#: apps/remix/app/components/general/user-profile-timur.tsx
-msgid "Pick any of the following agreements below and start signing to get started"
-msgstr "Elige cualquiera de los siguientes acuerdos a continuación y comience a firmar para empezar"
-
 #: apps/remix/app/components/general/folder/folder-card.tsx
 msgid "Pin"
 msgstr "Fijar"
@@ -8493,7 +8484,6 @@ msgstr "Mostrar plantillas en tu perfil público para que tu audiencia firme y c
 #: apps/remix/app/components/general/document-signing/document-signing-signature-field.tsx
 #: apps/remix/app/components/general/document/document-page-view-button.tsx
 #: apps/remix/app/components/general/user-profile-skeleton.tsx
-#: apps/remix/app/components/general/user-profile-timur.tsx
 #: apps/remix/app/components/tables/documents-table-action-button.tsx
 #: apps/remix/app/components/tables/documents-table-action-dropdown.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx

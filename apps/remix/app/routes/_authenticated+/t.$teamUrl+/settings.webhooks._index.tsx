@@ -1,28 +1,15 @@
 import { useMemo } from 'react';
 
-import { msg } from '@lingui/core/macro';
 import { Plural, useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import type { Webhook } from '@prisma/client';
-import {
-  CheckCircle2Icon,
-  EditIcon,
-  Loader,
-  MoreHorizontalIcon,
-  ScrollTextIcon,
-  Trash2Icon,
-  XCircleIcon,
-} from 'lucide-react';
-import { DateTime } from 'luxon';
+import { EditIcon, Loader, MoreHorizontalIcon, ScrollTextIcon, Trash2Icon } from 'lucide-react';
 import { Link } from 'react-router';
 
 import { toFriendlyWebhookEventName } from '@hanzo/esign-lib/universal/webhook/to-friendly-webhook-event-name';
 import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
-import { cn } from '@hanzo/esign-ui/lib/utils';
 import { Badge } from '@hanzo/esign-ui/primitives/badge';
-import { Button } from '@hanzo/esign-ui/primitives/button';
 import { DataTable, type DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
-import { DataTablePagination } from '@hanzo/esign-ui/primitives/data-table-pagination';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,6 +23,7 @@ import { TableCell } from '@hanzo/esign-ui/primitives/table';
 import { WebhookCreateDialog } from '~/components/dialogs/webhook-create-dialog';
 import { WebhookDeleteDialog } from '~/components/dialogs/webhook-delete-dialog';
 import { WebhookEditDialog } from '~/components/dialogs/webhook-edit-dialog';
+import { Empty } from '~/components/general/empty';
 import { SettingsHeader } from '~/components/general/settings-header';
 import { useCurrentTeam } from '~/providers/team';
 import { appMetaTags } from '~/utils/meta';
@@ -64,9 +52,9 @@ export default function WebhookPage() {
         header: t`Webhook`,
         cell: ({ row }) => (
           <Link to={`/t/${team.url}/settings/webhooks/${row.original.id}`}>
-            <p className="text-muted-foreground text-xs">{row.original.id}</p>
+            <p className="text-xs text-muted-foreground">{row.original.id}</p>
             <p
-              className="text-foreground max-w-sm truncate text-xs font-semibold"
+              className="max-w-sm truncate text-xs font-semibold text-foreground"
               title={row.original.webhookUrl}
             >
               {row.original.webhookUrl}
@@ -130,13 +118,11 @@ export default function WebhookPage() {
           enable: isError,
         }}
         emptyState={
-          <div className="text-muted-foreground/60 flex h-60 flex-col items-center justify-center gap-y-4">
-            <p>
-              <Trans>
-                You have no webhooks yet. Your webhooks will be shown here once you create them.
-              </Trans>
-            </p>
-          </div>
+          <Empty>
+            <Trans>
+              You have no webhooks yet. Your webhooks will be shown here once you create them.
+            </Trans>
+          </Empty>
         }
         skeleton={{
           enable: isLoading,
@@ -172,7 +158,7 @@ const WebhookTableActionDropdown = ({ webhook }: { webhook: Webhook }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger data-testid="webhook-table-action-btn">
-        <MoreHorizontalIcon className="text-muted-foreground h-5 w-5" />
+        <MoreHorizontalIcon className="h-5 w-5 text-muted-foreground" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="end" forceMount>

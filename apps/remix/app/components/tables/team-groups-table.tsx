@@ -25,6 +25,7 @@ import {
 import { Skeleton } from '@hanzo/esign-ui/primitives/skeleton';
 import { TableCell } from '@hanzo/esign-ui/primitives/table';
 
+import { Empty } from '~/components/general/empty';
 import { useCurrentTeam } from '~/providers/team';
 
 import { TeamGroupDeleteDialog } from '../dialogs/team-group-delete-dialog';
@@ -88,7 +89,7 @@ export const TeamGroupsTable = () => {
         cell: ({ row }) => (
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <MoreHorizontalIcon className="text-muted-foreground h-5 w-5" />
+              <MoreHorizontalIcon className="h-5 w-5 text-muted-foreground" />
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className="w-52" align="start" forceMount>
@@ -141,11 +142,9 @@ export const TeamGroupsTable = () => {
         enable: isLoadingError,
       }}
       emptyState={
-        <div className="text-muted-foreground/60 flex h-60 flex-col items-center justify-center gap-y-4">
-          <p>
-            <Trans>No team groups found</Trans>
-          </p>
-        </div>
+        <Empty>
+          <Trans>No team groups found</Trans>
+        </Empty>
       }
       skeleton={{
         enable: isLoading,

@@ -2,7 +2,6 @@ import { useMemo, useState } from 'react';
 
 import { Trans } from '@lingui/react/macro';
 import { EnvelopeType } from '@prisma/client';
-import { Bird } from 'lucide-react';
 import { useParams, useSearchParams } from 'react-router';
 
 import { useSessionStorage } from '@hanzo/esign-lib/client-only/hooks/use-session-storage';
@@ -16,6 +15,7 @@ import type { RowSelectionState } from '@hanzo/esign-ui/primitives/data-table';
 
 import { EnvelopesBulkDeleteDialog } from '~/components/dialogs/envelopes-bulk-delete-dialog';
 import { EnvelopesBulkMoveDialog } from '~/components/dialogs/envelopes-bulk-move-dialog';
+import { Empty } from '~/components/general/empty';
 import { EnvelopeDropZoneWrapper } from '~/components/general/envelope/envelope-drop-zone-wrapper';
 import { FolderGrid } from '~/components/general/folder/folder-grid';
 import { PageHeader } from '~/components/general/page-header';
@@ -79,22 +79,11 @@ export default function TemplatesPage() {
 
           <div className="mt-8">
             {data && data.count === 0 ? (
-              <div className="flex h-96 flex-col items-center justify-center gap-y-4 text-muted-foreground/60">
-                <Bird className="h-12 w-12" strokeWidth={1.5} />
-
-                <div className="text-center">
-                  <h3 className="text-lg font-semibold">
-                    <Trans>We're all empty</Trans>
-                  </h3>
-
-                  <p className="mt-2 max-w-[50ch]">
-                    <Trans>
-                      You have not yet created any templates. To create a template please upload
-                      one.
-                    </Trans>
-                  </p>
-                </div>
-              </div>
+              <Empty className="h-96" title={<Trans>We're all empty</Trans>}>
+                <Trans>
+                  You have not yet created any templates. To create a template please upload one.
+                </Trans>
+              </Empty>
             ) : (
               <TemplatesTable
                 data={data}
