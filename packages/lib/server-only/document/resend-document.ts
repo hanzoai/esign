@@ -213,43 +213,41 @@ export const resendDocument = async ({
         }),
       ]);
 
-      await prisma.$transaction(
-        async (tx) => {
-          await mailer.sendMail({
-            to: {
-              address: email,
-              name,
-            },
-            from: senderEmail,
-            replyTo: replyToEmail,
-            subject: envelope.documentMeta.subject
-              ? renderCustomEmailTemplate(
-                  i18n._(msg`Reminder: ${envelope.documentMeta.subject}`),
-                  customEmailTemplate,
-                )
-              : emailSubject,
-            html,
-            text,
-          });
-
-          await tx.documentAuditLog.create({
-            data: createDocumentAuditLogData({
-              type: DOCUMENT_AUDIT_LOG_TYPE.EMAIL_SENT,
-              envelopeId: envelope.id,
-              metadata: requestMetadata,
-              data: {
-                emailType: recipientEmailType,
-                recipientEmail: recipient.email,
-                recipientName: recipient.name,
-                recipientRole: recipient.role,
-                recipientId: recipient.id,
-                isResending: true,
-              },
-            }),
-          });
+      await mailer.sendMail({
+        to: {
+          address: email,
+          name,
         },
-        { timeout: 30_000 },
-      );
+        from: senderEmail,
+        replyTo: replyToEmail,
+        subject: envelope.documentMeta.subject
+          ? renderCustomEmailTemplate(
+              i18n._(msg`Reminder: ${envelope.documentMeta.subject}`),
+              customEmailTemplate,
+            )
+          : emailSubject,
+        html,
+        text,
+      });
+
+      // EMAIL_SENT records a send that happened, so it follows the send. One
+      // write needs no transaction, and outside one the send does not hold the
+      // write connection open across the network.
+      await prisma.documentAuditLog.create({
+        data: createDocumentAuditLogData({
+          type: DOCUMENT_AUDIT_LOG_TYPE.EMAIL_SENT,
+          envelopeId: envelope.id,
+          metadata: requestMetadata,
+          data: {
+            emailType: recipientEmailType,
+            recipientEmail: recipient.email,
+            recipientName: recipient.name,
+            recipientRole: recipient.role,
+            recipientId: recipient.id,
+            isResending: true,
+          },
+        }),
+      });
     }),
   );
 

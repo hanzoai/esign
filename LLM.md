@@ -44,8 +44,16 @@ blocking. It waits out the busy timeout and the transaction dies with `P2028
 Transaction already closed` — at runtime, on a green build. This is what stopped
 every document creation at 0.1.4.
 
+Mail and other calls out of the process do not deadlock, but they hold that one
+connection open across the network: every other write waits on a mail server,
+and a slow send reaches the same timeout by a longer road.
+
 Jobs, webhooks, notifications and mail are side effects of committed state:
-return what they need from the callback and fire them after the commit.
+return what they need from the callback and fire them after the commit. A
+failed send therefore no longer rolls back the record it announces — the record
+stands, and the send is reported where it happens. Where a transaction wrapped
+one write and a send, it was doing nothing: keep the order, drop the
+transaction, and a single write is still atomic on its own.
 
 `packages/eslint-config/transaction.cjs` holds the rule. Two callers read it:
 the shared config, so an editor says it while you type, and `npm run lint:tx`,
@@ -53,9 +61,14 @@ which runs it alone over every package and app in seconds and is the first
 thing the CI gate does. `npm test -w @hanzo/esign-eslint-config` proves the
 rule still fires, so it cannot rot into a no-op.
 
-It reads the call site, not the call graph: a helper that reaches the global
-client from its own body is invisible to it. Calling something inside a
-transaction that you did not hand `tx` is the shape to distrust.
+It asks three questions of a callback: is the client called `tx`, does the
+callback name a client that is not `tx`, and does it await a call it did not
+hand `tx`. The third is the general one — handing `tx` on is how a call says it
+joins the transaction, so awaiting one that never mentions it is awaiting the
+world outside while holding the door. That covers jobs, webhooks, mail and any
+other I/O under one question, and it sees through a helper the earlier
+name-matching could not: what is checked is the call site's shape, not its
+callee's name.
 
 ## In-process cloud fold (HIP-0106, task #100)
 The core server-side e-signature flow is ALSO shipped as a self-contained,

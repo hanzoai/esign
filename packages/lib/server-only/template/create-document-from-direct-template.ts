@@ -755,7 +755,17 @@ export const createDocumentFromDirectTemplate = async ({
       });
     }
 
-    // Send email to template owner.
+    return {
+      createdEnvelope,
+      token: createdDirectRecipient.token,
+      recipientId: createdDirectRecipient.id,
+    };
+  });
+
+  // Tell the template owner a document exists, now that one does. The envelope
+  // is committed, so a bounced notification is a bounced notification — it is
+  // logged, and the document goes on to be sent below.
+  try {
     const emailTemplate = createElement(DocumentCreatedFromDirectTemplateEmailTemplate, {
       recipientName: directRecipientEmail,
       recipientRole: directTemplateRecipient.role,
@@ -785,13 +795,9 @@ export const createDocumentFromDirectTemplate = async ({
       html,
       text,
     });
-
-    return {
-      createdEnvelope,
-      token: createdDirectRecipient.token,
-      recipientId: createdDirectRecipient.id,
-    };
-  });
+  } catch (err) {
+    console.error('[CREATE_DOCUMENT_FROM_DIRECT_TEMPLATE]:', err);
+  }
 
   try {
     // This handles sending emails and sealing the document if required.
