@@ -5,22 +5,24 @@
 // result — or throws the reconstructed AppError. This is the transport the
 // migrated React hooks (../react) sit on. Wire is binary ZAP; payloads are
 // SuperJSON strings (the same transformer tRPC used).
-
-import SuperJSON from 'superjson';
-
-import { connect, type Connection } from '@zap-proto/web/client';
 import type { Conn } from '@zap-proto/web';
+import { type Connection, connect } from '@zap-proto/web/client';
+import SuperJSON from 'superjson';
 
 import { getBaseUrl } from '@hanzo/esign-lib/universal/get-base-url';
 
+import { ZapReply, newZapRequest } from '../gen/transport_zap';
 import { fromWireError } from '../runtime/error';
 import { METHOD_RPC } from '../runtime/method';
 import { ZAP_PATH } from '../runtime/path';
-import { ZapReply, newZapRequest } from '../gen/transport_zap';
 
 /** Build the wss:// URL for the ZAP endpoint from the app base URL. */
 export function zapUrl(): string {
-  const base = getBaseUrl();
+  // A WebSocket is dialled by absolute origin — it has no relative form. In the
+  // browser `getBaseUrl()` is `''` (the relative-fetch convention the HTTP
+  // transport wants), and `new URL('')` throws, so read the origin off the page
+  // that is making the call. Off the page, fall back to the configured URL.
+  const base = typeof window !== 'undefined' ? window.location.origin : getBaseUrl();
   const url = new URL(base);
   url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
   url.pathname = ZAP_PATH;
@@ -30,7 +32,7 @@ export function zapUrl(): string {
 let shared: Promise<Connection<Conn>> | null = null;
 
 /** Open (or reuse) the shared ZAP connection. */
-function getConnection(): Promise<Connection<Conn>> {
+async function getConnection(): Promise<Connection<Conn>> {
   if (!shared) {
     shared = connect<Conn>(zapUrl()).catch((err) => {
       shared = null;
@@ -73,8 +75,15 @@ export async function zapCall<T = unknown>(
 
 /** Close the shared connection (e.g. on logout). */
 export async function closeZap(): Promise<void> {
-  if (!shared) return;
-  const conn = await shared.catch(() => null);
+  // Claim the slot before awaiting: a caller that dials in the meantime gets a
+  // fresh connection, and this call closes the one it actually took.
+  const pending = shared;
+
+  if (!pending) return;
+
   shared = null;
+
+  const conn = await pending.catch(() => null);
+
   conn?.close();
 }

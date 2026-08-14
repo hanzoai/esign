@@ -11,8 +11,8 @@ Hanzo eSign is an open-source document signing platform built as a **monorepo** 
 │                              Remix App (Hono Server)                        │
 │                                 apps/remix                                  │
 ├─────────────┬─────────────┬─────────────┬─────────────┬─────────────────────┤
-│  /api/v1/*  │  /api/v2/*  │ /api/trpc/* │ /api/jobs/* │   React Router UI   │
-│  (ts-rest)  │   (tRPC)    │   (tRPC)    │  (Jobs API) │                     │
+│  /api/v1/*  │  /api/v2/*  │    /zap     │ /api/jobs/* │   React Router UI   │
+│  (ts-rest)  │ (ZAP/JSON)  │  (ZAP/WS)   │  (Jobs API) │                     │
 ├─────────────┴─────────────┴─────────────┴─────────────┴─────────────────────┤
 │                                                                             │
 │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────────────┐    │
@@ -133,11 +133,15 @@ packages/trpc/server/
 └── ...
 ```
 
-### Internal tRPC API
+### Internal RPC API
 
-- **Mount**: `/api/trpc/*`
+- **Mount**: `/zap` (ZAP over WebSocket, one shared connection per tab)
 - **Usage**: Frontend-to-backend communication
-- **Auth**: Session-based
+- **Auth**: Session cookie, read on the upgrade request
+- **Route name**: `<router>.<procedure>`, carried in the request body — not the path
+
+The same routes are reachable as POST JSON under `/api/v2` for external
+integrators, where auth is a bearer API token instead of the session.
 
 ## Background Jobs
 
@@ -252,9 +256,9 @@ Hono Server (apps/remix/server/)
    │
    ├──▶ /api/v1/* ──▶ ts-rest handlers (packages/api/)
    │
-   ├──▶ /api/v2/* ──▶ tRPC OpenAPI handlers (packages/trpc/)
+   ├──▶ /api/v2/* ──▶ ZAP over JSON/HTTP (packages/trpc/zap/)
    │
-   ├──▶ /api/trpc/* ──▶ tRPC handlers (packages/trpc/)
+   ├──▶ /zap ──▶ ZAP over WebSocket (packages/trpc/zap/)
    │
    ├──▶ /api/jobs/* ──▶ Job handlers (packages/lib/jobs/)
    │
