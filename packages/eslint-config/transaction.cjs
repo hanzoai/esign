@@ -13,8 +13,10 @@
  * return what they need from the callback and fire them on the way out.
  *
  * Read by two callers: `./index.cjs`, so an editor says it while you type, and
- * the `lint:tx` script, which runs this file alone across every package that
- * opens a transaction.
+ * the `lint:tx` script, which runs this file alone over every package and app.
+ * It takes seconds, so it sweeps the whole tree rather than a list of the
+ * directories that open a transaction today — a new one is covered by being
+ * written, not by being remembered here.
  */
 
 const CALLBACK = 'CallExpression[callee.property.name="$transaction"] > :function';

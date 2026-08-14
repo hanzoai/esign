@@ -49,9 +49,9 @@ return what they need from the callback and fire them after the commit.
 
 `packages/eslint-config/transaction.cjs` holds the rule. Two callers read it:
 the shared config, so an editor says it while you type, and `npm run lint:tx`,
-which runs it alone over `packages/{lib,trpc,api}` and `apps/remix` in seconds
-and is the first thing the CI gate does. `npm test -w @hanzo/esign-eslint-config`
-proves the rule still fires, so it cannot rot into a no-op.
+which runs it alone over every package and app in seconds and is the first
+thing the CI gate does. `npm test -w @hanzo/esign-eslint-config` proves the
+rule still fires, so it cannot rot into a no-op.
 
 It reads the call site, not the call graph: a helper that reaches the global
 client from its own body is invisible to it. Calling something inside a
