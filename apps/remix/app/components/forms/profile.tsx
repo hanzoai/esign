@@ -69,14 +69,6 @@ export const ProfileForm = ({ className }: ProfileFormProps) => {
         name,
         signature,
       });
-
-      await refreshSession();
-
-      toast({
-        title: _(msg`Profile updated`),
-        description: _(msg`Your profile has been updated successfully.`),
-        duration: 5000,
-      });
     } catch (err) {
       toast({
         title: _(msg`An unknown error occurred`),
@@ -85,7 +77,22 @@ export const ProfileForm = ({ className }: ProfileFormProps) => {
         ),
         variant: 'destructive',
       });
+
+      return;
     }
+
+    // The save is what this reports, so it fires on the save. Refreshing the
+    // session is a second read that can be slow, fail, or come back
+    // unauthenticated — and an unauthenticated read clears the session, which
+    // takes down the subtree holding the toaster. Confirming first means the
+    // save is always confirmed.
+    toast({
+      title: _(msg`Profile updated`),
+      description: _(msg`Your profile has been updated successfully.`),
+      duration: 5000,
+    });
+
+    await refreshSession();
   };
 
   return (

@@ -64,9 +64,9 @@ CLAUDE.md
 # scripts
 scripts/output*
 
-# license
-.hanzo-sign-license.json
-.hanzo-sign-license-backup.json
+# license — the names LICENSE_FILE_NAME in packages/lib/types/license.ts writes
+.sign-license.json
+.sign-license-backup.json
 
 # tmp
 tmp/

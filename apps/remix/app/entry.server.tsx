@@ -1,3 +1,5 @@
+import { StrictMode } from 'react';
+
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { createReadableStreamFromReadable } from '@react-router/node';
@@ -40,9 +42,14 @@ export default async function handleRequest(
       (userAgent && isbot(userAgent)) || routerContext.isSpaMode ? 'onAllReady' : 'onShellReady';
 
     const { pipe, abort } = renderToPipeableStream(
-      <I18nProvider i18n={i18n}>
-        <ServerRouter context={routerContext} url={request.url} />
-      </I18nProvider>,
+      // Shaped exactly like entry.client's tree, StrictMode included — see the
+      // note there. StrictMode does nothing on the server beyond occupying the
+      // same slot the client gives it.
+      <StrictMode>
+        <I18nProvider i18n={i18n}>
+          <ServerRouter context={routerContext} url={request.url} />
+        </I18nProvider>
+      </StrictMode>,
       {
         [readyOption]() {
           shellRendered = true;

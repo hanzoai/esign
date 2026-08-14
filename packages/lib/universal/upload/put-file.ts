@@ -2,7 +2,6 @@ import { DocumentDataType } from '@prisma/client';
 import { base64 } from '@scure/base';
 import { match } from 'ts-pattern';
 
-import { env } from '@hanzo/esign-lib/utils/env';
 import type {
   TGetPresignedPostUrlResponse,
   TUploadPdfResponse,
@@ -10,6 +9,7 @@ import type {
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '../../constants/app';
 import { AppError } from '../../errors/app-error';
+import { uploadTransport } from './transport';
 
 type File = {
   name: string;
@@ -46,11 +46,10 @@ export const putPdfFile = async (file: File) => {
  * Uploads a file to the appropriate storage location.
  */
 export const putFile = async (file: File) => {
-  const NEXT_PUBLIC_UPLOAD_TRANSPORT = env('NEXT_PUBLIC_UPLOAD_TRANSPORT');
-
-  return await match(NEXT_PUBLIC_UPLOAD_TRANSPORT)
+  return await match(uploadTransport())
     .with('s3', async () => putFileInS3(file))
-    .otherwise(async () => putFileInDatabase(file));
+    .with('database', async () => putFileInDatabase(file))
+    .exhaustive();
 };
 
 const putFileInDatabase = async (file: File) => {

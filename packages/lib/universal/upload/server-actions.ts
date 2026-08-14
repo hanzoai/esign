@@ -11,6 +11,7 @@ import { env } from '@hanzo/esign-lib/utils/env';
 
 import { ONE_HOUR, ONE_SECOND } from '../../constants/time';
 import { alphaid } from '../id';
+import { uploadTransport } from './transport';
 
 export const getPresignPostUrl = async (fileName: string, contentType: string, userId?: number) => {
   const client = getS3Client();
@@ -138,9 +139,7 @@ export const deleteS3File = async (key: string) => {
 };
 
 const getS3Client = () => {
-  const NEXT_PUBLIC_UPLOAD_TRANSPORT = env('NEXT_PUBLIC_UPLOAD_TRANSPORT');
-
-  if (NEXT_PUBLIC_UPLOAD_TRANSPORT !== 's3') {
+  if (uploadTransport() !== 's3') {
     throw new Error('Invalid upload transport');
   }
 

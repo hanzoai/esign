@@ -3,12 +3,11 @@ import { DocumentDataType } from '@prisma/client';
 import { base64 } from '@scure/base';
 import { match } from 'ts-pattern';
 
-import { env } from '@hanzo/esign-lib/utils/env';
-
 import { AppError } from '../../errors/app-error';
 import { createDocumentData } from '../../server-only/document-data/create-document-data';
 import { normalizePdf } from '../../server-only/pdf/normalize-pdf';
 import { uploadS3File } from './server-actions';
+import { uploadTransport } from './transport';
 
 type File = {
   name: string;
@@ -73,11 +72,10 @@ export const putNormalizedPdfFileServerSide = async (
  * Uploads a file to the appropriate storage location.
  */
 export const putFileServerSide = async (file: File) => {
-  const NEXT_PUBLIC_UPLOAD_TRANSPORT = env('NEXT_PUBLIC_UPLOAD_TRANSPORT');
-
-  return await match(NEXT_PUBLIC_UPLOAD_TRANSPORT)
+  return await match(uploadTransport())
     .with('s3', async () => putFileInS3(file))
-    .otherwise(async () => putFileInDatabase(file));
+    .with('database', async () => putFileInDatabase(file))
+    .exhaustive();
 };
 
 const putFileInDatabase = async (file: File) => {
