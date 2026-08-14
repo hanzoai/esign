@@ -56,7 +56,12 @@ jobs:
           NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: './example/cert.p12'
           DANGEROUS_BYPASS_RATE_LIMITS: 'true'
 
-      - uses: actions/upload-artifact@v4
+      # v3, not v4: @actions/artifact v2 (which upload-artifact v4 uses) refuses
+      # to run against anything it does not recognise as github.com and fails
+      # with GHESNotSupportedError. That failed the job on its own, so a green
+      # suite would still have reported red. The forge keeps artifacts for 30
+      # days and serves the v3 protocol.
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: test-results
