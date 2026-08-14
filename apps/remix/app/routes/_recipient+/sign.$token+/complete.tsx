@@ -13,9 +13,7 @@ import { isRecipientAuthorized } from '@hanzo/esign-lib/server-only/document/is-
 import { getFieldsForToken } from '@hanzo/esign-lib/server-only/field/get-fields-for-token';
 import { getRecipientByToken } from '@hanzo/esign-lib/server-only/recipient/get-recipient-by-token';
 import { getRecipientSignatures } from '@hanzo/esign-lib/server-only/recipient/get-recipient-signatures';
-import { getUserByEmail } from '@hanzo/esign-lib/server-only/user/get-user-by-email';
 import { isDocumentCompleted } from '@hanzo/esign-lib/utils/document';
-import { env } from '@hanzo/esign-lib/utils/env';
 import type { TSigningStatusEnvelopeResponse } from '@hanzo/esign-trpc/server/envelope-router/signing-status-envelope.types';
 import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import { DocumentShareButton } from '@hanzo/esign-ui/components/document/document-share-button';
@@ -25,7 +23,6 @@ import { Badge } from '@hanzo/esign-ui/primitives/badge';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { EnvelopeDownloadDialog } from '~/components/dialogs/envelope-download-dialog';
-import { ClaimAccount } from '~/components/general/claim-account';
 import { DocumentSigningAuthPageView } from '~/components/general/document-signing/document-signing-auth-page';
 
 import type { Route } from './+types/complete';
@@ -72,16 +69,10 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   }
 
   const signatures = await getRecipientSignatures({ recipientId: recipient.id });
-  const isExistingUser = await getUserByEmail({ email: recipient.email })
-    .then((u) => !!u)
-    .catch(() => false);
-
   const recipientName =
     recipient.name ||
     fields.find((field) => field.type === FieldType.NAME)?.customText ||
     recipient.email;
-
-  const canSignUp = !isExistingUser && env('NEXT_PUBLIC_DISABLE_SIGNUP') !== 'true';
 
   const canRedirectToFolder =
     user && document.userId === user.id && document.folderId && document.team?.url;
@@ -92,7 +83,6 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 
   return {
     isDocumentAccessValid: true,
-    canSignUp,
     recipientName,
     recipientEmail: recipient.email,
     signatures,
@@ -110,7 +100,6 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
 
   const {
     isDocumentAccessValid,
-    canSignUp,
     recipientName,
     signatures,
     document,
@@ -146,19 +135,13 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
     <div
       className={cn(
         '-mx-4 flex flex-col items-center overflow-hidden px-4 pt-16 md:-mx-8 md:px-8 lg:pt-20 xl:pt-28',
-        { 'pt-0 lg:pt-0 xl:pt-0': canSignUp },
       )}
     >
       <div
-        className={cn('relative mt-6 flex w-full flex-col items-center justify-center', {
-          'mt-0 flex-col divide-y overflow-hidden pt-6 md:pt-16 lg:flex-row lg:divide-x lg:divide-y-0 lg:pt-20 xl:pt-24':
-            canSignUp,
-        })}
+        className={cn('relative mt-6 flex w-full flex-col items-center justify-center')}
       >
         <div
-          className={cn('flex flex-col items-center', {
-            'mb-8 p-4 md:mb-0 md:p-12': canSignUp,
-          })}
+          className={cn('flex flex-col items-center')}
         >
           <Badge variant="neutral" size="default" className="mb-6 rounded-xl border bg-transparent">
             <span className="block max-w-[10rem] truncate font-medium hover:underline md:max-w-[20rem]">
@@ -275,24 +258,6 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
               </Button>
             )}
           </div>
-        </div>
-
-        <div className="flex flex-col items-center">
-          {canSignUp && (
-            <div className="flex max-w-xl flex-col items-center justify-center p-4 md:p-12">
-              <h2 className="mt-8 text-center text-xl font-semibold md:mt-0">
-                <Trans>Need to sign documents?</Trans>
-              </h2>
-
-              <p className="mt-4 max-w-[55ch] text-center leading-normal text-muted-foreground/60">
-                <Trans>
-                  Create your account and start using state-of-the-art document signing.
-                </Trans>
-              </p>
-
-              <ClaimAccount defaultName={recipientName} defaultEmail={recipient.email} />
-            </div>
-          )}
         </div>
       </div>
     </div>
