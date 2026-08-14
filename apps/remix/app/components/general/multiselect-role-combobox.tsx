@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { Trans } from '@lingui/react/macro';
-import { Role } from '@prisma/client';
 import { Check, ChevronsUpDown } from 'lucide-react';
 
 import { cn } from '@hanzo/esign-ui/lib/utils';
@@ -23,7 +22,9 @@ type ComboboxProps = {
 const MultiSelectRoleCombobox = ({ listValues, onChange }: ComboboxProps) => {
   const [open, setOpen] = React.useState(false);
   const [selectedValues, setSelectedValues] = React.useState<string[]>([]);
-  const dbRoles = Object.values(Role);
+  // `Role` is orphaned on the Base SQLite schema (User.roles is a JSON string[]),
+  // so the generated client no longer exports it. These are the role values.
+  const dbRoles = ['USER', 'ADMIN'];
 
   React.useEffect(() => {
     setSelectedValues(listValues);

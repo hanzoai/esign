@@ -1,4 +1,4 @@
-import { OrganisationType, Role } from '@prisma/client';
+import { OrganisationType } from '@prisma/client';
 import { customAlphabet } from 'nanoid';
 
 import { hashSync } from '@hanzo/esign-lib/server-only/auth/hash';
@@ -44,7 +44,7 @@ export const seedUser = async ({
       email: email.toLowerCase(),
       password: hashSync(password),
       emailVerified: verified ? new Date() : undefined,
-      roles: isAdmin ? [Role.USER, Role.ADMIN] : [Role.USER],
+      roles: isAdmin ? ['USER', 'ADMIN'] : ['USER'],
     },
   });
 
