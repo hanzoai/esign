@@ -13,19 +13,20 @@ import {
   Users,
   WebhookIcon,
 } from 'lucide-react';
-import { Link, useLocation } from 'react-router';
 
 import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
 import { IS_BILLING_ENABLED } from '@hanzo/esign-lib/constants/app';
-import { canExecuteOrganisationAction, isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import {
+  canExecuteOrganisationAction,
+  isPersonalLayout,
+} from '@hanzo/esign-lib/utils/organisations';
 import { cn } from '@hanzo/esign-ui/lib/utils';
-import { Button } from '@hanzo/esign-ui/primitives/button';
+
+import { SettingsNavItem } from '~/components/general/settings-nav-item';
 
 export type SettingsMobileNavProps = HTMLAttributes<HTMLDivElement>;
 
 export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProps) => {
-  const { pathname } = useLocation();
-
   const { organisations } = useSession();
 
   const isPersonalLayoutMode = isPersonalLayout(organisations);
@@ -39,141 +40,64 @@ export const SettingsMobileNav = ({ className, ...props }: SettingsMobileNavProp
       className={cn('flex flex-wrap items-center justify-start gap-x-2 gap-y-4', className)}
       {...props}
     >
-      <Link to="/settings/profile">
-        <Button
-          variant="ghost"
-          className={cn(
-            'w-full justify-start',
-            pathname?.startsWith('/settings/profile') && 'bg-secondary',
-          )}
-        >
-          <User className="mr-2 h-5 w-5" />
-          <Trans>Profile</Trans>
-        </Button>
-      </Link>
+      <SettingsNavItem to="/settings/profile">
+        <User className="mr-2 h-5 w-5" />
+        <Trans>Profile</Trans>
+      </SettingsNavItem>
 
       {isPersonalLayoutMode && (
         <>
-          <Link to="/settings/document">
-            <Button
-              variant="ghost"
-              className={cn(
-                'w-full justify-start',
-                pathname?.startsWith('/settings/document') && 'bg-secondary',
-              )}
-            >
-              <Settings2Icon className="mr-2 h-5 w-5" />
-              <Trans>Document Preferences</Trans>
-            </Button>
-          </Link>
+          <SettingsNavItem to="/settings/document">
+            <Settings2Icon className="mr-2 h-5 w-5" />
+            <Trans>Document Preferences</Trans>
+          </SettingsNavItem>
 
-          <Link to="/settings/branding">
-            <Button
-              variant="ghost"
-              className={cn(
-                'w-full justify-start',
-                pathname?.startsWith('/settings/branding') && 'bg-secondary',
-              )}
-            >
-              <PaletteIcon className="mr-2 h-5 w-5" />
-              <Trans>Branding Preferences</Trans>
-            </Button>
-          </Link>
+          <SettingsNavItem to="/settings/branding">
+            <PaletteIcon className="mr-2 h-5 w-5" />
+            <Trans>Branding Preferences</Trans>
+          </SettingsNavItem>
 
-          <Link to="/settings/email">
-            <Button
-              variant="ghost"
-              className={cn(
-                'w-full justify-start',
-                pathname?.startsWith('/settings/email') && 'bg-secondary',
-              )}
-            >
-              <MailIcon className="mr-2 h-5 w-5" />
-              <Trans>Email Preferences</Trans>
-            </Button>
-          </Link>
+          <SettingsNavItem to="/settings/email">
+            <MailIcon className="mr-2 h-5 w-5" />
+            <Trans>Email Preferences</Trans>
+          </SettingsNavItem>
 
-          <Link to="/settings/public-profile">
-            <Button
-              variant="ghost"
-              className={cn(
-                'w-full justify-start',
-                pathname?.startsWith('/settings/public-profile') && 'bg-secondary',
-              )}
-            >
-              <Globe2Icon className="mr-2 h-5 w-5" />
-              <Trans>Public Profile</Trans>
-            </Button>
-          </Link>
+          <SettingsNavItem to="/settings/public-profile">
+            <Globe2Icon className="mr-2 h-5 w-5" />
+            <Trans>Public Profile</Trans>
+          </SettingsNavItem>
 
-          <Link to="/settings/tokens">
-            <Button
-              variant="ghost"
-              className={cn(
-                'w-full justify-start',
-                pathname?.startsWith('/settings/tokens') && 'bg-secondary',
-              )}
-            >
-              <BracesIcon className="mr-2 h-5 w-5" />
-              <Trans>API Tokens</Trans>
-            </Button>
-          </Link>
+          <SettingsNavItem to="/settings/tokens">
+            <BracesIcon className="mr-2 h-5 w-5" />
+            <Trans>API Tokens</Trans>
+          </SettingsNavItem>
 
-          <Link to="/settings/webhooks">
-            <Button
-              variant="ghost"
-              className={cn(
-                'w-full justify-start',
-                pathname?.startsWith('/settings/webhooks') && 'bg-secondary',
-              )}
-            >
-              <WebhookIcon className="mr-2 h-5 w-5" />
-              <Trans>Webhooks</Trans>
-            </Button>
-          </Link>
+          <SettingsNavItem to="/settings/webhooks">
+            <WebhookIcon className="mr-2 h-5 w-5" />
+            <Trans>Webhooks</Trans>
+          </SettingsNavItem>
         </>
       )}
 
-      <Link to="/settings/organisations">
-        <Button
-          variant="ghost"
-          className={cn(
-            'w-full justify-start',
-            pathname?.startsWith('/settings/organisations') && 'bg-secondary',
-          )}
-        >
-          <Users className="mr-2 h-5 w-5" />
-          <Trans>Organisations</Trans>
-        </Button>
-      </Link>
+      <SettingsNavItem to="/settings/organisations">
+        <Users className="mr-2 h-5 w-5" />
+        <Trans>Organisations</Trans>
+      </SettingsNavItem>
 
       {IS_BILLING_ENABLED() && hasManageableBillingOrgs && (
-        <Link to={isPersonalLayoutMode ? '/settings/billing-personal' : `/settings/billing`}>
-          <Button
-            variant="ghost"
-            className={cn(
-              'w-full justify-start',
-              pathname?.startsWith('/settings/billing') && 'bg-secondary',
-            )}
-          >
-            <CreditCardIcon className="mr-2 h-5 w-5" />
-            <Trans>Billing</Trans>
-          </Button>
-        </Link>
+        <SettingsNavItem
+          to={isPersonalLayoutMode ? '/settings/billing-personal' : '/settings/billing'}
+          match="/settings/billing"
+        >
+          <CreditCardIcon className="mr-2 h-5 w-5" />
+          <Trans>Billing</Trans>
+        </SettingsNavItem>
       )}
 
-      <Link to="/settings/security">
-        <Button
-          variant="ghost"
-          className={cn(
-            'w-full justify-start',
-            pathname?.startsWith('/settings/security') && 'bg-secondary',
-          )}
-        >
-          <Lock className="mr-2 h-5 w-5" />
-          <Trans>Security</Trans>
-        </Button>
-      </Link>
+      <SettingsNavItem to="/settings/security">
+        <Lock className="mr-2 h-5 w-5" />
+        <Trans>Security</Trans>
+      </SettingsNavItem>
     </div>
   );
 };

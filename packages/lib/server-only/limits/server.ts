@@ -10,7 +10,7 @@ export type GetServerLimitsOptions = {
 };
 
 /**
- * Hanzo eSign is fully AGPL — no paywalls, no plan tiers. Every team gets the
+ * Hanzo Sign is fully AGPL — no paywalls, no plan tiers. Every team gets the
  * self-hosted unlimited limits.
  */
 export const getServerLimits = async ({

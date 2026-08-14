@@ -10,17 +10,17 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## Overview
 
-Verifying webhook requests ensures that incoming payloads originate from Hanzo eSign and have not been tampered with. Without verification, attackers could forge requests to your endpoint and trigger unintended actions.
+Verifying webhook requests ensures that incoming payloads originate from Hanzo Sign and have not been tampered with. Without verification, attackers could forge requests to your endpoint and trigger unintended actions.
 
-## How Hanzo eSign Signs Webhooks
+## How Hanzo Sign Signs Webhooks
 
-When you configure a webhook with a secret, Hanzo eSign includes that secret in every webhook request via the `X-Hanzo eSign-Secret` header. Your server should compare this header value against your stored secret to authenticate the request.
+When you configure a webhook with a secret, Hanzo Sign includes that secret in every webhook request via the `X-Hanzo-Secret` header. Your server should compare this header value against your stored secret to authenticate the request.
 
 ```bash
 POST /your-webhook-endpoint HTTP/1.1
 Host: your-server.com
 Content-Type: application/json
-X-Hanzo eSign-Secret: your_webhook_secret_here
+X-Hanzo-Secret: your_webhook_secret_here
 
 {"event": "DOCUMENT_COMPLETED", "payload": {...}}
 ```
@@ -29,7 +29,7 @@ X-Hanzo eSign-Secret: your_webhook_secret_here
 
 | Header               | Description                                             |
 | -------------------- | ------------------------------------------------------- |
-| `X-Hanzo eSign-Secret` | The secret key you configured when creating the webhook |
+| `X-Hanzo-Secret` | The secret key you configured when creating the webhook |
 
 The header contains your webhook secret as a plain string. If you did not configure a secret, the header will be an empty string.
 
@@ -38,7 +38,7 @@ The header contains your webhook secret as a plain string. If you did not config
 {/* prettier-ignore */}
 <Steps>
   <Step>
-    Extract the `X-Hanzo eSign-Secret` header from the incoming request
+    Extract the `X-Hanzo-Secret` header from the incoming request
   </Step>
   <Step>
     Compare it against your stored webhook secret using a constant-time comparison
@@ -139,7 +139,7 @@ def verify_webhook_signature(received_secret, expected_secret):
 
 @app.route('/webhooks/hanzo-sign', methods=['POST'])
 def handle_webhook():
-    received_secret = request.headers.get('X-Hanzo eSign-Secret', '')
+    received_secret = request.headers.get('X-Hanzo-Secret', '')
 
     if not verify_webhook_signature(received_secret, WEBHOOK_SECRET):
         print('Webhook verification failed')
@@ -197,8 +197,8 @@ app.post('/webhooks/hanzo-sign', (req, res) => {
 
 | Issue           | Cause                                   | Solution                                                           |
 | --------------- | --------------------------------------- | ------------------------------------------------------------------ |
-| Secret mismatch | Webhook secret changed or misconfigured | Verify the secret in your environment matches the one in Hanzo eSign |
-| Empty header    | Webhook created without a secret        | Add a secret to the webhook configuration in Hanzo eSign             |
+| Secret mismatch | Webhook secret changed or misconfigured | Verify the secret in your environment matches the one in Hanzo Sign |
+| Empty header    | Webhook created without a secret        | Add a secret to the webhook configuration in Hanzo Sign             |
 | Encoding issues | String encoding mismatch                | Ensure both secrets use the same encoding (UTF-8)                  |
 
 ## Security Best Practices
@@ -230,7 +230,7 @@ const WEBHOOK_SECRET = 'my-secret-key'; // Never do this
 
 1. Generate a new secret
 2. Update your server to accept both old and new secrets temporarily
-3. Update the webhook configuration in Hanzo eSign
+3. Update the webhook configuration in Hanzo Sign
 4. Remove the old secret from your server
 
 </Accordion>

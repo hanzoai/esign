@@ -140,18 +140,18 @@ export const linkOrganisationAccount = async ({
           });
         }
       }
-
-      // Only add the user to the organisation if they are not already a member.
-      if (!organisationMember) {
-        await addUserToOrganisation({
-          userId: user.id,
-          organisationId: tokenMetadata.data.organisationId,
-          organisationGroups: organisation.groups,
-          organisationMemberRole:
-            organisation.organisationAuthenticationPortal.defaultOrganisationRole,
-        });
-      }
     },
     { timeout: 30_000 },
   );
+
+  // Membership carries its own transaction, so it runs once the link above has
+  // committed and released the write lock.
+  if (!organisationMember) {
+    await addUserToOrganisation({
+      userId: user.id,
+      organisationId: tokenMetadata.data.organisationId,
+      organisationGroups: organisation.groups,
+      organisationMemberRole: organisation.organisationAuthenticationPortal.defaultOrganisationRole,
+    });
+  }
 };

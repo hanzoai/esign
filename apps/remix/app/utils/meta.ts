@@ -1,7 +1,7 @@
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
 import { env } from '@hanzo/esign-lib/utils/env';
 
-const APP_NAME = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo eSign';
+const APP_NAME = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo Sign';
 const COMPANY_NAME = env('NEXT_PUBLIC_COMPANY_NAME') || 'Hanzo AI, Inc.';
 const TWITTER_HANDLE = env('NEXT_PUBLIC_TWITTER_HANDLE') || '@hanzoai';
 

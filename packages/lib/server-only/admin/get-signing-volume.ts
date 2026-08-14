@@ -56,7 +56,8 @@ export async function getSigningVolume({
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where(sql`lower(t.name)`, 'like', needle),
+            .where(sql`lower(t.name)`, 'like', needle)
+            .select(sql.lit(1).as('one')),
         ),
       ]),
     )
@@ -101,7 +102,8 @@ export async function getSigningVolume({
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where(sql`lower(t.name)`, 'like', needle),
+            .where(sql`lower(t.name)`, 'like', needle)
+            .select(sql.lit(1).as('one')),
         ),
       ]),
     )
@@ -176,7 +178,8 @@ export async function getOrganisationInsights({
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where(sql`lower(t.name)`, 'like', needle),
+            .where(sql`lower(t.name)`, 'like', needle)
+            .select(sql.lit(1).as('one')),
         ),
       ]),
     )
@@ -235,7 +238,8 @@ export async function getOrganisationInsights({
           eb
             .selectFrom('Team as t')
             .whereRef('t.organisationId', '=', 'o.id')
-            .where(sql`lower(t.name)`, 'like', needle),
+            .where(sql`lower(t.name)`, 'like', needle)
+            .select(sql.lit(1).as('one')),
         ),
       ]),
     )

@@ -608,8 +608,8 @@ msgid "<0>{organisationName}</0> has requested to create an account on your beha
 msgstr "<0>{organisationName}</0> has requested to create an account on your behalf."
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "<0>{organisationName}</0> has requested to link your current Hanzo eSign account to their organisation."
-msgstr "<0>{organisationName}</0> has requested to link your current Hanzo eSign account to their organisation."
+msgid "<0>{organisationName}</0> has requested to link your current Hanzo Sign account to their organisation."
+msgstr "<0>{organisationName}</0> has requested to link your current Hanzo Sign account to their organisation."
 
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
 msgid "<0>{senderName} {senderEmail}</0> has invited you to approve this document"
@@ -648,8 +648,8 @@ msgid "<0>{senderName} {senderEmail}</0> on behalf of \"{0}\" has invited you to
 msgstr "<0>{senderName} {senderEmail}</0> on behalf of \"{0}\" has invited you to view this document"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "<0>{teamName}</0> has requested to use your email address for their team on Hanzo eSign."
-msgstr "<0>{teamName}</0> has requested to use your email address for their team on Hanzo eSign."
+msgid "<0>{teamName}</0> has requested to use your email address for their team on Hanzo Sign."
+msgstr "<0>{teamName}</0> has requested to use your email address for their team on Hanzo Sign."
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "<0>Account management:</0> Modify your account settings, permissions, and preferences"
@@ -877,8 +877,8 @@ msgid "A means to print or download documents for your records"
 msgstr "A means to print or download documents for your records"
 
 #: packages/email/templates/organisation-join.tsx
-msgid "A member has joined your organisation on Hanzo eSign"
-msgstr "A member has joined your organisation on Hanzo eSign"
+msgid "A member has joined your organisation on Hanzo Sign"
+msgstr "A member has joined your organisation on Hanzo Sign"
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-left-email.handler.ts
 msgid "A member has left your organisation"
@@ -889,8 +889,8 @@ msgid "A member has left your organisation {organisationName}"
 msgstr "A member has left your organisation {organisationName}"
 
 #: packages/email/templates/organisation-leave.tsx
-msgid "A member has left your organisation on Hanzo eSign"
-msgstr "A member has left your organisation on Hanzo eSign"
+msgid "A member has left your organisation on Hanzo Sign"
+msgstr "A member has left your organisation on Hanzo Sign"
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-joined-email.handler.ts
 msgid "A new member has joined your organisation"
@@ -929,18 +929,18 @@ msgid "A request has been made to create an account for you"
 msgstr "A request has been made to create an account for you"
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "A request has been made to link your Hanzo eSign account"
-msgstr "A request has been made to link your Hanzo eSign account"
+msgid "A request has been made to link your Hanzo Sign account"
+msgstr "A request has been made to link your Hanzo Sign account"
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/create-team-email-verification.ts
-msgid "A request to use your email has been initiated by {0} on Hanzo eSign"
-msgstr "A request to use your email has been initiated by {0} on Hanzo eSign"
+msgid "A request to use your email has been initiated by {0} on Hanzo Sign"
+msgstr "A request to use your email has been initiated by {0} on Hanzo Sign"
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
-msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo eSign."
-msgstr "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo eSign."
+msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo Sign."
+msgstr "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo Sign."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "A stable internet connection"
@@ -983,12 +983,12 @@ msgid "Accept & Link Account"
 msgstr "Accept & Link Account"
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Accept invitation to join an organisation on Hanzo eSign"
-msgstr "Accept invitation to join an organisation on Hanzo eSign"
+msgid "Accept invitation to join an organisation on Hanzo Sign"
+msgstr "Accept invitation to join an organisation on Hanzo Sign"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "Accept team email request for {teamName} on Hanzo eSign"
-msgstr "Accept team email request for {teamName} on Hanzo eSign"
+msgid "Accept team email request for {teamName} on Hanzo Sign"
+msgstr "Accept team email request for {teamName} on Hanzo Sign"
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
 msgid "Acceptance and Consent"
@@ -1546,10 +1546,6 @@ msgstr "An email with this address already exists."
 msgid "An error occurred"
 msgstr "An error occurred"
 
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-msgid "An error occurred during upload."
-msgstr "An error occurred during upload."
-
 #: apps/remix/app/components/general/template/template-edit-form.tsx
 msgid "An error occurred while adding fields."
 msgstr "An error occurred while adding fields."
@@ -1726,10 +1722,13 @@ msgstr "An error occurred while updating the signature."
 msgid "An error occurred while updating your profile."
 msgstr "An error occurred while updating your profile."
 
-#: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/upload-error.ts
 msgid "An error occurred while uploading your document."
 msgstr "An error occurred while uploading your document."
+
+#: apps/remix/app/components/general/envelope/upload-error.ts
+msgid "An error occurred while uploading your template."
+msgstr "An error occurred while uploading your template."
 
 #: apps/remix/app/components/forms/support-ticket-form.tsx
 msgid "An error occurred. Please try again later."
@@ -2207,8 +2206,8 @@ msgid "By enabling 2FA, you will be required to enter a code from your authentic
 msgstr "By enabling 2FA, you will be required to enter a code from your authenticator app every time you sign in using email password."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
-msgid "By proceeding to use the electronic signature service provided by Hanzo eSign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
-msgstr "By proceeding to use the electronic signature service provided by Hanzo eSign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
+msgid "By proceeding to use the electronic signature service provided by Hanzo Sign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
+msgstr "By proceeding to use the electronic signature service provided by Hanzo Sign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
 
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
 msgid "By proceeding with your electronic signature, you acknowledge and consent that it will be used to sign the given document and holds the same legal validity as a handwritten signature. By completing the electronic signing process, you affirm your understanding and acceptance of these conditions."
@@ -3564,10 +3563,6 @@ msgstr "Disabling direct link signing will prevent anyone from accessing the lin
 #: apps/remix/app/components/dialogs/admin-user-disable-dialog.tsx
 msgid "Disabling the user results in the user not being able to use the account. It also disables all the related contents such as subscription, webhooks, teams, and API keys."
 msgstr "Disabling the user results in the user not being able to use the account. It also disables all the related contents such as subscription, webhooks, teams, and API keys."
-
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
-msgid "Discord"
-msgstr "Discord"
 
 #: apps/remix/app/components/dialogs/organisation-email-create-dialog.tsx
 #: apps/remix/app/components/dialogs/organisation-email-update-dialog.tsx
@@ -5242,12 +5237,12 @@ msgid "Groups"
 msgstr "Groups"
 
 #: apps/remix/app/components/general/admin-license-card.tsx
-msgid "Hanzo eSign License"
-msgstr "Hanzo eSign License"
+msgid "Hanzo Sign License"
+msgstr "Hanzo Sign License"
 
 #: apps/remix/app/components/dialogs/account-delete-dialog.tsx
-msgid "Hanzo eSign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
-msgstr "Hanzo eSign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
+msgid "Hanzo Sign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
+msgstr "Hanzo Sign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-recipient-form.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-recipient-form.tsx
@@ -5562,8 +5557,8 @@ msgid "Invalid License Key"
 msgstr "Invalid License Key"
 
 #: apps/remix/app/components/general/admin-license-status-banner.tsx
-msgid "Invalid License Type - Your Hanzo eSign instance is using features that are not part of your license."
-msgstr "Invalid License Type - Your Hanzo eSign instance is using features that are not part of your license."
+msgid "Invalid License Type - Your Hanzo Sign instance is using features that are not part of your license."
+msgstr "Invalid License Type - Your Hanzo Sign instance is using features that are not part of your license."
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Invalid link"
@@ -5685,12 +5680,8 @@ msgid "Japanese"
 msgstr "Japanese"
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Join {organisationName} on Hanzo eSign"
-msgstr "Join {organisationName} on Hanzo eSign"
-
-#: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
-msgid "Join our community on <0>Discord</0> for community support and discussion."
-msgstr "Join our community on <0>Discord</0> for community support and discussion."
+msgid "Join {organisationName} on Hanzo Sign"
+msgstr "Join {organisationName} on Hanzo Sign"
 
 #: apps/remix/app/components/tables/organisation-insights-table.tsx
 msgid "Joined"
@@ -5879,8 +5870,8 @@ msgid "Link template"
 msgstr "Link template"
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "Link your Hanzo eSign account"
-msgstr "Link your Hanzo eSign account"
+msgid "Link your Hanzo Sign account"
+msgstr "Link your Hanzo Sign account"
 
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
@@ -6158,6 +6149,10 @@ msgstr "Member Since"
 msgid "Members"
 msgstr "Members"
 
+#: apps/remix/app/components/general/app-header.tsx
+msgid "Menu"
+msgstr "Menu"
+
 #: apps/remix/app/components/forms/support-ticket-form.tsx
 msgid "Message"
 msgstr "Message"
@@ -6180,8 +6175,8 @@ msgid "Min"
 msgstr "Min"
 
 #: apps/remix/app/components/general/admin-license-status-banner.tsx
-msgid "Missing License - Your Hanzo eSign instance is using features that require a license."
-msgstr "Missing License - Your Hanzo eSign instance is using features that require a license."
+msgid "Missing License - Your Hanzo Sign instance is using features that require a license."
+msgstr "Missing License - Your Hanzo Sign instance is using features that require a license."
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 msgid "Missing Recipients"
@@ -7437,8 +7432,8 @@ msgid "Read Only"
 msgstr "Read Only"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
-msgid "Read our documentation to get started with Hanzo eSign."
-msgstr "Read our documentation to get started with Hanzo eSign."
+msgid "Read our documentation to get started with Hanzo Sign."
+msgstr "Read our documentation to get started with Hanzo Sign."
 
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
 msgid "Read the full <0>signature disclosure</0>."
@@ -7926,8 +7921,8 @@ msgid "Return to documents"
 msgstr "Return to documents"
 
 #: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
-msgid "Return to Hanzo eSign sign in page here"
-msgstr "Return to Hanzo eSign sign in page here"
+msgid "Return to Hanzo Sign sign in page here"
+msgstr "Return to Hanzo Sign sign in page here"
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.decline.$token.tsx
 msgid "Return to Home"
@@ -8018,6 +8013,7 @@ msgstr "Seal job triggered"
 msgid "Sealing job started"
 msgstr "Sealing job started"
 
+#: apps/remix/app/components/general/app-header.tsx
 #: apps/remix/app/components/general/app-nav-desktop.tsx
 #: apps/remix/app/components/tables/documents-table-sender-filter.tsx
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.members.tsx
@@ -8562,10 +8558,6 @@ msgstr "Signature ID"
 msgid "Signature is too small"
 msgstr "Signature is too small"
 
-#: apps/remix/app/components/forms/profile.tsx
-msgid "Signature Pad cannot be empty."
-msgstr "Signature Pad cannot be empty."
-
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
 msgid "Signature Settings"
 msgstr "Signature Settings"
@@ -9053,8 +9045,8 @@ msgstr "Team"
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/delete-team.ts
-msgid "Team \"{0}\" has been deleted on Hanzo eSign"
-msgstr "Team \"{0}\" has been deleted on Hanzo eSign"
+msgid "Team \"{0}\" has been deleted on Hanzo Sign"
+msgstr "Team \"{0}\" has been deleted on Hanzo Sign"
 
 #: packages/lib/constants/teams-translations.ts
 msgid "Team Admin"
@@ -9096,8 +9088,8 @@ msgid "Team email removed"
 msgstr "Team email removed"
 
 #: packages/email/templates/team-email-removed.tsx
-msgid "Team email removed for {teamName} on Hanzo eSign"
-msgstr "Team email removed for {teamName} on Hanzo eSign"
+msgid "Team email removed for {teamName} on Hanzo Sign"
+msgstr "Team email removed for {teamName} on Hanzo Sign"
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
 msgid "Team email verification"
@@ -9352,8 +9344,8 @@ msgid "Thank you for completing the signing process."
 msgstr "Thank you for completing the signing process."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
-msgid "Thank you for using Hanzo eSign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
-msgstr "Thank you for using Hanzo eSign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
+msgid "Thank you for using Hanzo Sign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
+msgstr "Thank you for using Hanzo Sign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
 
 #: packages/email/template-components/template-forgot-password.tsx
 msgid "That's okay, it happens! Click the button below to reset your password."
@@ -9703,8 +9695,8 @@ msgstr "The types of signatures that recipients are allowed to use when signing 
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
-msgid "The URL for Hanzo eSign to send webhook events to."
-msgstr "The URL for Hanzo eSign to send webhook events to."
+msgid "The URL for Hanzo Sign to send webhook events to."
+msgstr "The URL for Hanzo Sign to send webhook events to."
 
 #: apps/remix/app/routes/_authenticated+/admin+/users.$id.tsx
 msgid "The user you are looking for may have been removed, renamed or may have never existed."
@@ -9834,8 +9826,8 @@ msgid "This document has been signed by all recipients"
 msgstr "This document has been signed by all recipients"
 
 #: apps/remix/app/components/general/document/document-certificate-qr-view.tsx
-msgid "This document is available in your Hanzo eSign account. You can view more details, recipients, and audit logs there."
-msgstr "This document is available in your Hanzo eSign account. You can view more details, recipients, and audit logs there."
+msgid "This document is available in your Hanzo Sign account. You can view more details, recipients, and audit logs there."
+msgstr "This document is available in your Hanzo Sign account. You can view more details, recipients, and audit logs there."
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
 msgid "This document is currently a draft and has not been sent"
@@ -9854,8 +9846,8 @@ msgid "This document was created using a direct link."
 msgstr "This document was created using a direct link."
 
 #: packages/email/template-components/template-footer.tsx
-msgid "This document was sent using <0>Hanzo eSign</0>."
-msgstr "This document was sent using <0>Hanzo eSign</0>."
+msgid "This document was sent using <0>Hanzo Sign</0>."
+msgstr "This document was sent using <0>Hanzo Sign</0>."
 
 #: apps/remix/app/components/dialogs/envelope-duplicate-dialog.tsx
 msgid "This document will be duplicated."
@@ -11052,8 +11044,8 @@ msgstr "Waiting for Your Turn"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
-msgid "Want to send slick signing links like this one? <0>Check out Hanzo eSign</0>."
-msgstr "Want to send slick signing links like this one? <0>Check out Hanzo eSign</0>."
+msgid "Want to send slick signing links like this one? <0>Check out Hanzo Sign</0>."
+msgstr "Want to send slick signing links like this one? <0>Check out Hanzo Sign</0>."
 
 #: apps/remix/app/routes/_profile+/_layout.tsx
 msgid "Want your own public profile?"
@@ -11450,8 +11442,8 @@ msgid "Welcome to {organisationName}"
 msgstr "Welcome to {organisationName}"
 
 #: packages/email/template-components/template-confirmation-email.tsx
-msgid "Welcome to Hanzo eSign!"
-msgstr "Welcome to Hanzo eSign!"
+msgid "Welcome to Hanzo Sign!"
+msgstr "Welcome to Hanzo Sign!"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
 msgid "Well-known URL is required"
@@ -11489,8 +11481,8 @@ msgid "Whether to enable the SSO portal for your organisation"
 msgstr "Whether to enable the SSO portal for your organisation"
 
 #: apps/remix/app/routes/_profile+/p.$url.tsx
-msgid "While waiting for them to do so you can create your own Hanzo eSign account and get started with document signing right away."
-msgstr "While waiting for them to do so you can create your own Hanzo eSign account and get started with document signing right away."
+msgid "While waiting for them to do so you can create your own Hanzo Sign account and get started with document signing right away."
+msgstr "While waiting for them to do so you can create your own Hanzo Sign account and get started with document signing right away."
 
 #: apps/remix/app/components/dialogs/document-resend-dialog.tsx
 msgid "Who do you want to remind?"
@@ -11718,8 +11710,8 @@ msgid "You can only detect fields in draft envelopes"
 msgstr "You can only detect fields in draft envelopes"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "You can revoke access at any time in your team settings on Hanzo eSign <0>here</0>."
-msgstr "You can revoke access at any time in your team settings on Hanzo eSign <0>here</0>."
+msgid "You can revoke access at any time in your team settings on Hanzo Sign <0>here</0>."
+msgstr "You can revoke access at any time in your team settings on Hanzo Sign <0>here</0>."
 
 #: apps/remix/app/components/forms/public-profile-form.tsx
 msgid "You can update the profile URL by updating the team URL in the general settings page."
@@ -11776,9 +11768,7 @@ msgstr "You cannot remove members from this team if the inherit member feature i
 msgid "You cannot upload documents at this time."
 msgstr "You cannot upload documents at this time."
 
-#: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/upload-error.ts
 msgid "You cannot upload encrypted PDFs."
 msgstr "You cannot upload encrypted PDFs."
 
@@ -11841,8 +11831,8 @@ msgstr "You have been invited by <0>{0}</0> to join their organisation."
 
 #. placeholder {0}: organisation.name
 #: packages/lib/server-only/organisation/create-organisation-member-invites.ts
-msgid "You have been invited to join {0} on Hanzo eSign"
-msgstr "You have been invited to join {0} on Hanzo eSign"
+msgid "You have been invited to join {0} on Hanzo Sign"
+msgstr "You have been invited to join {0} on Hanzo Sign"
 
 #: packages/email/templates/organisation-invite.tsx
 msgid "You have been invited to join the following organisation"
@@ -11880,9 +11870,7 @@ msgstr "You have not yet created any templates. To create a template please uplo
 msgid "You have not yet created or received any documents. To create a document please upload one."
 msgstr "You have not yet created or received any documents. To create a document please upload one."
 
-#: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/upload-error.ts
 msgid "You have reached the limit of the number of files per envelope."
 msgstr "You have reached the limit of the number of files per envelope."
 
@@ -11895,9 +11883,7 @@ msgstr "You have reached the maximum limit of {0} direct templates. <0>Upgrade y
 msgid "You have reached the maximum number of teams for your plan. Please contact sales at <0>{SUPPORT_EMAIL}</0> if you would like to adjust your plan."
 msgstr "You have reached the maximum number of teams for your plan. Please contact sales at <0>{SUPPORT_EMAIL}</0> if you would like to adjust your plan."
 
-#: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/upload-error.ts
 msgid "You have reached your document limit for this month. Please upgrade your plan."
 msgstr "You have reached your document limit for this month. Please upgrade your plan."
 
@@ -12358,12 +12344,12 @@ msgid "Your Email"
 msgstr "Your Email"
 
 #: apps/remix/app/routes/_unauthenticated+/verify-email.$token.tsx
-msgid "Your email has already been confirmed. You can now use all features of Hanzo eSign."
-msgstr "Your email has already been confirmed. You can now use all features of Hanzo eSign."
+msgid "Your email has already been confirmed. You can now use all features of Hanzo Sign."
+msgstr "Your email has already been confirmed. You can now use all features of Hanzo Sign."
 
 #: apps/remix/app/routes/_unauthenticated+/verify-email.$token.tsx
-msgid "Your email has been successfully confirmed! You can now use all features of Hanzo eSign."
-msgstr "Your email has been successfully confirmed! You can now use all features of Hanzo eSign."
+msgid "Your email has been successfully confirmed! You can now use all features of Hanzo Sign."
+msgstr "Your email has been successfully confirmed! You can now use all features of Hanzo Sign."
 
 #. placeholder {0}: teamEmail.team.name
 #. placeholder {1}: teamEmail.team.url

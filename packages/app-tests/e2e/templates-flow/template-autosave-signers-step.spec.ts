@@ -90,7 +90,7 @@ test.describe('AutoSave Signers Step - Templates', () => {
 
     await addSignerAndSave(page);
 
-    await page.getByPlaceholder('Name').fill('Hanzo eSign Manager');
+    await page.getByPlaceholder('Name').fill('Hanzo Sign Manager');
     await page.getByPlaceholder('Email').fill('manager@esign.hanzo.ai');
 
     await triggerAutosave(page);
@@ -109,7 +109,7 @@ test.describe('AutoSave Signers Step - Templates', () => {
 
       expect(retrievedRecipients.length).toBe(1);
       expect(retrievedRecipients[0].email).toBe('manager@esign.hanzo.ai');
-      expect(retrievedRecipients[0].name).toBe('Hanzo eSign Manager');
+      expect(retrievedRecipients[0].name).toBe('Hanzo Sign Manager');
       expect(retrievedRecipients[0].role).toBe('CC');
     }).toPass();
   });

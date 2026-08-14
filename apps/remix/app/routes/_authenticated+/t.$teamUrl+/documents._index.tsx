@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Trans } from '@lingui/react/macro';
 import { EnvelopeType } from '@prisma/client';
@@ -57,6 +57,8 @@ export default function DocumentsPage() {
 
   const { folderId } = useParams();
   const [searchParams] = useSearchParams();
+
+  const filterStripRef = useRef<HTMLDivElement>(null);
 
   const [isMovingDocument, setIsMovingDocument] = useState(false);
   const [documentToMove, setDocumentToMove] = useState<number | null>(null);
@@ -130,6 +132,14 @@ export default function DocumentsPage() {
     }
   }, [data?.stats]);
 
+  // The strip scrolls sideways when it is wider than the viewport, so bring the
+  // selected filter into view.
+  useEffect(() => {
+    filterStripRef.current
+      ?.querySelector('[data-state="active"]')
+      ?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }, [findDocumentSearchParams.status]);
+
   return (
     <EnvelopeDropZoneWrapper type={EnvelopeType.DOCUMENT}>
       <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
@@ -148,7 +158,11 @@ export default function DocumentsPage() {
           </div>
 
           <div className="-m-1 flex flex-wrap gap-x-4 gap-y-6 overflow-hidden p-1">
-            <Tabs value={findDocumentSearchParams.status || 'ALL'} className="overflow-x-auto">
+            <Tabs
+              ref={filterStripRef}
+              value={findDocumentSearchParams.status || 'ALL'}
+              className="overflow-x-auto"
+            >
               <TabsList>
                 {[
                   ExtendedDocumentStatus.INBOX,

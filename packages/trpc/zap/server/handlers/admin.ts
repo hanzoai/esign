@@ -14,12 +14,12 @@
 // `roles` needed for `isAdmin`. So every handler below calls `assertAdmin(ctx)`
 // first, which loads the caller's roles via getUserById and replicates the
 // exact `isAdmin` check — re-asserting the admin boundary the middleware enforced.
+import type { Prisma } from '@prisma/client';
 import {
   EnvelopeType,
   OrganisationGroupType,
   OrganisationMemberRole,
   OrganisationType,
-  Prisma,
   SubscriptionStatus,
 } from '@prisma/client';
 
@@ -718,17 +718,17 @@ export const adminRoutes: ZapRouteMap = {
         },
         data,
       });
-
-      if (Object.keys(newlyEnabledFlags).length > 0) {
-        await jobsClient.triggerJob({
-          name: 'internal.backport-subscription-claims',
-          payload: {
-            subscriptionClaimId: id,
-            flags: newlyEnabledFlags,
-          },
-        });
-      }
     });
+
+    if (Object.keys(newlyEnabledFlags).length > 0) {
+      await jobsClient.triggerJob({
+        name: 'internal.backport-subscription-claims',
+        payload: {
+          subscriptionClaimId: id,
+          flags: newlyEnabledFlags,
+        },
+      });
+    }
   },
 
   'admin.claims.delete': async (ctx: ZapContext, raw) => {

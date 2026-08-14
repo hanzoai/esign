@@ -1,6 +1,6 @@
 ---
 title: Backups
-description: Backup strategies for Hanzo eSign data.
+description: Backup strategies for Hanzo Sign data.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -9,7 +9,7 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 
 ## What to Back Up
 
-Hanzo eSign stores data in three locations:
+Hanzo Sign stores data in three locations:
 
 | Component             | Location                      | Contains                                            |
 | --------------------- | ----------------------------- | --------------------------------------------------- |
@@ -71,7 +71,7 @@ docker compose cp \
 </Tabs>
 
 The `.backup` command copies the live database (including the WAL) into a new,
-self-contained file. It is safe to run while Hanzo eSign is serving traffic.
+self-contained file. It is safe to run while Hanzo Sign is serving traffic.
 
 ### Plain File Copy (App Stopped)
 
@@ -201,7 +201,7 @@ For disaster recovery, enable cross-region replication on your S3 bucket. This a
 
 ## Automated Backup Script
 
-Create a script to back up all Hanzo eSign components:
+Create a script to back up all Hanzo Sign components:
 
 <Tabs items={['Standalone', 'Docker Compose']}>
 <Tab value="Standalone">
@@ -228,7 +228,7 @@ S3_BUCKET="your-hanzo-sign-bucket"
 # Create backup directory
 mkdir -p "$BACKUP_DIR/$TIMESTAMP"
 
-echo "Starting Hanzo eSign backup: $TIMESTAMP"
+echo "Starting Hanzo Sign backup: $TIMESTAMP"
 
 # Database backup
 echo "Backing up database..."
@@ -355,7 +355,7 @@ Create `/etc/systemd/system/hanzo-sign-backup.service`:
 
 ```ini
 [Unit]
-Description=Hanzo eSign Backup
+Description=Hanzo Sign Backup
 
 [Service]
 Type=oneshot
@@ -367,7 +367,7 @@ Create `/etc/systemd/system/hanzo-sign-backup.timer`:
 
 ```ini
 [Unit]
-Description=Daily Hanzo eSign Backup
+Description=Daily Hanzo Sign Backup
 
 [Timer]
 OnCalendar=*-*-* 02:00:00
@@ -452,7 +452,7 @@ aws s3 sync /backup/hanzo-sign/documents/ s3://your-hanzo-sign-bucket
 {/* prettier-ignore */}
 <Steps>
 <Step>
-### Stop Hanzo eSign
+### Stop Hanzo Sign
 
 ```bash
 docker compose stop hanzo-sign
@@ -484,7 +484,7 @@ aws s3 sync /backup/documents/ s3://your-bucket
 
 </Step>
 <Step>
-### Start Hanzo eSign
+### Start Hanzo Sign
 
 ```bash
 docker compose start hanzo-sign

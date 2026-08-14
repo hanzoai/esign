@@ -4,7 +4,7 @@ import { createTOTPKeyURI } from 'oslo/otp';
 
 import { SIGN_ENCRYPTION_KEY } from '../../../constants/crypto';
 
-const ISSUER = `${process.env.NEXT_PUBLIC_APP_NAME || 'Hanzo eSign'} Email 2FA`;
+const ISSUER = `${process.env.NEXT_PUBLIC_APP_NAME || 'Hanzo Sign'} Email 2FA`;
 
 export type GenerateTwoFactorCredentialsFromEmailOptions = {
   envelopeId: string;

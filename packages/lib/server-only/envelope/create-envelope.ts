@@ -619,17 +619,22 @@ export const createEnvelope = async ({
           }),
         });
       }
-
-      await triggerWebhook({
-        event: WebhookTriggerEvents.DOCUMENT_CREATED,
-        data: ZWebhookDocumentSchema.parse(mapEnvelopeToWebhookDocumentPayload(createdEnvelope)),
-        userId,
-        teamId,
-      });
     }
 
     return createdEnvelope;
   });
+
+  // A webhook is a side effect of a committed envelope, and it reads through
+  // its own connection, so it fires once the transaction has released the write
+  // lock.
+  if (type === EnvelopeType.DOCUMENT) {
+    await triggerWebhook({
+      event: WebhookTriggerEvents.DOCUMENT_CREATED,
+      data: ZWebhookDocumentSchema.parse(mapEnvelopeToWebhookDocumentPayload(createdEnvelope)),
+      userId,
+      teamId,
+    });
+  }
 
   return createdEnvelope;
 };

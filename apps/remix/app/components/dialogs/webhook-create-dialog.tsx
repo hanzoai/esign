@@ -143,7 +143,7 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
                       </FormControl>
 
                       <FormDescription>
-                        <Trans>The URL for Hanzo eSign to send webhook events to.</Trans>
+                        <Trans>The URL for Hanzo Sign to send webhook events to.</Trans>
                       </FormDescription>
 
                       <FormMessage />
@@ -221,7 +221,7 @@ export const WebhookCreateDialog = ({ trigger, ...props }: WebhookCreateDialogPr
                     <FormDescription>
                       <Trans>
                         A secret that will be sent to your URL so you can verify that the request
-                        has been sent by Hanzo eSign.
+                        has been sent by Hanzo Sign.
                       </Trans>
                     </FormDescription>
                     <FormMessage />

@@ -190,7 +190,7 @@ export const sendOrganisationMemberInviteEmail = async ({
   await mailer.sendMail({
     to: email,
     from: senderEmail,
-    subject: i18n._(msg`You have been invited to join ${organisation.name} on Hanzo eSign`),
+    subject: i18n._(msg`You have been invited to join ${organisation.name} on Hanzo Sign`),
     html,
     text,
   });

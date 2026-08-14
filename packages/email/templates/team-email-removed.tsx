@@ -27,7 +27,7 @@ export const TeamEmailRemovedTemplate = ({
   const { _ } = useLingui();
   const branding = useBranding();
 
-  const previewText = msg`Team email removed for ${teamName} on Hanzo eSign`;
+  const previewText = msg`Team email removed for ${teamName} on Hanzo Sign`;
 
   return (
     <Html>

@@ -125,17 +125,17 @@ export const addUserToOrganisation = async ({
           },
         },
       });
-
-      if (!bypassEmail) {
-        await jobs.triggerJob({
-          name: 'send.organisation-member-joined.email',
-          payload: {
-            organisationId,
-            memberUserId: userId,
-          },
-        });
-      }
     },
     { timeout: 30_000 },
   );
+
+  if (!bypassEmail) {
+    await jobs.triggerJob({
+      name: 'send.organisation-member-joined.email',
+      payload: {
+        organisationId,
+        memberUserId: userId,
+      },
+    });
+  }
 };

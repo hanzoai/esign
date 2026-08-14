@@ -1,18 +1,18 @@
 ---
 title: Environment Variables
-description: Complete reference for all environment variables used to configure a self-hosted Hanzo eSign instance.
+description: Complete reference for all environment variables used to configure a self-hosted Hanzo Sign instance.
 ---
 
 ## Required Variables
 
-These variables must be set for Hanzo eSign to function:
+These variables must be set for Hanzo Sign to function:
 
 | Variable                                | Description                                                                                |
 | --------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `NEXT_PRIVATE_AUTH_SECRET`                       | Secret key for NextAuth.js encryption and signing. Generate with `openssl rand -base64 32` |
 | `NEXT_PRIVATE_ENCRYPTION_KEY`           | Primary encryption key for symmetric encryption (minimum 32 characters)                    |
 | `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY` | Secondary encryption key for symmetric encryption (minimum 32 characters)                  |
-| `NEXT_PUBLIC_WEBAPP_URL`                | Public URL of your Hanzo eSign instance (e.g., `https://sign.example.com`)                   |
+| `NEXT_PUBLIC_WEBAPP_URL`                | Public URL of your Hanzo Sign instance (e.g., `https://sign.example.com`)                   |
 | `DATABASE_URL`                          | SQLite database file URL (e.g., `file:/opt/hanzo-sign/base/data/_dev/sign.db`)              |
 | `BASE_PATH`                             | Directory root for embedded Base data on the persistent disk                               |
 | `NEXT_PRIVATE_SMTP_FROM_ADDRESS`        | Email address used as the sender for all outgoing emails                                   |
@@ -31,7 +31,7 @@ These variables must be set for Hanzo eSign to function:
 
 ## Database Configuration
 
-Hanzo eSign stores all of its data in an **embedded SQLite database (Hanzo Base)**
+Hanzo Sign stores all of its data in an **embedded SQLite database (Hanzo Base)**
 on the application's persistent disk. There is no external database server to
 provision, connect, or tune. esign uses a single shared SQLite file with tenancy
 enforced at the query layer (see HIP-0305), not a database-per-tenant split.
@@ -98,7 +98,7 @@ Callback URL: `https://<your-domain>/api/auth/callback/microsoft`
 
 ## Email Configuration
 
-Hanzo eSign supports multiple email transports for sending notifications.
+Hanzo Sign supports multiple email transports for sending notifications.
 
 ### Transport Selection
 
@@ -156,7 +156,7 @@ For detailed email setup, see [Email Configuration](/docs/self-hosting/configura
 
 ## Storage Configuration
 
-Hanzo eSign can store documents in the embedded SQLite database (Hanzo Base) or in S3-compatible storage.
+Hanzo Sign can store documents in the embedded SQLite database (Hanzo Base) or in S3-compatible storage.
 
 | Variable                                 | Description                                 | Default    |
 | ---------------------------------------- | ------------------------------------------- | ---------- |
@@ -190,7 +190,7 @@ For detailed storage setup, see [Storage Configuration](/docs/self-hosting/confi
 
 ## Signing Certificate Configuration
 
-Hanzo eSign requires a certificate to digitally sign documents.
+Hanzo Sign requires a certificate to digitally sign documents.
 
 ### Transport Selection
 
@@ -242,7 +242,7 @@ For detailed certificate setup, see [Signing Certificate](/docs/self-hosting/con
 
 ## AI Features
 
-Hanzo eSign can use Google Vertex AI for recipient and field detection.
+Hanzo Sign can use Google Vertex AI for recipient and field detection.
 
 | Variable                   | Description                                    | Default  |
 | -------------------------- | ---------------------------------------------- | -------- |
@@ -256,7 +256,7 @@ AI features must also be enabled in organisation/team settings after configurati
 
 ## Background Jobs
 
-Hanzo eSign uses a SQLite-backed job queue by default. Jobs (email delivery, document processing, webhook dispatch) are stored in the `BackgroundJob` table inside the embedded Base database and processed via internal HTTP requests. No external queue service like Redis is required.
+Hanzo Sign uses a SQLite-backed job queue by default. Jobs (email delivery, document processing, webhook dispatch) are stored in the `BackgroundJob` table inside the embedded Base database and processed via internal HTTP requests. No external queue service like Redis is required.
 
 | Variable                     | Description                                                                | Default |
 | ---------------------------- | -------------------------------------------------------------------------- | ------- |
@@ -329,7 +329,7 @@ NEXT_PRIVATE_SMTP_HOST="smtp.example.com"
 NEXT_PRIVATE_SMTP_PORT=587
 NEXT_PRIVATE_SMTP_USERNAME="your-smtp-user"
 NEXT_PRIVATE_SMTP_PASSWORD="your-smtp-password"
-NEXT_PRIVATE_SMTP_FROM_NAME="Hanzo eSign"
+NEXT_PRIVATE_SMTP_FROM_NAME="Hanzo Sign"
 NEXT_PRIVATE_SMTP_FROM_ADDRESS="noreply@example.com"
 
 # Signing (certificate must be configured)

@@ -9,8 +9,8 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ## Prerequisites
 
-- A Hanzo eSign account (cloud or self-hosted)
-- A Hanzo eSign account on any plan (Free, Individual, Team, or Enterprise)
+- A Hanzo Sign account (cloud or self-hosted)
+- A Hanzo Sign account on any plan (Free, Individual, Team, or Enterprise)
 
 <Callout type="info">
   Free accounts include API access with a limit of 5 documents per month. [Upgrade to a paid
@@ -24,7 +24,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 <Step>
 ### Open settings
 
-- Log in to your Hanzo eSign account
+- Log in to your Hanzo Sign account
 - Click your avatar in the top right corner
 - Select **Settings** from the dropdown menu
 
@@ -92,12 +92,12 @@ const documents = await response.json();
 
 ### Using the TypeScript SDK
 
-Hanzo eSign provides official SDKs that handle authentication for you:
+Hanzo Sign provides official SDKs that handle authentication for you:
 
 ```typescript
-import { Hanzo eSign } from '@hanzo/esign-sdk-typescript';
+import { Hanzo Sign } from '@hanzo/esign-sdk-typescript';
 
-const client = new Hanzo eSign({
+const client = new Hanzo Sign({
   apiKey: 'api_xxxxxxxxxxxxxxxx',
 });
 
@@ -146,7 +146,7 @@ SIGN_API_KEY=api_xxxxxxxxxxxxxxxx
 ```
 
 ```typescript
-const client = new Hanzo eSign({
+const client = new Hanzo Sign({
   apiKey: process.env.SIGN_API_KEY,
 });
 ```

@@ -57,7 +57,7 @@ No configuration required. Database storage is enabled when `NEXT_PUBLIC_UPLOAD_
 
 ## S3 Configuration
 
-S3 storage is recommended for production deployments. Hanzo eSign supports AWS S3 and any S3-compatible storage service.
+S3 storage is recommended for production deployments. Hanzo Sign supports AWS S3 and any S3-compatible storage service.
 
 ### Required Variables
 
@@ -175,7 +175,7 @@ docker run -d \
   minio/minio server /data --console-address ":9001"
 ```
 
-Using Docker Compose with Hanzo eSign:
+Using Docker Compose with Hanzo Sign:
 
 ```yaml
 services:
@@ -235,7 +235,7 @@ NEXT_PRIVATE_UPLOAD_REGION=us-east-1
 
 ## Other S3-Compatible Services
 
-Hanzo eSign works with any S3-compatible storage service. Configure the endpoint and enable path-style URLs if required.
+Hanzo Sign works with any S3-compatible storage service. Configure the endpoint and enable path-style URLs if required.
 
 ### Cloudflare R2
 
@@ -289,7 +289,7 @@ Use Amazon CloudFront to serve documents with lower latency and reduced S3 costs
 
 ### Prerequisites
 
-- An S3 bucket configured for Hanzo eSign
+- An S3 bucket configured for Hanzo Sign
 - A CloudFront distribution with the S3 bucket as origin
 - A CloudFront key pair for signing URLs
 
@@ -377,7 +377,7 @@ Signed URLs expire after 1 hour.
 
 ## Migration Between Storage Backends
 
-Hanzo eSign does not provide automatic migration between storage backends. Each document's storage location is recorded in the database.
+Hanzo Sign does not provide automatic migration between storage backends. Each document's storage location is recorded in the database.
 
 <Callout type="warn">
   Documents uploaded to one storage backend cannot be automatically migrated to another. Plan your
@@ -418,7 +418,7 @@ This requires custom scripts and database modifications.
 
 ### Hybrid Operation
 
-During migration, Hanzo eSign can read from both backends. The `DocumentData.type` field indicates where each document is stored.
+During migration, Hanzo Sign can read from both backends. The `DocumentData.type` field indicates where each document is stored.
 
 - `BYTES_64`: Stored in database
 - `S3_PATH`: Stored in S3

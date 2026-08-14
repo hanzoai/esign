@@ -35,7 +35,7 @@ export const resendTeamEmailVerification = async ({
     });
   }
 
-  await prisma.$transaction(
+  const { email, token } = await prisma.$transaction(
     async (tx) => {
       const { emailVerification } = team;
 
@@ -57,8 +57,10 @@ export const resendTeamEmailVerification = async ({
         },
       });
 
-      await sendTeamEmailVerificationEmail(emailVerification.email, token, team);
+      return { email: emailVerification.email, token };
     },
     { timeout: 30_000 },
   );
+
+  await sendTeamEmailVerificationEmail(email, token, team);
 };

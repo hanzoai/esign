@@ -9,6 +9,7 @@ import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 import { z } from 'zod';
 
+import { DOCS_URL } from '@hanzo/esign-lib/constants/app';
 import { TEAM_MEMBER_ROLE_HIERARCHY } from '@hanzo/esign-lib/constants/teams';
 import { TEAM_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/teams-translations';
 import type { TFindOrganisationMembersResponse } from '@hanzo/esign-trpc/server/organisation-router/find-organisation-members.types';
@@ -202,7 +203,7 @@ export const TeamMemberCreateDialog = ({ trigger, ...props }: TeamMemberCreateDi
                       To be able to add members to a team, you must first add them to the
                       organisation. For more information, please see the{' '}
                       <Link
-                        to="https://docs.esign.hanzo.ai/users/organisations/members"
+                        to={DOCS_URL}
                         target="_blank"
                         rel="noreferrer"
                         className="text-sign-700 hover:text-sign-600 hover:underline"

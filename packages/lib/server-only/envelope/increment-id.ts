@@ -3,11 +3,15 @@ import { prisma } from '@hanzo/esign-prisma';
 import { mapDocumentIdToSecondaryId, mapTemplateIdToSecondaryId } from '../../utils/envelope';
 
 export const incrementDocumentId = async () => {
-  const documentIdCounter = await prisma.counter.update({
+  const documentIdCounter = await prisma.counter.upsert({
     where: {
       id: 'document',
     },
-    data: {
+    create: {
+      id: 'document',
+      value: 1,
+    },
+    update: {
       value: {
         increment: 1,
       },
@@ -21,11 +25,15 @@ export const incrementDocumentId = async () => {
 };
 
 export const incrementTemplateId = async () => {
-  const templateIdCounter = await prisma.counter.update({
+  const templateIdCounter = await prisma.counter.upsert({
     where: {
       id: 'template',
     },
-    data: {
+    create: {
+      id: 'template',
+      value: 1,
+    },
+    update: {
       value: {
         increment: 1,
       },

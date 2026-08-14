@@ -10,7 +10,10 @@ import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
 import { ORGANISATION_MEMBER_ROLE_MAP } from '@hanzo/esign-lib/constants/organisations-translations';
 import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
-import { canExecuteOrganisationAction, isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
+import {
+  canExecuteOrganisationAction,
+  isPersonalLayout,
+} from '@hanzo/esign-lib/utils/organisations';
 import type { TGetOrganisationsResponse } from '@hanzo/esign-trpc/server/organisation-router/get-organisations.types';
 import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import { AvatarWithText } from '@hanzo/esign-ui/primitives/avatar';
@@ -53,7 +56,7 @@ export const UserOrganisationsTable = () => {
         accessorKey: 'name',
         cell: ({ row }) => (
           <Link
-            to={isPersonalLayoutMode ? `/settings/organisations` : `/o/${row.original.url}`}
+            to={isPersonalLayoutMode ? `/o/${row.original.url}/settings` : `/o/${row.original.url}`}
             preventScrollReset={true}
           >
             <AvatarWithText
@@ -61,7 +64,7 @@ export const UserOrganisationsTable = () => {
               avatarClass="h-12 w-12"
               avatarFallback={row.original.name.slice(0, 1).toUpperCase()}
               primaryText={
-                <span className="text-foreground/80 font-semibold">
+                <span className="font-semibold text-foreground/80">
                   {isPersonalLayoutMode
                     ? _(
                         msg({

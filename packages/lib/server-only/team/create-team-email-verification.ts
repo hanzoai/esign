@@ -52,7 +52,7 @@ export const createTeamEmailVerification = async ({
       });
     }
 
-    await prisma.$transaction(
+    const { token } = await prisma.$transaction(
       async (tx) => {
         const existingTeamEmail = await tx.teamEmail.findFirst({
           where: {
@@ -78,10 +78,12 @@ export const createTeamEmailVerification = async ({
           },
         });
 
-        await sendTeamEmailVerificationEmail(data.email, token, team);
+        return { token };
       },
       { timeout: 30_000 },
     );
+
+    await sendTeamEmailVerificationEmail(data.email, token, team);
   } catch (err) {
     console.error(err);
 
@@ -143,7 +145,7 @@ export const sendTeamEmailVerificationEmail = async (email: string, token: strin
     to: email,
     from: senderEmail,
     subject: i18n._(
-      msg`A request to use your email has been initiated by ${team.name} on Hanzo eSign`,
+      msg`A request to use your email has been initiated by ${team.name} on Hanzo Sign`,
     ),
     html,
     text,

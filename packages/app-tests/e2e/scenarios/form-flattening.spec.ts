@@ -29,7 +29,7 @@ const FORM_FIELDS = {
 // Test values to insert into form fields
 const TEST_FORM_VALUES = {
   [FORM_FIELDS.TEXT_FIELD]: 'Hello World',
-  [FORM_FIELDS.COMPANY_NAME]: 'Hanzo eSign Inc.',
+  [FORM_FIELDS.COMPANY_NAME]: 'Hanzo Sign Inc.',
   [FORM_FIELDS.CHECKBOX]: true,
   [FORM_FIELDS.DROPDOWN]: 'Germany',
 };

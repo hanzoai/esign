@@ -10,7 +10,10 @@ import { match } from 'ts-pattern';
 
 import { useAutoSave } from '@hanzo/esign-lib/client-only/hooks/use-autosave';
 import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
-import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
+import {
+  DATE_FORMATS,
+  DEFAULT_DOCUMENT_DATE_FORMAT,
+} from '@hanzo/esign-lib/constants/date-formats';
 import {
   DOCUMENT_DISTRIBUTION_METHODS,
   DOCUMENT_SIGNATURE_TYPES,
@@ -502,7 +505,7 @@ export const AddTemplateSettingsFormPartial = ({
                                       </SelectItem>
                                     ))}
 
-                                    <SelectItem value={'-1'}>Hanzo eSign</SelectItem>
+                                    <SelectItem value={'-1'}>Hanzo Sign</SelectItem>
                                   </SelectContent>
                                 </Select>
                               </FormControl>

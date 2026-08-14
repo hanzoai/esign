@@ -5,7 +5,7 @@ import { env } from '@hanzo/esign-lib/utils/env';
 
 import { ApiContractV1 } from './contract';
 
-const appName = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo eSign';
+const appName = env('NEXT_PUBLIC_APP_NAME') || 'Hanzo Sign';
 
 export const OpenAPIV1 = Object.assign(
   generateOpenApi(

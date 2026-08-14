@@ -1,6 +1,6 @@
 ---
 title: Tips & Common Pitfalls
-description: Practical advice for running Hanzo eSign in production.
+description: Practical advice for running Hanzo Sign in production.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
@@ -8,11 +8,11 @@ import { Callout } from 'fumadocs-ui/components/callout';
 ## Always Configure a Signing Certificate
 
 <Callout type="error">
-  This is the single most common issue when self-hosting Hanzo eSign. Without a signing certificate,
+  This is the single most common issue when self-hosting Hanzo Sign. Without a signing certificate,
   the application starts normally but document signing fails.
 </Callout>
 
-Hanzo eSign does **not** bundle a [signing certificate](/docs/self-hosting/configuration/signing-certificate) in the Docker image. You must provide one yourself using one of two methods:
+Hanzo Sign does **not** bundle a [signing certificate](/docs/self-hosting/configuration/signing-certificate) in the Docker image. You must provide one yourself using one of two methods:
 
 ### Volume Mount (Recommended)
 
@@ -51,7 +51,7 @@ NEXT_PRIVATE_SIGNING_PASSPHRASE=your-certificate-password
 
 ### Verify Your Certificate
 
-After starting Hanzo eSign, check the certificate status endpoint:
+After starting Hanzo Sign, check the certificate status endpoint:
 
 ```bash
 curl http://localhost:3000/api/certificate-status
@@ -69,13 +69,13 @@ Certificates without a password cause signing to fail with:
 Error: Failed to get private key bags
 ```
 
-Always set a password when creating your `.p12` certificate. When using OpenSSL, set the password during the export step and provide it to Hanzo eSign via `NEXT_PRIVATE_SIGNING_PASSPHRASE`.
+Always set a password when creating your `.p12` certificate. When using OpenSSL, set the password during the export step and provide it to Hanzo Sign via `NEXT_PRIVATE_SIGNING_PASSPHRASE`.
 
 ---
 
 ## Use the Health Check Endpoints
 
-Hanzo eSign exposes two endpoints for monitoring:
+Hanzo Sign exposes two endpoints for monitoring:
 
 | Endpoint                  | Purpose                              |
 | ------------------------- | ------------------------------------ |
@@ -114,7 +114,7 @@ The Docker container runs `prisma migrate deploy` every time it starts. This mea
 
 ## Set Internal Webapp URL for Background Jobs
 
-Background jobs work by Hanzo eSign sending HTTP requests to itself. If your reverse proxy or network setup causes issues with the app reaching its own public URL, set the internal URL:
+Background jobs work by Hanzo Sign sending HTTP requests to itself. If your reverse proxy or network setup causes issues with the app reaching its own public URL, set the internal URL:
 
 ```bash
 NEXT_PRIVATE_INTERNAL_WEBAPP_URL=http://localhost:3000
@@ -146,9 +146,9 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage) for full s
 
 ## Background Jobs Don't Need Redis
 
-Hanzo eSign uses a SQLite-backed job queue by default. No Redis, no external message broker. The job system uses the embedded Base database to store and process background tasks like email delivery and document processing.
+Hanzo Sign uses a SQLite-backed job queue by default. No Redis, no external message broker. The job system uses the embedded Base database to store and process background tasks like email delivery and document processing.
 
-For high-throughput deployments, Hanzo eSign optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider:
+For high-throughput deployments, Hanzo Sign optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider:
 
 ```bash
 NEXT_PRIVATE_JOBS_PROVIDER=inngest
@@ -162,7 +162,7 @@ Most self-hosted instances do not need Inngest.
 
 ## Docker File Permissions
 
-The Hanzo eSign container runs as a non-root user (UID 1001). If you mount files into the container (certificates, configuration), ensure they're readable:
+The Hanzo Sign container runs as a non-root user (UID 1001). If you mount files into the container (certificates, configuration), ensure they're readable:
 
 ```bash
 # On the host, before mounting

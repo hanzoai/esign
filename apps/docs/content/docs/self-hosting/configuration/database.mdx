@@ -1,6 +1,6 @@
 ---
 title: Database Configuration
-description: Hanzo eSign stores all data in an embedded Base SQLite database — no external database server to provision, connect, or tune.
+description: Hanzo Sign stores all data in an embedded Base SQLite database — no external database server to provision, connect, or tune.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -8,14 +8,14 @@ import { Callout } from 'fumadocs-ui/components/callout';
 
 ## Storage Model
 
-Hanzo eSign stores all of its data in an **embedded SQLite database (Hanzo
+Hanzo Sign stores all of its data in an **embedded SQLite database (Hanzo
 Base)** that lives on the application's persistent disk. There is **no external
 database server** to install, secure, pool, or back up over the network — the
 database is a single file under `BASE_PATH`, created automatically on first
 start.
 
 <Callout type="info">
-  Earlier releases required PostgreSQL. From this release onward, Hanzo eSign
+  Earlier releases required PostgreSQL. From this release onward, Hanzo Sign
   ships with Base SQLite built in. If you are migrating an existing PostgreSQL
   deployment, see [Migrating from PostgreSQL](#migrating-from-postgresql) below.
 </Callout>
@@ -59,7 +59,7 @@ The schema is created and updated by migrations bundled with the application.
 
 ### Automatic Migrations
 
-When running Hanzo eSign via Docker, migrations run automatically on container
+When running Hanzo Sign via Docker, migrations run automatically on container
 startup against the SQLite file. No manual step is required — on a fresh disk
 the database is created and migrated before the app accepts traffic.
 

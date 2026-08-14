@@ -3,6 +3,7 @@ import { AlertTriangleIcon, KeyRoundIcon } from 'lucide-react';
 import { Link } from 'react-router';
 import { match } from 'ts-pattern';
 
+import { DOCS_URL } from '@hanzo/esign-lib/constants/app';
 import type { TCachedLicense } from '@hanzo/esign-lib/types/license';
 import { cn } from '@hanzo/esign-ui/lib/utils';
 import { Button } from '@hanzo/esign-ui/primitives/button';
@@ -43,12 +44,12 @@ export const AdminLicenseStatusBanner = ({ license }: AdminLicenseStatusBannerPr
             .with('UNAUTHORIZED', () =>
               license ? (
                 <Trans>
-                  Invalid License Type - Your Hanzo eSign instance is using features that are not part
-                  of your license.
+                  Invalid License Type - Your Hanzo Sign instance is using features that are not
+                  part of your license.
                 </Trans>
               ) : (
                 <Trans>
-                  Missing License - Your Hanzo eSign instance is using features that require a
+                  Missing License - Your Hanzo Sign instance is using features that require a
                   license.
                 </Trans>
               ),
@@ -67,7 +68,7 @@ export const AdminLicenseStatusBanner = ({ license }: AdminLicenseStatusBannerPr
           })}
           asChild
         >
-          <Link to="https://docs.esign.hanzo.ai/users/licenses/enterprise-edition" target="_blank">
+          <Link to={DOCS_URL} target="_blank">
             <KeyRoundIcon className="mr-1.5 h-4 w-4" />
             <Trans>See Documentation</Trans>
           </Link>

@@ -74,7 +74,7 @@ export async function GET(_req: Request, { params }: RouteContext<'/og/docs/[...
           }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoSrc} alt="Hanzo eSign" height="28" />
+          <img src={logoSrc} alt="Hanzo Sign" height="28" />
           <span
             style={{
               color: '#D4D4D8',

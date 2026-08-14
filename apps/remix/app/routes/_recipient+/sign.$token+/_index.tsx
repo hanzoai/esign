@@ -377,11 +377,8 @@ const SigningPageV1 = ({ data }: { data: Awaited<ReturnType<typeof handleV1Loade
             <p className="mt-36 text-sm text-muted-foreground/60">
               <Trans>
                 Want to send slick signing links like this one?{' '}
-                <Link
-                  to="https://esign.hanzo.ai"
-                  className="text-sign-700 hover:text-sign-600"
-                >
-                  Check out Hanzo eSign
+                <Link to="https://esign.hanzo.ai" className="text-sign-700 hover:text-sign-600">
+                  Check out Hanzo Sign
                 </Link>
                 .
               </Trans>
@@ -477,11 +474,8 @@ const SigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV2Loade
             <p className="mt-36 text-sm text-muted-foreground/60">
               <Trans>
                 Want to send slick signing links like this one?{' '}
-                <Link
-                  to="https://esign.hanzo.ai"
-                  className="text-sign-700 hover:text-sign-600"
-                >
-                  Check out Hanzo eSign
+                <Link to="https://esign.hanzo.ai" className="text-sign-700 hover:text-sign-600">
+                  Check out Hanzo Sign
                 </Link>
                 .
               </Trans>

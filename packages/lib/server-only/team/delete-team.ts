@@ -95,21 +95,21 @@ export const deleteTeam = async ({ userId, teamId }: DeleteTeamOptions) => {
           },
         },
       });
-
-      await jobs.triggerJob({
-        name: 'send.team-deleted.email',
-        payload: {
-          team: {
-            name: team.name,
-            url: team.url,
-          },
-          members: membersToNotify,
-          organisationId: team.organisationId,
-        },
-      });
     },
     { timeout: 30_000 },
   );
+
+  await jobs.triggerJob({
+    name: 'send.team-deleted.email',
+    payload: {
+      team: {
+        name: team.name,
+        url: team.url,
+      },
+      members: membersToNotify,
+      organisationId: team.organisationId,
+    },
+  });
 };
 
 type SendTeamDeleteEmailOptions = {
@@ -147,7 +147,7 @@ export const sendTeamDeleteEmail = async ({
   await mailer.sendMail({
     to: email,
     from: senderEmail,
-    subject: i18n._(msg`Team "${team.name}" has been deleted on Hanzo eSign`),
+    subject: i18n._(msg`Team "${team.name}" has been deleted on Hanzo Sign`),
     html,
     text,
   });

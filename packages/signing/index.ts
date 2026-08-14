@@ -44,7 +44,7 @@ export const signPdf = async ({ pdf }: SignOptions) => {
 
   const { bytes } = await pdf.sign({
     signer,
-    reason: `Signed by ${process.env.NEXT_PUBLIC_APP_NAME || 'Hanzo eSign'}`,
+    reason: `Signed by ${process.env.NEXT_PUBLIC_APP_NAME || 'Hanzo Sign'}`,
     location: NEXT_PUBLIC_WEBAPP_URL(),
     contactInfo: NEXT_PUBLIC_SIGNING_CONTACT_INFO(),
     subFilter: NEXT_PRIVATE_USE_LEGACY_SIGNING_SUBFILTER()

@@ -2,9 +2,11 @@ import { DocumentDataType, EnvelopeType, SigningStatus } from '@prisma/client';
 import { tsr } from '@ts-rest/serverless/fetch';
 import { match } from 'ts-pattern';
 
-import { getServerLimits } from '@hanzo/esign-lib/server-only/limits/server';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
-import { DATE_FORMATS, DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
+import {
+  DATE_FORMATS,
+  DEFAULT_DOCUMENT_DATE_FORMAT,
+} from '@hanzo/esign-lib/constants/date-formats';
 import '@hanzo/esign-lib/constants/time-zones';
 import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
 import { AppError } from '@hanzo/esign-lib/errors/app-error';
@@ -21,6 +23,7 @@ import {
 } from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
 import { deleteDocumentField } from '@hanzo/esign-lib/server-only/field/delete-document-field';
 import { updateEnvelopeFields } from '@hanzo/esign-lib/server-only/field/update-envelope-fields';
+import { getServerLimits } from '@hanzo/esign-lib/server-only/limits/server';
 import { insertFormValuesInPdf } from '@hanzo/esign-lib/server-only/pdf/insert-form-values-in-pdf';
 import { deleteEnvelopeRecipient } from '@hanzo/esign-lib/server-only/recipient/delete-envelope-recipient';
 import { getRecipientsForDocument } from '@hanzo/esign-lib/server-only/recipient/get-recipients-for-document';
@@ -1389,7 +1392,7 @@ export const ApiContractV1Implementation = tsr.router(ApiContractV1, {
               throw new Error('Invalid page number');
             }
 
-            const recipient = await prisma.recipient.findFirst({
+            const recipient = await tx.recipient.findFirst({
               where: {
                 id: Number(recipientId),
                 envelopeId: envelope.id,

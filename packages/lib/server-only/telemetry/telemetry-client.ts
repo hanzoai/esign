@@ -1,8 +1,8 @@
 /* eslint-disable require-atomic-updates */
+import { Insights as InsightsClient } from '@hanzo/insights-node';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { Insights as InsightsClient } from '@hanzo/insights-node';
 
 import { version } from '../../../../package.json';
 import { prefixedId } from '../../universal/id';
@@ -99,7 +99,7 @@ export class TelemetryClient {
     this.nodeId = await this.getOrCreateNodeId();
 
     console.log(
-      '[Telemetry] Telemetry is enabled. Hanzo eSign collects anonymous usage data to help improve the product.',
+      '[Telemetry] Telemetry is enabled. Hanzo Sign collects anonymous usage data to help improve the product.',
     );
     console.log(
       '[Telemetry] We collect: app version, installation ID, and node ID. No personal data, document contents, or user information is collected.',

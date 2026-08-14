@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type { TUpdateProfileMutationSchema } from '@hanzo/esign-trpc/server/profile-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { cn } from '@hanzo/esign-ui/lib/utils';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
@@ -28,7 +28,9 @@ export const ZProfileFormSchema = z.object({
     .string()
     .trim()
     .min(1, { message: msg`Please enter a valid name.`.id }),
-  signature: z.string().min(1, { message: msg`Signature Pad cannot be empty.`.id }),
+  // A signature is drawn when signing, not when the profile is saved, so the
+  // name can be updated before one exists. Matches the server schema.
+  signature: z.string(),
 });
 
 export const ZTwoFactorAuthTokenSchema = z.object({

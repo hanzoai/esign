@@ -11,13 +11,14 @@ import { DateTime } from 'luxon';
 import { Link, useRevalidator } from 'react-router';
 import { match } from 'ts-pattern';
 
+import { DOCS_URL } from '@hanzo/esign-lib/constants/app';
 import type { TCachedLicense } from '@hanzo/esign-lib/types/license';
 import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/esign-lib/types/subscription';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TResyncLicenseRequest,
   TResyncLicenseResponse,
 } from '@hanzo/esign-trpc/server/admin-router/resync-license.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { Badge } from '@hanzo/esign-ui/primitives/badge';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 import {
@@ -66,7 +67,7 @@ export const AdminLicenseCard = ({ licenseData }: AdminLicenseCardProps) => {
               )}
 
               <Link
-                to="https://docs.esign.hanzo.ai/users/licenses/enterprise-edition"
+                to={DOCS_URL}
                 target="_blank"
                 className="flex flex-row items-center text-xs text-muted-foreground hover:text-muted-foreground/80"
               >
@@ -93,7 +94,7 @@ export const AdminLicenseCard = ({ licenseData }: AdminLicenseCardProps) => {
         </div>
 
         <h3 className="text-primary-forground mb-2 flex items-end text-sm font-medium leading-tight">
-          <Trans>Hanzo eSign License</Trans>
+          <Trans>Hanzo Sign License</Trans>
         </h3>
 
         {match(license.status)
@@ -176,20 +177,20 @@ const AdminLicenseResyncButton = () => {
     TResyncLicenseResponse,
     TResyncLicenseRequest
   >('admin.license.resync', {
-      onSuccess: async () => {
-        toast({
-          title: t`License synced`,
-        });
+    onSuccess: async () => {
+      toast({
+        title: t`License synced`,
+      });
 
-        await revalidate();
-      },
-      onError: () => {
-        toast({
-          title: t`Failed to sync license`,
-          variant: 'destructive',
-        });
-      },
-    });
+      await revalidate();
+    },
+    onError: () => {
+      toast({
+        title: t`Failed to sync license`,
+        variant: 'destructive',
+      });
+    },
+  });
 
   return (
     <TooltipProvider>

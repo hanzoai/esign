@@ -8,7 +8,7 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ## Embedded Signing vs Embedded Authoring
 
-Hanzo eSign offers two types of embedding:
+Hanzo Sign offers two types of embedding:
 
 - **Embedded Signing** lets you embed the signing experience in your application. Your users sign documents without leaving your site. Available on Teams Plan and above.
 - **Embedded Authoring** lets you embed document and template _creation and editing_ in your application. This is an [Enterprise](/docs/policies/enterprise-edition) feature (also available as a Platform Plan add-on). See the [Authoring](/docs/developers/embedding/authoring) guide.
@@ -25,7 +25,7 @@ The [Platform Plan](https://esign.hanzo.ai/platform-cta-pricing) adds enhanced c
 
 - Custom CSS and styling variables
 - Dark mode controls
-- Removal of Hanzo eSign branding
+- Removal of Hanzo Sign branding
 
 ---
 
@@ -81,7 +81,7 @@ import { EmbedSignDocument } from '@hanzo/esign-embed-react';
 {/* prettier-ignore */}
 <Steps>
 <Step>
-Navigate to your team's templates in Hanzo eSign
+Navigate to your team's templates in Hanzo Sign
 
 ![Team Templates](/embedding/team-templates.png)
 
@@ -152,7 +152,7 @@ If you prefer not to use any SDK, you can embed signing using [Direct Links](/do
 | Prop                  | Type       | Description                                                      |
 | --------------------- | ---------- | ---------------------------------------------------------------- |
 | `token`               | `string`   | **Required.** The direct template token.                         |
-| `host`                | `string`   | Hanzo eSign instance URL. Defaults to `https://app.esign.hanzo.ai`. |
+| `host`                | `string`   | Hanzo Sign instance URL. Defaults to `https://app.esign.hanzo.ai`. |
 | `name`                | `string`   | Pre-fill the signer's name.                                      |
 | `lockName`            | `boolean`  | Prevent the signer from changing their name.                     |
 | `email`               | `string`   | Pre-fill the signer's email.                                     |
@@ -172,7 +172,7 @@ If you prefer not to use any SDK, you can embed signing using [Direct Links](/do
 | Prop                  | Type       | Description                                                      |
 | --------------------- | ---------- | ---------------------------------------------------------------- |
 | `token`               | `string`   | **Required.** The recipient's signing token.                     |
-| `host`                | `string`   | Hanzo eSign instance URL. Defaults to `https://app.esign.hanzo.ai`. |
+| `host`                | `string`   | Hanzo Sign instance URL. Defaults to `https://app.esign.hanzo.ai`. |
 | `name`                | `string`   | Pre-fill the signer's name.                                      |
 | `lockName`            | `boolean`  | Prevent the signer from changing their name.                     |
 | `onDocumentReady`     | `function` | Called when the document is loaded and ready.                    |

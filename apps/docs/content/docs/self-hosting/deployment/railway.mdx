@@ -1,6 +1,6 @@
 ---
 title: Railway
-description: Deploy Hanzo eSign on Railway with automatic builds from Git, a persistent volume for the embedded SQLite database, and built-in networking. Use the one-click template or manual setup.
+description: Deploy Hanzo Sign on Railway with automatic builds from Git, a persistent volume for the embedded SQLite database, and built-in networking. Use the one-click template or manual setup.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -29,13 +29,13 @@ Before deploying, you need:
 
 ## One-Click Deploy
 
-The fastest way to deploy Hanzo eSign on Railway is using the official template:
+The fastest way to deploy Hanzo Sign on Railway is using the official template:
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/bG6D4p)
 
 This template automatically provisions:
 
-- Hanzo eSign application service
+- Hanzo Sign application service
 - A persistent volume mounted at `BASE_PATH` for the SQLite database
 - Required environment variables with secure defaults
 
@@ -81,14 +81,14 @@ This takes approximately 5-10 minutes for the initial build.
 
 Once deployed, Railway provides a URL like `hanzo-sign-production.up.railway.app`.
 
-Click the URL in the Railway dashboard to access your Hanzo eSign instance.
+Click the URL in the Railway dashboard to access your Hanzo Sign instance.
 
 </Step>
 </Steps>
 
 ## Manual Deployment
 
-If you prefer more control over the setup, deploy Hanzo eSign manually:
+If you prefer more control over the setup, deploy Hanzo Sign manually:
 
 {/* prettier-ignore */}
 <Steps>
@@ -99,7 +99,7 @@ If you prefer more control over the setup, deploy Hanzo eSign manually:
 - Click "New Project"
 - Select "Deploy from GitHub repo"
 - Connect your GitHub account if not already connected
-- Fork or select the [Hanzo eSign repository](https://github.com/hanzoai/esign)
+- Fork or select the [Hanzo Sign repository](https://github.com/hanzoai/esign)
 
 </Step>
 
@@ -121,7 +121,7 @@ No additional build configuration is needed.
 <Step>
 ### Add a persistent volume
 
-- Select your Hanzo eSign service
+- Select your Hanzo Sign service
 - Go to "Settings" > "Volumes"
 - Click "Add Volume" and set the mount path to `/opt/hanzo-sign/base/data`
 
@@ -132,7 +132,7 @@ This volume holds the SQLite database and survives deploys and restarts.
 <Step>
 ### Configure environment variables
 
-Click on the Hanzo eSign service and go to the "Variables" tab. Add the following variables:
+Click on the Hanzo Sign service and go to the "Variables" tab. Add the following variables:
 
 **Required variables:**
 
@@ -148,7 +148,7 @@ NEXT_PRIVATE_SMTP_HOST=<your-smtp-host>
 NEXT_PRIVATE_SMTP_PORT=587
 NEXT_PRIVATE_SMTP_USERNAME=<your-smtp-username>
 NEXT_PRIVATE_SMTP_PASSWORD=<your-smtp-password>
-NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo eSign
+NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo Sign
 NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@yourdomain.com
 ```
 
@@ -217,7 +217,7 @@ BASE_PATH=/opt/hanzo-sign/base/data
 DATABASE_URL=file:${BASE_PATH}/sign.db
 ```
 
-Hanzo eSign runs database migrations automatically on startup.
+Hanzo Sign runs database migrations automatically on startup.
 
 ### Inspecting the Database
 
@@ -229,7 +229,7 @@ and use the bundled `sqlite3` CLI:
 <Step>
 ### Open a service shell
 
-In the Railway dashboard, select your Hanzo eSign service and open a shell (or use
+In the Railway dashboard, select your Hanzo Sign service and open a shell (or use
 the Railway CLI: `railway run bash`).
 
 </Step>
@@ -264,7 +264,7 @@ Railway provides a generated URL by default. To use your own domain:
 <Step>
 ### Generate a domain
 
-- Click on your Hanzo eSign service
+- Click on your Hanzo Sign service
 - Go to "Settings" > "Networking"
 - Click "Generate Domain" to get a Railway subdomain, or proceed to add a custom domain
 
@@ -308,7 +308,7 @@ Railway automatically provisions and renews SSL certificates for custom domains.
 
 ## Scaling Options
 
-Railway provides several options for scaling your Hanzo eSign deployment:
+Railway provides several options for scaling your Hanzo Sign deployment:
 
 ### Vertical Scaling
 
@@ -317,9 +317,9 @@ Increase resources for your service:
 {/* prettier-ignore */}
 <Steps>
 <Step>
-### Open your Hanzo eSign service
+### Open your Hanzo Sign service
 
-In the Railway dashboard, select the Hanzo eSign service.
+In the Railway dashboard, select the Hanzo Sign service.
 
 </Step>
 <Step>
@@ -357,7 +357,7 @@ For high-traffic or document-heavy deployments:
 
 ## Cost Estimate
 
-Railway uses usage-based pricing. Estimated monthly costs for Hanzo eSign:
+Railway uses usage-based pricing. Estimated monthly costs for Hanzo Sign:
 
 | Tier  | Resources                          | Estimated Cost |
 | ----- | ---------------------------------- | -------------- |
@@ -390,11 +390,11 @@ This is sufficient for testing but not recommended for production.
 
 ## Signing Certificate
 
-Hanzo eSign requires a signing certificate to sign documents. On Railway, you can:
+Hanzo Sign requires a signing certificate to sign documents. On Railway, you can:
 
 ### Option 1: Use Generated Certificate (Default)
 
-Hanzo eSign generates a self-signed certificate automatically if none is provided. This works for testing but shows generic certificate information in signed documents.
+Hanzo Sign generates a self-signed certificate automatically if none is provided. This works for testing but shows generic certificate information in signed documents.
 
 ### Option 2: Mount Custom Certificate
 
@@ -415,7 +415,7 @@ base64 -i your-cert.p12 | tr -d '\n'
 <Step>
 ### Add environment variables in Railway
 
-In your Hanzo eSign service variables, set:
+In your Hanzo Sign service variables, set:
 
 ```bash
 NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS=<base64-encoded-certificate>

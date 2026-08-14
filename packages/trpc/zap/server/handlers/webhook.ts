@@ -92,7 +92,7 @@ export const webhookRoutes: ZapRouteMap = {
       body: JSON.stringify(webhookCall.requestBody),
       headers: {
         'Content-Type': 'application/json',
-        'X-Hanzo eSign-Secret': webhook.secret ?? '',
+        'X-Hanzo-Secret': webhook.secret ?? '',
       },
     });
 

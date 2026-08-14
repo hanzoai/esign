@@ -14,13 +14,12 @@ import {
 import { Link, useNavigate, useParams } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
 import { useAnalytics } from '@hanzo/esign-lib/client-only/hooks/use-analytics';
 import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
 import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT, IS_BILLING_ENABLED } from '@hanzo/esign-lib/constants/app';
 import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
-import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
 import { megabytesToBytes } from '@hanzo/esign-lib/universal/unit-convertions';
 import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
 import type {
@@ -33,6 +32,8 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 
+import { uploadErrorMessage } from './upload-error';
+
 export interface EnvelopeDropZoneWrapperProps {
   children: ReactNode;
   type: EnvelopeType;
@@ -44,7 +45,7 @@ export const EnvelopeDropZoneWrapper = ({
   type,
   className,
 }: EnvelopeDropZoneWrapperProps) => {
-  const { t } = useLingui();
+  const { t, i18n } = useLingui();
   const { toast } = useToast();
   const { user } = useSession();
   const { folderId } = useParams();
@@ -125,23 +126,11 @@ export const EnvelopeDropZoneWrapper = ({
 
       await navigate(`${pathPrefix}/${id}/edit${aiQueryParam}`);
     } catch (err) {
-      const error = AppError.parseError(err);
-
-      const errorMessage = match(error.code)
-        .with('INVALID_DOCUMENT_FILE', () => t`You cannot upload encrypted PDFs.`)
-        .with(
-          AppErrorCode.LIMIT_EXCEEDED,
-          () => t`You have reached your document limit for this month. Please upgrade your plan.`,
-        )
-        .with(
-          'ENVELOPE_ITEM_LIMIT_EXCEEDED',
-          () => t`You have reached the limit of the number of files per envelope.`,
-        )
-        .otherwise(() => t`An error occurred during upload.`);
+      console.error(err);
 
       toast({
         title: t`Error`,
-        description: errorMessage,
+        description: i18n._(uploadErrorMessage(err, type)),
         variant: 'destructive',
         duration: 7500,
       });

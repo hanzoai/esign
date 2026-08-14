@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import type { z } from 'zod';
 
-import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { DOCS_URL, NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
 import { AppError } from '@hanzo/esign-lib/errors/app-error';
 import { LicenseClient } from '@hanzo/esign-lib/server-only/license/license-client';
 import type { TLicenseClaim } from '@hanzo/esign-lib/types/license';
@@ -569,7 +569,7 @@ const OrganisationAdminForm = ({ organisation, licenseFlags }: OrganisationAdmin
                 <span>¹&nbsp;</span>
                 <Trans>Your current license does not include these features.</Trans>{' '}
                 <Link
-                  to="https://docs.esign.hanzo.ai/users/licenses/enterprise-edition"
+                  to={DOCS_URL}
                   target="_blank"
                   className="text-foreground underline hover:opacity-80"
                 >

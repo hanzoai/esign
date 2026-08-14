@@ -36,8 +36,9 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
 
   const [enteredEmail, setEnteredEmail] = useState<string>('');
 
-  const { mutateAsync: deleteAccount, isPending: isDeletingAccount } =
-    useZapMutation<void, void>('profile.deleteAccount');
+  const { mutateAsync: deleteAccount, isPending: isDeletingAccount } = useZapMutation<void, void>(
+    'profile.deleteAccount',
+  );
 
   const onDeleteAccount = async () => {
     try {
@@ -109,7 +110,7 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
 
                 <DialogDescription>
                   <Trans>
-                    Hanzo eSign will delete{' '}
+                    Hanzo Sign will delete{' '}
                     <span className="font-semibold">all of your documents</span>, along with all of
                     your completed documents, signatures, and all other resources belonging to your
                     Account.
@@ -122,7 +123,7 @@ export const AccountDeleteDialog = ({ className }: AccountDeleteDialogProps) => 
                   <Label>
                     <Trans>
                       Please type{' '}
-                      <span className="text-muted-foreground font-semibold">{user.email}</span> to
+                      <span className="font-semibold text-muted-foreground">{user.email}</span> to
                       confirm.
                     </Trans>
                   </Label>

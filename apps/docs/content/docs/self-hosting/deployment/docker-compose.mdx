@@ -1,6 +1,6 @@
 ---
 title: Docker Compose
-description: Deploy Hanzo eSign with Docker Compose. A single application container with an embedded SQLite database on a named volume — production-ready for most self-hosted deployments.
+description: Deploy Hanzo Sign with Docker Compose. A single application container with an embedded SQLite database on a named volume — production-ready for most self-hosted deployments.
 ---
 
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
@@ -121,7 +121,7 @@ NEXT_PRIVATE_AUTH_SECRET=your-nextauth-secret
 NEXT_PRIVATE_ENCRYPTION_KEY=your-encryption-key-min-32-characters
 NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY=your-secondary-key-min-32-characters
 
-# Public URL where Hanzo eSign is accessible
+# Public URL where Hanzo Sign is accessible
 NEXT_PUBLIC_WEBAPP_URL=https://sign.example.com
 NEXT_PRIVATE_INTERNAL_WEBAPP_URL=http://localhost:3000
 
@@ -131,7 +131,7 @@ NEXT_PRIVATE_SMTP_HOST=smtp.example.com
 NEXT_PRIVATE_SMTP_PORT=587
 NEXT_PRIVATE_SMTP_USERNAME=your-smtp-username
 NEXT_PRIVATE_SMTP_PASSWORD=your-smtp-password
-NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo eSign
+NEXT_PRIVATE_SMTP_FROM_NAME=Hanzo Sign
 NEXT_PRIVATE_SMTP_FROM_ADDRESS=noreply@example.com
 ```
 
@@ -226,7 +226,7 @@ docker compose logs -f hanzo-sign
 
 Look for "Ready" or "Listening on port 3000" in the output.
 
-## Accessing Hanzo eSign
+## Accessing Hanzo Sign
 
 Once the containers are running:
 
@@ -298,7 +298,7 @@ docker compose down -v
   `sign.db` database. Back up your data first.
 </Callout>
 
-### Update Hanzo eSign
+### Update Hanzo Sign
 
 {/* prettier-ignore */}
 <Steps>
@@ -330,7 +330,7 @@ Database migrations run automatically on container startup.
 
 ### Reverse Proxy
 
-For production, place Hanzo eSign behind a reverse proxy for SSL termination:
+For production, place Hanzo Sign behind a reverse proxy for SSL termination:
 
 **nginx example:**
 

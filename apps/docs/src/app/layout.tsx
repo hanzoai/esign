@@ -13,13 +13,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://docs.esign.hanzo.ai'),
   title: {
-    template: '%s | Hanzo eSign Docs',
-    default: 'Hanzo eSign Docs',
+    template: '%s | Hanzo Sign Docs',
+    default: 'Hanzo Sign Docs',
   },
   description:
-    'The official documentation for Hanzo eSign, the open-source document signing platform.',
+    'The official documentation for Hanzo Sign, the open-source document signing platform.',
   openGraph: {
-    siteName: 'Hanzo eSign Docs',
+    siteName: 'Hanzo Sign Docs',
     type: 'website',
   },
   twitter: {

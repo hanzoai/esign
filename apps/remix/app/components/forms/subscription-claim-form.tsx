@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 import type { z } from 'zod';
 
+import { DOCS_URL } from '@hanzo/esign-lib/constants/app';
 import type { TLicenseClaim } from '@hanzo/esign-lib/types/license';
 import { SUBSCRIPTION_CLAIM_FEATURE_FLAGS } from '@hanzo/esign-lib/types/subscription';
 import { ZCreateSubscriptionClaimRequestSchema } from '@hanzo/esign-trpc/server/admin-router/create-subscription-claim.types';
@@ -196,7 +197,7 @@ export const SubscriptionClaimForm = ({
                   <span>¹&nbsp;</span>
                   <Trans>Your current license does not include these features.</Trans>{' '}
                   <Link
-                    to="https://docs.esign.hanzo.ai/users/licenses/enterprise-edition"
+                    to={DOCS_URL}
                     target="_blank"
                     className="text-foreground underline hover:opacity-80"
                   >

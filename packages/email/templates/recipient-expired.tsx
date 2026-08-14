@@ -39,7 +39,7 @@ export const RecipientExpiredTemplate = ({
               ) : (
                 <Img
                   src={getAssetUrl('/static/logo.png')}
-                  alt="Hanzo eSign Logo"
+                  alt="Hanzo Sign Logo"
                   className="mb-4 h-6"
                 />
               )}

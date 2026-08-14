@@ -31,7 +31,12 @@ export const run = async ({ io }: { payload: TSealDocumentSweepJobDefinition; io
     .where('Envelope.deletedAt', 'is', null)
     // Ensure there is at least one recipient.
     .where((eb) =>
-      eb.exists(eb.selectFrom('Recipient').whereRef('Recipient.envelopeId', '=', 'Envelope.id')),
+      eb.exists(
+        eb
+          .selectFrom('Recipient')
+          .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
+          .select(sql.lit(1).as('one')),
+      ),
     )
     // Document is ready to seal: all recipients are SIGNED/CC, or any recipient REJECTED.
     .where((eb) =>
@@ -43,7 +48,8 @@ export const run = async ({ io }: { payload: TSealDocumentSweepJobDefinition; io
               .selectFrom('Recipient')
               .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
               .where('Recipient.signingStatus', '!=', sql.lit(SigningStatus.SIGNED))
-              .where('Recipient.role', '!=', sql.lit(RecipientRole.CC)),
+              .where('Recipient.role', '!=', sql.lit(RecipientRole.CC))
+              .select(sql.lit(1).as('one')),
           ),
         ),
         // Case 2: Any recipient has rejected.
@@ -51,7 +57,8 @@ export const run = async ({ io }: { payload: TSealDocumentSweepJobDefinition; io
           eb
             .selectFrom('Recipient')
             .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
-            .where('Recipient.signingStatus', '=', sql.lit(SigningStatus.REJECTED)),
+            .where('Recipient.signingStatus', '=', sql.lit(SigningStatus.REJECTED))
+            .select(sql.lit(1).as('one')),
         ),
       ]),
     )
@@ -63,7 +70,8 @@ export const run = async ({ io }: { payload: TSealDocumentSweepJobDefinition; io
           eb
             .selectFrom('Recipient')
             .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
-            .where('Recipient.signedAt', '>', epochMs(fifteenMinutesAgo)),
+            .where('Recipient.signedAt', '>', epochMs(fifteenMinutesAgo))
+            .select(sql.lit(1).as('one')),
         ),
       ),
     )
@@ -74,7 +82,8 @@ export const run = async ({ io }: { payload: TSealDocumentSweepJobDefinition; io
         eb
           .selectFrom('Recipient')
           .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
-          .where('Recipient.signedAt', '>', epochMs(sixHoursAgo)),
+          .where('Recipient.signedAt', '>', epochMs(sixHoursAgo))
+          .select(sql.lit(1).as('one')),
       ),
     )
     .limit(100)

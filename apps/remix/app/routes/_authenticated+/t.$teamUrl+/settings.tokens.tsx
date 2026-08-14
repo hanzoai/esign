@@ -3,6 +3,7 @@ import { Trans } from '@lingui/react/macro';
 import { TeamMemberRole } from '@prisma/client';
 import { DateTime } from 'luxon';
 
+import { DOCS_URL } from '@hanzo/esign-lib/constants/app';
 import type { TGetApiTokensResponse } from '@hanzo/esign-trpc/server/api-token-router/get-api-tokens.types';
 import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import { Alert, AlertDescription } from '@hanzo/esign-ui/primitives/alert';
@@ -35,8 +36,9 @@ export default function ApiTokensPage() {
             On this page, you can create and manage API tokens. See our{' '}
             <a
               className="text-primary underline"
-              href={'https://docs.esign.hanzo.ai/developers/public-api'}
+              href={DOCS_URL}
               target="_blank"
+              rel="noopener noreferrer"
             >
               Documentation
             </a>{' '}
@@ -71,7 +73,7 @@ export default function ApiTokensPage() {
 
           {tokens && tokens.length === 0 && (
             <div className="mb-4">
-              <p className="text-muted-foreground mt-2 text-sm italic">
+              <p className="mt-2 text-sm italic text-muted-foreground">
                 <Trans>Your tokens will be shown here once you create them.</Trans>
               </p>
             </div>
@@ -80,24 +82,24 @@ export default function ApiTokensPage() {
           {tokens && tokens.length > 0 && (
             <div className="mt-4 flex max-w-xl flex-col gap-y-4">
               {tokens.map((token) => (
-                <div key={token.id} className="border-border rounded-lg border p-4">
+                <div key={token.id} className="rounded-lg border border-border p-4">
                   <div className="flex items-center justify-between gap-x-4">
                     <div>
                       <h5 className="text-base">{token.name}</h5>
 
-                      <p className="text-muted-foreground mt-2 text-xs">
+                      <p className="mt-2 text-xs text-muted-foreground">
                         <Trans>
                           Created on {i18n.date(token.createdAt, DateTime.DATETIME_FULL)}
                         </Trans>
                       </p>
                       {token.expires ? (
-                        <p className="text-muted-foreground mt-1 text-xs">
+                        <p className="mt-1 text-xs text-muted-foreground">
                           <Trans>
                             Expires on {i18n.date(token.expires, DateTime.DATETIME_FULL)}
                           </Trans>
                         </p>
                       ) : (
-                        <p className="text-muted-foreground mt-1 text-xs">
+                        <p className="mt-1 text-xs text-muted-foreground">
                           <Trans>Token doesn't have an expiration date</Trans>
                         </p>
                       )}

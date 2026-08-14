@@ -36,7 +36,12 @@ export const adminFindUnsealedDocuments = async ({
     .where('Envelope.deletedAt', 'is', null)
     // Must have at least one recipient.
     .where((eb) =>
-      eb.exists(eb.selectFrom('Recipient').whereRef('Recipient.envelopeId', '=', 'Envelope.id')),
+      eb.exists(
+        eb
+          .selectFrom('Recipient')
+          .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
+          .select(sql.lit(1).as('one')),
+      ),
     )
     // Document is ready to seal: all recipients are SIGNED/CC, or any recipient REJECTED.
     .where((eb) =>
@@ -48,7 +53,8 @@ export const adminFindUnsealedDocuments = async ({
               .selectFrom('Recipient')
               .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
               .where('Recipient.signingStatus', '!=', sql.lit(SigningStatus.SIGNED))
-              .where('Recipient.role', '!=', sql.lit(RecipientRole.CC)),
+              .where('Recipient.role', '!=', sql.lit(RecipientRole.CC))
+              .select(sql.lit(1).as('one')),
           ),
         ),
         // Case 2: Any recipient has rejected.
@@ -56,7 +62,8 @@ export const adminFindUnsealedDocuments = async ({
           eb
             .selectFrom('Recipient')
             .whereRef('Recipient.envelopeId', '=', 'Envelope.id')
-            .where('Recipient.signingStatus', '=', sql.lit(SigningStatus.REJECTED)),
+            .where('Recipient.signingStatus', '=', sql.lit(SigningStatus.REJECTED))
+            .select(sql.lit(1).as('one')),
         ),
       ]),
     );

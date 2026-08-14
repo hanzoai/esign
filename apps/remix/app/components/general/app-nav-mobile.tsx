@@ -9,8 +9,8 @@ import LogoImage from '@hanzo/esign-assets/logo.png';
 import { authClient } from '@hanzo/esign-auth/client';
 import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
 import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
-import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import type { TGetInboxCountResponse } from '@hanzo/esign-trpc/server/document-router/get-inbox-count.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import { Sheet, SheetContent } from '@hanzo/esign-ui/primitives/sheet';
 import { ThemeSwitcher } from '@hanzo/esign-ui/primitives/theme-switcher';
 
@@ -88,7 +88,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
         <Link to="/" onClick={handleMenuItemClick}>
           <img
             src={LogoImage}
-            alt="Hanzo eSign Logo"
+            alt="Hanzo Sign Logo"
             className="dark:invert"
             width={170}
             height={25}
@@ -99,13 +99,13 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
           {menuNavigationLinks.map(({ href, text }) => (
             <Link
               key={href}
-              className="text-foreground hover:text-foreground/80 flex items-center gap-2 text-2xl font-semibold"
+              className="flex items-center gap-2 text-2xl font-semibold text-foreground hover:text-foreground/80"
               to={href}
               onClick={() => handleMenuItemClick()}
             >
               {text}
               {href === '/inbox' && unreadCountData && unreadCountData.count > 0 && (
-                <span className="bg-primary text-primary-foreground flex h-6 min-w-[1.5rem] items-center justify-center rounded-full px-1.5 text-xs font-semibold">
+                <span className="flex h-6 min-w-[1.5rem] items-center justify-center rounded-full bg-primary px-1.5 text-xs font-semibold text-primary-foreground">
                   {unreadCountData.count > 99 ? '99+' : unreadCountData.count}
                 </span>
               )}
@@ -113,7 +113,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
           ))}
 
           <button
-            className="text-foreground hover:text-foreground/80 text-2xl font-semibold"
+            className="text-2xl font-semibold text-foreground hover:text-foreground/80"
             onClick={async () => authClient.signOut()}
           >
             <Trans>Sign Out</Trans>
@@ -125,8 +125,8 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
             <ThemeSwitcher />
           </div>
 
-          <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Hanzo eSign, Inc.
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Hanzo
             <br />
             <Trans>All rights reserved.</Trans>
           </p>

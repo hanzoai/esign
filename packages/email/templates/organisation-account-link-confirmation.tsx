@@ -37,7 +37,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
   const previewText =
     type === 'create'
       ? msg`A request has been made to create an account for you`
-      : msg`A request has been made to link your Hanzo eSign account`;
+      : msg`A request has been made to link your Hanzo Sign account`;
 
   return (
     <Html>
@@ -69,7 +69,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
                 {type === 'create' ? (
                   <Trans>Account creation request</Trans>
                 ) : (
-                  <Trans>Link your Hanzo eSign account</Trans>
+                  <Trans>Link your Hanzo Sign account</Trans>
                 )}
               </Text>
 
@@ -82,7 +82,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
                 ) : (
                   <Trans>
                     <span className="font-bold">{organisationName}</span> has requested to link your
-                    current Hanzo eSign account to their organisation.
+                    current Hanzo Sign account to their organisation.
                   </Trans>
                 )}
               </Text>
@@ -110,7 +110,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
 
                 <Text className="mt-2 text-sm">
                   <Trans>
-                    You can unlink your account at any time in your security settings on Hanzo eSign{' '}
+                    You can unlink your account at any time in your security settings on Hanzo Sign{' '}
                     <Link href={`${assetBaseUrl}/settings/security/linked-accounts`}>here.</Link>
                   </Trans>
                 </Text>
@@ -118,7 +118,7 @@ export const OrganisationAccountLinkConfirmationTemplate = ({
 
               <Section className="mb-6 mt-8 text-center">
                 <Button
-                  className="bg-sign-500 inline-flex items-center justify-center rounded-lg px-6 py-3 text-center text-sm font-medium text-black no-underline"
+                  className="inline-flex items-center justify-center rounded-lg bg-sign-500 px-6 py-3 text-center text-sm font-medium text-black no-underline"
                   href={confirmationLink}
                 >
                   <Trans>Review request</Trans>

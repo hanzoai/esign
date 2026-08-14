@@ -1,13 +1,13 @@
 ---
 title: Requirements
-description: System requirements and prerequisites for self-hosting Hanzo eSign.
+description: System requirements and prerequisites for self-hosting Hanzo Sign.
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
 
 ## What You Need
 
-Hanzo eSign requires the following external services:
+Hanzo Sign requires the following external services:
 
 | Service       | Purpose                      | Minimum Version |
 | ------------- | ---------------------------- | --------------- |
@@ -18,7 +18,7 @@ The database is **embedded** — there is no external database server to run.
 
 ### Database (embedded Base SQLite)
 
-Hanzo eSign stores all data — documents, users, audit logs — in an embedded
+Hanzo Sign stores all data — documents, users, audit logs — in an embedded
 SQLite database (Hanzo Base) on its persistent disk. There is no PostgreSQL,
 MySQL, or other database server to provision. The only configuration is where
 the file lives:
@@ -31,7 +31,7 @@ details and for migrating an existing PostgreSQL deployment.
 
 ### Email Server
 
-Hanzo eSign sends transactional emails for:
+Hanzo Sign sends transactional emails for:
 
 - Document signing requests
 - Signing reminders
@@ -54,7 +54,7 @@ Supported transports:
 
 ### Reverse Proxy
 
-For production deployments, place Hanzo eSign behind a reverse proxy such as:
+For production deployments, place Hanzo Sign behind a reverse proxy such as:
 
 - nginx
 - Caddy
@@ -62,7 +62,7 @@ For production deployments, place Hanzo eSign behind a reverse proxy such as:
 - HAProxy
 - Cloud load balancers (AWS ALB, GCP Load Balancer, etc.)
 
-The reverse proxy handles SSL/TLS termination and forwards requests to Hanzo eSign on port 3000.
+The reverse proxy handles SSL/TLS termination and forwards requests to Hanzo Sign on port 3000.
 
 ---
 
@@ -76,7 +76,7 @@ These services are not required but improve functionality or scalability:
 
 ### Document Storage
 
-By default, Hanzo eSign stores documents in the embedded Base SQLite database. For production deployments with significant document volume, use S3-compatible storage:
+By default, Hanzo Sign stores documents in the embedded Base SQLite database. For production deployments with significant document volume, use S3-compatible storage:
 
 - Amazon S3
 - MinIO
@@ -88,9 +88,9 @@ See [Storage Configuration](/docs/self-hosting/configuration/storage) for setup 
 
 ### Background Jobs
 
-Hanzo eSign processes background jobs (email delivery, document processing) using a database-backed queue. No additional services like Redis are required: the job queue is built into the application and uses the embedded Base SQLite database.
+Hanzo Sign processes background jobs (email delivery, document processing) using a database-backed queue. No additional services like Redis are required: the job queue is built into the application and uses the embedded Base SQLite database.
 
-For high-throughput deployments, Hanzo eSign optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider. Set `NEXT_PRIVATE_JOBS_PROVIDER=inngest` and configure `INNGEST_EVENT_KEY` and `INNGEST_SIGNING_KEY`. Most self-hosted instances do not need this.
+For high-throughput deployments, Hanzo Sign optionally supports [Inngest](https://www.inngest.com/) as an alternative job provider. Set `NEXT_PRIVATE_JOBS_PROVIDER=inngest` and configure `INNGEST_EVENT_KEY` and `INNGEST_SIGNING_KEY`. Most self-hosted instances do not need this.
 
 ---
 
@@ -132,7 +132,7 @@ If building from source (not using Docker images):
 
 ## Supported Platforms
 
-Hanzo eSign runs on:
+Hanzo Sign runs on:
 
 - **Linux** - Any modern distribution (Ubuntu, Debian, CentOS, Alpine)
 - **Docker** - Official images available on DockerHub and GitHub Container Registry
@@ -170,7 +170,7 @@ Before proceeding to deployment, confirm you have:
 - [ ] A persistent disk/volume for the SQLite database (`BASE_PATH`)
 - [ ] SMTP credentials or email provider API key
 - [ ] Signing certificate (`.p12`) for document signing — see [Tips](/docs/self-hosting/getting-started/tips)
-- [ ] Domain name for your Hanzo eSign instance
+- [ ] Domain name for your Hanzo Sign instance
 - [ ] SSL certificate (or reverse proxy that handles SSL)
 - [ ] Server meeting minimum hardware requirements
 
@@ -178,6 +178,6 @@ Before proceeding to deployment, confirm you have:
 
 ## See Also
 
-- [Quick Start](/docs/self-hosting/getting-started/quick-start) - Deploy Hanzo eSign with Docker in 5 minutes
+- [Quick Start](/docs/self-hosting/getting-started/quick-start) - Deploy Hanzo Sign with Docker in 5 minutes
 - [Docker Compose](/docs/self-hosting/deployment/docker-compose) - Production setup with Docker Compose
 - [Environment Variables](/docs/self-hosting/configuration/environment) - Full configuration reference
