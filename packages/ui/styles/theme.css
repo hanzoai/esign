@@ -58,36 +58,37 @@
     --envelope-editor-background: 0 0% 98%;
   }
 
+  /* Black page. Depth is the ramp above it: surface 6-7%, hover 16%, edge 18%. No hue at any step. */
   .dark:not(.dark-mode-disabled) {
-    --background: 0 0% 14.9%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 97%;
 
-    --muted: 0 0% 23.4%;
-    --muted-foreground: 0 0% 85%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 65%;
 
-    --popover: 0 0% 14.9%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 90%;
 
-    --card: 0 0% 14.9%;
-    --card-border: 0 0% 27.9%;
+    --card: 0 0% 6%;
+    --card-border: 0 0% 18%;
     --card-border-tint: 115 115 115;
     --card-foreground: 0 0% 95%;
 
-    --widget: 0 0% 14.9%;
+    --widget: 0 0% 6%;
     --widget-foreground: 0 0% 18%;
 
-    --border: 0 0% 27.9%;
-    --input: 0 0% 27.9%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
 
     --field-border: 0 0% 91%;
 
     --primary: 0 0% 100%;
     --primary-foreground: 0 0% 0%;
 
-    --secondary: 0 0% 23.4%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 98%;
 
-    --accent: 0 0% 27.9%;
+    --accent: 0 0% 16%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 87% 62%;
@@ -99,7 +100,7 @@
 
     --warning: 0 0% 45%;
 
-    --envelope-editor-background: 0 0% 14.9%;
+    --envelope-editor-background: 0 0% 0%;
   }
 }
 
