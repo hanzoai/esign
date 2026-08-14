@@ -50,7 +50,7 @@ export default function HomePage() {
           href="/docs/users"
           className="group bg-fd-card hover:border-fd-primary/50 relative flex flex-col rounded-xl border p-6 transition-all hover:shadow-md"
         >
-          <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+          <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-neutral-500/10 text-neutral-700 dark:text-neutral-300">
             <UserIcon className="size-6" />
           </div>
           <h2 className="mb-2 text-lg font-semibold">User Guide</h2>
@@ -64,7 +64,7 @@ export default function HomePage() {
           href="/docs/developers"
           className="group bg-fd-card hover:border-fd-primary/50 relative flex flex-col rounded-xl border p-6 transition-all hover:shadow-md"
         >
-          <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400">
+          <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-neutral-500/10 text-neutral-700 dark:text-neutral-300">
             <CodeIcon className="size-6" />
           </div>
           <h2 className="mb-2 text-lg font-semibold">Developer Guide</h2>
@@ -79,7 +79,7 @@ export default function HomePage() {
           href="/docs/self-hosting"
           className="group bg-fd-card hover:border-fd-primary/50 relative flex flex-col rounded-xl border p-6 transition-all hover:shadow-md"
         >
-          <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400">
+          <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-neutral-500/10 text-neutral-700 dark:text-neutral-300">
             <ServerIcon className="size-6" />
           </div>
           <h2 className="mb-2 text-lg font-semibold">Self-Hosting Guide</h2>
@@ -208,7 +208,7 @@ export default function HomePage() {
           href="/docs/compliance"
           className="bg-fd-card/50 hover:border-fd-primary/50 flex items-start gap-4 rounded-xl border p-5 transition-all"
         >
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-neutral-500/10 text-neutral-700 dark:text-neutral-300">
             <ShieldCheckIcon className="size-5" />
           </div>
           <div>
@@ -223,7 +223,7 @@ export default function HomePage() {
           href="/docs/policies"
           className="bg-fd-card/50 hover:border-fd-primary/50 flex items-start gap-4 rounded-xl border p-5 transition-all"
         >
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-slate-500/10 text-slate-600 dark:text-slate-400">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-neutral-500/10 text-neutral-700 dark:text-neutral-300">
             <FileTextIcon className="size-5" />
           </div>
           <div>

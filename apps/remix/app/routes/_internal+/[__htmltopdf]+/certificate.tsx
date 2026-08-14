@@ -265,7 +265,7 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
                           <div
                             className="inline-block rounded-lg p-1"
                             style={{
-                              boxShadow: `0px 0px 0px 4.88px rgba(122, 196, 85, 0.1), 0px 0px 0px 1.22px rgba(122, 196, 85, 0.6), 0px 0px 0px 0.61px rgba(122, 196, 85, 1)`,
+                              boxShadow: `0px 0px 0px 4.88px rgba(92, 92, 92, 0.1), 0px 0px 0px 1.22px rgba(92, 92, 92, 0.6), 0px 0px 0px 0.61px rgba(92, 92, 92, 1)`,
                             }}
                           >
                             {signature.signature?.signatureImageAsBase64 && (

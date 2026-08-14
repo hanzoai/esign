@@ -96,12 +96,12 @@ export default function EnvelopeEditorHeader() {
               <>
                 {envelope.templateType === 'PRIVATE' ? (
                   <Badge variant="secondary">
-                    <LockIcon className="mr-2 h-4 w-4 text-blue-600 dark:text-blue-300" />
+                    <LockIcon className="mr-2 h-4 w-4 text-muted-foreground" />
                     <Trans>Private Template</Trans>
                   </Badge>
                 ) : (
                   <Badge variant="default">
-                    <Globe2Icon className="mr-2 h-4 w-4 text-green-500 dark:text-green-300" />
+                    <Globe2Icon className="mr-2 h-4 w-4 text-foreground" />
                     <Trans>Public Template</Trans>
                   </Badge>
                 )}

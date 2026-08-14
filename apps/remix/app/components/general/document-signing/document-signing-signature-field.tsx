@@ -10,13 +10,18 @@ import { DO_NOT_INVALIDATE_QUERY_ON_MUTATION } from '@hanzo/esign-lib/constants/
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import type { TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
 import type { FieldWithSignature } from '@hanzo/esign-prisma/types/field-with-signature';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
 } from '@hanzo/esign-trpc/server/field-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { Button } from '@hanzo/esign-ui/primitives/button';
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from '@hanzo/esign-ui/primitives/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+} from '@hanzo/esign-ui/primitives/dialog';
 import { SignaturePad } from '@hanzo/esign-ui/primitives/signature-pad';
 import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
@@ -251,7 +256,7 @@ export const DocumentSigningSignatureField = ({
       )}
 
       {state === 'empty' && (
-        <p className="font-signature text-[clamp(0.575rem,25cqw,1.2rem)] text-xl text-muted-foreground duration-200 group-hover:text-primary group-hover:text-recipient-green">
+        <p className="font-signature text-[clamp(0.575rem,25cqw,1.2rem)] text-xl text-muted-foreground duration-200 group-hover:text-primary">
           <Trans>Signature</Trans>
         </p>
       )}

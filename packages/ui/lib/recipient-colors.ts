@@ -30,99 +30,92 @@ export const RECIPIENT_COLOR_STYLES = {
     fieldItem: 'group/field-item rounded-[2px]',
     fieldItemInitials: '',
     comboxBoxTrigger:
-      'ring-2 ring-recipient-green shadow-[0_0_0_5px_hsl(var(--recipient-green)/10%),0_0_0_2px_hsl(var(--recipient-green)/60%),0_0_0_0.5px_hsl(var(--recipient-green))]',
+      'ring-2 ring-recipient-1 shadow-[0_0_0_5px_hsl(var(--recipient-1)/10%),0_0_0_2px_hsl(var(--recipient-1)/60%),0_0_0_0.5px_hsl(var(--recipient-1))]',
     comboxBoxItem: '',
   },
 
-  green: {
-    base: 'ring-recipient-green hover:bg-recipient-green/30',
-    baseRing: 'rgba(122, 195, 85, 1)',
-    baseRingHover: 'rgba(122, 195, 85, 0.3)',
-    baseTextHover: 'rgba(122, 195, 85, 1)',
-    fieldButton: 'hover:border-recipient-green hover:bg-recipient-green/30 ',
+  1: {
+    base: 'ring-recipient-1 hover:bg-recipient-1/30',
+    baseRing: 'rgba(92, 92, 92, 1)',
+    baseRingHover: 'rgba(92, 92, 92, 0.3)',
+    baseTextHover: 'rgba(92, 92, 92, 1)',
+    fieldButton: 'hover:border-recipient-1 hover:bg-recipient-1/30 ',
     fieldItem: 'group/field-item rounded-[2px]',
-    fieldItemInitials: 'group-hover/field-item:bg-recipient-green',
+    fieldItemInitials: 'group-hover/field-item:bg-recipient-1',
     comboxBoxTrigger:
-      'ring-2 ring-recipient-green hover:bg-recipient-green/15 active:bg-recipient-green/15 shadow-[0_0_0_5px_hsl(var(--recipient-green)/10%),0_0_0_2px_hsl(var(--recipient-green)/60%),0_0_0_0.5px_hsl(var(--recipient-green))]',
-    comboxBoxItem: 'hover:bg-recipient-green/15 active:bg-recipient-green/15',
+      'ring-2 ring-recipient-1 hover:bg-recipient-1/15 active:bg-recipient-1/15 shadow-[0_0_0_5px_hsl(var(--recipient-1)/10%),0_0_0_2px_hsl(var(--recipient-1)/60%),0_0_0_0.5px_hsl(var(--recipient-1))]',
+    comboxBoxItem: 'hover:bg-recipient-1/15 active:bg-recipient-1/15',
   },
 
-  blue: {
-    base: 'ring-recipient-blue hover:bg-recipient-blue/30',
-    baseRing: 'rgba(56, 123, 199, 1)',
-    baseRingHover: 'rgba(56, 123, 199, 0.3)',
-    baseTextHover: 'rgba(56, 123, 199, 1)',
-    fieldButton: 'hover:border-recipient-blue hover:bg-recipient-blue/30',
+  2: {
+    base: 'ring-recipient-2 hover:bg-recipient-2/30',
+    baseRing: 'rgba(110, 110, 110, 1)',
+    baseRingHover: 'rgba(110, 110, 110, 0.3)',
+    baseTextHover: 'rgba(110, 110, 110, 1)',
+    fieldButton: 'hover:border-recipient-2 hover:bg-recipient-2/30',
     fieldItem: 'group/field-item rounded-[2px]',
-    fieldItemInitials: 'group-hover/field-item:bg-recipient-blue',
+    fieldItemInitials: 'group-hover/field-item:bg-recipient-2',
     comboxBoxTrigger:
-      'ring-2 ring-recipient-blue hover:bg-recipient-blue/15 active:bg-recipient-blue/15 shadow-[0_0_0_5px_hsl(var(--recipient-blue)/10%),0_0_0_2px_hsl(var(--recipient-blue)/60%),0_0_0_0.5px_hsl(var(--recipient-blue))]',
-    comboxBoxItem: 'ring-recipient-blue hover:bg-recipient-blue/15 active:bg-recipient-blue/15',
+      'ring-2 ring-recipient-2 hover:bg-recipient-2/15 active:bg-recipient-2/15 shadow-[0_0_0_5px_hsl(var(--recipient-2)/10%),0_0_0_2px_hsl(var(--recipient-2)/60%),0_0_0_0.5px_hsl(var(--recipient-2))]',
+    comboxBoxItem: 'ring-recipient-2 hover:bg-recipient-2/15 active:bg-recipient-2/15',
   },
 
-  purple: {
-    base: 'ring-recipient-purple hover:bg-recipient-purple/30',
-    baseRing: 'rgba(151, 71, 255, 1)',
-    baseRingHover: 'rgba(151, 71, 255, 0.3)',
-    baseTextHover: 'rgba(151, 71, 255, 1)',
-    fieldButton: 'hover:border-recipient-purple hover:bg-recipient-purple/30',
+  3: {
+    base: 'ring-recipient-3 hover:bg-recipient-3/30',
+    baseRing: 'rgba(128, 128, 128, 1)',
+    baseRingHover: 'rgba(128, 128, 128, 0.3)',
+    baseTextHover: 'rgba(128, 128, 128, 1)',
+    fieldButton: 'hover:border-recipient-3 hover:bg-recipient-3/30',
     fieldItem: 'group/field-item rounded-[2px]',
-    fieldItemInitials: 'group-hover/field-item:bg-recipient-purple',
+    fieldItemInitials: 'group-hover/field-item:bg-recipient-3',
     comboxBoxTrigger:
-      'ring-2 ring-recipient-purple hover:bg-recipient-purple/15 active:bg-recipient-purple/15 shadow-[0_0_0_5px_hsl(var(--recipient-purple)/10%),0_0_0_2px_hsl(var(--recipient-purple)/60%),0_0_0_0.5px_hsl(var(--recipient-purple))]',
-    comboxBoxItem: 'hover:bg-recipient-purple/15 active:bg-recipient-purple/15',
+      'ring-2 ring-recipient-3 hover:bg-recipient-3/15 active:bg-recipient-3/15 shadow-[0_0_0_5px_hsl(var(--recipient-3)/10%),0_0_0_2px_hsl(var(--recipient-3)/60%),0_0_0_0.5px_hsl(var(--recipient-3))]',
+    comboxBoxItem: 'hover:bg-recipient-3/15 active:bg-recipient-3/15',
   },
 
-  orange: {
-    base: 'ring-recipient-orange hover:bg-recipient-orange/30',
-    baseRing: 'rgba(246, 159, 30, 1)',
-    baseRingHover: 'rgba(246, 159, 30, 0.3)',
-    baseTextHover: 'rgba(246, 159, 30, 1)',
-    fieldButton: 'hover:border-recipient-orange hover:bg-recipient-orange/30',
+  4: {
+    base: 'ring-recipient-4 hover:bg-recipient-4/30',
+    baseRing: 'rgba(145, 145, 145, 1)',
+    baseRingHover: 'rgba(145, 145, 145, 0.3)',
+    baseTextHover: 'rgba(145, 145, 145, 1)',
+    fieldButton: 'hover:border-recipient-4 hover:bg-recipient-4/30',
     fieldItem: 'group/field-item rounded-[2px]',
-    fieldItemInitials: 'group-hover/field-item:bg-recipient-orange',
+    fieldItemInitials: 'group-hover/field-item:bg-recipient-4',
     comboxBoxTrigger:
-      'ring-2 ring-recipient-orange hover:bg-recipient-orange/15 active:bg-recipient-orange/15 shadow-[0_0_0_5px_hsl(var(--recipient-orange)/10%),0_0_0_2px_hsl(var(--recipient-orange)/60%),0_0_0_0.5px_hsl(var(--recipient-orange))]',
-    comboxBoxItem: 'hover:bg-recipient-orange/15 active:bg-recipient-orange/15',
+      'ring-2 ring-recipient-4 hover:bg-recipient-4/15 active:bg-recipient-4/15 shadow-[0_0_0_5px_hsl(var(--recipient-4)/10%),0_0_0_2px_hsl(var(--recipient-4)/60%),0_0_0_0.5px_hsl(var(--recipient-4))]',
+    comboxBoxItem: 'hover:bg-recipient-4/15 active:bg-recipient-4/15',
   },
 
-  yellow: {
-    base: 'ring-recipient-yellow hover:bg-recipient-yellow/30',
-    baseRing: 'rgba(219, 186, 0, 1)',
-    baseRingHover: 'rgba(219, 186, 0, 0.3)',
-    baseTextHover: 'rgba(219, 186, 0, 1)',
-    fieldButton: 'hover:border-recipient-yellow hover:bg-recipient-yellow/30',
+  5: {
+    base: 'ring-recipient-5 hover:bg-recipient-5/30',
+    baseRing: 'rgba(163, 163, 163, 1)',
+    baseRingHover: 'rgba(163, 163, 163, 0.3)',
+    baseTextHover: 'rgba(163, 163, 163, 1)',
+    fieldButton: 'hover:border-recipient-5 hover:bg-recipient-5/30',
     fieldItem: 'group/field-item rounded-[2px]',
-    fieldItemInitials: 'group-hover/field-item:bg-recipient-yellow',
+    fieldItemInitials: 'group-hover/field-item:bg-recipient-5',
     comboxBoxTrigger:
-      'ring-2 ring-recipient-yellow hover:bg-recipient-yellow/15 active:bg-recipient-yellow/15 shadow-[0_0_0_5px_hsl(var(--recipient-yellow)/10%),0_0_0_2px_hsl(var(--recipient-yellow)/60%),0_0_0_0.5px_hsl(var(--recipient-yellow))]',
-    comboxBoxItem: 'hover:bg-recipient-yellow/15 active:bg-recipient-yellow/15',
+      'ring-2 ring-recipient-5 hover:bg-recipient-5/15 active:bg-recipient-5/15 shadow-[0_0_0_5px_hsl(var(--recipient-5)/10%),0_0_0_2px_hsl(var(--recipient-5)/60%),0_0_0_0.5px_hsl(var(--recipient-5))]',
+    comboxBoxItem: 'hover:bg-recipient-5/15 active:bg-recipient-5/15',
   },
 
-  pink: {
-    base: 'ring-recipient-pink hover:bg-recipient-pink/30',
-    baseRing: 'rgba(217, 74, 186, 1)',
-    baseRingHover: 'rgba(217, 74, 186, 0.3)',
-    baseTextHover: 'rgba(217, 74, 186, 1)',
-    fieldButton: 'hover:border-recipient-pink hover:bg-recipient-pink/30',
+  6: {
+    base: 'ring-recipient-6 hover:bg-recipient-6/30',
+    baseRing: 'rgba(181, 181, 181, 1)',
+    baseRingHover: 'rgba(181, 181, 181, 0.3)',
+    baseTextHover: 'rgba(181, 181, 181, 1)',
+    fieldButton: 'hover:border-recipient-6 hover:bg-recipient-6/30',
     fieldItem: 'group/field-item rounded-[2px]',
-    fieldItemInitials: 'group-hover/field-item:bg-recipient-pink',
+    fieldItemInitials: 'group-hover/field-item:bg-recipient-6',
     comboxBoxTrigger:
-      'ring-2 ring-recipient-pink hover:bg-recipient-pink/15 active:bg-recipient-pink/15 shadow-[0_0_0_5px_hsl(var(--recipient-pink)/10%),0_0_0_2px_hsl(var(--recipient-pink)/60%),0_0_0_0.5px_hsl(var(--recipient-pink',
-    comboxBoxItem: 'hover:bg-recipient-pink/15 active:bg-recipient-pink/15',
+      'ring-2 ring-recipient-6 hover:bg-recipient-6/15 active:bg-recipient-6/15 shadow-[0_0_0_5px_hsl(var(--recipient-6)/10%),0_0_0_2px_hsl(var(--recipient-6)/60%),0_0_0_0.5px_hsl(var(--recipient-6))]',
+    comboxBoxItem: 'hover:bg-recipient-6/15 active:bg-recipient-6/15',
   },
 } satisfies Record<string, RecipientColorStyles>;
 
 export type TRecipientColor = keyof typeof RECIPIENT_COLOR_STYLES;
 
-export const AVAILABLE_RECIPIENT_COLORS = [
-  'green',
-  'blue',
-  'purple',
-  'orange',
-  'yellow',
-  'pink',
-] satisfies TRecipientColor[];
+export const AVAILABLE_RECIPIENT_COLORS = [1, 2, 3, 4, 5, 6] satisfies TRecipientColor[];
 
 export const useRecipientColors = (index: number) => {
   const key = AVAILABLE_RECIPIENT_COLORS[index % AVAILABLE_RECIPIENT_COLORS.length];

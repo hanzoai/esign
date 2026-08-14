@@ -139,12 +139,13 @@ export const EnvelopeSignerPageRenderer = ({ pageData }: { pageData: PageRenderD
 
     const fieldToRender = ZFullFieldSchema.parse(unparsedField);
 
-    let color: TRecipientColor = 'green';
+    // A field still waiting on the signer takes the darkest ring so it reads first.
+    let color: TRecipientColor = 3;
 
     if (fieldToRender.fieldMeta?.readOnly) {
       color = 'readOnly';
     } else if (showPendingFieldTooltip && isFieldUnsignedAndRequired(fieldToRender)) {
-      color = 'orange';
+      color = 1;
     }
 
     const { fieldGroup } = renderField({

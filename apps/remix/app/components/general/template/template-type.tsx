@@ -21,12 +21,12 @@ const TEMPLATE_TYPES: Record<TemplateTypes, TemplateTypeIcon> = {
   PRIVATE: {
     label: msg`Private`,
     icon: Lock,
-    color: 'text-blue-600 dark:text-blue-300',
+    color: 'text-muted-foreground',
   },
   PUBLIC: {
     label: msg`Public`,
     icon: Globe2,
-    color: 'text-green-500 dark:text-green-300',
+    color: 'text-foreground',
   },
 };
 

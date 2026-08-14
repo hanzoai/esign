@@ -6,9 +6,9 @@ import { Trans } from '@lingui/react/macro';
 import { AlertTriangle, Globe2Icon, InfoIcon, Link2Icon, Loader, LockIcon } from 'lucide-react';
 import { Link } from 'react-router';
 
-import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
 import { useUpdateSearchParams } from '@hanzo/esign-lib/client-only/hooks/use-update-search-params';
 import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
+import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
 import { formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
 import type { TFindTemplatesResponse } from '@hanzo/esign-trpc/server/template-router/schema';
 import { Alert, AlertDescription, AlertTitle } from '@hanzo/esign-ui/primitives/alert';
@@ -124,7 +124,7 @@ export const TemplatesTable = ({
                 <ul className="space-y-0.5 divide-y text-muted-foreground [&>li]:p-4">
                   <li>
                     <h2 className="mb-2 flex flex-row items-center font-semibold">
-                      <Globe2Icon className="mr-2 h-5 w-5 text-green-500 dark:text-green-300" />
+                      <Globe2Icon className="mr-2 h-5 w-5 text-foreground" />
                       <Trans>Public</Trans>
                     </h2>
 
@@ -151,7 +151,7 @@ export const TemplatesTable = ({
                   </li>
                   <li>
                     <h2 className="mb-2 flex flex-row items-center font-semibold">
-                      <LockIcon className="mr-2 h-5 w-5 text-blue-600 dark:text-blue-300" />
+                      <LockIcon className="mr-2 h-5 w-5 text-muted-foreground" />
                       {team?.id ? <Trans>Team Only</Trans> : <Trans>Private</Trans>}
                     </h2>
 

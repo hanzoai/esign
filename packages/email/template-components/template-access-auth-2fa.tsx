@@ -27,11 +27,11 @@ export const TemplateAccessAuth2FA = ({
       <Img src={getAssetUrl('/static/document.png')} alt="Document" className="mx-auto h-12 w-12" />
 
       <Section className="mt-8">
-        <Heading className="text-center text-lg font-semibold text-slate-900">
+        <Heading className="text-center text-lg font-semibold text-black">
           <Trans>Verification Code Required</Trans>
         </Heading>
 
-        <Text className="mt-2 text-center text-slate-700">
+        <Text className="mt-2 text-center text-neutral-700">
           <Trans>
             Hi {userName}, you need to enter a verification code to complete the document "
             {documentTitle}".
@@ -42,7 +42,7 @@ export const TemplateAccessAuth2FA = ({
           <Text className="mb-2 text-sm font-medium text-slate-600">
             <Trans>Your verification code:</Trans>
           </Text>
-          <Text className="text-2xl font-bold tracking-wider text-slate-900">{code}</Text>
+          <Text className="text-2xl font-bold tracking-wider text-black">{code}</Text>
         </Section>
 
         <Text className="mt-4 text-center text-sm text-slate-600">

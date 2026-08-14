@@ -80,7 +80,7 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
       <div className="w-screen max-w-lg px-4">
         <div className="flex w-full items-start">
           <div className="mr-4 mt-1 hidden md:block">
-            <AlertTriangle className="h-10 w-10 text-yellow-500" strokeWidth={2} />
+            <AlertTriangle className="h-10 w-10 text-muted-foreground" strokeWidth={2} />
           </div>
 
           <div>
@@ -136,7 +136,7 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
       <div className="w-screen max-w-lg px-4">
         <div className="flex w-full items-start">
           <div className="mr-4 mt-1 hidden md:block">
-            <CheckCircle2 className="h-10 w-10 text-green-500" strokeWidth={2} />
+            <CheckCircle2 className="h-10 w-10 text-foreground" strokeWidth={2} />
           </div>
 
           <div>
@@ -164,7 +164,7 @@ export default function VerifyEmailPage({ loaderData }: Route.ComponentProps) {
       <div className="w-screen max-w-lg px-4">
         <div className="flex w-full items-start">
           <div className="mr-4 mt-1 hidden md:block">
-            <CheckCircle2 className="h-10 w-10 text-green-500" strokeWidth={2} />
+            <CheckCircle2 className="h-10 w-10 text-foreground" strokeWidth={2} />
           </div>
 
           <div>

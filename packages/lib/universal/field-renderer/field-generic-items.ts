@@ -111,7 +111,7 @@ export const createSpinner = ({
     outerRadius: spinnerSize / 2,
     angle: 270,
     rotation: 0,
-    fill: 'rgba(122, 195, 85, 1)',
+    fill: 'rgba(92, 92, 92, 1)',
     lineCap: 'round',
   });
 

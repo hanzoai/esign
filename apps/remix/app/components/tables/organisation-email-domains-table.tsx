@@ -86,13 +86,13 @@ export const OrganisationEmailDomainsDataTable = () => {
           match(row.original.status)
             .with(EmailDomainStatus.ACTIVE, () => (
               <Badge>
-                <CheckCircle2Icon className="mr-2 h-4 w-4 text-green-500 dark:text-green-300" />
+                <CheckCircle2Icon className="mr-2 h-4 w-4 text-foreground" />
                 <Trans>Active</Trans>
               </Badge>
             ))
             .with(EmailDomainStatus.PENDING, () => (
               <Badge variant="warning">
-                <ClockIcon className="mr-2 h-4 w-4 text-yellow-500 dark:text-yellow-200" />
+                <ClockIcon className="mr-2 h-4 w-4 text-muted-foreground" />
                 <Trans>Pending</Trans>
               </Badge>
             ))

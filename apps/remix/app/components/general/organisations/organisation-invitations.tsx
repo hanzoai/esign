@@ -39,7 +39,7 @@ export const OrganisationInvitations = ({ className }: { className?: string }) =
         <AnimateGenericFadeInOut>
           <Alert variant="secondary" className={className}>
             <div className="flex h-full flex-row items-center p-2">
-              <BellIcon className="mr-4 h-5 w-5 text-blue-800" />
+              <BellIcon className="mr-4 h-5 w-5 text-foreground" />
 
               <AlertDescription className="mr-2">
                 <Plural
@@ -59,7 +59,7 @@ export const OrganisationInvitations = ({ className }: { className?: string }) =
 
               <Dialog>
                 <DialogTrigger asChild>
-                  <button className="ml-auto text-sm font-medium text-blue-700 hover:text-blue-600">
+                  <button className="ml-auto text-sm font-medium text-foreground hover:opacity-80">
                     <Trans>View invites</Trans>
                   </button>
                 </DialogTrigger>
@@ -96,7 +96,7 @@ export const OrganisationInvitations = ({ className }: { className?: string }) =
                             className="w-full max-w-none py-4"
                             avatarFallback={invitation.organisation.name.slice(0, 1)}
                             primaryText={
-                              <span className="text-foreground/80 font-semibold">
+                              <span className="font-semibold text-foreground/80">
                                 {invitation.organisation.name}
                               </span>
                             }
@@ -134,24 +134,25 @@ const AcceptOrganisationInvitationButton = ({ token }: { token: string }) => {
   } = useZapMutation<TAcceptOrganisationMemberInviteResponse, { token: string }>(
     'organisation.member.invite.accept',
     {
-    onSuccess: async () => {
-      await refreshSession();
+      onSuccess: async () => {
+        await refreshSession();
 
-      toast({
-        title: _(msg`Success`),
-        description: _(msg`Invitation accepted`),
-        duration: 5000,
-      });
+        toast({
+          title: _(msg`Success`),
+          description: _(msg`Invitation accepted`),
+          duration: 5000,
+        });
+      },
+      onError: () => {
+        toast({
+          title: _(msg`Something went wrong`),
+          description: _(msg`Unable to join this organisation at this time.`),
+          variant: 'destructive',
+          duration: 10000,
+        });
+      },
     },
-    onError: () => {
-      toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`Unable to join this organisation at this time.`),
-        variant: 'destructive',
-        duration: 10000,
-      });
-    },
-  });
+  );
 
   return (
     <Button
@@ -176,24 +177,25 @@ const DeclineOrganisationInvitationButton = ({ token }: { token: string }) => {
   } = useZapMutation<TDeclineOrganisationMemberInviteResponse, { token: string }>(
     'organisation.member.invite.decline',
     {
-    onSuccess: async () => {
-      await refreshSession();
+      onSuccess: async () => {
+        await refreshSession();
 
-      toast({
-        title: _(msg`Success`),
-        description: _(msg`Invitation declined`),
-        duration: 5000,
-      });
+        toast({
+          title: _(msg`Success`),
+          description: _(msg`Invitation declined`),
+          duration: 5000,
+        });
+      },
+      onError: () => {
+        toast({
+          title: _(msg`Something went wrong`),
+          description: _(msg`Unable to decline this invitation at this time.`),
+          variant: 'destructive',
+          duration: 10000,
+        });
+      },
     },
-    onError: () => {
-      toast({
-        title: _(msg`Something went wrong`),
-        description: _(msg`Unable to decline this invitation at this time.`),
-        variant: 'destructive',
-        duration: 10000,
-      });
-    },
-  });
+  );
 
   return (
     <Button

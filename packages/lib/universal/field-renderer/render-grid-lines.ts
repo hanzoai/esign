@@ -250,7 +250,7 @@ export function showSnapGuides(
     const horizontalLine = new Konva.Line({
       name: 'snap-guide-horizontal',
       points: [0, horizontalGuide, stageWidth, horizontalGuide],
-      stroke: 'rgb(0, 161, 255)',
+      stroke: 'rgb(0, 0, 0)',
       strokeWidth: 1,
       dash: [5, 5],
       listening: false,
@@ -262,7 +262,7 @@ export function showSnapGuides(
     const verticalLine = new Konva.Line({
       name: 'snap-guide-vertical',
       points: [verticalGuide, 0, verticalGuide, stageHeight],
-      stroke: 'rgb(0, 161, 255)',
+      stroke: 'rgb(0, 0, 0)',
       strokeWidth: 1,
       dash: [5, 5],
       listening: false,
@@ -291,7 +291,7 @@ export function showMultipleSnapGuides(
     const horizontalLine = new Konva.Line({
       name: 'snap-guide-horizontal',
       points: [0, guide, stageWidth, guide],
-      stroke: 'rgb(0, 161, 255)',
+      stroke: 'rgb(0, 0, 0)',
       strokeWidth: 1,
       dash: [5, 5],
       listening: false,
@@ -304,7 +304,7 @@ export function showMultipleSnapGuides(
     const verticalLine = new Konva.Line({
       name: 'snap-guide-vertical',
       points: [guide, 0, guide, stageHeight],
-      stroke: 'rgb(0, 161, 255)',
+      stroke: 'rgb(0, 0, 0)',
       strokeWidth: 1,
       dash: [5, 5],
       listening: false,

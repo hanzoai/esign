@@ -689,17 +689,17 @@ const dateFormat: DateTimeFormatOptions = {
  */
 const getAuditLogIndicatorColor = (type: string) =>
   match(type)
-    .with(DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_RECIPIENT_COMPLETED, () => '#22c55e') // bg-green-500
-    .with(DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_RECIPIENT_REJECTED, () => '#ef4444') // bg-red-500
-    .with(DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_SENT, () => '#f97316') // bg-orange-500
+    .with(DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_RECIPIENT_COMPLETED, () => '#0a0a0a') // foreground
+    .with(DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_RECIPIENT_REJECTED, () => '#ef4444') // destructive
+    .with(DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_SENT, () => '#737373') // muted-foreground
     .with(
       P.union(
         DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_FIELD_INSERTED,
         DOCUMENT_AUDIT_LOG_TYPE.DOCUMENT_FIELD_UNINSERTED,
       ),
-      () => '#3b82f6', // bg-blue-500
+      () => '#d4d4d4', // border
     )
-    .otherwise(() => '#f1f5f9'); // bg-muted
+    .otherwise(() => '#f5f5f5'); // muted
 
 const formatUserAgent = (userAgent: string | null | undefined, userAgentInfo: UAParser.IResult) => {
   if (!userAgent) {

@@ -14,11 +14,11 @@ import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import type { TRecipientActionAuth } from '@hanzo/esign-lib/types/document-auth';
 import { ZDateFieldMeta } from '@hanzo/esign-lib/types/field-meta';
 import type { FieldWithSignature } from '@hanzo/esign-prisma/types/field-with-signature';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
   TSignFieldWithTokenMutationSchema,
 } from '@hanzo/esign-trpc/server/field-router/schema';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { cn } from '@hanzo/esign-ui/lib/utils';
 import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
@@ -142,13 +142,13 @@ export const DocumentSigningDateField = ({
       tooltipText={isDifferentTime ? tooltipText : undefined}
     >
       {isLoading && (
-        <div className="bg-background absolute inset-0 flex items-center justify-center rounded-md">
-          <Loader className="text-primary h-5 w-5 animate-spin md:h-8 md:w-8" />
+        <div className="absolute inset-0 flex items-center justify-center rounded-md bg-background">
+          <Loader className="h-5 w-5 animate-spin text-primary md:h-8 md:w-8" />
         </div>
       )}
 
       {!field.inserted && (
-        <p className="group-hover:text-primary text-foreground group-hover:text-recipient-green text-[clamp(0.425rem,25cqw,0.825rem)] duration-200">
+        <p className="text-[clamp(0.425rem,25cqw,0.825rem)] text-foreground duration-200 group-hover:text-primary">
           <Trans>Date</Trans>
         </p>
       )}
@@ -157,7 +157,7 @@ export const DocumentSigningDateField = ({
         <div className="flex h-full w-full items-center">
           <p
             className={cn(
-              'text-foreground w-full whitespace-nowrap text-left text-[clamp(0.425rem,25cqw,0.825rem)] duration-200',
+              'w-full whitespace-nowrap text-left text-[clamp(0.425rem,25cqw,0.825rem)] text-foreground duration-200',
               {
                 '!text-center': parsedFieldMeta?.textAlign === 'center',
                 '!text-right': parsedFieldMeta?.textAlign === 'right',

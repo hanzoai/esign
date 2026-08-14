@@ -18,7 +18,7 @@ const tooltipVariants = cva('font-semibold', {
   variants: {
     color: {
       default: 'border-2 fill-white',
-      warning: 'border-0 bg-orange-300 fill-orange-300 text-orange-900',
+      warning: 'border-0 bg-foreground fill-foreground text-background',
     },
   },
   defaultVariants: {

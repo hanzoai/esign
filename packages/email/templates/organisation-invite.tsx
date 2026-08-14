@@ -79,7 +79,7 @@ export const OrganisationInviteEmailTemplate = ({
 
               <Text className="my-1 text-center text-base">
                 <Trans>
-                  by <span className="text-slate-900">{senderName}</span>
+                  by <span className="text-black">{senderName}</span>
                 </Trans>
               </Text>
 

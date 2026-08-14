@@ -23,25 +23,28 @@ export const EnvelopeItemSelector = ({
       title={typeof primaryText === 'string' ? primaryText : undefined}
       className={`flex h-fit max-w-72 flex-shrink-0 cursor-pointer items-center space-x-3 rounded-lg border px-4 py-3 transition-colors ${
         isSelected
-          ? 'border-green-200 bg-green-50 text-green-900 dark:border-green-400/30 dark:bg-green-400/10 dark:text-green-400'
+          ? 'border-foreground/30 bg-muted text-foreground'
           : 'border-border bg-muted/50 hover:bg-muted/70'
       }`}
       {...buttonProps}
     >
+      {/* The selected file's number is filled, the rest are outlined. */}
       <div
         className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-xs font-medium ${
-          isSelected ? 'bg-green-100 text-green-600' : 'bg-gray-200 text-gray-600'
+          isSelected ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground'
         }`}
       >
         {number}
       </div>
       <div className="min-w-0 text-left">
-        <div className="truncate text-sm font-medium">{primaryText}</div>
-        <div className="text-xs text-gray-500">{secondaryText}</div>
+        <div className={cn('truncate text-sm', isSelected ? 'font-semibold' : 'font-medium')}>
+          {primaryText}
+        </div>
+        <div className="text-xs text-muted-foreground">{secondaryText}</div>
       </div>
       <div
         className={cn('h-2 w-2 flex-shrink-0 rounded-full', {
-          'bg-green-500': isSelected,
+          'bg-foreground': isSelected,
         })}
       ></div>
     </button>

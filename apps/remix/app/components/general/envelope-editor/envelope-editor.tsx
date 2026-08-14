@@ -282,10 +282,8 @@ export const EnvelopeEditor = () => {
                   data-testid={`envelope-editor-step-${step.id}`}
                   type="button"
                   className={cn(
-                    `cursor-pointer rounded-lg text-left transition-colors ${
-                      isActive
-                        ? 'border border-green-200 bg-green-50 dark:border-green-500/20 dark:bg-green-500/10'
-                        : 'border border-gray-200 hover:bg-gray-50 dark:border-gray-400/20 dark:hover:bg-gray-400/10'
+                    `cursor-pointer rounded-lg border text-left transition-colors ${
+                      isActive ? 'border-foreground/30 bg-muted' : 'border-border hover:bg-muted/50'
                     }`,
                     {
                       'p-3': !minimizeLeftSidebar,
@@ -294,25 +292,24 @@ export const EnvelopeEditor = () => {
                   onClick={() => void navigateToStep(step.id as EnvelopeEditorStep)}
                 >
                   <div className="flex items-center space-x-3">
+                    {/* The active step's mark is filled, the rest are outlined. */}
                     <div
                       className={`rounded border p-2 ${
                         isActive
-                          ? 'border-green-200 bg-green-50 dark:border-green-500/20 dark:bg-green-500/10'
-                          : 'border-gray-100 bg-gray-100 dark:border-gray-400/20 dark:bg-gray-400/10'
+                          ? 'border-foreground bg-foreground text-background'
+                          : 'border-border bg-muted text-muted-foreground'
                       }`}
                     >
-                      <Icon
-                        className={`h-4 w-4 ${isActive ? 'text-green-600' : 'text-gray-600'}`}
-                      />
+                      <Icon className="h-4 w-4" />
                     </div>
 
                     {!minimizeLeftSidebar && (
                       <div className="space-y-0.5">
                         <div
-                          className={`text-sm font-medium ${
+                          className={`text-sm ${
                             isActive
-                              ? 'text-green-900 dark:text-green-400'
-                              : 'text-foreground dark:text-muted-foreground'
+                              ? 'font-semibold text-foreground'
+                              : 'font-medium text-muted-foreground'
                           }`}
                         >
                           {t(step.title)}

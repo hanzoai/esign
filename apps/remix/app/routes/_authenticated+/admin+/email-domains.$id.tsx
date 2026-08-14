@@ -57,29 +57,28 @@ export default function AdminEmailDomainDetailPage({ loaderData }: Route.Compone
     refetch,
   } = useZapQuery<TGetEmailDomainResponse>('admin.emailDomain.get', { emailDomainId });
 
-  const { mutate: reregisterDomain, isPending: isReregistering } =
-    useZapMutation<TReregisterEmailDomainResponse, TReregisterEmailDomainRequest>(
-      'admin.emailDomain.reregister',
-      {
-        onSuccess: () => {
-          toast({
-            title: _(msg`Domain re-registered`),
-            description: _(
-              msg`The SES identity has been deleted and recreated with the same keys. DNS records remain unchanged.`,
-            ),
-          });
+  const { mutate: reregisterDomain, isPending: isReregistering } = useZapMutation<
+    TReregisterEmailDomainResponse,
+    TReregisterEmailDomainRequest
+  >('admin.emailDomain.reregister', {
+    onSuccess: () => {
+      toast({
+        title: _(msg`Domain re-registered`),
+        description: _(
+          msg`The SES identity has been deleted and recreated with the same keys. DNS records remain unchanged.`,
+        ),
+      });
 
-          void refetch();
-        },
-        onError: () => {
-          toast({
-            title: _(msg`Error`),
-            description: _(msg`Failed to re-register email domain`),
-            variant: 'destructive',
-          });
-        },
-      },
-    );
+      void refetch();
+    },
+    onError: () => {
+      toast({
+        title: _(msg`Error`),
+        description: _(msg`Failed to re-register email domain`),
+        variant: 'destructive',
+      });
+    },
+  });
 
   const dnsRecords = useMemo(() => {
     if (!emailDomain) {
@@ -142,13 +141,13 @@ export default function AdminEmailDomainDetailPage({ loaderData }: Route.Compone
           {match(emailDomain.status)
             .with(EmailDomainStatus.ACTIVE, () => (
               <Badge>
-                <CheckCircle2Icon className="mr-2 h-4 w-4 text-green-500 dark:text-green-300" />
+                <CheckCircle2Icon className="mr-2 h-4 w-4 text-foreground" />
                 <Trans>Active</Trans>
               </Badge>
             ))
             .with(EmailDomainStatus.PENDING, () => (
               <Badge variant="warning">
-                <ClockIcon className="mr-2 h-4 w-4 text-yellow-500 dark:text-yellow-200" />
+                <ClockIcon className="mr-2 h-4 w-4 text-muted-foreground" />
                 <Trans>Pending</Trans>
               </Badge>
             ))
@@ -182,7 +181,7 @@ export default function AdminEmailDomainDetailPage({ loaderData }: Route.Compone
             : '-'}
         </div>
         {pendingDuration && (
-          <div className="mt-1 text-yellow-600 dark:text-yellow-400">
+          <div className="mt-1 text-muted-foreground">
             <Trans>Pending since</Trans>: {pendingDuration}
           </div>
         )}

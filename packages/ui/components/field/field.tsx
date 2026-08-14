@@ -142,7 +142,7 @@ export function FieldRootContainer({
           {
             'px-2': field.type !== FieldType.SIGNATURE && field.type !== FieldType.FREE_SIGNATURE,
             'justify-center': !field.inserted,
-            'ring-orange-300': isValidating && isFieldUnsignedAndRequired(field),
+            'ring-neutral-900': isValidating && isFieldUnsignedAndRequired(field),
           },
           className,
         )}

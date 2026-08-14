@@ -250,7 +250,7 @@ export const EnvelopeEditorFieldsPageRenderer = ({ pageData }: { pageData: PageR
 
     // Add selection rectangle.
     const selectionRectangle = new Konva.Rect({
-      fill: 'rgba(24, 160, 251, 0.3)',
+      fill: 'rgba(0, 0, 0, 0.2)',
       visible: false,
     });
     currentPageLayer.add(selectionRectangle);
@@ -346,7 +346,7 @@ export const EnvelopeEditorFieldsPageRenderer = ({ pageData }: { pageData: PageR
           y: box.y / scale,
           width: unscaledBoxWidth,
           height: unscaledBoxHeight,
-          fill: 'rgba(24, 160, 251, 0.3)',
+          fill: 'rgba(0, 0, 0, 0.2)',
         });
 
         currentPageLayer.add(pendingFieldCreation);

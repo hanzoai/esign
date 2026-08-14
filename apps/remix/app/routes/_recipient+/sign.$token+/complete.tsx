@@ -137,12 +137,8 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
         '-mx-4 flex flex-col items-center overflow-hidden px-4 pt-16 md:-mx-8 md:px-8 lg:pt-20 xl:pt-28',
       )}
     >
-      <div
-        className={cn('relative mt-6 flex w-full flex-col items-center justify-center')}
-      >
-        <div
-          className={cn('flex flex-col items-center')}
-        >
+      <div className={cn('relative mt-6 flex w-full flex-col items-center justify-center')}>
+        <div className={cn('flex flex-col items-center')}>
           <Badge variant="neutral" size="default" className="mb-6 rounded-xl border bg-transparent">
             <span className="block max-w-[10rem] truncate font-medium hover:underline md:max-w-[20rem]">
               {document.title}
@@ -172,7 +168,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
               </div>
             ))
             .with({ status: 'PROCESSING' }, () => (
-              <div className="mt-4 flex items-center text-center text-orange-600">
+              <div className="mt-4 flex items-center text-center text-muted-foreground">
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 <span className="text-sm">
                   <Trans>Processing document</Trans>
@@ -180,7 +176,7 @@ export default function CompletedSigningPage({ loaderData }: Route.ComponentProp
               </div>
             ))
             .with({ deletedAt: null }, () => (
-              <div className="mt-4 flex items-center text-center text-blue-600">
+              <div className="mt-4 flex items-center text-center text-muted-foreground">
                 <Clock8 className="mr-2 h-5 w-5" />
                 <span className="text-sm">
                   <Trans>Waiting for others to sign</Trans>

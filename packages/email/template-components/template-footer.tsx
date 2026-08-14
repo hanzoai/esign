@@ -16,7 +16,7 @@ export const TemplateFooter = ({ isDocument = true }: TemplateFooterProps) => {
         <Text className="my-4 text-base text-slate-400">
           <Trans>
             This document was sent using{' '}
-            <Link className="text-[#7AC455]" href="https://esign.hanzo.ai/mail-footer">
+            <Link className="text-black" href="https://esign.hanzo.ai/mail-footer">
               Hanzo Sign
             </Link>
             .
