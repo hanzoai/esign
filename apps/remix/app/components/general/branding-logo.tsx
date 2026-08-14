@@ -14,7 +14,7 @@ export type LogoProps = SVGAttributes<SVGSVGElement>;
 // for documents (team/org `brandingLogo`); extending it to the app shell is the
 // next step and would replace the mark here.
 export const BrandingLogo = ({ ...props }: LogoProps) => {
-  const { name } = brand();
+  const { name, primary, suffix } = brand();
 
   // The wordmark starts after the 67-wide mark plus a gap. Advance width is
   // estimated per glyph (~0.55em at 44px) because SVG cannot measure text — the
@@ -30,6 +30,7 @@ export const BrandingLogo = ({ ...props }: LogoProps) => {
       {...props}
     >
       <MarkPaths />
+      {/* `dx` is the word space: SVG collapses a space written between tspans. */}
       <text
         x={textX}
         y="48"
@@ -37,9 +38,13 @@ export const BrandingLogo = ({ ...props }: LogoProps) => {
         fontSize="44"
         fontWeight="600"
         letterSpacing="-1.5"
-        fill="currentColor"
       >
-        {name}
+        <tspan className="fill-foreground">{primary}</tspan>
+        {suffix && (
+          <tspan className="fill-muted-foreground" dx="11">
+            {suffix}
+          </tspan>
+        )}
       </text>
     </svg>
   );
