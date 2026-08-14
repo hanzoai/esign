@@ -1,3 +1,16 @@
+# Playwright e2e against a real stack: services up, database migrated and
+# seeded, then the suite.
+#
+# This is the ONE thing .github/workflows still did that the native lane does
+# not. The other three files there were identical stubs echoing "moved to native
+# pipeline" — a workflow that reports success for doing nothing, which is worse
+# than no workflow, so they are gone.
+#
+# The label was warp-ubuntu-2204-x64-8x, a WarpBuild SaaS runner this fleet does
+# not have. On the forge that queues rather than fails.
+#
+# .github/actions/{node-install,playwright-install} stay where they are and
+# still resolve — a local action is a path in the repo, not a GitHub surface.
 name: Playwright Tests
 on:
   push:
@@ -13,7 +26,7 @@ jobs:
   e2e_tests:
     name: 'E2E Tests'
     timeout-minutes: 60
-    runs-on: warp-ubuntu-2204-x64-8x
+    runs-on: hanzo-build-linux-amd64
     steps:
       - uses: actions/checkout@v4
 

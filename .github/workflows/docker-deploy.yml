@@ -1,8 +1,0 @@
-name: Docker (moved to native pipeline)
-on:
-  workflow_dispatch:
-jobs:
-  notice:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "native pipeline is .hanzo/workflows/deploy.yml; GitHub is a mirror"
