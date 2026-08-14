@@ -1,23 +1,15 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { msg, plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react/macro';
 import { Trans } from '@lingui/react/macro';
 import { EnvelopeType } from '@prisma/client';
 import { ErrorCode as DropzoneErrorCode, type FileRejection } from 'react-dropzone';
-import { useNavigate } from 'react-router';
 
 import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
 import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/esign-lib/constants/app';
-import { TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
 import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
-import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
-import type {
-  TCreateEnvelopePayload,
-  TCreateEnvelopeResponse,
-} from '@hanzo/esign-trpc/server/envelope-router/create-envelope.types';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { cn } from '@hanzo/esign-ui/lib/utils';
 import { DocumentUploadButton } from '@hanzo/esign-ui/primitives/document-upload-button';
 import {
@@ -30,7 +22,7 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 
-import { uploadErrorMessage } from './upload-error';
+import { useCreateEnvelope } from './create';
 
 export type EnvelopeUploadButtonProps = {
   className?: string;
@@ -42,26 +34,17 @@ export type EnvelopeUploadButtonProps = {
  * Upload an envelope
  */
 export const EnvelopeUploadButton = ({ className, type, folderId }: EnvelopeUploadButtonProps) => {
-  const { t, i18n } = useLingui();
+  const { t } = useLingui();
   const { toast } = useToast();
   const { user } = useSession();
 
   const team = useCurrentTeam();
 
-  const navigate = useNavigate();
   const organisation = useCurrentOrganisation();
 
-  const userTimezone = TIME_ZONES.find(
-    (timezone) => timezone === Intl.DateTimeFormat().resolvedOptions().timeZone,
-  );
+  const { quota, remaining, maximumEnvelopeItemCount } = useLimits();
 
-  const { quota, remaining, refreshLimits, maximumEnvelopeItemCount } = useLimits();
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { mutateAsync: createEnvelope } = useZapMutation<TCreateEnvelopeResponse, FormData>(
-    'envelope.create',
-  );
+  const { create, isCreating } = useCreateEnvelope({ type, folderId });
 
   const disabledMessage = useMemo(() => {
     if (organisation.subscription && remaining.documents === 0) {
@@ -78,66 +61,6 @@ export const EnvelopeUploadButton = ({ className, type, folderId }: EnvelopeUplo
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remaining.documents, user.emailVerified, team]);
-
-  const onFileDrop = async (files: File[]) => {
-    try {
-      setIsLoading(true);
-
-      const payload = {
-        folderId,
-        type,
-        title: files[0].name,
-        meta: {
-          timezone: userTimezone,
-        },
-      } satisfies TCreateEnvelopePayload;
-
-      const formData = new FormData();
-
-      formData.append('payload', JSON.stringify(payload));
-
-      for (const file of files) {
-        formData.append('files', file);
-      }
-
-      const { id } = await createEnvelope(formData).catch((error) => {
-        console.error(error);
-
-        throw error;
-      });
-
-      void refreshLimits();
-
-      const pathPrefix =
-        type === EnvelopeType.DOCUMENT
-          ? formatDocumentsPath(team.url)
-          : formatTemplatesPath(team.url);
-
-      const aiQueryParam = team.preferences.aiFeaturesEnabled ? '?ai=true' : '';
-
-      await navigate(`${pathPrefix}/${id}/edit${aiQueryParam}`);
-
-      toast({
-        title: type === EnvelopeType.DOCUMENT ? t`Document uploaded` : t`Template uploaded`,
-        description:
-          type === EnvelopeType.DOCUMENT
-            ? t`Your document has been uploaded successfully.`
-            : t`Your template has been uploaded successfully.`,
-        duration: 5000,
-      });
-    } catch (err) {
-      console.error(err);
-
-      toast({
-        title: t`Error`,
-        description: i18n._(uploadErrorMessage(err, type)),
-        variant: 'destructive',
-        duration: 7500,
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const onFileDropRejected = (fileRejections: FileRejection[]) => {
     const maxItemsReached = fileRejections.some((fileRejection) =>
@@ -172,10 +95,10 @@ export const EnvelopeUploadButton = ({ className, type, folderId }: EnvelopeUplo
           <TooltipTrigger asChild>
             <div>
               <DocumentUploadButton
-                loading={isLoading}
+                loading={isCreating}
                 disabled={remaining.documents === 0 || !user.emailVerified}
                 disabledMessage={disabledMessage}
-                onDrop={onFileDrop}
+                onDrop={(files) => void create(files)}
                 onDropRejected={onFileDropRejected}
                 type={type}
                 internalVersion="2"

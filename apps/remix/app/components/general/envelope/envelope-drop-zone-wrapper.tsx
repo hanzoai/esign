@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from 'react';
+import type { ReactNode } from 'react';
 
 import { plural } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react/macro';
@@ -14,25 +14,17 @@ import {
 import { Link, useNavigate, useParams } from 'react-router';
 import { match } from 'ts-pattern';
 
-import { useAnalytics } from '@hanzo/esign-lib/client-only/hooks/use-analytics';
 import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
 import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
 import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT, IS_BILLING_ENABLED } from '@hanzo/esign-lib/constants/app';
-import { DEFAULT_DOCUMENT_TIME_ZONE, TIME_ZONES } from '@hanzo/esign-lib/constants/time-zones';
 import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
 import { megabytesToBytes } from '@hanzo/esign-lib/universal/unit-convertions';
-import { formatDocumentsPath, formatTemplatesPath } from '@hanzo/esign-lib/utils/teams';
-import type {
-  TCreateEnvelopePayload,
-  TCreateEnvelopeResponse,
-} from '@hanzo/esign-trpc/server/envelope-router/create-envelope.types';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { cn } from '@hanzo/esign-ui/lib/utils';
 import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 import { useCurrentTeam } from '~/providers/team';
 
-import { uploadErrorMessage } from './upload-error';
+import { useCreateEnvelope } from './create';
 
 export interface EnvelopeDropZoneWrapperProps {
   children: ReactNode;
@@ -45,7 +37,7 @@ export const EnvelopeDropZoneWrapper = ({
   type,
   className,
 }: EnvelopeDropZoneWrapperProps) => {
-  const { t, i18n } = useLingui();
+  const { t } = useLingui();
   const { toast } = useToast();
   const { user } = useSession();
   const { folderId } = useParams();
@@ -53,20 +45,11 @@ export const EnvelopeDropZoneWrapper = ({
   const team = useCurrentTeam();
 
   const navigate = useNavigate();
-  const analytics = useAnalytics();
   const organisation = useCurrentOrganisation();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { quota, remaining, maximumEnvelopeItemCount } = useLimits();
 
-  const userTimezone =
-    TIME_ZONES.find((timezone) => timezone === Intl.DateTimeFormat().resolvedOptions().timeZone) ??
-    DEFAULT_DOCUMENT_TIME_ZONE;
-
-  const { quota, remaining, refreshLimits, maximumEnvelopeItemCount } = useLimits();
-
-  const { mutateAsync: createEnvelope } = useZapMutation<TCreateEnvelopeResponse, FormData>(
-    'envelope.create',
-  );
+  const { create, isCreating } = useCreateEnvelope({ type, folderId });
 
   const isUploadDisabled = remaining.documents === 0 || !user.emailVerified;
 
@@ -76,67 +59,7 @@ export const EnvelopeDropZoneWrapper = ({
       return;
     }
 
-    try {
-      setIsLoading(true);
-
-      const payload = {
-        folderId,
-        type,
-        title: files[0].name,
-        meta: {
-          timezone: userTimezone,
-        },
-      } satisfies TCreateEnvelopePayload;
-
-      const formData = new FormData();
-
-      formData.append('payload', JSON.stringify(payload));
-
-      for (const file of files) {
-        formData.append('files', file);
-      }
-
-      const { id } = await createEnvelope(formData);
-
-      void refreshLimits();
-
-      toast({
-        title: type === EnvelopeType.DOCUMENT ? t`Document uploaded` : t`Template uploaded`,
-        description:
-          type === EnvelopeType.DOCUMENT
-            ? t`Your document has been uploaded successfully.`
-            : t`Your template has been uploaded successfully.`,
-        duration: 5000,
-      });
-
-      if (type === EnvelopeType.DOCUMENT) {
-        analytics.capture('App: Document Uploaded', {
-          userId: user.id,
-          documentId: id,
-          timestamp: new Date().toISOString(),
-        });
-      }
-
-      const pathPrefix =
-        type === EnvelopeType.DOCUMENT
-          ? formatDocumentsPath(team.url)
-          : formatTemplatesPath(team.url);
-
-      const aiQueryParam = team.preferences.aiFeaturesEnabled ? '?ai=true' : '';
-
-      await navigate(`${pathPrefix}/${id}/edit${aiQueryParam}`);
-    } catch (err) {
-      console.error(err);
-
-      toast({
-        title: t`Error`,
-        description: i18n._(uploadErrorMessage(err, type)),
-        variant: 'destructive',
-        duration: 7500,
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    await create(files);
   };
 
   const onFileDropRejected = (fileRejections: FileRejection[]) => {
@@ -257,7 +180,7 @@ export const EnvelopeDropZoneWrapper = ({
         </div>
       )}
 
-      {isLoading && (
+      {isCreating && (
         <div className="absolute inset-0 z-50 bg-muted/30 backdrop-blur-[2px]">
           <div className="pointer-events-none flex h-1/2 w-full flex-col items-center justify-center">
             <Loader className="h-12 w-12 animate-spin text-primary" />

@@ -1,12 +1,15 @@
 import { sValidator } from '@hono/standard-validator';
 import type { Prisma } from '@prisma/client';
+import contentDisposition from 'content-disposition';
 import { Hono } from 'hono';
 
 import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
 import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/esign-lib/constants/app';
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import { verifyEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/verify-embedding-presign-token';
+import { resolve } from '@hanzo/esign-lib/server-only/import';
 import { getTeamById } from '@hanzo/esign-lib/server-only/team/get-team';
+import { ZImportSourceSchema } from '@hanzo/esign-lib/universal/import';
 import { putNormalizedPdfFileServerSide } from '@hanzo/esign-lib/universal/upload/put-file.server';
 import { getPresignPostUrl } from '@hanzo/esign-lib/universal/upload/server-actions';
 import { prisma } from '@hanzo/esign-prisma';
@@ -54,6 +57,38 @@ export const filesRoute = new Hono<HonoEnv>()
     } catch (error) {
       console.error('Upload failed:', error);
       return c.json({ error: 'Upload failed' }, 500);
+    }
+  })
+  /**
+   * Resolves an import source — a link, pasted content — to the PDF it stands
+   * for. The browser turns the answer back into a File and creates the envelope
+   * with it, so an import and an upload are the same thing from here on.
+   */
+  .post('/import', sValidator('json', ZImportSourceSchema), async (c) => {
+    const session = await getOptionalSession(c);
+
+    if (!session.user) {
+      return c.json({ error: 'Unauthorized' }, 401);
+    }
+
+    try {
+      const { name, bytes } = await resolve(c.req.valid('json'));
+
+      // The bytes themselves, not their backing buffer — a rendered PDF sits in
+      // a pooled one, and the whole pool would go over the wire.
+      return new Response(bytes, {
+        headers: {
+          'Content-Type': 'application/pdf',
+          'Content-Disposition': contentDisposition(name),
+          'Cache-Control': 'no-store',
+        },
+      });
+    } catch (err) {
+      const error = AppError.parseError(err);
+
+      c.get('logger').info({ event: 'files.import.failed', code: error.code });
+
+      return c.json(AppError.toJSON(error), error.statusCode === 400 ? 400 : 500);
     }
   })
   .post('/presigned-post-url', sValidator('json', ZGetPresignedPostUrlRequestSchema), async (c) => {

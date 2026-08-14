@@ -22,6 +22,7 @@ import { DocumentUploadButtonLegacy } from '~/components/general/document/docume
 import { FolderCard, FolderCardEmpty } from '~/components/general/folder/folder-card';
 import { useCurrentTeam } from '~/providers/team';
 
+import { EnvelopeImportMenu } from '../envelope/envelope-import-menu';
 import { EnvelopeUploadButton } from '../envelope/envelope-upload-button';
 
 export type FolderGridProps = {
@@ -101,6 +102,8 @@ export const FolderGrid = ({ type, parentId }: FolderGridProps) => {
 
         <div className="flex gap-4 sm:flex-row sm:justify-end">
           <EnvelopeUploadButton type={type} folderId={parentId || undefined} />
+
+          <EnvelopeImportMenu type={type} folderId={parentId || undefined} />
 
           {/* If you delete this, delete the component as well. */}
           {organisation.organisationClaim.flags.allowLegacyEnvelopes && (

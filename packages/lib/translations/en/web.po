@@ -596,6 +596,10 @@ msgstr "{validationLength, plural, one {Select exactly # option} other {Select e
 msgid "{visibleRows, plural, one {Showing # result.} other {Showing # results.}}"
 msgstr "{visibleRows, plural, one {Showing # result.} other {Showing # results.}}"
 
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "# Mutual NDA — both parties agree..."
+msgstr "# Mutual NDA — both parties agree..."
+
 #. placeholder {0}: document.title
 #. placeholder {0}: envelope.title
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
@@ -2314,6 +2318,8 @@ msgstr "Can't find someone?"
 #: apps/remix/app/components/general/document/document-attachments-popover.tsx
 #: apps/remix/app/components/general/document/embedded-editor-attachment-popover.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-settings-dialog.tsx
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
 #: apps/remix/app/components/general/teams/team-email-usage.tsx
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
@@ -2713,6 +2719,7 @@ msgstr "Contact Information"
 msgid "Contact us"
 msgstr "Contact us"
 
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
 #: apps/remix/app/routes/_authenticated+/admin+/site-settings.tsx
 msgid "Content"
 msgstr "Content"
@@ -2868,6 +2875,7 @@ msgstr "Copy Value"
 #: apps/remix/app/components/dialogs/organisation-create-dialog.tsx
 #: apps/remix/app/components/dialogs/organisation-group-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
 #: apps/remix/app/routes/_profile+/_layout.tsx
 msgid "Create"
 msgstr "Create"
@@ -3904,10 +3912,13 @@ msgid "Document upload disabled due to unpaid invoices"
 msgstr "Document upload disabled due to unpaid invoices"
 
 #: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/create.ts
 msgid "Document uploaded"
 msgstr "Document uploaded"
+
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "Document URL"
+msgstr "Document URL"
 
 #: packages/lib/utils/document-audit-logs.ts
 msgctxt "Audit log format"
@@ -4693,8 +4704,7 @@ msgstr "Envelope updated"
 #: apps/remix/app/components/general/document/document-edit-form.tsx
 #: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
 #: apps/remix/app/components/general/envelope-signing/envelope-signer-page-renderer.tsx
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/create.ts
 #: apps/remix/app/components/general/pdf-viewer/pdf-viewer.tsx
 #: apps/remix/app/components/general/template/template-edit-form.tsx
 #: apps/remix/app/components/general/template/template-edit-form.tsx
@@ -5439,6 +5449,20 @@ msgstr "If you don't find the confirmation link in your inbox, you can request a
 #: apps/remix/app/components/forms/2fa/enable-authenticator-app-dialog.tsx
 msgid "If your authenticator app does not support QR codes, you can use the following code instead:"
 msgstr "If your authenticator app does not support QR codes, you can use the following code instead:"
+
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "Import"
+msgstr "Import"
+
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "Import failed"
+msgstr "Import failed"
+
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "Import from URL"
+msgstr "Import from URL"
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
 msgid "Important: What This Means"
@@ -6947,6 +6971,19 @@ msgstr "Password updated!"
 msgctxt "Subscription status"
 msgid "Past Due"
 msgstr "Past Due"
+
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "Paste content"
+msgstr "Paste content"
+
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "Paste text or Markdown. It becomes a PDF you can place fields on and send for signature."
+msgstr "Paste text or Markdown. It becomes a PDF you can place fields on and send for signature."
+
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "Pasted document"
+msgstr "Pasted document"
 
 #: apps/remix/app/components/dialogs/envelope-download-dialog.tsx
 msgid "PDF Document"
@@ -9031,6 +9068,10 @@ msgstr "System Requirements"
 msgid "System Theme"
 msgstr "System Theme"
 
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "Taken from the first line"
+msgstr "Taken from the first line"
+
 #: apps/remix/app/components/dialogs/admin-swap-subscription-dialog.tsx
 msgid "Target Organisation"
 msgstr "Target Organisation"
@@ -9268,8 +9309,7 @@ msgstr "Template Updated"
 msgid "Template updated successfully"
 msgstr "Template updated successfully"
 
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/create.ts
 msgid "Template uploaded"
 msgstr "Template uploaded"
 
@@ -9347,6 +9387,18 @@ msgstr "Thank you for completing the signing process."
 msgid "Thank you for using Hanzo Sign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
 msgstr "Thank you for using Hanzo Sign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
 
+#: apps/remix/app/components/general/envelope/upload-error.ts
+msgid "That address cannot be read. Use a public http(s) link."
+msgstr "That address cannot be read. Use a public http(s) link."
+
+#: apps/remix/app/components/general/envelope/upload-error.ts
+msgid "That address does not lead to a PDF."
+msgstr "That address does not lead to a PDF."
+
+#: apps/remix/app/components/general/envelope/upload-error.ts
+msgid "That document is larger than {APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB."
+msgstr "That document is larger than {APP_DOCUMENT_UPLOAD_SIZE_LIMIT}MB."
+
 #: packages/email/template-components/template-forgot-password.tsx
 msgid "That's okay, it happens! Click the button below to reset your password."
 msgstr "That's okay, it happens! Click the button below to reset your password."
@@ -9362,6 +9414,10 @@ msgstr "The account has been disabled successfully."
 #: apps/remix/app/components/dialogs/admin-user-enable-dialog.tsx
 msgid "The account has been enabled successfully."
 msgstr "The account has been enabled successfully."
+
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
+msgid "The address of a PDF we can reach. A GitHub file page works — paste it as you see it."
+msgstr "The address of a PDF we can reach. A GitHub file page works — paste it as you see it."
 
 #: packages/ui/components/recipient/recipient-action-auth-select.tsx
 msgid "The authentication methods required for recipients to sign fields"
@@ -10031,6 +10087,7 @@ msgid "Time Zone"
 msgstr "Time Zone"
 
 #: apps/remix/app/components/embed/authoring/configure-document-view.tsx
+#: apps/remix/app/components/general/envelope/envelope-import-menu.tsx
 #: apps/remix/app/components/general/template/template-page-view-documents-table.tsx
 #: apps/remix/app/components/tables/documents-table.tsx
 #: apps/remix/app/components/tables/inbox-table.tsx
@@ -11070,6 +11127,10 @@ msgstr "We are unable to remove this passkey at the moment. Please try again lat
 #: apps/remix/app/components/tables/settings-security-passkey-table-actions.tsx
 msgid "We are unable to update this passkey at the moment. Please try again later."
 msgstr "We are unable to update this passkey at the moment. Please try again later."
+
+#: apps/remix/app/components/general/envelope/upload-error.ts
+msgid "We could not reach that address."
+msgstr "We could not reach that address."
 
 #: apps/remix/app/components/dialogs/ai-features-enable-dialog.tsx
 msgid "We couldn't enable AI features right now. Please try again."
@@ -12316,8 +12377,7 @@ msgid "Your document has been updated successfully"
 msgstr "Your document has been updated successfully"
 
 #: apps/remix/app/components/general/document/document-upload-button-legacy.tsx
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/create.ts
 msgid "Your document has been uploaded successfully."
 msgstr "Your document has been uploaded successfully."
 
@@ -12478,8 +12538,7 @@ msgstr "Your template has been successfully deleted."
 msgid "Your template has been updated successfully"
 msgstr "Your template has been updated successfully"
 
-#: apps/remix/app/components/general/envelope/envelope-drop-zone-wrapper.tsx
-#: apps/remix/app/components/general/envelope/envelope-upload-button.tsx
+#: apps/remix/app/components/general/envelope/create.ts
 msgid "Your template has been uploaded successfully."
 msgstr "Your template has been uploaded successfully."
 
