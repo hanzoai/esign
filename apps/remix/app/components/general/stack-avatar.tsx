@@ -27,7 +27,7 @@ export const StackAvatar = ({ first, zIndex, fallbackText = '', type }: StackAva
 
   switch (type) {
     case RecipientStatusType.UNSIGNED:
-      classes = 'bg-neutral-100 text-neutral-500';
+      classes = 'bg-muted text-muted-foreground';
       break;
     case RecipientStatusType.OPENED:
       classes = 'bg-neutral-200 text-neutral-600';
