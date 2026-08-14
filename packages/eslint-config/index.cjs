@@ -79,4 +79,15 @@ module.exports = {
       },
     ],
   },
+
+  overrides: [
+    {
+      // `node:test` awaits the promise a describe/test call returns; a test
+      // file states its cases rather than chaining them.
+      files: ['**/__tests__/**/*.ts'],
+      rules: {
+        '@typescript-eslint/no-floating-promises': 'off',
+      },
+    },
+  ],
 };

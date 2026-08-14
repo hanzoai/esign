@@ -18,6 +18,7 @@ import { cn } from '@hanzo/esign-ui/lib/utils';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
+import { PageHeader } from '~/components/general/page-header';
 import { useCurrentTeam } from '~/providers/team';
 import { appMetaTags } from '~/utils/meta';
 
@@ -128,9 +129,7 @@ export default function TeamsSettingsLayout() {
 
   return (
     <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
-      <h1 className="text-4xl font-semibold">
-        <Trans>Team Settings</Trans>
-      </h1>
+      <PageHeader title={<Trans>Team Settings</Trans>} />
 
       <div className="mt-4 grid grid-cols-12 gap-x-8 md:mt-8">
         <div

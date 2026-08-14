@@ -18,6 +18,7 @@ import { EnvelopesBulkDeleteDialog } from '~/components/dialogs/envelopes-bulk-d
 import { EnvelopesBulkMoveDialog } from '~/components/dialogs/envelopes-bulk-move-dialog';
 import { EnvelopeDropZoneWrapper } from '~/components/general/envelope/envelope-drop-zone-wrapper';
 import { FolderGrid } from '~/components/general/folder/folder-grid';
+import { PageHeader } from '~/components/general/page-header';
 import { EnvelopesTableBulkActionBar } from '~/components/tables/envelopes-table-bulk-action-bar';
 import { TemplatesTable } from '~/components/tables/templates-table';
 import { useCurrentTeam } from '~/providers/team';
@@ -61,7 +62,7 @@ export default function TemplatesPage() {
 
   return (
     <EnvelopeDropZoneWrapper type={EnvelopeType.TEMPLATE}>
-      <div className="mx-auto max-w-screen-xl px-4 md:px-8">
+      <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
         <FolderGrid type={FolderType.TEMPLATE} parentId={folderId ?? null} />
 
         <div className="mt-8">
@@ -73,9 +74,7 @@ export default function TemplatesPage() {
               </AvatarFallback>
             </Avatar>
 
-            <h1 className="truncate text-2xl font-semibold md:text-3xl">
-              <Trans>Templates</Trans>
-            </h1>
+            <PageHeader title={<Trans>Templates</Trans>} />
           </div>
 
           <div className="mt-8">

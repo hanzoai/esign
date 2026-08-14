@@ -8,8 +8,10 @@
 //
 // Payloads ride as SuperJSON strings, the exact transformer tRPC used, so the
 // typed-object semantics every callsite depends on survive the transport swap.
-// The wire itself is binary ZAP (ZapRequest/ZapReply structs over WS frames),
-// not JSON-RPC.
+// Files ride as bytes alongside them and are rebuilt here (../runtime/file), so
+// an upload route parses the same FormData it received over HTTP. The wire
+// itself is binary ZAP (ZapRequest/ZapReply structs over WS frames), not
+// JSON-RPC.
 import type { CallHandler } from '@zap-proto/web';
 import type { Call, Response } from '@zap-proto/zap';
 import { Status } from '@zap-proto/zap';
@@ -17,6 +19,7 @@ import SuperJSON from 'superjson';
 
 import { ZapReply, ZapRequest, newZapReply } from '../gen/transport_zap';
 import { toWireError } from '../runtime/error';
+import { unpack } from '../runtime/file';
 import type { ZapContext } from './context';
 
 /** A typed procedure handler: (ctx, input) → output. */
@@ -26,7 +29,7 @@ export type ZapHandler = (ctx: ZapContext, input: unknown) => Promise<unknown> |
 export type ZapRouteMap = Record<string, ZapHandler>;
 
 const encoder = (value: unknown): string => (value === undefined ? '' : SuperJSON.stringify(value));
-const decoder = (s: string): unknown => (s === '' ? undefined : SuperJSON.parse(s));
+const decoder = (s: string): unknown => (s === '' ? undefined : unpack(SuperJSON.parse(s)));
 
 /**
  * Build the rootCap CallHandler over a route map. Unknown / unported routes

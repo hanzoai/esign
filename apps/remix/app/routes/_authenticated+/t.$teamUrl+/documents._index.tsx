@@ -14,9 +14,9 @@ import { formatAvatarUrl } from '@hanzo/esign-lib/utils/avatars';
 import { parseToIntegerArray } from '@hanzo/esign-lib/utils/params';
 import { formatDocumentsPath } from '@hanzo/esign-lib/utils/teams';
 import { ExtendedDocumentStatus } from '@hanzo/esign-prisma/types/extended-document-status';
-import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import type { TFindDocumentsInternalResponse } from '@hanzo/esign-trpc/server/document-router/find-documents-internal.types';
 import { ZFindDocumentsInternalRequestSchema } from '@hanzo/esign-trpc/server/document-router/find-documents-internal.types';
+import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@hanzo/esign-ui/primitives/avatar';
 import type { RowSelectionState } from '@hanzo/esign-ui/primitives/data-table';
 import { Tabs, TabsList, TabsTrigger } from '@hanzo/esign-ui/primitives/tabs';
@@ -28,6 +28,7 @@ import { DocumentSearch } from '~/components/general/document/document-search';
 import { DocumentStatus } from '~/components/general/document/document-status';
 import { EnvelopeDropZoneWrapper } from '~/components/general/envelope/envelope-drop-zone-wrapper';
 import { FolderGrid } from '~/components/general/folder/folder-grid';
+import { PageHeader } from '~/components/general/page-header';
 import { PeriodSelector } from '~/components/general/period-selector';
 import { DocumentsTable } from '~/components/tables/documents-table';
 import { DocumentsTableEmptyState } from '~/components/tables/documents-table-empty-state';
@@ -143,9 +144,7 @@ export default function DocumentsPage() {
               </AvatarFallback>
             </Avatar>
 
-            <h2 className="text-4xl font-semibold">
-              <Trans>Documents</Trans>
-            </h2>
+            <PageHeader title={<Trans>Documents</Trans>} />
           </div>
 
           <div className="-m-1 flex flex-wrap gap-x-4 gap-y-6 overflow-hidden p-1">

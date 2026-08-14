@@ -307,7 +307,7 @@ export const EnvelopeEditor = () => {
                     </div>
 
                     {!minimizeLeftSidebar && (
-                      <div>
+                      <div className="space-y-0.5">
                         <div
                           className={`text-sm font-medium ${
                             isActive

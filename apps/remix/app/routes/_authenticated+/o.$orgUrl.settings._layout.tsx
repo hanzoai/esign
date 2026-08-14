@@ -17,6 +17,7 @@ import { cn } from '@hanzo/esign-ui/lib/utils';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
+import { PageHeader } from '~/components/general/page-header';
 import { appMetaTags } from '~/utils/meta';
 
 export function meta() {
@@ -106,10 +107,8 @@ export default function SettingsLayout() {
   }
 
   return (
-    <div>
-      <h1 className="text-4xl font-semibold">
-        <Trans>Organisation Settings</Trans>
-      </h1>
+    <div className="mx-auto w-full max-w-screen-xl px-4 md:px-8">
+      <PageHeader title={<Trans>Organisation Settings</Trans>} />
 
       <div className="mt-4 grid grid-cols-12 gap-x-8 md:mt-8">
         {/* Navigation */}

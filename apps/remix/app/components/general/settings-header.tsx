@@ -20,10 +20,10 @@ export const SettingsHeader = ({
   return (
     <>
       <div className={cn('flex flex-row items-center justify-between', className)}>
-        <div>
+        <div className="space-y-1.5">
           <h3 className="text-lg font-medium">{title}</h3>
 
-          <p className="text-muted-foreground text-sm md:mt-2">{subtitle}</p>
+          <p className="text-sm text-muted-foreground">{subtitle}</p>
         </div>
 
         {children}

@@ -9,11 +9,11 @@ import { FileWarningIcon, GripVerticalIcon, Loader2 } from 'lucide-react';
 import { X } from 'lucide-react';
 import { ErrorCode as DropzoneErrorCode, type FileRejection } from 'react-dropzone';
 
-import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
 import { useEnvelopeAutosave } from '@hanzo/esign-lib/client-only/hooks/use-envelope-autosave';
 import { useCurrentEnvelopeEditor } from '@hanzo/esign-lib/client-only/providers/envelope-editor-provider';
 import { useCurrentOrganisation } from '@hanzo/esign-lib/client-only/providers/organisation';
 import { APP_DOCUMENT_UPLOAD_SIZE_LIMIT } from '@hanzo/esign-lib/constants/app';
+import { useLimits } from '@hanzo/esign-lib/server-only/limits/provider/client';
 import type { TEditorEnvelope } from '@hanzo/esign-lib/types/envelope-editor';
 import { nanoid } from '@hanzo/esign-lib/universal/id';
 import { PRESIGNED_ENVELOPE_ITEM_ID_PREFIX } from '@hanzo/esign-lib/utils/embed-config';
@@ -87,16 +87,16 @@ export const EnvelopeEditorUploadPage = () => {
     TCreateEnvelopeItemsResponse,
     FormData
   >('envelope.item.createMany', {
-      onSuccess: ({ data }) => {
-        const createdEnvelopes = data.filter(
-          (item) => !envelope.envelopeItems.find((envelopeItem) => envelopeItem.id === item.id),
-        );
+    onSuccess: ({ data }) => {
+      const createdEnvelopes = data.filter(
+        (item) => !envelope.envelopeItems.find((envelopeItem) => envelopeItem.id === item.id),
+      );
 
-        setLocalEnvelope({
-          envelopeItems: [...envelope.envelopeItems, ...createdEnvelopes],
-        });
-      },
-    });
+      setLocalEnvelope({
+        envelopeItems: [...envelope.envelopeItems, ...createdEnvelopes],
+      });
+    },
+  });
 
   const { mutateAsync: updateEnvelopeItems } = useZapMutation<
     TUpdateEnvelopeItemsResponse,
@@ -184,6 +184,13 @@ export const EnvelopeEditorUploadPage = () => {
 
     const { data } = await createPromise.catch((error) => {
       console.error(error);
+
+      toast({
+        title: t`Upload failed`,
+        description: t`Your file could not be uploaded. Please try again.`,
+        duration: 7500,
+        variant: 'destructive',
+      });
 
       // Set error state on files in batch upload.
       setLocalFiles((prev) =>

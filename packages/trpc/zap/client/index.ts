@@ -4,7 +4,8 @@
 // typed `call(route, input)` that ships a ZapRequest and resolves the decoded
 // result — or throws the reconstructed AppError. This is the transport the
 // migrated React hooks (../react) sit on. Wire is binary ZAP; payloads are
-// SuperJSON strings (the same transformer tRPC used).
+// SuperJSON strings (the same transformer tRPC used), with any file read into
+// bytes first (../runtime/file).
 import type { Conn } from '@zap-proto/web';
 import { type Connection, connect } from '@zap-proto/web/client';
 import SuperJSON from 'superjson';
@@ -13,6 +14,7 @@ import { getBaseUrl } from '@hanzo/esign-lib/universal/get-base-url';
 
 import { ZapReply, newZapRequest } from '../gen/transport_zap';
 import { fromWireError } from '../runtime/error';
+import { pack } from '../runtime/file';
 import { METHOD_RPC } from '../runtime/method';
 import { ZAP_PATH } from '../runtime/path';
 
@@ -84,7 +86,7 @@ export async function zapCall<T = unknown>(
 
   const payload = newZapRequest({
     method: route,
-    payload: input === undefined ? '' : SuperJSON.stringify(input),
+    payload: input === undefined ? '' : SuperJSON.stringify(await pack(input)),
     teamId: teamId === null || teamId === undefined ? '' : String(teamId),
   });
 

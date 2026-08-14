@@ -7,6 +7,7 @@ import { isValidReturnTo, normalizeReturnTo } from '@hanzo/esign-lib/utils/is-va
 import { brand } from '~/components/branding/brand';
 import { HanzoMark } from '~/components/branding/hanzo-mark';
 import { SignInForm } from '~/components/forms/signin';
+import { PageHeader } from '~/components/general/page-header';
 import { appMetaTags } from '~/utils/meta';
 
 import type { Route } from './+types/signin';
@@ -47,12 +48,11 @@ export default function SignIn({ loaderData }: Route.ComponentProps) {
           </span>
         </div>
 
-        <h1 className="text-balance text-3xl font-semibold">
-          <Trans>Sign in to your account</Trans>
-        </h1>
-        <p className="mt-2 text-balance text-sm text-zinc-400">
-          <Trans>Welcome back, we are lucky to have you.</Trans>
-        </p>
+        <PageHeader
+          title={<Trans>Sign in to your account</Trans>}
+          description={<Trans>Welcome back, we are lucky to have you.</Trans>}
+          descriptionClassName="text-zinc-400"
+        />
 
         <div className="mt-8">
           <SignInForm returnTo={returnTo} />
