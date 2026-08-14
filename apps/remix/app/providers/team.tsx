@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react';
 import React from 'react';
 
 import type { TeamSession } from '@hanzo/esign-trpc/server/organisation-router/get-organisation-session.types';
+import { setZapTeam } from '@hanzo/esign-trpc/zap/client';
 
 type TeamProviderValue = TeamSession;
 
@@ -27,5 +28,9 @@ export const useOptionalCurrentTeam = () => {
 };
 
 export const TeamProvider = ({ children, team }: TeamProviderProps) => {
+  // Scope RPC to the same team the tree below is about. Set while rendering, so
+  // it is in place before any descendant issues its first call.
+  setZapTeam(team?.id ?? null);
+
   return <TeamContext.Provider value={team}>{children}</TeamContext.Provider>;
 };

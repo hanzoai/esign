@@ -15,11 +15,12 @@ export const run = async ({ io }: { payload: TCleanupRateLimitsJobDefinition; io
 
   do {
     // Prisma doesn't support DELETE with LIMIT, so use raw SQL for batching
-    // to avoid long-running transactions that could lock the table.
+    // to avoid long-running transactions that could lock the table. `rowid` is
+    // SQLite's row identity — the store this schema targets.
     deleted = await prisma.$executeRaw`
       DELETE FROM "RateLimit"
-      WHERE ctid IN (
-        SELECT ctid FROM "RateLimit"
+      WHERE rowid IN (
+        SELECT rowid FROM "RateLimit"
         WHERE "createdAt" < ${cutoff}
         LIMIT ${BATCH_SIZE}
       )

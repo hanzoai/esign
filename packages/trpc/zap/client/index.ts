@@ -47,6 +47,21 @@ export interface ZapCallOptions {
   teamId?: number | string;
 }
 
+let currentTeam: number | null = null;
+
+/**
+ * Scope every subsequent call to a team, until it changes.
+ *
+ * tRPC sent the team on each HTTP request as `x-team-id`. ZAP shares one socket
+ * per tab, and a browser cannot set headers on a WebSocket handshake, so the
+ * team rides the per-call envelope instead. The app declares it once where it
+ * knows the team (the team provider); handlers still verify membership, so this
+ * selects a scope rather than granting one.
+ */
+export function setZapTeam(teamId: number | null): void {
+  currentTeam = teamId;
+}
+
 /**
  * Call a migrated ZAP route. Resolves the decoded output; throws the
  * reconstructed AppError on a non-OK reply. `<T>` is the procedure output type.
@@ -58,10 +73,12 @@ export async function zapCall<T = unknown>(
 ): Promise<T> {
   const conn = await getConnection();
 
+  const teamId = opts.teamId ?? currentTeam;
+
   const payload = newZapRequest({
     method: route,
     payload: input === undefined ? '' : SuperJSON.stringify(input),
-    teamId: opts.teamId === undefined ? '' : String(opts.teamId),
+    teamId: teamId === null || teamId === undefined ? '' : String(teamId),
   });
 
   const resp = await conn.bootstrap.call(METHOD_RPC, { payload });
