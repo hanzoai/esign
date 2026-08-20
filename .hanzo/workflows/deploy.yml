@@ -48,9 +48,10 @@ jobs:
           platforms: linux/amd64
           push: true
           provenance: false
+          # No `secrets:`. docker/Dockerfile is Node all the way down and mounts
+          # nothing, and this repo's go.mod requires no module at all — so the
+          # credential was reaching a build that had nothing to fetch with it.
           tags: ghcr.io/hanzoai/sign:${{ steps.meta.outputs.tag }}
-          secrets: |
-            GIT_AUTH_TOKEN=${{ secrets.GH_PAT }}
 
       - name: Verify the pushed image resolves
         run: |
