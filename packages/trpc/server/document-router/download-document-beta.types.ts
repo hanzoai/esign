@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const ZDownloadDocumentRequestSchema = z.object({
-  documentId: z.number().describe('The ID of the document to download.'),
+  documentId: z.coerce.number().describe('The ID of the document to download.'),
   version: z
     .enum(['original', 'signed'])
     .describe(

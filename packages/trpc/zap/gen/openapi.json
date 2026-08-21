@@ -736,6 +736,48 @@
         }
       }
     },
+    "/document/{documentId}/download-beta": {
+      "get": {
+        "operationId": "document.downloadBeta",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentResp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request — payload failed validation."
+          },
+          "401": {
+            "description": "Unauthorized — missing or invalid credentials."
+          },
+          "403": {
+            "description": "Forbidden — credentials lack the capability."
+          },
+          "404": {
+            "description": "Not found — unknown method."
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentReq"
+              }
+            }
+          }
+        }
+      }
+    },
     "/document/create/beta": {
       "post": {
         "operationId": "document.createDocumentTemporary",

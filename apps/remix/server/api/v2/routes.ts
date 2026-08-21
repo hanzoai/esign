@@ -5,11 +5,16 @@
 // written in OpenAPI form so this table is also what the published document
 // describes; ./index.ts converts `{param}` to Hono's `:param` when registering.
 //
-// `form: true` marks the four endpoints whose body is multipart/form-data
+// `form: true` marks the five endpoints whose body is multipart/form-data
 // because they carry PDFs; every other POST body is JSON.
 //
-// The three GET download endpoints are absent on purpose: they stream files and
-// are served by ../download/download.ts.
+// Rows are ordered so a literal segment is registered before a parameter that
+// could match it — `/envelope/attachment` before `/envelope/{envelopeId}`.
+//
+// Two GET endpoints are absent on purpose — `/document/{documentId}/download`
+// and `/envelope/item/{envelopeItemId}/download` stream the file itself and are
+// served by ../download/download.ts, which is mounted ahead of this. The third,
+// `download-beta`, answers with a presigned URL as JSON, so it belongs here.
 
 export interface Route {
   method: 'GET' | 'POST';
@@ -28,6 +33,7 @@ export const routes: Route[] = [
   { method: 'POST', path: '/document/create/beta', call: 'document.createDocumentTemporary' },
   { method: 'POST', path: '/document/delete', call: 'document.delete' },
   { method: 'POST', path: '/document/distribute', call: 'document.distribute' },
+  { method: 'GET', path: '/document/{documentId}/download-beta', call: 'document.downloadBeta' },
   { method: 'POST', path: '/document/duplicate', call: 'document.duplicate' },
   { method: 'POST', path: '/document/field/create', call: 'field.createDocumentField' },
   { method: 'POST', path: '/document/field/create-many', call: 'field.createDocumentFields' },
