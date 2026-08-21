@@ -9,7 +9,6 @@
 // inside a handler — it produces a typed error that the dispatcher serialises
 // into a ZapReply. This is the replacement the migration brief calls for
 // ("AppError → methodError(...)").
-
 import { Status } from '@zap-proto/zap';
 
 import {
@@ -18,9 +17,20 @@ import {
   genericErrorCodeToTrpcErrorCodeMap,
 } from '@hanzo/esign-lib/errors/app-error';
 
-/** Map an AppError code to the wire status (mirrors the tRPC code→status map). */
+const APP_ERROR_CODES = new Set<string>(Object.values(AppErrorCode));
+
+/**
+ * Map an error code to the wire status (mirrors the tRPC code→status map).
+ *
+ * A value thrown from deeper down carries its own `code` — Prisma's `P2025`, a
+ * Node errno — and AppError.parseError adopts it as-is. Those are ours to
+ * answer for, so they get 500, the way tRPC answered any error it did not
+ * raise itself. Only a code we actually define falls back to 400.
+ */
 export function statusForCode(code: string): number {
-  return genericErrorCodeToTrpcErrorCodeMap[code]?.status ?? 400;
+  return (
+    genericErrorCodeToTrpcErrorCodeMap[code]?.status ?? (APP_ERROR_CODES.has(code) ? 400 : 500)
+  );
 }
 
 /**
@@ -28,20 +38,44 @@ export function statusForCode(code: string): number {
  * handler; the dispatcher serialises it into a ZapReply with the right status
  * and the AppError JSON, exactly as tRPC's errorFormatter did.
  */
-export function methodError(
-  code: AppErrorCode | string,
-  message?: string,
-): AppError {
+export function methodError(code: AppErrorCode | string, message?: string): AppError {
   return new AppError(code, message ? { message } : undefined);
 }
 
 /** Status + AppError-JSON for any thrown value, for ZapReply encoding. */
 export function toWireError(err: unknown): { status: number; errorJson: string } {
-  const appError = AppError.parseError(err);
+  // A handler validates its own input, so a schema rejection surfaces here as a
+  // raw ZodError. tRPC answered those 400 BAD_REQUEST because the caller sent
+  // the wrong thing; without this they would read as an unknown 500.
+  const appError = isZodError(err)
+    ? new AppError(AppErrorCode.INVALID_BODY, { message: zodMessage(err) })
+    : AppError.parseError(err);
+
   return {
     status: appError.statusCode ?? statusForCode(appError.code),
     errorJson: AppError.toJSONString(appError),
   };
+}
+
+interface ZodIssue {
+  path: (string | number)[];
+  message: string;
+}
+
+/** ZodError by shape, so this does not depend on which copy of zod threw. */
+function isZodError(err: unknown): err is { name: string; issues: ZodIssue[] } {
+  return (
+    err instanceof Error &&
+    err.name === 'ZodError' &&
+    Array.isArray((err as { issues?: unknown }).issues)
+  );
+}
+
+/** "payload.title: Required, files: Expected array" — the failing fields. */
+function zodMessage(err: { issues: ZodIssue[] }): string {
+  return err.issues
+    .map((issue) => (issue.path.length > 0 ? `${issue.path.join('.')}: ` : '') + issue.message)
+    .join(', ');
 }
 
 /** Reconstruct the AppError a client received in a failed ZapReply. */

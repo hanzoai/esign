@@ -11,7 +11,7 @@ import {
 import { ZRecipientLiteSchema, ZRecipientSchema } from '@hanzo/esign-lib/types/recipient';
 
 export const ZGetRecipientRequestSchema = z.object({
-  recipientId: z.number(),
+  recipientId: z.coerce.number(),
 });
 
 export const ZGetRecipientResponseSchema = ZRecipientSchema;

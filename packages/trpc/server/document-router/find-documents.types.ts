@@ -5,7 +5,7 @@ import { ZDocumentManySchema } from '@hanzo/esign-lib/types/document';
 import { ZFindResultResponse, ZFindSearchParamsSchema } from '@hanzo/esign-lib/types/search-params';
 
 export const ZFindDocumentsRequestSchema = ZFindSearchParamsSchema.extend({
-  templateId: z
+  templateId: z.coerce
     .number()
     .describe('Filter documents by the template ID used to create it.')
     .optional(),

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { ZEnvelopeFieldSchema } from '@hanzo/esign-lib/types/field';
 
 export const ZGetEnvelopeFieldRequestSchema = z.object({
-  fieldId: z.number(),
+  fieldId: z.coerce.number(),
 });
 
 export const ZGetEnvelopeFieldResponseSchema = ZEnvelopeFieldSchema;

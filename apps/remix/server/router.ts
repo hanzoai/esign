@@ -26,6 +26,7 @@ import openApiDocument from '@hanzo/esign-trpc/zap/gen/openapi.json';
 import { aiRoute } from './api/ai/route';
 import { downloadRoute } from './api/download/download';
 import { filesRoute } from './api/files/files';
+import { v2Route } from './api/v2';
 import { type AppContext, appContext } from './context';
 import { appMiddleware } from './middleware';
 
@@ -97,15 +98,16 @@ app.route('/api/ai', aiRoute);
 app.route('/api/v1', tsRestHonoApp);
 app.use('/api/jobs/*', jobsClient.getApiHandler());
 
-// Unstable API server routes. The /api/v2 + /api/v2-beta REST surface is served
-// over JSON-over-HTTP ZAP, mounted on the http.Server in main.js (serveZapHttpApi).
-// httpServe terminates only its POST routes there, so these GET specs and the GET
-// download routes still reach Hono.
+// Unstable API server routes. Order matters for these three: the download
+// routes stream files and so shadow the REST face, which serves the rest of the
+// published v2 contract (see ./api/v2/routes) off the ZAP service.
 app.get(`/api/v2/openapi.json`, (c) => c.json(openApiDocument));
 app.route(`/api/v2`, downloadRoute);
+app.route(`/api/v2`, v2Route);
 
 app.get(`/api/v2-beta/openapi.json`, (c) => c.json(openApiDocument));
 app.route(`/api/v2-beta`, downloadRoute);
+app.route(`/api/v2-beta`, v2Route);
 
 // Start telemetry client for anonymous usage tracking.
 // Can be disabled by setting SIGN_DISABLE_TELEMETRY=true

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 /**
  * merge-openapi.ts — compose the 14 per-router ZAP OpenAPI docs into one.
  *
@@ -9,6 +10,13 @@
  * (`folder-router.openapi.json` -> `Folder`) before merging, and the local
  * `$ref`s inside that router's paths + schemas are rewritten to match.
  *
+ * The compiler names each operation after the procedure and derives a path from
+ * that name, which is not what the v2 API publishes. So each operation is filed
+ * under the method and path the route table gives it
+ * (apps/remix/server/api/v2/routes) — one table describing the contract, read by
+ * both the server that serves it and the document that describes it. Procedures
+ * with no row there are internal and stay out of the document.
+ *
  * The result is written to `packages/trpc/zap/gen/openapi.json` with the same
  * top-level `info`, `security`, and `securitySchemes.apiKey` block the old
  * trpc-to-openapi document exposed (Authorization header api key).
@@ -17,6 +25,8 @@
  */
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+
+import { routes } from '../apps/remix/server/api/v2/routes';
 
 const GEN_DIR = join(process.cwd(), 'packages', 'trpc', 'zap', 'gen');
 const OUT_FILE = join(GEN_DIR, 'openapi.json');
@@ -56,9 +66,24 @@ function rewriteRefs(node: unknown, map: (name: string) => string): unknown {
 }
 
 interface OpenApiDoc {
-  paths?: Record<string, unknown>;
+  paths?: Record<string, { post?: { operationId?: string } }>;
   components?: { schemas?: Record<string, unknown> };
 }
+
+/**
+ * The operationId the ZAP compiler gives a procedure: the router, then the rest
+ * of the nested path folded into one camelCase word
+ * (`envelope.recipient.createMany` -> `envelope.recipientCreateMany`).
+ */
+function operationIdFor(call: string): string {
+  const [router, head, ...tail] = call.split('.');
+
+  return `${router}.${head}${tail.map((part) => part[0].toUpperCase() + part.slice(1)).join('')}`;
+}
+
+/** operationId -> the published route that serves it, for the ones we publish. */
+const published = new Map(routes.map((route) => [operationIdFor(route.call), route]));
+const documented = new Set<string>();
 
 const files = readdirSync(GEN_DIR)
   .filter((f) => f.endsWith('-router.openapi.json'))
@@ -81,12 +106,30 @@ for (const file of files) {
     mergedSchemas[key] = rewriteRefs(schema, rename);
   }
 
-  for (const [path, item] of Object.entries(doc.paths ?? {})) {
-    if (path in mergedPaths) {
-      throw new Error(`path collision: ${path} (from ${file})`);
+  for (const item of Object.values(doc.paths ?? {})) {
+    const operationId = item.post?.operationId;
+    const route = operationId ? published.get(operationId) : undefined;
+
+    // Procedures the v2 API does not publish stay out of the published document.
+    if (!route || !operationId) {
+      continue;
     }
-    mergedPaths[path] = rewriteRefs(item, rename);
+
+    if (route.path in mergedPaths) {
+      throw new Error(`path collision: ${route.path} (from ${file})`);
+    }
+
+    documented.add(operationId);
+    mergedPaths[route.path] = {
+      [route.method.toLowerCase()]: rewriteRefs(item.post, rename),
+    };
   }
+}
+
+const undocumented = [...published.keys()].filter((id) => !documented.has(id));
+
+if (undocumented.length > 0) {
+  throw new Error(`route table names procedures the ZAP docs do not: ${undocumented.join(', ')}`);
 }
 
 const composite = {

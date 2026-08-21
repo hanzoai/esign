@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { ZEnvelopeRecipientSchema } from '@hanzo/esign-lib/types/recipient';
 
 export const ZGetEnvelopeRecipientRequestSchema = z.object({
-  recipientId: z.number(),
+  recipientId: z.coerce.number(),
 });
 
 export const ZGetEnvelopeRecipientResponseSchema = ZEnvelopeRecipientSchema;

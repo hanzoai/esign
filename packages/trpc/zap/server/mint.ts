@@ -45,68 +45,72 @@ function parseBearer(value: string | undefined): string | null {
   return token ?? null;
 }
 
+/** The request source, mirroring tRPC's `requestSource`. */
+export type MintSource = 'app' | 'apiV1' | 'apiV2';
+
 /**
- * The esign MintCap: bearer/session → ZapContext, or null (401).
- * `source` mirrors the tRPC `requestSource` ('app' | 'apiV1' | 'apiV2').
+ * bearer/session → ZapContext, or null (401). The WS upgrade reaches this
+ * through makeMintCap; the v2 REST face calls it per request.
  */
-export function makeMintCap(source: 'app' | 'apiV1' | 'apiV2' = 'app'): MintCap<ZapContext> {
-  return async (req: IncomingMessage): Promise<ZapContext | null> => {
-    const fetchReq = toFetchRequest(req);
-    const requestMetadata = extractRequestMetadata(fetchReq);
-    const baseLogger = logger.child({
-      ipAddress: requestMetadata.ipAddress,
-      userAgent: requestMetadata.userAgent,
-      requestId: alphaid(),
-    });
+export async function mint(source: MintSource, fetchReq: Request): Promise<ZapContext | null> {
+  const requestMetadata = extractRequestMetadata(fetchReq);
+  const baseLogger = logger.child({
+    ipAddress: requestMetadata.ipAddress,
+    userAgent: requestMetadata.userAgent,
+    requestId: alphaid(),
+  });
 
-    const token = parseBearer(req.headers.authorization);
+  const token = parseBearer(fetchReq.headers.get('authorization') ?? undefined);
 
-    // API-token auth.
-    if (token) {
-      const apiToken = await getApiTokenByToken({ token }).catch(() => null);
-      if (!apiToken) return null;
-      return {
-        user: apiToken.user,
-        session: null,
-        teamId: apiToken.teamId ?? -1,
-        logger: baseLogger,
-        metadata: {
-          requestMetadata,
-          source,
-          auth: 'api',
-          auditUser: apiToken.team
-            ? { id: null, email: null, name: apiToken.team.name }
-            : {
-                id: apiToken.user.id,
-                email: apiToken.user.email,
-                name: apiToken.user.name,
-              },
-        },
-      };
-    }
-
-    // Session-cookie auth.
-    const { session, user } = await getOptionalSession(fetchReq).catch(() => ({
-      session: null,
-      user: null,
-    }));
-    if (!session || !user) return null;
-
-    const rawTeamId = req.headers['x-team-id'];
-    const teamIdHeader = Array.isArray(rawTeamId) ? rawTeamId[0] : rawTeamId;
-    const parsedTeamId = teamIdHeader ? Number(teamIdHeader) : NaN;
-
+  // API-token auth.
+  if (token) {
+    const apiToken = await getApiTokenByToken({ token }).catch(() => null);
+    if (!apiToken) return null;
     return {
-      user,
-      session,
-      teamId: Number.isFinite(parsedTeamId) && parsedTeamId > 0 ? parsedTeamId : -1,
+      user: apiToken.user,
+      session: null,
+      teamId: apiToken.teamId ?? -1,
       logger: baseLogger,
       metadata: {
         requestMetadata,
         source,
-        auth: 'session',
-        auditUser: { id: user.id, name: user.name, email: user.email },
+        auth: 'api',
+        auditUser: apiToken.team
+          ? { id: null, email: null, name: apiToken.team.name }
+          : {
+              id: apiToken.user.id,
+              email: apiToken.user.email,
+              name: apiToken.user.name,
+            },
       },
     };
+  }
+
+  // Session-cookie auth.
+  const { session, user } = await getOptionalSession(fetchReq).catch(() => ({
+    session: null,
+    user: null,
+  }));
+  if (!session || !user) return null;
+
+  const teamIdHeader = fetchReq.headers.get('x-team-id');
+  const parsedTeamId = teamIdHeader ? Number(teamIdHeader) : NaN;
+
+  return {
+    user,
+    session,
+    teamId: Number.isFinite(parsedTeamId) && parsedTeamId > 0 ? parsedTeamId : -1,
+    logger: baseLogger,
+    metadata: {
+      requestMetadata,
+      source,
+      auth: 'session',
+      auditUser: { id: user.id, name: user.name, email: user.email },
+    },
   };
+}
+
+/** The WS upgrade's MintCap: the same mint, over a Node upgrade request. */
+export function makeMintCap(source: MintSource = 'app'): MintCap<ZapContext> {
+  return async (req: IncomingMessage) => await mint(source, toFetchRequest(req));
 }

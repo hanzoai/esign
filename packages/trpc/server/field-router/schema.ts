@@ -170,7 +170,7 @@ export type TRemovedSignedFieldWithTokenMutationSchema = z.infer<
 >;
 
 export const ZGetFieldRequestSchema = z.object({
-  fieldId: z.number(),
+  fieldId: z.coerce.number(),
 });
 
 export const ZGetFieldResponseSchema = ZFieldSchema;

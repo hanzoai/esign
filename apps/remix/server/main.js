@@ -10,12 +10,12 @@ import { serve } from '@hono/node-server';
 import { serveStatic } from '@hono/node-server/serve-static';
 import handle from 'hono-react-router-adapter/node';
 
-// serveZap (WebSocket) + serveZapHttpApi (JSON-over-HTTP) both come from the
-// rollup-bundled http-api module — the first-party esign ZAP server layer is
-// bundled there (it's .ts workspace source that can't resolve at runtime as a
-// package subpath). See rollup.config.mjs (http-api.ts is a build input).
-import { serveZap, serveZapHttpApi } from './hono/server/zap/http-api.js';
 import server from './hono/server/router.js';
+// serveZap (WebSocket) comes from the rollup-bundled zap/server module — the
+// first-party esign ZAP server layer is bundled there (it's .ts workspace source
+// that can't resolve at runtime as a package subpath). See rollup.config.mjs
+// (server/zap/server.ts is a build input).
+import { serveZap } from './hono/server/zap/server.js';
 import * as build from './index.js';
 
 server.use(
@@ -45,14 +45,4 @@ const httpServer = serve({ fetch: handler.fetch, port });
 
 serveZap(httpServer, {
   onError: (err) => console.error('[zap-rpc]', err),
-});
-
-// Re-back the /api/v2 + /api/v2-beta REST surface (external integrators) with
-// the same ZAP service over JSON-over-HTTP. httpServe terminates only its
-// declared POST routes at the http.Server level (before Hono), dispatching
-// through the SAME zapRoutes + makeDispatcher + makeMintCap('apiV2'); all other
-// requests (GET /api/v2/openapi.json, the download routes, the RR7 app) pass
-// through to Hono untouched.
-serveZapHttpApi(httpServer, {
-  onError: (err) => console.error('[zap-http-api]', err),
 });

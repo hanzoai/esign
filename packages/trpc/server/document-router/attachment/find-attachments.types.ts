@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { ZEnvelopeAttachmentTypeSchema } from '@hanzo/esign-lib/types/envelope-attachment';
 
 export const ZFindAttachmentsRequestSchema = z.object({
-  documentId: z.number(),
+  documentId: z.coerce.number(),
 });
 
 export const ZFindAttachmentsResponseSchema = z.object({

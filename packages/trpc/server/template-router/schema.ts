@@ -303,7 +303,7 @@ export type TFindTemplatesResponse = z.infer<typeof ZFindTemplatesResponseSchema
 export type FindTemplateRow = TFindTemplatesResponse['data'][number];
 
 export const ZGetTemplateByIdRequestSchema = z.object({
-  templateId: z.number(),
+  templateId: z.coerce.number(),
 });
 
 export const ZGetTemplateByIdResponseSchema = ZTemplateSchema;

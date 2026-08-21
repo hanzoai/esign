@@ -9,7 +9,7 @@ export const ZFindEnvelopesRequestSchema = ZFindSearchParamsSchema.extend({
     .nativeEnum(EnvelopeType)
     .describe('Filter envelopes by type (DOCUMENT or TEMPLATE).')
     .optional(),
-  templateId: z
+  templateId: z.coerce
     .number()
     .describe('Filter envelopes by the template ID used to create it.')
     .optional(),
