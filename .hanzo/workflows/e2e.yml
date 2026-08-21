@@ -27,6 +27,23 @@ jobs:
     name: 'E2E Tests'
     timeout-minutes: 60
     runs-on: hanzo-build-linux-amd64
+
+    # The suite needs one thing it does not carry itself: somewhere to send mail.
+    # `npm run dx:up` is the local way and cannot work here — it reaches the
+    # runner's docker socket, so inbucket comes up as a SIBLING of this job with
+    # 2500 published on the docker host, while the job runs in its own container
+    # on its own network. 127.0.0.1:2500 in here is nothing, which is the
+    # `connect ECONNREFUSED 127.0.0.1:2500` behind the resend endpoint answering
+    # 500. A service container joins this job's network and answers on its name.
+    #
+    # dx:up's other container, minio, is not needed: uploads go to the database
+    # (NEXT_PUBLIC_UPLOAD_TRANSPORT) and the database is a SQLite file.
+    services:
+      mailserver:
+        image: inbucket/inbucket
+        ports:
+          - '2500:2500'
+
     steps:
       - uses: actions/checkout@v4
 
@@ -34,9 +51,6 @@ jobs:
         run: cp .env.example .env
 
       - uses: ./.github/actions/node-install
-
-      - name: Start Services
-        run: npm run dx:up
 
       - uses: ./.github/actions/playwright-install
 
@@ -55,6 +69,10 @@ jobs:
           # Needed since we use next start which will set the NODE_ENV to production
           NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: './example/cert.p12'
           DANGEROUS_BYPASS_RATE_LIMITS: 'true'
+          # .env.example points at 127.0.0.1 for the local dx:up mailserver; here
+          # it is the service above. dotenv leaves an existing variable alone, so
+          # this wins over the file.
+          NEXT_PRIVATE_SMTP_HOST: 'mailserver'
 
       # v3, not v4: @actions/artifact v2 (which upload-artifact v4 uses) refuses
       # to run against anything it does not recognise as github.com and fails
