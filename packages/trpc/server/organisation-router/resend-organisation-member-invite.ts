@@ -1,6 +1,9 @@
+import { OrganisationMemberInviteStatus } from '@prisma/client';
+
 import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/organisations';
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import { sendOrganisationMemberInviteEmail } from '@hanzo/esign-lib/server-only/organisation/create-organisation-member-invites';
+import { newInvitation } from '@hanzo/esign-lib/server-only/organisation/new-invitation';
 import { assertAdmin } from '@hanzo/esign-lib/server-only/user/assert-admin';
 import { buildOrganisationWhereQuery } from '@hanzo/esign-lib/utils/organisations';
 import { prisma } from '@hanzo/esign-prisma';
@@ -33,7 +36,8 @@ export type ResendOrganisationMemberInvitationOptions = {
 };
 
 /**
- * Resend an email for a given member invite. Only an ADMIN resends.
+ * Resend a member invite as a fresh invitation from the resender. Only an
+ * ADMIN resends.
  */
 export const resendOrganisationMemberInvitation = async ({
   userId,
@@ -68,25 +72,31 @@ export const resendOrganisationMemberInvitation = async ({
 
   const invitation = organisation.invites[0];
 
-  if (!invitation) {
+  if (!invitation || invitation.status !== OrganisationMemberInviteStatus.PENDING) {
     throw new AppError(AppErrorCode.NOT_FOUND, {
       message: 'Invitation does not exist',
     });
   }
 
-  // The resender vouches for the invitation from now on.
-  await prisma.organisationMemberInvite.update({
-    where: {
-      id: invitation.id,
-    },
-    data: {
-      inviterId: userId,
-    },
+  // A resend is a fresh invitation from the resender: new token, sent now. The
+  // old one, and its link, stop working.
+  const reissued = newInvitation(invitation, userId);
+
+  await prisma.$transaction(async (tx) => {
+    await tx.organisationMemberInvite.delete({
+      where: {
+        id: invitation.id,
+      },
+    });
+
+    await tx.organisationMemberInvite.create({
+      data: reissued,
+    });
   });
 
   await sendOrganisationMemberInviteEmail({
-    email: invitation.email,
-    token: invitation.token,
+    email: reissued.email,
+    token: reissued.token,
     senderName: userName,
     organisation,
   });

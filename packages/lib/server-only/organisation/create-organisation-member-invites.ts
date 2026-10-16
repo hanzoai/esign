@@ -3,7 +3,6 @@ import { createElement } from 'react';
 import { msg } from '@lingui/core/macro';
 import type { Organisation, Prisma } from '@prisma/client';
 import { OrganisationMemberInviteStatus } from '@prisma/client';
-import { nanoid } from 'nanoid';
 
 import { mailer } from '@hanzo/esign-email/mailer';
 import { OrganisationInviteEmailTemplate } from '@hanzo/esign-email/templates/organisation-invite';
@@ -15,12 +14,12 @@ import { prisma } from '@hanzo/esign-prisma';
 import type { TCreateOrganisationMemberInvitesRequestSchema } from '@hanzo/esign-trpc/server/organisation-router/create-organisation-member-invites.types';
 
 import { getI18nInstance } from '../../client-only/providers/i18n-server';
-import { generateDatabaseId } from '../../universal/id';
 import { buildOrganisationWhereQuery } from '../../utils/organisations';
 import { renderEmailWithI18N } from '../../utils/render-email-with-i18n';
 import { getEmailContext } from '../email/get-email-context';
 import { getMemberOrganisationRole } from '../team/get-member-roles';
 import { assertAdmin } from '../user/assert-admin';
+import { newInvitation } from './new-invitation';
 
 export type CreateOrganisationMemberInvitesOptions = {
   userId: number;
@@ -108,14 +107,9 @@ export const createOrganisationMemberInvites = async ({
   }
 
   const organisationMemberInvites: Prisma.OrganisationMemberInviteCreateManyInput[] =
-    usersToInvite.map(({ email, organisationRole }) => ({
-      id: generateDatabaseId('member_invite'),
-      email,
-      organisationId,
-      organisationRole,
-      token: nanoid(32),
-      inviterId: userId,
-    }));
+    usersToInvite.map(({ email, organisationRole }) =>
+      newInvitation({ email, organisationId, organisationRole }, userId),
+    );
 
   await prisma.organisationMemberInvite.createMany({
     data: organisationMemberInvites,
