@@ -1,6 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberInviteStatus } from '@prisma/client';
-import { Link } from 'react-router';
+import { Form, Link } from 'react-router';
 
 import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
 import { acceptOrganisationInvitation } from '@hanzo/esign-lib/server-only/organisation/accept-organisation-invitation';
@@ -10,16 +10,17 @@ import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import type { Route } from './+types/organisation.invite.$token';
 
-export async function loader({ params, request }: Route.LoaderArgs) {
-  const session = await getOptionalSession(request);
-
-  const { token } = params;
-
+/**
+ * The invitation a token names and whether the signed-in person may accept it.
+ * Reading it changes nothing: acceptance is the POST below, made by the invited
+ * person pressing the button.
+ */
+const readInvitation = async (request: Request, token: string | undefined) => {
   if (!token) {
-    return {
-      state: 'InvalidLink',
-    } as const;
+    return { state: 'InvalidLink' } as const;
   }
+
+  const session = await getOptionalSession(request);
 
   const organisationMemberInvite = await prisma.organisationMemberInvite.findUnique({
     where: {
@@ -38,46 +39,66 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     !organisationMemberInvite ||
     organisationMemberInvite.status === OrganisationMemberInviteStatus.DECLINED
   ) {
-    return {
-      state: 'InvalidLink',
-    } as const;
+    return { state: 'InvalidLink' } as const;
   }
 
-  const signInPath = `/signin?returnTo=${encodeURIComponent(`/organisation/invite/${token}`)}`;
+  const email = organisationMemberInvite.email;
+  const organisationName = organisationMemberInvite.organisation.name;
 
   // The invitation joins the person signed in, so nobody is added until the
   // invited person is the one holding the session.
   if (!session.user) {
+    const signInPath = `/signin?returnTo=${encodeURIComponent(`/organisation/invite/${token}`)}`;
+
+    return { state: 'LoginRequired', email, organisationName, signInPath } as const;
+  }
+
+  if (!isInvitedPerson(session.user, email)) {
+    return { state: 'WrongAccount', email, organisationName } as const;
+  }
+
+  if (organisationMemberInvite.status === OrganisationMemberInviteStatus.ACCEPTED) {
+    return { state: 'Success', email, organisationName } as const;
+  }
+
+  return { state: 'Ready', email, organisationName, userId: session.user.id, token } as const;
+};
+
+export async function loader({ params, request }: Route.LoaderArgs) {
+  const invitation = await readInvitation(request, params.token);
+
+  if (invitation.state === 'Ready') {
     return {
-      state: 'LoginRequired',
-      email: organisationMemberInvite.email,
-      organisationName: organisationMemberInvite.organisation.name,
-      signInPath,
+      state: 'Ready',
+      email: invitation.email,
+      organisationName: invitation.organisationName,
     } as const;
   }
 
-  if (!isInvitedPerson(session.user, organisationMemberInvite.email)) {
-    return {
-      state: 'WrongAccount',
-      email: organisationMemberInvite.email,
-      organisationName: organisationMemberInvite.organisation.name,
-    } as const;
+  return invitation;
+}
+
+export async function action({ params, request }: Route.ActionArgs) {
+  const invitation = await readInvitation(request, params.token);
+
+  if (invitation.state !== 'Ready') {
+    return invitation;
   }
 
   await acceptOrganisationInvitation({
-    token: organisationMemberInvite.token,
-    userId: session.user.id,
+    token: invitation.token,
+    userId: invitation.userId,
   });
 
   return {
     state: 'Success',
-    email: organisationMemberInvite.email,
-    organisationName: organisationMemberInvite.organisation.name,
+    email: invitation.email,
+    organisationName: invitation.organisationName,
   } as const;
 }
 
-export default function AcceptInvitationPage({ loaderData }: Route.ComponentProps) {
-  const data = loaderData;
+export default function AcceptInvitationPage({ loaderData, actionData }: Route.ComponentProps) {
+  const data = actionData ?? loaderData;
 
   if (data.state === 'InvalidLink') {
     return (
@@ -151,6 +172,29 @@ export default function AcceptInvitationPage({ loaderData }: Route.ComponentProp
             <Trans>Return</Trans>
           </Link>
         </Button>
+      </div>
+    );
+  }
+
+  if (data.state === 'Ready') {
+    return (
+      <div>
+        <h1 className="text-4xl font-semibold">
+          <Trans>Organisation invitation</Trans>
+        </h1>
+
+        <p className="mb-4 mt-2 text-sm text-muted-foreground">
+          <Trans>
+            You have been invited by <strong>{data.organisationName}</strong> to join their
+            organisation.
+          </Trans>
+        </p>
+
+        <Form method="post">
+          <Button type="submit">
+            <Trans>Accept invitation</Trans>
+          </Button>
+        </Form>
       </div>
     );
   }

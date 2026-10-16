@@ -1,33 +1,49 @@
 import { Trans } from '@lingui/react/macro';
 import { OrganisationMemberInviteStatus } from '@prisma/client';
-import { Link } from 'react-router';
+import { Form, Link } from 'react-router';
 
 import { prisma } from '@hanzo/esign-prisma';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 
 import type { Route } from './+types/organisation.decline.$token';
 
-export async function loader({ params }: Route.LoaderArgs) {
-  const { token } = params;
+const findInvitation = async (token: string | undefined) =>
+  token
+    ? await prisma.organisationMemberInvite.findUnique({
+        where: {
+          token,
+        },
+        include: {
+          organisation: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      })
+    : null;
 
-  if (!token) {
+/** Shows the invitation; declining it is the POST below, never the page load. */
+export async function loader({ params }: Route.LoaderArgs) {
+  const organisationMemberInvite = await findInvitation(params.token);
+
+  if (!organisationMemberInvite) {
     return {
       state: 'InvalidLink',
     } as const;
   }
 
-  const organisationMemberInvite = await prisma.organisationMemberInvite.findUnique({
-    where: {
-      token,
-    },
-    include: {
-      organisation: {
-        select: {
-          name: true,
-        },
-      },
-    },
-  });
+  return {
+    state:
+      organisationMemberInvite.status === OrganisationMemberInviteStatus.DECLINED
+        ? 'Success'
+        : 'Ready',
+    organisationName: organisationMemberInvite.organisation.name,
+  } as const;
+}
+
+export async function action({ params }: Route.ActionArgs) {
+  const organisationMemberInvite = await findInvitation(params.token);
 
   if (!organisationMemberInvite) {
     return {
@@ -52,8 +68,8 @@ export async function loader({ params }: Route.LoaderArgs) {
   } as const;
 }
 
-export default function DeclineInvitationPage({ loaderData }: Route.ComponentProps) {
-  const data = loaderData;
+export default function DeclineInvitationPage({ loaderData, actionData }: Route.ComponentProps) {
+  const data = actionData ?? loaderData;
 
   if (data.state === 'InvalidLink') {
     return (
@@ -63,7 +79,7 @@ export default function DeclineInvitationPage({ loaderData }: Route.ComponentPro
             <Trans>Invalid token</Trans>
           </h1>
 
-          <p className="text-muted-foreground mb-4 mt-2 text-sm">
+          <p className="mb-4 mt-2 text-sm text-muted-foreground">
             <Trans>This token is invalid or has expired. No action is needed.</Trans>
           </p>
 
@@ -77,13 +93,36 @@ export default function DeclineInvitationPage({ loaderData }: Route.ComponentPro
     );
   }
 
+  if (data.state === 'Ready') {
+    return (
+      <div className="w-screen max-w-lg px-4">
+        <h1 className="text-4xl font-semibold">
+          <Trans>Decline invitation</Trans>
+        </h1>
+
+        <p className="mb-4 mt-2 text-sm text-muted-foreground">
+          <Trans>
+            Decline the invitation from <strong>{data.organisationName}</strong> to join their
+            organisation?
+          </Trans>
+        </p>
+
+        <Form method="post">
+          <Button type="submit" variant="destructive">
+            <Trans>Decline invitation</Trans>
+          </Button>
+        </Form>
+      </div>
+    );
+  }
+
   return (
     <div className="w-screen max-w-lg px-4">
       <h1 className="text-4xl font-semibold">
         <Trans>Invitation declined</Trans>
       </h1>
 
-      <p className="text-muted-foreground mb-4 mt-2 text-sm">
+      <p className="mb-4 mt-2 text-sm text-muted-foreground">
         <Trans>
           You have declined the invitation from <strong>{data.organisationName}</strong> to join
           their organisation.
