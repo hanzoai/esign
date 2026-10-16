@@ -1,8 +1,10 @@
 # Hanzo eSign — a turborepo whose deployable artifact is the remix app.
 #
-# Gate only. The image is already built and pushed by the native builder in this
-# repo (.hanzo/workflows/deploy.yml → ghcr.io/hanzoai/sign:<tag>), so declaring
-# `images:` here would publish a second copy of the same commit.
+# GitHub runs .github/workflows/cicd.yml (hanzoai/ci build.yml@v2) against this
+# file on every push to main, tag v* and pull request. `test:` gates; `images:`
+# builds docker/Dockerfile and publishes ghcr.io/hanzoai/sign as
+# sha-<short7>-amd64 plus the semver the pin in hanzoai/universe
+# (charts/app/values/hanzo/sign.yaml) names.
 #
 # The gate is the real build of the app the cluster runs: npm ci against the
 # committed lockfile (postinstall generates the Prisma client), then turbo's
@@ -17,6 +19,13 @@
 # client. Base SQLite serves one write connection, so such a call waits on a
 # lock the transaction holds and the transaction dies (`P2028`) — at runtime,
 # with a green build. See packages/eslint-config/transaction.cjs.
+
+# The image series. bin/imgver publishes max(this, the highest semver already on
+# ghcr.io/hanzoai/sign) plus a patch, and exactly this when it is the higher. It
+# is stated here because package.json carries 2.7.1, the upstream Documenso
+# release, which is not this image's series.
+version: 0.2.0
+
 test:
   - name: build
     run: |
@@ -25,3 +34,11 @@ test:
       npm ci --no-audit --no-fund
       npm run lint:tx
       npx turbo run build --filter=@hanzo/esign-remix
+
+images:
+  - name: sign
+    context: .
+    dockerfile: docker/Dockerfile
+    repo: ghcr.io/hanzoai/sign
+    # One architecture: the live image and its pin are amd64.
+    platforms: [linux/amd64]
