@@ -56,13 +56,15 @@ export default function SettingsSecurityLinkedAccounts() {
       },
       {
         id: 'actions',
-        cell: ({ row }) => (
-          <AccountUnlinkDialog
-            accountId={row.original.id}
-            provider={row.original.provider}
-            onSuccess={refetch}
-          />
-        ),
+        // The Hanzo link is how this account signs in, so it has no unlink.
+        cell: ({ row }) =>
+          row.original.provider === 'hanzo' ? null : (
+            <AccountUnlinkDialog
+              accountId={row.original.id}
+              provider={row.original.provider}
+              onSuccess={refetch}
+            />
+          ),
       },
     ] satisfies DataTableColumnDef<(typeof results)[number]>[];
   }, []);
