@@ -1,6 +1,7 @@
 import { ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/organisations';
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import { sendOrganisationMemberInviteEmail } from '@hanzo/esign-lib/server-only/organisation/create-organisation-member-invites';
+import { assertAdmin } from '@hanzo/esign-lib/server-only/user/assert-admin';
 import { buildOrganisationWhereQuery } from '@hanzo/esign-lib/utils/organisations';
 import { prisma } from '@hanzo/esign-prisma';
 
@@ -32,7 +33,7 @@ export type ResendOrganisationMemberInvitationOptions = {
 };
 
 /**
- * Resend an email for a given member invite.
+ * Resend an email for a given member invite. Only an ADMIN resends.
  */
 export const resendOrganisationMemberInvitation = async ({
   userId,
@@ -40,6 +41,8 @@ export const resendOrganisationMemberInvitation = async ({
   organisationId,
   invitationId,
 }: ResendOrganisationMemberInvitationOptions): Promise<void> => {
+  await assertAdmin(userId);
+
   const organisation = await prisma.organisation.findFirst({
     where: buildOrganisationWhereQuery({
       organisationId,
@@ -70,6 +73,16 @@ export const resendOrganisationMemberInvitation = async ({
       message: 'Invitation does not exist',
     });
   }
+
+  // The resender vouches for the invitation from now on.
+  await prisma.organisationMemberInvite.update({
+    where: {
+      id: invitation.id,
+    },
+    data: {
+      inviterId: userId,
+    },
+  });
 
   await sendOrganisationMemberInviteEmail({
     email: invitation.email,

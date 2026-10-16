@@ -3,18 +3,18 @@ import { OAuth2Client, decodeIdToken } from 'arctic';
 import type { Context } from 'hono';
 import { deleteCookie } from 'hono/cookie';
 
-import { SignInRefusal } from '@hanzo/esign-lib/constants/auth';
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import { onCreateUserHook } from '@hanzo/esign-lib/server-only/user/create-user';
 import { deletedServiceAccountEmail } from '@hanzo/esign-lib/server-only/user/service-accounts/deleted-account';
 import { legacyServiceAccountEmail } from '@hanzo/esign-lib/server-only/user/service-accounts/legacy-service-account';
+import { isAdmin } from '@hanzo/esign-lib/utils/is-admin';
 import { isValidReturnTo, normalizeReturnTo } from '@hanzo/esign-lib/utils/is-valid-return-to';
 import { prisma } from '@hanzo/esign-prisma';
 
 import type { OAuthClientOptions } from '../../config';
 import { AuthenticationErrorCode } from '../errors/error-codes';
 import { onAuthorize } from './authorizer';
-import { administersAppOrg, readIamPerson } from './iam-person';
+import { decideSignIn, readIamPerson, rolesFor } from './iam-person';
 import { getOpenIdConfiguration } from './open-id';
 
 type HandleOAuthCallbackUrlOptions = {
@@ -30,76 +30,84 @@ export const handleOAuthCallbackUrl = async (options: HandleOAuthCallbackUrlOpti
     clientOptions,
   });
 
-  const refuse = (reason: SignInRefusal) => c.redirect(`/signin?error=${reason}`, 302);
-
   const email = person.email.toLowerCase();
 
   if (email === legacyServiceAccountEmail() || email === deletedServiceAccountEmail()) {
     return c.text('FORBIDDEN', 403);
   }
 
-  if (!person.emailVerified) {
-    return refuse(SignInRefusal.UnverifiedEmail);
-  }
-
-  // An account is found by the IAM identity it is linked to, and by nothing else.
-  const existingAccount = await prisma.account.findFirst({
+  const linked = await prisma.account.findFirst({
     where: {
       provider: clientOptions.id,
       providerAccountId: person.sub,
     },
-    include: {
+    select: {
       user: {
         select: {
           id: true,
           disabled: true,
+          roles: true,
         },
       },
     },
   });
 
-  if (existingAccount) {
-    if (existingAccount.user.disabled) {
-      return refuse(SignInRefusal.Disabled);
-    }
+  // The store is asked only what a first sign-in needs to know.
+  const addressHeldByUnlinkedAccount =
+    !linked && (await prisma.user.count({ where: { email } })) > 0;
 
-    await onAuthorize({ userId: existingAccount.user.id }, c);
+  const invites = linked
+    ? []
+    : await prisma.organisationMemberInvite.findMany({
+        where: {
+          email,
+          status: OrganisationMemberInviteStatus.PENDING,
+        },
+        select: {
+          createdAt: true,
+          inviter: {
+            select: {
+              roles: true,
+              disabled: true,
+            },
+          },
+        },
+      });
 
-    return c.redirect(redirectPath, 302);
-  }
-
-  // An address is not an identity: an account that holds this address but was
-  // never linked to this IAM identity is not handed to whoever signs in with it.
-  const userWithSameEmail = await prisma.user.findFirst({
-    where: {
-      email,
-    },
-    select: {
-      id: true,
-    },
+  const decision = decideSignIn({
+    person,
+    linked: linked ? { id: linked.user.id, disabled: linked.user.disabled } : null,
+    addressHeldByUnlinkedAccount,
+    invites: invites.map((invite) => ({
+      createdAt: invite.createdAt,
+      inviterIsAdmin: Boolean(
+        invite.inviter && !invite.inviter.disabled && isAdmin(invite.inviter),
+      ),
+    })),
   });
 
-  if (userWithSameEmail) {
-    return refuse(SignInRefusal.UnlinkedAccount);
+  if (decision.kind === 'refuse') {
+    return c.redirect(`/signin?error=${decision.reason}`, 302);
   }
 
-  // A first sign-in makes an account only for someone who was asked in: an admin
-  // of the org this application serves, or a person an organisation invited at
-  // this verified address.
-  const invited =
-    administersAppOrg(person) ||
-    (await prisma.organisationMemberInvite.findFirst({
+  if (decision.kind === 'sign-in' && linked) {
+    // IAM's answer is restated on every sign-in: whether the address is
+    // verified (an invitation is accepted only at a verified address) and
+    // whether the person administers the app's org (ADMIN).
+    await prisma.user.update({
       where: {
-        email,
-        status: OrganisationMemberInviteStatus.PENDING,
+        id: decision.userId,
       },
-      select: {
-        id: true,
+      data: {
+        emailVerified: person.emailVerified ? new Date() : null,
+        roles: rolesFor(person, linked.user.roles),
+        lastSignedIn: new Date(),
       },
-    })) !== null;
+    });
 
-  if (!invited) {
-    return refuse(SignInRefusal.NotInvited);
+    await onAuthorize({ userId: decision.userId }, c);
+
+    return c.redirect(redirectPath, 302);
   }
 
   const createdUser = await prisma.$transaction(async (tx) => {
@@ -108,6 +116,7 @@ export const handleOAuthCallbackUrl = async (options: HandleOAuthCallbackUrlOpti
         email,
         name: person.name,
         emailVerified: new Date(),
+        roles: rolesFor(person, []),
       },
     });
 

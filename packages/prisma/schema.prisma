@@ -67,6 +67,7 @@ model User {
 
   ownedOrganisations Organisation[]
   organisationMember OrganisationMember[]
+  invitationsSent    OrganisationMemberInvite[] @relation("OrganisationMemberInviteInviter")
 
   twoFactorSecret      String?
   twoFactorEnabled     Boolean @default(false)
@@ -760,6 +761,11 @@ model OrganisationMemberInvite {
   organisationId   String
   organisation     Organisation           @relation(fields: [organisationId], references: [id], onDelete: Cascade)
   organisationRole OrganisationMemberRole
+
+  // Who sent the invitation. A pending invitation makes an account on its
+  // invitee's first Hanzo IAM sign-in only while its sender holds ADMIN.
+  inviterId Int?
+  inviter   User? @relation("OrganisationMemberInviteInviter", fields: [inviterId], references: [id], onDelete: SetNull)
 }
 
 model OrganisationGroup {

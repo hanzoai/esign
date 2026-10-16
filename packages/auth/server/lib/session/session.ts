@@ -4,9 +4,10 @@ import { type Session, type User, UserSecurityAuditLogType } from '@prisma/clien
 
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import type { RequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
+import { sessionIsCurrent } from '@hanzo/esign-lib/utils/iam-sign-in';
 import { prisma } from '@hanzo/esign-prisma';
 
-import { AUTH_SESSION_LIFETIME } from '../../config';
+import { AUTH_SESSION_LIFETIME, HanzoAuthOptions } from '../../config';
 
 /**
  * The user object to pass around the app.
@@ -77,6 +78,15 @@ export const createSession = async (
   return session;
 };
 
+/**
+ * The session a token names, or none.
+ *
+ * A session is honoured only while it is current (`sessionIsCurrent`): issued
+ * under IAM-only sign-in, to a user who is not disabled and whose account is
+ * linked to a Hanzo IAM identity. It lives for AUTH_SESSION_LIFETIME from the
+ * IAM sign-in that made it and is never extended, so a person IAM no longer
+ * admits is out within that lifetime.
+ */
 export const validateSessionToken = async (token: string): Promise<SessionValidationResult> => {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
 
@@ -98,6 +108,16 @@ export const validateSessionToken = async (token: string): Promise<SessionValida
           twoFactorEnabled: true,
           roles: true,
           signature: true,
+          disabled: true,
+          accounts: {
+            where: {
+              provider: HanzoAuthOptions.id,
+            },
+            select: {
+              id: true,
+            },
+            take: 1,
+          },
         },
       },
     },
@@ -107,24 +127,20 @@ export const validateSessionToken = async (token: string): Promise<SessionValida
     return { session: null, user: null, isAuthenticated: false };
   }
 
-  const { user, ...session } = result;
+  const { user: holder, ...session } = result;
+  const { disabled, accounts, ...user } = holder;
 
   if (Date.now() >= session.expiresAt.getTime()) {
     await prisma.session.delete({ where: { id: sessionId } });
     return { session: null, user: null, isAuthenticated: false };
   }
 
-  if (Date.now() >= session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * 15) {
-    session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
-
-    await prisma.session.update({
-      where: {
-        id: session.id,
-      },
-      data: {
-        expiresAt: session.expiresAt,
-      },
-    });
+  if (
+    !sessionIsCurrent({ createdAt: session.createdAt, disabled, linkedToIam: accounts.length > 0 })
+  ) {
+    // deleteMany: two requests on one refused session both reach this line.
+    await prisma.session.deleteMany({ where: { id: sessionId } });
+    return { session: null, user: null, isAuthenticated: false };
   }
 
   return { session, user, isAuthenticated: true };

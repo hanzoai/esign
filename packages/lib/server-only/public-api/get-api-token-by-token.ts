@@ -1,6 +1,7 @@
 import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
+import { apiTokenIsCurrent } from '../../utils/iam-sign-in';
 import { hashString } from '../auth/hash';
 
 export const getApiTokenByToken = async ({ token }: { token: string }) => {
@@ -61,6 +62,15 @@ export const getApiTokenByToken = async ({ token }: { token: string }) => {
 
   // This will never happen but we need to narrow types
   if (!user) {
+    throw new AppError(AppErrorCode.UNAUTHORIZED, {
+      message: 'Invalid token',
+      statusCode: 401,
+    });
+  }
+
+  // A token minted under the old sign-in rules, or held by a disabled user, is
+  // not honoured.
+  if (!apiTokenIsCurrent({ createdAt: apiToken.createdAt, disabled: user.disabled })) {
     throw new AppError(AppErrorCode.UNAUTHORIZED, {
       message: 'Invalid token',
       statusCode: 401,

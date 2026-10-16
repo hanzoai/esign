@@ -34,6 +34,7 @@ import { acceptOrganisationInvitation } from '@hanzo/esign-lib/server-only/organ
 import { createOrganisation } from '@hanzo/esign-lib/server-only/organisation/create-organisation';
 import { createOrganisationMemberInvites } from '@hanzo/esign-lib/server-only/organisation/create-organisation-member-invites';
 import { getMemberOrganisationRole } from '@hanzo/esign-lib/server-only/team/get-member-roles';
+import { assertAdmin } from '@hanzo/esign-lib/server-only/user/assert-admin';
 import { INTERNAL_CLAIM_ID, internalClaims } from '@hanzo/esign-lib/types/subscription';
 import { generateDatabaseId } from '@hanzo/esign-lib/universal/id';
 import {
@@ -117,6 +118,8 @@ export const organisationRoutes: ZapRouteMap = {
   'organisation.create': async (ctx: ZapContext, raw) => {
     const { name } = ZCreateOrganisationRequestSchema.parse(raw);
     const { user } = ctx;
+
+    await assertAdmin(user.id);
 
     await createOrganisation({
       userId: user.id,

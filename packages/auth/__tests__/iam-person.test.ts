@@ -1,18 +1,27 @@
 /**
- * Who a Hanzo IAM sign-in may make an account for.
+ * What a Hanzo IAM sign-in leads to.
  *
- * The callback reads IAM's userinfo answer and makes an account on a first
- * sign-in only for someone who was asked in. One half of that is read here: the
- * person administers the org the application serves. `isAdmin` is IAM's "admin
- * of the account's own org", so it must count only when that org is the
- * application's — an admin of a personal org of one is not an admin of Hanzo.
+ * A returning person is found by their linked IAM identity and let in unless
+ * disabled. A first sign-in makes an account only for someone who was asked in:
+ * an admin of the org the application serves, or a person an ADMIN invited
+ * under IAM-only sign-in. `isAdmin` is IAM's "admin of the account's own org",
+ * so it counts only when that org is the application's — an admin of a
+ * personal org of one is not an admin of Hanzo.
  *
  * Run:  npx tsx --test packages/auth/__tests__/iam-person.test.ts
  */
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import { administersAppOrg, readIamPerson } from '../server/lib/utils/iam-person';
+import { SignInRefusal } from '@hanzo/esign-lib/constants/auth';
+import { IAM_ONLY_SINCE } from '@hanzo/esign-lib/utils/iam-sign-in';
+
+import {
+  administersAppOrg,
+  decideSignIn,
+  readIamPerson,
+  rolesFor,
+} from '../server/lib/utils/iam-person';
 
 const userinfo = (over: Record<string, unknown> = {}): Record<string, unknown> => ({
   sub: 'b474eaa5-e000-474d-b317-c37bbd9a6945',
@@ -111,5 +120,117 @@ describe('administersAppOrg', () => {
     const person = readIamPerson(userinfo({ orgs: undefined }), sub);
 
     assert.equal(administersAppOrg(person), false);
+  });
+});
+
+describe('decideSignIn', () => {
+  const sub = 'b474eaa5-e000-474d-b317-c37bbd9a6945';
+  const before = new Date(IAM_ONLY_SINCE.getTime() - 1);
+  const after = new Date(IAM_ONLY_SINCE.getTime() + 1);
+
+  const admin = () => readIamPerson(userinfo(), sub);
+  const member = (over: Record<string, unknown> = {}) =>
+    readIamPerson(
+      userinfo({ isAdmin: false, orgs: [{ org: 'hanzo', role: 'member' }], ...over }),
+      sub,
+    );
+
+  const first = { linked: null, addressHeldByUnlinkedAccount: false, invites: [] };
+
+  test('a returning linked person is let in without their address being asked about', () => {
+    const decision = decideSignIn({
+      ...first,
+      person: member({ email_verified: false }),
+      linked: { id: 7, disabled: false },
+    });
+
+    assert.deepEqual(decision, { kind: 'sign-in', userId: 7 });
+  });
+
+  test('a returning linked person an admin disabled is refused', () => {
+    const decision = decideSignIn({
+      ...first,
+      person: admin(),
+      linked: { id: 7, disabled: true },
+    });
+
+    assert.deepEqual(decision, { kind: 'refuse', reason: SignInRefusal.Disabled });
+  });
+
+  test('a new admin of the app org gets an account', () => {
+    assert.deepEqual(decideSignIn({ ...first, person: admin() }), { kind: 'create' });
+  });
+
+  test('a new non-admin with no invitation is refused', () => {
+    assert.deepEqual(decideSignIn({ ...first, person: member() }), {
+      kind: 'refuse',
+      reason: SignInRefusal.NotInvited,
+    });
+  });
+
+  test('an invitation from an ADMIN, sent under IAM-only sign-in, makes an account', () => {
+    const decision = decideSignIn({
+      ...first,
+      person: member(),
+      invites: [{ createdAt: after, inviterIsAdmin: true }],
+    });
+
+    assert.deepEqual(decision, { kind: 'create' });
+  });
+
+  test('an invitation from a sender who is not ADMIN makes no account', () => {
+    const decision = decideSignIn({
+      ...first,
+      person: member(),
+      invites: [{ createdAt: after, inviterIsAdmin: false }],
+    });
+
+    assert.deepEqual(decision, { kind: 'refuse', reason: SignInRefusal.NotInvited });
+  });
+
+  test('an invitation from before IAM-only sign-in makes no account, whoever sent it', () => {
+    const decision = decideSignIn({
+      ...first,
+      person: member(),
+      invites: [{ createdAt: before, inviterIsAdmin: true }],
+    });
+
+    assert.deepEqual(decision, { kind: 'refuse', reason: SignInRefusal.NotInvited });
+  });
+
+  test('a first sign-in at an address IAM has not verified is refused, admin or not', () => {
+    const decision = decideSignIn({
+      ...first,
+      person: readIamPerson(userinfo({ email_verified: false }), sub),
+    });
+
+    assert.deepEqual(decision, { kind: 'refuse', reason: SignInRefusal.UnverifiedEmail });
+  });
+
+  test('an address held by an account never linked to this identity is refused, admin or not', () => {
+    const decision = decideSignIn({
+      ...first,
+      person: admin(),
+      addressHeldByUnlinkedAccount: true,
+    });
+
+    assert.deepEqual(decision, { kind: 'refuse', reason: SignInRefusal.UnlinkedAccount });
+  });
+});
+
+describe('rolesFor', () => {
+  const sub = 'b474eaa5-e000-474d-b317-c37bbd9a6945';
+
+  test('an admin of the app org holds ADMIN', () => {
+    assert.deepEqual(rolesFor(readIamPerson(userinfo(), sub), ['USER']), ['USER', 'ADMIN']);
+  });
+
+  test('a person IAM no longer calls an admin loses ADMIN', () => {
+    const person = readIamPerson(
+      userinfo({ isAdmin: false, orgs: [{ org: 'hanzo', role: 'member' }] }),
+      sub,
+    );
+
+    assert.deepEqual(rolesFor(person, ['USER', 'ADMIN']), ['USER']);
   });
 });

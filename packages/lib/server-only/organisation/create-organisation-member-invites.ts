@@ -20,6 +20,7 @@ import { buildOrganisationWhereQuery } from '../../utils/organisations';
 import { renderEmailWithI18N } from '../../utils/render-email-with-i18n';
 import { getEmailContext } from '../email/get-email-context';
 import { getMemberOrganisationRole } from '../team/get-member-roles';
+import { assertAdmin } from '../user/assert-admin';
 
 export type CreateOrganisationMemberInvitesOptions = {
   userId: number;
@@ -29,7 +30,8 @@ export type CreateOrganisationMemberInvitesOptions = {
 };
 
 /**
- * Invite organisation members via email to join a organisation.
+ * Invite organisation members via email to join a organisation. Only an ADMIN
+ * invites, and the invitation records who sent it.
  */
 export const createOrganisationMemberInvites = async ({
   userId,
@@ -37,6 +39,8 @@ export const createOrganisationMemberInvites = async ({
   organisationId,
   invitations,
 }: CreateOrganisationMemberInvitesOptions): Promise<void> => {
+  await assertAdmin(userId);
+
   const organisation = await prisma.organisation.findFirst({
     where: buildOrganisationWhereQuery({
       organisationId,
@@ -110,6 +114,7 @@ export const createOrganisationMemberInvites = async ({
       organisationId,
       organisationRole,
       token: nanoid(32),
+      inviterId: userId,
     }));
 
   await prisma.organisationMemberInvite.createMany({

@@ -19,9 +19,9 @@ type LoginOptions = {
  * Signs the page in as the seeded user with this email.
  *
  * The app signs people in through Hanzo IAM only, and a test cannot drive IAM.
- * So the suite starts the session the way a completed IAM sign-in leaves it: a
- * Session row for the user and the signed `sessionId` cookie that names it,
- * signed with the app's own NEXT_PRIVATE_AUTH_SECRET exactly as hono signs it.
+ * So the suite starts the session the way a completed IAM sign-in leaves it: the
+ * user's IAM link, a Session row, and the signed `sessionId` cookie that names
+ * it, signed with the app's own NEXT_PRIVATE_AUTH_SECRET exactly as hono signs it.
  */
 export const apiSignin = async ({
   page,
@@ -35,6 +35,23 @@ export const apiSignin = async ({
     select: {
       id: true,
     },
+  });
+
+  // A session counts only for an account linked to a Hanzo IAM identity.
+  await prisma.account.upsert({
+    where: {
+      provider_providerAccountId: {
+        provider: 'hanzo',
+        providerAccountId: `e2e-${user.id}`,
+      },
+    },
+    create: {
+      userId: user.id,
+      type: 'oauth',
+      provider: 'hanzo',
+      providerAccountId: `e2e-${user.id}`,
+    },
+    update: {},
   });
 
   const token = randomBytes(20).toString('hex');
