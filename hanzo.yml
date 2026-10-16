@@ -14,6 +14,10 @@
 # `lint:paths` runs before install: it needs no dependencies and fails the gate
 # the moment a first-party /api path is served or called (every route is /v1).
 #
+# The unit suites of auth and lib run after install: who IAM sign-in admits and
+# what keeps working for them, where a sign-in may return, and the rest of lib.
+# The migration test runs the real 0_init and 1_iam_only_sign_in against SQLite.
+#
 # `lint:tx` runs next because it takes seconds and answers a question the build
 # cannot: whether anything inside a `$transaction` reaches the global Prisma
 # client. Base SQLite serves one write connection, so such a call waits on a
@@ -32,6 +36,7 @@ test:
       set -euo pipefail
       node scripts/lint-paths.mjs
       npm ci --no-audit --no-fund
+      npx tsx --test packages/auth/__tests__/*.test.ts packages/lib/__tests__/*.test.ts packages/prisma/__tests__/iam-only-migration.test.ts
       npm run lint:tx
       npx turbo run build --filter=@hanzo/esign-remix
 
