@@ -13,7 +13,6 @@ test('[TEAMS]: send team email request', async ({ page }) => {
   await apiSignin({
     page,
     email: user.email,
-    password: 'password',
     redirectPath: `/t/${team.url}/settings`,
   });
 

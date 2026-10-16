@@ -1,4 +1,4 @@
-// esign ZAP handlers — organisation router (37/37 procedures).
+// esign ZAP handlers — organisation router.
 //
 // Verbatim tRPC procedure bodies rewired to (ctx, raw). Input is validated by
 // the SAME Zod schema the tRPC procedure used; the server-only functions and
@@ -6,17 +6,12 @@
 // findOrganisationMembers / deleteOrganisationMembers / findOrganisationMemberInvites /
 // resendOrganisationMemberInvitation / findOrganisationGroups / findOrganisationEmails /
 // getOrganisationEmailDomain / findOrganisationEmailDomains /
-// getOrganisationAuthenticationPortal / getOrganisationSession) are reused
+// getOrganisationSession) are reused
 // unchanged. Route keys mirror the tRPC nested router shape (see
 // organisation-router.zap). The .meta() calls are dropped.
 //
-// Auth note: in tRPC, member.invite.accept / member.invite.decline used
-// maybeAuthenticatedProcedure and authenticationPortal.linkAccount /
-// declineLinkAccount used the unauthenticated `procedure`. Their bodies read
-// only `input` (and, for linkAccount, ctx.metadata) — never ctx.user — so they
-// port verbatim onto the authenticated ZapContext without behavioural change;
-// the ZAP transport establishes auth once at connection, and these handlers
-// simply don't depend on it.
+// An invitation is accepted by the person it names: member.invite.accept binds
+// the signed-in user, and only when their verified address is the invited one.
 import {
   OrganisationGroupType,
   OrganisationMemberInviteStatus,
@@ -25,9 +20,7 @@ import {
 } from '@prisma/client';
 import { unique } from 'remeda';
 
-import { SIGN_ENCRYPTION_KEY } from '@hanzo/esign-lib/constants/crypto';
 import {
-  ORGANISATION_ACCOUNT_LINK_VERIFICATION_TOKEN_IDENTIFIER,
   ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP,
   ORGANISATION_USER_ACCOUNT_TYPE,
 } from '@hanzo/esign-lib/constants/organisations';
@@ -40,12 +33,8 @@ import { orphanEnvelopes } from '@hanzo/esign-lib/server-only/envelope/orphan-en
 import { acceptOrganisationInvitation } from '@hanzo/esign-lib/server-only/organisation/accept-organisation-invitation';
 import { createOrganisation } from '@hanzo/esign-lib/server-only/organisation/create-organisation';
 import { createOrganisationMemberInvites } from '@hanzo/esign-lib/server-only/organisation/create-organisation-member-invites';
-import { linkOrganisationAccount } from '@hanzo/esign-lib/server-only/organisation/link-organisation-account';
-import { assertRateLimit } from '@hanzo/esign-lib/server-only/rate-limit/rate-limit-middleware';
-import { linkOrgAccountRateLimit } from '@hanzo/esign-lib/server-only/rate-limit/rate-limits';
 import { getMemberOrganisationRole } from '@hanzo/esign-lib/server-only/team/get-member-roles';
 import { INTERNAL_CLAIM_ID, internalClaims } from '@hanzo/esign-lib/types/subscription';
-import { symmetricEncrypt } from '@hanzo/esign-lib/universal/crypto';
 import { generateDatabaseId } from '@hanzo/esign-lib/universal/id';
 import {
   buildOrganisationWhereQuery,
@@ -65,7 +54,6 @@ import { ZCreateOrganisationEmailRequestSchema } from '../../../server/organisat
 import { ZCreateOrganisationGroupRequestSchema } from '../../../server/organisation-router/create-organisation-group.types';
 import { ZCreateOrganisationMemberInvitesRequestSchema } from '../../../server/organisation-router/create-organisation-member-invites.types';
 import { ZCreateOrganisationRequestSchema } from '../../../server/organisation-router/create-organisation.types';
-import { ZDeclineLinkOrganisationAccountRequestSchema } from '../../../server/organisation-router/decline-link-organisation-account.types';
 import { ZDeclineOrganisationMemberInviteRequestSchema } from '../../../server/organisation-router/decline-organisation-member-invite.types';
 import { ZDeleteOrganisationEmailDomainRequestSchema } from '../../../server/organisation-router/delete-organisation-email-domain.types';
 import { ZDeleteOrganisationEmailRequestSchema } from '../../../server/organisation-router/delete-organisation-email.types';
@@ -86,8 +74,6 @@ import { ZFindOrganisationMemberInvitesRequestSchema } from '../../../server/org
 import { findOrganisationMembers } from '../../../server/organisation-router/find-organisation-members';
 import { ZFindOrganisationMembersRequestSchema } from '../../../server/organisation-router/find-organisation-members.types';
 import { getOrganisation } from '../../../server/organisation-router/get-organisation';
-import { getOrganisationAuthenticationPortal } from '../../../server/organisation-router/get-organisation-authentication-portal';
-import { ZGetOrganisationAuthenticationPortalRequestSchema } from '../../../server/organisation-router/get-organisation-authentication-portal.types';
 import { getOrganisationEmailDomain } from '../../../server/organisation-router/get-organisation-email-domain';
 import { ZGetOrganisationEmailDomainRequestSchema } from '../../../server/organisation-router/get-organisation-email-domain.types';
 import { ZGetOrganisationMemberInvitesRequestSchema } from '../../../server/organisation-router/get-organisation-member-invites.types';
@@ -95,10 +81,8 @@ import { getOrganisationSession } from '../../../server/organisation-router/get-
 import { ZGetOrganisationRequestSchema } from '../../../server/organisation-router/get-organisation.types';
 import { getOrganisations } from '../../../server/organisation-router/get-organisations';
 import { ZLeaveOrganisationRequestSchema } from '../../../server/organisation-router/leave-organisation.types';
-import { ZLinkOrganisationAccountRequestSchema } from '../../../server/organisation-router/link-organisation-account.types';
 import { resendOrganisationMemberInvitation } from '../../../server/organisation-router/resend-organisation-member-invite';
 import { ZResendOrganisationMemberInviteRequestSchema } from '../../../server/organisation-router/resend-organisation-member-invite.types';
-import { ZUpdateOrganisationAuthenticationPortalRequestSchema } from '../../../server/organisation-router/update-organisation-authentication-portal.types';
 import { ZUpdateOrganisationEmailRequestSchema } from '../../../server/organisation-router/update-organisation-email.types';
 import { ZUpdateOrganisationGroupRequestSchema } from '../../../server/organisation-router/update-organisation-group.types';
 import { ZUpdateOrganisationMemberRequestSchema } from '../../../server/organisation-router/update-organisation-members.types';
@@ -585,11 +569,12 @@ export const organisationRoutes: ZapRouteMap = {
     });
   },
 
-  'organisation.member.invite.accept': async (_ctx: ZapContext, raw) => {
+  'organisation.member.invite.accept': async (ctx: ZapContext, raw) => {
     const { token } = ZAcceptOrganisationMemberInviteRequestSchema.parse(raw);
 
     return await acceptOrganisationInvitation({
       token,
+      userId: ctx.user.id,
     });
   },
 
@@ -1348,129 +1333,6 @@ export const organisationRoutes: ZapRouteMap = {
     });
 
     await Promise.all(emailsToVerify.map(async (email) => verifyEmailDomain(email.id)));
-  },
-
-  'organisation.authenticationPortal.get': async (ctx: ZapContext, raw) => {
-    const { organisationId } = ZGetOrganisationAuthenticationPortalRequestSchema.parse(raw);
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-      },
-    });
-
-    return await getOrganisationAuthenticationPortal({
-      userId: ctx.user.id,
-      organisationId,
-    });
-  },
-
-  'organisation.authenticationPortal.update': async (ctx: ZapContext, raw) => {
-    const { organisationId, data } =
-      ZUpdateOrganisationAuthenticationPortalRequestSchema.parse(raw);
-    const { user } = ctx;
-
-    ctx.logger.info({
-      input: {
-        organisationId,
-      },
-    });
-
-    const organisation = await prisma.organisation.findFirst({
-      where: buildOrganisationWhereQuery({
-        organisationId,
-        userId: user.id,
-        roles: ORGANISATION_MEMBER_ROLE_PERMISSIONS_MAP['MANAGE_ORGANISATION'],
-      }),
-      include: {
-        organisationAuthenticationPortal: true,
-      },
-    });
-
-    if (!organisation) {
-      throw new AppError(AppErrorCode.UNAUTHORIZED);
-    }
-
-    const {
-      defaultOrganisationRole,
-      enabled,
-      clientId,
-      clientSecret,
-      wellKnownUrl,
-      autoProvisionUsers,
-      allowedDomains,
-    } = data;
-
-    if (
-      enabled &&
-      (!wellKnownUrl ||
-        !clientId ||
-        (!clientSecret && !organisation.organisationAuthenticationPortal.clientSecret))
-    ) {
-      throw new AppError(AppErrorCode.INVALID_BODY, {
-        message:
-          'Client ID, client secret, and well known URL are required when authentication portal is enabled',
-      });
-    }
-
-    // Allow empty string to be passed in to remove the client secret from the database.
-    let encryptedClientSecret: string | undefined = clientSecret;
-
-    // Encrypt the secret if it is provided.
-    if (clientSecret) {
-      const encryptionKey = SIGN_ENCRYPTION_KEY;
-
-      if (!encryptionKey) {
-        throw new Error('Missing SIGN_ENCRYPTION_KEY');
-      }
-
-      encryptedClientSecret = symmetricEncrypt({
-        key: encryptionKey,
-        data: clientSecret,
-      });
-    }
-
-    await prisma.organisationAuthenticationPortal.update({
-      where: {
-        id: organisation.organisationAuthenticationPortal.id,
-      },
-      data: {
-        defaultOrganisationRole,
-        enabled,
-        clientId,
-        clientSecret: encryptedClientSecret,
-        wellKnownUrl,
-        autoProvisionUsers,
-        allowedDomains,
-      },
-    });
-  },
-
-  'organisation.authenticationPortal.linkAccount': async (ctx: ZapContext, raw) => {
-    const { token } = ZLinkOrganisationAccountRequestSchema.parse(raw);
-
-    const rateLimitResult = await linkOrgAccountRateLimit.check({
-      ip: ctx.metadata.requestMetadata.ipAddress ?? 'unknown',
-      identifier: token,
-    });
-
-    assertRateLimit(rateLimitResult);
-
-    await linkOrganisationAccount({
-      token,
-      requestMeta: ctx.metadata.requestMetadata,
-    });
-  },
-
-  'organisation.authenticationPortal.declineLinkAccount': async (_ctx: ZapContext, raw) => {
-    const { token } = ZDeclineLinkOrganisationAccountRequestSchema.parse(raw);
-
-    await prisma.verificationToken.delete({
-      where: {
-        token,
-        identifier: ORGANISATION_ACCOUNT_LINK_VERIFICATION_TOKEN_IDENTIFIER,
-      },
-    });
   },
 
   'organisation.internal.getOrganisationSession': async (ctx: ZapContext) => {

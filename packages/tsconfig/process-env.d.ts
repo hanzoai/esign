@@ -4,15 +4,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_WEBAPP_URL?: string;
     NEXT_PRIVATE_SIGN_LICENSE_KEY?: string;
 
-    NEXT_PRIVATE_GOOGLE_CLIENT_ID?: string;
-    NEXT_PRIVATE_GOOGLE_CLIENT_SECRET?: string;
-
-    NEXT_PRIVATE_OIDC_WELL_KNOWN?: string;
-    NEXT_PRIVATE_OIDC_CLIENT_ID?: string;
-    NEXT_PRIVATE_OIDC_CLIENT_SECRET?: string;
-    NEXT_PRIVATE_OIDC_PROVIDER_LABEL?: string;
-    NEXT_PRIVATE_OIDC_SKIP_VERIFY?: string;
-
     // Base SQLite (single shared file). BASE_PATH is the directory that contains
     // the one `sign.db` file; DATABASE_URL is the `file:` URL Prisma / the CLI /
     // migrations open. Tenancy is enforced in-query via buildTeamWhereQuery, not

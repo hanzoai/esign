@@ -3,6 +3,7 @@ import { z } from 'zod';
 const ZOpenIdConfigurationSchema = z.object({
   authorization_endpoint: z.string(),
   token_endpoint: z.string(),
+  userinfo_endpoint: z.string(),
   scopes_supported: z.array(z.string()).optional(),
 });
 

@@ -1,8 +1,10 @@
 import { Trans } from '@lingui/react/macro';
+import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { Link } from 'react-router';
 
 import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
 import { acceptOrganisationInvitation } from '@hanzo/esign-lib/server-only/organisation/accept-organisation-invitation';
+import { isInvitedPerson } from '@hanzo/esign-lib/server-only/organisation/is-invited-person';
 import { prisma } from '@hanzo/esign-prisma';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 
@@ -32,43 +34,45 @@ export async function loader({ params, request }: Route.LoaderArgs) {
     },
   });
 
-  if (!organisationMemberInvite) {
+  if (
+    !organisationMemberInvite ||
+    organisationMemberInvite.status === OrganisationMemberInviteStatus.DECLINED
+  ) {
     return {
       state: 'InvalidLink',
     } as const;
   }
 
-  const user = await prisma.user.findFirst({
-    where: {
-      // Emails are stored lowercased (see create-user.ts); SQLite has no
-      // case-insensitive filter `mode`, so normalise the invite email instead.
-      email: organisationMemberInvite.email.toLowerCase(),
-    },
-    select: {
-      id: true,
-    },
-  });
+  const signInPath = `/signin?returnTo=${encodeURIComponent(`/organisation/invite/${token}`)}`;
 
-  // Directly convert the team member invite to a team member if they already have an account.
-  if (user) {
-    await acceptOrganisationInvitation({ token: organisationMemberInvite.token });
-  }
-
-  if (!user) {
+  // The invitation joins the person signed in, so nobody is added until the
+  // invited person is the one holding the session.
+  if (!session.user) {
     return {
       state: 'LoginRequired',
+      email: organisationMemberInvite.email,
+      organisationName: organisationMemberInvite.organisation.name,
+      signInPath,
+    } as const;
+  }
+
+  if (!isInvitedPerson(session.user, organisationMemberInvite.email)) {
+    return {
+      state: 'WrongAccount',
       email: organisationMemberInvite.email,
       organisationName: organisationMemberInvite.organisation.name,
     } as const;
   }
 
-  const isSessionUserTheInvitedUser = user.id === session.user?.id;
+  await acceptOrganisationInvitation({
+    token: organisationMemberInvite.token,
+    userId: session.user.id,
+  });
 
   return {
     state: 'Success',
     email: organisationMemberInvite.email,
     organisationName: organisationMemberInvite.organisation.name,
-    isSessionUserTheInvitedUser,
   } as const;
 }
 
@@ -83,7 +87,7 @@ export default function AcceptInvitationPage({ loaderData }: Route.ComponentProp
             <Trans>Invalid token</Trans>
           </h1>
 
-          <p className="text-muted-foreground mb-4 mt-2 text-sm">
+          <p className="mb-4 mt-2 text-sm text-muted-foreground">
             <Trans>
               This token is invalid or has expired. Please contact your team for a new invitation.
             </Trans>
@@ -106,20 +110,45 @@ export default function AcceptInvitationPage({ loaderData }: Route.ComponentProp
           <Trans>Organisation invitation</Trans>
         </h1>
 
-        <p className="text-muted-foreground mt-2 text-sm">
+        <p className="mt-2 text-sm text-muted-foreground">
           <Trans>
             You have been invited by <strong>{data.organisationName}</strong> to join their
             organisation.
           </Trans>
         </p>
 
-        <p className="text-muted-foreground mb-4 mt-1 text-sm">
-          <Trans>To accept this invitation you must create an account.</Trans>
+        <p className="mb-4 mt-1 text-sm text-muted-foreground">
+          <Trans>
+            Sign in with Hanzo as <strong>{data.email}</strong> to accept this invitation.
+          </Trans>
         </p>
 
         <Button asChild>
-          <Link to={`/signup#email=${encodeURIComponent(data.email)}`}>
-            <Trans>Create account</Trans>
+          <Link to={data.signInPath}>
+            <Trans>Sign in to accept</Trans>
+          </Link>
+        </Button>
+      </div>
+    );
+  }
+
+  if (data.state === 'WrongAccount') {
+    return (
+      <div>
+        <h1 className="text-4xl font-semibold">
+          <Trans>Organisation invitation</Trans>
+        </h1>
+
+        <p className="mb-4 mt-2 text-sm text-muted-foreground">
+          <Trans>
+            This invitation from <strong>{data.organisationName}</strong> was sent to{' '}
+            <strong>{data.email}</strong>. Sign in as that address to accept it.
+          </Trans>
+        </p>
+
+        <Button asChild>
+          <Link to="/">
+            <Trans>Return</Trans>
           </Link>
         </Button>
       </div>
@@ -132,26 +161,18 @@ export default function AcceptInvitationPage({ loaderData }: Route.ComponentProp
         <Trans>Invitation accepted!</Trans>
       </h1>
 
-      <p className="text-muted-foreground mb-4 mt-2 text-sm">
+      <p className="mb-4 mt-2 text-sm text-muted-foreground">
         <Trans>
           You have accepted an invitation from <strong>{data.organisationName}</strong> to join
           their organisation.
         </Trans>
       </p>
 
-      {data.isSessionUserTheInvitedUser ? (
-        <Button asChild>
-          <Link to="/">
-            <Trans>Continue</Trans>
-          </Link>
-        </Button>
-      ) : (
-        <Button asChild>
-          <Link to={`/signin#email=${encodeURIComponent(data.email)}`}>
-            <Trans>Continue to login</Trans>
-          </Link>
-        </Button>
-      )}
+      <Button asChild>
+        <Link to="/">
+          <Trans>Continue</Trans>
+        </Link>
+      </Button>
     </div>
   );
 }

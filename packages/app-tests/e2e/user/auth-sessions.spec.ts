@@ -11,7 +11,6 @@ test('[USER] revoke sessions', async ({ page }: { page: Page }) => {
   await apiSignin({
     page,
     email: user.email,
-    password: 'password',
     redirectPath: '/settings/security/sessions',
   });
 
@@ -24,7 +23,6 @@ test('[USER] revoke sessions', async ({ page }: { page: Page }) => {
   await apiSignin({
     page,
     email: user.email,
-    password: 'password',
     redirectPath: '/settings/security/sessions',
   });
 
@@ -33,7 +31,6 @@ test('[USER] revoke sessions', async ({ page }: { page: Page }) => {
   await apiSignin({
     page,
     email: user.email,
-    password: 'password',
     redirectPath: '/settings/security/sessions',
   });
 
@@ -54,7 +51,6 @@ test('[USER] revoke sessions', async ({ page }: { page: Page }) => {
   await apiSignin({
     page,
     email: user.email,
-    password: 'password',
     redirectPath: '/settings/security/sessions',
   });
 

@@ -96,12 +96,6 @@ services:
       - key: NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY
         generateValue: true
 
-      # Auth Optional
-      - key: NEXT_PRIVATE_GOOGLE_CLIENT_ID
-        sync: false
-      - key: NEXT_PRIVATE_GOOGLE_CLIENT_SECRET
-        sync: false
-
       # Signing
       - key: NEXT_PRIVATE_SIGNING_TRANSPORT
         sync: false

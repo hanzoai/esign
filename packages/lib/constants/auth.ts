@@ -10,23 +10,25 @@ export const IDENTITY_PROVIDER_NAME: Record<string, string> = {
   OIDC: 'OIDC',
 };
 
-export const IS_GOOGLE_SSO_ENABLED = Boolean(
-  env('NEXT_PRIVATE_GOOGLE_CLIENT_ID') && env('NEXT_PRIVATE_GOOGLE_CLIENT_SECRET'),
-);
-
-export const IS_MICROSOFT_SSO_ENABLED = Boolean(
-  env('NEXT_PRIVATE_MICROSOFT_CLIENT_ID') && env('NEXT_PRIVATE_MICROSOFT_CLIENT_SECRET'),
-);
-
-export const IS_OIDC_SSO_ENABLED = Boolean(
-  env('NEXT_PRIVATE_OIDC_WELL_KNOWN') &&
-    env('NEXT_PRIVATE_OIDC_CLIENT_ID') &&
-    env('NEXT_PRIVATE_OIDC_CLIENT_SECRET'),
-);
-
-export const OIDC_PROVIDER_LABEL = env('NEXT_PRIVATE_OIDC_PROVIDER_LABEL');
-
 export const IS_IAM_SSO_ENABLED = Boolean(env('IAM_CLIENT_ID'));
+
+/**
+ * Why a Hanzo IAM sign-in was turned away. The callback redirects to
+ * `/signin?error=<reason>` and the sign-in page says it in a sentence, so the
+ * person knows what to do next.
+ */
+export const SignInRefusal = {
+  /** IAM has not proved the address the account would be named after. */
+  UnverifiedEmail: 'unverified-email',
+  /** An account holds this address but was never linked to an IAM sign-in. */
+  UnlinkedAccount: 'unlinked-account',
+  /** Nobody invited this person and they do not administer the org. */
+  NotInvited: 'not-invited',
+  /** An admin disabled the account. */
+  Disabled: 'disabled',
+} as const;
+
+export type SignInRefusal = (typeof SignInRefusal)[keyof typeof SignInRefusal];
 
 export const USER_SECURITY_AUDIT_LOG_MAP: Record<string, string> = {
   ACCOUNT_SSO_LINK: 'Linked account to SSO',

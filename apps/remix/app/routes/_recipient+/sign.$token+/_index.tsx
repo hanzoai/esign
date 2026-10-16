@@ -321,12 +321,7 @@ const SigningPageV1 = ({ data }: { data: Awaited<ReturnType<typeof handleV1Loade
   const user = sessionData?.user;
 
   if (!data.isDocumentAccessValid) {
-    return (
-      <DocumentSigningAuthPageView
-        email={data.recipientEmail}
-        emailHasAccount={!!data.recipientHasAccount}
-      />
-    );
+    return <DocumentSigningAuthPageView email={data.recipientEmail} />;
   }
 
   const {
@@ -428,12 +423,7 @@ const SigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV2Loade
   const user = sessionData?.user;
 
   if (!data.isDocumentAccessValid) {
-    return (
-      <DocumentSigningAuthPageView
-        email={data.recipientEmail}
-        emailHasAccount={!!data.recipientHasAccount}
-      />
-    );
+    return <DocumentSigningAuthPageView email={data.recipientEmail} />;
   }
 
   const { envelope, recipientSignature, recipient } = data.envelopeForSigning;

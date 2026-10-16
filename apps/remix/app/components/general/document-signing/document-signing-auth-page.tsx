@@ -10,30 +10,20 @@ import { useToast } from '@hanzo/esign-ui/primitives/use-toast';
 
 export type DocumentSigningAuthPageViewProps = {
   email?: string;
-  emailHasAccount?: boolean;
 };
 
-export const DocumentSigningAuthPageView = ({
-  email,
-  emailHasAccount,
-}: DocumentSigningAuthPageViewProps) => {
+export const DocumentSigningAuthPageView = ({ email }: DocumentSigningAuthPageViewProps) => {
   const { _ } = useLingui();
   const { toast } = useToast();
 
   const [isSigningOut, setIsSigningOut] = useState(false);
 
-  const handleChangeAccount = async (email?: string) => {
+  const handleChangeAccount = async () => {
     try {
       setIsSigningOut(true);
 
-      let redirectPath = '/signin';
-
-      if (email) {
-        redirectPath = emailHasAccount ? `/signin#email=${email}` : `/signup#email=${email}`;
-      }
-
       await authClient.signOut({
-        redirectPath,
+        redirectPath: '/signin',
       });
     } catch {
       toast({
@@ -54,7 +44,7 @@ export const DocumentSigningAuthPageView = ({
           <Trans>Authentication required</Trans>
         </h1>
 
-        <p className="text-muted-foreground mt-2 text-sm">
+        <p className="mt-2 text-sm text-muted-foreground">
           {email ? (
             <Trans>
               You need to be logged in as <strong>{email}</strong> to view this page.
@@ -67,10 +57,10 @@ export const DocumentSigningAuthPageView = ({
         <Button
           className="mt-4 w-full"
           type="submit"
-          onClick={async () => handleChangeAccount(email)}
+          onClick={handleChangeAccount}
           loading={isSigningOut}
         >
-          {emailHasAccount ? <Trans>Login</Trans> : <Trans>Sign up</Trans>}
+          <Trans>Sign in with Hanzo</Trans>
         </Button>
       </div>
     </div>

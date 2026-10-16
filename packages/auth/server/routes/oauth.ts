@@ -2,9 +2,8 @@ import { sValidator } from '@hono/standard-validator';
 import { Hono } from 'hono';
 import { z } from 'zod';
 
-import { GoogleAuthOptions, HanzoAuthOptions, MicrosoftAuthOptions, OidcAuthOptions } from '../config';
+import { HanzoAuthOptions } from '../config';
 import { handleOAuthAuthorizeUrl } from '../lib/utils/handle-oauth-authorize-url';
-import { getOrganisationAuthenticationPortalOptions } from '../lib/utils/organisation-portal';
 import type { HonoAuthContext } from '../types/context';
 
 const ZOAuthAuthorizeSchema = z.object({
@@ -13,33 +12,7 @@ const ZOAuthAuthorizeSchema = z.object({
 
 export const oauthRoute = new Hono<HonoAuthContext>()
   /**
-   * Google authorize endpoint.
-   */
-  .post('/authorize/google', sValidator('json', ZOAuthAuthorizeSchema), async (c) => {
-    const { redirectPath } = c.req.valid('json');
-
-    return handleOAuthAuthorizeUrl({
-      c,
-      clientOptions: GoogleAuthOptions,
-      redirectPath,
-    });
-  })
-
-  /**
-   * Microsoft authorize endpoint.
-   */
-  .post('/authorize/microsoft', sValidator('json', ZOAuthAuthorizeSchema), async (c) => {
-    const { redirectPath } = c.req.valid('json');
-
-    return handleOAuthAuthorizeUrl({
-      c,
-      clientOptions: MicrosoftAuthOptions,
-      redirectPath,
-    });
-  })
-
-  /**
-   * Hanzo IAM authorize endpoint.
+   * Hanzo IAM authorize endpoint — the one way to sign in.
    */
   .post('/authorize/hanzo', sValidator('json', ZOAuthAuthorizeSchema), async (c) => {
     const { redirectPath } = c.req.valid('json');
@@ -48,35 +21,5 @@ export const oauthRoute = new Hono<HonoAuthContext>()
       c,
       clientOptions: HanzoAuthOptions,
       redirectPath,
-    });
-  })
-
-  /**
-   * OIDC authorize endpoint.
-   */
-  .post('/authorize/oidc', sValidator('json', ZOAuthAuthorizeSchema), async (c) => {
-    const { redirectPath } = c.req.valid('json');
-
-    return handleOAuthAuthorizeUrl({
-      c,
-      clientOptions: OidcAuthOptions,
-      redirectPath,
-    });
-  })
-  /**
-   * Organisation OIDC authorize endpoint.
-   */
-  .post('/authorize/oidc/org/:orgUrl', async (c) => {
-    const orgUrl = c.req.param('orgUrl');
-
-    const { clientOptions } = await getOrganisationAuthenticationPortalOptions({
-      type: 'url',
-      organisationUrl: orgUrl,
-    });
-
-    return await handleOAuthAuthorizeUrl({
-      c,
-      clientOptions,
-      prompt: 'select_account',
     });
   });

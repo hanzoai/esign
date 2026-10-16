@@ -1,24 +1,24 @@
-// esign ZAP handlers — auth router (fully ported, 7/7 procedures).
+// esign ZAP handlers — auth router: the signed-in person's passkeys.
 //
 // Verbatim tRPC procedure bodies rewired to (ctx, raw). Input is validated by
 // the SAME Zod schema the tRPC procedure used; the server-only functions are
 // reused unchanged. Routes:
 //   auth.passkey.create / createAuthenticationOptions /
-//   createRegistrationOptions / createSigninOptions / delete / find / update.
+//   createRegistrationOptions / delete / find / update.
+//
+// A passkey re-authenticates a signed-in person for an action; it is never a
+// way to sign in, which is Hanzo IAM's alone.
 import type { RegistrationResponseJSON } from '@simplewebauthn/server';
 
 import { createPasskey } from '@hanzo/esign-lib/server-only/auth/create-passkey';
 import { createPasskeyAuthenticationOptions } from '@hanzo/esign-lib/server-only/auth/create-passkey-authentication-options';
 import { createPasskeyRegistrationOptions } from '@hanzo/esign-lib/server-only/auth/create-passkey-registration-options';
-import { createPasskeySigninOptions } from '@hanzo/esign-lib/server-only/auth/create-passkey-signin-options';
 import { deletePasskey } from '@hanzo/esign-lib/server-only/auth/delete-passkey';
 import { findPasskeys } from '@hanzo/esign-lib/server-only/auth/find-passkeys';
 import { updatePasskey } from '@hanzo/esign-lib/server-only/auth/update-passkey';
-import { nanoid } from '@hanzo/esign-lib/universal/id';
 
 import { ZCreatePasskeyAuthenticationOptionsRequestSchema } from '../../../server/auth-router/create-passkey-authentication-options.types';
 import { ZCreatePasskeyRegistrationOptionsRequestSchema } from '../../../server/auth-router/create-passkey-registration-options.types';
-import { ZCreatePasskeySigninOptionsRequestSchema } from '../../../server/auth-router/create-passkey-signin-options.types';
 import { ZCreatePasskeyRequestSchema } from '../../../server/auth-router/create-passkey.types';
 import { ZDeletePasskeyRequestSchema } from '../../../server/auth-router/delete-passkey.types';
 import { ZFindPasskeysRequestSchema } from '../../../server/auth-router/find-passkeys.types';
@@ -56,21 +56,6 @@ export const authRoutes: ZapRouteMap = {
     return await createPasskeyRegistrationOptions({
       userId: ctx.user.id,
     });
-  },
-
-  'auth.passkey.createSigninOptions': async (_ctx: ZapContext, raw) => {
-    ZCreatePasskeySigninOptionsRequestSchema.parse(raw);
-
-    const sessionIdToken = nanoid(16);
-
-    const [sessionId] = decodeURI(sessionIdToken).split('|');
-
-    const options = await createPasskeySigninOptions({ sessionId });
-
-    return {
-      options,
-      sessionId,
-    };
   },
 
   'auth.passkey.delete': async (ctx: ZapContext, raw) => {

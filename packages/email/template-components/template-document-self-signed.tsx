@@ -1,8 +1,6 @@
 import { Trans } from '@lingui/react/macro';
 
-import { env } from '@hanzo/esign-lib/utils/env';
-
-import { Button, Column, Img, Link, Section, Text } from '../components';
+import { Column, Img, Section, Text } from '../components';
 import { TemplateDocumentImage } from './template-document-image';
 
 export interface TemplateDocumentSelfSignedProps {
@@ -14,10 +12,6 @@ export const TemplateDocumentSelfSigned = ({
   documentName,
   assetBaseUrl,
 }: TemplateDocumentSelfSignedProps) => {
-  const NEXT_PUBLIC_WEBAPP_URL = env('NEXT_PUBLIC_WEBAPP_URL');
-
-  const signUpUrl = `${NEXT_PUBLIC_WEBAPP_URL ?? 'http://localhost:3000'}/signup`;
-
   const getAssetUrl = (path: string) => {
     return new URL(path, assetBaseUrl).toString();
   };
@@ -42,44 +36,6 @@ export const TemplateDocumentSelfSigned = ({
         <Text className="mb-0 mt-6 text-center text-lg font-semibold text-primary">
           <Trans>You have signed “{documentName}”</Trans>
         </Text>
-
-        <Text className="mx-auto mb-6 mt-1 max-w-[80%] text-center text-base text-slate-400">
-          <Trans>
-            Create a{' '}
-            <Link
-              href={signUpUrl}
-              target="_blank"
-              className="whitespace-nowrap text-sign-700 hover:text-sign-600"
-            >
-              free account
-            </Link>{' '}
-            to access your signed documents at any time.
-          </Trans>
-        </Text>
-
-        <Section className="mb-6 mt-8 text-center">
-          <Button
-            href={signUpUrl}
-            className="mr-4 rounded-lg border border-solid border-slate-200 px-4 py-2 text-center text-sm font-medium text-black no-underline"
-          >
-            <Img
-              src={getAssetUrl('/static/user-plus.png')}
-              className="mb-0.5 mr-2 inline h-5 w-5 align-middle"
-            />
-            <Trans>Create account</Trans>
-          </Button>
-
-          <Button
-            className="rounded-lg border border-solid border-slate-200 px-4 py-2 text-center text-sm font-medium text-black no-underline"
-            href="https://esign.hanzo.ai/pricing"
-          >
-            <Img
-              src={getAssetUrl('/static/review.png')}
-              className="mb-0.5 mr-2 inline h-5 w-5 align-middle"
-            />
-            <Trans>View plans</Trans>
-          </Button>
-        </Section>
       </Section>
     </>
   );

@@ -1,8 +1,9 @@
-import { UserSecurityAuditLogType } from '@prisma/client';
+import { OrganisationMemberInviteStatus } from '@prisma/client';
 import { OAuth2Client, decodeIdToken } from 'arctic';
 import type { Context } from 'hono';
 import { deleteCookie } from 'hono/cookie';
 
+import { SignInRefusal } from '@hanzo/esign-lib/constants/auth';
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import { onCreateUserHook } from '@hanzo/esign-lib/server-only/user/create-user';
 import { deletedServiceAccountEmail } from '@hanzo/esign-lib/server-only/user/service-accounts/deleted-account';
@@ -13,6 +14,7 @@ import { prisma } from '@hanzo/esign-prisma';
 import type { OAuthClientOptions } from '../../config';
 import { AuthenticationErrorCode } from '../errors/error-codes';
 import { onAuthorize } from './authorizer';
+import { administersAppOrg, readIamPerson } from './iam-person';
 import { getOpenIdConfiguration } from './open-id';
 
 type HandleOAuthCallbackUrlOptions = {
@@ -23,103 +25,88 @@ type HandleOAuthCallbackUrlOptions = {
 export const handleOAuthCallbackUrl = async (options: HandleOAuthCallbackUrlOptions) => {
   const { c, clientOptions } = options;
 
-  const requestMeta = c.get('requestMetadata');
+  const { person, accessToken, accessTokenExpiresAt, idToken, redirectPath } = await validateOauth({
+    c,
+    clientOptions,
+  });
 
-  const { email, name, sub, accessToken, accessTokenExpiresAt, idToken, redirectPath } =
-    await validateOauth({ c, clientOptions });
+  const refuse = (reason: SignInRefusal) => c.redirect(`/signin?error=${reason}`, 302);
 
-  if (
-    email.toLowerCase() === legacyServiceAccountEmail() ||
-    email.toLowerCase() === deletedServiceAccountEmail()
-  ) {
+  const email = person.email.toLowerCase();
+
+  if (email === legacyServiceAccountEmail() || email === deletedServiceAccountEmail()) {
     return c.text('FORBIDDEN', 403);
   }
 
-  // Find the account if possible.
+  if (!person.emailVerified) {
+    return refuse(SignInRefusal.UnverifiedEmail);
+  }
+
+  // An account is found by the IAM identity it is linked to, and by nothing else.
   const existingAccount = await prisma.account.findFirst({
     where: {
       provider: clientOptions.id,
-      providerAccountId: sub,
+      providerAccountId: person.sub,
     },
     include: {
       user: {
         select: {
           id: true,
+          disabled: true,
         },
       },
     },
   });
 
-  // Directly log in user if account already exists.
   if (existingAccount) {
+    if (existingAccount.user.disabled) {
+      return refuse(SignInRefusal.Disabled);
+    }
+
     await onAuthorize({ userId: existingAccount.user.id }, c);
 
     return c.redirect(redirectPath, 302);
   }
 
+  // An address is not an identity: an account that holds this address but was
+  // never linked to this IAM identity is not handed to whoever signs in with it.
   const userWithSameEmail = await prisma.user.findFirst({
     where: {
-      email: email,
+      email,
     },
     select: {
       id: true,
-      emailVerified: true,
     },
   });
 
-  // Handle existing user but no account.
   if (userWithSameEmail) {
-    await prisma.$transaction(async (tx) => {
-      await tx.account.create({
-        data: {
-          type: 'oauth',
-          provider: clientOptions.id,
-          providerAccountId: sub,
-          access_token: accessToken,
-          expires_at: Math.floor(accessTokenExpiresAt.getTime() / 1000),
-          token_type: 'Bearer',
-          id_token: idToken,
-          userId: userWithSameEmail.id,
-        },
-      });
-
-      // Log link event.
-      await tx.userSecurityAuditLog.create({
-        data: {
-          userId: userWithSameEmail.id,
-          ipAddress: requestMeta.ipAddress,
-          userAgent: requestMeta.userAgent,
-          type: UserSecurityAuditLogType.ACCOUNT_SSO_LINK,
-        },
-      });
-
-      // If account already exists in an unverified state, remove the password to ensure
-      // they cannot sign in since we cannot confirm the password was set by the user.
-      if (!userWithSameEmail.emailVerified) {
-        await tx.user.update({
-          where: {
-            id: userWithSameEmail.id,
-          },
-          data: {
-            emailVerified: new Date(),
-            password: null,
-            // Todo: (RR7) Will need to update the "password" account after the migration.
-          },
-        });
-      }
-    });
-
-    await onAuthorize({ userId: userWithSameEmail.id }, c);
-
-    return c.redirect(redirectPath, 302);
+    return refuse(SignInRefusal.UnlinkedAccount);
   }
 
-  // Handle new user.
+  // A first sign-in makes an account only for someone who was asked in: an admin
+  // of the org this application serves, or a person an organisation invited at
+  // this verified address.
+  const invited =
+    administersAppOrg(person) ||
+    (await prisma.organisationMemberInvite.findFirst({
+      where: {
+        email,
+        status: OrganisationMemberInviteStatus.PENDING,
+      },
+      select: {
+        id: true,
+      },
+    })) !== null;
+
+  if (!invited) {
+    return refuse(SignInRefusal.NotInvited);
+  }
+
   const createdUser = await prisma.$transaction(async (tx) => {
     const user = await tx.user.create({
       data: {
-        email: email,
-        name: name,
+        email,
+        name: person.name,
         emailVerified: new Date(),
       },
     });
@@ -128,7 +115,7 @@ export const handleOAuthCallbackUrl = async (options: HandleOAuthCallbackUrlOpti
       data: {
         type: 'oauth',
         provider: clientOptions.id,
-        providerAccountId: sub,
+        providerAccountId: person.sub,
         access_token: accessToken,
         expires_at: Math.floor(accessTokenExpiresAt.getTime() / 1000),
         token_type: 'Bearer',
@@ -141,7 +128,6 @@ export const handleOAuthCallbackUrl = async (options: HandleOAuthCallbackUrlOpti
   });
 
   await onCreateUserHook(createdUser).catch((err) => {
-    // Todo: (RR7) Add logging.
     console.error(err);
   });
 
@@ -157,9 +143,12 @@ export const validateOauth = async (options: HandleOAuthCallbackUrlOptions) => {
     throw new AppError(AppErrorCode.NOT_SETUP);
   }
 
-  const { token_endpoint } = await getOpenIdConfiguration(clientOptions.wellKnownUrl, {
-    requiredScopes: clientOptions.scope,
-  });
+  const { token_endpoint, userinfo_endpoint } = await getOpenIdConfiguration(
+    clientOptions.wellKnownUrl,
+    {
+      requiredScopes: clientOptions.scope,
+    },
+  );
 
   const oAuthClient = new OAuth2Client(
     clientOptions.clientId,
@@ -204,40 +193,30 @@ export const validateOauth = async (options: HandleOAuthCallbackUrlOptions) => {
   const idToken = tokens.idToken();
 
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  const claims = decodeIdToken(tokens.idToken()) as Record<string, unknown>;
+  const claims = decodeIdToken(idToken) as Record<string, unknown>;
 
-  const email = claims.email;
-  const name = claims.name;
-  const sub = claims.sub;
-
-  if (typeof email !== 'string') {
-    throw new AppError(AuthenticationErrorCode.InvalidRequest, {
-      message: 'Missing email',
-    });
-  }
-
-  if (typeof name !== 'string') {
-    throw new AppError(AuthenticationErrorCode.InvalidRequest, {
-      message: 'Missing name',
-    });
-  }
-
-  if (typeof sub !== 'string') {
+  if (typeof claims.sub !== 'string' || claims.sub === '') {
     throw new AppError(AuthenticationErrorCode.InvalidRequest, {
       message: 'Missing sub claim',
     });
   }
 
-  if (claims.email_verified !== true && !clientOptions.bypassEmailVerification) {
-    throw new AppError(AuthenticationErrorCode.UnverifiedEmail, {
-      message: 'Account email is not verified',
+  const response = await fetch(userinfo_endpoint, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    signal: AbortSignal.timeout(8_000),
+  });
+
+  if (!response.ok) {
+    throw new AppError(AuthenticationErrorCode.Unauthorized, {
+      message: `The identity provider refused the userinfo request: ${response.status}`,
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  const info = (await response.json()) as Record<string, unknown>;
+
   return {
-    email,
-    name,
-    sub,
+    person: readIamPerson(info, claims.sub),
     accessToken,
     accessTokenExpiresAt,
     idToken,

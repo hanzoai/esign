@@ -13,7 +13,6 @@ import { Button } from '@hanzo/esign-ui/primitives/button';
 import { AppBanner } from '~/components/general/app-banner';
 import { Header } from '~/components/general/app-header';
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
-import { VerifyEmailBanner } from '~/components/general/verify-email-banner';
 import { TeamProvider } from '~/providers/team';
 
 import type { Route } from './+types/_layout';
@@ -109,8 +108,6 @@ export default function Layout({ loaderData, params, matches }: Route.ComponentP
   return (
     <OrganisationProvider organisation={currentOrganisation}>
       <TeamProvider team={currentTeam || null}>
-        {!user.emailVerified && <VerifyEmailBanner email={user.email} />}
-
         {banner && !hideHeader && <AppBanner banner={banner} />}
 
         {!hideHeader && <Header />}

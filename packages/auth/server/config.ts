@@ -13,41 +13,14 @@ export type OAuthClientOptions = {
   clientSecret: string;
   wellKnownUrl: string;
   redirectUrl: string;
-  bypassEmailVerification?: boolean;
-};
-
-export const GoogleAuthOptions: OAuthClientOptions = {
-  id: 'google',
-  scope: ['openid', 'email', 'profile'],
-  clientId: env('NEXT_PRIVATE_GOOGLE_CLIENT_ID') ?? '',
-  clientSecret: env('NEXT_PRIVATE_GOOGLE_CLIENT_SECRET') ?? '',
-  redirectUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/v1/auth/callback/google`,
-  wellKnownUrl: 'https://accounts.google.com/.well-known/openid-configuration',
-  bypassEmailVerification: false,
-};
-
-export const MicrosoftAuthOptions: OAuthClientOptions = {
-  id: 'microsoft',
-  scope: ['openid', 'email', 'profile'],
-  clientId: env('NEXT_PRIVATE_MICROSOFT_CLIENT_ID') ?? '',
-  clientSecret: env('NEXT_PRIVATE_MICROSOFT_CLIENT_SECRET') ?? '',
-  redirectUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/v1/auth/callback/microsoft`,
-  wellKnownUrl: 'https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration',
-  bypassEmailVerification: false,
-};
-
-export const OidcAuthOptions: OAuthClientOptions = {
-  id: 'oidc',
-  scope: ['openid', 'email', 'profile'],
-  clientId: env('NEXT_PRIVATE_OIDC_CLIENT_ID') ?? '',
-  clientSecret: env('NEXT_PRIVATE_OIDC_CLIENT_SECRET') ?? '',
-  redirectUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/v1/auth/callback/oidc`,
-  wellKnownUrl: env('NEXT_PRIVATE_OIDC_WELL_KNOWN') ?? '',
-  bypassEmailVerification: env('NEXT_PRIVATE_OIDC_SKIP_VERIFY') === 'true',
 };
 
 const iamUrl = env('IAM_URL') ?? 'https://hanzo.id';
 
+/**
+ * Hanzo IAM is the one way into the app. A person signs in at IAM, and the
+ * account they arrive with is IAM's answer, read from its userinfo endpoint.
+ */
 export const HanzoAuthOptions: OAuthClientOptions = {
   id: 'hanzo',
   scope: ['openid', 'email', 'profile'],
@@ -55,5 +28,4 @@ export const HanzoAuthOptions: OAuthClientOptions = {
   clientSecret: env('IAM_CLIENT_SECRET') ?? '',
   redirectUrl: `${NEXT_PUBLIC_WEBAPP_URL()}/auth/callback`,
   wellKnownUrl: `${iamUrl}/.well-known/openid-configuration`,
-  bypassEmailVerification: true,
 };

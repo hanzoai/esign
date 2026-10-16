@@ -223,7 +223,7 @@ const DirectSigningPageV2 = ({ data }: { data: Awaited<ReturnType<typeof handleV
   const user = sessionData?.user;
 
   if (!data.isDocumentAccessValid) {
-    return <DocumentSigningAuthPageView email={''} emailHasAccount={true} />;
+    return <DocumentSigningAuthPageView email={''} />;
   }
 
   const { envelope, recipient } = data.envelopeForSigning;

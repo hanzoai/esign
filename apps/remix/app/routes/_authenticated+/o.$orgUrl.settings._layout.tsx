@@ -1,13 +1,6 @@
 import { msg } from '@lingui/core/macro';
 import { Trans, useLingui } from '@lingui/react/macro';
-import {
-  Building2Icon,
-  GroupIcon,
-  MailboxIcon,
-  Settings2Icon,
-  ShieldCheckIcon,
-  Users2Icon,
-} from 'lucide-react';
+import { Building2Icon, GroupIcon, MailboxIcon, Settings2Icon, Users2Icon } from 'lucide-react';
 import { FaUsers } from 'react-icons/fa6';
 import { Link, NavLink, Outlet } from 'react-router';
 
@@ -75,11 +68,6 @@ export default function SettingsLayout() {
       path: `/o/${organisation.url}/settings/groups`,
       label: t`Groups`,
       icon: GroupIcon,
-    },
-    {
-      path: `/o/${organisation.url}/settings/sso`,
-      label: t`SSO`,
-      icon: ShieldCheckIcon,
     },
   ];
 

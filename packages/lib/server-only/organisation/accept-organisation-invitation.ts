@@ -6,13 +6,25 @@ import { prisma } from '@hanzo/esign-prisma';
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { jobs } from '../../jobs/client';
 import { generateDatabaseId } from '../../universal/id';
+import { isInvitedPerson } from './is-invited-person';
 
 export type AcceptOrganisationInvitationOptions = {
   token: string;
+  /** The signed-in person accepting. The invitation must name them. */
+  userId: number;
 };
 
+/**
+ * Accept an organisation invitation as the signed-in person it was sent to.
+ *
+ * The token proves the invitation was received; it does not say who received
+ * it. So the invitation joins the person holding the session, and only when that
+ * person's verified address is the address it was sent to. Holding the link is
+ * never enough to put somebody else into the organisation.
+ */
 export const acceptOrganisationInvitation = async ({
   token,
+  userId,
 }: AcceptOrganisationInvitationOptions) => {
   const organisationMemberInvite = await prisma.organisationMemberInvite.findFirst({
     where: {
@@ -40,18 +52,24 @@ export const acceptOrganisationInvitation = async ({
 
   const user = await prisma.user.findFirst({
     where: {
-      // Emails are stored lowercased (see create-user.ts); SQLite has no
-      // case-insensitive filter `mode`, so normalise the invite email instead.
-      email: organisationMemberInvite.email.toLowerCase(),
+      id: userId,
     },
     select: {
       id: true,
+      email: true,
+      emailVerified: true,
     },
   });
 
   if (!user) {
     throw new AppError(AppErrorCode.NOT_FOUND, {
-      message: 'User must exist to accept an organisation invitation',
+      message: 'Sign in to accept an organisation invitation',
+    });
+  }
+
+  if (!isInvitedPerson(user, organisationMemberInvite.email)) {
+    throw new AppError(AppErrorCode.UNAUTHORIZED, {
+      message: 'This invitation was sent to a different address',
     });
   }
 

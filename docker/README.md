@@ -209,8 +209,6 @@ Here's a markdown table documenting all the provided environment variables:
 | `NEXT_PRIVATE_AUTH_SECRET`                                              | The secret key used by NextAuth.js for encryption and signing.                                      |
 | `NEXT_PRIVATE_ENCRYPTION_KEY`                                  | The primary encryption key for symmetric encryption and decryption (at least 32 characters).        |
 | `NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY`                        | The secondary encryption key for symmetric encryption and decryption (at least 32 characters).      |
-| `NEXT_PRIVATE_GOOGLE_CLIENT_ID`                                | The Google client ID for Google authentication (optional).                                          |
-| `NEXT_PRIVATE_GOOGLE_CLIENT_SECRET`                            | The Google client secret for Google authentication (optional).                                      |
 | `NEXT_PUBLIC_WEBAPP_URL`                                       | The URL for the web application.                                                                    |
 | `BASE_PATH`                                                    | Root directory for per-tenant SQLite (Hanzo Base). Each org gets `${BASE_PATH}/${orgId}/sign.db`.   |
 | `DATABASE_URL`                                                 | SQLite file URL for the default (CLI / migration) database, e.g. `file:${BASE_PATH}/_dev/sign.db`.  |
