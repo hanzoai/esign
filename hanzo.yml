@@ -35,7 +35,9 @@ test:
     run: |
       set -euo pipefail
       node scripts/lint-paths.mjs
-      npm ci --no-audit --no-fund
+      # The gate runs no browser, and the runner's shared Playwright cache is not
+      # ours to write, so the browser packages install without downloading one.
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --no-audit --no-fund
       npx tsx --test packages/auth/__tests__/*.test.ts packages/lib/__tests__/*.test.ts packages/prisma/__tests__/iam-only-migration.test.ts
       npm run lint:tx
       npx turbo run build --filter=@hanzo/esign-remix
