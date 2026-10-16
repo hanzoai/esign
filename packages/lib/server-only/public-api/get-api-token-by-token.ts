@@ -1,8 +1,9 @@
 import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
-import { apiTokenIsCurrent } from '../../utils/iam-sign-in';
+import { credentialIsCurrent } from '../../utils/iam-sign-in';
 import { hashString } from '../auth/hash';
+import { readStanding } from '../user/standing';
 
 export const getApiTokenByToken = async ({ token }: { token: string }) => {
   const hashedToken = hashString(token);
@@ -68,9 +69,12 @@ export const getApiTokenByToken = async ({ token }: { token: string }) => {
     });
   }
 
-  // A token minted under the old sign-in rules, or held by a disabled user, is
-  // not honoured.
-  if (!apiTokenIsCurrent({ createdAt: apiToken.createdAt, disabled: user.disabled })) {
+  // A token works only while its holder's credentials are current: linked to
+  // Hanzo IAM, not disabled, and admitted. A team token's holder is the
+  // organisation's owner.
+  const standing = await readStanding(user.id);
+
+  if (!standing || !credentialIsCurrent(standing)) {
     throw new AppError(AppErrorCode.UNAUTHORIZED, {
       message: 'Invalid token',
       statusCode: 401,

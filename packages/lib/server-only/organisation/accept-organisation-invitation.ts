@@ -6,6 +6,7 @@ import { prisma } from '@hanzo/esign-prisma';
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { jobs } from '../../jobs/client';
 import { generateDatabaseId } from '../../universal/id';
+import { vouches } from '../../utils/iam-sign-in';
 import { isInvitedPerson } from './is-invited-person';
 
 export type AcceptOrganisationInvitationOptions = {
@@ -20,7 +21,10 @@ export type AcceptOrganisationInvitationOptions = {
  * The token proves the invitation was received; it does not say who received
  * it. So the invitation joins the person holding the session, and only when that
  * person's verified address is the address it was sent to. Holding the link is
- * never enough to put somebody else into the organisation.
+ * never enough to put somebody else into the organisation. And it is accepted
+ * only while its sender vouches for it (`vouches`: an ADMIN, not disabled) — the
+ * same rule that lets it admit its invitee — and the membership records that
+ * sender as the member's inviter.
  */
 export const acceptOrganisationInvitation = async ({
   token,
@@ -39,11 +43,24 @@ export const acceptOrganisationInvitation = async ({
           groups: true,
         },
       },
+      inviter: {
+        select: {
+          roles: true,
+          disabled: true,
+        },
+      },
     },
   });
 
   if (!organisationMemberInvite) {
     throw new AppError(AppErrorCode.NOT_FOUND);
+  }
+
+  if (!vouches(organisationMemberInvite.inviter)) {
+    throw new AppError(AppErrorCode.UNAUTHORIZED, {
+      message: 'This invitation is no longer valid; ask an admin to invite you again',
+      statusCode: 403,
+    });
   }
 
   if (organisationMemberInvite.status === OrganisationMemberInviteStatus.ACCEPTED) {
@@ -91,6 +108,7 @@ export const acceptOrganisationInvitation = async ({
     organisationId: organisation.id,
     organisationGroups: organisation.groups,
     organisationMemberRole: organisationMemberInvite.organisationRole,
+    invitedById: organisationMemberInvite.inviterId,
   });
 
   await prisma.organisationMemberInvite.update({
@@ -108,12 +126,15 @@ export const addUserToOrganisation = async ({
   organisationId,
   organisationGroups,
   organisationMemberRole,
+  invitedById = null,
   bypassEmail = false,
 }: {
   userId: number;
   organisationId: string;
   organisationGroups: OrganisationGroup[];
   organisationMemberRole: OrganisationMemberRole;
+  /** The sender of the invitation this membership comes from. */
+  invitedById?: number | null;
   bypassEmail?: boolean;
 }) => {
   const organisationGroupToUse = organisationGroups.find(
@@ -135,6 +156,7 @@ export const addUserToOrganisation = async ({
           id: generateDatabaseId('member'),
           userId,
           organisationId,
+          invitedById,
           organisationGroupMembers: {
             create: {
               id: generateDatabaseId('group_member'),

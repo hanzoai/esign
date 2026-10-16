@@ -4,7 +4,8 @@ import { decodeJwt, jwtVerify } from 'jose';
 import { prisma } from '@hanzo/esign-prisma';
 
 import { AppError, AppErrorCode } from '../../errors/app-error';
-import { apiTokenIsCurrent } from '../../utils/iam-sign-in';
+import { credentialIsCurrent } from '../../utils/iam-sign-in';
+import { readStanding } from '../user/standing';
 
 export type VerifyEmbeddingPresignTokenOptions = {
   token: string;
@@ -67,7 +68,6 @@ export const verifyEmbeddingPresignToken = async ({
           id: true,
           name: true,
           email: true,
-          disabled: true,
         },
       },
     },
@@ -79,9 +79,9 @@ export const verifyEmbeddingPresignToken = async ({
     });
   }
 
-  if (
-    !apiTokenIsCurrent({ createdAt: apiToken.createdAt, disabled: apiToken.user?.disabled ?? true })
-  ) {
+  const standing = apiToken.userId ? await readStanding(apiToken.userId) : null;
+
+  if (!standing || !credentialIsCurrent(standing)) {
     throw new AppError(AppErrorCode.UNAUTHORIZED, {
       message: 'Invalid presign token: API token not found',
     });

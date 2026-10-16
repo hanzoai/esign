@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 
 import { authClient } from '@hanzo/esign-auth/client';
+import { IAM_PROVIDER } from '@hanzo/esign-lib/constants/auth';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 import type { DataTableColumnDef } from '@hanzo/esign-ui/primitives/data-table';
 import { DataTable } from '@hanzo/esign-ui/primitives/data-table';
@@ -58,7 +59,7 @@ export default function SettingsSecurityLinkedAccounts() {
         id: 'actions',
         // The Hanzo link is how this account signs in, so it has no unlink.
         cell: ({ row }) =>
-          row.original.provider === 'hanzo' ? null : (
+          row.original.provider === IAM_PROVIDER ? null : (
             <AccountUnlinkDialog
               accountId={row.original.id}
               provider={row.original.provider}

@@ -3,11 +3,12 @@ import { encodeBase32LowerCaseNoPadding, encodeHexLowerCase } from '@oslojs/enco
 import { type Session, type User, UserSecurityAuditLogType } from '@prisma/client';
 
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
+import { readStanding } from '@hanzo/esign-lib/server-only/user/standing';
 import type { RequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
-import { sessionIsCurrent } from '@hanzo/esign-lib/utils/iam-sign-in';
+import { credentialIsCurrent } from '@hanzo/esign-lib/utils/iam-sign-in';
 import { prisma } from '@hanzo/esign-prisma';
 
-import { AUTH_SESSION_LIFETIME, HanzoAuthOptions } from '../../config';
+import { AUTH_SESSION_LIFETIME } from '../../config';
 
 /**
  * The user object to pass around the app.
@@ -81,11 +82,10 @@ export const createSession = async (
 /**
  * The session a token names, or none.
  *
- * A session is honoured only while it is current (`sessionIsCurrent`): issued
- * under IAM-only sign-in, to a user who is not disabled and whose account is
- * linked to a Hanzo IAM identity. It lives for AUTH_SESSION_LIFETIME from the
- * IAM sign-in that made it and is never extended, so a person IAM no longer
- * admits is out within that lifetime.
+ * A session is honoured only while its holder's credentials are current
+ * (`credentialIsCurrent`): linked to a Hanzo IAM identity, not disabled, and
+ * admitted under the one admission rule. It lives for AUTH_SESSION_LIFETIME
+ * from the IAM sign-in that made it and is never extended.
  */
 export const validateSessionToken = async (token: string): Promise<SessionValidationResult> => {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
@@ -108,16 +108,6 @@ export const validateSessionToken = async (token: string): Promise<SessionValida
           twoFactorEnabled: true,
           roles: true,
           signature: true,
-          disabled: true,
-          accounts: {
-            where: {
-              provider: HanzoAuthOptions.id,
-            },
-            select: {
-              id: true,
-            },
-            take: 1,
-          },
         },
       },
     },
@@ -127,17 +117,16 @@ export const validateSessionToken = async (token: string): Promise<SessionValida
     return { session: null, user: null, isAuthenticated: false };
   }
 
-  const { user: holder, ...session } = result;
-  const { disabled, accounts, ...user } = holder;
+  const { user, ...session } = result;
 
   if (Date.now() >= session.expiresAt.getTime()) {
     await prisma.session.delete({ where: { id: sessionId } });
     return { session: null, user: null, isAuthenticated: false };
   }
 
-  if (
-    !sessionIsCurrent({ createdAt: session.createdAt, disabled, linkedToIam: accounts.length > 0 })
-  ) {
+  const standing = await readStanding(user.id);
+
+  if (!standing || !credentialIsCurrent(standing)) {
     // deleteMany: two requests on one refused session both reach this line.
     await prisma.session.deleteMany({ where: { id: sessionId } });
     return { session: null, user: null, isAuthenticated: false };

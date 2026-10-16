@@ -5,6 +5,7 @@ import { Form, Link } from 'react-router';
 import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
 import { acceptOrganisationInvitation } from '@hanzo/esign-lib/server-only/organisation/accept-organisation-invitation';
 import { isInvitedPerson } from '@hanzo/esign-lib/server-only/organisation/is-invited-person';
+import { vouches } from '@hanzo/esign-lib/utils/iam-sign-in';
 import { prisma } from '@hanzo/esign-prisma';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 
@@ -32,12 +33,20 @@ const readInvitation = async (request: Request, token: string | undefined) => {
           name: true,
         },
       },
+      inviter: {
+        select: {
+          roles: true,
+          disabled: true,
+        },
+      },
     },
   });
 
+  // An invitation its sender no longer vouches for is as good as withdrawn.
   if (
     !organisationMemberInvite ||
-    organisationMemberInvite.status === OrganisationMemberInviteStatus.DECLINED
+    organisationMemberInvite.status === OrganisationMemberInviteStatus.DECLINED ||
+    !vouches(organisationMemberInvite.inviter)
   ) {
     return { state: 'InvalidLink' } as const;
   }

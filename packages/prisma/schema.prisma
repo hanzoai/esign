@@ -68,6 +68,7 @@ model User {
   ownedOrganisations Organisation[]
   organisationMember OrganisationMember[]
   invitationsSent    OrganisationMemberInvite[] @relation("OrganisationMemberInviteInviter")
+  membersInvited     OrganisationMember[]       @relation("OrganisationMemberInvitedBy")
 
   twoFactorSecret      String?
   twoFactorEnabled     Boolean @default(false)
@@ -745,6 +746,11 @@ model OrganisationMember {
 
   organisationGroupMembers OrganisationGroupMember[]
 
+  // Who invited this member: the sender of the invitation they accepted. A
+  // membership admits its holder only while that sender holds ADMIN.
+  invitedById Int?
+  invitedBy   User? @relation("OrganisationMemberInvitedBy", fields: [invitedById], references: [id], onDelete: SetNull)
+
   @@unique([userId, organisationId])
   @@index([organisationId])
 }
@@ -762,8 +768,8 @@ model OrganisationMemberInvite {
   organisation     Organisation           @relation(fields: [organisationId], references: [id], onDelete: Cascade)
   organisationRole OrganisationMemberRole
 
-  // Who sent the invitation. A pending invitation makes an account on its
-  // invitee's first Hanzo IAM sign-in only while its sender holds ADMIN.
+  // Who sent the invitation. A pending invitation admits its invitee, and may
+  // be accepted, only while its sender holds ADMIN.
   inviterId Int?
   inviter   User? @relation("OrganisationMemberInviteInviter", fields: [inviterId], references: [id], onDelete: SetNull)
 }

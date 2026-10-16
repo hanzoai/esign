@@ -1,32 +1,52 @@
 /**
- * The instant esign began admitting people through Hanzo IAM alone — the time
- * of the commit that made it so.
+ * Who esign admits, and what keeps working for them.
  *
- * Every session, API token and organisation invitation created before it was
- * issued under the old sign-in rules (local passwords, other providers, and
- * invitations any account could send). None of them is honoured: everyone
- * signs in again through IAM, integrations mint new tokens, and an invitation
- * from before it makes no account.
+ * ONE RULE, applied on every Hanzo IAM sign-in and on every use of a session or
+ * API token: a person is admitted when IAM says they administer the org the
+ * application serves (held as the ADMIN role, restated at each sign-in), or
+ * when an ADMIN vouches for them — through an organisation membership that came
+ * from that ADMIN's invitation, or through such an invitation still pending for
+ * their verified address.
+ *
+ * The cutoff is structural. Migration 1_iam_only_sign_in deletes every session
+ * and API token, and adds the columns that record who sent an invitation and
+ * who invited a member, NULL for every row from before it. A NULL sender vouches
+ * for nobody, so nothing issued under the old sign-in rules admits anyone.
  */
-export const IAM_ONLY_SINCE = new Date('2026-10-16T09:51:53Z');
 
-/** Whether something created at `createdAt` was issued under IAM-only sign-in. */
-export const issuedUnderIamOnly = (createdAt: Date): boolean =>
-  createdAt.getTime() >= IAM_ONLY_SINCE.getTime();
+/** The sender of an invitation, or the inviter of a member; null before the cutoff. */
+export type Voucher = { roles: readonly string[]; disabled: boolean } | null;
 
-/**
- * Whether a session may still be used: issued under IAM-only sign-in, to a user
- * who is not disabled and whose account is linked to a Hanzo IAM identity.
- */
-export const sessionIsCurrent = (facts: {
-  createdAt: Date;
+/** Whether an invitation's sender vouches for its invitee: an ADMIN who is not disabled. */
+export const vouches = (voucher: Voucher): boolean =>
+  voucher !== null && !voucher.disabled && voucher.roles.includes('ADMIN');
+
+/** What admission is decided from. */
+export type Admission = {
+  /** IAM says the person administers the app's org (or ADMIN, recorded at sign-in). */
+  iamAdmin: boolean;
+  /** A membership whose inviter vouches for them. */
+  vouchedMembership: boolean;
+  /** A pending invitation to their verified address whose sender vouches for them. */
+  vouchedInvite: boolean;
+};
+
+/** The one admission rule. */
+export const isAdmitted = (admission: Admission): boolean =>
+  admission.iamAdmin || admission.vouchedMembership || admission.vouchedInvite;
+
+/** A user as the store holds them, for deciding whether their credentials still work. */
+export type Standing = {
   disabled: boolean;
+  /** The account is linked to a Hanzo IAM identity. */
   linkedToIam: boolean;
-}): boolean => issuedUnderIamOnly(facts.createdAt) && !facts.disabled && facts.linkedToIam;
+  admission: Admission;
+};
 
 /**
- * Whether an API token may still be used: issued under IAM-only sign-in, to a
- * user who is not disabled.
+ * Whether a session or API token held by this user may be used: they are linked
+ * to IAM, not disabled, and admitted. For a team token the holder is the
+ * organisation's owner.
  */
-export const apiTokenIsCurrent = (facts: { createdAt: Date; disabled: boolean }): boolean =>
-  issuedUnderIamOnly(facts.createdAt) && !facts.disabled;
+export const credentialIsCurrent = (standing: Standing): boolean =>
+  standing.linkedToIam && !standing.disabled && isAdmitted(standing.admission);

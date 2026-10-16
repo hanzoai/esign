@@ -2,7 +2,7 @@ import type { Role } from '@prisma/client';
 
 import { SignInRefusal } from '@hanzo/esign-lib/constants/auth';
 import { AppError } from '@hanzo/esign-lib/errors/app-error';
-import { issuedUnderIamOnly } from '@hanzo/esign-lib/utils/iam-sign-in';
+import { isAdmitted } from '@hanzo/esign-lib/utils/iam-sign-in';
 
 import { AuthenticationErrorCode } from '../errors/error-codes';
 
@@ -93,13 +93,6 @@ export const rolesFor = (person: IamPerson, current: readonly Role[]): Role[] =>
   return administersAppOrg(person) ? ['USER', 'ADMIN', ...rest] : ['USER', ...rest];
 };
 
-/** A pending invitation to the address IAM signed in, with its sender's standing. */
-export type PendingInvite = {
-  createdAt: Date;
-  /** The sender holds ADMIN and is not disabled. */
-  inviterIsAdmin: boolean;
-};
-
 export type SignInDecision =
   | { kind: 'sign-in'; userId: number }
   | { kind: 'create' }
@@ -109,26 +102,38 @@ export type SignInDecision =
  * What an IAM sign-in leads to, decided from what IAM said and what the store
  * holds.
  *
- * A returning person is found by the IAM identity their account is linked to,
- * and is let in unless an admin disabled them; IAM has already authenticated
- * them, so their address is not asked about again. Everything else is a first
- * sign-in, which makes an account only for someone who was asked in — an admin
- * of the org the application serves, or a person an ADMIN invited under
- * IAM-only sign-in — and only at an address IAM has verified that no unlinked
- * account already holds.
+ * Every sign-in, returning or first, passes the one admission rule
+ * (`isAdmitted`): IAM says the person administers the app's org, or an ADMIN
+ * vouches for them through a membership or a pending invitation to their
+ * verified address. A returning person is found by the IAM identity their
+ * account is linked to; a disabled one is refused. A first sign-in also needs
+ * an address IAM has verified that no unlinked account already holds.
  */
 export const decideSignIn = (facts: {
   person: IamPerson;
   linked: { id: number; disabled: boolean } | null;
   addressHeldByUnlinkedAccount: boolean;
-  invites: PendingInvite[];
+  /** The linked account holds a membership whose inviter vouches for it. */
+  vouchedMembership: boolean;
+  /** A pending invitation to the address IAM signed in, whose sender vouches for it. */
+  vouchedInvite: boolean;
 }): SignInDecision => {
   const { person, linked } = facts;
 
+  const admitted = isAdmitted({
+    iamAdmin: administersAppOrg(person),
+    vouchedMembership: linked !== null && facts.vouchedMembership,
+    vouchedInvite: person.emailVerified && facts.vouchedInvite,
+  });
+
   if (linked) {
-    return linked.disabled
-      ? { kind: 'refuse', reason: SignInRefusal.Disabled }
-      : { kind: 'sign-in', userId: linked.id };
+    if (linked.disabled) {
+      return { kind: 'refuse', reason: SignInRefusal.Disabled };
+    }
+
+    return admitted
+      ? { kind: 'sign-in', userId: linked.id }
+      : { kind: 'refuse', reason: SignInRefusal.NotInvited };
   }
 
   if (!person.emailVerified) {
@@ -139,13 +144,5 @@ export const decideSignIn = (facts: {
     return { kind: 'refuse', reason: SignInRefusal.UnlinkedAccount };
   }
 
-  const invited = facts.invites.some(
-    (invite) => invite.inviterIsAdmin && issuedUnderIamOnly(invite.createdAt),
-  );
-
-  if (administersAppOrg(person) || invited) {
-    return { kind: 'create' };
-  }
-
-  return { kind: 'refuse', reason: SignInRefusal.NotInvited };
+  return admitted ? { kind: 'create' } : { kind: 'refuse', reason: SignInRefusal.NotInvited };
 };

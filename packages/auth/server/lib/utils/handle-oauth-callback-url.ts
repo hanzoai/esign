@@ -7,7 +7,7 @@ import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import { onCreateUserHook } from '@hanzo/esign-lib/server-only/user/create-user';
 import { deletedServiceAccountEmail } from '@hanzo/esign-lib/server-only/user/service-accounts/deleted-account';
 import { legacyServiceAccountEmail } from '@hanzo/esign-lib/server-only/user/service-accounts/legacy-service-account';
-import { isAdmin } from '@hanzo/esign-lib/utils/is-admin';
+import { vouches } from '@hanzo/esign-lib/utils/iam-sign-in';
 import { isValidReturnTo, normalizeReturnTo } from '@hanzo/esign-lib/utils/is-valid-return-to';
 import { prisma } from '@hanzo/esign-prisma';
 
@@ -36,6 +36,8 @@ export const handleOAuthCallbackUrl = async (options: HandleOAuthCallbackUrlOpti
     return c.text('FORBIDDEN', 403);
   }
 
+  const voucher = { select: { roles: true, disabled: true } } as const;
+
   const linked = await prisma.account.findFirst({
     where: {
       provider: clientOptions.id,
@@ -47,46 +49,46 @@ export const handleOAuthCallbackUrl = async (options: HandleOAuthCallbackUrlOpti
           id: true,
           disabled: true,
           roles: true,
+          organisationMember: {
+            select: {
+              invitedBy: voucher,
+            },
+          },
         },
       },
     },
   });
 
-  // The store is asked only what a first sign-in needs to know.
   const addressHeldByUnlinkedAccount =
     !linked && (await prisma.user.count({ where: { email } })) > 0;
 
-  const invites = linked
-    ? []
-    : await prisma.organisationMemberInvite.findMany({
-        where: {
-          email,
-          status: OrganisationMemberInviteStatus.PENDING,
-        },
-        select: {
-          createdAt: true,
-          inviter: {
-            select: {
-              roles: true,
-              disabled: true,
-            },
-          },
-        },
-      });
+  const invites = await prisma.organisationMemberInvite.findMany({
+    where: {
+      email,
+      status: OrganisationMemberInviteStatus.PENDING,
+    },
+    select: {
+      inviter: voucher,
+    },
+  });
 
   const decision = decideSignIn({
     person,
     linked: linked ? { id: linked.user.id, disabled: linked.user.disabled } : null,
     addressHeldByUnlinkedAccount,
-    invites: invites.map((invite) => ({
-      createdAt: invite.createdAt,
-      inviterIsAdmin: Boolean(
-        invite.inviter && !invite.inviter.disabled && isAdmin(invite.inviter),
-      ),
-    })),
+    vouchedMembership: Boolean(
+      linked?.user.organisationMember.some((member) => vouches(member.invitedBy)),
+    ),
+    vouchedInvite: invites.some((invite) => vouches(invite.inviter)),
   });
 
   if (decision.kind === 'refuse') {
+    // An account that fails admission keeps nothing that would let it back in.
+    if (linked) {
+      await prisma.session.deleteMany({ where: { userId: linked.user.id } });
+      await prisma.apiToken.deleteMany({ where: { userId: linked.user.id } });
+    }
+
     return c.redirect(`/signin?error=${decision.reason}`, 302);
   }
 

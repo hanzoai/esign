@@ -1,4 +1,5 @@
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
+import { IAM_PROVIDER } from '@hanzo/esign-lib/constants/auth';
 import { env } from '@hanzo/esign-lib/utils/env';
 
 /**
@@ -22,7 +23,7 @@ const iamUrl = env('IAM_URL') ?? 'https://hanzo.id';
  * account they arrive with is IAM's answer, read from its userinfo endpoint.
  */
 export const HanzoAuthOptions: OAuthClientOptions = {
-  id: 'hanzo',
+  id: IAM_PROVIDER,
   scope: ['openid', 'email', 'profile'],
   clientId: env('IAM_CLIENT_ID') ?? '',
   clientSecret: env('IAM_CLIENT_SECRET') ?? '',

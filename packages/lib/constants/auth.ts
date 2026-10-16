@@ -12,6 +12,9 @@ export const IDENTITY_PROVIDER_NAME: Record<string, string> = {
 
 export const IS_IAM_SSO_ENABLED = Boolean(env('IAM_CLIENT_ID'));
 
+/** The Account.provider of a Hanzo IAM link — the one way to sign in. */
+export const IAM_PROVIDER = 'hanzo';
+
 /**
  * Why a Hanzo IAM sign-in was turned away. The callback redirects to
  * `/signin?error=<reason>` and the sign-in page says it in a sentence, so the

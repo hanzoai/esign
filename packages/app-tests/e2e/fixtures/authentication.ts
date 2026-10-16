@@ -2,7 +2,7 @@ import type { Page } from '@playwright/test';
 import { createHash, createHmac, randomBytes } from 'node:crypto';
 
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
-import { formatSecureCookieName } from '@hanzo/esign-lib/constants/auth';
+import { IAM_PROVIDER, formatSecureCookieName } from '@hanzo/esign-lib/constants/auth';
 import { prisma } from '@hanzo/esign-prisma';
 
 type LoginOptions = {
@@ -20,8 +20,9 @@ type LoginOptions = {
  *
  * The app signs people in through Hanzo IAM only, and a test cannot drive IAM.
  * So the suite starts the session the way a completed IAM sign-in leaves it: the
- * user's IAM link, a Session row, and the signed `sessionId` cookie that names
- * it, signed with the app's own NEXT_PRIVATE_AUTH_SECRET exactly as hono signs it.
+ * user's IAM link and admission, a Session row, and the signed `sessionId`
+ * cookie that names it, signed with the app's own NEXT_PRIVATE_AUTH_SECRET
+ * exactly as hono signs it.
  */
 export const apiSignin = async ({
   page,
@@ -41,17 +42,46 @@ export const apiSignin = async ({
   await prisma.account.upsert({
     where: {
       provider_providerAccountId: {
-        provider: 'hanzo',
+        provider: IAM_PROVIDER,
         providerAccountId: `e2e-${user.id}`,
       },
     },
     create: {
       userId: user.id,
       type: 'oauth',
-      provider: 'hanzo',
+      provider: IAM_PROVIDER,
       providerAccountId: `e2e-${user.id}`,
     },
     update: {},
+  });
+
+  // And only for an admitted user: an ADMIN, or someone an ADMIN vouches for.
+  // A seeded user who is not ADMIN is vouched for through their memberships by
+  // one ADMIN that exists for the suite.
+  const voucher = await prisma.user.upsert({
+    where: {
+      email: 'e2e-voucher@esign.hanzo.ai',
+    },
+    create: {
+      email: 'e2e-voucher@esign.hanzo.ai',
+      name: 'E2E voucher',
+      emailVerified: new Date(),
+      roles: ['USER', 'ADMIN'],
+    },
+    update: {},
+    select: {
+      id: true,
+    },
+  });
+
+  await prisma.organisationMember.updateMany({
+    where: {
+      userId: user.id,
+      invitedById: null,
+    },
+    data: {
+      invitedById: voucher.id,
+    },
   });
 
   const token = randomBytes(20).toString('hex');
