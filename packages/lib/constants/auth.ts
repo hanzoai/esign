@@ -61,8 +61,11 @@ export const PASSKEY_TIMEOUT = 60000;
  */
 export const MAXIMUM_PASSKEYS = 50;
 
-export const useSecureCookies =
-  env('NODE_ENV') === 'production' && String(NEXT_PUBLIC_WEBAPP_URL()).startsWith('https://');
+/**
+ * Cookies are Secure whenever the app is served over https; only a plain-http
+ * development server sets them without it.
+ */
+export const useSecureCookies = String(NEXT_PUBLIC_WEBAPP_URL()).startsWith('https://');
 
 const secureCookiePrefix = useSecureCookies ? '__Secure-' : '';
 

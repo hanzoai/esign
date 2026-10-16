@@ -27,12 +27,13 @@ const getAuthSecret = () => {
 };
 
 /**
- * Generic auth session cookie options.
+ * Generic auth session cookie options. SameSite=Lax: the session rides top-level
+ * navigation (the return from IAM included) and no cross-site subrequest.
  */
 export const sessionCookieOptions = {
   httpOnly: true,
   path: '/',
-  sameSite: useSecureCookies ? 'none' : 'lax',
+  sameSite: 'lax',
   secure: useSecureCookies,
   domain: getCookieDomain(),
   expires: new Date(Date.now() + AUTH_SESSION_LIFETIME),

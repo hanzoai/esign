@@ -8,13 +8,15 @@
 //
 // Auth semantics are byte-identical to the tRPC middleware:
 //   - "Authorization: [Bearer] <token>"  → getApiTokenByToken, auth:'api'
-//   - else session cookie                 → getOptionalSession,  auth:'session'
+//   - else session cookie                 → getOptionalSession,  auth:'session',
+//     only when Origin is the app's own
 // The same getApiTokenByToken + session validation functions are reused, so
 // there is no second auth code path.
 import type { MintCap } from '@zap-proto/web/server';
 import type { IncomingMessage } from 'node:http';
 
 import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
+import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
 import { getApiTokenByToken } from '@hanzo/esign-lib/server-only/public-api/get-api-token-by-token';
 import { extractRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
 import { alphaid } from '@hanzo/esign-lib/universal/id';
@@ -85,7 +87,11 @@ export function makeMintCap(source: 'app' | 'apiV1' | 'apiV2' = 'app'): MintCap<
       };
     }
 
-    // Session-cookie auth.
+    // Session-cookie auth, for the app's own pages only. The browser attaches
+    // the cookie to every request to this host, whichever site started it;
+    // Origin names that site, and a session acts only for this one.
+    if (req.headers.origin !== new URL(NEXT_PUBLIC_WEBAPP_URL()).origin) return null;
+
     const { session, user } = await getOptionalSession(fetchReq).catch(() => ({
       session: null,
       user: null,
