@@ -268,7 +268,7 @@ export const EnvelopeImportMenu = ({ type, folderId }: EnvelopeImportMenuProps) 
                       <FormControl>
                         <Input
                           type="url"
-                          placeholder="https://github.com/hanzoai/sign/blob/main/terms.pdf"
+                          placeholder="https://github.com/hanzoai/esign/blob/main/terms.pdf"
                           {...field}
                         />
                       </FormControl>

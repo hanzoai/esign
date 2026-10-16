@@ -5,7 +5,7 @@ name: hanzo-sign-production
 # row-level org/team scoping in the app, not a per-file split.
 services:
   hanzo-sign:
-    image: hanzo-sign/hanzo-sign:latest
+    image: ghcr.io/hanzoai/esign:latest
     environment:
       - PORT=${PORT:-3000}
       - NEXT_PRIVATE_AUTH_SECRET=${NEXT_PRIVATE_AUTH_SECRET:?err}

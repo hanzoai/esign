@@ -22,7 +22,7 @@ printf "🐳 Self-hosting guide: https://docs.esign.hanzo.ai/developers/self-hos
 printf "🔐 Certificate setup: https://docs.esign.hanzo.ai/developers/self-hosting/signing-certificate\n"
 printf "🏥 Health check: http://localhost:3000/v1/health\n"
 printf "📊 Certificate status: http://localhost:3000/v1/certificate-status\n"
-printf "👥 Community: https://github.com/hanzo-sign/hanzo-sign\n\n"
+printf "👥 Community: https://github.com/hanzoai/esign\n\n"
 
 printf "🗄️  Running database migrations...\n"
 # The replicate sidecar streams the SQLite WAL concurrently, so the first

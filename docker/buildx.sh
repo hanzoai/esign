@@ -47,15 +47,15 @@ else
     echo "Using default repositories: dockerhub and ghcr.io"
     
     # Add tags for both default repositories
-    docker tag "hanzo-sign-base" "hanzo-sign/hanzo-sign:latest"
-    docker tag "hanzo-sign-base" "hanzo-sign/hanzo-sign:$GIT_SHA"
-    docker tag "hanzo-sign-base" "ghcr.io/hanzo-sign/hanzo-sign:latest"
-    docker tag "hanzo-sign-base" "ghcr.io/hanzo-sign/hanzo-sign:$GIT_SHA"
+    docker tag "hanzo-sign-base" "ghcr.io/hanzoai/esign:latest"
+    docker tag "hanzo-sign-base" "ghcr.io/hanzoai/esign:$GIT_SHA"
+    docker tag "hanzo-sign-base" "ghcr.io/hanzoai/esign:latest"
+    docker tag "hanzo-sign-base" "ghcr.io/hanzoai/esign:$GIT_SHA"
 
     # Add version tags if available
     if [ ! -z "$APP_VERSION" ] && [ "$APP_VERSION" != "undefined" ]; then
-        docker tag "hanzo-sign-base" "hanzo-sign/hanzo-sign:$APP_VERSION"
-        docker tag "hanzo-sign-base" "ghcr.io/hanzo-sign/hanzo-sign:$APP_VERSION"
+        docker tag "hanzo-sign-base" "ghcr.io/hanzoai/esign:$APP_VERSION"
+        docker tag "hanzo-sign-base" "ghcr.io/hanzoai/esign:$APP_VERSION"
     fi
 fi
 

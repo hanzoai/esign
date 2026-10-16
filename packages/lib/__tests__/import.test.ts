@@ -113,20 +113,20 @@ describe('import url policy', () => {
 
   test('a GitHub page URL is read as the file it shows', () => {
     assert.equal(
-      parseUrl('https://github.com/hanzoai/sign/blob/main/docs/terms.pdf').toString(),
-      'https://raw.githubusercontent.com/hanzoai/sign/main/docs/terms.pdf',
+      parseUrl('https://github.com/hanzoai/esign/blob/main/docs/terms.pdf').toString(),
+      'https://raw.githubusercontent.com/hanzoai/esign/main/docs/terms.pdf',
     );
 
     assert.equal(
-      parseUrl('https://github.com/hanzoai/sign/raw/v1.2.3/a/b/terms.pdf').toString(),
-      'https://raw.githubusercontent.com/hanzoai/sign/v1.2.3/a/b/terms.pdf',
+      parseUrl('https://github.com/hanzoai/esign/raw/v1.2.3/a/b/terms.pdf').toString(),
+      'https://raw.githubusercontent.com/hanzoai/esign/v1.2.3/a/b/terms.pdf',
     );
 
     // A repo page carries no file, so it is left alone and answers as HTML —
     // which the PDF check then refuses.
     assert.equal(
-      parseUrl('https://github.com/hanzoai/sign').toString(),
-      'https://github.com/hanzoai/sign',
+      parseUrl('https://github.com/hanzoai/esign').toString(),
+      'https://github.com/hanzoai/esign',
     );
   });
 });

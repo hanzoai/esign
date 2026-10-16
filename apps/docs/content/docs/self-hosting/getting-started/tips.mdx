@@ -22,7 +22,7 @@ Mount your `.p12` certificate file into the container at the default path:
 docker run -d \
   -v /path/to/your/cert.p12:/opt/hanzo-sign/cert.p12:ro \
   -e NEXT_PRIVATE_SIGNING_PASSPHRASE="your-certificate-password" \
-  hanzo-sign/hanzo-sign:latest
+  ghcr.io/hanzoai/esign:latest
 ```
 
 The default certificate path inside the container is `/opt/hanzo-sign/cert.p12`. You can change this with `NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH`.
@@ -92,10 +92,10 @@ Use a specific version tag in production:
 
 ```bash
 # Good — predictable, reproducible
-docker pull hanzo-sign/hanzo-sign:1.8.0
+docker pull ghcr.io/hanzoai/esign:1.8.0
 
 # Risky — may pull breaking changes
-docker pull hanzo-sign/hanzo-sign:latest
+docker pull ghcr.io/hanzoai/esign:latest
 ```
 
 Check the [GitHub releases](https://github.com/hanzoai/esign/releases) page for available versions.

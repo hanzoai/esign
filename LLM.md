@@ -101,7 +101,7 @@ Postgres. This replaces the standalone esign pod.
 - `goja/bundle.js` — the ported domain: documents, recipients, fields, the
   signing flow/state machine, audit trail and completion. Exposes
   `globalThis.handle({route,method,params,body,tenant})`. It carries LOGIC only.
-- `embed.go` / `go.mod` — a std-lib-only Go module (`github.com/hanzoai/sign`,
+- `embed.go` / `go.mod` — a std-lib-only Go module (`github.com/hanzoai/esign`,
   `Bundle()`) that cloud imports to `go:embed` the bundle.
 - `goja/README.md` — the host contract. It runs on the reusable
   `hanzoai/cloud/clients/gojabase` RW-Base host: persistence (`globalThis.__db`,

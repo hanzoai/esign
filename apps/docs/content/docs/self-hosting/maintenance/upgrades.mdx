@@ -68,7 +68,7 @@ kubectl get deployment hanzo-sign -n hanzo-sign -o jsonpath='{.spec.template.spe
 View available releases on GitHub:
 
 ```bash
-curl -s https://api.github.com/repos/hanzo-sign/hanzo-sign/releases/latest | grep tag_name
+curl -s https://api.github.com/repos/hanzoai/esign/releases/latest | grep tag_name
 ```
 
 Or visit the [releases page](https://github.com/hanzoai/esign/releases).
@@ -81,7 +81,7 @@ List available image tags:
 <Tab value="DockerHub">
 
 ```bash
-curl -s https://hub.docker.com/v2/repositories/hanzo-sign/hanzo-sign/tags | jq -r '.results[].name'
+gh api /orgs/hanzoai/packages/container/esign/versions --jq '.[].metadata.container.tags[]'
 ```
 
 </Tab>
@@ -165,7 +165,7 @@ See [Backups](/docs/self-hosting/maintenance/backups) for automated backup strat
 ### Pull the new image
 
 ```bash
-docker pull hanzo-sign/hanzo-sign:1.6.0
+docker pull ghcr.io/hanzoai/esign:1.6.0
 ```
 
 Replace `1.6.0` with your target version.
@@ -189,7 +189,7 @@ docker run -d \
   -p 3000:3000 \
   --env-file .env \
   -v /path/to/cert.p12:/opt/hanzo-sign/cert.p12:ro \
-  hanzo-sign/hanzo-sign:1.6.0
+  ghcr.io/hanzoai/esign:1.6.0
 ```
 
 </Step>
@@ -223,7 +223,7 @@ Edit `compose.yml` or your `.env` file to specify the new version:
 ```yaml
 services:
   hanzo-sign:
-    image: hanzo-sign/hanzo-sign:1.6.0
+    image: ghcr.io/hanzoai/esign:1.6.0
 ```
 
 Or if using environment variable substitution:
@@ -237,7 +237,7 @@ SIGN_VERSION=1.6.0
 # In compose.yml
 services:
   hanzo-sign:
-    image: hanzo-sign/hanzo-sign:${SIGN_VERSION:-latest}
+    image: ghcr.io/hanzoai/esign:${SIGN_VERSION:-latest}
 ```
 
 </Step>
@@ -283,7 +283,7 @@ Edit the deployment directly:
 
 ```bash
 kubectl set image deployment/hanzo-sign \
-  hanzo-sign=hanzo-sign/hanzo-sign:1.6.0 \
+  hanzo-sign=ghcr.io/hanzoai/esign:1.6.0 \
   -n hanzo-sign
 ```
 
@@ -295,7 +295,7 @@ spec:
     spec:
       containers:
         - name: hanzo-sign
-          image: hanzo-sign/hanzo-sign:1.6.0
+          image: ghcr.io/hanzoai/esign:1.6.0
 ```
 
 Then apply:
@@ -421,12 +421,12 @@ To run migrations manually before upgrading:
 
 ```bash
 # Pull the new image
-docker pull hanzo-sign/hanzo-sign:1.6.0
+docker pull ghcr.io/hanzoai/esign:1.6.0
 
 # Run migrations only
 docker run --rm \
   -e NEXT_PRIVATE_DATABASE_URL="postgresql://user:password@host:5432/hanzo-sign" \
-  hanzo-sign/hanzo-sign:1.6.0 \
+  ghcr.io/hanzoai/esign:1.6.0 \
   npx prisma migrate deploy
 ```
 
@@ -490,7 +490,7 @@ Compare your current environment with the latest example:
 
 ```bash
 # Download latest example
-curl -O https://raw.githubusercontent.com/hanzo-sign/hanzo-sign/main/.env.example
+curl -O https://raw.githubusercontent.com/hanzoai/esign/main/.env.example
 
 # Compare with your current config
 diff .env .env.example
@@ -516,7 +516,7 @@ docker run -d \
   -p 3000:3000 \
   --env-file .env \
   -v /path/to/cert.p12:/opt/hanzo-sign/cert.p12:ro \
-  hanzo-sign/hanzo-sign:1.5.0
+  ghcr.io/hanzoai/esign:1.5.0
 ```
 
 </Tab>

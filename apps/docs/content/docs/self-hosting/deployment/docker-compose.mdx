@@ -35,7 +35,7 @@ Download the production Docker Compose file:
 
 ```bash
 mkdir hanzo-sign && cd hanzo-sign
-curl -O https://raw.githubusercontent.com/hanzo-sign/hanzo-sign/release/docker/production/compose.yml
+curl -O https://raw.githubusercontent.com/hanzoai/esign/release/docker/production/compose.yml
 ```
 
 Alternatively, clone the full repository:
@@ -78,7 +78,7 @@ name: hanzo-sign-production
 
 services:
   hanzo-sign:
-    image: hanzo-sign/hanzo-sign:latest
+    image: ghcr.io/hanzoai/esign:latest
     environment:
       - BASE_PATH=/opt/hanzo-sign/base/data
       - DATABASE_URL=file:/opt/hanzo-sign/base/data/_dev/sign.db

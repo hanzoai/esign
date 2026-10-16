@@ -13,7 +13,7 @@ Before you begin, ensure that you have the following installed:
 
 This setup includes a PostgreSQL database and the Hanzo eSign application. You will need to provide your own SMTP details via environment variables.
 
-1. Download the Docker Compose file from the Hanzo eSign repository: [compose.yml](https://raw.githubusercontent.com/hanzo-sign/hanzo-sign/release/docker/production/compose.yml)
+1. Download the Docker Compose file from the Hanzo eSign repository: [compose.yml](https://raw.githubusercontent.com/hanzoai/esign/release/docker/production/compose.yml)
 2. Navigate to the directory containing the `compose.yml` file.
 3. Create a `.env` file in the same directory and add your SMTP details as well as a few extra environment variables, following the example below:
 
@@ -95,13 +95,13 @@ If you prefer to host the Hanzo eSign application on your container provider of 
 1. Pull the Hanzo eSign Docker image:
 
 ```
-docker pull hanzo-sign/hanzo-sign
+docker pull ghcr.io/hanzoai/esign
 ```
 
 Or, if using GitHub's Package Registry:
 
 ```
-docker pull ghcr.io/hanzo-sign/hanzo-sign
+docker pull ghcr.io/hanzoai/esign
 ```
 
 2. Run the Docker container, providing the necessary environment variables for your database and SMTP host:
@@ -122,7 +122,7 @@ docker run -d \
   -e NEXT_PRIVATE_SIGNING_PASSPHRASE="<your-certificate-password>" \
   -v /path/to/your/cert.p12:/opt/hanzo-sign/cert.p12:ro \
   -v hanzo-sign_base:/opt/hanzo-sign/base/data \
-  hanzo-sign/hanzo-sign
+  ghcr.io/hanzoai/esign
 ```
 
 Replace the placeholders with your actual database and SMTP details.

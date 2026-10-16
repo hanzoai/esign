@@ -23,9 +23,9 @@
 
 <p align="center">
    <a href="https://esign.hanzo.ai/discord"><img src="https://img.shields.io/badge/Discord-esign.hanzo.ai/discord-%235865F2" alt="Join Hanzo eSign on Discord"></a>
-   <a href="https://github.com/hanzoai/esign/stargazers"><img src="https://img.shields.io/github/stars/hanzo-sign/hanzo-sign" alt="Github Stars"></a>
+   <a href="https://github.com/hanzoai/esign/stargazers"><img src="https://img.shields.io/github/stars/hanzoai/esign" alt="Github Stars"></a>
    <a href="https://github.com/hanzoai/esign/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-AGPLv3-purple" alt="License"></a>
-   <a href="https://github.com/hanzoai/esign/pulse"><img src="https://img.shields.io/github/commit-activity/m/hanzo-sign/hanzo-sign" alt="Commits-per-month"></a>
+   <a href="https://github.com/hanzoai/esign/pulse"><img src="https://img.shields.io/github/commit-activity/m/hanzoai/esign" alt="Commits-per-month"></a>
    <a href="https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/hanzoai/esign">
    <img alt="open in devcontainer" src="https://img.shields.io/static/v1?label=Dev%20Containers&message=Enabled&color=blue&logo=visualstudiocode" />
    </a>
@@ -203,10 +203,9 @@ If you're a visual learner and prefer to watch a video walkthrough of setting up
 
 ## Docker
 
-We provide a Docker container for Hanzo eSign, which is published on both DockerHub and GitHub Container Registry.
+We provide a Docker container for Hanzo eSign, which is published on the GitHub Container Registry.
 
-- DockerHub: [https://hub.docker.com/r/hanzo-sign/hanzo-sign](https://hub.docker.com/r/hanzo-sign/hanzo-sign)
-- GitHub Container Registry: [https://ghcr.io/hanzo-sign/hanzo-sign](https://ghcr.io/hanzo-sign/hanzo-sign)
+- GitHub Container Registry: [https://ghcr.io/hanzoai/esign](https://github.com/hanzoai/esign/pkgs/container/esign)
 
 You can pull the Docker image from either of these registries and run it with your preferred container hosting provider.
 

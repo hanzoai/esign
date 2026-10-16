@@ -1,7 +1,7 @@
 # General Issues
-Contact: https://github.com/hanzo-sign/hanzo-sign/issues/new?assignees=&labels=bug&projects=&template=bug-report.yml
+Contact: https://github.com/hanzoai/esign/issues/new?assignees=&labels=bug&projects=&template=bug-report.yml
 
 # Report critical issues privately to let us take appropriate action before publishing.
 Contact: mailto:security@sign.hanzo.ai
 Preferred-Languages: en
-Canonical: https://sign.hanzo.ai/.well-known/security.txt
+Canonical: https://esign.hanzo.ai/.well-known/security.txt

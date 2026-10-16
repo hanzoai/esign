@@ -2,9 +2,9 @@
 #
 # GitHub runs .github/workflows/cicd.yml (hanzoai/ci build.yml@v2) against this
 # file on every push to main, tag v* and pull request. `test:` gates; `images:`
-# builds docker/Dockerfile and publishes ghcr.io/hanzoai/sign as
+# builds docker/Dockerfile and publishes ghcr.io/hanzoai/esign as
 # sha-<short7>-amd64 plus the semver the pin in hanzoai/universe
-# (charts/app/values/hanzo/sign.yaml) names.
+# (charts/app/values/hanzo/esign.yaml) names.
 #
 # The gate is the real build of the app the cluster runs: npm ci against the
 # committed lockfile (postinstall generates the Prisma client), then turbo's
@@ -21,7 +21,7 @@
 # with a green build. See packages/eslint-config/transaction.cjs.
 
 # The image series. bin/imgver publishes max(this, the highest semver already on
-# ghcr.io/hanzoai/sign) plus a patch, and exactly this when it is the higher. It
+# ghcr.io/hanzoai/esign) plus a patch, and exactly this when it is the higher. It
 # is stated here because package.json carries 2.7.1, the upstream Documenso
 # release, which is not this image's series.
 version: 0.2.0
@@ -46,6 +46,6 @@ images:
   - name: sign
     context: .
     dockerfile: docker/Dockerfile
-    repo: ghcr.io/hanzoai/sign
+    repo: ghcr.io/hanzoai/esign
     # One architecture: the live image and its pin are amd64.
     platforms: [linux/amd64]

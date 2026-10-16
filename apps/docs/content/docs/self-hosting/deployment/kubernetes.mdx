@@ -224,7 +224,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: hanzo-sign
-          image: hanzo-sign/hanzo-sign:latest
+          image: ghcr.io/hanzoai/esign:latest
           imagePullPolicy: Always
           ports:
             - name: http
@@ -286,7 +286,7 @@ spec:
 ```
 
 <Callout type="info">
-  Pin to a specific image tag (e.g., `hanzo-sign/hanzo-sign:1.5.0`) in production instead of `latest`
+  Pin to a specific image tag (e.g., `ghcr.io/hanzoai/esign:1.5.0`) in production instead of `latest`
   to ensure predictable deployments.
 </Callout>
 
@@ -681,7 +681,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: hanzo-sign
-          image: hanzo-sign/hanzo-sign:latest
+          image: ghcr.io/hanzoai/esign:latest
           ports:
             - name: http
               containerPort: 3000
