@@ -5,7 +5,6 @@ import { Trans } from '@lingui/react/macro';
 import { ReadStatus } from '@prisma/client';
 import { Link } from 'react-router';
 
-import LogoImage from '@hanzo/esign-assets/logo.png';
 import { authClient } from '@hanzo/esign-auth/client';
 import { useSession } from '@hanzo/esign-lib/client-only/providers/session';
 import { isPersonalLayout } from '@hanzo/esign-lib/utils/organisations';
@@ -14,6 +13,8 @@ import { useZapQuery } from '@hanzo/esign-trpc/zap/react';
 import { Sheet, SheetContent } from '@hanzo/esign-ui/primitives/sheet';
 import { ThemeSwitcher } from '@hanzo/esign-ui/primitives/theme-switcher';
 
+import { companyName } from '~/components/branding/brand';
+import { BrandingLogo } from '~/components/general/branding-logo';
 import { useOptionalCurrentTeam } from '~/providers/team';
 
 export type AppNavMobileProps = {
@@ -85,14 +86,8 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
   return (
     <Sheet open={isMenuOpen} onOpenChange={onMenuOpenChange}>
       <SheetContent className="flex w-full max-w-[350px] flex-col">
-        <Link to="/" onClick={handleMenuItemClick}>
-          <img
-            src={LogoImage}
-            alt="Hanzo Sign Logo"
-            className="dark:invert"
-            width={170}
-            height={25}
-          />
+        <Link to="/" onClick={handleMenuItemClick} className="self-start">
+          <BrandingLogo className="text-[19px]" />
         </Link>
 
         <div className="mt-8 flex w-full flex-col items-start gap-y-4">
@@ -126,7 +121,7 @@ export const AppNavMobile = ({ isMenuOpen, onMenuOpenChange }: AppNavMobileProps
           </div>
 
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Hanzo
+            © {new Date().getFullYear()} {companyName()}
             <br />
             <Trans>All rights reserved.</Trans>
           </p>

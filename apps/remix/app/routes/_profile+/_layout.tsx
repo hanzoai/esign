@@ -1,17 +1,13 @@
-import { useEffect, useState } from 'react';
-
 import { msg } from '@lingui/core/macro';
 import { Trans } from '@lingui/react/macro';
 import { ChevronLeft } from 'lucide-react';
 import { Link, Outlet, isRouteErrorResponse } from 'react-router';
 
-import LogoIcon from '@hanzo/esign-assets/logo_icon.png';
 import { useOptionalSession } from '@hanzo/esign-lib/client-only/providers/session';
-import { cn } from '@hanzo/esign-ui/lib/utils';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 
-import { Header as AuthenticatedHeader } from '~/components/general/app-header';
-import { BrandingLogo } from '~/components/general/branding-logo';
+import { AppFooter } from '~/components/general/app-footer';
+import { Header as AuthenticatedHeader, PublicHeader } from '~/components/general/app-header';
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
 import { appMetaTags } from '~/utils/meta';
 
@@ -24,51 +20,15 @@ export function meta() {
 export default function PublicProfileLayout() {
   const { sessionData } = useOptionalSession();
 
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', onScroll);
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <div className="min-h-screen">
-      {sessionData ? (
-        <AuthenticatedHeader />
-      ) : (
-        <header
-          className={cn(
-            'supports-backdrop-blur:bg-background/60 sticky top-0 z-[60] flex h-16 w-full items-center border-b border-b-transparent bg-background/95 backdrop-blur duration-200',
-            scrollY > 5 && 'border-b-border',
-          )}
-        >
-          <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between gap-x-4 px-4 md:px-8">
-            <Link
-              to="/"
-              className="rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:inline"
-            >
-              <BrandingLogo className="hidden h-6 w-auto sm:block" />
+    <div className="flex min-h-screen flex-col">
+      {sessionData ? <AuthenticatedHeader /> : <PublicHeader />}
 
-              <img
-                src={LogoIcon}
-                alt="Hanzo Sign Logo"
-                width={48}
-                height={48}
-                className="h-10 w-auto sm:hidden dark:invert"
-              />
-            </Link>
-          </div>
-        </header>
-      )}
-
-      <main className="my-8 px-4 md:my-12 md:px-8">
+      <main className="my-8 flex-1 px-4 md:my-12 md:px-8">
         <Outlet />
       </main>
+
+      <AppFooter />
     </div>
   );
 }

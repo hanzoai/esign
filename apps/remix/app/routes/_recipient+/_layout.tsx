@@ -3,10 +3,10 @@ import { ChevronLeft } from 'lucide-react';
 import { Link, Outlet, isRouteErrorResponse } from 'react-router';
 
 import { useOptionalSession } from '@hanzo/esign-lib/client-only/providers/session';
-import { cn } from '@hanzo/esign-ui/lib/utils';
 import { Button } from '@hanzo/esign-ui/primitives/button';
 
-import { Header as AuthenticatedHeader } from '~/components/general/app-header';
+import { AppFooter } from '~/components/general/app-footer';
+import { Header as AuthenticatedHeader, PublicHeader } from '~/components/general/app-header';
 import { GenericErrorLayout } from '~/components/general/generic-error-layout';
 
 import type { Route } from './+types/_layout';
@@ -20,24 +20,32 @@ import type { Route } from './+types/_layout';
 export default function RecipientLayout({ matches }: Route.ComponentProps) {
   const { sessionData } = useOptionalSession();
 
-  // Hide the header for signing routes.
+  // Hide the header and footer for signing routes: the signer draws its own bar.
   const hideHeader = matches.some(
     (match) =>
       match?.id === 'routes/_recipient+/sign.$token+/_index' ||
       match?.id === 'routes/_recipient+/d.$token+/_index',
   );
 
-  return (
-    <div className="min-h-screen">
-      {!hideHeader && sessionData?.user && <AuthenticatedHeader />}
+  if (hideHeader) {
+    return (
+      <div className="min-h-screen">
+        <main>
+          <Outlet />
+        </main>
+      </div>
+    );
+  }
 
-      <main
-        className={cn({
-          'mb-8 mt-8 px-4 md:mb-12 md:mt-12 md:px-8': !hideHeader,
-        })}
-      >
+  return (
+    <div className="flex min-h-screen flex-col">
+      {sessionData?.user ? <AuthenticatedHeader /> : <PublicHeader />}
+
+      <main className="mb-8 mt-8 flex-1 px-4 md:mb-12 md:mt-12 md:px-8">
         <Outlet />
       </main>
+
+      <AppFooter />
     </div>
   );
 }

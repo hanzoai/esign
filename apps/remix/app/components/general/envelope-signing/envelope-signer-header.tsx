@@ -19,7 +19,6 @@ import { EnvelopeDownloadDialog } from '~/components/dialogs/envelope-download-d
 import { useEmbedSigningContext } from '~/components/embed/embed-signing-context';
 import { BrandingLogo } from '~/components/general/branding-logo';
 
-import { BrandingLogoIcon } from '../branding-logo-icon';
 import { DocumentSigningRejectDialog } from '../document-signing/document-signing-reject-dialog';
 import { useRequiredEnvelopeSigningContext } from '../document-signing/envelope-signing-provider';
 import { EnvelopeSignerCompleteDialog } from './envelope-signing-complete-dialog';
@@ -31,9 +30,9 @@ export const EnvelopeSignerHeader = () => {
   const isEmbedSigning = useEmbedSigningContext() !== null;
 
   return (
-    <nav className="embed--DocumentWidgetHeader max-w-screen flex flex-row justify-between border-b border-border bg-background px-4 py-3 md:px-6">
+    <nav className="embed--DocumentWidgetHeader max-w-screen flex h-16 flex-row items-center justify-between border-b border-border bg-background px-4 md:px-6">
       {/* Left side - Logo and title */}
-      <div className="flex min-w-0 flex-1 items-center space-x-2 md:w-auto md:flex-none">
+      <div className="flex min-w-0 flex-1 items-center space-x-3 md:w-auto md:flex-none">
         {!isEmbedSigning && (
           <Link to="/" className="flex-shrink-0">
             {envelopeData.settings.brandingEnabled && envelopeData.settings.brandingLogo ? (
@@ -43,22 +42,19 @@ export const EnvelopeSignerHeader = () => {
                 className="h-6 w-auto"
               />
             ) : (
-              <>
-                <BrandingLogo className="hidden h-6 w-auto md:block" />
-                <BrandingLogoIcon className="h-6 w-auto md:hidden" />
-              </>
+              <BrandingLogo className="text-base md:text-[19px]" />
             )}
           </Link>
         )}
 
+        {!isEmbedSigning && <Separator orientation="vertical" className="h-6" />}
+
         <h1
           title={envelope.title}
-          className="min-w-0 truncate text-base font-semibold text-foreground md:hidden"
+          className="min-w-0 truncate text-sm font-medium text-foreground md:hidden"
         >
           {envelope.title}
         </h1>
-
-        {!isEmbedSigning && <Separator orientation="vertical" className="hidden h-6 md:block" />}
 
         <div className="hidden items-center space-x-2 md:flex">
           <h1 className="whitespace-nowrap text-sm font-medium text-foreground">

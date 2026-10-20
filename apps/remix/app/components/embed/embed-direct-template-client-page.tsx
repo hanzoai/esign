@@ -20,6 +20,7 @@ import { useThrottleFn } from '@hanzo/esign-lib/client-only/hooks/use-throttle-f
 import { DEFAULT_DOCUMENT_DATE_FORMAT } from '@hanzo/esign-lib/constants/date-formats';
 import { PDF_VIEWER_PAGE_SELECTOR } from '@hanzo/esign-lib/constants/pdf-viewer';
 import { DEFAULT_DOCUMENT_TIME_ZONE } from '@hanzo/esign-lib/constants/time-zones';
+import type { TCreateDocumentFromDirectTemplateResponse } from '@hanzo/esign-lib/server-only/template/create-document-from-direct-template';
 import { ZDirectTemplateEmbedDataSchema } from '@hanzo/esign-lib/types/embed-direct-template-schema';
 import {
   isFieldUnsignedAndRequired,
@@ -27,7 +28,6 @@ import {
 } from '@hanzo/esign-lib/utils/advanced-fields-helpers';
 import { getDocumentDataUrlForPdfViewer } from '@hanzo/esign-lib/utils/envelope-download';
 import { sortFieldsByPosition, validateFieldsInserted } from '@hanzo/esign-lib/utils/fields';
-import type { TCreateDocumentFromDirectTemplateResponse } from '@hanzo/esign-lib/server-only/template/create-document-from-direct-template';
 import { isSignatureFieldType } from '@hanzo/esign-prisma/guards/is-signature-field';
 import type {
   TRemovedSignedFieldWithTokenMutationSchema,
@@ -512,7 +512,7 @@ export const EmbedDirectTemplateClientPage = ({
           <span>
             <Trans>Powered by</Trans>
           </span>
-          <BrandingLogo className="ml-2 inline-block h-[14px]" />
+          <BrandingLogo className="ml-1" />
         </div>
       )}
     </div>

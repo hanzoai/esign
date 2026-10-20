@@ -195,7 +195,7 @@ export default function AuditLog({ loaderData }: Route.ComponentProps) {
       {!hidePoweredBy && (
         <div className="my-8 flex-row-reverse">
           <div className="flex items-end justify-end gap-x-4">
-            <BrandingLogo className="max-h-6 print:max-h-4" />
+            <BrandingLogo className="text-lg print:text-sm" />
           </div>
         </div>
       )}

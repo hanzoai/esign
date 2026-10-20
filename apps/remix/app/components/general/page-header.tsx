@@ -8,7 +8,6 @@ export type PageHeaderProps = {
   /** Rendered at the trailing edge of the title row. */
   children?: ReactNode;
   className?: string;
-  descriptionClassName?: string;
 };
 
 /**
@@ -16,23 +15,13 @@ export type PageHeaderProps = {
  * heading and the line explaining it are one unit, so they sit closer to each
  * other than to anything else on the page.
  */
-export const PageHeader = ({
-  title,
-  description,
-  children,
-  className,
-  descriptionClassName,
-}: PageHeaderProps) => {
+export const PageHeader = ({ title, description, children, className }: PageHeaderProps) => {
   return (
     <div className={cn('flex flex-row items-center justify-between gap-x-4', className)}>
       <div className="space-y-1.5">
         <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
 
-        {description && (
-          <p className={cn('text-balance text-sm text-muted-foreground', descriptionClassName)}>
-            {description}
-          </p>
-        )}
+        {description && <p className="text-balance text-sm text-muted-foreground">{description}</p>}
       </div>
 
       {children}

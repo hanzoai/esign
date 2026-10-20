@@ -86,9 +86,9 @@ export const AppNavDesktop = ({
                   key={href}
                   to={href}
                   className={cn(
-                    'text-muted-foreground dark:text-muted-foreground/60 focus-visible:ring-ring ring-offset-background rounded-md font-medium leading-5 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2',
+                    'rounded-full text-[13px] font-medium leading-5 text-muted-foreground ring-offset-background transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                     {
-                      'text-foreground dark:text-muted-foreground': pathname?.startsWith(href),
+                      'text-foreground': pathname?.startsWith(href),
                     },
                   )}
                 >
@@ -102,16 +102,16 @@ export const AppNavDesktop = ({
 
       <Button
         variant="outline"
-        className="text-muted-foreground flex w-full max-w-96 items-center justify-between rounded-lg"
+        className="flex h-9 w-full max-w-80 items-center justify-between pl-3 pr-1.5 font-normal text-muted-foreground"
         onClick={() => setIsCommandMenuOpen(true)}
       >
-        <div className="flex items-center">
-          <Search className="mr-2 h-5 w-5" />
+        <div className="flex items-center text-[13px]">
+          <Search className="mr-2 h-4 w-4" />
           <Trans>Search</Trans>
         </div>
 
         <div>
-          <div className="text-muted-foreground bg-muted flex items-center rounded-md px-1.5 py-0.5 text-xs tracking-wider">
+          <div className="flex items-center rounded-full bg-muted px-2 py-0.5 text-xs tracking-wider text-muted-foreground">
             {modifierKey}+K
           </div>
         </div>

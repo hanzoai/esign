@@ -1,4 +1,4 @@
-import { type HTMLAttributes, useEffect, useState } from 'react';
+import { type HTMLAttributes, useState } from 'react';
 
 import { useLingui } from '@lingui/react/macro';
 import { ReadStatus } from '@prisma/client';
@@ -23,6 +23,29 @@ import { OrgMenuSwitcher } from './org-menu-switcher';
 
 export type HeaderProps = HTMLAttributes<HTMLDivElement>;
 
+// hanzo.ai's bar: the wordmark at the left edge, a hairline under it, the page through a blur.
+const HEADER_CLASS_NAME =
+  'supports-backdrop-blur:bg-background/60 sticky top-0 z-[60] flex h-16 w-full items-center border-b border-border bg-background/80 backdrop-blur';
+
+const WORDMARK_LINK_CLASS_NAME =
+  'rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
+
+/**
+ * The bar a visitor without a session sees: the wordmark and nothing else, so a recipient
+ * or a sign-in reads as the same product as the app behind it.
+ */
+export const PublicHeader = ({ className, ...props }: HeaderProps) => {
+  return (
+    <header className={cn(HEADER_CLASS_NAME, className)} {...props}>
+      <div className="mx-auto flex w-full max-w-screen-xl items-center px-4 md:px-8">
+        <Link to="/" className={WORDMARK_LINK_CLASS_NAME}>
+          <BrandingLogo className="text-[19px]" />
+        </Link>
+      </div>
+    </header>
+  );
+};
+
 export const Header = ({ className, ...props }: HeaderProps) => {
   const { t } = useLingui();
   const params = useParams();
@@ -31,7 +54,6 @@ export const Header = ({ className, ...props }: HeaderProps) => {
 
   const [isCommandMenuOpen, setIsCommandMenuOpen] = useState(false);
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
 
   const { data: unreadCountData } = useZapQuery<TGetInboxCountResponse>(
     'document.inbox.getCount',
@@ -43,38 +65,18 @@ export const Header = ({ className, ...props }: HeaderProps) => {
     },
   );
 
-  useEffect(() => {
-    const onScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener('scroll', onScroll);
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <header
-      className={cn(
-        'supports-backdrop-blur:bg-background/60 sticky top-0 z-[60] flex h-16 w-full items-center border-b border-b-transparent bg-background/95 backdrop-blur duration-200',
-        scrollY > 5 && 'border-b-border',
-        className,
-      )}
-      {...props}
-    >
-      <div className="mx-auto flex w-full max-w-screen-xl items-center justify-between gap-x-4 px-4 md:justify-normal md:px-8">
-        <Link
-          to={getRootHref(params)}
-          className="hidden rounded-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:inline"
-        >
-          <BrandingLogo className="h-6 w-auto" />
+    <header className={cn(HEADER_CLASS_NAME, className)} {...props}>
+      <div className="mx-auto flex w-full max-w-screen-xl items-center gap-x-4 px-4 md:px-8">
+        <Link to={getRootHref(params)} className={WORDMARK_LINK_CLASS_NAME}>
+          <BrandingLogo className="text-[19px]" />
         </Link>
 
         <AppNavDesktop setIsCommandMenuOpen={setIsCommandMenuOpen} />
 
-        <Button asChild variant="outline" className="relative hidden h-10 w-10 rounded-lg md:flex">
-          <Link to="/inbox" className="relative block h-10 w-10">
-            <InboxIcon className="h-5 w-5 flex-shrink-0 text-muted-foreground transition-colors hover:text-foreground" />
+        <Button asChild variant="outline" className="relative hidden h-9 w-9 md:flex">
+          <Link to="/inbox" aria-label={t`Inbox`} className="relative block h-9 w-9">
+            <InboxIcon className="h-4 w-4 flex-shrink-0 text-muted-foreground transition-colors hover:text-foreground" />
 
             {unreadCountData && unreadCountData.count > 0 && (
               <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-semibold text-primary-foreground">
@@ -84,17 +86,17 @@ export const Header = ({ className, ...props }: HeaderProps) => {
           </Link>
         </Button>
 
-        <div className="md:ml-4">
+        <div className="ml-auto md:ml-2">
           {isPersonalLayout(organisations) ? <MenuSwitcher /> : <OrgMenuSwitcher />}
         </div>
 
         <div className="flex flex-row items-center space-x-4 md:hidden">
           <button aria-label={t`Search`} onClick={() => setIsCommandMenuOpen(true)}>
-            <SearchIcon className="h-6 w-6 text-muted-foreground" />
+            <SearchIcon className="h-5 w-5 text-muted-foreground" />
           </button>
 
           <button aria-label={t`Menu`} onClick={() => setIsHamburgerMenuOpen(true)}>
-            <MenuIcon className="h-6 w-6 text-muted-foreground" />
+            <MenuIcon className="h-5 w-5 text-muted-foreground" />
           </button>
 
           <AppCommandMenu open={isCommandMenuOpen} onOpenChange={setIsCommandMenuOpen} />

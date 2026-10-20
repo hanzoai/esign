@@ -1,51 +1,24 @@
-import type { SVGAttributes } from 'react';
+import type { HTMLAttributes } from 'react';
 
-import { brand } from '~/components/branding/brand';
-import { MarkPaths } from '~/components/branding/hanzo-mark';
+import { cn } from '@hanzo/esign-ui/lib/utils';
 
-export type LogoProps = SVGAttributes<SVGSVGElement>;
+import { appName } from '~/components/branding/brand';
 
-// Mark plus wordmark, locked up as ONE svg so the pair scales as a unit
-// wherever it mounts — the app header, the embed footers and the generated PDF
-// audit trail all size it by height alone.
-//
-// The name comes from NEXT_PUBLIC_APP_NAME at runtime, so a tenant rebrands by
-// setting env rather than forking this file. Per-org logo upload already exists
-// for documents (team/org `brandingLogo`); extending it to the app shell is the
-// next step and would replace the mark here.
-export const BrandingLogo = ({ ...props }: LogoProps) => {
-  const { name, primary, suffix } = brand();
+export type BrandingLogoProps = HTMLAttributes<HTMLSpanElement>;
 
-  // The wordmark starts after the 67-wide mark plus a gap. Advance width is
-  // estimated per glyph (~0.55em at 44px) because SVG cannot measure text — the
-  // viewBox has to be right before layout, and `w-auto` callers size by height.
-  const textX = 86;
-  const width = textX + Math.ceil(name.length * 24);
-
+/**
+ * The wordmark, and nothing in front of it: the app's name set as text, as hanzo.ai sets
+ * its own. Text rather than an SVG so it is measured by the browser and never clipped,
+ * whatever the tenant's name (NEXT_PUBLIC_APP_NAME). It takes its colour from the parent
+ * and its size from the caller's text-* class.
+ */
+export const BrandingLogo = ({ className, ...props }: BrandingLogoProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox={`0 0 ${width} 67`}
-      aria-label={name}
+    <span
+      className={cn('whitespace-nowrap font-semibold tracking-[-0.02em]', className)}
       {...props}
     >
-      <MarkPaths />
-      {/* `dx` is the word space: SVG collapses a space written between tspans. */}
-      <text
-        x={textX}
-        y="48"
-        fontFamily="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif"
-        fontSize="44"
-        fontWeight="600"
-        letterSpacing="-1.5"
-      >
-        <tspan className="fill-foreground">{primary}</tspan>
-        {suffix && (
-          <tspan className="fill-muted-foreground" dx="11">
-            {suffix}
-          </tspan>
-        )}
-      </text>
-    </svg>
+      {appName()}
+    </span>
   );
 };

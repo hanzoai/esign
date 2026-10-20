@@ -287,7 +287,7 @@ export default function MultisignPage() {
             <span>
               <Trans>Powered by</Trans>
             </span>
-            <BrandingLogo className="ml-2 inline-block h-[14px]" />
+            <BrandingLogo className="ml-1" />
           </div>
         )}
       </div>
@@ -304,7 +304,7 @@ export default function MultisignPage() {
           <span>
             <Trans>Powered by</Trans>
           </span>
-          <BrandingLogo className="ml-2 inline-block h-[14px]" />
+          <BrandingLogo className="ml-1" />
         </div>
       )}
     </div>

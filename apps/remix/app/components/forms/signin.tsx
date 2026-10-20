@@ -54,12 +54,7 @@ export const SignInForm = ({ className, returnTo }: SignInFormProps) => {
 
   return (
     <div className={cn('flex w-full flex-col gap-y-4', className)}>
-      <Button
-        type="button"
-        size="lg"
-        className="bg-white font-normal text-black hover:bg-zinc-200"
-        onClick={onSignInClick}
-      >
+      <Button type="button" size="lg" className="font-normal" onClick={onSignInClick}>
         Sign in with <span className="ml-1 font-bold">{providerName}</span>
       </Button>
     </div>

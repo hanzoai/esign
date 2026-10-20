@@ -404,7 +404,7 @@ export default function SigningCertificate({ loaderData }: Route.ComponentProps)
             <p className="flex-shrink-0 text-sm font-medium print:text-xs">
               {_(msg`Signing certificate provided by`)}:
             </p>
-            <BrandingLogo className="max-h-6 print:max-h-4" />
+            <BrandingLogo className="text-lg print:text-sm" />
           </div>
         </div>
       )}

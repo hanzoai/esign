@@ -5,8 +5,6 @@ import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-sessi
 import { SignInRefusal } from '@hanzo/esign-lib/constants/auth';
 import { isValidReturnTo, normalizeReturnTo } from '@hanzo/esign-lib/utils/is-valid-return-to';
 
-import { brand } from '~/components/branding/brand';
-import { HanzoMark } from '~/components/branding/hanzo-mark';
 import { SignInForm } from '~/components/forms/signin';
 import { PageHeader } from '~/components/general/page-header';
 import { appMetaTags } from '~/utils/meta';
@@ -70,34 +68,21 @@ const Refusal = ({ refusal }: { refusal: SignInRefusal }) => {
 export default function SignIn({ loaderData }: Route.ComponentProps) {
   const { returnTo, refusal } = loaderData;
 
-  const { primary, suffix } = brand();
-
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-black px-6 text-white">
-      <div className="w-full max-w-sm">
-        <div className="mb-12 flex items-center gap-3">
-          <HanzoMark size={28} className="text-white" />
-          <span className="text-base font-medium tracking-tight">
-            {primary}
-            {suffix && <span className="text-zinc-400"> {suffix}</span>}
-          </span>
-        </div>
+    <div className="w-full max-w-sm rounded-3xl border border-border bg-card p-8">
+      <PageHeader
+        title={<Trans>Sign in to your account</Trans>}
+        description={<Trans>Welcome back, we are lucky to have you.</Trans>}
+      />
 
-        <PageHeader
-          title={<Trans>Sign in to your account</Trans>}
-          description={<Trans>Welcome back, we are lucky to have you.</Trans>}
-          descriptionClassName="text-zinc-400"
-        />
+      {refusal && (
+        <p role="alert" className="mt-6 text-sm text-destructive">
+          <Refusal refusal={refusal} />
+        </p>
+      )}
 
-        {refusal && (
-          <p role="alert" className="mt-6 text-sm text-red-400">
-            <Refusal refusal={refusal} />
-          </p>
-        )}
-
-        <div className="mt-8">
-          <SignInForm returnTo={returnTo} />
-        </div>
+      <div className="mt-8">
+        <SignInForm returnTo={returnTo} />
       </div>
     </div>
   );
