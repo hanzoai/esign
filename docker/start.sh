@@ -8,7 +8,10 @@ printf "🔐 Checking certificate configuration...\n"
 
 CERT_PATH="${NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH:-/opt/hanzo-sign/cert.p12}"
 
-if [ -f "$CERT_PATH" ] && [ -r "$CERT_PATH" ]; then
+# The signer takes the certificate's contents before its path, so the check does too.
+if [ -n "$NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS" ]; then
+    printf "✅ Certificate provided in the environment - document signing is ready!\n"
+elif [ -f "$CERT_PATH" ] && [ -r "$CERT_PATH" ]; then
     printf "✅ Certificate file found and readable - document signing is ready!\n"
 else
     printf "⚠️ Certificate not found or not readable\n"
