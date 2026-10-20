@@ -123,7 +123,7 @@ export const DocumentSigningAuthDialog = ({
         {/* Show chooser if no auth type is selected and there are multiple options */}
         {!selectedAuthType && validAuthTypes.length > 1 && (
           <div className="space-y-4">
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               <Trans>Choose your preferred authentication method:</Trans>
             </p>
             <div className="grid gap-2">
@@ -132,7 +132,7 @@ export const DocumentSigningAuthDialog = ({
                   key={authType}
                   type="button"
                   variant="outline"
-                  className="h-auto justify-start p-4"
+                  className="h-auto justify-start rounded-2xl p-4"
                   onClick={() => setSelectedAuthType(authType)}
                 >
                   <div className="text-left">
@@ -145,7 +145,7 @@ export const DocumentSigningAuthDialog = ({
                         .exhaustive()}
                     </div>
 
-                    <div className="text-muted-foreground text-sm">
+                    <div className="text-sm text-muted-foreground">
                       {match(authType)
                         .with(DocumentAuth.ACCOUNT, () => <Trans>Sign in to your account</Trans>)
                         .with(DocumentAuth.PASSKEY, () => (

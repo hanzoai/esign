@@ -100,7 +100,7 @@ export const FolderGrid = ({ type, parentId }: FolderGridProps) => {
           )}
         </div>
 
-        <div className="flex gap-4 sm:flex-row sm:justify-end">
+        <div className="flex flex-wrap gap-4 sm:flex-row sm:justify-end">
           <EnvelopeUploadButton type={type} folderId={parentId || undefined} />
 
           <EnvelopeImportMenu type={type} folderId={parentId || undefined} />

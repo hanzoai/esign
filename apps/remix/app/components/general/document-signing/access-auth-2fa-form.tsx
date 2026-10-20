@@ -10,11 +10,11 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import type { TRecipientAccessAuth } from '@hanzo/esign-lib/types/document-auth';
-import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import type {
   TAccessAuthRequest2FAEmailRequest,
   TAccessAuthRequest2FAEmailResponse,
 } from '@hanzo/esign-trpc/server/document-router/access-auth-request-2fa-email.types';
+import { useZapMutation } from '@hanzo/esign-trpc/zap/react';
 import { cn } from '@hanzo/esign-ui/lib/utils';
 import { Alert } from '@hanzo/esign-ui/primitives/alert';
 import { Button } from '@hanzo/esign-ui/primitives/button';
@@ -157,7 +157,7 @@ export const AccessAuth2FAForm = ({ onSubmit, token, error }: AccessAuth2FAFormP
             <h3 className="text-lg font-semibold">
               <Trans>Choose verification method</Trans>
             </h3>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               <Trans>Please select how you'd like to receive your verification code.</Trans>
             </p>
           </div>
@@ -172,7 +172,7 @@ export const AccessAuth2FAForm = ({ onSubmit, token, error }: AccessAuth2FAFormP
             <Button
               type="button"
               variant="outline"
-              className="flex h-auto w-full justify-start gap-3 p-4"
+              className="flex h-auto w-full justify-start gap-3 rounded-2xl p-4"
               onClick={async () => onMethodSelect('email')}
               disabled={isRequesting2FAEmail}
             >
@@ -181,7 +181,7 @@ export const AccessAuth2FAForm = ({ onSubmit, token, error }: AccessAuth2FAFormP
                 <div className="font-medium">
                   <Trans>Email verification</Trans>
                 </div>
-                <div className="text-muted-foreground text-sm">
+                <div className="text-sm text-muted-foreground">
                   <Trans>We'll send a 6-digit code to your email</Trans>
                 </div>
               </div>
@@ -191,7 +191,7 @@ export const AccessAuth2FAForm = ({ onSubmit, token, error }: AccessAuth2FAFormP
               <Button
                 type="button"
                 variant="outline"
-                className="flex h-auto w-full justify-start gap-3 p-4"
+                className="flex h-auto w-full justify-start gap-3 rounded-2xl p-4"
                 onClick={async () => onMethodSelect('authenticator')}
                 disabled={isRequesting2FAEmail}
               >
@@ -200,7 +200,7 @@ export const AccessAuth2FAForm = ({ onSubmit, token, error }: AccessAuth2FAFormP
                   <div className="font-medium">
                     <Trans>Authenticator app</Trans>
                   </div>
-                  <div className="text-muted-foreground text-sm">
+                  <div className="text-sm text-muted-foreground">
                     <Trans>Use your authenticator app to generate a code</Trans>
                   </div>
                 </div>
@@ -222,7 +222,7 @@ export const AccessAuth2FAForm = ({ onSubmit, token, error }: AccessAuth2FAFormP
             </h3>
           </div>
 
-          <div className="text-muted-foreground text-sm">
+          <div className="text-sm text-muted-foreground">
             {selectedMethod === 'email' ? (
               <Trans>
                 We've sent a 6-digit verification code to your email. Please enter it below to
@@ -268,7 +268,7 @@ export const AccessAuth2FAForm = ({ onSubmit, token, error }: AccessAuth2FAFormP
 
                       {expiresAt && millisecondsRemaining !== null && (
                         <div
-                          className={cn('text-muted-foreground mt-2 text-center text-sm', {
+                          className={cn('mt-2 text-center text-sm text-muted-foreground', {
                             'text-destructive': millisecondsRemaining <= 0,
                           })}
                         >

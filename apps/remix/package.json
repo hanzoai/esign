@@ -22,6 +22,7 @@
     "@hanzo/esign-tailwind-config": "*",
     "@hanzo/esign-trpc": "*",
     "@hanzo/esign-ui": "*",
+    "@hanzo/font": "1.9.3",
     "@zap-proto/zap": "^1.6.0",
     "@zap-proto/web": "^1.0.0",
     "ws": "^8.21.3",

@@ -10,8 +10,16 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans],
+        mono: ['var(--font-mono)', ...fontFamily.mono],
         signature: ['var(--font-signature)'],
         noto: ['var(--font-noto)'],
+      },
+      // Zen is variable; these are where it reads on a screen (@hanzo/ui DESIGN.md §1).
+      fontWeight: {
+        normal: '497',
+        medium: '606',
+        semibold: '680',
+        bold: '760',
       },
       zIndex: {
         9999: '9999',

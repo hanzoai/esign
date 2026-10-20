@@ -3,45 +3,48 @@
 @tailwind utilities;
 
 @layer base {
+  /* Light: hanzo.ai's light palette (@hanzo/tokens `light`). A white page, #0a0a0a ink, and
+     hairlines that are DESIGN.md's black-alpha rungs composited on white: border 10%, a
+     control's edge 15%, hover 5%. Every value is opaque so Tailwind's `/alpha` modifiers apply. */
   :root,
   .dark-mode-disabled {
     --background: 0 0% 100%;
-    --foreground: 0 0% 11%;
+    --foreground: 0 0% 4%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 32%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 11%;
+    --popover-foreground: 0 0% 4%;
 
     --card: 0 0% 100%;
-    --card-border: 0 0% 91%;
+    --card-border: 0 0% 90%;
     --card-border-tint: 115 115 115;
-    --card-foreground: 0 0% 11%;
+    --card-foreground: 0 0% 4%;
 
     --field-card: 0 0% 96%;
     --field-card-border: 0 0% 85%;
-    --field-card-foreground: 0 0% 11%;
+    --field-card-foreground: 0 0% 4%;
 
     --widget: 0 0% 97%;
     --widget-foreground: 0 0% 95%;
 
-    --border: 0 0% 91%;
-    --input: 0 0% 91%;
+    --border: 0 0% 90%;
+    --input: 0 0% 85%;
 
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 0% 4%;
+    --primary-foreground: 0 0% 98%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 11%;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 4%;
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 11%;
+    --accent: 0 0% 95%;
+    --accent-foreground: 0 0% 4%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --ring: 0 0% 45%;
+    --ring: 0 0% 50%;
 
     --radius: 0.5rem;
 
@@ -58,43 +61,45 @@
     --envelope-editor-background: 0 0% 98%;
   }
 
-  /* Black page. Depth is the ramp above it: surface 6-7%, hover 16%, edge 18%. No hue at any step. */
+  /* Dark, the house theme: @hanzo/ui DESIGN.md §4. A true-black page, #0a0a0a
+     surfaces, #171717 for hover and anything raised, and white-alpha hairlines composited
+     on black (border 10%, a control's edge 15%). Ink is #ededf1, never pure white on black. */
   .dark:not(.dark-mode-disabled) {
     --background: 0 0% 0%;
-    --foreground: 0 0% 97%;
+    --foreground: 240 11% 94%;
 
-    --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 240 5% 65%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 90%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 240 11% 94%;
 
-    --card: 0 0% 6%;
-    --card-border: 0 0% 18%;
+    --card: 0 0% 4%;
+    --card-border: 0 0% 10%;
     --card-border-tint: 115 115 115;
-    --card-foreground: 0 0% 95%;
+    --card-foreground: 240 11% 94%;
 
-    --widget: 0 0% 6%;
-    --widget-foreground: 0 0% 18%;
+    --widget: 0 0% 4%;
+    --widget-foreground: 0 0% 10%;
 
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
+    --border: 0 0% 10%;
+    --input: 0 0% 15%;
 
     --field-border: 0 0% 91%;
 
-    --primary: 0 0% 100%;
+    --primary: 0 0% 98%;
     --primary-foreground: 0 0% 0%;
 
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 9%;
     --secondary-foreground: 0 0% 98%;
 
-    --accent: 0 0% 16%;
+    --accent: 0 0% 9%;
     --accent-foreground: 0 0% 98%;
 
     --destructive: 0 87% 62%;
     --destructive-foreground: 0 87% 19%;
 
-    --ring: 0 0% 45%;
+    --ring: 0 0% 40%;
 
     --radius: 0.5rem;
 
@@ -109,8 +114,9 @@
     @apply border-border;
   }
 
+  /* Zen's book weight is 497, not the generic 400 (@hanzo/ui DESIGN.md §1). */
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background font-normal text-foreground;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
