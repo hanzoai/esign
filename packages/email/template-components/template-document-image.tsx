@@ -19,7 +19,7 @@ export const TemplateDocumentImage = ({ assetBaseUrl, className }: TemplateDocum
           <Img
             className="h-42 mx-auto"
             src={getAssetUrl('/static/document.png')}
-            alt="Hanzo Sign"
+            alt="Hanzo eSign"
           />
         </Column>
 

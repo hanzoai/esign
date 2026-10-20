@@ -246,7 +246,7 @@ export const AddSubjectFormPartial = ({
                                     </SelectItem>
                                   ))}
 
-                                  <SelectItem value={'-1'}>Hanzo Sign</SelectItem>
+                                  <SelectItem value={'-1'}>Hanzo eSign</SelectItem>
                                 </SelectContent>
                               </Select>
                             </FormControl>

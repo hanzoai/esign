@@ -61,7 +61,7 @@ export default function SupportPage() {
               </Link>
             </h2>
             <p className="mt-1 text-muted-foreground">
-              <Trans>Read our documentation to get started with Hanzo Sign.</Trans>
+              <Trans>Read our documentation to get started with Hanzo eSign.</Trans>
             </p>
           </div>
           {organisation && (

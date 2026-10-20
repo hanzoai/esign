@@ -617,7 +617,7 @@ msgid "<0>{organisationName}</0> has requested to create an account on your beha
 msgstr "Organizacja <0>{organisationName}</0> poprosiła o utworzenie konta w Twoim imieniu."
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "<0>{organisationName}</0> has requested to link your current Hanzo Sign account to their organisation."
+msgid "<0>{organisationName}</0> has requested to link your current Hanzo eSign account to their organisation."
 msgstr ""
 
 #: apps/remix/app/components/general/document-signing/document-signing-page-view-v1.tsx
@@ -657,7 +657,7 @@ msgid "<0>{senderName} {senderEmail}</0> on behalf of \"{0}\" has invited you to
 msgstr "Użytkownik <0>{senderName} {senderEmail}</0> z zespołu „{0}” zaprosił Cię do wyświetlenia dokumentu"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "<0>{teamName}</0> has requested to use your email address for their team on Hanzo Sign."
+msgid "<0>{teamName}</0> has requested to use your email address for their team on Hanzo eSign."
 msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.sso.confirmation.$token.tsx
@@ -886,7 +886,7 @@ msgid "A means to print or download documents for your records"
 msgstr "Środka do drukowania lub pobierania dokumentów w formie elektronicznej"
 
 #: packages/email/templates/organisation-join.tsx
-msgid "A member has joined your organisation on Hanzo Sign"
+msgid "A member has joined your organisation on Hanzo eSign"
 msgstr ""
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-left-email.handler.ts
@@ -898,7 +898,7 @@ msgid "A member has left your organisation {organisationName}"
 msgstr "Użytkownik opuścił organizację {organisationName}"
 
 #: packages/email/templates/organisation-leave.tsx
-msgid "A member has left your organisation on Hanzo Sign"
+msgid "A member has left your organisation on Hanzo eSign"
 msgstr ""
 
 #: packages/lib/jobs/definitions/emails/send-organisation-member-joined-email.handler.ts
@@ -938,17 +938,17 @@ msgid "A request has been made to create an account for you"
 msgstr "Utworzono prośbę o utworzenie konta dla Ciebie"
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "A request has been made to link your Hanzo Sign account"
+msgid "A request has been made to link your Hanzo eSign account"
 msgstr ""
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/create-team-email-verification.ts
-msgid "A request to use your email has been initiated by {0} on Hanzo Sign"
+msgid "A request to use your email has been initiated by {0} on Hanzo eSign"
 msgstr ""
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
-msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo Sign."
+msgid "A secret that will be sent to your URL so you can verify that the request has been sent by Hanzo eSign."
 msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
@@ -992,11 +992,11 @@ msgid "Accept & Link Account"
 msgstr "Zaakceptuj i połącz konto"
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Accept invitation to join an organisation on Hanzo Sign"
+msgid "Accept invitation to join an organisation on Hanzo eSign"
 msgstr ""
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "Accept team email request for {teamName} on Hanzo Sign"
+msgid "Accept team email request for {teamName} on Hanzo eSign"
 msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
@@ -2215,7 +2215,7 @@ msgid "By enabling 2FA, you will be required to enter a code from your authentic
 msgstr "Po włączeniu weryfikacji dwuetapowej konieczne będzie wpisanie kodu z aplikacji uwierzytelniającej przy każdym logowaniu za pomocą hasła."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
-msgid "By proceeding to use the electronic signature service provided by Hanzo Sign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
+msgid "By proceeding to use the electronic signature service provided by Hanzo eSign, you affirm that you have read and understood this disclosure. You agree to all terms and conditions related to the use of electronic signatures and electronic transactions as outlined herein."
 msgstr ""
 
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
@@ -5251,11 +5251,11 @@ msgid "Groups"
 msgstr "Grupy"
 
 #: apps/remix/app/components/general/admin-license-card.tsx
-msgid "Hanzo Sign License"
+msgid "Hanzo eSign License"
 msgstr ""
 
 #: apps/remix/app/components/dialogs/account-delete-dialog.tsx
-msgid "Hanzo Sign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
+msgid "Hanzo eSign will delete <0>all of your documents</0>, along with all of your completed documents, signatures, and all other resources belonging to your Account."
 msgstr ""
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-recipient-form.tsx
@@ -5581,7 +5581,7 @@ msgid "Invalid License Key"
 msgstr "Klucz licencyjny jest nieprawidłowy"
 
 #: apps/remix/app/components/general/admin-license-status-banner.tsx
-msgid "Invalid License Type - Your Hanzo Sign instance is using features that are not part of your license."
+msgid "Invalid License Type - Your Hanzo eSign instance is using features that are not part of your license."
 msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
@@ -5704,7 +5704,7 @@ msgid "Japanese"
 msgstr "Japoński"
 
 #: packages/email/templates/organisation-invite.tsx
-msgid "Join {organisationName} on Hanzo Sign"
+msgid "Join {organisationName} on Hanzo eSign"
 msgstr ""
 
 #: apps/remix/app/components/tables/organisation-insights-table.tsx
@@ -5894,7 +5894,7 @@ msgid "Link template"
 msgstr "Połącz szablon"
 
 #: packages/email/templates/organisation-account-link-confirmation.tsx
-msgid "Link your Hanzo Sign account"
+msgid "Link your Hanzo eSign account"
 msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/settings+/security._index.tsx
@@ -6199,7 +6199,7 @@ msgid "Min"
 msgstr "Min"
 
 #: apps/remix/app/components/general/admin-license-status-banner.tsx
-msgid "Missing License - Your Hanzo Sign instance is using features that require a license."
+msgid "Missing License - Your Hanzo eSign instance is using features that require a license."
 msgstr ""
 
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-fields-page.tsx
@@ -7465,7 +7465,7 @@ msgid "Read Only"
 msgstr "Tylko do odczytu"
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.support.tsx
-msgid "Read our documentation to get started with Hanzo Sign."
+msgid "Read our documentation to get started with Hanzo eSign."
 msgstr ""
 
 #: apps/remix/app/components/general/document-signing/document-signing-disclosure.tsx
@@ -7954,7 +7954,7 @@ msgid "Return to documents"
 msgstr "Powrót do dokumentów"
 
 #: apps/remix/app/routes/_unauthenticated+/o.$orgUrl.signin.tsx
-msgid "Return to Hanzo Sign sign in page here"
+msgid "Return to Hanzo eSign sign in page here"
 msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/organisation.decline.$token.tsx
@@ -9081,7 +9081,7 @@ msgstr "Zespół"
 
 #. placeholder {0}: team.name
 #: packages/lib/server-only/team/delete-team.ts
-msgid "Team \"{0}\" has been deleted on Hanzo Sign"
+msgid "Team \"{0}\" has been deleted on Hanzo eSign"
 msgstr ""
 
 #: packages/lib/constants/teams-translations.ts
@@ -9124,7 +9124,7 @@ msgid "Team email removed"
 msgstr "Adres e-mail zespołu został usunięty"
 
 #: packages/email/templates/team-email-removed.tsx
-msgid "Team email removed for {teamName} on Hanzo Sign"
+msgid "Team email removed for {teamName} on Hanzo eSign"
 msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/team.verify.email.$token.tsx
@@ -9379,7 +9379,7 @@ msgid "Thank you for completing the signing process."
 msgstr "Podpisywanie zostało zakończone."
 
 #: apps/remix/app/routes/_unauthenticated+/articles.signature-disclosure.tsx
-msgid "Thank you for using Hanzo Sign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
+msgid "Thank you for using Hanzo eSign to perform your electronic document signing. The purpose of this disclosure is to inform you about the process, legality, and your rights regarding the use of electronic signatures on our platform. By opting to use an electronic signature, you are agreeing to the terms and conditions outlined below."
 msgstr ""
 
 #: apps/remix/app/components/general/envelope/upload-error.ts
@@ -9746,7 +9746,7 @@ msgstr "Rodzaje podpisów, których odbiorcy mogą używać podczas podpisywania
 
 #: apps/remix/app/components/dialogs/webhook-create-dialog.tsx
 #: apps/remix/app/components/dialogs/webhook-edit-dialog.tsx
-msgid "The URL for Hanzo Sign to send webhook events to."
+msgid "The URL for Hanzo eSign to send webhook events to."
 msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/admin+/users.$id.tsx
@@ -9877,7 +9877,7 @@ msgid "This document has been signed by all recipients"
 msgstr "Dokument został podpisany przez wszystkich odbiorców"
 
 #: apps/remix/app/components/general/document/document-certificate-qr-view.tsx
-msgid "This document is available in your Hanzo Sign account. You can view more details, recipients, and audit logs there."
+msgid "This document is available in your Hanzo eSign account. You can view more details, recipients, and audit logs there."
 msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/t.$teamUrl+/documents.$id._index.tsx
@@ -9897,7 +9897,7 @@ msgid "This document was created using a direct link."
 msgstr "Dokument został utworzony za pomocą bezpośredniego linku."
 
 #: packages/email/template-components/template-footer.tsx
-msgid "This document was sent using <0>Hanzo Sign</0>."
+msgid "This document was sent using <0>Hanzo eSign</0>."
 msgstr ""
 
 #: apps/remix/app/components/dialogs/envelope-duplicate-dialog.tsx
@@ -11098,7 +11098,7 @@ msgstr "Oczekiwanie na Ciebie"
 
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
 #: apps/remix/app/routes/_recipient+/sign.$token+/_index.tsx
-msgid "Want to send slick signing links like this one? <0>Check out Hanzo Sign</0>."
+msgid "Want to send slick signing links like this one? <0>Check out Hanzo eSign</0>."
 msgstr ""
 
 #: apps/remix/app/routes/_profile+/_layout.tsx
@@ -11500,7 +11500,7 @@ msgid "Welcome to {organisationName}"
 msgstr "Witaj w organizacji {organisationName}"
 
 #: packages/email/template-components/template-confirmation-email.tsx
-msgid "Welcome to Hanzo Sign!"
+msgid "Welcome to Hanzo eSign!"
 msgstr ""
 
 #: apps/remix/app/routes/_authenticated+/o.$orgUrl.settings.sso.tsx
@@ -11539,7 +11539,7 @@ msgid "Whether to enable the SSO portal for your organisation"
 msgstr "Czy chcesz włączyć logowanie SSO dla Twojej organizacji?"
 
 #: apps/remix/app/routes/_profile+/p.$url.tsx
-msgid "While waiting for them to do so you can create your own Hanzo Sign account and get started with document signing right away."
+msgid "While waiting for them to do so you can create your own Hanzo eSign account and get started with document signing right away."
 msgstr ""
 
 #: apps/remix/app/components/dialogs/document-resend-dialog.tsx
@@ -11768,7 +11768,7 @@ msgid "You can only detect fields in draft envelopes"
 msgstr "Możesz wykrywać pola tylko w kopertach w wersji roboczej"
 
 #: packages/email/templates/confirm-team-email.tsx
-msgid "You can revoke access at any time in your team settings on Hanzo Sign <0>here</0>."
+msgid "You can revoke access at any time in your team settings on Hanzo eSign <0>here</0>."
 msgstr ""
 
 #: apps/remix/app/components/forms/public-profile-form.tsx
@@ -11889,7 +11889,7 @@ msgstr "Organizacja <0>{0}</0> zaprasza Cię do dołączenia do nich."
 
 #. placeholder {0}: organisation.name
 #: packages/lib/server-only/organisation/create-organisation-member-invites.ts
-msgid "You have been invited to join {0} on Hanzo Sign"
+msgid "You have been invited to join {0} on Hanzo eSign"
 msgstr ""
 
 #: packages/email/templates/organisation-invite.tsx
@@ -12401,11 +12401,11 @@ msgid "Your Email"
 msgstr "Twój adres e-mail"
 
 #: apps/remix/app/routes/_unauthenticated+/verify-email.$token.tsx
-msgid "Your email has already been confirmed. You can now use all features of Hanzo Sign."
+msgid "Your email has already been confirmed. You can now use all features of Hanzo eSign."
 msgstr ""
 
 #: apps/remix/app/routes/_unauthenticated+/verify-email.$token.tsx
-msgid "Your email has been successfully confirmed! You can now use all features of Hanzo Sign."
+msgid "Your email has been successfully confirmed! You can now use all features of Hanzo eSign."
 msgstr ""
 
 #. placeholder {0}: teamEmail.team.name

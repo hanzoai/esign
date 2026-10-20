@@ -12,7 +12,7 @@ type SetupTwoFactorAuthenticationOptions = {
   user: Pick<User, 'id' | 'email'>;
 };
 
-const ISSUER = process.env.NEXT_PUBLIC_APP_NAME || 'Hanzo Sign';
+const ISSUER = process.env.NEXT_PUBLIC_APP_NAME || 'Hanzo eSign';
 
 export const setupTwoFactorAuthentication = async ({
   user,

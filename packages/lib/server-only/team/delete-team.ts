@@ -147,7 +147,7 @@ export const sendTeamDeleteEmail = async ({
   await mailer.sendMail({
     to: email,
     from: senderEmail,
-    subject: i18n._(msg`Team "${team.name}" has been deleted on Hanzo Sign`),
+    subject: i18n._(msg`Team "${team.name}" has been deleted on Hanzo eSign`),
     html,
     text,
   });

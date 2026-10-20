@@ -94,7 +94,7 @@ export const AdminLicenseCard = ({ licenseData }: AdminLicenseCardProps) => {
         </div>
 
         <h3 className="text-primary-forground mb-2 flex items-end text-sm font-medium leading-tight">
-          <Trans>Hanzo Sign License</Trans>
+          <Trans>Hanzo eSign License</Trans>
         </h3>
 
         {match(license.status)

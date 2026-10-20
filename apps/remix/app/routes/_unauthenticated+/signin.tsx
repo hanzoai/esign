@@ -43,7 +43,7 @@ const Refusal = ({ refusal }: { refusal: SignInRefusal }) => {
     case SignInRefusal.NotInvited:
       return (
         <Trans>
-          Hanzo Sign is open to invited people only. Ask an admin to invite you, then sign in again.
+          Hanzo eSign is open to invited people only. Ask an admin to invite you, then sign in again.
         </Trans>
       );
     case SignInRefusal.UnverifiedEmail:

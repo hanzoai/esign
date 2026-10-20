@@ -16,7 +16,7 @@ export const NEXT_PRIVATE_INTERNAL_WEBAPP_URL = () =>
   env('NEXT_PRIVATE_INTERNAL_WEBAPP_URL') ?? NEXT_PUBLIC_WEBAPP_URL();
 
 /**
- * Hanzo Sign is fully AGPL — no commercial billing surface exists.
+ * Hanzo eSign is fully AGPL — no commercial billing surface exists.
  * Every feature is available to every user; this constant is kept for
  * call-site compatibility but always returns false.
  */
