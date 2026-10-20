@@ -141,3 +141,32 @@ as the Remix/tRPC handlers.
   is the org's credential (no-reply@send.hanzo.ai), and notify carries no
   attachment and no reply-to. The completed email reaches every recipient with
   its download link (`/sign/<token>/complete`), not the PDF attached.
+
+## The look: hanzo.ai's
+
+- Tokens are `packages/ui/styles/theme.css`, values from @hanzo/ui DESIGN.md: dark is a
+  #000 page, #0a0a0a surfaces, #171717 raised, #ededf1 ink, hairlines at white 10% (a
+  control's edge 15%); light is white, #0a0a0a ink, black 10% and 15%. Every value is an
+  opaque `H S% L%` triplet, because the Tailwind colours are `hsl(var(--x))` and an alpha
+  inside the variable breaks every `/50` modifier. Monochrome: the recipient tones and the
+  destructive red are the only colour, and both are functional.
+- Type is Zen and Zen Mono from `@hanzo/font` (`app.css` imports `@hanzo/font/css`), with
+  Zen's weight ladder in `packages/tailwind-config` (normal 497, medium 606, semibold 680,
+  bold 760). The server-side PDF renderers keep their own Inter files in `public/fonts`.
+- Buttons are pills (`packages/ui/primitives/button.tsx`); the primary is the ink colour,
+  white on black or black on white. A tall option card built from a Button says
+  `rounded-2xl` itself.
+- The brand is the wordmark alone, as text: `BrandingLogo` renders
+  `NEXT_PUBLIC_APP_NAME` (default "Hanzo eSign", `components/branding/brand.ts`) and is
+  sized by the caller's `text-*` class, so no tenant name is clipped. There is no mark.
+  Emails and the sealed PDF's certificate and audit log draw `public/static/logo.png`
+  (copy in `packages/assets/static`), a raster of the same wordmark in Zen; redraw it if
+  the default name changes.
+- `PublicHeader` (in `app-header.tsx`) and `AppFooter` frame every page a visitor without
+  a session sees: sign-in and the other unauthenticated pages, a recipient's result
+  pages (`/sign/<token>/complete`, expired, rejected, waiting) and public profiles. The
+  signing and direct-template pages keep their own bar and no footer.
+- Theme: a stored choice (`/v1/theme`) wins; with none, remix-themes follows the device,
+  dark unless it asks for light, as hanzo.ai does.
+- Prettier's Tailwind plugin finds the hoisted Tailwind 4 and fails on this tree; format
+  with a config that sets `tailwindConfig` to `apps/remix/tailwind.config.ts`.
