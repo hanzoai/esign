@@ -3,7 +3,9 @@ import * as fs from 'node:fs';
 import { env } from '@hanzo/esign-lib/utils/env';
 
 export const getCertificateStatus = () => {
-  if (env('NEXT_PRIVATE_SIGNING_TRANSPORT') !== 'local') {
+  // The same default the signer takes (packages/signing): an unset transport is
+  // local, so it needs the certificate as much as an explicit one does.
+  if ((env('NEXT_PRIVATE_SIGNING_TRANSPORT') || 'local') !== 'local') {
     return { isAvailable: true };
   }
 
