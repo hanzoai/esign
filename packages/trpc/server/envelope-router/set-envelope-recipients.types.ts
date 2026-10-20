@@ -6,6 +6,9 @@ import { ZRecipientEmailSchema, ZRecipientLiteSchema } from '@hanzo/esign-lib/ty
 
 export const ZSetEnvelopeRecipientSchema = z.object({
   id: z.number().optional(),
+  // The editor's stable key for the row, echoed back on the response so a
+  // recipient created by one autosave is updated, not recreated, by the next.
+  clientId: z.string().optional(),
   email: ZRecipientEmailSchema,
   name: z.string().max(255),
   role: z.nativeEnum(RecipientRole),
@@ -23,7 +26,11 @@ export const ZSetEnvelopeRecipientsResponseSchema = z.object({
   data: ZRecipientLiteSchema.omit({
     documentId: true,
     templateId: true,
-  }).array(),
+  })
+    .extend({
+      clientId: z.string().nullish(),
+    })
+    .array(),
 });
 
 export type TSetEnvelopeRecipientsRequest = z.infer<typeof ZSetEnvelopeRecipientsRequestSchema>;

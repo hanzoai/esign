@@ -227,6 +227,109 @@ test.describe('document editor', () => {
   });
 });
 
+test.describe('document editor, several recipients in one visit', () => {
+  // The form learns server ids only on a step change, so every autosave after
+  // the first used to send the new signers id-less: the server deleted and
+  // recreated them, and their ids, signing tokens and fields went with them.
+  test('recipients keep their ids and fields while more are added, then send', async ({ page }) => {
+    const surface = await openDocumentEnvelopeEditor(page);
+    const { root } = surface;
+
+    const recipientsInDatabase = async () =>
+      prisma.recipient.findMany({
+        where: { envelopeId: surface.envelopeId },
+        orderBy: { id: 'asc' },
+      });
+
+    await setRecipientEmail(root, 0, 'first-signer@example.com');
+    await setRecipientName(root, 0, 'First Signer');
+    await expect.poll(async () => (await recipientsInDatabase()).length).toBe(1);
+
+    const [first] = await recipientsInDatabase();
+
+    await clickAddSignerButton(root);
+    await setRecipientEmail(root, 1, 'approver@example.com');
+    await setRecipientName(root, 1, 'The Approver');
+    await setRecipientRole(root, 1, 'Needs to approve');
+
+    await clickAddSignerButton(root);
+    await setRecipientEmail(root, 2, 'copy@example.com');
+    await setRecipientName(root, 2, 'Gets A Copy');
+    await setRecipientRole(root, 2, 'Receives copy');
+
+    await expect
+      .poll(async () => (await recipientsInDatabase()).map((r) => r.role))
+      .toEqual([RecipientRole.SIGNER, RecipientRole.APPROVER, RecipientRole.CC]);
+
+    const afterAdding = await recipientsInDatabase();
+    expect(afterAdding[0].id).toBe(first.id);
+    expect(afterAdding[0].token).toBe(first.token);
+
+    // A field for each of the two who act.
+    await clickEnvelopeEditorStep(root, 'addFields');
+    await expect(root.locator('.konva-container canvas').first()).toBeVisible();
+    await root.getByRole('button', { name: 'Signature', exact: true }).click();
+    await root
+      .locator('.konva-container canvas')
+      .first()
+      .click({ position: { x: 120, y: 140 } });
+    await root.locator('button[role="combobox"]').click();
+    await root.getByText('approver@example.com').click();
+    await root.getByRole('button', { name: 'Signature', exact: true }).click();
+    await root
+      .locator('.konva-container canvas')
+      .first()
+      .click({ position: { x: 120, y: 300 } });
+    await expect
+      .poll(async () => prisma.field.count({ where: { envelopeId: surface.envelopeId } }))
+      .toBe(2);
+
+    // An edit after the fields are placed keeps everyone and every field.
+    await clickEnvelopeEditorStep(root, 'upload');
+    await setRecipientName(root, 1, 'The Approver, Esq.');
+    await clickAddSignerButton(root);
+    await setRecipientEmail(root, 3, 'late-signer@example.com');
+    await setRecipientName(root, 3, 'Late Signer');
+    await setRecipientName(root, 3, 'Late Signer Two');
+    await expect.poll(async () => (await recipientsInDatabase()).length).toBe(4);
+    await expect
+      .poll(async () => (await recipientsInDatabase())[1].name)
+      .toBe('The Approver, Esq.');
+
+    const afterEditing = await recipientsInDatabase();
+    expect(afterEditing.slice(0, 3).map((r) => r.id)).toEqual(afterAdding.map((r) => r.id));
+    expect(await prisma.field.count({ where: { envelopeId: surface.envelopeId } })).toBe(2);
+
+    // The late signer needs a field before the document can go out.
+    await clickEnvelopeEditorStep(root, 'addFields');
+    await expect(root.locator('.konva-container canvas').first()).toBeVisible();
+    await root.locator('button[role="combobox"]').click();
+    await root.getByText('late-signer@example.com').click();
+    await root.getByRole('button', { name: 'Signature', exact: true }).click();
+    await root
+      .locator('.konva-container canvas')
+      .first()
+      .click({ position: { x: 300, y: 140 } });
+    await expect
+      .poll(async () => prisma.field.count({ where: { envelopeId: surface.envelopeId } }))
+      .toBe(3);
+    await clickEnvelopeEditorStep(root, 'upload');
+
+    await page.locator('button[title="Send Envelope"]').click();
+    await expect(page.getByRole('heading', { name: 'Send Document' })).toBeVisible();
+    await page.getByRole('button', { name: 'Send' }).click();
+    await expectToastTextToBeVisible(page, 'Envelope distributed');
+
+    const sent = await prisma.envelope.findUniqueOrThrow({
+      where: { id: surface.envelopeId },
+      include: { recipients: { orderBy: { id: 'asc' } } },
+    });
+
+    expect(sent.status).toBe('PENDING');
+    expect(sent.recipients.map((r) => r.id)).toEqual(afterEditing.map((r) => r.id));
+  });
+});
+
 test.describe('template editor', () => {
   test('add myself, CRUD, roles, signing order and dictate signers', async ({ page }) => {
     const surface = await openTemplateEnvelopeEditor(page);

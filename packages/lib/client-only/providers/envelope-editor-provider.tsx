@@ -39,6 +39,11 @@ export type EnvelopeEditorStep = 'upload' | 'addFields' | 'preview';
 
 type UpdateEnvelopePayload = Pick<TUpdateEnvelopeRequest, 'data' | 'meta'>;
 
+/** A signer row as the recipients form holds it: `formId` is its stable key. */
+type SetRecipientsPayload = (TSetEnvelopeRecipientsRequest['recipients'][number] & {
+  formId?: string;
+})[];
+
 type EnvelopeEditorProviderValue = {
   editorConfig: EnvelopeEditorConfig;
 
@@ -51,8 +56,8 @@ type EnvelopeEditorProviderValue = {
   setLocalEnvelope: (localEnvelope: Partial<TEditorEnvelope>) => void;
   updateEnvelope: (envelopeUpdates: UpdateEnvelopePayload) => void;
   updateEnvelopeAsync: (envelopeUpdates: UpdateEnvelopePayload) => Promise<void>;
-  setRecipientsDebounced: (recipients: TSetEnvelopeRecipientsRequest['recipients']) => void;
-  setRecipientsAsync: (recipients: TSetEnvelopeRecipientsRequest['recipients']) => Promise<void>;
+  setRecipientsDebounced: (recipients: SetRecipientsPayload) => void;
+  setRecipientsAsync: (recipients: SetRecipientsPayload) => Promise<void>;
 
   getRecipientColorKey: (recipientId: number) => TRecipientColor;
 
@@ -154,6 +159,22 @@ export const EnvelopeEditorProvider = ({
     envelope,
   });
 
+  /**
+   * Server ids of the signers created while the form is open, by formId. The
+   * form learns ids only when it is reset (a step change), so without this a
+   * signer created by one autosave is sent id-less by the next, deleted and
+   * created again: its id, signing token and fields are lost on every keystroke
+   * that follows, which is what adding a second recipient did.
+   */
+  const recipientIdByFormIdRef = useRef<Map<string, number>>(new Map());
+
+  const withKnownRecipientIds = (localRecipients: SetRecipientsPayload) =>
+    localRecipients.map(({ formId, ...recipient }) => ({
+      ...recipient,
+      id: recipient.id ?? (formId ? recipientIdByFormIdRef.current.get(formId) : undefined),
+      clientId: formId,
+    }));
+
   const setRecipientsMutation = useZapMutation<
     TSetEnvelopeRecipientsResponse,
     TSetEnvelopeRecipientsRequest
@@ -174,20 +195,30 @@ export const EnvelopeEditorProvider = ({
     triggerSave: setRecipientsDebounced,
     flush: flushSetRecipients,
     isPending: isRecipientsMutationPending,
-  } = useEnvelopeAutosave(async (localRecipients: TSetEnvelopeRecipientsRequest['recipients']) => {
+  } = useEnvelopeAutosave(async (localRecipients: SetRecipientsPayload) => {
     try {
       let recipients: TEditorEnvelope['recipients'] = [];
 
+      // The autosave runs after the render that scheduled it, so it reads the
+      // envelope as it stands now rather than as that render saw it.
+      const current = envelopeRef.current;
+
       if (!isEmbedded) {
         const response = await setRecipientsMutation.mutateAsync({
-          envelopeId: envelope.id,
-          envelopeType: envelope.type,
-          recipients: localRecipients,
+          envelopeId: current.id,
+          envelopeType: current.type,
+          recipients: withKnownRecipientIds(localRecipients),
         });
+
+        for (const recipient of response.data) {
+          if (recipient.clientId) {
+            recipientIdByFormIdRef.current.set(recipient.clientId, recipient.id);
+          }
+        }
 
         recipients = response.data;
       } else {
-        recipients = mapLocalRecipientsToRecipients({ envelope, localRecipients });
+        recipients = mapLocalRecipientsToRecipients({ envelope: current, localRecipients });
       }
 
       setEnvelope((prev) => ({
@@ -200,7 +231,7 @@ export const EnvelopeEditorProvider = ({
 
       // Reset the local fields to ensure deleted recipient fields are removed.
       editorFields.resetForm(
-        envelope.fields.filter((field) =>
+        envelopeRef.current.fields.filter((field) =>
           recipients.some((recipient) => recipient.id === field.recipientId),
         ),
       );
@@ -220,9 +251,7 @@ export const EnvelopeEditorProvider = ({
     }
   }, 1000);
 
-  const setRecipientsAsync = async (
-    localRecipients: TSetEnvelopeRecipientsRequest['recipients'],
-  ) => {
+  const setRecipientsAsync = async (localRecipients: SetRecipientsPayload) => {
     setRecipientsDebounced(localRecipients);
     await flushSetRecipients();
   };
