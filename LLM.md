@@ -112,3 +112,25 @@ Postgres. This replaces the standalone esign pod.
 
 Edit a server-side rule? Mirror it in `goja/bundle.js` (the cloud path) as well
 as the Remix/tRPC handlers.
+
+## Several recipients, and what a send needs in production
+- cmdk 1 writes `data-disabled="false"` on every enabled item. `CommandItem`
+  (`packages/ui/primitives/command.tsx`) disables only on `data-[disabled=true]`;
+  matching the bare attribute made every combobox item ignore the mouse, so the
+  fields step could not select a second recipient and the send refused for want
+  of their signature field.
+- The recipients form learns server ids only on a step change. The editor
+  provider keeps them by the row's `formId`, sent as `clientId` and echoed back
+  (`envelope.recipient.set`), so a recipient created by one autosave is updated,
+  not deleted and recreated, by the next. `envelope-recipients.spec.ts`
+  ("several recipients in one visit") holds both.
+- Sealing a completed document signs it with the certificate the local signer
+  reads: `NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS` (base64 p12) and
+  `NEXT_PRIVATE_SIGNING_PASSPHRASE`, from KMS `hanzo/sign@prod`. The image has
+  none; without them every completion fails at the seal. An unset
+  `NEXT_PRIVATE_SIGNING_TRANSPORT` is `local` for the signer and for
+  `/v1/health` alike.
+- Mail goes through notify (`packages/email/transports/notify.ts`): the sender
+  is the org's credential (no-reply@send.hanzo.ai), and notify carries no
+  attachment and no reply-to. The completed email reaches every recipient with
+  its download link (`/sign/<token>/complete`), not the PDF attached.
