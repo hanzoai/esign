@@ -170,3 +170,19 @@ as the Remix/tRPC handlers.
   dark unless it asks for light, as hanzo.ai does.
 - Prettier's Tailwind plugin finds the hoisted Tailwind 4 and fails on this tree; format
   with a config that sets `tailwindConfig` to `apps/remix/tailwind.config.ts`.
+
+## Shipping and what is still broken
+- The pin is universe `charts/app/values/hanzo/sign.yaml` (image
+  `oci.hanzo.ai/hanzoai/esign:<semver>@<digest>`; CI publishes
+  `ghcr.io/hanzoai/esign:<semver>` and `sha-<short>-amd64` through the door). CD
+  syncs `hanzo-sign` only by hand: `POST /v1/platform/apps/sign/sync?org=hanzo` as
+  admin. The signing certificate is the KMSSecret `sign-env-kms-sync` (KMS hanzo
+  `/sign@prod`), read by the operator under its grant in `kms-grants.yaml`.
+- The investor SAFE template is built from hanzoai/deck `safe/`; the intake that
+  sends it is hanzo-inc/cloud `POST /v1/marketing/leads` (program `investor`), which
+  posts back to `/v1/marketing/leads/esign` on this app's team webhook.
+- Broken, found and not fixed: deleting an account fails ("Deleted account service
+  account not found"): the SQLite `0_init` never created the deleted-account
+  service user the delete hands envelopes to. `/admin/documents/<id>` answers 500.
+  On `/v1/rpc` the admin routes' operationIds (`admin.documentDelete`) are not the
+  handler names (`admin.document.delete`), so they 404; the socket reaches them.
