@@ -22,6 +22,7 @@ import { recipientRoutes } from './handlers/recipient';
 import { teamRoutes } from './handlers/team';
 import { templateRoutes } from './handlers/template';
 import { webhookRoutes } from './handlers/webhook';
+import { publicRoutes } from './public-routes';
 
 export const zapRoutes: ZapRouteMap = {
   ...adminRoutes,
@@ -39,6 +40,16 @@ export const zapRoutes: ZapRouteMap = {
   ...templateRoutes,
   ...webhookRoutes,
 };
+
+export { publicRoutes };
+
+// A public route the server does not serve is a typo that would refuse a
+// recipient in production; it stops the server at boot instead.
+for (const route of publicRoutes) {
+  if (!(route in zapRoutes)) {
+    throw new Error(`publicRoutes names ${route}, which no handler serves`);
+  }
+}
 
 /** The set of routes the ZAP server can handle (used by the client to decide
  *  whether to dispatch over ZAP or fall back to the legacy tRPC client). */

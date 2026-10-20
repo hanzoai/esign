@@ -52,7 +52,7 @@ import {
   ZToggleTemplateDirectLinkRequestSchema,
   ZUpdateTemplateRequestSchema,
 } from '../../../server/template-router/schema';
-import type { ZapContext } from '../context';
+import type { ZapConnectionContext, ZapContext } from '../context';
 import type { ZapRouteMap } from '../dispatch';
 
 export const templateRoutes: ZapRouteMap = {
@@ -526,7 +526,7 @@ export const templateRoutes: ZapRouteMap = {
     });
   },
 
-  'template.createDocumentFromDirectTemplate': async (ctx: ZapContext, raw) => {
+  'template.createDocumentFromDirectTemplate': async (ctx: ZapConnectionContext, raw) => {
     const input = ZCreateDocumentFromDirectTemplateRequestSchema.parse(raw);
     const {
       directRecipientName,

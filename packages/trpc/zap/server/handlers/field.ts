@@ -38,7 +38,7 @@ import {
   ZUpdateTemplateFieldsRequestSchema,
 } from '../../../server/field-router/schema';
 import { ZGenericSuccessResponse } from '../../../server/schema';
-import type { ZapContext } from '../context';
+import type { ZapConnectionContext, ZapContext } from '../context';
 import type { ZapRouteMap } from '../dispatch';
 
 export const fieldRoutes: ZapRouteMap = {
@@ -394,7 +394,7 @@ export const fieldRoutes: ZapRouteMap = {
     });
   },
 
-  'field.signFieldWithToken': async (ctx: ZapContext, raw) => {
+  'field.signFieldWithToken': async (ctx: ZapConnectionContext, raw) => {
     const { token, fieldId, value, isBase64, authOptions } =
       ZSignFieldWithTokenMutationSchema.parse(raw);
 
@@ -415,7 +415,7 @@ export const fieldRoutes: ZapRouteMap = {
     });
   },
 
-  'field.removeSignedFieldWithToken': async (ctx: ZapContext, raw) => {
+  'field.removeSignedFieldWithToken': async (ctx: ZapConnectionContext, raw) => {
     const { token, fieldId } = ZRemovedSignedFieldWithTokenMutationSchema.parse(raw);
 
     ctx.logger.info({

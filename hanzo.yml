@@ -39,8 +39,10 @@ test:
       # The unit suites of auth and lib run last, after the build generates the
       # Prisma client they import: who IAM sign-in admits and what keeps working
       # for them, where a sign-in may return, and the rest of lib. The migration
-      # test runs the real 0_init and 1_iam_only_sign_in against SQLite.
-      npx tsx --test packages/auth/__tests__/*.test.ts packages/lib/__tests__/*.test.ts packages/prisma/__tests__/iam-only-migration.test.ts
+      # test runs the real 0_init and 1_iam_only_sign_in against SQLite. The
+      # trpc suite holds an anonymous socket (a recipient signing by their link)
+      # to the public routes.
+      npx tsx --test packages/auth/__tests__/*.test.ts packages/lib/__tests__/*.test.ts packages/trpc/__tests__/*.test.ts packages/prisma/__tests__/iam-only-migration.test.ts
 
 images:
   - name: sign

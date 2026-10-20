@@ -47,7 +47,7 @@ import {
   ZUpdateTemplateRecipientsRequestSchema,
 } from '../../../server/recipient-router/schema';
 import { ZGenericSuccessResponse } from '../../../server/schema';
-import type { ZapContext } from '../context';
+import type { ZapConnectionContext, ZapContext } from '../context';
 import type { ZapRouteMap } from '../dispatch';
 
 export const recipientRoutes: ZapRouteMap = {
@@ -389,7 +389,7 @@ export const recipientRoutes: ZapRouteMap = {
     });
   },
 
-  'recipient.completeDocumentWithToken': async (ctx: ZapContext, raw) => {
+  'recipient.completeDocumentWithToken': async (ctx: ZapConnectionContext, raw) => {
     const { token, documentId, accessAuthOptions, nextSigner, recipientOverride } =
       ZCompleteDocumentWithTokenMutationSchema.parse(raw);
 
@@ -413,7 +413,7 @@ export const recipientRoutes: ZapRouteMap = {
     });
   },
 
-  'recipient.rejectDocumentWithToken': async (ctx: ZapContext, raw) => {
+  'recipient.rejectDocumentWithToken': async (ctx: ZapConnectionContext, raw) => {
     const { token, documentId, reason } = ZRejectDocumentWithTokenMutationSchema.parse(raw);
 
     ctx.logger.info({

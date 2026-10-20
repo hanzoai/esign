@@ -7,7 +7,6 @@
 // upgrade (see mint.ts), exactly like tRPC's authenticatedMiddleware ran per
 // request — the difference is the ZAP context is per-connection, set when the
 // socket opens.
-
 import type { Session } from '@prisma/client';
 import type { Logger } from 'pino';
 
@@ -24,6 +23,23 @@ export interface ZapUser {
   name: string | null;
   email: string;
 }
+
+/**
+ * A connection opened without a session, from the app's own pages: a recipient
+ * signing by the token in their link, a visitor on a direct template link. It
+ * reaches only the routes in `publicRoutes` (routes.ts), each authorised by the
+ * token it carries, exactly as tRPC served them as public procedures.
+ */
+export interface AnonymousZapContext {
+  user: null;
+  session: null;
+  teamId: -1;
+  metadata: ApiRequestMetadata;
+  logger: Logger;
+}
+
+/** What a connection is minted as: signed in, or anonymous. */
+export type ZapConnectionContext = ZapContext | AnonymousZapContext;
 
 /** Authenticated per-connection context for ZAP handlers. */
 export interface ZapContext {

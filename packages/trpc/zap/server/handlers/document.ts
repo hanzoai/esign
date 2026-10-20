@@ -88,7 +88,7 @@ import { ZSearchDocumentRequestSchema } from '../../../server/document-router/se
 import { ZShareDocumentRequestSchema } from '../../../server/document-router/share-document.types';
 import { ZUpdateDocumentRequestSchema } from '../../../server/document-router/update-document.types';
 import { ZGenericSuccessResponse } from '../../../server/schema';
-import type { ZapContext } from '../context';
+import type { ZapConnectionContext, ZapContext } from '../context';
 import type { ZapRouteMap } from '../dispatch';
 
 export const documentRoutes: ZapRouteMap = {
@@ -523,7 +523,7 @@ export const documentRoutes: ZapRouteMap = {
     return documents;
   },
 
-  'document.share': async (ctx: ZapContext, raw) => {
+  'document.share': async (ctx: ZapConnectionContext, raw) => {
     const { documentId, token } = ZShareDocumentRequestSchema.parse(raw);
 
     ctx.logger.info({
@@ -847,7 +847,7 @@ export const documentRoutes: ZapRouteMap = {
     };
   },
 
-  'document.accessAuth.request2FAEmail': async (ctx: ZapContext, raw) => {
+  'document.accessAuth.request2FAEmail': async (ctx: ZapConnectionContext, raw) => {
     try {
       const { token } = ZAccessAuthRequest2FAEmailRequestSchema.parse(raw);
 

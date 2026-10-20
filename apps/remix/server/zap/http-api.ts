@@ -25,7 +25,7 @@ import { makeDispatcher } from '@hanzo/esign-trpc/zap/server/dispatch';
 import { fromWireError } from '@hanzo/esign-trpc/zap/runtime/error';
 import { METHOD_RPC } from '@hanzo/esign-trpc/zap/runtime/method';
 import { makeMintCap } from '@hanzo/esign-trpc/zap/server/mint';
-import { zapRoutes } from '@hanzo/esign-trpc/zap/server/routes';
+import { publicRoutes, zapRoutes } from '@hanzo/esign-trpc/zap/server/routes';
 import { ZapReply, newZapRequest } from '@hanzo/esign-trpc/zap/gen/transport_zap';
 
 import openapi from '@hanzo/esign-trpc/zap/gen/openapi.json';
@@ -91,7 +91,7 @@ export function serveZapHttpApi(
     prefix: '/v1/rpc',
     routes: buildRoutes(),
     mintCap: makeMintCap('apiV2'),
-    rootCap: makeDispatcher(zapRoutes),
+    rootCap: makeDispatcher(zapRoutes, publicRoutes),
     onError: opts.onError,
   });
 }

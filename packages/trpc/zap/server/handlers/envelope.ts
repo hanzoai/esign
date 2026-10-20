@@ -124,7 +124,7 @@ import { ZUpdateEnvelopeItemsRequestSchema } from '../../../server/envelope-rout
 import { ZUpdateEnvelopeRequestSchema } from '../../../server/envelope-router/update-envelope.types';
 import { ZUseEnvelopeRequestSchema } from '../../../server/envelope-router/use-envelope.types';
 import { ZGenericSuccessResponse } from '../../../server/schema';
-import type { ZapContext } from '../context';
+import type { ZapConnectionContext, ZapContext } from '../context';
 import type { ZapRouteMap } from '../dispatch';
 
 // ---------------------------------------------------------------------------
@@ -210,7 +210,7 @@ const handleGetEnvelopeItemsByUser = async ({
 };
 
 export const envelopeRoutes: ZapRouteMap = {
-  'envelope.attachment.find': async (ctx: ZapContext, raw) => {
+  'envelope.attachment.find': async (ctx: ZapConnectionContext, raw) => {
     const { envelopeId, token } = ZFindAttachmentsRequestSchema.parse(raw);
 
     ctx.logger.info({
@@ -344,7 +344,7 @@ export const envelopeRoutes: ZapRouteMap = {
     };
   },
 
-  'envelope.item.getManyByToken': async (ctx: ZapContext, raw) => {
+  'envelope.item.getManyByToken': async (ctx: ZapConnectionContext, raw) => {
     const { teamId, user } = ctx;
 
     const { envelopeId, access } = ZGetEnvelopeItemsByTokenRequestSchema.parse(raw);
@@ -975,7 +975,7 @@ export const envelopeRoutes: ZapRouteMap = {
     };
   },
 
-  'envelope.field.sign': async (ctx: ZapContext, raw) => {
+  'envelope.field.sign': async (ctx: ZapConnectionContext, raw) => {
     const { user, metadata } = ctx;
     const { token, fieldId, fieldValue, authOptions } = ZSignEnvelopeFieldRequestSchema.parse(raw);
 
@@ -1959,7 +1959,7 @@ export const envelopeRoutes: ZapRouteMap = {
     };
   },
 
-  'envelope.signingStatus': async (ctx: ZapContext, raw) => {
+  'envelope.signingStatus': async (ctx: ZapConnectionContext, raw) => {
     const { token } = ZSigningStatusEnvelopeRequestSchema.parse(raw);
 
     ctx.logger.info({

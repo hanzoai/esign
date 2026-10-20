@@ -22,7 +22,7 @@ import { extractRequestMetadata } from '@hanzo/esign-lib/universal/extract-reque
 import { alphaid } from '@hanzo/esign-lib/universal/id';
 import { logger } from '@hanzo/esign-lib/utils/logger';
 
-import type { ZapContext } from './context';
+import type { ZapConnectionContext } from './context';
 
 /** Build a Fetch Request mirroring the Node upgrade request (headers/cookies). */
 function toFetchRequest(req: IncomingMessage): Request {
@@ -48,11 +48,14 @@ function parseBearer(value: string | undefined): string | null {
 }
 
 /**
- * The esign MintCap: bearer/session → ZapContext, or null (401).
+ * The esign MintCap: bearer/session → ZapContext; no session on the app's own
+ * pages → an anonymous context (public routes only); otherwise null (401).
  * `source` mirrors the tRPC `requestSource` ('app' | 'apiV1' | 'apiV2').
  */
-export function makeMintCap(source: 'app' | 'apiV1' | 'apiV2' = 'app'): MintCap<ZapContext> {
-  return async (req: IncomingMessage): Promise<ZapContext | null> => {
+export function makeMintCap(
+  source: 'app' | 'apiV1' | 'apiV2' = 'app',
+): MintCap<ZapConnectionContext> {
+  return async (req: IncomingMessage): Promise<ZapConnectionContext | null> => {
     const fetchReq = toFetchRequest(req);
     const requestMetadata = extractRequestMetadata(fetchReq);
     const baseLogger = logger.child({
@@ -96,7 +99,27 @@ export function makeMintCap(source: 'app' | 'apiV1' | 'apiV2' = 'app'): MintCap<
       session: null,
       user: null,
     }));
-    if (!session || !user) return null;
+
+    // No session: the app's pages still serve people without an account — a
+    // recipient signing by their link, a visitor on a direct template link. The
+    // socket opens for them as anonymous, and the dispatcher lets an anonymous
+    // connection reach only the public routes. The operation API has no such
+    // caller: there a request without a token is refused.
+    if (!session || !user) {
+      if (source !== 'app') return null;
+
+      return {
+        user: null,
+        session: null,
+        teamId: -1,
+        logger: baseLogger,
+        metadata: {
+          requestMetadata,
+          source,
+          auth: null,
+        },
+      };
+    }
 
     const rawTeamId = req.headers['x-team-id'];
     const teamIdHeader = Array.isArray(rawTeamId) ? rawTeamId[0] : rawTeamId;

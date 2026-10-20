@@ -20,7 +20,7 @@ import SuperJSON from 'superjson';
 import { ZapReply, ZapRequest, newZapReply } from '../gen/transport_zap';
 import { toWireError } from '../runtime/error';
 import { unpack } from '../runtime/file';
-import type { ZapContext } from './context';
+import type { ZapConnectionContext, ZapContext } from './context';
 
 /** A typed procedure handler: (ctx, input) → output. */
 export type ZapHandler = (ctx: ZapContext, input: unknown) => Promise<unknown> | unknown;
@@ -36,8 +36,8 @@ const decoder = (s: string): unknown => (s === '' ? undefined : unpack(SuperJSON
  * resolve to a NOT_FOUND "not-yet-migrated" ZapReply so the build stays green
  * while routers are ported incrementally.
  */
-export function makeDispatcher(routes: ZapRouteMap) {
-  return (ctx: ZapContext): CallHandler => {
+export function makeDispatcher(routes: ZapRouteMap, publicRoutes: ReadonlySet<string>) {
+  return (ctx: ZapConnectionContext): CallHandler => {
     return async (call: Call): Promise<Response> => {
       let req: ZapRequest;
       try {
@@ -68,12 +68,27 @@ export function makeDispatcher(routes: ZapRouteMap) {
         });
       }
 
-      // Per-call teamId override (ZAP analogue of the x-team-id header).
+      // An anonymous connection reaches the public routes and nothing else.
+      if (ctx.user === null && !publicRoutes.has(route)) {
+        return reply(call.promiseID, {
+          ok: false,
+          status: Status.Unauthorized,
+          result: '',
+          errorJson: JSON.stringify({ code: 'UNAUTHORIZED', message: `sign in to call ${route}` }),
+        });
+      }
+
+      // Per-call teamId override (ZAP analogue of the x-team-id header), for a
+      // signed-in connection. A public handler takes ZapConnectionContext and
+      // reads no team, which routes.ts holds it to.
       const perCallTeamId = req.teamId ? Number(req.teamId) : NaN;
       const ctxForCall: ZapContext =
-        Number.isFinite(perCallTeamId) && perCallTeamId > 0
-          ? { ...ctx, teamId: perCallTeamId }
-          : ctx;
+        ctx.user === null
+          ? // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+            (ctx as unknown as ZapContext)
+          : Number.isFinite(perCallTeamId) && perCallTeamId > 0
+            ? { ...ctx, teamId: perCallTeamId }
+            : ctx;
 
       try {
         const input = decoder(req.payload);
