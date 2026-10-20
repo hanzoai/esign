@@ -124,6 +124,13 @@ as the Remix/tRPC handlers.
   (`envelope.recipient.set`), so a recipient created by one autosave is updated,
   not deleted and recreated, by the next. `envelope-recipients.spec.ts`
   ("several recipients in one visit") holds both.
+- A recipient has no account. The `/zap` socket opens without a session for the
+  app's own pages as an anonymous connection (`mint.ts`), and the dispatcher lets
+  it reach only `publicRoutes` (`zap/server/public-routes.ts`: the routes tRPC
+  served as public procedures, each authorised by the token it carries; their
+  handlers take `ZapConnectionContext`). Before this the socket refused them and
+  no recipient without an account could sign a field. `/v1/rpc` still needs a
+  token. `packages/trpc/__tests__/anonymous.test.ts` holds it.
 - Sealing a completed document signs it with the certificate the local signer
   reads: `NEXT_PRIVATE_SIGNING_LOCAL_FILE_CONTENTS` (base64 p12) and
   `NEXT_PRIVATE_SIGNING_PASSPHRASE`, from KMS `hanzo/sign@prod`. The image has
