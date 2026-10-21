@@ -45,6 +45,11 @@ export const getBearer = async ({ token }: { token: string }) => {
     throw refuse('The API takes an IAM application token; people sign in');
   }
 
+  // A token this app minted for itself is its own, never a caller's.
+  if (claims.azp === env('IAM_CLIENT_ID')) {
+    throw refuse('This application does not call itself');
+  }
+
   const url = appTeams().get(claims.azp);
 
   if (!url) {

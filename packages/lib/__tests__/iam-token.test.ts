@@ -13,6 +13,7 @@ import { SignJWT, exportJWK, generateKeyPair } from 'jose';
 
 import { Machine, verifyIamToken } from '../server-only/iam/token';
 import { appTeams } from '../server-only/public-api/get-bearer';
+import { receivers } from '../server-only/webhooks/send';
 
 const iamUrl = 'https://iam.test';
 const client = { iamUrl, clientId: 'hanzo-sign', clientSecret: 'secret' };
@@ -123,6 +124,19 @@ describe('the teams applications act for', () => {
       ['hanzo-ops', 'ops'],
     ]);
     assert.equal(appTeams('').size, 0);
+  });
+});
+
+describe('the webhooks eSign posts as itself', () => {
+  test('are exact URLs on the Hanzo API, and nothing else', () => {
+    const urls = receivers(
+      'https://api.hanzo.ai/v1/marketing/leads/esign, https://evil.test/x, not a url, https://api.hanzo.ai.evil.test/x',
+    );
+
+    assert.deepEqual([...urls], ['https://api.hanzo.ai/v1/marketing/leads/esign']);
+    assert.equal(urls.has('https://api.hanzo.ai/v1/marketing/leads/esign?x=1'), false);
+    assert.equal(urls.has('https://api.hanzo.ai/v1/billing/usage'), false);
+    assert.equal(receivers('').size, 0);
   });
 });
 

@@ -80,7 +80,7 @@ export class NotifyTransport implements Transport<SentMessageInfo> {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${await this._machine.token()}`,
+          Authorization: `Bearer ${await this._machine.token(HANZO_API)}`,
         },
         body: JSON.stringify({
           to,

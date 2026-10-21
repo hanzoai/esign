@@ -8,7 +8,6 @@
 // the two file-backed routes (calls.find / calls.resend) have their bodies
 // ported verbatim. Route keys mirror the tRPC nested router shape (see
 // webhook-router.zap).
-import type { Prisma } from '@prisma/client';
 import { WebhookCallStatus } from '@prisma/client';
 
 import { TEAM_MEMBER_ROLE_PERMISSIONS_MAP } from '@hanzo/esign-lib/constants/teams';
@@ -18,6 +17,7 @@ import { deleteWebhookById } from '@hanzo/esign-lib/server-only/webhooks/delete-
 import { editWebhook } from '@hanzo/esign-lib/server-only/webhooks/edit-webhook';
 import { getWebhookById } from '@hanzo/esign-lib/server-only/webhooks/get-webhook-by-id';
 import { getWebhooksByTeamId } from '@hanzo/esign-lib/server-only/webhooks/get-webhooks-by-team-id';
+import { sendWebhook } from '@hanzo/esign-lib/server-only/webhooks/send';
 import { triggerTestWebhook } from '@hanzo/esign-lib/server-only/webhooks/trigger-test-webhook';
 import { buildTeamWhereQuery } from '@hanzo/esign-lib/utils/teams';
 import { prisma } from '@hanzo/esign-prisma';
@@ -87,35 +87,21 @@ export const webhookRoutes: ZapRouteMap = {
 
     const { webhook } = webhookCall;
 
-    // Note: This is duplicated in `execute-webhook.handler.ts`.
-    const response = await fetch(webhookCall.url, {
-      method: 'POST',
-      body: JSON.stringify(webhookCall.requestBody),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Hanzo-Secret': webhook.secret ?? '',
-      },
+    const sent = await sendWebhook({
+      url: webhookCall.url,
+      body: webhookCall.requestBody,
+      secret: webhook.secret,
     });
-
-    const body = await response.text();
-
-    let responseBody: Prisma.InputJsonValue | Prisma.JsonNullValueInput;
-
-    try {
-      responseBody = JSON.parse(body);
-    } catch (err) {
-      responseBody = body;
-    }
 
     return await prisma.webhookCall.update({
       where: {
         id: webhookCall.id,
       },
       data: {
-        status: response.ok ? WebhookCallStatus.SUCCESS : WebhookCallStatus.FAILED,
-        responseCode: response.status,
-        responseBody,
-        responseHeaders: Object.fromEntries(response.headers.entries()),
+        status: sent.ok ? WebhookCallStatus.SUCCESS : WebhookCallStatus.FAILED,
+        responseCode: sent.status,
+        responseBody: sent.responseBody,
+        responseHeaders: sent.responseHeaders,
       },
     });
   },
