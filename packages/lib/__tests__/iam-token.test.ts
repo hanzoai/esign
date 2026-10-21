@@ -12,6 +12,7 @@ import { after, before, describe, test } from 'node:test';
 import { SignJWT, exportJWK, generateKeyPair } from 'jose';
 
 import { Machine, verifyIamToken } from '../server-only/iam/token';
+import { appTeams } from '../server-only/public-api/get-bearer';
 
 const iamUrl = 'https://iam.test';
 const client = { iamUrl, clientId: 'hanzo-sign', clientSecret: 'secret' };
@@ -29,7 +30,7 @@ before(async () => {
   const signer =
     (key: CryptoKey) =>
     async (claims: Record<string, unknown>, over: { iss?: string; aud?: string; exp?: string } = {}) =>
-      new SignJWT(claims)
+      new SignJWT({ tokenType: 'access-token', ...claims })
         .setProtectedHeader({ alg: 'RS256', kid: 'cert-hanzo' })
         .setIssuer(over.iss ?? iamUrl)
         .setAudience(over.aud ?? 'hanzo-sign')
@@ -100,12 +101,28 @@ describe('an IAM bearer', () => {
     await assert.rejects(verifyIamToken(await sign({ sub: 'u' }, { exp: '-5m' }), client));
   });
 
+  test('that is a sign-in identity, not an access token, is refused', async () => {
+    await assert.rejects(verifyIamToken(await sign({ sub: 'u', tokenType: 'id-token' }), client));
+  });
+
   test('naming no subject is refused', async () => {
     await assert.rejects(verifyIamToken(await sign({}), client));
   });
 
   test('is never meant for an application with no client id', async () => {
     await assert.rejects(verifyIamToken(await sign({ sub: 'u' }), { ...client, clientId: '' }));
+  });
+});
+
+describe('the teams applications act for', () => {
+  test('are read client by client, and a malformed entry names nobody', () => {
+    const teams = appTeams(' hanzo-cloud:hanzo , bad, :x, y:, a:b:c,hanzo-ops:ops ');
+
+    assert.deepEqual([...teams], [
+      ['hanzo-cloud', 'hanzo'],
+      ['hanzo-ops', 'ops'],
+    ]);
+    assert.equal(appTeams('').size, 0);
   });
 });
 

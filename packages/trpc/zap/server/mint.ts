@@ -6,8 +6,8 @@
 // `null` rejects the upgrade with HTTP 401 — no socket is ever opened for an
 // unauthenticated request, the ZAP analogue of throwing UNAUTHORIZED.
 //
-//   - "Authorization: [Bearer] <token>"  → getBearer, auth:'api', in the team
-//     X-Team-Id names
+//   - "Authorization: [Bearer] <token>"  → getBearer, auth:'api': an IAM
+//     application, in the one team it acts for
 //   - else session cookie                 → getOptionalSession,  auth:'session',
 //     only when Origin is the app's own
 // Both are the functions the rest of the server authenticates with, so there is
@@ -65,13 +65,10 @@ export function makeMintCap(
     });
 
     const token = parseBearer(req.headers.authorization);
-    const rawTeamId = req.headers['x-team-id'];
-    const teamIdHeader = Array.isArray(rawTeamId) ? rawTeamId[0] : rawTeamId;
-    const parsedTeamId = teamIdHeader ? Number(teamIdHeader) : NaN;
 
-    // IAM bearer auth: a person as themselves, an application for its team.
+    // IAM bearer auth: an application, for the one team it acts for.
     if (token) {
-      const bearer = await getBearer({ token, teamId: parsedTeamId }).catch(() => null);
+      const bearer = await getBearer({ token }).catch(() => null);
       if (!bearer) return null;
       return {
         user: bearer.user,
@@ -82,9 +79,7 @@ export function makeMintCap(
           requestMetadata,
           source,
           auth: 'api',
-          auditUser: bearer.app
-            ? { id: null, email: null, name: bearer.app }
-            : { id: bearer.user.id, email: bearer.user.email, name: bearer.user.name },
+          auditUser: { id: null, email: null, name: bearer.id },
         },
       };
     }
@@ -119,6 +114,10 @@ export function makeMintCap(
         },
       };
     }
+
+    const rawTeamId = req.headers['x-team-id'];
+    const teamIdHeader = Array.isArray(rawTeamId) ? rawTeamId[0] : rawTeamId;
+    const parsedTeamId = teamIdHeader ? Number(teamIdHeader) : NaN;
 
     return {
       user,

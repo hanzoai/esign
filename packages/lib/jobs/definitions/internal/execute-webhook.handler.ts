@@ -3,7 +3,7 @@ import { WebhookCallStatus } from '@prisma/client';
 
 import { prisma } from '@hanzo/esign-prisma';
 
-import { machine } from '../../../server-only/iam/token';
+import { HANZO_API, machine } from '../../../server-only/iam/token';
 import type { JobRunIO } from '../../client/_internal/job';
 import type { TExecuteWebhookJobDefinition } from './execute-webhook';
 
@@ -31,19 +31,24 @@ export const run = async ({
     webhookEndpoint: url,
   };
 
-  // The call is made as this application: an IAM token minted for the
-  // endpoint's own origin (RFC 8707), which the receiver verifies against IAM's
-  // keys, and which no other service would accept. A Hanzo service receiving it
-  // needs no secret of its own; the webhook's secret, when one was set, rides
-  // beside it for a receiver outside Hanzo.
+  // A webhook to the Hanzo API is made as this application: an IAM token minted
+  // for that API (RFC 8707), which it verifies like any other caller, so the
+  // receiver holds no secret of ours. Any other endpoint is sent no identity at
+  // all, only the webhook's own secret when one was set: a team's webhook must
+  // never hand eSign's credential to wherever it points.
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+    'X-Hanzo-Secret': secret ?? '',
+  };
+
+  if (new URL(url).origin === HANZO_API) {
+    headers.Authorization = `Bearer ${await machine.token(HANZO_API)}`;
+  }
+
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify(payloadData),
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${await machine.token(new URL(url).origin)}`,
-      'X-Hanzo-Secret': secret ?? '',
-    },
+    headers,
   });
 
   const body = await response.text();

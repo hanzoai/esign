@@ -39,7 +39,7 @@ export const downloadRoute = new Hono<HonoEnv>()
           });
         }
 
-        const apiToken = await getBearer({ token, teamId: Number(c.req.header('x-team-id')) });
+        const apiToken = await getBearer({ token });
 
         logger.info({
           auth: 'api',
@@ -118,7 +118,7 @@ export const downloadRoute = new Hono<HonoEnv>()
           });
         }
 
-        const apiToken = await getBearer({ token, teamId: Number(c.req.header('x-team-id')) });
+        const apiToken = await getBearer({ token });
 
         logger.info({
           auth: 'api',

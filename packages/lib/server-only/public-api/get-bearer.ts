@@ -1,10 +1,8 @@
 import { prisma } from '@hanzo/esign-prisma';
 
-import { IAM_PROVIDER } from '../../constants/auth';
 import { AppError, AppErrorCode } from '../../errors/app-error';
 import { env } from '../../utils/env';
 import { credentialIsCurrent } from '../../utils/iam-sign-in';
-import { buildTeamWhereQuery } from '../../utils/teams';
 import { verifyIamToken } from '../iam/token';
 import { readStanding } from '../user/standing';
 
@@ -14,58 +12,55 @@ const refuse = (message = 'Invalid token') =>
   new AppError(AppErrorCode.UNAUTHORIZED, { message, statusCode: 401 });
 
 /**
- * The one bearer this server accepts: a Hanzo IAM access token minted for it —
- * signed by a key IAM publishes, issued by IAM, its audience this application's
- * own client id, unexpired (verifyIamToken). Nothing else authenticates a call
- * that carries no session: this server mints no tokens of its own.
- *
- * Every bearer acts in one team, the one it names (X-Team-Id).
- *
- *   - A PERSON acts as themselves: the account their IAM sign-in linked, in a
- *     team they belong to.
- *   - An APPLICATION acts for a team of the org this eSign serves (IAM_ORG) and
- *     of no other: an app of another org is refused whatever team it names. It
- *     acts as the team's organisation owner, who is who a team-wide credential
- *     has always acted as, and it is audited under its own IAM name.
- *
- * Either way the user it acts as must stand where sign-in admits them.
+ * The team each IAM application acts for, from IAM_APP_TEAMS: `<client id>:<team
+ * url>`, comma-separated, e.g. `hanzo-cloud:hanzo`. An application not named
+ * here acts for nobody.
  */
-export const getBearer = async ({ token, teamId }: { token: string; teamId?: number }) => {
+export const appTeams = (raw = env('IAM_APP_TEAMS') ?? ''): Map<string, string> =>
+  new Map(
+    raw
+      .split(',')
+      .map((pair) => pair.trim().split(':'))
+      .filter((pair): pair is [string, string] => pair.length === 2 && pair.every(Boolean)),
+  );
+
+/**
+ * The one bearer this server accepts: a Hanzo IAM access token an APPLICATION
+ * minted for this server — signed by a key IAM publishes, issued by IAM, its
+ * audience this server's own client id, unexpired (verifyIamToken) — from a
+ * client IAM_APP_TEAMS names. People sign in; the API is for services, and this
+ * server mints no tokens of its own.
+ *
+ * The application acts for exactly the one team IAM_APP_TEAMS maps its client
+ * to, as that team's organisation owner (who a team-wide credential has always
+ * acted as), and is audited under its own IAM subject. The owner must stand
+ * where sign-in admits them.
+ */
+export const getBearer = async ({ token }: { token: string }) => {
   const claims = await verifyIamToken(token).catch(() => {
     throw refuse();
   });
 
-  if (!teamId || !Number.isInteger(teamId) || teamId <= 0) {
-    throw refuse('A bearer acts in one team: name it with X-Team-Id');
+  if (claims.type !== 'application' || !claims.azp) {
+    throw refuse('The API takes an IAM application token; people sign in');
   }
 
-  const app = claims.type === 'application';
+  const url = appTeams().get(claims.azp);
 
-  if (app && (!env('IAM_ORG') || claims.owner !== env('IAM_ORG'))) {
-    throw refuse('An application acts here only for the org this eSign serves');
+  if (!url) {
+    throw refuse('This application acts for no team here');
   }
 
-  const person = app
-    ? null
-    : await prisma.account.findFirst({
-        where: { provider: IAM_PROVIDER, providerAccountId: claims.sub },
-        select: { user: holder },
-      });
-
-  if (!app && !person) {
-    throw refuse('This IAM account has never signed in here');
-  }
-
-  const team = await prisma.team.findFirst({
-    where: person ? buildTeamWhereQuery({ teamId, userId: person.user.id }) : { id: teamId },
+  const team = await prisma.team.findUnique({
+    where: { url },
     include: { organisation: { select: { owner: holder } } },
   });
 
   if (!team) {
-    throw refuse('No such team for this bearer');
+    throw refuse('This application acts for no team here');
   }
 
-  const user = person ? person.user : team.organisation.owner;
+  const user = team.organisation.owner;
   const standing = await readStanding(user.id);
 
   if (!standing || !credentialIsCurrent(standing)) {
@@ -73,10 +68,8 @@ export const getBearer = async ({ token, teamId }: { token: string; teamId?: num
   }
 
   return {
-    /** The IAM subject, for the request log. */
+    /** The application's IAM subject, which every act is audited under. */
     id: claims.sub,
-    /** Set for an application: the name the act is audited under. */
-    app: app ? claims.sub : null,
     user,
     userId: user.id,
     team,

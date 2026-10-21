@@ -10,6 +10,9 @@ import { env } from '../../utils/env';
  * application keeps no credential of its own beyond its IAM client.
  */
 
+/** The unified Hanzo API: the one origin this application calls as itself. */
+export const HANZO_API = 'https://api.hanzo.ai';
+
 /** Re-mint a little before expiry so a call never races the clock. */
 const TOKEN_SKEW_SECONDS = 60;
 
@@ -160,6 +163,10 @@ export type IamClaims = JWTPayload & {
   owner?: string;
   /** `application` for a machine acting as itself; a person otherwise. */
   type?: string;
+  /** The client the token was minted by. */
+  azp?: string;
+  /** `access-token`, or `id-token` for a sign-in's identity, which is never a bearer. */
+  tokenType?: string;
 };
 
 let issuer: Promise<{ iss: string; keys: ReturnType<typeof createRemoteJWKSet> }> | null = null;
@@ -210,6 +217,10 @@ export const verifyIamToken = async (
 
   if (typeof payload.sub !== 'string' || payload.sub === '') {
     throw new Error('an IAM token names no subject');
+  }
+
+  if (payload.tokenType !== 'access-token') {
+    throw new Error('an IAM token that is not an access token is no bearer');
   }
 
   return payload as IamClaims;

@@ -171,25 +171,27 @@ as the Remix/tRPC handlers.
 - Prettier's Tailwind plugin finds the hoisted Tailwind 4 and fails on this tree; format
   with a config that sets `tailwindConfig` to `apps/remix/tailwind.config.ts`.
 
-## One way in: an IAM bearer
-A call without a session carries a Hanzo IAM access token, and nothing else
-authenticates it: this server mints no tokens of its own. `public-api/get-bearer.ts`
-is the one resolver behind `/v1/rpc` (mint.ts), `/v1/rest` and the download routes.
-The token must be signed by a key in hanzo.id's JWKS, issued by hanzo.id, minted FOR
-this app (`aud` = `IAM_CLIENT_ID`, RFC 8707 `resource`), and unexpired
-(`server-only/iam/token.ts`, `verifyIamToken`). It acts in the team `X-Team-Id` names:
+## One way in: an IAM application's token
+People sign in; the API is for services. A call without a session carries a Hanzo IAM
+ACCESS token (`tokenType` access-token, never a sign-in's id_token) that an APPLICATION
+minted for this app: signed by a key in hanzo.id's JWKS, issued by hanzo.id, `aud` =
+`IAM_CLIENT_ID` (RFC 8707 `resource`), unexpired (`server-only/iam/token.ts`,
+`verifyIamToken`). `public-api/get-bearer.ts` is the one resolver behind `/v1/rpc`
+(mint.ts), `/v1/rest` and the download routes, and this server mints no tokens of its own.
 
-- a person as themselves, through the account their IAM sign-in linked, in a team
-  they belong to;
-- an application only for the org this eSign serves (`IAM_ORG`, the token's `owner`),
-  as the team's organisation owner, audited under its IAM subject (`admin/hanzo-cloud`).
+`IAM_APP_TEAMS` (`<client id>:<team url>`, comma-separated) is the whole grant: the
+token's `azp` must be listed, and the application acts for exactly that one team, as
+its organisation owner, audited under its IAM subject (`admin/hanzo-cloud`). Since
+`resource` lets any authenticated client mint `aud` = this app, the audience proves
+nothing alone; the list does. Empty is nobody.
 
-The other way round, this app calls Hanzo services as itself: `Machine` mints its
-client_credentials token for the service it spends it at (notify, and every webhook,
-whose token is minted for the endpoint's origin, so a Hanzo receiver verifies it
-against hanzo.id and needs no secret). Zapier, which could only carry an API token,
-is gone. An API token is still read in exactly one place: embed authoring signs its
-presign token with one (`embedding-presign/api-token.ts`).
+The other way round, this app calls the Hanzo API as itself: `Machine` mints its
+client_credentials token for the service it spends it at. notify takes it, and a
+webhook to `https://api.hanzo.ai` carries one minted for that API, so the receiver
+verifies eSign against hanzo.id and holds no secret. A webhook anywhere else is sent no
+identity, only its own secret. Zapier, which could only carry an API token, is gone.
+An API token is still read in exactly one place: embed authoring signs its presign
+token with one (`embedding-presign/api-token.ts`).
 
 ## Shipping and what is still broken
 - The pin is universe `charts/app/values/hanzo/sign.yaml` (image
@@ -200,8 +202,9 @@ presign token with one (`embedding-presign/api-token.ts`).
   `/sign@prod`), read by the operator under its grant in `kms-grants.yaml`.
 - The investor SAFE template is built from hanzoai/deck `safe/`; the intake that
   sends it is hanzo-inc/cloud `POST /v1/marketing/leads` (program `investor`), calling
-  `/v1/rpc` as cloud's own IAM application with `X-Team-Id`. The team's webhook posts
-  back to `/v1/marketing/leads/esign` as this app's IAM identity.
+  `/v1/rpc` as cloud's own IAM application, which `IAM_APP_TEAMS` maps to the team
+  that holds the template. The team's webhook posts back to
+  `/v1/marketing/leads/esign` as this app's IAM identity.
 - Broken, found and not fixed: deleting an account fails ("Deleted account service
   account not found"): the SQLite `0_init` never created the deleted-account
   service user the delete hands envelopes to. `/admin/documents/<id>` answers 500.

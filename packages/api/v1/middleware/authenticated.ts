@@ -61,7 +61,7 @@ export const authenticatedMiddleware = <
         });
       }
 
-      const bearer = await getBearer({ token, teamId: Number(request.headers.get('x-team-id')) });
+      const bearer = await getBearer({ token });
 
       apiLogger.info({
         ...infoToLog,
@@ -73,9 +73,7 @@ export const authenticatedMiddleware = <
         requestMetadata,
         source: 'apiV1',
         auth: 'api',
-        auditUser: bearer.app
-          ? { id: null, email: null, name: bearer.app }
-          : { id: bearer.user.id, email: bearer.user.email, name: bearer.user.name },
+        auditUser: { id: null, email: null, name: bearer.id },
       };
 
       return await handler(

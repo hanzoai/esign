@@ -3,12 +3,19 @@ import type { Address } from 'nodemailer/lib/mailer';
 import type MailMessage from 'nodemailer/lib/mailer/mail-message';
 
 import type { IamClient } from '@hanzo/esign-lib/server-only/iam/token';
-import { Machine, iamClient, post, refused, retry } from '@hanzo/esign-lib/server-only/iam/token';
+import {
+  HANZO_API,
+  Machine,
+  iamClient,
+  post,
+  refused,
+  retry,
+} from '@hanzo/esign-lib/server-only/iam/token';
 
 const VERSION = '1.0.0';
 
 /** The unified endpoint. Every Hanzo service reaches notify here. */
-const NOTIFY_SEND_EMAIL = 'https://api.hanzo.ai/v1/notify/send/email?sync=true';
+const NOTIFY_SEND_EMAIL = `${HANZO_API}/v1/notify/send/email?sync=true`;
 
 type NodeMailerAddress = string | Address | Array<string | Address> | undefined;
 
