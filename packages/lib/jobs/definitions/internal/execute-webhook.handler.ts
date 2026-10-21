@@ -31,7 +31,7 @@ export const run = async ({
     webhookEndpoint: url,
   };
 
-  const sent = await sendWebhook({ url, body: payloadData, secret });
+  const sent = await sendWebhook({ url, body: payloadData, secret, teamId: webhook.teamId });
 
   await prisma.webhookCall.create({
     data: {

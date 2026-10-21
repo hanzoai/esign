@@ -128,14 +128,15 @@ describe('the teams applications act for', () => {
 });
 
 describe('the webhooks eSign posts as itself', () => {
-  test('are exact URLs on the Hanzo API, and nothing else', () => {
+  test('are a team and an exact URL on the Hanzo API, together', () => {
     const urls = receivers(
-      'https://api.hanzo.ai/v1/marketing/leads/esign, https://evil.test/x, not a url, https://api.hanzo.ai.evil.test/x',
+      'hanzo=https://api.hanzo.ai/v1/marketing/leads/esign, hanzo=https://evil.test/x, =https://api.hanzo.ai/v1/x, ' +
+        'hanzo=not a url, hanzo=https://api.hanzo.ai.evil.test/x, https://api.hanzo.ai/v1/y, a=b=c',
     );
 
-    assert.deepEqual([...urls], ['https://api.hanzo.ai/v1/marketing/leads/esign']);
-    assert.equal(urls.has('https://api.hanzo.ai/v1/marketing/leads/esign?x=1'), false);
-    assert.equal(urls.has('https://api.hanzo.ai/v1/billing/usage'), false);
+    assert.deepEqual([...urls], ['hanzo https://api.hanzo.ai/v1/marketing/leads/esign']);
+    assert.equal(urls.has('acme https://api.hanzo.ai/v1/marketing/leads/esign'), false);
+    assert.equal(urls.has('hanzo https://api.hanzo.ai/v1/marketing/leads/esign?x=1'), false);
     assert.equal(receivers('').size, 0);
   });
 });

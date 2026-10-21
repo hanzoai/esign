@@ -188,9 +188,10 @@ nothing alone; the list does. Empty is nobody.
 The other way round, this app calls the Hanzo API as itself: `Machine` mints its
 client_credentials token for the Hanzo API (`resource` https://api.hanzo.ai), never for
 itself, and refuses any bearer its own client minted. notify takes it, and so does a
-webhook whose URL `HANZO_WEBHOOKS` lists exactly (`webhooks/send.ts`, the one sender for
-sends and resends), so the receiver verifies eSign against hanzo.id and holds no secret;
-what it answers is not kept for the team to read. A webhook anywhere else is sent no
+webhook whose team and exact URL `HANZO_WEBHOOKS` lists together (`<team url>=<url>`;
+`webhooks/send.ts`, the one sender for sends and resends, following no redirect), so the
+receiver verifies eSign against hanzo.id and holds no secret; what it answers is not kept
+for the team to read. A webhook anywhere else is sent no
 identity, only its own secret: a team chooses where its webhook points. Zapier, which could only carry an API token, is gone.
 An API token is still read in exactly one place: embed authoring signs its presign
 token with one (`embedding-presign/api-token.ts`).

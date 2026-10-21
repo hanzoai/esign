@@ -91,6 +91,7 @@ export const webhookRoutes: ZapRouteMap = {
       url: webhookCall.url,
       body: webhookCall.requestBody,
       secret: webhook.secret,
+      teamId: webhook.teamId,
     });
 
     return await prisma.webhookCall.update({
