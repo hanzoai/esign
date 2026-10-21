@@ -5,7 +5,13 @@ import { credentialIsCurrent } from '../../utils/iam-sign-in';
 import { hashString } from '../auth/hash';
 import { readStanding } from '../user/standing';
 
-export const getApiTokenByToken = async ({ token }: { token: string }) => {
+/**
+ * An embedding presign token is signed with the API token it was minted from, so
+ * the embed authoring flow is the one place an API token is still read. It is a
+ * credential a customer's backend hands its own iframe, never a way into this
+ * server's API: every bearer the API accepts is an IAM token (public-api/get-bearer).
+ */
+export const apiTokenByToken = async ({ token }: { token: string }) => {
   const hashedToken = hashString(token);
 
   const apiToken = await prisma.apiToken.findFirst({

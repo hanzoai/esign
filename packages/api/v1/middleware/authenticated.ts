@@ -3,7 +3,7 @@ import type { TsRestRequest } from '@ts-rest/serverless';
 import type { Logger } from 'pino';
 
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
-import { getApiTokenByToken } from '@hanzo/esign-lib/server-only/public-api/get-api-token-by-token';
+import { getBearer } from '@hanzo/esign-lib/server-only/public-api/get-bearer';
 import type { BaseApiLog, RootApiLog } from '@hanzo/esign-lib/types/api-logs';
 import type { ApiRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
 import { extractRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
@@ -52,38 +52,30 @@ export const authenticatedMiddleware = <
     try {
       const { authorization } = args.headers;
 
-      // Support for both "Authorization: Bearer api_xxx" and "Authorization: api_xxx"
+      // A Hanzo IAM token, as "Authorization: Bearer <token>" or bare.
       const [token] = (authorization || '').split('Bearer ').filter((s) => s.length > 0);
 
       if (!token) {
         throw new AppError(AppErrorCode.UNAUTHORIZED, {
-          message: 'API token was not provided',
+          message: 'An IAM bearer token was not provided',
         });
       }
 
-      const apiToken = await getApiTokenByToken({ token });
-
-      if (apiToken.user.disabled) {
-        throw new AppError(AppErrorCode.UNAUTHORIZED, {
-          message: 'User is disabled',
-        });
-      }
+      const bearer = await getBearer({ token, teamId: Number(request.headers.get('x-team-id')) });
 
       apiLogger.info({
         ...infoToLog,
-        userId: apiToken.user.id,
-        apiTokenId: apiToken.id,
+        userId: bearer.user.id,
+        bearer: bearer.id,
       } satisfies BaseApiLog);
 
       const metadata: ApiRequestMetadata = {
         requestMetadata,
         source: 'apiV1',
         auth: 'api',
-        auditUser: {
-          id: apiToken.team ? null : apiToken.user.id,
-          email: apiToken.team ? null : apiToken.user.email,
-          name: apiToken.team?.name ?? apiToken.user.name,
-        },
+        auditUser: bearer.app
+          ? { id: null, email: null, name: bearer.app }
+          : { id: bearer.user.id, email: bearer.user.email, name: bearer.user.name },
       };
 
       return await handler(
@@ -91,8 +83,8 @@ export const authenticatedMiddleware = <
           ...args,
           req: request,
         },
-        apiToken.user,
-        apiToken.team,
+        bearer.user,
+        bearer.team,
         { metadata, logger: apiLogger },
       );
     } catch (err) {

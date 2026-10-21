@@ -17,12 +17,12 @@
 //     so the literal bytes are load-bearing.
 //   * createEmbeddingEnvelope / Document / Template and the update* routes —
 //     Bearer is a PRESIGN token (a signed JWT), verified by
-//     verifyEmbeddingPresignToken, NOT by getApiTokenByToken.
+//     verifyEmbeddingPresignToken, NOT by getBearer.
 //
 // The ZAP MintCap (mint.ts) authenticates ONCE at the WS upgrade via
-// getApiTokenByToken / session cookie and discards the raw header. It cannot:
+// getBearer / session cookie and discards the raw header. It cannot:
 //   (a) preserve the raw API-token string createEmbeddingPresignToken needs, nor
-//   (b) mint a context for a presign-token credential (getApiTokenByToken does
+//   (b) mint a context for a presign-token credential (getBearer does
 //       not recognise a presign JWT → the upgrade would be rejected with 401).
 //
 // So the credential travels in the request PAYLOAD under ZAP, exactly as the
@@ -31,7 +31,7 @@
 // local `.and(z.object({ presignToken | apiToken: z.string() }))` so the
 // ORIGINAL exported request schema and its inferred types stay untouched. The
 // verification + authorization logic (verifyEmbeddingPresignToken /
-// getApiTokenByToken + organisation-claim checks) is preserved BYTE-FOR-BYTE;
+// apiTokenByToken + organisation-claim checks) is preserved BYTE-FOR-BYTE;
 // only the line that SOURCED the token (header → input) changes. verify and
 // getMultiSignDocument are public (token-in-body already) and need no shim.
 import { DocumentStatus, EnvelopeType } from '@prisma/client';
@@ -43,6 +43,7 @@ import { IS_BILLING_ENABLED } from '@hanzo/esign-lib/constants/app';
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import { getDocumentAndSenderByToken } from '@hanzo/esign-lib/server-only/document/get-document-by-token';
 import { viewedDocument } from '@hanzo/esign-lib/server-only/document/viewed-document';
+import { apiTokenByToken } from '@hanzo/esign-lib/server-only/embedding-presign/api-token';
 import { createEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/create-embedding-presign-token';
 import { verifyEmbeddingPresignToken } from '@hanzo/esign-lib/server-only/embedding-presign/verify-embedding-presign-token';
 import { UNSAFE_createEnvelopeItems } from '@hanzo/esign-lib/server-only/envelope-item/create-envelope-items';
@@ -56,7 +57,6 @@ import { getFieldsForToken } from '@hanzo/esign-lib/server-only/field/get-fields
 import { setFieldsForDocument } from '@hanzo/esign-lib/server-only/field/set-fields-for-document';
 import { setFieldsForTemplate } from '@hanzo/esign-lib/server-only/field/set-fields-for-template';
 import { getOrganisationClaimByTeamId } from '@hanzo/esign-lib/server-only/organisation/get-organisation-claims';
-import { getApiTokenByToken } from '@hanzo/esign-lib/server-only/public-api/get-api-token-by-token';
 import { getRecipientByToken } from '@hanzo/esign-lib/server-only/recipient/get-recipient-by-token';
 import { setDocumentRecipients } from '@hanzo/esign-lib/server-only/recipient/set-document-recipients';
 import { setTemplateRecipients } from '@hanzo/esign-lib/server-only/recipient/set-template-recipients';
@@ -106,7 +106,7 @@ export const embeddingRoutes: ZapRouteMap = {
       const { expiresIn, scope } = input;
 
       if (IS_BILLING_ENABLED()) {
-        const token = await getApiTokenByToken({ token: apiToken });
+        const token = await apiTokenByToken({ token: apiToken });
 
         if (!token.userId) {
           throw new AppError(AppErrorCode.UNAUTHORIZED, {

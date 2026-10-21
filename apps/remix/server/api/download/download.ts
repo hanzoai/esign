@@ -4,7 +4,7 @@ import { Hono } from 'hono';
 
 import { AppError, AppErrorCode } from '@hanzo/esign-lib/errors/app-error';
 import { getEnvelopeById } from '@hanzo/esign-lib/server-only/envelope/get-envelope-by-id';
-import { getApiTokenByToken } from '@hanzo/esign-lib/server-only/public-api/get-api-token-by-token';
+import { getBearer } from '@hanzo/esign-lib/server-only/public-api/get-bearer';
 import { buildTeamWhereQuery } from '@hanzo/esign-lib/utils/teams';
 import { prisma } from '@hanzo/esign-prisma';
 
@@ -30,29 +30,23 @@ export const downloadRoute = new Hono<HonoEnv>()
         const { envelopeItemId, version } = c.req.valid('param');
         const authorizationHeader = c.req.header('authorization');
 
-        // Support for both "Authorization: Bearer api_xxx" and "Authorization: api_xxx"
+        // A Hanzo IAM token, as "Authorization: Bearer <token>" or bare.
         const [token] = (authorizationHeader || '').split('Bearer ').filter((s) => s.length > 0);
 
         if (!token) {
           throw new AppError(AppErrorCode.UNAUTHORIZED, {
-            message: 'API token was not provided',
+            message: 'An IAM bearer token was not provided',
           });
         }
 
-        const apiToken = await getApiTokenByToken({ token });
-
-        if (apiToken.user.disabled) {
-          throw new AppError(AppErrorCode.UNAUTHORIZED, {
-            message: 'User is disabled',
-          });
-        }
+        const apiToken = await getBearer({ token, teamId: Number(c.req.header('x-team-id')) });
 
         logger.info({
           auth: 'api',
           source: 'apiV2',
           path: c.req.path,
           userId: apiToken.user.id,
-          apiTokenId: apiToken.id,
+          bearer: apiToken.id,
           envelopeItemId,
           version,
         });
@@ -115,29 +109,23 @@ export const downloadRoute = new Hono<HonoEnv>()
         const { documentId, version } = c.req.valid('param');
         const authorizationHeader = c.req.header('authorization');
 
-        // Support for both "Authorization: Bearer api_xxx" and "Authorization: api_xxx"
+        // A Hanzo IAM token, as "Authorization: Bearer <token>" or bare.
         const [token] = (authorizationHeader || '').split('Bearer ').filter((s) => s.length > 0);
 
         if (!token) {
           throw new AppError(AppErrorCode.UNAUTHORIZED, {
-            message: 'API token was not provided',
+            message: 'An IAM bearer token was not provided',
           });
         }
 
-        const apiToken = await getApiTokenByToken({ token });
-
-        if (apiToken.user.disabled) {
-          throw new AppError(AppErrorCode.UNAUTHORIZED, {
-            message: 'User is disabled',
-          });
-        }
+        const apiToken = await getBearer({ token, teamId: Number(c.req.header('x-team-id')) });
 
         logger.info({
           auth: 'api',
           source: 'apiV2',
           path: c.req.path,
           userId: apiToken.user.id,
-          apiTokenId: apiToken.id,
+          bearer: apiToken.id,
           documentId,
           version,
         });

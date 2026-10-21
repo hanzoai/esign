@@ -4,10 +4,6 @@ import { Hono } from 'hono';
 import { ApiContractV1 } from '@hanzo/esign-api/v1/contract';
 import { ApiContractV1Implementation } from '@hanzo/esign-api/v1/implementation';
 import { OpenAPIV1 } from '@hanzo/esign-api/v1/openapi';
-import { testCredentialsHandler } from '@hanzo/esign-lib/server-only/public-api/test-credentials';
-import { listDocumentsHandler } from '@hanzo/esign-lib/server-only/webhooks/zapier/list-documents';
-import { subscribeHandler } from '@hanzo/esign-lib/server-only/webhooks/zapier/subscribe';
-import { unsubscribeHandler } from '@hanzo/esign-lib/server-only/webhooks/zapier/unsubscribe';
 // This is a bit nasty. Todo: Extract
 import type { HonoEnv } from '@hanzo/esign-remix/server/router';
 
@@ -17,14 +13,7 @@ export const tsRestHonoApp = new Hono<HonoEnv>();
 
 tsRestHonoApp
   .get('/openapi', (c) => c.redirect('https://openapi-v1.esign.hanzo.ai'))
-  .get('/openapi.json', (c) => c.json(OpenAPIV1))
-  .get('/me', async (c) => testCredentialsHandler(c.req.raw));
-
-// Zapier. Todo: (RR7) Check methods. Are these get/post/update requests?
-tsRestHonoApp
-  .all('/zapier/list-documents', async (c) => listDocumentsHandler(c.req.raw))
-  .all('/zapier/subscribe', async (c) => subscribeHandler(c.req.raw))
-  .all('/zapier/unsubscribe', async (c) => unsubscribeHandler(c.req.raw));
+  .get('/openapi.json', (c) => c.json(OpenAPIV1));
 
 tsRestHonoApp.mount('/', async (request) => {
   return fetchRequestHandler({

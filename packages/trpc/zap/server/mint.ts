@@ -2,22 +2,22 @@
 //
 // This is the single replacement for tRPC's `authenticatedMiddleware`. It runs
 // ONCE at the WebSocket upgrade (before the socket opens) and turns the bearer
-// (API token) or the session cookie into a `ZapContext`. Returning `null`
-// rejects the upgrade with HTTP 401 — no socket is ever opened for an
+// (a Hanzo IAM token) or the session cookie into a `ZapContext`. Returning
+// `null` rejects the upgrade with HTTP 401 — no socket is ever opened for an
 // unauthenticated request, the ZAP analogue of throwing UNAUTHORIZED.
 //
-// Auth semantics are byte-identical to the tRPC middleware:
-//   - "Authorization: [Bearer] <token>"  → getApiTokenByToken, auth:'api'
+//   - "Authorization: [Bearer] <token>"  → getBearer, auth:'api', in the team
+//     X-Team-Id names
 //   - else session cookie                 → getOptionalSession,  auth:'session',
 //     only when Origin is the app's own
-// The same getApiTokenByToken + session validation functions are reused, so
-// there is no second auth code path.
+// Both are the functions the rest of the server authenticates with, so there is
+// no second auth code path.
 import type { MintCap } from '@zap-proto/web/server';
 import type { IncomingMessage } from 'node:http';
 
 import { getOptionalSession } from '@hanzo/esign-auth/server/lib/utils/get-session';
 import { NEXT_PUBLIC_WEBAPP_URL } from '@hanzo/esign-lib/constants/app';
-import { getApiTokenByToken } from '@hanzo/esign-lib/server-only/public-api/get-api-token-by-token';
+import { getBearer } from '@hanzo/esign-lib/server-only/public-api/get-bearer';
 import { extractRequestMetadata } from '@hanzo/esign-lib/universal/extract-request-metadata';
 import { alphaid } from '@hanzo/esign-lib/universal/id';
 import { logger } from '@hanzo/esign-lib/utils/logger';
@@ -65,27 +65,26 @@ export function makeMintCap(
     });
 
     const token = parseBearer(req.headers.authorization);
+    const rawTeamId = req.headers['x-team-id'];
+    const teamIdHeader = Array.isArray(rawTeamId) ? rawTeamId[0] : rawTeamId;
+    const parsedTeamId = teamIdHeader ? Number(teamIdHeader) : NaN;
 
-    // API-token auth.
+    // IAM bearer auth: a person as themselves, an application for its team.
     if (token) {
-      const apiToken = await getApiTokenByToken({ token }).catch(() => null);
-      if (!apiToken) return null;
+      const bearer = await getBearer({ token, teamId: parsedTeamId }).catch(() => null);
+      if (!bearer) return null;
       return {
-        user: apiToken.user,
+        user: bearer.user,
         session: null,
-        teamId: apiToken.teamId ?? -1,
+        teamId: bearer.teamId,
         logger: baseLogger,
         metadata: {
           requestMetadata,
           source,
           auth: 'api',
-          auditUser: apiToken.team
-            ? { id: null, email: null, name: apiToken.team.name }
-            : {
-                id: apiToken.user.id,
-                email: apiToken.user.email,
-                name: apiToken.user.name,
-              },
+          auditUser: bearer.app
+            ? { id: null, email: null, name: bearer.app }
+            : { id: bearer.user.id, email: bearer.user.email, name: bearer.user.name },
         },
       };
     }
@@ -120,10 +119,6 @@ export function makeMintCap(
         },
       };
     }
-
-    const rawTeamId = req.headers['x-team-id'];
-    const teamIdHeader = Array.isArray(rawTeamId) ? rawTeamId[0] : rawTeamId;
-    const parsedTeamId = teamIdHeader ? Number(teamIdHeader) : NaN;
 
     return {
       user,

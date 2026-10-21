@@ -17,7 +17,8 @@ export type BaseApiLog = Partial<RootApiLog> & {
   auth: ApiRequestMetadata['auth'];
   source: ApiRequestMetadata['source'];
   userId?: number | null;
-  apiTokenId?: number | null;
+  /** The IAM subject of the bearer. */
+  bearer?: string | null;
 };
 
 /**

@@ -14,7 +14,7 @@
 //
 // Auth is per-request via makeMintCap('apiV2'), which reads
 // "Authorization: Bearer <token>" off the IncomingMessage and resolves it via
-// getApiTokenByToken — identical to the tRPC apiV2 context. httpServe hands the
+// getBearer — identical to the tRPC apiV2 context. httpServe hands the
 // mint the raw upgrade/request auth boundary, so no second auth path exists.
 import type { Server as HttpServer } from 'node:http';
 
