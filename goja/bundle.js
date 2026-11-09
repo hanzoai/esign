@@ -10,8 +10,8 @@
 // cannot provide:
 //
 //   Host contract (gojabase injects these per dispatch):
-//     globalThis.__db.query(sql, args) -> rows[]                 // per-tenant Base/SQLite
-//     globalThis.__db.exec(sql, args)  -> { changes, lastId }    // (one txn per dispatch;
+//     globalThis.__db.query(sql, args) -> rows[]                 // per-tenant store (SQLite or hanzo-sql)
+//     globalThis.__db.exec(sql, args)  -> { changes }            // (one txn per dispatch;
 //     globalThis.__newId()             -> crypto-random id        //  commits iff status<400)
 //     globalThis.__now()               -> unix milliseconds
 //   Host capability (esign injects via gojabase Config.HostFns):
@@ -25,6 +25,14 @@
 // calling handle, and passes it as orgId. This bundle never chooses a tenant — it
 // only issues SQL — so tenant isolation is a host property. The physical schema
 // is created by clients/sign (schema.go); this bundle owns the queries + flow.
+//
+// DIALECT: the SQL below is the one SQLite and PostgreSQL share, so the bundle runs
+// on a tenant's SQLite file and on a schema of hanzo-sql alike: $n placeholders in
+// the order they first appear, BIGINT integers, DOUBLE PRECISION where the caller's
+// number is kept as it was sent (a page, a signing order, a position), a text
+// argument that is always a string or null, NULLS FIRST where the order of a
+// nullable column decides who signs next, and a seq column for the order rows were
+// written in.
 (function () {
   'use strict';
 
@@ -71,6 +79,9 @@
   function jstr(v) { return v == null ? null : JSON.stringify(v); }
   function str(v) { return v == null ? '' : String(v); }
   function num(v, d) { var n = Number(v); return isFinite(n) ? n : d; }
+  // opt is a caller's value bound to a TEXT column: a string, or null when it is
+  // absent or empty. A number bound to text is an error on PostgreSQL.
+  function opt(v) { return v == null || v === '' ? null : String(v); }
   function reqBody(req) { return (req && req.body) || {}; }
 
   // strip a data: URL prefix from a base64 image, returning raw base64.
@@ -81,30 +92,36 @@
     return i >= 0 ? s.slice(i + 7) : s;
   }
 
+  // seq is the number a new row of recipients or audit_logs takes in its seq column,
+  // one past the largest: rows listed in the order they were written (the order a
+  // file gave by rowid, which a server has no spelling of). Every dispatch is the
+  // only writer of its store, so no two rows take the same number.
+  function nextSeq(table) { return '(SELECT COALESCE(MAX(seq), 0) + 1 FROM ' + table + ')'; }
+
   // --- audit trail ----------------------------------------------------------
   function audit(documentId, type, data, actor) {
     actor = actor || {};
     exec(
-      'INSERT INTO audit_logs (id, document_id, type, data, name, email, ip_address, user_agent, created_at) VALUES (?,?,?,?,?,?,?,?,?)',
-      [id(), documentId, type, jstr(data || {}), actor.name || null, actor.email || null,
-       actor.ip || null, actor.userAgent || null, now()]
+      'INSERT INTO audit_logs (id, document_id, type, data, name, email, ip_address, user_agent, created_at, seq) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,' + nextSeq('audit_logs') + ')',
+      [id(), documentId, type, jstr(data || {}), opt(actor.name), opt(actor.email),
+       opt(actor.ip), opt(actor.userAgent), now()]
     );
   }
 
   // --- data access ----------------------------------------------------------
-  function getDocument(docId) { return firstRow(query('SELECT * FROM documents WHERE id = ?', [docId])); }
-  function getDocumentData(ddId) { return firstRow(query('SELECT * FROM document_data WHERE id = ?', [ddId])); }
+  function getDocument(docId) { return firstRow(query('SELECT * FROM documents WHERE id = $1', [docId])); }
+  function getDocumentData(ddId) { return firstRow(query('SELECT * FROM document_data WHERE id = $1', [ddId])); }
   function listRecipients(documentId) {
-    return query('SELECT * FROM recipients WHERE document_id = ? ORDER BY signing_order ASC, created_at ASC', [documentId]);
+    return query('SELECT * FROM recipients WHERE document_id = $1 ORDER BY signing_order ASC NULLS FIRST, created_at ASC, seq ASC', [documentId]);
   }
   function listFields(documentId) {
-    return query('SELECT * FROM fields WHERE document_id = ? ORDER BY page ASC, created_at ASC', [documentId]);
+    return query('SELECT * FROM fields WHERE document_id = $1 ORDER BY page ASC, created_at ASC', [documentId]);
   }
-  function recipientByToken(token) { return firstRow(query('SELECT * FROM recipients WHERE token = ?', [token])); }
+  function recipientByToken(token) { return firstRow(query('SELECT * FROM recipients WHERE token = $1', [token])); }
   function fieldsForRecipient(documentId, recipientId) {
-    return query('SELECT * FROM fields WHERE document_id = ? AND recipient_id = ? ORDER BY page ASC, created_at ASC', [documentId, recipientId]);
+    return query('SELECT * FROM fields WHERE document_id = $1 AND recipient_id = $2 ORDER BY page ASC, created_at ASC', [documentId, recipientId]);
   }
-  function signatureForField(fieldId) { return firstRow(query('SELECT * FROM signatures WHERE field_id = ?', [fieldId])); }
+  function signatureForField(fieldId) { return firstRow(query('SELECT * FROM signatures WHERE field_id = $1', [fieldId])); }
 
   // assertTurn enforces SEQUENTIAL signing order: a recipient may only act once
   // EVERY signer/approver ahead of them (lower signing_order, then created_at — the
@@ -166,15 +183,15 @@
     // overwritten. __blob is tenant-scoped by the host, so the key is local.
     var initialKey = 'doc/' + dataId + '/initial';
     __blob.put(initialKey, pdf);
-    exec('INSERT INTO document_data (id, type, data, initial_data) VALUES (?,?,?,?)',
+    exec('INSERT INTO document_data (id, type, data, initial_data) VALUES ($1,$2,$3,$4)',
       [dataId, 'BLOB_KEY', initialKey, initialKey]);
 
     var docId = id();
     exec(
-      'INSERT INTO documents (id, title, status, external_id, source, signing_order, subject, message, document_data_id, internal_version, created_at, updated_at, completed_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-      [docId, str(b.title), STATUS.DRAFT, b.externalId || null, 'DOCUMENT',
+      'INSERT INTO documents (id, title, status, external_id, source, signing_order, subject, message, document_data_id, internal_version, created_at, updated_at, completed_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)',
+      [docId, str(b.title), STATUS.DRAFT, opt(b.externalId), 'DOCUMENT',
        b.signingOrder === 'SEQUENTIAL' ? 'SEQUENTIAL' : 'PARALLEL',
-       b.subject || null, b.message || null, dataId, 2, t, t, null]
+       opt(b.subject), opt(b.message), dataId, 2, t, t, null]
     );
     audit(docId, AUDIT.DOCUMENT_CREATED, { title: str(b.title), source: { type: 'DOCUMENT' } });
     return { status: 201, body: documentView(getDocument(docId)) };
@@ -205,7 +222,7 @@
     var token = id();
     var isCC = role === ROLE.CC;
     exec(
-      'INSERT INTO recipients (id, document_id, email, name, token, role, signing_order, read_status, signing_status, send_status, signed_at, rejection_reason, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+      'INSERT INTO recipients (id, document_id, email, name, token, role, signing_order, read_status, signing_status, send_status, signed_at, rejection_reason, created_at, seq) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,' + nextSeq('recipients') + ')',
       [recId, doc.id, String(b.email).toLowerCase(), str(b.name), token, role,
        b.signingOrder == null ? null : num(b.signingOrder, null), READ.NOT_OPENED,
        isCC ? SIGNING.SIGNED : SIGNING.NOT_SIGNED, isCC ? SEND.SENT : SEND.NOT_SENT, null, null, now()]
@@ -223,17 +240,17 @@
     var b = reqBody(req);
     if (!b.recipientId) bad('recipientId required');
     if (!FIELD_TYPES[b.type]) bad('invalid field type: ' + b.type);
-    var recipient = firstRow(query('SELECT id FROM recipients WHERE id = ? AND document_id = ?', [b.recipientId, doc.id]));
+    var recipient = firstRow(query('SELECT id FROM recipients WHERE id = $1 AND document_id = $2', [String(b.recipientId), doc.id]));
     if (!recipient) bad('recipientId does not belong to this document');
     var fieldId = id();
     exec(
-      'INSERT INTO fields (id, document_id, recipient_id, type, page, position_x, position_y, width, height, custom_text, inserted, field_meta, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-      [fieldId, doc.id, b.recipientId, b.type, num(b.page, 1),
+      'INSERT INTO fields (id, document_id, recipient_id, type, page, position_x, position_y, width, height, custom_text, inserted, field_meta, created_at) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)',
+      [fieldId, doc.id, String(b.recipientId), b.type, num(b.page, 1),
        num(b.positionX, 0), num(b.positionY, 0), num(b.width, -1), num(b.height, -1),
        '', 0, jstr(b.fieldMeta), now()]
     );
-    audit(doc.id, AUDIT.FIELD_CREATED, { fieldId: fieldId, fieldType: b.type, fieldRecipientId: b.recipientId });
-    return { status: 201, body: { id: fieldId, type: b.type, recipientId: b.recipientId, page: num(b.page, 1) } };
+    audit(doc.id, AUDIT.FIELD_CREATED, { fieldId: fieldId, fieldType: b.type, fieldRecipientId: String(b.recipientId) });
+    return { status: 201, body: { id: fieldId, type: b.type, recipientId: String(b.recipientId), page: num(b.page, 1) } };
   }
 
   // POST /v1/sign/documents/:id/send
@@ -246,16 +263,16 @@
     for (var i = 0; i < recipients.length; i++) {
       var r = recipients[i];
       if (SIGNING_ROLES[r.role]) {
-        var n = firstRow(query('SELECT COUNT(*) AS c FROM fields WHERE document_id = ? AND recipient_id = ?', [doc.id, r.id]));
+        var n = firstRow(query('SELECT COUNT(*) AS c FROM fields WHERE document_id = $1 AND recipient_id = $2', [doc.id, r.id]));
         if (!n || Number(n.c) === 0) bad('recipient ' + r.email + ' has no fields to sign');
       }
     }
     var t = now();
     if (doc.status === STATUS.DRAFT) {
-      exec('UPDATE documents SET status = ?, updated_at = ? WHERE id = ?', [STATUS.PENDING, t, doc.id]);
+      exec('UPDATE documents SET status = $1, updated_at = $2 WHERE id = $3', [STATUS.PENDING, t, doc.id]);
       audit(doc.id, AUDIT.DOCUMENT_SENT, {});
     }
-    exec('UPDATE recipients SET send_status = ? WHERE document_id = ? AND role != ?', [SEND.SENT, doc.id, ROLE.CC]);
+    exec('UPDATE recipients SET send_status = $1 WHERE document_id = $2 AND role != $3', [SEND.SENT, doc.id, ROLE.CC]);
 
     var links = recipients.filter(function (r) { return SIGNING_ROLES[r.role]; }).map(function (r) {
       return { recipientId: r.id, email: r.email, role: r.role, token: r.token, signingPath: 'sign/' + r.token };
@@ -280,7 +297,7 @@
   function documentsAudit(req) {
     var doc = getDocument(req.params.id);
     if (!doc) notFound('document not found');
-    var rows = query('SELECT * FROM audit_logs WHERE document_id = ? ORDER BY created_at ASC', [doc.id]);
+    var rows = query('SELECT * FROM audit_logs WHERE document_id = $1 ORDER BY created_at ASC, seq ASC', [doc.id]);
     return { status: 200, body: { documentId: doc.id, entries: rows.map(function (a) {
       return { id: a.id, type: a.type, data: jparse(a.data), name: a.name, email: a.email, createdAt: a.created_at };
     }) } };
@@ -303,7 +320,7 @@
     var rd = requireRecipient(req);
     var r = rd.recipient, doc = rd.doc;
     if (r.read_status === READ.NOT_OPENED) {
-      exec('UPDATE recipients SET read_status = ? WHERE id = ?', [READ.OPENED, r.id]);
+      exec('UPDATE recipients SET read_status = $1 WHERE id = $2', [READ.OPENED, r.id]);
       audit(doc.id, AUDIT.DOCUMENT_OPENED, { recipientId: r.id, recipientEmail: r.email }, { email: r.email });
     }
     var dd = getDocumentData(doc.document_data_id);
@@ -328,7 +345,7 @@
     if (r.signing_status === SIGNING.REJECTED) conflict('recipient already rejected');
     assertTurn(doc, r); // SEQUENTIAL: refuse until earlier signers have signed
 
-    var field = firstRow(query('SELECT * FROM fields WHERE id = ? AND document_id = ?', [req.params.fieldId, doc.id]));
+    var field = firstRow(query('SELECT * FROM fields WHERE id = $1 AND document_id = $2', [req.params.fieldId, doc.id]));
     if (!field) notFound('field not found');
     if (field.recipient_id !== r.id) unauthorized('field does not belong to this recipient');
     if (field.inserted) conflict('field already signed');
@@ -341,10 +358,10 @@
     if (isSig) {
       if (value == null || value === '') bad('signature value required');
       if (b.isBase64) {
-        exec('INSERT INTO signatures (id, field_id, recipient_id, image_base64, typed_signature, created_at) VALUES (?,?,?,?,?,?)',
+        exec('INSERT INTO signatures (id, field_id, recipient_id, image_base64, typed_signature, created_at) VALUES ($1,$2,$3,$4,$5,$6)',
           [id(), field.id, r.id, rawBase64(value), null, now()]);
       } else {
-        exec('INSERT INTO signatures (id, field_id, recipient_id, image_base64, typed_signature, created_at) VALUES (?,?,?,?,?,?)',
+        exec('INSERT INTO signatures (id, field_id, recipient_id, image_base64, typed_signature, created_at) VALUES ($1,$2,$3,$4,$5,$6)',
           [id(), field.id, r.id, null, String(value), now()]);
       }
     } else if (field.type === 'DATE') {
@@ -358,7 +375,7 @@
       customText = String(value);
     }
 
-    exec('UPDATE fields SET custom_text = ?, inserted = 1 WHERE id = ?', [customText, field.id]);
+    exec('UPDATE fields SET custom_text = $1, inserted = 1 WHERE id = $2', [customText, field.id]);
     audit(doc.id, AUDIT.DOCUMENT_FIELD_INSERTED,
       { fieldId: field.id, recipientId: r.id, recipientEmail: r.email, field: { type: field.type, data: isSig ? '[signature]' : customText } },
       { email: r.email });
@@ -372,11 +389,11 @@
     if (doc.status !== STATUS.PENDING) conflict('document is not pending signature');
     if (r.signing_status !== SIGNING.NOT_SIGNED) conflict('recipient has already acted');
     var reason = reqBody(req).reason ? String(reqBody(req).reason) : '';
-    exec('UPDATE recipients SET signing_status = ?, rejection_reason = ?, signed_at = ? WHERE id = ?',
+    exec('UPDATE recipients SET signing_status = $1, rejection_reason = $2, signed_at = $3 WHERE id = $4',
       [SIGNING.REJECTED, reason, now(), r.id]);
     audit(doc.id, AUDIT.DOCUMENT_RECIPIENT_REJECTED,
       { recipientId: r.id, recipientEmail: r.email, recipientName: r.name, recipientRole: r.role, reason: reason }, { email: r.email });
-    exec('UPDATE documents SET status = ?, updated_at = ? WHERE id = ?', [STATUS.REJECTED, now(), doc.id]);
+    exec('UPDATE documents SET status = $1, updated_at = $2 WHERE id = $3', [STATUS.REJECTED, now(), doc.id]);
     audit(doc.id, AUDIT.DOCUMENT_COMPLETED, { transactionId: id(), isRejected: true, rejectionReason: reason }, { email: r.email });
     return { status: 200, body: { recipientId: r.id, status: STATUS.REJECTED } };
   }
@@ -389,10 +406,10 @@
     if (r.signing_status === SIGNING.SIGNED) conflict('recipient already completed');
     assertTurn(doc, r); // SEQUENTIAL: refuse until earlier signers have signed
 
-    var pending = firstRow(query('SELECT COUNT(*) AS c FROM fields WHERE document_id = ? AND recipient_id = ? AND inserted = 0', [doc.id, r.id]));
+    var pending = firstRow(query('SELECT COUNT(*) AS c FROM fields WHERE document_id = $1 AND recipient_id = $2 AND inserted = 0', [doc.id, r.id]));
     if (pending && Number(pending.c) > 0) bad('recipient has ' + pending.c + ' unsigned field(s)');
 
-    exec('UPDATE recipients SET signing_status = ?, signed_at = ? WHERE id = ?', [SIGNING.SIGNED, now(), r.id]);
+    exec('UPDATE recipients SET signing_status = $1, signed_at = $2 WHERE id = $3', [SIGNING.SIGNED, now(), r.id]);
     audit(doc.id, AUDIT.DOCUMENT_RECIPIENT_COMPLETED, { recipientId: r.id, recipientEmail: r.email }, { email: r.email });
 
     var sealed = maybeSeal(doc, { email: r.email });
@@ -441,8 +458,8 @@
     // initial_data still references the original key, so both survive on the seam.
     var sealedKey = 'doc/' + dd.id + '/sealed';
     __blob.put(sealedKey, signed);
-    exec('UPDATE document_data SET data = ? WHERE id = ?', [sealedKey, dd.id]);
-    exec('UPDATE documents SET status = ?, completed_at = ?, updated_at = ? WHERE id = ?', [STATUS.COMPLETED, t, t, doc.id]);
+    exec('UPDATE document_data SET data = $1 WHERE id = $2', [sealedKey, dd.id]);
+    exec('UPDATE documents SET status = $1, completed_at = $2, updated_at = $3 WHERE id = $4', [STATUS.COMPLETED, t, t, doc.id]);
     audit(doc.id, AUDIT.DOCUMENT_COMPLETED, { transactionId: id() }, actor);
     return true;
   }

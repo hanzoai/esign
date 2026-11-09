@@ -27,13 +27,20 @@ are injected by that host:
 
 ```
 globalThis.__db.query(sql, args) -> rows[]                 // gojabase, per-tenant Base/SQLite
-globalThis.__db.exec(sql, args)  -> { changes, lastId }    // (one txn per dispatch; commits iff status<400)
+globalThis.__db.exec(sql, args)  -> { changes }             // (one txn per dispatch; commits iff status<400)
 globalThis.__newId()             -> crypto-random id
 globalThis.__now()               -> unix milliseconds
 globalThis.__pdf.stamp(pdfBase64, stampsJSON) -> pdfBase64        // render field values (pdfcpu)
 globalThis.__pdf.sign(pdfBase64)              -> signedPdfBase64  // x509/PKCS#7 seal (digitorus/pdfsign)
 globalThis.handle({ route, params, query, orgId, body }) -> { status, body }
 ```
+
+The SQL a bundle issues is the dialect SQLite and PostgreSQL share, so one bundle
+runs on a tenant's SQLite file and on a schema of hanzo-sql: `$n` placeholders in
+the order they first appear, `INSERT ... ON CONFLICT`, `BIGINT` integers, a quoted
+`"camelCase"` alias where a column is renamed to one (PostgreSQL folds an unquoted
+name to lower case), and a text argument that is always a string. There is no
+`lastId`: PostgreSQL has none, and a bundle makes its own ids with `__newId`.
 
 `clients/gojabase` provides `__db`/`__newId`/`__now` + the per-tenant SQLite file
 + the request transaction; `clients/sign` provides the `sign.db` schema and the
