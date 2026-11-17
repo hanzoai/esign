@@ -78,6 +78,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     {
       headers: {
         'Set-Cookie': await langCookie.serialize(lang),
+        'Content-Security-Policy': "frame-ancestors 'self' https://hanzo.team",
       },
     },
   );

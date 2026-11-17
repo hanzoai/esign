@@ -10,18 +10,18 @@ import { EmbedRecipientExpired } from '~/components/embed/embed-recipient-expire
 
 import type { Route } from './+types/_layout';
 
-// Todo: (RR7) Test
 export function headers({ loaderHeaders }: Route.HeadersArgs) {
-  const origin = loaderHeaders.get('Origin') ?? '*';
-
-  // Allow third parties to iframe the document.
-  return {
+  const headers = new Headers({
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Origin': origin,
-    'Content-Security-Policy': `frame-ancestors ${origin}`,
+    'Content-Security-Policy': "frame-ancestors 'self' https://hanzo.team",
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'X-Content-Type-Options': 'nosniff',
-  };
+  });
+  const origin = loaderHeaders.get('Origin');
+  if (origin) {
+    headers.set('Access-Control-Allow-Origin', origin);
+  }
+  return headers;
 }
 
 export default function Layout() {
