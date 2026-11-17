@@ -10,11 +10,12 @@ import { EmbedRecipientExpired } from '~/components/embed/embed-recipient-expire
 
 import type { Route } from './+types/_layout';
 
-// Todo: (RR7) Test
-export function headers({ loaderHeaders }: Route.HeadersArgs) {
+export function headers({ loaderHeaders, request }: Route.HeadersArgs) {
   return {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Origin': '*',
+    ...(request.headers.get('Origin')
+      ? { 'Access-Control-Allow-Origin': request.headers.get('Origin')! }
+      : {}),
     'Content-Security-Policy': "frame-ancestors 'self' https://hanzo.team",
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'X-Content-Type-Options': 'nosniff',
