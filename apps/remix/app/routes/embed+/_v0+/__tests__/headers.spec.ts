@@ -10,6 +10,9 @@ import { headers } from '../_layout';
 
 const headersOf = (origin?: string) =>
   headers({
+    parentHeaders: new Headers(),
+    actionHeaders: new Headers(),
+    errorHeaders: new Headers(),
     loaderHeaders: new Headers(origin ? { origin } : {}),
   });
 
