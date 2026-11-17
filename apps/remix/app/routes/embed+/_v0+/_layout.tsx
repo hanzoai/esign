@@ -10,16 +10,18 @@ import { EmbedRecipientExpired } from '~/components/embed/embed-recipient-expire
 
 import type { Route } from './+types/_layout';
 
-export function headers({ loaderHeaders, request }: Route.HeadersArgs) {
-  return {
+export function headers({ loaderHeaders }: Route.HeadersArgs) {
+  const headers = new Headers({
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    ...(request.headers.get('Origin')
-      ? { 'Access-Control-Allow-Origin': request.headers.get('Origin')! }
-      : {}),
     'Content-Security-Policy': "frame-ancestors 'self' https://hanzo.team",
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'X-Content-Type-Options': 'nosniff',
-  };
+  });
+  const origin = loaderHeaders.get('Origin');
+  if (origin) {
+    headers.set('Access-Control-Allow-Origin', origin);
+  }
+  return headers;
 }
 
 export default function Layout() {
