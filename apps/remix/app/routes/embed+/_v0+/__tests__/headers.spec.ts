@@ -11,9 +11,6 @@ import { headers } from '../_layout';
 const headersOf = (origin?: string) =>
   headers({
     loaderHeaders: new Headers(origin ? { origin } : {}),
-    request: new Request('https://esign.hanzo.ai/embed/v0/doc', {
-      headers: origin ? { origin } : {},
-    }),
   });
 
 describe('embed headers', () => {
