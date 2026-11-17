@@ -12,13 +12,10 @@ import type { Route } from './+types/_layout';
 
 // Todo: (RR7) Test
 export function headers({ loaderHeaders }: Route.HeadersArgs) {
-  const origin = loaderHeaders.get('Origin') ?? '*';
-
-  // Allow third parties to iframe the document.
   return {
     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Origin': origin,
-    'Content-Security-Policy': `frame-ancestors ${origin}`,
+    'Access-Control-Allow-Origin': '*',
+    'Content-Security-Policy': "frame-ancestors 'self' https://hanzo.team",
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'X-Content-Type-Options': 'nosniff',
   };
