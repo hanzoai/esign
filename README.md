@@ -38,6 +38,8 @@
 
 ## About Hanzo eSign
 
+[![Open in Hanzo](https://hanzo.app/badges/open-in-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/esign&ref=main&action=open) [![Edit with Hanzo](https://hanzo.app/badges/edit-with-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/esign&ref=main&action=edit) [![Deploy with Hanzo](https://hanzo.app/badges/deploy-with-hanzo.svg)](https://hanzo.app/dev/open?repo=github.com/hanzoai/esign&ref=main&action=deploy)
+
 Signing documents digitally should be fast and easy and should be the best practice for every document signed worldwide. This is technically quite easy today, but it also introduces a new party to every signature: The signing tool providers. While this is not a problem in itself, it should make us think about how we want these providers of trust to work. Hanzo eSign aims to be the world's most trusted document-signing tool. This trust is built by empowering you to self-host Hanzo eSign and review how it works under the hood.
 
 Join us in creating the next generation of open trust infrastructure.
