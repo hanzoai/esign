@@ -42,7 +42,7 @@ test:
       # test runs the real 0_init and 1_iam_only_sign_in against SQLite. The
       # trpc suite holds an anonymous socket (a recipient signing by their link)
       # to the public routes.
-      npx tsx --test packages/auth/__tests__/*.test.ts packages/lib/__tests__/*.test.ts packages/trpc/__tests__/*.test.ts packages/prisma/__tests__/iam-only-migration.test.ts
+      npx tsx --test packages/auth/__tests__/*.test.ts packages/lib/__tests__/*.test.ts packages/trpc/__tests__/*.test.ts packages/prisma/__tests__/iam-only-migration.test.ts apps/remix/app/routes/embed+/_v0+/__tests__/headers.spec.ts
 
 images:
   - name: sign

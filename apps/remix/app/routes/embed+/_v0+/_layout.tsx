@@ -8,20 +8,12 @@ import { EmbedDocumentWaitingForTurn } from '~/components/embed/embed-document-w
 import { EmbedPaywall } from '~/components/embed/embed-paywall';
 import { EmbedRecipientExpired } from '~/components/embed/embed-recipient-expired';
 
+import { buildEmbedHeaders } from '~/utils/frame-headers';
+
 import type { Route } from './+types/_layout';
 
 export function headers({ loaderHeaders }: Route.HeadersArgs) {
-  const headers = new Headers({
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Content-Security-Policy': "frame-ancestors 'self' https://hanzo.team",
-    'Referrer-Policy': 'strict-origin-when-cross-origin',
-    'X-Content-Type-Options': 'nosniff',
-  });
-  const origin = loaderHeaders.get('Origin');
-  if (origin) {
-    headers.set('Access-Control-Allow-Origin', origin);
-  }
-  return headers;
+  return buildEmbedHeaders(loaderHeaders);
 }
 
 export default function Layout() {

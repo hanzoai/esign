@@ -26,8 +26,13 @@ import { GenericErrorLayout } from './components/general/generic-error-layout';
 import { langCookie } from './storage/lang-cookie.server';
 import { themeSessionResolver } from './storage/theme-session.server';
 import { appMetaTags } from './utils/meta';
+import { FRAME_ANCESTORS_CSP, buildRootHeaders } from './utils/frame-headers';
 
 export const links: Route.LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }];
+
+export function headers({ loaderHeaders }: Route.HeadersArgs) {
+  return buildRootHeaders(loaderHeaders);
+}
 
 export function meta() {
   return appMetaTags();
@@ -78,7 +83,7 @@ export async function loader({ request }: Route.LoaderArgs) {
     {
       headers: {
         'Set-Cookie': await langCookie.serialize(lang),
-        'Content-Security-Policy': "frame-ancestors 'self' https://hanzo.team",
+        'Content-Security-Policy': FRAME_ANCESTORS_CSP,
       },
     },
   );
