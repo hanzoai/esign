@@ -8,20 +8,12 @@ import { EmbedDocumentWaitingForTurn } from '~/components/embed/embed-document-w
 import { EmbedPaywall } from '~/components/embed/embed-paywall';
 import { EmbedRecipientExpired } from '~/components/embed/embed-recipient-expired';
 
+import { buildEmbedHeaders } from '~/utils/frame-headers';
+
 import type { Route } from './+types/_layout';
 
-// Todo: (RR7) Test
 export function headers({ loaderHeaders }: Route.HeadersArgs) {
-  const origin = loaderHeaders.get('Origin') ?? '*';
-
-  // Allow third parties to iframe the document.
-  return {
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Origin': origin,
-    'Content-Security-Policy': `frame-ancestors ${origin}`,
-    'Referrer-Policy': 'strict-origin-when-cross-origin',
-    'X-Content-Type-Options': 'nosniff',
-  };
+  return buildEmbedHeaders(loaderHeaders);
 }
 
 export default function Layout() {
